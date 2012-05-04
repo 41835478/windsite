@@ -210,6 +210,9 @@ public class MemberRest {
 		if (StringUtils.isEmpty(www)) {
 			SystemException.handleMessageException("未指定独立域名");
 		}
+		if (EnvManager.getUser().getUsb().getVersionNo() <= 1.5f) {
+			SystemException.handleMessageException("必须升级为付费版本(普及付费或返利版或卖家版)");
+		}
 		www = www.toLowerCase();
 		List<DomainHistory> dhs = memberService.findAllByCriterion(
 				DomainHistory.class, R.eq("site_id", sid));

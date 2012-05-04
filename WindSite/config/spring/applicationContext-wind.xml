@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="envListener" class="com.wind.site.env.impl.LocalEnvListener">
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="ucService">
+			<ref bean="ucService" />
+		</property>
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+		<property name="ModuleMethod">
+			<ref bean="moduleMethod" />
+		</property>
+		<property name="topCometStreamJob">
+			<ref bean="topCometStreamJob"/>
+		</property>
+	</bean>
+
+	<!-- Http Client3 -->
+	<bean id="fetch" class="com.wind.site.rest.taobao.impl.TaobaoHttpClient3Fetch" />
+
+	<!-- DaoService 配置 -->
+	<bean id="daoService" class="com.wind.core.dao.impl.DaoServiceImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="daoUtils">
+			<bean class="com.wind.core.dao.util.DaoUtils" />
+		</property>
+	</bean>
+	<!-- BaseService -->
+	<bean id="baseService" class="com.wind.core.service.impl.BaseServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- 国际化 -->
+	<bean id="resources" class="com.wind.core.i18n.I18N">
+		<property name="resourceBundle">
+			<bean
+				class="org.springframework.context.support.ResourceBundleMessageSource">
+			</bean>
+		</property>
+	</bean>
+	<!-- SiteService -->
+	<bean id="siteService" class="com.wind.site.service.impl.SiteServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- ItemService -->
+	<bean id="itemService" class="com.wind.site.service.impl.ItemServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- CommandService -->
+	<bean id="commandService" class="com.wind.site.service.impl.CommandServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- MemberService -->
+	<bean id="memberService" class="com.wind.site.service.impl.MemberServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- DesignerService -->
+	<bean id="designerService" class="com.wind.site.service.impl.DesignerServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- AdminService -->
+	<bean id="adminService" class="com.wind.site.service.impl.AdminServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- TaobaoService -->
+	<bean id="taobaoService" class="com.wind.site.service.impl.TaobaoServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- SellerService -->
+	<bean id="sellerService" class="com.wind.site.service.impl.SellerServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- FanliService -->
+	<bean id="fanliService" class="com.wind.site.service.impl.FanliServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<!-- PageService -->
+	<bean id="pageService" class="com.wind.site.service.impl.PageServiceImpl">
+		<property name="daoService">
+			<ref bean="daoService" />
+		</property>
+	</bean>
+	<bean id="deployZone" class="com.wind.site.freemarker.impl.DefaultDeployZone">
+		<property name="designerService">
+			<ref bean="designerService"/>
+		</property>
+	</bean>
+	<bean id="ipTable" class="com.wind.core.iptable.IPTable">
+		<property name="isFilter" value="true"></property>
+	</bean>
+	<bean id="taobaoEnv" class="com.wind.site.env.TaobaoEnv">
+		<!--推广自定义输入串-->
+		<property name="items_outer_code" value="xintao001"/>
+		<property name="cats_outer_code" value="xintao002"/>
+		<property name="shops_outer_code" value="xintao003"/>
+		<property name="keywords_outer_code" value="xintao004"/>
+		<property name="malls_outer_code" value="xintao005"/>
+		<!--是否在审核中-->
+		<property name="isAudit" value="false" />
+		<!--是否启用沙箱环境-->
+		<property name="isSandbox" value="false" />
+		<!--APP KEY-->
+		<property name="appKey" value="12034285"/><!--已发布环境下-->
+		<!--SECRET-->
+		<property name="secret" value="2c18a03c14736c62a0b70804618f8c45"/><!--已发布环境下-->
+		<!--分成FC APP KEY-->
+		<property name="fcAppKey" value="12194773" /><!--发布环境下-->
+		<!--分成FC SECRET-->
+		<property name="fcSecret" value="7d5e8c29ef75dd1bd6b3c4fa6c835bab" /><!--发布环境下-->
+		<!--沙箱容器地址-->
+		<property name="sandboxContainer" value="http://open.taobao.com/isv/appTest.php" />
+		<!--REST沙箱地址-->
+		<property name="sandboxUrl" value="http://gw.api.tbsandbox.com/router/rest" />
+		<!--正式容器地址-->
+		<property name="taobaoContainer" value="http://container.open.taobao.com/container" />
+		<!--REST正式地址-->
+		<property name="taobaoUrl" value="http://gw.api.taobao.com/router/rest" />
+		<!--目前支持的API集合-->
+		<property name="API">
+			<map>
+				<!-- key:API名,value:0=无需登录,1=需要登录,2=私有字段需登录 -->
+				<entry key="taobao.user.get" value="2" />
+				<entry key="taobao.users.get" value="0" />
+				<entry key="taobao.taobaoke.items.get" value="0" />
+				<entry key="taobao.jianghu.feed.publish" value="1" />
+				<entry key="taobao.jianghu.friends.getFriendList" value="1" />
+				<entry key="taobao.jianghu.user.getProfile" value="1" />
+				<entry key="taobao.jianghu.msg.publish" value="1" />
+				<entry key="taobao.taobaoke.report.get" value="1" />
+				<entry key="taobao.taobaoke.interval.report.get" value="1" />
+			</map>
+		</property>
+	</bean>
+	<bean id="siteEnv" class="com.wind.site.env.SiteEnv">
+		<property name="memberViews">
+			<list>
+				<value>personal</value>
+				<value>friends</value>
+				<value>site</value>
+				<value>report</value>
+				<value>details</value>
+			</list>
+		</property>
+		<property name="siteViews">
+			<list>
+				<value>about</value>
+				<value>support</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="com.wind.site.env.EnvManager" init-method="init"  depends-on="gaClient">
+		<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
+		<!--<property name="zonePath" value="/usr/local/apache2"></property>--><!--发布环境-->
+		<property name="zonePath" value="E:\\project\\wind\\aws\\Apache2.2"></property><!--本地环境-->
+		<property name="defaultPid" value="mm_13667242_0_0"/>
+		<property name="listener">
+			<ref bean="envListener" />
+		</property>
+		<property name="taobaoEnv">
+			<ref bean="taobaoEnv" />
+		</property>
+		<property name="siteEnv">
+			<ref bean="siteEnv" />
+		</property>
+	</bean>
+	<!--新淘网统计客户端环境配置-->
+	<bean id="gaClient" class="com.wind.site.util.XintaoAnalyticsClient">
+		<property name="username" value="fxy060608@gmail.com"/>
+		<property name="password" value="iloveyou1817"/>
+		<property name="tableId" value="ga:30907871"/>
+		<property name="applicaitonName" value="xt-ga"/>
+		<property name="startDate" value="2010-08-08"/>
+	</bean>
+	<!--命令执行-->
+	<bean class="com.wind.site.command.CommandExecutor" init-method="runCommand">
+		<property name="service">
+			<ref bean="commandService" />
+		</property>
+	</bean>
+</beans>

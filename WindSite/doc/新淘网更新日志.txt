@@ -1,0 +1,689 @@
+#apache apr
+wget http://apache.etoak.com//apr/apr-1.4.6.tar.gz
+gzip -d apr-1.4.6.tar.gz
+tar xvf apr-1.4.6.tar
+cd apr-1.4.6
+./configure
+make
+make install
+#apache apr-util
+wget http://apache.etoak.com//apr/apr-util-1.4.1.tar.gz
+gzip -d apr-util-1.4.1.tar.gz
+tar xvf apr-util-1.4.1.tar
+cd apr-util-1.4.1
+./configure --with-apr=/usr/local/apr
+make
+make install
+#pcre
+http://sourceforge.net/projects/pcre
+unzip  -o pcre-8.30.zip
+cd pcre-8.30
+./configure --prefix=/usr/local/pcre
+make
+make install
+#apache 2.2.2
+lynx http://httpd.apache.org/download.cgi
+gzip -d httpd-NN.tar.gz
+tar xvf httpd-NN.tar
+cd httpd-NN
+./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so 
+#--with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre
+make
+make install
+
+#http_proxy
+cd /opt/httpd-2.2.22/modules/proxy
+/usr/local/apache2/bin/apxs -c -i mod_proxy.c proxy_util.c
+/usr/local/apache2/bin/apxs -c -i mod_proxy_balancer.c
+/usr/local/apache2/bin/apxs -c -i mod_proxy_http.c
+cd /opt/httpd-2.2.22/modules/metadata/
+/usr/local/apache2/bin/apxs -c -i -a mod_expires.c
+cd /opt/httpd-2.2.22/modules/filters/
+/usr/local/apache2/bin/apxs -i -c -a mod_deflate.c
+#java
+cp jdk-6u26-linux-x64.bin /usr/local/
+chmod +x jdk-6u26-linux-x64.bin
+./jdk-6u26-linux-x64.bin
+/etc/profile
+export PATH=$PATH:/usr/local/mysql/bin
+export JAVA_HOME=/usr/local/jdk1.6.0_26
+export PATH=$JAVA_HOME/bin:$PATH
+source /etc/profile
+java -version
+#tomcat
+wget http://labs.renren.com/apache-mirror/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.tar.gz
+gzip -d apache-tomcat-6.0.35.tar.gz
+tar xvf apache-tomcat-6.0.35.tar
+cd apache-tomcat-6.0.35
+server.xml
+#mysql
+http://down1.tech.sina.com.cn/download/downContent/2005-04-06/13485.shtml
+gzip -d mysql-5.1.62.tar.gz
+tar xvf mysql-5.1.62.tar
+./configure 
+--prefix=/usr/local/mysql //MySQL安装目录 
+--datadir=/mydata //数据库存放目录 
+--with-charset=utf8 //使用UTF8格式 
+--with-extra-charsets=complex //安装所有的扩展字符集 
+--enable-thread-safe-client //启用客户端安全线程 
+--with-big-tables //启用大表 
+--with-ssl //使用SSL加密 
+--with-embedded-server //编译成embedded MySQL library (libmysqld.a), 
+--enable-local-infile //允许从本地导入数据 
+--enable-assembler //汇编x86的普通操作符，可以提高性能 
+--with-plugins=innobase //数据库插件 
+--with-plugins=partition //分表功能，将一个大表分割成多个小表
+./configure --prefix=/usr/local/mysql --datadir=/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
+二、新建用户和组 
+#groupadd mysql //建MySQL组 
+#useradd -g mysql -s /sbin/nologin mysql //建MySQL用户属于MySQL组
+#chown -R mysql:mysql /usr/local/mysql/ 把MySQL目录的权限给MySQL用户和组
+ 
+#cp  /opt/mysql-5.1.62/support-files/my-medium.cnf /etc/my.cnf //拷入配置文件my.cnf 
+#/usr/local/mysql/bin/mysql_install_db --user=mysql //用MySQL来初始化数据库 
+#chown -R mysql:mysql /usr/local/mysql/var/ //把初始化的数据库目录给MySQL所有者 
+#/usr/local/mysql/bin/mysqld_safe --user=mysql & //启动MySQL
+
+#cp /opt/mysql-5.1.62/support-files/mysql.server /etc/init.d/mysqld 
+#chmod 755 /etc/init.d/mysqld 
+#chkconfig --add mysqld 
+#chkconfig mysqld on 
+#service mysqld restart 
+#php
+wget http://cn2.php.net/get/php-5.4.0.tar.gz/from/this/mirror
+gzip -d php-5.4.0.tar.gz
+tar xvf php-5.4.0.tar
+cd php-5.4.0
+'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib' 
+#'--with-mcrypt=/usr/local/libmcrypt'
+#同步
+/usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/var/www/htdocs/ /var/www/htdocs
+/usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/data/hitem/ /var/www/htdocs/hitem
+/usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/data/hposter/ /var/www/htdocs/hposter
+/usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/data/hshop/ /var/www/htdocs/hshop
+
+/usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/data/mysqldata /var/www/htdocs
+
+/usr/bin/rsync -avzuP  root@175.41.19.18:/opt/ /mnt/ebs/opt
+
+导入：
+mysql -uroot -p --default-character-set=utf8 uchome
+rsync
+http://www.jb51.net/article/19668.htm
+
+/src-uc/config.properties
+UC_IP
+编辑/etc/sysctl.conf文件，增加三行：
+　　引用
+　　net.ipv4.tcp_syncookies = 1
+　　net.ipv4.tcp_tw_reuse = 1
+　　net.ipv4.tcp_tw_recycle = 1
+
+1.详情页：返利显示
+2.帐号登录：滞后
+3.搜索直接宝贝链接
+4.可配置直接跳转
+5.搜索框提示
+6.登陆后跳转回
+
+select info.username as '用户名',info.alipay as '支付宝',info.email as '电子邮箱',info.qq as 'QQ',info.mobile as '手机',m.created as '注册时间',m.visits as '登录次数' from w_fanli_member m,w_fanli_member_info info where user_id=115846243 and m.info_id=info.id;
+select info.username as '用户名',o.cs as '返利记录' from w_fanli_member m,w_fanli_member_info as info,(select replace(outer_code,'xtfl','') as mid,count(*) as cs from t_fanli_report where user_id=115846243 and outer_code like 'xtfl%' group by outer_code) as o where m.info_id=info.id and m.id=o.mid;
+
+http://o.yiqifa.com/servlet/queryCpsMultiRow?st=2011-11-18&username=fxy060608@gmail.com&wid=231622&privatekey=i8c8e5u8y4
+http://o.yiqifa.com/servlet/queryCpsMultiRow?ed=2011-11-22&username=guxingduxia@163.com&wid=427383&privatekey=zyrgou
+
+ find /data/hitem/906/ -type f -size 0 | xargs -exec rm -f {};
+ find /var/www/htdocs/zone/ -name itemDetail.html | xargs -exec rm -f {};
+//当文件系统变只读，重新挂载rw
+umount /dev/xvdb1
+mount -o remount,rw /data
+//修复文件系统
+fuser -m /dev/xvdb1
+fuser -k /dev/xvdb1
+umount /dev/xvdb1
+e2fsck [-p,-C] /dev/xvdb1
+
+mysqlcheck --auto-repair windsite -uroot -p
+cd /usr/local/mysql/bin
+ mysqladmin -u root -p shutdown
+ 
+ mysqld_safe &
+ 重启
+修复站点用户标识被置空
+select user_id,site_id,nick from w_page where site_id in (select id from w_site where user_id is null);
+
+php5.2.17(配置安装)
+
+'./configure' '--prefix=/var/www/php5.2.17' '--with-apxs2=/var/www/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/var/www/php5.2.17/lib' '--with-mcrypt=/usr/local/libmcrypt'
+
+旧版会员可能牵扯到没有生成footer.html,导致其他静态化SSI页面无法include
+服务器迁移：
+迁移完成后，准备移除数据同步定时
+(
+suPhp 权限处理： 
+find /var/www/htdocs/uchome2/ -type d|xargs chmod 755;
+find /var/www/htdocs/uchome2/ -type f|xargs chmod 644;
+)
+1.环境搭配：
+	a.jdk1.6，
+		1.下载：wget -c -t 100 -T 120 http://download.oracle.com/otn-pub/java/jdk/6u26-b03/jdk-6u26-linux-i586.bin
+		2.安装：
+			chmod +x jdk-6u26-linux-i586.bin
+			./jdk-6u26-linux-i586.bin
+			#删除1.4版本的快捷方式:
+			rm -f /usr/bin/java
+			#rm -f /usr/bin/javac 
+			rm -f /etc/alternatives/java 
+			#rm -f /etc/alternatives/javac
+			#新建1.6版本的快捷方式:
+			ln -s -f /usr/jdk1.6.0_26/jre/bin/java 
+			ln -s -f /usr/jdk1.6.0_26/bin/javac
+			 
+			5.将新建的快捷方式放在/usr/bin目录下
+			rm /usr/java  /usr/bin/
+			rm /usr/javac  /usr/bin/
+	b.tomcat6.0
+		1.下载：wget -c -t 100 -T 120 http://labs.renren.com/apache-mirror/tomcat/tomcat-6/v6.0.32/bin/apache-tomcat-6.0.32.tar.gz
+		2.安装：
+
+
+2.数据拷贝：
+
+/usr/bin/rsync -avzP  --password-file=/etc/rsync.password root@xintaonet::xintao_zone /var/www/htdocs/zone
+
+数据库备份：
+ mysqldump -u root -p --all-databases | gzip > all.sql.gz
+ mysqldump -u root -p -–add-drop-table windsite | gzip  > windsite.sql.gz
+
+//目前不可用
+目标从源复制 scp -v root@222.35.137.84:/usr/local/apache2/htdocs/thriving.tgz /var/www/htdocs/
+源复制至目标 scp -v /usr/local/apache2/htdocs/latest.zip root@223.4.86.100:/var/www/htdocs/ 
+
+ 
+ 
+3.mysql管理员密码重置:
+如果 MySQL 正在运行，首先杀之： killall -TERM mysqld。 
+启动 MySQL ：mysqld_safe --skip-grant-tables & 
+就可以不需要密码就进入 MySQL 了。 
+然后就是 
+>use mysql
+>update user set password=password("new_pass") where user="root";
+>flush privileges;
+重新杀 MySQL ，用正常方法启动 MySQL 。
+
+ select sum(hits),ip from w_log_ip group by ip order by sum(hits) desc limit 20;
+
+下一步开发计划：首页弹出购物流程,促销频道
+会员中心邮件通知
+注册时的那个支付宝信息改为选填
+
+select sellerNick ,count(sellerNick) from w_ad_module_item group by sellerNick order by count(sellerNick) desc limit 10;
+#删除文件
+find . -name detail.html |xargs rm -rf
+#文件数
+find -type f |wc -l
+#文件夹大小
+du -sh
+df -h
+
+cd /opt/tomcat/bin
+./startup.sh
+cd /usr/local/apache/bin
+./apachectl stop
+cd /usr/local/apache2/bin
+./apachectl start
+/usr/local/snmp/sbin/snmpd -c /usr/local/snmp/snmpd.conf
+
+
+
+新功能:
+会员注册：增加手机号
+密码：Xintao@)!!
+端口：61698
+1.页尾，多个搜索框，模块商品显示排序
+2.商城浮动分类IE下BUG
+每次全版本发布注意:
+1.修改lucence索引位置
+2.修改TOP Appkey及Secret，showSql
+3.修改静态文件发布位置，三处
+4.修改js，css版本标记
+5.生成新淘网超时队列/cache/delay/create
+
+下次更新注意事项：
+1.生成页面模板数据
+2.定时更新淘宝商城模块（首页楼层，轮播）
+
+#syn flood
+监控实时并发数:
+watch -n 1 -d "pgrep httpd|wc -l"
+netstat -nat |grep SYN_RECV
+netstat -nat |grep SYN_RECV > test.txt
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+iptables -I INPUT -s 1.202.221.1 -j DROP//封IP
+sudo iptables -L -n --line-number//IPTable详情
+iptables -D INPUT 15//解禁IP
+http://t.ejunhai.com/
+//查看进程打开的文件数：
+lsof -p 21517|wc -l
+启动SNMP代理程序
+/usr/local/snmp/sbin/snmpd -c /usr/local/snmp/snmpd.conf
+如果要关闭，则可以直接kill这个进程，如下：
+killall -9 snmpd
+
+ps afx | grep snmpd
+
+画报search8代码
+//mysql 慢查询
+ mysqlsla -lt slow /data/mysql-tmp/slowquery.log
+
+接入商：北京万网志成科技有限公司 
+IP：222.35.137.84 
+修复页头：
+select id,metadata from w_page_meta  where id in(select id from w_page where user_id='#');
+update w_page_meta set metadata=replace(metadata,'','') where id in(select id from w_page where user_id='#');
+mysql:
+mysqlcheck --auto-repair windsite -uroot -p
+
+ //apache 
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+netstat -nat|grep 175.41.19.18:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+netstat -nat|grep 223.4.86.100:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+netstat -nat|grep 222.35.137.84:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+ps -ef | grep httpd | wc -l
+硬盘空间：
+df -lh
+文件数:
+find ./ -type f|wc -l
+删除重复数据：
+第一步：创建临时表，将重复数据插入
+create table tmp_table as select id from  t_huabaos_tag  group  by  name  having  count(name) > 1;//标签表
+create table tmp_table as select id  from  t_item  group  by  num_iid,gid  having  count(*) > 1;
+create table tmp_table as select id  from  t_huabaos_tags  group  by  tid,hid  having  count(*) > 1;
+第二步：根据临时表删除所有重复数据
+delete from t_huabaos_tag where id in(select id from tmp_table);
+delete from t_item where id in (select id from tmp_table);
+delete from t_huabaos_tags where id in (select id from tmp_table);
+
+select nick,name,title,region,id,parent from w_page_module where region='3345';
+万网：
+30047618　　Ivan1984
+30909445 
+订购记录：
+select nick '会员名',versionNo '版本号',TIMESTAMPDIFF(day,startDate,endDate) ‘订购天数’ from t_usersubscribe where versionNo>1.5;
+select sum(total_pay_fee) from t_article_biz_order;
+select sum(total_pay_fee) from t_article_biz_order where created between '2011-5-01' and '2011-5-31';
+select count(nick),startDate from t_usersubscribe  where versionNo>1 group by startdate;
+邮件日志:
+ perl /opt/awstats-6.95/wwwroot/cgi-bin/awstats.pl -config=mail  -update -lang=cn
+Apache日志: 
+ perl /opt/awstats-6.95/wwwroot/cgi-bin/awstats.pl -config=www.xintaonet.com  -update -lang=cn
+
+awstats 帐号xintaonet
+
+#删除用户信息
+delete from w_user where user_id='';
+delete from w_site where user_id='';
+delete from w_page where user_id='';
+delete from w_page_layout where user_id='';
+delete from w_page_region where user_id='';
+delete from w_page_module where user_id='';
+delete from w_page_meta where user_id='';
+delete from t_usercredit where user_id='';
+delete from T_UserSubscribe where user_id='';
+
+
+
+
+
+
+
+
+
+
+
+
+
+#无效用户
+RewriteMap unvalidmap txt:unvalid.txt
+
+#二级域名REST服务
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond ${unvalidmap:%{SERVER_NAME}|NOT_FOUND} !NOT_FOUND
+RewriteRule ^(.*) http://www.xintaonet.com/router/site/unvalid [P,NC]
+
+RewriteCond %{REQUEST_URI}  !\/assets\/
+RewriteCond %{HTTP_HOST} !^shop
+RewriteCond %{HTTP_HOST} ^[a-zA-Z]+[0-9]+\.xintaonet\.com
+RewriteRule ^(.*) ${seconddomainmap:%{SERVER_NAME}|http://www.xintaonet.com/zone/404.html?}$1 [P,NC]
+
+
+#自定义二级域名
+RewriteMap seconddomainmap txt:seconddomain.txt
+
+
+RewriteCond %{HTTP_HOST} ^shop(58633868|278989587|249206636|745739365|204843481)\.xintaonet\.com
+RewriteRule ^(.*)  http://www.xintaonet.com/zone/404.html	[p]
+
+RewriteCond %{HTTP_HOST} ^www\.[a-zA-Z]+[0-9]+\.xintaonet\.com
+RewriteRule ^(.+) %{SERVER_NAME}$1   [C]
+RewriteRule ^www.(.+)  http://$1	[p]
+
+RewriteCond %{REQUEST_URI}  !\/assets\/
+RewriteCond %{HTTP_HOST} !^shop
+RewriteCond %{HTTP_HOST} ^[a-zA-Z]+[0-9]+\.xintaonet\.com
+RewriteRule ^(.*) ${seconddomainmap:%{SERVER_NAME}|http://www.xintaonet.com/zone/404.html?}$1 [P,NC]
+
+#顶级域名绑定
+RewriteMap domainmap txt:domain.txt
+
+
+RewriteCond %{REQUEST_URI}  !\/assets\/
+RewriteCond %{HTTP_HOST} ^www
+RewriteCond %{HTTP_HOST} !www\.xintaonet\.com|www\.xintaowang\.com
+RewriteCond %{REQUEST_URI} !^/weibo
+RewriteCond %{REQUEST_URI} !^/discuzx15
+RewriteRule ^(.*) ${domainmap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/domainerror?}$1 [P]
+
+RewriteCond %{REQUEST_URI}  !\/assets\/
+RewriteCond %{HTTP_HOST} !www
+RewriteCond %{HTTP_HOST} !([a-z0-9]\.xintaonet\.com)|([a-z0-9]\.xintaowang\.com)
+RewriteCond %{REQUEST_URI} !^/weibo
+RewriteCond %{REQUEST_URI} !^/discuzx15
+RewriteRule ^(.*) ${domainmap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/domainerror?}$1 [P]
+
+#返利购物社区，微博域名绑定
+RewriteMap fanlimap txt:fanli.txt
+
+RewriteCond %{HTTP_HOST} ^t\.
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.*) ${fanlimap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/discuzerror?site=t}/weibo/index.php [L,P]
+
+RewriteCond %{HTTP_HOST} ^t\.
+RewriteCond %{REQUEST_URI} =/favicon.ico
+RewriteRule ^(.*) ${fanlimap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/discuzerror?site=t}/favicon.ico [L,P]
+
+RewriteCond %{HTTP_HOST} ^t\.
+RewriteCond %{REQUEST_URI} !=/
+RewriteRule ^(.*) ${fanlimap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/discuzerror?site=t}/weibo$1 [L,P]
+
+RewriteCond %{HTTP_HOST} ^x\.
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.*) ${fanlimap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/discuzerror?site=x}/discuzx15/index.php [L,P]
+
+RewriteCond %{HTTP_HOST} ^x\.
+RewriteCond %{REQUEST_URI} !=/
+RewriteRule ^(.*) ${fanlimap:%{SERVER_NAME}|http://www.xintaonet.com/router/site/discuzerror?site=x}/discuzx15$1 [L,P]
+
+
+#搜索重写
+RewriteCond %{REQUEST_URI} ^/search
+RewriteRule ^(.*)  /router/top/items/search [P]
+#店铺搜索重写
+RewriteCond %{REQUEST_URI} ^/shops
+RewriteRule ^(.*)  /router/site/shops [P]
+
+#淘店铺首页重写
+RewriteCond %{REQUEST_URI} ^/dianpu.html
+RewriteRule ^(.*)  /router/dianpu [P]
+#淘店铺一级重写
+RewriteCond %{REQUEST_URI} ^/dianpu/[a-zA-Z0-9_]+\.html
+RewriteRule ^\/dianpu\/(.+).html  /router/dianpu/$1 [P]
+#淘店铺二级重写
+RewriteCond %{REQUEST_URI} ^/dianpu/[a-zA-Z0-9_]+/[a-zA-Z0-9_]+\.html
+RewriteRule ^\/dianpu\/([a-zA-Z0-9_]+)\/(.+).html  /router/dianpu/$1/$2 [P]
+
+
+#亿起发数据同步重写
+RewriteCond %{REQUEST_URI} ^/yiqifa
+RewriteRule ^(.*)  /router/ymall/yiqifa [P]
+#亿起发首页重写
+RewriteCond %{REQUEST_URI} ^/ymall.html
+RewriteRule ^(.*)  /router/ymall [P]
+#亿起发二级重写
+RewriteCond %{REQUEST_URI} ^/ymall-[0-9]+\.html
+RewriteRule ^\/ymall-([0-9]+).html  /router/ymall/$1 [P]
+#亿起发二级重写(直接访问目标)
+RewriteCond %{REQUEST_URI} ^/ymall-go-[0-9]+\.html
+RewriteRule ^\/ymall-go-([0-9]+).html  /router/ymall/go/$1 [P]
+
+#画报分类重写
+RewriteCond %{REQUEST_URI} ^/huabao/(index|man|lady|fashion|beauty|life|baby|digital|idea|pet|tour|star)\.html
+RewriteRule ^\/huabao\/(.+).html  /router/huabao/channel/$1 [P]
+#画报专辑重写
+RewriteCond %{REQUEST_URI} ^/huabao/[0-9]+\.html
+RewriteRule ^\/huabao\/(.+).html  /router/huabao/detail/$1 [P]
+#画报图片重写
+RewriteCond %{REQUEST_URI} ^/huabao/[0-9]+/[0-9]+\.html
+RewriteRule ^\/huabao\/([0-9]+)\/(.+).html  /router/huabao/detail/$1/$2 [P]
+#画报标签库重写
+RewriteCond %{REQUEST_URI} ^/huabao/tags\.html
+RewriteRule ^\/huabao\/(.+).html  /router/huabao/tags [P]
+#画报标签重写
+RewriteCond %{REQUEST_URI} ^/huabao/tags/(.+)\.html
+RewriteRule ^\/huabao\/tags\/(.+).html  /router/huabao/tags/$1 [P]
+#频道重写
+RewriteCond %{REQUEST_URI} ^/channel/(.+)\.html
+RewriteRule ^\/channel\/(.+).html  /router/site/channel/$1 [P]
+
+#日志分类重写
+RewriteCond %{REQUEST_URI} ^/class
+RewriteRule ^\/class\/(.+).html  /router/site/class/$1 [P]
+
+#商品推广重写
+RewriteCond %{HTTP_HOST}  ^shop([0-9]+([0-9]{2}))\.xintaonet\.com [NC]
+RewriteCond %{DOCUMENT_ROOT}/zone/%2/%1/itemDetail.html -f
+RewriteCond %{REQUEST_URI} ^\/titem\/([0-9]+([0-9]{3}))\.html
+RewriteCond %{DOCUMENT_ROOT}/hitem/%2/%1/%1.html -f
+RewriteCond %{QUERY_STRING} !ITEMIID
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))\.xintaonet\.com\/titem\/([0-9]+)\.html  /zone/$2/$1/itemDetail.html?ITEMIID=$3 [NC,L,QSA]
+
+#商品推广重写
+RewriteCond %{REQUEST_URI} ^/titem
+RewriteRule ^\/titem\/(.+).html  /router/site/titem/$1 [P]
+#商品推广重写(别人已被收录的淘宝商品访问)
+RewriteCond %{REQUEST_URI} ^/item-[0-9]+\.html
+RewriteRule ^\/item-([0-9]+).html  /router/site/titem/$1 [P]
+#商品推广跳转重写
+RewriteCond %{REQUEST_URI} ^/gitem
+RewriteRule ^\/gitem\/(.+).html  /router/site/gitem/$1 [P]
+
+
+#店铺推广重写
+RewriteCond %{HTTP_HOST}  ^shop([0-9]+([0-9]{2}))\.xintaonet\.com [NC]
+RewriteCond %{DOCUMENT_ROOT}/zone/%2/%1/shopDetail.html -f
+RewriteCond %{REQUEST_URI} ^\/tshop\/([0-9]+([0-9]{2}))\.html
+RewriteCond %{DOCUMENT_ROOT}/hshop/%2/%1/%1.html -f
+RewriteCond %{QUERY_STRING} !SHOPSID
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))\.xintaonet\.com\/tshop\/([0-9]+)\.html  /zone/$2/$1/shopDetail.html?SHOPSID=$3 [NC,L,QSA]
+#店铺推广重写
+RewriteCond %{REQUEST_URI} ^/tshop
+RewriteRule ^\/tshop/(.+).html  /router/site/tshop/$1 [P]
+#店铺推广重写
+RewriteCond %{REQUEST_URI} ^/gshop
+RewriteRule ^\/gshop/(.+).html  /router/site/gshop/$1 [P]
+#推广组推广重写
+RewriteCond %{REQUEST_URI} ^/tgroup
+RewriteRule ^\/tgroup/(.+).html  /router/site/tgroup/$1 [P]
+#店铺收藏推广重写
+RewriteCond %{REQUEST_URI} ^/tfavshop.html
+RewriteRule ^(.*)  /router/site/tfavshop [P]
+#品牌重写
+RewriteCond %{REQUEST_URI} ^/brand
+RewriteRule ^\/brand\/(.+).html  /router/site/brand/$1 [P]
+
+#新版本日志列表
+RewriteCond %{REQUEST_URI} ^/tblogs.html
+RewriteRule ^(.*)  /router/site/tblogs [P]
+RewriteCond %{REQUEST_URI} ^/tblogs/[0-9]+\.html
+RewriteRule ^\/tblogs\/(.+).html  /router/site/tblogs/$1 [P]
+RewriteCond %{REQUEST_URI} ^/tblogs/[0-9]+/[0-9]+\.html
+RewriteRule ^\/tblogs\/(.+)\/(.+).html  /router/site/tblogs/$1/$2 [P]
+
+
+#活动重写
+RewriteCond %{REQUEST_URI} ^/activity
+RewriteRule ^\/activity\/(.+).html  /router/site/activity/$1 [P]
+#推广商品重写
+RewriteCond %{REQUEST_URI} ^/aditem
+RewriteRule ^\/aditem\/(.+).html  /router/ad/item/$1 [P]
+#商品重写
+RewriteCond %{REQUEST_URI} ^/item
+RewriteRule ^\/item\/(.+).html  /router/site/item/$1 [P]
+#日志重写
+RewriteCond %{REQUEST_URI} ^/blog
+RewriteRule ^\/blog\/(.+)\/(.+).html  /router/site/blog/$1/$2 [P]
+#所有日志列表
+RewriteCond %{REQUEST_URI} ^/blogs
+RewriteRule ^\/blogs\/(.+).html  /router/site/blogs/$1 [P]
+#我的日志列表
+RewriteCond %{REQUEST_URI} ^/blogs\/me
+RewriteRule ^\/blogs\/me\/(.+).html  /router/site/blogs/me/$1 [P]
+#好友的日志列表
+RewriteCond %{REQUEST_URI} ^/blogs\/friends
+RewriteRule ^\/blogs\/friends\/(.+).html  /router/site/blogs/friends/$1 [P]
+#推广组重写
+RewriteCond %{REQUEST_URI} ^/group
+RewriteRule ^\/group\/(.+).html  /router/site/tgroup/$1 [P]
+#关键词重写
+RewriteCond %{REQUEST_URI} ^/keywords
+RewriteRule ^(.*)  /router/site/keywords [P]
+
+#xintaonet二级域名
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/shop$1.html [NC,L]
+#xintaonet二级域名多页面
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} ^/pages
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))\.xintaonet\.com\/pages\/(.+)  /zone/$2/$1/pages/$3 [NC,L]
+
+#text认证
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} ^/(.+).txt
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))\.xintaonet\.com\/(.+).txt  /zone/$2/$1/$3.txt [NC,L]
+
+#xintaonet站点地图
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/robots.txt
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/robots.txt [NC,L]
+
+RewriteCond %{REQUEST_URI} =/favicon.ico
+RewriteCond %{HTTP_HOST}  ^shop([0-9]+([0-9]{2}))\.xintaonet\.com [NC]
+RewriteCond %{DOCUMENT_ROOT}/zone/%2/%1/favicon.ico -f
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/favicon.ico [NC,L]
+
+#xintaonet站点地图
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/sitemap.xml
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/sitemap.xml.gz [NC,L]
+
+#xintaonet二级域名订阅
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/rss
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/shop$1.xml [NC,L]
+
+#二级域名
+#RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+#RewriteRule ^(.+)       http://www.xintaonet.com$1          [NC,L]
+#xintaowang二级域名
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaowang\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/shop$1.html [NC,L]
+#二级域名REST服务
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} ^/router
+RewriteCond %{QUERY_STRING} !^USER
+RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))\.xintaonet\.com\/(.+)  /$3?USER=$1 [L,P,QSA]
+
+#xintaowang二级域名订阅
+RewriteCond %{HTTP_HOST}  ^shop[0-9]+\.xintaowang\.com [NC]
+RewriteCond %{REQUEST_URI} =/rss
+RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+RewriteRule ^shop([0-9]+([0-9]{2}))  /zone/$2/$1/shop$1.xml [NC,L]
+
+RewriteCond %{HTTP_HOST}   ^xintaonet.com|^xintaowang.com [NC]
+RewriteCond %{HTTP_HOST}   !^$
+RewriteRule ^/(.*)         http://www.xintaonet.com/$1 [R]
+
+#xintaonet根域名
+RewriteCond %{HTTP_HOST} ^www.xintaonet.com
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+RewriteRule ^(.+) 	/router/site/login [L,P]
+#xintaowang根域名
+RewriteCond %{HTTP_HOST} ^www.xintaowang.com
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+RewriteRule ^(.+) 	/router/site/login/ [L,P]
+#jtrac访问
+RewriteCond %{HTTP_HOST}  ^jtrac\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       http://www.xintaonet.com/jtrac          [L,P]
+
+#xintaowang uccenter访问
+#RewriteCond %{HTTP_HOST} www.xintaowang.com
+#RewriteCond %{REQUEST_URI} \/uccenter [NC]
+#RewriteRule ^(.+)       %{HTTP_HOST}$1          [C]
+#RewriteRule ^(.+) 	/discuz72/$1 [L,P]
+#xintaonet 论坛二级域名
+RewriteCond %{HTTP_HOST}  forum\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/discuz72/index.php [NC,L]
+#xintaonet 论坛二级域名
+RewriteCond %{HTTP_HOST}  forum\.xintaonet\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/discuz72/$1          [NC,L]
+#xintaowang 论坛二级域名
+RewriteCond %{HTTP_HOST}  forum\.xintaowang\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/discuz72/index.php [NC,L]
+#xintaonet 论坛二级域名
+RewriteCond %{HTTP_HOST}  forum\.xintaowang\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/discuz72/$1          [NC,L]
+
+#xintaonet 家园二级域名
+RewriteCond %{HTTP_HOST}  home\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/uchome2/index.php [NC,L]
+#xintaonet 家园二级域名
+RewriteCond %{HTTP_HOST}  home\.xintaonet\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/uchome2/$1          [NC,L]
+#xintaowang 家园二级域名
+RewriteCond %{HTTP_HOST}  home\.xintaowang\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/uchome2/index.php [NC,L]
+#xintaonet 家园二级域名
+RewriteCond %{HTTP_HOST}  home\.xintaowang\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/uchome2/$1          [NC,L]
+
+#xintaonet wiki二级域名
+RewriteCond %{HTTP_HOST}  wiki\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/wiki/index.php [NC,L]
+#xintaonet wiki二级域名
+RewriteCond %{HTTP_HOST}  wiki\.xintaonet\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/wiki/$1          [NC,L]
+#xintaonet mysql二级域名
+RewriteCond %{HTTP_HOST}  mysql\.xintaonet\.com [NC]
+RewriteCond %{REQUEST_URI} =/
+RewriteRule ^(.+)       %{SERVER_NAME}$1          [C]
+RewriteRule ^(.+)  	/mysql/index.php [NC,L]
+#xintaonet mysql二级域名
+RewriteCond %{HTTP_HOST}  mysql\.xintaonet\.com [NC]
+RewriteRule ^/(.+)       http://www.xintaonet.com/mysql/$1          [NC,L]

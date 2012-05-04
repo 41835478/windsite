@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="LocalWindSite">
+        <wb-resource deploy-path="/" source-path="/war"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/local"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/wind"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/spring"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/hibernate"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-uc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-manyou"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-discuz"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-weibo"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-sitemap"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-weibo4j"/>
+        <property name="context-root"/>
+        <property name="java-output-path"/>
+    </wb-module>
+</project-modules>

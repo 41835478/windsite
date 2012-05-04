@@ -1,0 +1,199 @@
+Rsync实现文件夹同步
+
+一    准备
+1、 本案例以Red Hat Enterprise4 为例，其中Rsync以rsync-3.0.4为例；
+
+2、 安装两台以上linux服务器，其中一台作为服务端，一台作为客户端来同步服务端文件夹；
+
+3、 服务端的IP为192.168.1.240，机器名为MyLinuxTest240；客户端IP为192.168.1.241，机器名为MyLinuxTest241；
+
+4、 Rsync可从http://rsync.samba.org/ftp/rsync/获得最新版；
+
+5、 本文档实现的是将服务端/sildata/test下的所有文件备份到客户端的/sildata/ftpfile目录下；
+
+二    安装（服务端、客户端）
+1.         tar -xzvf rsync-3.0.4.tar.gz   #解压缩安装文件
+
+2.         cd rsync-3.0.4
+
+3.         ./configure   #配置时如果有gcc错误需安装delelopment tools
+
+4.         Make
+
+5.         make install
+
+三    配置（服务端）
+A：创建服务端的配置文件rsyncd.conf；
+
+1.         mkdir /etc/rsyncd   # /etc下创建rsyncd，用来存放rsyncd.conf 、rsyncd.secrets和rsyncd.motd
+
+2.         touch /etc/rsyncd/rsyncd.conf   #创建rsyncd.conf配置文件
+
+3.         touch /etc/rsyncd/rsyncd.secrets   #创建rsyncd.secrets密码文件
+
+4.         chmod 600 /etc/rsyncd/rsyncd.secrets   #设置密码文件权限600
+
+5.         touch /etc/rsyncd/rsyncd.motd   #创建FTP服务器标示文件
+
+B：文件配置
+
+1.         rsyncd.conf文件配置参考附件；
+
+path = /sildata/test，标注的是同步的数据源；
+
+其中会在/etc/rsyncd/rsync.log创建日志，可用来查看；
+
+2.         rsyncd.secrets文件配置如下所示；
+
+root:ftp123
+
+3.         rsyncd.motd创建FTP服务器标示文件如下所示；
+
+      ++++++++++++++++++++++++++++++++++++
+
+      + MyLinuxTest240 rsync 2008-2010 +
+
+      ++++++++++++++++++++++++++++++++++++
+
+     C：启动服务端rsync服务
+
+1.         /usr/local/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf   #默认安装时服务在usr/local/bin下；
+
+2.         如果需要做成自动启动，需加上启动脚本；
+
+vi /etc/rc.d/rc.local
+
+增加内容：/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf
+
+3.         在防火墙中放开访问端口873；
+
+vi /etc/sysconfig/iptables
+
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 873 -j ACCEPT
+
+iptables –L   #查看873端口是否打开；
+
+4.         查看服务是否启动正常；
+
+rsync - - list - only root@MyLinuxTest240::          
+
+如果正常能看到以下内容：
+
+      ++++++++++++++++++++++++++++++++++++
+
+            + MyLinuxTest240 rsync 2002-2007 +
+
+            ++++++++++++++++++++++++++++++++++++
+
+roothome        root home data
+
+键入以下命令rsync –list-only root@MyLinuxTest240::roothome，输入密码后能list出来文件夹列表
+
+四    调试（客户端）
+     A：创建、配置密码文件
+
+1、touch ect/rsync.password   #在etc下创建密码文件rsync.password；
+
+         2、chmod 600 rsync.passwod
+
+         3、echo "ftp123"> rsync.password
+
+     B：测试
+
+1、 在hosts中增加IP与机器名映射；
+
+vi /etc/hosts
+
+192.168.1.240   MyLinuxTest240
+
+         2、在客户端上执行以下命令，查看是否将文件同步到/sildata/ftpfile下（测试）
+
+/usr/bin/rsync -avzP   --delete --password-file=/etc/rsync.password root@MyLinuxTest240::roothome /sildata/ftpfile
+
+      C：创建脚本
+
+          1、mkdir   /etc/cron.daily.rsync
+
+          2、cd /etc/cron.daily.rsync
+
+          3、touch root.sh
+
+          4、chmod 755 /etc/cron.daily.rsync/root.sh
+
+          5、vi root.sh    #添加以下内容；
+
+#!/bin/sh
+
+#MyLinuxTest240 Home Backup
+
+/usr/bin/rsync -avzP   --delete --password-file=/etc/rsync.password
+
+root@MyLinuxTest240::roothome /sildata/ftpfile
+
+       D：修改守护程序列表（也可以加在/etc/crontab中）
+
+1、 crontab -e   #增加以下内容，每10分钟执行一次/etc/cron.daily.rsync/root.sh：
+
+# Run daily cron jobs per 10minutes everyday,backup 240 to 241
+
+*/10 * * * * sh /etc/cron.daily.rsync/root.sh    #每10分钟
+
+或者
+
+0 */2 * * * sh /etc/cron.daily.rsync/root.sh     #每2小时
+
+或
+
+0 */23 * * * sh /etc/cron.daily.rsync/root.sh    #每天23点
+
+2、 重启crond服务；
+
+killall crond   #杀死所有crond进程
+
+ps aux |grep crond   #查看
+
+/usr/sbin/crond   #启动
+
+ps aux |grep crond   #查看
+
+　　# service crond stop 
+　　# service crond start
+
+       E：自动启动
+
+vi /etc/rc.d/rc.local
+
+增加内容：/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf
+
+       F：邮件查看
+
+          成功后会往root发送邮件，可用如下命令查看：
+
+          sudo mutt -f /var/spool/mail/root
+
+
+
+
+
+	  conf演示：
+
+
+	  #这里指定的用户名和用户组是root，权限过高了，出于安全考虑可以用别的
+uid=root
+gid=root
+
+# 这里是认证的模块名，在client端需要指定
+[xintao_zone]
+
+# 需要做镜像的目录
+path = /usr/local/apache2/htdocs/zone
+comment = zone area
+# 可以忽略一些无关的IO错误
+ignore errors
+# 只读，如果是no，则可以从client发送文件到此服务器
+read only = yes
+# 不允许列文件
+list = no
+
+# 认证文件名
+secrets file = /etc/rsyncd/rsyncd.secrets

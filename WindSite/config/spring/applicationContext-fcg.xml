@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<!-- 自定义组件获取 -->
+	<bean id="widgetCustomer" class="com.wind.site.freemarker.method.WidgetCustomerMethod">
+		<property name="baseService">
+			<ref bean="baseService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+	<!-- 模块获取 -->
+	<bean id="moduleMethod" class="com.wind.site.freemarker.method.ModuleMethod">
+		<property name="moduleLoad">
+			<ref bean="moduleLoad" />
+		</property>
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+	</bean>
+	<!-- 日期UNIX解析组件获取 -->
+	<bean id="dateline" class="com.wind.site.freemarker.method.DatelineMethod">
+	</bean>
+	<!-- freemarker页面解析器-->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="contentType" value="text/html;charset=utf-8"></property>
+		<property name="cache" value="false" /><!-- 开发时不缓存 -->
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+		<!-- 如果你需要使用Spring 对 FreeMarker 宏命令的支持, 将这个属性设为true  -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.freemarker.FreeMarkerView
+			</value>
+		</property>
+		<!-- 自定义方法 -->
+		<property name="attributesMap">
+			<map>
+				<entry key="widgetCustomer">
+					<ref bean="widgetCustomer" />
+				</entry>
+				<entry key="dateline">
+					<ref bean="dateline" />
+				</entry>
+				<entry key="getTime">
+					<bean class="com.wind.site.freemarker.method.GetTimeMethod" />
+				</entry>
+				<entry key="dateDiff">
+					<bean class="com.wind.site.freemarker.method.DateDiffMethod" />
+				</entry>
+				<entry key="dateVersion">
+					<bean class="com.wind.site.freemarker.method.DateVersionMethod">
+						<property name="format" value="yyyyMMddHHmmss" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 配置Freemarker -->
+	<bean id="freemarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="templateLoaderPath">
+			<value></value>
+		</property>
+		<property name="templateLoaders">
+			<list>
+				<bean class="com.wind.site.freemarker.DBTemplateLoader">
+					<property name="designerService">
+						<ref bean="designerService" />
+					</property>
+				</bean>
+				<bean class="com.wind.site.freemarker.TemplateAbsolutePathLoader">
+					<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
+					<property name="htmlPath">
+						<value>E:\\project\\wind\\aws\\Apache2.2\\htdocs\\zone</value>
+						<!-- <value>/usr/local/apache2/htdocs/zone</value>-->
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="classic_compatible">true</prop>
+				<prop key="number_format">0.##</prop>
+				<prop key="date_format">yyyy-mm-dd</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="localized_lookup">false</prop>
+				<prop key="auto_import">/assets/macro/windsite.ftl as
+					ws,/assets/macro/widgets.ftl as w,/assets/macro/xintao.ftl as
+					xt,/assets/macro/huabao.ftl as hb,/assets/macro/page.ftl as p
+				</prop>
+				<!-- 如果模板不经常更新，此属性设置更新延迟时间 -->
+				<!-- <prop key="template_update_delay">3600</prop> -->
+			</props>
+		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<!-- 淘宝环境 -->
+				<entry key="taobaoEnv">
+					<ref bean="taobaoEnv" />
+				</entry>
+				<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
+				<entry key="htmlPath">
+					<value>E:\\project\\wind\\aws\\Apache2.2</value>
+					<!-- <value>/usr/local/apache2/htdocs/zone</value>-->
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!--模块加载类-->
+	<bean id="moduleLoad" class="com.wind.site.module.impl.DefaultModuleLoad">
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+		<!--拦截器-->
+		<property name="interceptors">
+			<list>
+				<bean class="com.wind.site.module.impl.CommonMultiAdTypeInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopDisplay</value>
+							<value>ShopTenOrder</value>
+							<value>ShopItemList</value>
+							<value>ShopRank</value>
+							<value>ShopDianPu</value>
+							<value>ShopMallJingXi</value>
+							<value>ShopChildFloor</value>
+							<value>ShopB2CMall</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.CommonDianPuInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopDianPuCat</value>
+							<value>ShopDianPuList</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.CategoryMultiAdTypeInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopCategoryVancl</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopComplexAInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopComplexA</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopComplexBInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopComplexB</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopChannelInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopChannel</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopBrandInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopBrand</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopSliderInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopSlider</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopTemplateInterceptor">
+					<property name="fcg">
+						<ref bean="freemarkerConfigurer" />
+					</property>
+					<property name="modules">
+						<list>
+							<value>ShopTemplate</value>
+							<value>ShopMarketCat</value>
+							<value>ShopMallFloor</value>
+							<value>ShopMallNewFloor</value>
+							<value>ShopSliderTemplate</value>
+							<value>ShopTabNav</value>
+							<value>ShopMallTabNav</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopBlogInterceptor">
+					<property name="ucService">
+						<ref bean="ucService" />
+					</property>
+					<property name="fcg">
+						<ref bean="freemarkerConfigurer" />
+					</property>
+					<property name="modules">
+						<list>
+							<value>ShopBlog</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ListParamsModuleInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopCategory</value>
+							<value>ShopHeader</value>
+							<value>ShopClass</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="com.wind.site.module.impl.ShopKeywordInterceptor">
+					<property name="modules">
+						<list>
+							<value>ShopKeyword</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

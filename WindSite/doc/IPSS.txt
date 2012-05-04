@@ -1,0 +1,42 @@
+iptables-save >/etc/sysconfig/iptables
+iptables -I FORWARD -s 110.75.164.0/16 -j DROP
+iptables -I FORWARD -s 110.75.171.0/16 -j DROP
+iptables -I FORWARD -s 110.75.172.0/16 -j DROP
+iptables -I FORWARD -s 110.75.173.0/16 -j DROP
+iptables -I FORWARD -s 110.75.174.0/16 -j DROP
+iptables -I FORWARD -s 110.75.175.0/16 -j DROP
+iptables -I FORWARD -s 110.75.176.0/16 -j DROP
+
+iptables -I FORWARD -s 61.135.249.0/16 -j DROP
+iptables -I FORWARD -s 61.135.190.0/16 -j DROP
+
+iptables -I FORWARD -s 119.188.14.0/16 -j DROP
+ 
+iptables -I FORWARD -s 220.181.93.0/16 -j DROP
+iptables -I FORWARD -s 220.181.94.0/16 -j DROP
+
+iptables -I FORWARD -s 124.115.0.0/16 -j DROP
+
+iptables -I FORWARD -s 1.202.218.0/16 -j DROP
+iptables -I FORWARD -s 1.202.219.0/16 -j DROP
+iptables -I FORWARD -s 1.202.220.0/16 -j DROP
+iptables -I FORWARD -s 1.202.221.0/16 -j DROP
+iptables -I FORWARD -s 2.202.218.0/16 -j DROP
+iptables -I FORWARD -s 2.202.219.0/16 -j DROP
+iptables -I FORWARD -s 2.202.220.0/16 -j DROP
+iptables -I FORWARD -s 2.202.221.0/16 -j DROP
+iptables -I FORWARD -s 3.202.218.0/16 -j DROP
+iptables -I FORWARD -s 3.202.219.0/16 -j DROP
+iptables -I FORWARD -s 3.202.220.0/16 -j DROP
+iptables -I FORWARD -s 3.202.221.0/16 -j DROP
+iptables -I FORWARD -s 4.202.218.0/16 -j DROP
+iptables -I FORWARD -s 4.202.219.0/16 -j DROP
+iptables -I FORWARD -s 4.202.220.0/16 -j DROP
+iptables -I FORWARD -s 4.202.221.0/16 -j DROP
+iptables -I FORWARD -s 5.202.218.0/16 -j DROP
+iptables -I FORWARD -s 5.202.219.0/16 -j DROP
+iptables -I FORWARD -s 5.202.220.0/16 -j DROP
+iptables -I FORWARD -s 5.202.221.0/16 -j DROP
+
+
+

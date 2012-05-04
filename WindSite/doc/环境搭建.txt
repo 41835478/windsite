@@ -1,0 +1,3 @@
+#apache ./configure --enable-module=so --enable-mods-shared=all --enable-so --enable-cache --enable-file-cache --enable-mem-cache --enable-disk-cache --enable-static-support --enable-static-htpasswd --enable-static-htdigest --enable-static-rotatelogs --enable-static-logresolve --enable-static-htdbm --enable-static-ab --enable-static-checkgid --enable-mod_cgi --enable-deflate=shared --enable-expires=shared --enable-rewrite=shared --enable-proxy --enable-proxy-http
+#php  ./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql --prefix=/usr/local/apache2/php --with-config-file-path=/usr/local/apache2/php --enable-force-cgi-redirect --disable-cgi --with-zlib --with-gettext --with-gdbm
+

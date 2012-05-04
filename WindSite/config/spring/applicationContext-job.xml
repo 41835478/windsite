@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!--微购定时营销信息-->
+	<bean name="autoCronCommand" class="com.wind.site.command.WeigouAutocronGetTimer" >
+	</bean>
+	<bean id="autoCronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="autoCronCommand" />
+		</property>
+		<property name="targetMethod">
+			<value>getAutocrons</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="autoCronCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="autoCronJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 8 * * ?</value>
+		</property>
+	</bean>
+	<!--更新凡客的商品信息-->
+	<bean name="vanclCommand" class="com.wind.site.command.VanclCommand" >
+		<property name="weiboService">
+			<ref bean="weiboService" />
+		</property>
+	</bean>
+	<bean id="vanclJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vanclCommand" />
+		</property>
+		<property name="targetMethod">
+			<value>synVancl</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="vanclCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vanclJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<!--更新缓存的店铺详情页面-->
+	<bean name="shopDetailDeployJob" class="com.wind.site.command.ShopDetailDeployCommand" >
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+	<bean id="shopDetailDeployJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="shopDetailDeployJob" />
+		</property>
+		<property name="targetMethod">
+			<value>deployShopDetail</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="shopDetailDeployCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="shopDetailDeployJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<!--更新缓存的商品详情页面-->
+	<bean name="itemDetailDeployJob" class="com.wind.site.command.ItemDetailDeployCommand" >
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+	<bean id="itemDetailDeployJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="itemDetailDeployJob" />
+		</property>
+		<property name="targetMethod">
+			<value>deployItemDetail</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="itemDetailDeployCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="itemDetailDeployJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+	<!--淘宝主动通知-->
+	<bean name="topCometStreamJob" class="com.wind.site.command.TopCometStreamCommand" >
+	</bean>
+	<bean id="topCometStreamJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="topCometStreamJob" />
+		</property>
+		<property name="targetMethod">
+			<value>checkTopComet</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="topCometStreamCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="topCometStreamJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 */3 * * * ?</value>
+		</property>
+	</bean>
+	<!--亿起发订单状态同步-->
+	<bean name="yiqifaOrderStatusJob" class="com.wind.site.command.YiqifaReportsOrderStatusCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+	<bean id="yiqifaOrderStatusJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="yiqifaOrderStatusJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synYiqifaOrderStatus</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="yiqifaOrderStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="yiqifaOrderStatusJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 */2 * * ?</value>
+		</property>
+	</bean>
+	<!--亿起发报表同步-->
+	<bean name="yiqifaReportsJob" class="com.wind.site.command.YiqifaReportsGetTimer" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+	<bean id="yiqifaReportsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="yiqifaReportsJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synYiqifaReports</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="yiqifaReportsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="yiqifaReportsJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 */40 * * * ?</value>
+		</property>
+	</bean>
+	<!--亿起发抓取-->
+	<bean name="yiqifaJob" class="com.wind.site.command.YiqifaCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+	<bean id="yiqifaJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="yiqifaJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synYiqifa</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="yiqifaCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="yiqifaJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 40 0 * * ?</value>
+		</property>
+	</bean>
+	
+	<!--商城首页楼层模块蜘蛛-->
+	<bean id="mallIndexFloorSpider" class="com.wind.site.module.spider.TMallIndexFloorSpider" >
+	</bean>
+	<bean id="mallIndexNewFloorSpider" class="com.wind.site.module.spider.TMallIndexNewFloorSpider" >
+	</bean>
+	<!--商城首页楼层模块蜘蛛-->
+	<bean id="mallSliderPicturesSpider" class="com.wind.site.module.spider.TMallSliderPicturesSpider" >
+	</bean>
+	<!--店铺街排行榜模块蜘蛛-->
+	<bean id="dianpuPaihangSpider" class="com.wind.site.module.spider.TaobaoJiePaihangSpider" >
+	</bean>
+	
+	<!--模块蜘蛛抓取-->
+	<bean name="spiderCommandJob" class="com.wind.site.command.SpiderCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+		<property name="spiders">
+			<list>
+				<ref local="dianpuPaihangSpider"/>
+				<ref local="mallIndexNewFloorSpider"/>
+				<ref local="mallSliderPicturesSpider"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="spiderCommandJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spiderCommandJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synSpiders</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="spiderCommandCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spiderCommandJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 15 0 * * ?</value>
+		</property>
+	</bean>
+	<!--订单记录抓取-->
+	<bean name="articleBizOrderJob" class="com.wind.site.command.ArticleBizOrderCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+	<bean id="articleBizOrderJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="articleBizOrderJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synOrders</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="articleBizOrderCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="articleBizOrderJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 1 * * ?</value>
+		</property>
+	</bean>
+	<!--淘店铺同步-->
+	<bean name="taobaoDianPuJob" class="com.wind.site.command.TaobaoDianpuCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+
+	<bean id="taobaoDianPuMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="taobaoDianPuJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synDianpu</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="taobaoDianPuCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="taobaoDianPuMethodInvokingJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+	<!--淘店铺昵称同步-->
+	<bean name="taobaoNicksJob" class="com.wind.site.command.TaobaoShopNickCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+
+	<bean id="taobaoNicksMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="taobaoNicksJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synNicks</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="taobaoNicksCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="taobaoNicksMethodInvokingJobDetail" />
+		</property>
+		<!-- 每隔半小时-->
+		<property name="cronExpression">
+			<value>0 */30 * * * ?</value>
+		</property>
+	</bean>
+	<!--淘宝关键词更新-->
+	<bean name="taobaoKeywordJob" class="com.wind.site.command.TaobaoKeywordCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+
+	<bean id="taobaoKeywordMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="taobaoKeywordJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synKeywords</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="taobaoKeywordCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="taobaoKeywordMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天凌晨12点30分钟-->
+		<property name="cronExpression">
+			<value>0 30 0 * * ?</value>
+		</property>
+
+	</bean>
+	<!--淘宝SESSION更新-->
+	<bean name="taobaoSessionJob" class="com.wind.site.command.TaobaoSessionCommand" >
+		<property name="taobaoService">
+			<ref bean="taobaoService" />
+		</property>
+	</bean>
+
+	<bean id="taobaoSessionMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="taobaoSessionJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synTaobaoSession</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="taobaoSessionCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="taobaoSessionMethodInvokingJobDetail" />
+		</property>
+		<!-- 每隔20分钟-->
+		<property name="cronExpression">
+			<value>0 0 */3 * * ?</value>
+		</property>
+
+	</bean>
+	<!--网站统计数据更新-->
+	<bean name="analyticsJob" class="com.wind.site.command.AnalyticsCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+
+	<bean id="analyticsMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="analyticsJob" />
+		</property>
+		<property name="targetMethod">
+			<value>refreshAnalytics</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="analyticsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="analyticsMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天的1点触发-->
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+
+	</bean>
+	<!--广告投放数据更新-->
+	<bean name="adsJob" class="com.wind.site.command.AdsCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="commandService">
+			<ref bean="commandService" />
+		</property>
+	</bean>
+
+	<bean id="adsMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="adsJob" />
+		</property>
+		<property name="targetMethod">
+			<value>refreshAds</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="adsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="adsMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天的0点触发-->
+		<property name="cronExpression">
+			<value>0 25 1 * * ?</value>
+		</property>
+
+	</bean>
+	<!--排行榜数据更新-->
+	<bean name="xintaoTopJob" class="com.wind.site.command.TopXintaoCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+
+	<bean id="topMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="xintaoTopJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synXintaoTop</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="topCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="topMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天的2点触发-->
+		<property name="cronExpression">
+			<value>0 30 2 * * ?</value>
+		</property>
+
+	</bean>
+	<!--画报数据更新-->
+	<bean name="xintaoHuabaoJob" class="com.wind.site.command.HuabaoXintaoCommand" >
+		<property name="taobaoService">
+			<ref bean="taobaoService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+	</bean>
+
+	<bean id="huabaoMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="xintaoHuabaoJob" />
+		</property>
+		<property name="targetMethod">
+			<value>synXintaoHuabao</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="huabaoCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="huabaoMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天的3点触发-->
+		<property name="cronExpression">
+			<value>0 30 3 * * ?</value>
+		</property>
+	</bean>
+	<!--定时发送邮件-->
+	<bean name="mailSendJob" class="com.wind.site.command.MailSendCommand" >
+		<property name="ucService">
+			<ref bean="ucService" />
+		</property>
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+		<property name="mailSender">
+			<ref bean="mailSender" />
+		</property>
+	</bean>
+
+	<bean id="mailSendMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="mailSendJob" />
+		</property>
+		<property name="targetMethod">
+			<value>mailSend</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="mailSendCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="mailSendMethodInvokingJobDetail" />
+		</property>
+		<!-- 每隔3小时触发-->
+		<property name="cronExpression">
+			<value>0 0 3,8 * * ?</value>
+		</property>
+	</bean>
+	<!--定时创建周报-->
+	<bean name="weeklyMailCreateJob" class="com.wind.site.command.WeeklyMailCreateCommand" >
+		<property name="adminService">
+			<ref bean="adminService" />
+		</property>
+	</bean>
+
+	<bean id="weeklyMailCreateMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="weeklyMailCreateJob" />
+		</property>
+		<property name="targetMethod">
+			<value>createMail</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="weeklyMailCreateCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="weeklyMailCreateMethodInvokingJobDetail" />
+		</property>
+		<!-- 每周五凌晨2点触发-->
+		<property name="cronExpression">
+			<value>0 0 2 ? * FRI</value>
+		</property>
+	</bean>
+	<!--自动发布高版本会员页面-->
+	<bean name="autoDeployPageJob" class="com.wind.site.command.AutoDeployPageCommand" >
+		<property name="pageService">
+			<ref bean="pageService" />
+		</property>
+		<property name="ucService">
+			<ref bean="ucService" />
+		</property>
+		<property name="fcg">
+			<ref bean="freemarkerConfigurer" />
+		</property>
+		<property name="ModuleMethod">
+			<ref bean="moduleMethod" />
+		</property>
+		<property name="pings">
+			<list>
+				<value>http://www.google.com/webmasters/tools/ping?sitemap=</value>
+				<value>http://cn.bing.com/webmaster/ping.aspx?siteMap=</value>
+				<value>http://submissions.ask.com/ping?sitemap=</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="autoDeployMethodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="autoDeployPageJob" />
+		</property>
+		<property name="targetMethod">
+			<value>deployPage</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="autoDeployCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="autoDeployMethodInvokingJobDetail" />
+		</property>
+		<!-- 每天凌晨1点半触发-->
+		<property name="cronExpression">
+			<value>0 50 1 * * ?</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 添加触发器 -->
+		<property name="triggers">
+			<list>
+				<ref local="autoCronCronTrigger" />
+				<!--<ref local="topCometStreamCronTrigger" />-->
+				<ref local="topCronTrigger" />
+				<ref local="huabaoCronTrigger" />
+				<ref local="taobaoKeywordCronTrigger" />
+				<ref local="taobaoNicksCronTrigger" />
+				<ref local="taobaoDianPuCronTrigger" />
+				<ref local="articleBizOrderCronTrigger" />
+				<ref local="spiderCommandCronTrigger" />
+				<ref local="yiqifaCronTrigger" />
+				<ref local="yiqifaReportsCronTrigger" />
+				<ref local="yiqifaOrderStatusCronTrigger" />
+				<!--<ref local="itemDetailDeployCronTrigger" />-->
+				<ref local="shopDetailDeployCronTrigger" />
+				<!--<ref local="mailSendCronTrigger" />-->
+				<ref local="weeklyMailCreateCronTrigger" />
+				<ref local="autoDeployCronTrigger" />
+				<ref local="adsCronTrigger" />
+				<ref local="analyticsCronTrigger" />
+				<ref local="taobaoSessionCronTrigger"/>
+			</list>
+		</property>
+	</bean>
+</beans>

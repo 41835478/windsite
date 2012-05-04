@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<bean id="sessionFactoryWeibo"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate-weibo.cfg.xml</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.query.substitutions">
+					true=1,false=0
+				</prop>
+				<prop key="hibernate.jdbc.use_scrollable_resultset">
+					false
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cglib.use_reflection_optimizer">
+					true
+				</prop>
+			</props>
+		</property>
+		<property name="lobHandler" ref="SQLLobHandler" />
+		<property name="packagesToScan" value="com.wind.weibo.model" />
+	</bean>
+	<!--事务配置-->
+	<!-- Annotations事务配置 -->
+	<bean id="transactionManagerWeibo"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactoryWeibo" />
+		</property>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManagerWeibo" />
+	<!-- DaoService 配置 -->
+	<bean id="daoServiceWeibo" class="com.wind.core.dao.impl.DaoServiceImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactoryWeibo" />
+		</property>
+		<property name="daoUtils">
+			<bean class="com.wind.core.dao.util.DaoUtils" />
+		</property>
+	</bean>
+	<!-- BaseService -->
+	<bean id="baseServiceWeibo" class="com.wind.core.service.impl.BaseServiceImpl">
+		<property name="daoService">
+			<ref bean="daoServiceWeibo" />
+		</property>
+	</bean>
+	<!-- WeiboService -->
+	<bean id="weiboService" class="com.wind.weibo.service.impl.WeiboServiceImpl">
+		<property name="daoService">
+			<ref bean="daoServiceWeibo" />
+		</property>
+	</bean>
+	
+</beans>

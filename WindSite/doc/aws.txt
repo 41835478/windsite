@@ -1,0 +1,191 @@
+1.Confirm that your new volume exists from within the EC2 instance.
+2.“ls -al /dev/s*” or “ls -al /dev/x*” should show you the new volume
+	ls -al /dev/s*
+	ls -al /dev/x*
+3.if the volume is found with a name starting with “x” (under newer linux kernels” take note of it. we’ll assume at this stage that the new device is found under “/dev/xvdf”
+4.Format the new Volume
+	sudo /sbin/mkfs.ext3 /dev/xvdt
+5.The volume is now ready. Now create a directory unto which this can be mounted
+	sudo mkdir /mnt/ebs
+6.Mount the volume
+	sudo mount  /dev/xvdt   /mnt/ebs	
+7.Confirm that the  mount worked
+	ls /mnt/ebs	
+8.To ensure that this volume is automatically mounted on system startup, modify  your fstab
+	[If you still have the mount active from the previous command, umount it : 
+		sudo umount /mnt/ebs
+	Edit the fstab: 
+		sudo nano /etc/fstab
+	Add the following line at the end:  
+		/dev/xvdt  /mnt/ebs  ext3    defaults        0 0
+	Save and Reload your mount. Reload with the following command: 
+		sudo mount -a
+9.Create a subsection in the volume for your databases, we have called ours “mysql” in this example
+	sudo mkdir /mnt/ebs/mysql
+	sudo mkdir /mnt/ebs/apache2
+	sudo mkdir /mnt/ebs/tomcat
+	sudo mkdir /mnt/ebs/php5
+
+ln -s /mnt/ebs/mysql/ /usr/local/
+ln -s /mnt/ebs/apache2/ /usr/local/
+ln -s /mnt/ebs/tomcat/ /usr/local/
+ln -s /mnt/ebs/php5/ /usr/local/
+	
+/usr/bin/rsync -avzuP  root@175.41.19.18:/opt/mysql-5.1.62.tar /mnt/ebs/opt/
+	
+ami-00de6e01	
+	
+#java（aws似乎不需要内置opensdk）
+cp jdk-6u26-linux-x64.bin /usr/local/
+chmod +x jdk-6u26-linux-x64.bin
+./jdk-6u26-linux-x64.bin
+/etc/profile
+export PATH=$PATH:/usr/local/mysql/bin
+export JAVA_HOME=/usr/local/jdk1.6.0_26
+export PATH=$JAVA_HOME/bin:$PATH
+source /etc/profile
+java -version	
+#tomcat
+/usr/bin/rsync -avzuP  root@175.41.19.18:/opt/apache-tomcat-6.0.35.tar /mnt/ebs/opt/
+tar xvf apache-tomcat-6.0.35.tar
+ cp -r /mnt/ebs/opt/apache-tomcat-6.0.35/ /mnt/ebs/
+#apache2
+/usr/bin/rsync -avzuP  root@175.41.19.18:/opt/httpd-2.2.22.tar /mnt/ebs/opt/
+tar xvf httpd-2.2.22.tar
+./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so
+make
+make install
+
+#http_proxy
+cd /mnt/ebs/opt/httpd-2.2.22/modules/proxy
+/usr/local/apache2/bin/apxs -c -i mod_proxy.c proxy_util.c
+/usr/local/apache2/bin/apxs -c -i mod_proxy_balancer.c
+/usr/local/apache2/bin/apxs -c -i mod_proxy_http.c
+cd /mnt/ebs/opt/httpd-2.2.22/modules/metadata/
+/usr/local/apache2/bin/apxs -c -i -a mod_expires.c
+cd /mnt/ebs/opt/httpd-2.2.22/modules/filters/
+/usr/local/apache2/bin/apxs -i -c -a mod_deflate.c
+#libxml2
+yum -y install libxml2-devel
+yum -y install openssl-devel 
+yum -y install curl-devel
+yum -y install libjpeg-devel 
+yum -y install libpng-devel 
+yum -y install freetype-devel
+yum -y install gmp-devel  
+yum -y install bzip2-devel 
+ 
+#php
+wget http://cn2.php.net/get/php-5.4.0.tar.gz/from/this/mirror
+gzip -d php-5.4.0.tar.gz
+tar xvf php-5.4.0.tar
+cd php-5.4.0
+'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib'
+make
+make install
+
+/usr/bin/rsync -avzuP  root@175.41.19.18:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs/
+
+/usr/bin/rsync -avzuP  root@175.41.19.18:/usr/local/mysql/mysqldata /mnt/opt/
+
+/usr/bin/rsync -avzuP  root@223.4.86.100:/data/mysqldata/uchome_2012050119.sql.gz /mnt/ebs/opt/
+
+AddHandler  php5-script     php
+AddType application/x-httpd-php .php
+#maybe
+yum list|grep ncurses 
+ yum -y install ncurses-devel
+yum -y install gcc-c++.x86_64
+
+rpm -qa|grep libtool
+yum -y install libtool
+autoreconf --force --install
+libtoolize --automake --force
+automake --force --add-missing
+#mysql
+tar xvf mysql-5.1.62.tar
+./configure --prefix=/usr/local/mysql --datadir=/mnt/ebs/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
+make
+make install
+groupadd mysql
+useradd -g mysql -s /sbin/nologin mysql
+chown -R mysql:mysql /usr/local/mysql/
+cp  /mnt/ebs/opt/mysql-5.1.62/support-files/my-medium.cnf /etc/my.cnf
+ /usr/local/mysql/bin/mysql_install_db --user=mysql
+chown -R mysql:mysql /usr/local/mysql/var/ 
+cp /mnt/ebs/opt/mysql-5.1.62/support-files/mysql.server /etc/init.d/mysqld
+chmod 755 /etc/init.d/mysqld 
+chkconfig --add mysqld 
+chkconfig mysqld on 
+service mysqld restart  
+/etc/profile
+ PATH=$PATH:/usr/local/mysql/bin
+ source /etc/profile
+ 
+ update user set host = '%' where user ='root';
+ flush privileges;
+ 
+  /usr/bin/rsync -avzuP  root@175.41.19.18:/usr/local/apache2/htdocs/ /usr/local/apache2/htdocs/
+  /usr/bin/rsync -avzuP  root@175.41.19.18:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/
+ 
+ gzip -d sql.gz
+ mysql -uroot -p --default-character-set=utf8 uchome
+ 
+ ulimit -a  显示当前所有的 limit 信息
+ ulimit -n 可以打开最大文件描述符的数量
+ ulimit -n 65536 限制最大可以使用 65536个文件描述符
+ /etc/security/limits.conf
+ * soft nofile 65536
+ * hard nofile 65536
+ 
+ cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ 
+ w_ad_page_status is_valid
+ w_ad_blog_status is_valid
+ 
+ 
+ netstat -nat|grep 54.248.108.253:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+ 用户与产品
+新用户为何试用你的产品？
+你现在有多少用户？
+你的用户最需要的是什么？
+你的用户增长率是多少？
+哪些人会成为你的第一批付费用户？
+你怎么知道自己在做的正是用户所需要的？
+转化率是多少？
+为什么你挑了这个点子做下去？
+这个产品的下一阶段你有什么构思？
+你会遇到哪些困难？你打算如何克服？
+
+市场与竞争对手
+这个市场有多大？
+在这一领域你有什么专长？
+谁有可能是你的潜在竞争对手？
+关于这一领域，有什么是你知道而别人不知道的？
+获得新的融资之前，你还能坚持多久？
+
+团队
+你会招聘什么样的人加入你的团队？
+你的团队是如何分工的？
+你的团队是如何走到一起的？
+
+
+
+
+大量close_wait
+
+#1
+sysctl -w net.ipv4.tcp_keepalive_time=30
+
+sysctl -w net.ipv4.tcp_fin_timeout=30
+
+sysctl -w net.ipv4.tcp_keepalive_probes=2
+
+sysctl -w net.ipv4.tcp_keepalive_intvl=2
+
+#2
+net.ipv4.tcp_keepalive_time = 1800 
+net.ipv4.tcp_keepalive_probes = 3 
+net.ipv4.tcp_keepalive_intvl = 15 
+
+/etc/rc.d/init.d/network restart 

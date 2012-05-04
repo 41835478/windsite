@@ -1,0 +1,2 @@
+select t.title '商品',u.nick '推广人',concat('shop',u.user_id,'.xintaonet.com') '推广站点', t.nick '店家' from t_item t,w_user u where t.nick ='hanlong66' and t.createdby=u.user_id order by title;
+select count(nick),nick from t_item group by nick order by count(nick) desc limit 100;

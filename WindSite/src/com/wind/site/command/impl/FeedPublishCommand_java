@@ -1,0 +1,48 @@
+package com.wind.site.command.impl;
+
+import java.util.logging.Logger;
+
+import com.taobao.api.TaobaoApiException;
+import com.taobao.api.jianghu.request.feed.FeedPublishRequest;
+import com.taobao.api.jianghu.response.feed.FeedPublishResponse;
+import com.wind.site.service.ICommandService;
+
+/**
+ * 发布动态
+ * 
+ * @author fxy
+ * 
+ */
+public class FeedPublishCommand extends AbstractTaobaoJianghuCommand {
+	private static final Logger logger = Logger
+			.getLogger(FeedPublishCommand.class.getName());
+	private FeedPublishRequest request;
+
+	public FeedPublishCommand() {
+		super();
+	}
+
+	@Override
+	public void execute(ICommandService service) {
+		try {
+			FeedPublishResponse response = client.feedPublish(request, session);
+			if (response.isSuccess()) {
+				logger.info("[" + nick + "]开通新淘服务淘江湖动态发布成功");
+			} else {
+				logger.warning("[" + nick + "]发布Feed异常:"
+						+ response.getErrorCode() + "|" + response.getMsg());
+			}
+		} catch (TaobaoApiException e) {
+			logger.warning("[" + nick + "]发布Feed异常:" + e);
+		}
+	}
+
+	public void setRequest(FeedPublishRequest request) {
+		this.request = request;
+	}
+
+	public FeedPublishRequest getRequest() {
+		return request;
+	}
+
+}

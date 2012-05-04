@@ -1,0 +1,52 @@
+package com.wind.site.command.impl;
+
+import java.util.logging.Logger;
+
+import com.taobao.api.TaobaoApiException;
+import com.taobao.api.jianghu.request.message.MessagePublishRequest;
+import com.taobao.api.jianghu.response.message.MessagePublishResponse;
+import com.wind.site.service.ICommandService;
+
+/**
+ * 淘江湖普通消息发布
+ * 
+ * @author fxy
+ * 
+ */
+public class MsgPublishCommand extends AbstractTaobaoJianghuCommand {
+	private static final Logger logger = Logger
+			.getLogger(MsgPublishCommand.class.getName());
+	private MessagePublishRequest request;
+
+	public MsgPublishCommand() {
+		super();
+	}
+
+	@Override
+	public void execute(ICommandService service) {
+		try {
+			MessagePublishResponse response = client.messagePublish(request,
+					session);
+			if (response.isSuccess() && response.getContent()) {
+				logger.info("[" + nick + "]邀请[" + request.getToUid()
+						+ "]消息发布成功");
+			} else {
+				logger.warning("[" + nick + "]邀请[" + request.getToUid()
+						+ "]消息发布异常:" + response.getErrorCode() + "|"
+						+ response.getMsg());
+			}
+		} catch (TaobaoApiException e) {
+			logger.warning("[" + nick + "]邀请[" + request.getToUid()
+					+ "]消息发布异常:" + e);
+		}
+	}
+
+	public void setRequest(MessagePublishRequest request) {
+		this.request = request;
+	}
+
+	public MessagePublishRequest getRequest() {
+		return request;
+	}
+
+}

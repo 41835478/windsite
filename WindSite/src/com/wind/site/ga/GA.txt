@@ -1,0 +1,35 @@
+D1. Visitor		
+	ga:browser							浏览器
+	ga:browserVersion					浏览器版本
+	ga:city								城市
+	ga:connectionSpeed					网络连接速度
+	ga:continent						
+	ga:countOfVisits (deprecated)		
+	ga:country							国家
+	ga:date								日期(YYYYMMDD)
+	ga:day								天(1-31)
+	ga:daysSinceLastVisit				
+	ga:flashVersion						flash版本
+	ga:hostname							主机名
+	ga:hour								小时(00-23)
+	ga:isMobile							是否移动用户
+	ga:javaEnabled						是否支持java
+	ga:language							语言
+	ga:latitude							纬度
+	ga:longitude						经度
+	ga:month							月份
+	ga:networkDomain					
+	ga:networkLocation					
+	ga:operatingSystem
+	ga:operatingSystemVersion
+	ga:pageDepth
+	ga:region
+	ga:screenColors
+	ga:screenResolution
+	ga:subContinent
+	ga:userDefinedValue
+	ga:visitCount						访问次数
+	ga:visitLength
+	ga:visitorType						新客人或回流	New Visitor ， Returning Visitor 
+	ga:week								周(01-52)
+	ga:year

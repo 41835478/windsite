@@ -1,0 +1,27 @@
+package com.wind.site.command.impl;
+
+import com.taobao.api.ApiConstants;
+import com.wind.site.env.EnvManager;
+
+/**
+ * 淘江湖异步命令基类
+ * 
+ * @author fxy
+ * 
+ */
+public abstract class AbstractTaobaoJianghuCommand extends
+		AbstractTaobaoCommand {
+
+	protected JiangHuJsonRestClient client;
+
+	public AbstractTaobaoJianghuCommand() {
+		try {
+			client = new JiangHuJsonRestClient(EnvManager.getAppKey(),
+					EnvManager.getSecret(), ApiConstants.API_SERVICE_URL);
+			client.addJHUrlFetch(new JHJdkUrlFetch());
+		} catch (TaobaoApiException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

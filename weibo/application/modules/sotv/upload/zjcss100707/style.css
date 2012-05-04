@@ -1,0 +1,156 @@
+em{font-style:normal}
+.footer,.line{height:1px;font-size:0px;margin:0 auto;clear:both;overflow:hidden}
+.area{width:980px}
+#channelNav{margin:0 auto}
+.c{float:left;display:inline}
+
+.pp li{float:left;display:inline;width:100%}
+.pp img{border:1px #ddd solid;padding:1px;background:#FFF}
+.blank10B{height:10px;background:#FFF;clear:both;overflow:hidden;font-size:0}
+.line{background:url(http://tv.sohu.com/upload/zjcss100707/images/xx2.gif)}
+
+.adA{margin:7px auto 0}
+
+#location{height:22px;padding:8px 0;color:#0D56AE;line-height:22px;}
+#location .left{width:700px;text-align:left;height:16px;overflow:hidden}
+#location .left span{color:#797979}
+
+#picFocus{margin:0 auto 20px}
+
+#contentA{background:url(http://tv.sohu.com/upload/zjcss100707/images/bg01.gif)}
+#contentA .left{width:690px;border-top:1px #DDD solid}
+#contentA .right{width:280px;border-top:1px #DDD solid}
+#contentA .footer{background:url(http://tv.sohu.com/upload/zjcss100707/images/bg02.gif)}
+
+#contentA .left h2{height:24px;padding:12px 22px 0;line-height:24px;color:#333}
+#contentA .left h2 span{font:14px/16px "宋体";margin-top:4px}
+#contentA .left h2 span a{color:#333}
+
+#contentA .blockLA .title{width:660px;margin:0 auto;height:51px;background:url(http://tv.sohu.com/upload/zjcss100707/images/xx1.gif) repeat-x bottom left;color:#333}
+#contentA .blockLA .title .l{margin-top:12px;font:12px/30px "宋体"}
+#contentA .blockLA .title .l strong{font:600 16px/30px "宋体"}
+#contentA .blockLA .title .r{margin:7px 10px 0 0;}
+#contentA .blockLA .title .r span{font:24px/40px "Arial";color:#FF6901}
+
+#contentA .blockLA .info{width:650px;margin:14px auto 20px;color:#797979}
+#contentA .blockLA .info .l{margin-top:3px}
+#contentA .blockLA .info .l img{border:1px #A2BADC solid;padding:1px}
+#contentA .blockLA .info .r{width:508px;line-height:20px;text-align:left}
+#contentA .blockLA .info .r dl{clear:both}
+#contentA .blockLA .info .r dt{float:left;width:216px}
+#contentA .blockLA .info .r dd{float:right;width:292px}
+#contentA .blockLA .info .r dl em{color:#333}
+#contentA .blockLA .info .r p{clear:both}
+#contentA .blockLA .info .r p span{float:right;display:inline;margin:0 4px 0 0;}
+#contentA .blockLA .info .r p span a{background:url(images/bbg01.gif) no-repeat}
+#contentA .blockLA .info .r .shTxt a{padding-right:12px;background-position:50px 1px}
+#contentA .blockLA .info .r .opTxt a{padding-right:12px;background-position:50px -29px}
+#contentA .blockLA .info .r h5{margin:20px auto 0;line-height:26px}
+#contentA .blockLA .info .r h5 a{margin-right:22px}
+#contentA .blockLA .info .playBtn{float:left;width:90px;height:20px;padding-top:3px;display:block;background:url(images/bg03.gif);color:#FFF;font:600 12px/20px "宋体";text-indent:28px}
+#contentA .blockLA .noInfo{margin:10px auto}
+
+.menu{background:#F6F6F6;width:660px;margin:0 auto}
+.menu .l{width:522px;color:#0D56AE;font:14px/26px "宋体"}
+.menu .l span{cursor:pointer;width:58px;float:left;background:url(http://tv.sohu.com/upload/zjcss100707/images/bg06.gif) no-repeat right -2px}
+.menu .l .now{color:#333;font-weight:bold}
+
+.taglist{width:130px;margin-top:5px;float:right;color:#797979;line-height:18px;}
+.taglist div{float:right;}
+.taglist span{float:right;width:16px;height:16px;font-size:1px;line-height:500px;overflow:hidden;background:url(http://tv.sohu.com/upload/20091020tvtag/images/tag.gif) no-repeat;margin:0 3px 0 0;cursor:pointer;}
+.taglist .lzA{background-position:0 0;}
+.taglist .lzB{background-position:0 -17px;}
+.taglist .ltA{background-position:-21px 0;}
+.taglist .ltB{background-position:-21px -17px;}
+
+#contentA .left .pp{width:656px;margin:15px auto}
+#contentA .left .pp li{width:124px;margin:0 20px}
+#contentA .blockLA .pp li{height:150px;overflow:hidden}
+#contentA .left .pp span{margin:6px auto 0;text-align:left;line-height:16px}
+#contentA .left .pp em{display:block;color:#A3A3A3}
+#contentA .blockLB .pp span{margin:6px auto 12px}
+#contentA .blockLB .pp i{position:relative;height:124px;display:block;}
+#contentA .blockLB .pp i img{position: absolute;bottom:0;left:0}
+
+#contentA .left .list12{width:660px;margin:6px auto 30px}
+#contentA .left .list12 li{padding:9px 0 9px 12px;background:url(http://tv.sohu.com/upload/zjcss100707/images/xx2.gif) repeat-x 0 33px;color:#A3A3A3}
+#contentA .left .list12 li span{width:100px;float:right}
+#contentA .left .list12 p{padding:9px 16px 9px 12px;border-bottom:1px #D4D4D4 solid;color:#797979;text-align:left;line-height:16px}
+#contentA .left .list12 p span{float:right}
+
+#contentA .blockLB{border-top:1px #DDD solid;border-bottom:1px #DDD solid}
+#contentA .blockLB .pp{margin:5px auto}
+#contentA .blockLC{border-top:1px #DDD solid}
+
+/* 评论 */
+#contentA .comment{width:650px;margin:0 auto;color:#777;line-height:16px}
+#contentA .page{padding:0 10px 0 5px;margin:0 auto 1px;background:url(http://tv.sohu.com/upload/zjcss100707/images/xx2.gif) repeat-x bottom;line-height:20px;text-align:right}
+#contentA .review{margin:0 auto;padding:18px 0 6px;background:url(http://tv.sohu.com/upload/zjcss100707/images/xx2.gif) repeat-x bottom}
+#contentA .review h3{height:26px;padding:0 20px;color:#777;text-align:right;line-height:26px;}
+#contentA .review h3 span{float:left;}
+#contentA .review p{padding:0 20px 10px;color:#333;text-align:left;line-height:20px;word-wrap:break-word;}
+#contentA .review h5{padding-right:20px;text-align:right;}
+#contentA .review .com{width:600px;margin:5px auto;background:#FFF;border:1px #CFDFF5 solid}
+#contentA .line{background-position:0 -3px;height:1px;font-size:1px;overflow:hidden;clear:both;}
+#contentA .comment .more{padding:0 20px 0 5px;line-height:20px;}
+
+#contentA .codeTop{width:630px;margin:-30px auto 0;text-align:left;line-height:30px}
+
+.ad300{margin:1px auto 0}
+
+#contentA .right h2{height:20px;padding:4px 8px 0;line-height:16px;color:#333}
+#contentA .right h2 span{font-size:14px}
+#contentA .right .pp{width:245px;margin:16px auto 0}
+#contentA .right .pp li{width:84px;height:120px;overflow:hidden;margin-right:52px}
+#contentA .right .pp span{margin:5px auto 0;text-align:left;color:#797979}
+#contentA .right .pp span em{font-weight: bold;color:#FF6901}
+#contentA .right .pp .noMr{margin:0}
+#contentA .right .more{padding-right:22px;line-height:22px}
+.bordA{padding-top:12px;border-top:1px #DDD solid}
+
+.list{width:253px;margin:6px auto 0;text-align:left}
+.list h3{line-height:24px;color:#333}
+.list li{width:48px;float:left;line-height:22px}
+.c3 li{width:80px}
+.c4 li{width:60px}
+
+#contentA .blockRA{width:265px;margin:16px auto 0}
+#contentA .mvCls{width:265px;margin:25px auto 0}
+#contentA .tvCls{width:265px;margin:25px auto 0}
+#contentA .dmCls{width:265px;margin:25px auto 0}
+#contentA .realCls{width:265px;margin:25px auto 0}
+#contentA .tvRank{width:265px;margin:25px auto 0}
+#contentA .mvRank{width:265px;margin:25px auto 0}
+#contentA .dmRank{width:265px;margin:25px auto 0}
+#contentA .netGgrade{width:265px;margin:25px auto 0}
+
+.menuA{height:26px;width:249px;margin:0 auto;background:url(http://tv.sohu.com/upload/zjcss100707/images/bg05.gif)}
+.menuA .l{font:600 14px/18px "宋体";color:#333}
+.menuA ul{float:right;width:144px;border-right:1px #CDCDCD solid;height:26px}
+.menuA li{float:left;cursor:pointer;width:35px;height:24px;border:1px #CDCDCD solid;border-right:0;background:#FFF;line-height:24px;}
+.menuA .libg{background:#F3F3F3;border-bottom:1px #F3F3F3 solid;color:#dd0d0b;font-weight: bold;}
+
+#contentA .right .list12 ul{width:246px;margin:12px auto 0 3px}
+#contentA .right .list12 li{padding:5px 0}
+#contentA .right .list12 .sn{width:26px;float:left;text-align:center;color:#0D56AE;font:14px/14px "Arial"}
+#contentA .right .list12 .colorA{color:#FF6000}
+#contentA .right .list12 .num{float:right}
+
+.score{width:240px;margin:15px auto 0 6px}
+.score h3{height:23px;text-align:right;line-height:18px}
+.score h3 span{float:left;}
+.score h3 em{float:left;padding:2px 2px 0;margin-right:7px;color:#FFF;line-height:14px}
+.score .bgA{background:#C80502}
+.score .bgB{background:#E65F00}
+.score .bgC{background:#608C02}
+.score ul{margin:5px auto 0;text-align:left;line-height:24px}
+.score ul span{float:right;color:#FF6000}
+
+#foot{width:980px;border:0}
+#foot a{color:#333}
+
+/* 2010-7-12 排行榜趋势 */
+#contentA .right .list12 li span{margin-top:0;*margin-top:0}
+#contentA .right .list12 .trend{width:10px;height:16px;display:block;background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg10.gif) no-repeat 2px 2px;float:right}
+#contentA .right .list12 .up{background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg09.gif) no-repeat 2px 2px}
+#contentA .right .list12 .down{background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg11.gif) no-repeat 2px 2px}

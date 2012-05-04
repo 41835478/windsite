@@ -1,0 +1,178 @@
+em{font-style:normal}
+.footer,.line,.top,.bot{height:1px;font-size:0px;margin:0 auto;clear:both;overflow:hidden}
+.c{float:left;display:inline}
+.area{width:980px}
+body{color:#999;}
+a{color:#5a5a5a;}
+
+.vPic img,.pic img{border:1px #ddd solid;background:#FFF;padding:1px}
+.vPic a:hover img,.pic a:hover img{border:1px #dd0d0b solid}
+.pic img{padding:2px}
+.bord{border:1px #DDD solid}
+
+#contentA{margin:12px auto}
+#contentA .left{width:210px}
+#contentA .right{width:747px}
+#contentA .left .bord{width:208px;background:#F8F8F8}
+#contentA .right .bord{width:745px}
+
+.indexMenu h2{height:26px;padding:14px 0 0 41px;background:url(images/bg01.gif);color:#333}
+.indexMenu h2 span{font:600 14px/16px "宋体"}
+.indexMenu li{height:30px;padding:15px 0 0 43px;background:url(images/bg02.gif);font:14px/16px "宋体";color:#333;text-align:left}
+.indexMenu .now{background:url(images/bg03.gif);color:#FFF;font-weight:bold}
+.indexMenu .now a{color:#FFF}
+.indexMenu .nobg{background:none}
+
+.rankBox{margin:10px auto 0}
+.rankBox h2{height:25px;padding:15px 0 0 11px;color:#333}
+.rankBox h2 span{font:600 14px/16px "宋体"}
+
+.menuA{height:28px;width:193px;margin:8px auto 0}
+.menuA ul{height:23px;width:192px;border-left:1px #D1DFEB solid}
+.menuA li{cursor:pointer;float:left;width:47px;height:16px;padding-top:5px;border:1px #D1DFEB solid;border-left:0;background:#FFF;color:#1D569C;line-height:14px}
+.menuA .now{position:relative;background:#F4F8FA;font-weight: bold}
+.menuA .now em{position:absolute;top:21px;left:19px;display:block;width:9px;height:6px;background:url(images/bg04.gif);font-size:0}
+
+.snList{width:178px;margin:10px auto 0 10px}
+.snList li{height:16px;padding:6px 0;text-align:left;line-height:16px}
+.snList .sn{float:left;width:14px;background:url(images/bg05.gif);color:#FFF;font:600 11px/14px "Arial";margin-right:7px;text-align:center}
+.snList .snr{background:url(images/bg06.gif)}
+.snList .num{float:right}
+
+.seleRe{height:39px}
+.seleRe .l{height:26px;padding:13px 10px 0;border-right:1px #DDD solid;font:600 14px/16px "宋体";color:#333}
+.seleRe .c{margin:13px 0 0 14px}
+.seleRe .c .ll{float:left;line-height:16px;display:inline}
+.seleRe .c .cb li{float:left;margin-left:6px;display:inline}
+.seleRe .c .cb li span{float:left}
+.seleRe .c .cb li em{float:left;cursor:pointer;width:13px;height:13px;margin:0 0 0 1px;display:inline-block;background:url(images/bg08.gif);line-height:0}
+.seleRe .c .cc{margin-left:16px}
+.seleRe .c .cc span{color:#FC0101}
+.seleRe .r{margin:14px 12px 0 0;background:url(images/bg09.gif) no-repeat 0 0;padding-left:18px;line-height:14px}
+.seleRe .r a{color:#333}
+
+#contentA .seaKey{border-top:0;padding:10px 0}
+.seaKey ul{width:725px;margin:0 auto;clear:both}
+.seaKey li{white-space:nowrap;float:left;display:block;height:24px;margin:0 6px;line-height:24px;}
+.seaKey .now{padding:0 6px;margin:0 2px;background:url(images/bg07.gif) repeat-x 0 3px}
+.seaKey .now a{color:#FFF;text-decoration:none}
+
+.shLay{cursor:pointer;width:45px;height:21px;margin:0 auto;background:url(images/bg10.gif)}
+.hdLay{cursor:pointer;width:45px;height:21px;margin:0 auto;background:url(images/bg11.gif)}
+
+.menuC{height:23px;margin:12px auto 0;border-bottom:1px #D5D5D5 solid}
+.menuC .l li{float:left;width:70px;height:18px;padding-top:5px;margin-right:5px;background:url(images/bg12.gif);line-height:16px;color:#333}
+.menuC .l .libg{background:url(images/bg13.gif);color:#FFF;font-weight: bold;}
+.menuC .l .libg a{color:#FFF;text-decoration:none}
+
+.jumpA{margin:7px auto 0;line-height:20px}
+.jumpA a{display:inline-block}
+.jumpA .pa{width:53px;background:url(images/bg14.gif) no-repeat 0 0;text-decoration:none}
+
+.jumpB{line-height:20px}
+.jumpB a{display:inline-block;margin:0 4px}
+
+.jumpB .pa{width:53px;background:url(images/bg15.gif) no-repeat 0 0;color:#333;text-decoration:none;line-height:24px}
+.jumpB .num{padding:0 6px;background:#FFF;border:1px #DDD solid;color:#333;text-decoration:none;line-height:18px}
+.jumpB span{display:inline-block;margin:0 4px;padding:0 7px;background:url(images/bg16.gif);color:#FFF;text-decoration:none;line-height:20px}
+.jumpB em{display:inline-block;margin:0 4px;background:#FFF;border:1px #DDD solid;color:#333;text-decoration:none;line-height:18px}
+
+.taglist{width:130px;margin-top:5px;float:right;line-height:20px;}
+.taglist div{float:right;}
+.taglist span{float:right;width:16px;height:16px;font-size:1px;line-height:500px;overflow:hidden;background:url(http://tv.sohu.com/upload/20091020tvtag/images/tag.gif) no-repeat;margin:0 3px 0 0;cursor:pointer;}
+.taglist .lzA{background-position:0 0;}
+.taglist .lzB{background-position:0 -17px;}
+.taglist .ltA{background-position:-21px 0;}
+.taglist .ltB{background-position:-21px -17px;}
+
+.jsonPP{margin:10px auto 5px;width:752px}
+.jsonPP .vData{margin:0 auto 10px}
+.jsonPP .vInfo{float:left;width:188px;}
+.jsonPP .vInfo .vPic{width:122px;margin:0 auto;position:relative}
+.jsonPP .vInfo .vTxt{width:120px;margin:5px auto 0;text-align:left;line-height:20px}
+.jsonPP .vInfo .vTxt h4{font-weight: bold;}
+.jsonPP .vInfo .vTxt p{height:20px;overflow:hidden;}
+.jsonPP .vInfo .vTxt p em{color:#333}
+
+.jsonPT{margin:22px auto 0}
+.jsonPT .vInfo{width:745px;margin:0 auto 20px}
+.jsonPT .vInfo .vPic{float:left;width:122px;margin:0 auto;position:relative}
+.jsonPT .vInfo .vTxt{width:600px;float:right;text-align:left;line-height:20px}
+.jsonPT .vInfo .vTxt h4{height:24px;margin:0 auto 6px;font:14px/24px "宋体";}
+.jsonPT .vInfo .vTxt .vName{font-weight: bold;float:left}
+.jsonPT .vInfo .vTxt span{float:right}
+.jsonPT .vInfo .vTxt .vGra{margin-top:-3px;color:#FF6000;font-weight: bold;}
+.jsonPT .vInfo .vTxt .vGra em{font-size:24px;line-height:20px}
+.jsonPT .vInfo .vTxt .vGra strong{font-size:16px}
+
+.jsonPT .vInfo .vTxt dl{margin:0 auto 6px;clear:both;line-height:20px}
+.jsonPT .vInfo .vTxt dl em{color:#333}
+.jsonPT .vInfo .vTxt dt{width:250px;float:left}
+.jsonPT .vInfo .vTxt dd{width:350px;float:left}
+.jsonPT .vInfo .vTxt p{padding-bottom:5px;line-height:18px;clear:both}
+.jsonPT .vInfo .vTxt h5 a{display:block;width:75px;height:21px;padding-top:5px;background:url(images/bg17.gif);color:#FFF;font:600 12px/18px "宋体";text-indent:20px}
+
+.label{position:absolute;bottom:2px;*bottom:6px;left:2px;height:15px;width:115px;margin:0 auto;color:#FFF;line-height:14px;text-align:right;padding:3px 5px 0 0}
+.label i{position:absolute;height:18px;width:120px;left:0;top:0;background:#000;filter:alpha(opacity=60);opacity: 0.60;}
+.label em{margin:0;position:relative;z-index:2;color:#FFF;font:12px/14px "宋体"}
+.only{position:absolute;top:-2px;left:-2px;background:url(http://tv.sohu.com/upload/suoy101026/images/only.gif);width:45px;height:45px}
+
+.noInfo{margin:50px auto}
+.noInfo .noA a em{display:inline-block;background:url(images/bg08.gif) no-repeat right 0;cursor: pointer;height: 13px;line-height: 0;margin: 0 0 0 5px;width: 13px;}
+.noInfo .noB{margin:10px auto 0}
+.noInfo .noB a{margin:0 6px;display:inline-block;padding-left:15px;background:url(images/bg09.gif) no-repeat 0 0;color:#FC0202;line-height:14px}
+.noInfo .noC{margin:10px auto 0}
+.noInfo .noC a{width:143px;height:20px;padding-top:2px;display:inline-block;background:url(images/bg18.gif);color:#333;line-height:20px}
+
+/* 弹层 */
+.popInfo{position:absolute;top:0;left:123px;width:279px;height:171px;text-align:left;display:none}
+.popInfo .popBG{position:absolute;top:0;left:0;width:279px;height:171px;_FILTER:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://i1.itc.cn/20100813/7c2_19215f3e_6ce1_4dd0_847f_6d90ba067a11_0.png',sizingMethod='scale');background:url(http://i1.itc.cn/20100813/7c2_19215f3e_6ce1_4dd0_847f_6d90ba067a11_0.png)!important;background:none;}
+.popInfo .popLay{width:253px;padding:10px 0 0 26px;position:relative;z-index:1001;}
+.popInfo h4{margin:0 auto;padding:0 10px 0 0;line-height:18px;text-align:left;font-weight: bold}
+.popInfo p{padding:5px 10px 0 0;line-height:18px}
+.popInfo p strong{margin-right:4px;font:600 14px/16px "Arial";color:#FF6000}
+
+#foot{width:980px;margin:0 auto 10px;border:0}
+
+.payPos{position:absolute;top:2px;left:2px;width:45px;height:45px;margin:0;background:url(http://img04.taobaocdn.com/imgextra/i4/71614142/T2jvGwXaFaXXXXXXXX_!!71614142.png)}
+.cq_ico {
+    background: url("http://tv.sohu.com/upload/110216tvsearch/skin/imgs/CQ_ico.gif") no-repeat scroll 0 0 transparent;
+    bottom: 8px;
+    display: block;
+    height: 13px;
+    left: 4px;
+    position: absolute;
+    width: 28px;
+}
+.gq_ico {
+    background: url("http://tv.sohu.com/upload/110216tvsearch/skin/imgs/GQ_ico.gif") no-repeat scroll 0 0 transparent;
+    bottom: 8px;
+    display: block;
+    height: 13px;
+    left: 4px;
+    position: absolute;
+    width: 28px;
+}
+
+.seaKey1 ul{width:auto;}
+
+
+.menuC .p{text-align:left;}
+.menuC .p .color1{color:#dd0d0b;}
+.menuC .p1{text-align:center;font-weight:bold;}
+
+.classify{border:1px solid #d2d2d2;border-top:0;text-align:left;background:#FAFAFA;padding:10px 0 0;}
+.classify .list h3{background:url(../../skin/imgs/point1.png) no-repeat;margin:0 10px;font-weight:bold;padding-left:8px;}
+.classify h2{font-size:14px;font-weight:700}
+.classify ul{overflow:hidden;padding:10px 0 10px 10px;width:192px;}
+.classify li.line{border-bottom:1px dotted #A0A0A0;font-size:0;line-height:0;margin:10px 10px 10px 0;}
+.classify span{color:#797979}
+.classify a{margin-right:9px;line-height:20px;display:inline-block;}
+.classify font{float:right;font-size:12px}
+.classify .p{padding:0 0 10px 10px;}
+.classify .list li{width:48px;line-height:20px;float:left;}
+.classify .list1 li{width:20px;}
+.color1,.color1 a{color:#dd0d0b;}
+
+.h3s1{font-weight:bold;font-size:14px;text-align:left;margin:10px 32px 0;color:#000;}
+#location{padding:8px 0 0;}

@@ -1,0 +1,16 @@
+User-agent: *
+Crawl-delay:400
+
+Disallow:/map.*
+Disallow:/api/
+Disallow:/var/
+Disallow:/application/
+Disallow:/templates/
+Disallow:/install/
+Disallow:/flash/
+Disallow:/index/
+Disallow:/event/
+Disallow:/index.php?m=show&id=*
+Disallow:/index.php?m=ta.profile&id=*
+Disallow:/index.php?m=ta&name=*
+Disallow:/index.php?m=ta&id=*

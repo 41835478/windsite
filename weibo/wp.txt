@@ -1,0 +1,6 @@
+增加一个新模块
+1.wp_posts 增加新页面wp_insert_post( array( 'comment_status' => 'closed', 'ping_status' => 'closed', 'post_title' => ucwords( 'albums' ), 'post_status' => 'publish', 'post_type' => 'page' ) );
+2.wp_options xt-pages
+3.xt-****-screens.php
+4.xt-core-template.php xt_is_**_component()
+5.xt-core-loader.php $xt->required_components

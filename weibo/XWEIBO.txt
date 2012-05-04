@@ -1,0 +1,810 @@
+1.画报
+2.搜索框提示，结果分区
+
+
+
+用户结构
+_id
+user_id
+username
+sex
+buyer_credit
+seller_credit
+created
+last_visit
+sid
+title
+pic_path
+avatar
+type
+item_score
+service_score
+delivery_score
+pid
+评论结构
+_id
+vid
+bid
+title
+sid
+stitle
+type
+comments[_id,parent_id,user_id,username,nums,depth,path,votes,voters,ip,dateline,message]
+
+
+1.正规的：自己购买一个独立空间，支持域名备案的，先把域名备案了，然后解析回新淘网
+2.非正规：网上有一些做代理备案的，你可以咨询一下，但是需要小心，不要上当
+
+
+
+现在是工信部排查未备案域名，万网对未备案的进行了屏蔽，建议最好自己备案一下：
+1.正规的：自己购买一个独立空间，支持域名备案的，先把域名备案了，然后解析回新淘网
+2.非正规：网上有一些做代理备案的，你可以咨询一下，但是需要小心，不要上当
+
+
+播放页面定时刷新session
+
+新淘网取消域名绑定474529217
+select user_id,nick from w_user  where nick='晓飞0706';
+select www from w_site where user_id=483857380;
+delete from w_domain where user_id=483857380;
+update w_site set www=null  where user_id=483857380;
+domains.txt
+更换缓存
+
+取消域名绑定：
+1.删除xwb_xt_domains
+select * from xwb_xt_domains where domain='www.sexleg.net';
+ delete from xwb_xt_domains  where domain='www.sexleg.net';
+2.修改xwb_admin domain
+update xwb_admin set domain='t89562337.xintaowang.com' where user_id=89562337;
+3.修改domains.php
+4.修改当前会员config的XT_SITE_DOMAIN
+
+ rsync -vzrtopgu -progress /var/www/htdocs/zone/ /data/zone/
+
+
+1.卖家自主挑选商品
+2.店铺收藏有礼
+3.营销等级制度
+4.内容自定义
+
+select nick '会员名',versionNo '版本号',TIMESTAMPDIFF(day,startDate,endDate) ‘订购天数’ from t_usersubscribe where versionNo>1.5;
+
+select group_id,count(*) from xwb_admin group by group_id;
+
+快速删除海量文件
+rsync --delete-before -a -H -v --progress --stats /var/www/htdocs/weibo21/var/cache_xt/test/ /var/www/htdocs/weibo21/var/cache_xt/cache_tv/
+
+
+0:尚未归类
+1:店铺
+2:商品
+3:画报
+4:笑话
+5:影视
+6:其他
+7:商品分享
+
+
+User-agent: *
+Crawl-delay:400
+
+Disallow:/api/
+Disallow:/css/
+Disallow:/js/
+Disallow:/var/
+Disallow:/application/
+Disallow:/templates/
+Disallow:/install/
+Disallow:/img/
+Disallow:/flash/
+Disallow:/index/
+Disallow:/event/
+Disallow:/index.php?m=show&id=*
+Disallow:/index.php?m=ta.profile&id=*
+Disallow:/index.php?m=ta&name=*
+Disallow:/index.php?m=ta&id=*
+
+
+1.为了统计卖家的商品，店铺点击率（是否增加/go/nid-参数[nid_user_id|piwik_id]）
+2.增加小号营销系统
+
+eclipse 删除空行^\s*\n
+//卖家服务淘宝客店铺今日推广详情
+select user_id,shop_nums,item_nums from xwb_xt_yingxiao where user_id in(select user_id from xwb_xt_user_shop where isseller=1 and isItems=1 and click_url is not null and click_url !='') order by item_nums desc;
+
+SELECT s.title,s.nick,s.isItems,s.sid,s.user_id FROM xwb_xt_user_shop s,xwb_xt_yingxiao y WHERE s.`isSeller`=1 AND s.`click_url`!='' AND s.`user_id`=y.`user_id` ORDER BY y.`item_nums` asc,s.`level` desc;
+
+必选项目（40，每个10分）
+1.微博绑定
+	新浪，腾讯，搜狐，网易
+推荐项目（30）
+1.增值服务
+	卖家，淘客
+优化项目（30）	
+1.绑定域名（16）
+	绑定域名(3)
+	ICP备案（2）
+	新浪平台，腾讯平台，搜狐平台，网易平台（8，每个2分）
+	代理帐号（3）
+2.站点地图（14，每个2分）
+	官方店铺
+	分类地图
+	商品地图
+	店铺地图
+	画报地图
+	影视地图
+	关键词地图
+	微博地图
+
+//淘客商品
+///查店铺
+SELECT s.* FROM xwb_xt_user_shop s,xwb_xt_yingxiao y WHERE s.`isSeller`=1 AND s.`isItems`=1 AND s.`click_url` is not null AND s.`click_url`!='' AND s.`user_id`=y.`user_id` ORDER BY y.`item_nums` asc,s.`level` desc limit 1;
+///查商品
+SELECT * FROM xwb_xt_user_item_6 WHERE `user_id`=137394446 AND `isSeller`=1 AND `click_url` is not null AND `click_url`!='' ORDER BY `nums` asc,`volume` desc limit 1;
+
+select type,count(*) from xwb_xt_xiaohua group by type;
+ select cat,count(*) from xwb_xt_tv group by cat;
+ select channel_id,count(*) from xwb_xt_poster group by channel_id;
+
+9-10点，12点-13点，16—18点，20—24点
+select count(*),cat from xwb_xt_tv group by cat;
+select count(*),channel_id from xwb_xt_poster group by channel_id;
+
+select sum(nums) from xwb_xt_xiaohua;
+select sum(nums) from xwb_xt_tv;
+select sum(nums) from xwb_xt_poster;
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+##### Synchronization Time
+01 * * * * root  /usr/sbin/ntpdate stdtime.hichina.com >/dev/null
+
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+02 4 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+
+01 0 * * * root wget http://www.xintaowang.com/map.synTvCovers
+10 0 * * * root wget http://www.xintaowang.com/map.synDiscount
+20 0 * * * root wget http://www.xintaowang.com/map.synTvMap
+31 0 * * * root wget http://www.xintaowang.com/map.synTvJuqing
+01 2 * * * root wget http://www.xintaowang.com/map.synTopItem
+10 2 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-0
+20 2 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-1
+30 2 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-2
+40 2 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-3
+50 2 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-4
+01 3 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-5
+10 3 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-6
+20 3 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-7
+30 3 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-8
+40 3 * * * root wget http://www.xintaowang.com/map.synItemAdmin/index-9
+10 4 * * * root wget http://www.xintaowang.com/map.synTaokeItem
+30 4 * * * root wget http://www.xintaowang.com/map.synWow
+50 4 * * * root wget http://www.xintaowang.com/map.autoFansAdmin
+50 5 * * * root wget http://www.xintaowang.com/map.synWeiboType
+05 6 * * * root wget http://www.xintaowang.com/map.synWowUserItemAdmin
+35 6 * * * root wget http://www.xintaowang.com/map.synWowTaokeItem
+05 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1
+10 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=2
+15 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=7
+20 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=8
+25 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=13
+30 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=16
+35 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=21
+40 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=24
+45 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1300
+50 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1301
+55 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=9001
+01 8 * * * root wget http://www.xintaowang.com/map.posterUpdate
+20 8 * * * root wget http://www.xintaowang.com/map.synItemAdminFixed
+30 8 * * * root wget http://www.xintaowang.com/map.synCatAdmin
+40 8 * * * root wget http://www.xintaowang.com/map.synCatAdmin
+01 10 * * * root wget http://www.xintaowang.com/map.synTvBrand
+40 12 * * * root wget http://www.xintaowang.com/map.synTvJuqing?sid=1007904
+
+
+
+
+
+这又是一个利用Facebook“喜欢”的案列，关于Facebook“喜欢”的运用分析，可以参考这里和这里。
+用户需要用Facebook账户登录LikeBids，然后寻找自己想要的优惠券并“喜欢”一下。
+由于LikeBids上所有的优惠券都处于锁定状态，用户“喜欢”某一优惠券后并不一定能得到它。
+只有某一优惠券的“喜欢”数超过LikeBids规定的标准后，LikeBids将把此优惠券解锁并用电子邮件发送给每一个“喜欢”它的用户。
+LikeBids用Facebook“喜欢”解锁优惠券的做法还有另一个好处。
+用户只要点击“喜欢”某一优惠券，关于这个优惠券的消息将自动出现在他们的个人信息墙上和好友的信息流中。
+免去了用户手动发布优惠券消息的环节，LikeBids的优惠券消息将快速地在社交网络中传播。
+
+LikeBids充分发掘了社交网络信息快速传播的优势，这是它的优点。
+但是，LikeBids也有很大的不足。LikeBids目前仅提供三种优惠券，覆盖商品的范围过小，能够辐射的社交网络用户数还很少。
+这说明，社会化购物的不仅需要社交网络传播渠道的支撑，丰富的商品资源才是未来长远发展的基石。
+
+///自制皮肤：暂不提供两栏布局
+
+///临时屏蔽：998，1000，淘宝购物和试衣间
+xintao_extra.php,pageNav_nav.tpl.php,site_nav.tpl.php
+
+//影视频道
+1.系统初始化
+	两个页面（影视搜索，视频播放）
+	三个模块（影视搜索，视屏播放广告位）
+	一个模块编辑（影视搜索）
+	卖家版是否提供切换视频广告位功能（可选择显示商品或自定义广告联盟）
+INSERT INTO `xwb_page_manager_2` VALUES ('801', '102', '淘宝购物链接', '5', '0', '1', '9002', '1', '{\"source\":\"4\",\"pid\":\"\",\"sizecode\":\"\",\"width\":\"\",\"height\":\"\",\"type\":\"\",\"titlecolor\":\"0000FF\",\"descolor\":\"000000\",\"bgcolor\":\"FFFFFF\",\"bordercolor\":\"E6E6E6\",\"linkcolor\":\"008000\",\"bottomcolor\":\"FFFFFF\",\"anglesize\":\"0\",\"bgpic\":\"0\",\"icon\":\"0\",\"ad_client\":\"\",\"ad_slot\":\"\",\"ad_width\":\"\",\"ad_height\":\"\",\"cpro_id\":\"\",\"flash-url\":\"\",\"flash-width\":\"\",\"flash-height\":\"\",\"image-src\":\"http:\\/\\/www.xintaowang.com\\/css\\/default\\/xintao\\/taobao\\/T1mIGzXottXXXXXXXX-190-300.png\",\"image-url\":\"http:\\/\\/t.lovezippo.com\\/items\",\"image-width\":\"190\",\"image-height\":\"300\",\"image-alt\":\"\\u6dd8\\u5b9d\\u8d2d\\u7269\",\"text-title\":\"\",\"text-link\":\"\",\"text-size\":\"16\"}', '71614142');
+INSERT INTO `xwb_page_manager_2` VALUES ('801', '102', '淘宝购物链接', '4', '0', '1', '9001', '1', '{\"source\":\"4\",\"pid\":\"\",\"sizecode\":\"\",\"width\":\"\",\"height\":\"\",\"type\":\"\",\"titlecolor\":\"0000FF\",\"descolor\":\"000000\",\"bgcolor\":\"FFFFFF\",\"bordercolor\":\"E6E6E6\",\"linkcolor\":\"008000\",\"bottomcolor\":\"FFFFFF\",\"anglesize\":\"0\",\"bgpic\":\"0\",\"icon\":\"0\",\"ad_client\":\"\",\"ad_slot\":\"\",\"ad_width\":\"\",\"ad_height\":\"\",\"cpro_id\":\"\",\"flash-url\":\"\",\"flash-width\":\"\",\"flash-height\":\"\",\"image-src\":\"http:\\/\\/www.xintaowang.com\\/css\\/default\\/xintao\\/taobao\\/T1mIGzXottXXXXXXXX-190-300.png\",\"image-url\":\"http:\\/\\/t.lovezippo.com\\/items\",\"image-width\":\"190\",\"image-height\":\"300\",\"image-alt\":\"\\u6dd8\\u5b9d\\u8d2d\\u7269\",\"text-title\":\"\",\"text-link\":\"\",\"text-size\":\"16\"}', '71614142');
+
+///每条微博底下增加商品推广位
+
+///将微博内容中是淘宝推广链接的转换为当前的推广链接
+
+14日优化内容：
+1.appstore（体验版用户后台首页提供立即订购）
+2.微博内容链接转换（PID替换，淘宝商品，微购商品，店铺，画报）
+3.action.abs.php(自动营销过滤，必须绑定新浪)
+
+/etc/rc.d/init.d/snmpd start
+netstat -nat|grep 223.4.88.215:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+
+
+1.需要在java端增加当天同一商品主动通知过滤
+
+
+发布注意事项：
+1.user_config.php关闭DEBUG
+2.js_link.php删除JS的随机时间
+//临时关闭功能：布局，页头
+
+1.SEO（主要页面调整：如商品搜索页面，详情页面，画报详情页，店铺搜索页，详情页，凡客搜索页，详情页将有关meta，desc的信息提前注入页面）
+2.初始化(少导购画报模块?)
+3.自动营销
+4.站点地图
+5.权限测试（后台功能截图演示功能）
+6.积分？
+7.收藏，分享（记录）
+8.店铺详情页
+9.凡客数据包定时更新
+10.卖家版初始化，设置主动通知（是否启用，当订购过期后关闭）
+11.装修功能（先提供几个常用模块）
+12.html限制（第三方统计，页头html）
+13.微博模板
+14.分享微博时，提供商品图片
+15.新浪微博（含中文的url不能被正确解析：如目前的淘宝店铺，以中文昵称来生成的url）
+16.后台统计功能
+///系统初始化：
+1.几个模块需要动态产生数据（如大家都在聊-微博，今日主题）（另外需要根据不同用户：如卖家用户，自动配置店铺模块自动关注，），导航菜单
+
+
+///TODO 淘宝客相关方法，可能涉及缓存问题（因为nick是在方法内设置的，有可能相同参数，nick不同）
+
+
+文件夹软连接 ln -s /data/htdocs/piwik/tmp/ /var/www/htdocs/piwik/
+
+ln -s /data/htdocs/weibo21/var/ /var/www/htdocs/weibo21/
+
+（万网）新云服务器：
+php需要处理
+1.open_basedir safe_mode_include_dir(加入data文件夹)
+2.session.cookie_secure = 0（有可能原始为1，仅允许https传递cookie）
+mysql 需注释掉：skip-networking
+
+删除空行：^\s*\n
+
+SEO:
+1.<html xmlns="http://www.w3.org/1999/xhtml">修改为：<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+2.调查不同url的重复页面问题（如搜索页面的排序功能）noindex nofollow
+3.SEO Booster PRO
+4.404错误（e404.tpl.php <?php  header("http/1.1 404 Not Found");   //返回错误  header("Status: 404 Not Found");    //返回状态的定义，可不写此句  ?>）
+
+///js全局动作拦截器
+actions.js
+收藏：
+isv.add-service-error:owner	不可以自己收藏自己的商品或店铺	
+isv.add-service-error:is_in_blacklist	该用户已经被列入黑名单，无法收藏商品	
+isv.add-service-error:is_full	用户单日的收藏量达到上限（80）或超过总收藏数上限（1000）	
+isv.add-service-erroris:is_not_exit	需要收藏的目标不存在	
+isv.add-service-erroris:already_collect	目标已经被用户收藏
+<!--[if IE 6]>
+<script type="text/javascript">
+// <![CDATA[
+  document.execCommand("BackgroundImageCache", false, true);
+// ]]>
+</script>
+<![endif]-->
+///清理用户系统数据
+delete from xwb_ad where user_id=0;
+delete from xwb_component_cfg where user_id=0;
+delete from xwb_component_topic where user_id=0;
+delete from xwb_component_topiclist where user_id=0;
+delete from xwb_component_usergroups where user_id=0;
+delete from xwb_item_groups where user_id=0;
+delete from xwb_nav where user_id=0;
+delete from xwb_page_manager where user_id=0;
+delete from xwb_pages where user_id=0;
+delete from xwb_sys_config where user_id=0;
+
+SEO:
+1.图片地址变相加密（lazyload）
+
+
+//重要改造：使pagelet支持js代码【例如广告联盟js代码模块】输出，原理：当pagelet为js代码模块时，实时输出，不再启用palelet异步
+1.core.php（增加js代码模块判断）
+2.改造已有使用common.sideComponent递归pagelet输出
+原始递归pagelet：<?php Xpipe::pagelet('common.sideComponents', array('type'=>1) );?>
+改造后非递归pagelet：<?php TPL :: module('xintao/pagelets', array ('p' => 998,'position' => 3));?>
+
+
+开发一个pagelet步骤（范例）：
+增加一个组件分类（page_manager.mod.php/$component_cty）|componentCategory.tpl.php
+后台开发:
+1.component_*.pls.php（实现pagelet接口）
+2.*.tpl.php（模板定义）
+前台开发:
+1.pagelets.js（注册接口）
+2.增加样式文件
+templates/1|2/css_link.tpl.php
+
+//增加一个模块
+a.数据库增加模块信息
+b.后台PHP
+1.page_manager.mod.php(createComponentView,editComponentView,getEditViewParam[设置编辑时的默认参数])
+2.xintao_pageManager_createComStep2_*.tpl.php(新增模块属性)，xintao_pageManager_editComponent_*.tpl.php(编辑模块属性)
+3.componentCategory.tpl.php(调整模块分类)
+4.page_manager_mod($component_cty)配置分类名称
+5.pagesetting.js(可选增加回调函数处理)
+
+//增加一个缓存组
+1.xintao.php(增加缓存组前缀标识)
+	define('TB_CACHE_POSTER_KEY_PRE', 'tbCache_poster_');
+2.xintao_extra.php(增加缓存组文件夹)
+	define('P_VAR_CACHE_TB_POSTER',	P_VAR."/ptbcache");
+3.core.php(增加缓存组使用函数)
+	function PTB() {
+	$p = func_get_args();
+	array_unshift($p, false);
+	$length = count($p);
+	if ($length == 2) {
+		$p[] = false;
+		$p[] = TB_CACHE_POSTER_KEY_PRE;
+	}
+	elseif ($length == 3) {
+		$p[] = TB_CACHE_POSTER_KEY_PRE;
+	}
+	return call_user_func_array(array (
+		'dsMgr',
+		'tbCall'
+	), $p);
+}
+4.file_cache.adp.php(增加文件缓存的识别)
+	
+
+
+//开发一个后台功能流程
+1.增加mod(application/controllers/mgr/xintao/*.mod.php)
+2.增加com(application/modules/mgr/xintao/*Com.com.php)
+3.增加tpl(templates/mgr/xintao/*.tpl.php)
+//后台功能菜单
+1.增加菜单配置：action.abs.php
+2.授权管理员用户
+3.如果非会员站点管理员功能，则加入系统内置action.abs.php[$sys_menus]
+
+暂时屏蔽：
+mgr/page_nav.nav,mgr/page_manager,
+///改造后台登录，根据淘宝容器回调登录系统，是否提醒及时绑定微博帐号
+
+新淘网定制功能大部分均对外开放
+index.php 增加非登录页面例外：'posters.*','items.*','fiting.*','vancl.*'
+增加内置页面：
+1.application/controller/fiting_room.mod.php
+2.templates/1|2/*.tpl.php
+3.DB：xwb_pages
+4.pagelist.tpl.php
+
+皮肤：
+1.屏蔽皮肤管理中部分功能skin_tab.tpl.php
+集成TOP
+1.增加TOP配置（init.php）
+2.增加TOP文件加载（core.php/_getIncFile）
+3.集成TOP PHP SDK 路径：application/modules/top
+4.改造TopClient.com.php（调整内部日志记录及类文件加载及RST返回值【为缓存】）
+5.开发TOP pagelet
+	1.pagelets.js(注册pagelet)
+	2.后台实现application/pagelets/xintao/..
+	3.模板实现templates/modules/xintao/..
+	4.pagelet缓存时间配置：
+	5.语言错误配置：zh_cn/zh-tw:lang1.lang.php,lang2.lang.php
+6.TOP日志记录：application/adapter/log/file_log.adp.php/_getLogFile
+
+7.pagesetting.js处理模块编辑中下拉框的js选中	
+
+XWEIBO的SEO优化：
+1.排除百度和Google，application/function/is_robot.func.php
+2.设置百度和Google的抓取标识:init.php,core.php(蜘蛛爬取时采用标准输出)
+XWEIBO后台管理改造:
+
+数据库:
+	weibo_copy 增加user_id字段
+	users 增加user_id字段
+	comment_copy 增加user_id字段
+	profile_ad  增加user_id字段
+	component_usergroups	增加user_id字段
+	item_groups	增加user_id字段
+	admin 增加user_id字段
+	sys_config 增加user_id字段
+	notice 增加user_id字段
+	notice_recipients 增加user_id字段
+	account_proxy 增加user_id字段
+	user_verify 增加user_id字段
+	user_ban 增加user_id字段
+	user_action 增加user_id字段
+	nav 增加user_id字段
+	components 增加user_id字段(同时设置component_id与user_id为主键【因为部分component_id为固定】)
+	component_cfg 增加user_id字段(同时设置component_id与cfgName,user_id为主键【因为部分component_id为固定】)
+	component_topiclist 增加user_id字段(同时设置topic_id与user_id为主键【因为部分topic_id为固定,如今日话题】)
+	component_topic 增加user_id字段
+	pages 增加user_id字段(同时设置page_id与user_id为主键【因为部分page_id为固定】)
+	page_manager 增加user_id字段
+	page_prototype 增加user_id字段
+	feedback 增加user_id字段
+	events 增加user_id字段
+	event_join 增加user_id字段
+	celeb 增加user_id字段
+	celeb_category 增加user_id字段
+	content_unit 增加user_id字段
+	
+替换页面内ICO
+BUG(officialWB.com.php)解决权限问题（使用默认管理员帐号的auth，避免使用随机代理帐号）
+BUG(application/controllers/event.mod.php)解决本地方法mb_substr()造成的发起活动不能跳转
+站长管理员功能列表:
+首页
+	快捷方式
+		1.首页
+		2.聚焦图
+		3.个人资料推广位
+		4.通知
+		5.首次登录关注
+系统设置
+	基础设置
+		1.站点设置
+		2.账号登录设置
+		3.代理账号设置
+	管理员
+		1.修改密码
+界面管理
+	界面
+		1.布局
+		2.导航
+		3.皮肤
+		4.广告
+		5.页头设置
+	页面模块
+		1.页面设置
+内容管理
+	内容
+		1.意见反馈
+	活动
+		1.活动管理
+	通知
+		1.通知
+	扩展设置
+		1.页头页脚链接
+		2.个人资料推广
+		3.我的首页聚焦位
+用户管理
+	用户
+		1.用户管理
+		2.用户组管理
+		3.禁止用户
+	名人 - 认证
+		1.认证管理
+		2.名人管理
+扩展工具
+	整合工具
+		1.转发按钮
+		2.站外调用
+	扩展应用(需调研)
+		1.在线直播
+		2.在线访谈																
+
+
+新淘网后台提供微博平台设置,及生成默认配置(包括导航,3个广告,用户组,自动关注的,Nav,topic,topiclist):
+INSERT INTO `xwb_sys_config` VALUES 
+('rewrite_enable','0',1),
+('logo','',1),
+('login_way','1',1),
+('third_code','',1),
+('site_record','',1),
+('address_icon','',1),
+('head_link','{\"1\":{\"link_name\":\"\\u65b0\\u6d6a\\u5fae\\u535a\",\"link_address\":\"http:\\/\\/t.sina.com.cn\\/\"},\"3\":{\"link_name\":\"\\u65b0\\u6d6a\\u7f51\",\"link_address\":\"http:\\/\\/www.sina.com.cn\"}}',1),
+('foot_link','{\"3\":{\"link_name\":\"\\u5e2e\\u52a9\\u4e2d\\u5fc3\",\"link_address\":\"http:\\/\\/x.weibo.com\\/help.php\"}}',1),
+('authen_type','3',1),
+('authen_big_icon','img/logo/big_auth_icon.png',1),
+('authen_small_icon','img/logo/small_auth_icon.png',1),
+('skin_default','1',1),
+('ad_header','',1),
+('guide_auto_follow','',1),
+('ad_footer','',1),
+('title','Xweibo 2.1',2),
+('text','新版Xweibo2.1更新了大量功能，在原有体系基础上，提供了丰富的运营手段，帮助广大站长利用新浪微博的平台，架设属于自己网站的微博系统。',2),
+('bg_pic','',2),
+('oper','2',2),
+('topic','',2),
+('link','http://x.weibo.com',2),
+('btnTitle','了解更多',2),
+('guide_auto_follow_id','3',1),
+('authen_small_icon_title','我的站点认证',1),
+('ad_setting','',1),
+('microInterview_setting','',1),
+('wb_page_type','2',1),
+('wb_header_model','1',1),
+('wb_header_htmlcode','',1),
+('api_checking','',1),
+('xwb_discuz_url','',1),
+('xwb_discuz_enable','',1),
+('use_person_domain','0',1),
+('site_short_link','',1),
+('microLive_setting','',1),
+('default_use_custom','0',1),
+('open_user_local_relationship','0',1),
+('xwb_strategy','',1),
+('sysLoginModel','0',1),
+('xwb_login_group_id',84,1);//系统默认
+INSERT INTO xwb_sys_config (`key`,`value`)VALUES
+('site_name','站点名称'),
+('wb_version','2.1'),
+('app_key', 'WB_AKEY'),
+('app_secret', 'WB_SKEY'),
+('db_prefix', 'xwb_'),
+('wb_lang_type','zh_cn');//站点默认
+功能改造:(修改所有方法内需要关联user_id)
+
+重新定义缓存前缀:cfg.php(取消配置)index.php(增加缓存键值的站点标识,避免不同站点使用相同缓存)
+
+1.管理员登录:application/modules/mgr/adminCom.com.php
+2.管理员激活:application/modules/mgr/active_admin.mod.php
+3.后台默认页面:
+	templates/mgr/index.tpl.php(屏蔽xweibo更新提示)
+	templates/mgr/default.tpl.php(屏蔽xweibo动态)
+	application/modules/xweibo/weiboCopy.com.php/counts
+	application/modules/xweibo/CommentCopy.com.php/counts
+	application/modules/mgr/userCom.com.php/counts
+4.后台聚焦图:
+	application/class/indexFocus.class.php	
+5.个人资料推广位:
+	application/modules/plugins/adProfile.com.php
+6.通知:
+	application/modules/notice.com.php	
+7.首次登陆关注:
+	application/modules/common/sysConfig.com.php
+	applicaiton/modules/mgr/userRecommendCom.com.php
+	application/class/itemGroups.class.php	
+8.代理账号设置:
+	application/modules/accountProxy.com.php
+	
+9.站点设置,清理缓存(user_config配置相关):
+	application/controllers/mgr/setting.mod.php(注销MC的清理)
+	application/controllers/mgr/account.mod.php(user_config.php修改)
+10.广告:(需新淘网后台初始化原始数据)		
+	application/modules/ad.com.php
+11.布局,页头设置(无需修改)
+12.导航
+	application/modules/nav.com.php
+	application/modules/PageModule.com.php
+	application/modules/xweibo/topics.com.php
+	application/controllers/mgr/page_manager.mod.php
+	application/class/pageManager.class.pnp
+	application/modules/PagePrototype.com.php
+13.皮肤
+	templates/mgr/skin/skin_tab.tpl.php(屏蔽皮肤分类，禁用，编辑，自定义等相关功能)	
+14.页面设置	
+15.意见反馈
+	application/modules/feedback.com.php
+15.活动管理
+	application/modules/events.com.php	
+16.用户管理
+17.用户组管理
+18.禁止用户
+	templates/mgr/user/user_action.tpl.php（暂不提供清除用户数据功能）
+19.认证管理
+20.名人管理	
+	application/modules/Celeb.com.php
+21.转发按钮
+22.站外调用
+	application/modules/mgr/contentUnitCom.com.php
+源码
+application/modules/plugins/adProfile.com.php		增加user_id
+application/modules/mgr/userRecommend.com.php		增加user_id(可选)		
+1.首页:
+	网站基本数据:
+	源码:
+	1.总微博数
+	2.今日微博数
+	3.总用户数
+	4.今日用户数
+	5.总评论数
+	6.今日评论数
+	
+	
+ADPSKLEJSAHDNXCM12387SADUYJKASK2178
+
+09876qwer
+
+TP-LINK:20:07:20:08:11
+
+202.106.46.151
+
+15901121659
+
+服务器：ssh1.moonssh.com   或者	173.254.203.51
+账号：moonssh219
+密码：2011090637  端口22
+
+
+iptables-save >/etc/sysconfig/iptables
+	
+封单个IP的命令是： 
+iptables -I INPUT -s 211.1.0.0 -j DROP 
+
+
+
+封IP段的命令是： 
+iptables -I INPUT -s 211.1.0.0/16 -j DROP 
+iptables -I INPUT -s 211.2.0.0/16 -j DROP 
+iptables -I INPUT -s 211.3.0.0/16 -j DROP 
+
+封整个段的命令是： 
+iptables -I INPUT -s 211.0.0.0/8 -j DROP 
+
+封几个段的命令是： 
+iptables -I INPUT -s 61.37.80.0/24 -j DROP 
+iptables -I INPUT -s 61.37.81.0/24 -j DROP
+
+iptables -I INPUT -s 183.60.193.35 -j DROP
+
+
+iptables-save >/etc/sysconfig/iptables
+//黑客
+iptables -I INPUT -s 118.192.35.57 -j DROP
+iptables -I INPUT -s 109.230.216.203 -j DROP
+iptables -I INPUT -s 220.181.158.0/24 -j DROP
+
+//Google
+iptables -I INPUT -s 74.125.158.0/24 -j DROP
+iptables -I INPUT -s 74.125.64.0/24 -j DROP
+
+
+iptables -I INPUT -s 93.186.31.0/24 -j DROP
+
+iptables -I INPUT -s 220.181.51.0/24 -j DROP
+iptables -I INPUT -s 111.161.54.0/24 -j DROP
+iptables -I INPUT -s 119.147.11.0/24 -j DROP
+//163 牵扯到网易微博授权，不能屏蔽
+#iptables -I INPUT -s 123.58.179.0/24 -j DROP
+
+iptables -I INPUT -s 58.215.180.0/24 -j DROP
+iptables -I INPUT -s 211.154.151.0/24 -j DROP
+
+iptables -I INPUT -s 113.142.18.0/24 -j DROP
+iptables -I INPUT -s 113.142.24.0/24 -j DROP
+iptables -I INPUT -s 113.142.9.0/24 -j DROP
+
+iptables -I INPUT -s 101.226.33.0/24 -j DROP
+iptables -I INPUT -s 101.226.51.0/24 -j DROP
+iptables -I INPUT -s 101.226.65.0/24 -j DROP
+iptables -I INPUT -s 101.226.66.0/24 -j DROP
+
+iptables -I INPUT -s 180.153.0.0/24 -j DROP
+iptables -I INPUT -s 180.153.114.0/24 -j DROP
+iptables -I INPUT -s 180.153.160.0/24 -j DROP
+iptables -I INPUT -s 180.153.163.0/24 -j DROP
+iptables -I INPUT -s 180.153.201.0/24 -j DROP
+iptables -I INPUT -s 180.153.205.0/24 -j DROP
+iptables -I INPUT -s 180.153.206.0/24 -j DROP
+iptables -I INPUT -s 180.153.211.0/24 -j DROP
+iptables -I INPUT -s 180.153.214.0/24 -j DROP
+iptables -I INPUT -s 180.153.227.0/24 -j DROP
+
+
+iptables -I INPUT -s 211.154.151.111 -j DROP
+iptables -I INPUT -s 69.28.58.0/24 -j DROP
+iptables -I INPUT -s 116.255.188.177 -j DROP
+iptables -I INPUT -s 80.82.232.42 -j DROP
+iptables -I INPUT -s 125.39.78.0/24 -j DROP
+iptables -I INPUT -s 74.125.78.0/24 -j DROP
+iptables -I INPUT -s 124.115.5.0/24 -j DROP
+iptables -I INPUT -s 124.115.10.0/24 -j DROP
+iptables -I INPUT -s 124.115.12.0/24 -j DROP
+iptables -I INPUT -s 113.108.12.0/24 -j DROP
+iptables -I INPUT -s 183.60.193.0/24 -j DROP
+iptables -I INPUT -s 113.105.248.0/24 -j DROP
+iptables -I INPUT -s 124.115.0.0/24 -j DROP
+iptables -I INPUT -s 124.115.4.0/24 -j DROP
+iptables -I INPUT -s 113.200.64.0/24 -j DROP
+iptables -I INPUT -s 124.114.98.0/24 -j DROP
+iptables -I INPUT -s 112.64.235.0/24 -j DROP
+iptables -I INPUT -s 220.181.125.0/24 -j DROP
+iptables -I INPUT -s 220.181.94.0/24 -j DROP
+iptables -I INPUT -s 72.14.202.0/24 -j DROP
+iptables -I INPUT -s 203.172.201.0/24 -j DROP
+iptables -I INPUT -s 221.194.136.0/24 -j DROP
+iptables -I INPUT -s 124.201.82.0/24 -j DROP
+iptables -I INPUT -s 74.125.152.0/24 -j DROP
+iptables -I INPUT -s 64.233.182.0/24 -j DROP
+iptables -I INPUT -s 157.55.116.0/24 -j DROP
+iptables -I INPUT -s 65.52.108.0/24 -j DROP
+iptables -I INPUT -s 65.52.109.0/24 -j DROP
+iptables -I INPUT -s 65.52.110.0/24 -j DROP
+iptables -I INPUT -s 65.52.104.0/24 -j DROP
+iptables -I INPUT -s 207.46.199.0/24 -j DROP
+iptables -I INPUT -s 207.46.195.0/24 -j DROP
+iptables -I INPUT -s 207.46.204.0/24 -j DROP
+iptables -I INPUT -s 58.60.14.0/24 -j DROP
+iptables -I INPUT -s 208.115.111.0/24 -j DROP
+iptables -I INPUT -s 202.160.178.0/24 -j DROP
+iptables -I INPUT -s 209.85.238.0/24 -j DROP
+iptables -I INPUT -s 67.195.111.0/24 -j DROP
+iptables -I INPUT -s 67.195.112.0/24 -j DROP
+iptables -I INPUT -s 67.195.113.0/24 -j DROP
+iptables -I INPUT -s 67.195.114.0/24 -j DROP
+iptables -I INPUT -s 67.195.115.0/24 -j DROP
+iptables -I INPUT -s 124.201.82.0/24 -j DROP
+iptables -I INPUT -s 74.125.94.0/24 -j DROP
+iptables -I INPUT -s 209.85.224.0/24 -j DROP
+iptables -I INPUT -s 125.119.175.0/24 -j DROP
+iptables -I INPUT -s 60.29.76.0/24 -j DROP
+iptables -I INPUT -s 223.246.0.0/24 -j DROP
+iptables -I INPUT -s 223.246.1.0/24 -j DROP
+iptables -I INPUT -s 123.125.68.0/24 -j DROP
+iptables -I INPUT -s 58.217.119.0/24 -j DROP
+iptables -I INPUT -s 180.149.133.0/24 -j DROP
+iptables -I INPUT -s 61.135.216.0/24 -j DROP
+iptables -I INPUT -s 123.126.50.0/24 -j DROP
+iptables -I INPUT -s 121.0.28.0/24 -j DROP
+iptables -I INPUT -s 114.80.93.0/24 -j DROP
+iptables -I INPUT -s 61.155.149.0/24 -j DROP
+iptables -I INPUT -s 119.188.14.0/24 -j DROP
+iptables -I INPUT -s 220.255.1.0/24 -j DROP
+iptables -I INPUT -s 220.255.2.0/24 -j DROP
+iptables -I INPUT -s 121.10.244.0/24 -j DROP
+iptables -I INPUT -s 220.181.93.0/24 -j DROP
+iptables -I INPUT -s 220.181.94.0/24 -j DROP
+iptables -I INPUT -s 220.181.125.0/24 -j DROP
+iptables -I INPUT -s 125.69.91.0/24 -j DROP
+iptables -I INPUT -s 125.69.92.0/24 -j DROP
+iptables -I INPUT -s 125.69.93.0/24 -j DROP
+iptables -I INPUT -s 125.69.94.0/24 -j DROP
+iptables -I INPUT -s 110.75.164.0/24 -j DROP
+iptables -I INPUT -s 110.75.167.0/24 -j DROP
+iptables -I INPUT -s 110.75.171.0/24 -j DROP
+iptables -I INPUT -s 110.75.172.0/24 -j DROP
+iptables -I INPUT -s 110.75.173.0/24 -j DROP
+iptables -I INPUT -s 110.75.174.0/24 -j DROP
+iptables -I INPUT -s 110.75.175.0/24 -j DROP
+iptables -I INPUT -s 110.75.176.0/24 -j DROP
+iptables -I INPUT -s 1.202.218.0/24 -j DROP
+iptables -I INPUT -s 1.202.219.0/24 -j DROP
+iptables -I INPUT -s 1.202.220.0/24 -j DROP
+iptables -I INPUT -s 1.202.221.0/24 -j DROP
+iptables -I INPUT -s 2.202.218.0/24 -j DROP
+iptables -I INPUT -s 2.202.219.0/24 -j DROP
+iptables -I INPUT -s 2.202.220.0/24 -j DROP
+iptables -I INPUT -s 2.202.221.0/24 -j DROP
+iptables -I INPUT -s 3.202.218.0/24 -j DROP
+iptables -I INPUT -s 3.202.219.0/24 -j DROP
+iptables -I INPUT -s 3.202.220.0/24 -j DROP
+iptables -I INPUT -s 3.202.221.0/24 -j DROP
+iptables -I INPUT -s 4.202.218.0/24 -j DROP
+iptables -I INPUT -s 4.202.219.0/24 -j DROP
+iptables -I INPUT -s 4.202.220.0/24 -j DROP
+iptables -I INPUT -s 4.202.221.0/24 -j DROP
+iptables -I INPUT -s 5.202.218.0/24 -j DROP
+iptables -I INPUT -s 5.202.219.0/24 -j DROP
+iptables -I INPUT -s 5.202.220.0/24 -j DROP
+iptables -I INPUT -s 5.202.221.0/24 -j DROP
+iptables -I INPUT -s 61.135.249.0/24 -j DROP
+iptables -I INPUT -s 61.135.190.0/24 -j DROP 

@@ -1,0 +1,124 @@
+.box .shop-slider .bd {
+	padding: 0;
+}
+
+.slider-promo {
+	position: relative;
+	overflow: hidden;
+}
+
+.slider-promo .lst-main {
+	overflow: hidden;
+	_width: 100%;
+}
+
+.slider-promo .lst-main li a {
+	display: block;
+	overflow: hidden;
+}
+
+.slider-promo .lst-trigger {
+	position: absolute;
+	z-index: 10;
+	bottom: 9px;
+	right: 4px;
+	height: 19px;
+	line-height: 17px;
+	color: #fff;
+}
+
+.slider-promo .lst-trigger li {
+	float: left;
+	margin-right: 5px;
+	width: 17px;
+	font-weight: 700;
+	border: 1px solid #fff;
+	background-color: #999;
+	height: auto;
+	line-height: inherit;
+	text-align: center;
+	cursor: pointer;
+}
+
+.slider-promo .lst-trigger .current {
+	width: 22px;
+	background-color: #000;
+}
+
+.slider-promo img {
+	vertical-align: top;
+}
+
+.grid-m .col-main .shop-slider .slider-promo img {
+	width: 950px;
+}
+
+.grid-s5m0 .col-main .shop-slider .slider-promo img,.grid-m0s5 .col-main .shop-slider .slider-promo img
+	{
+	width: 750px;
+}
+
+.grid-s5m0e5 .col-main .shop-slider .slider-promo img,.grid-s5e5m0 .col-main .shop-slider .slider-promo img,.grid-m0s5e5 .col-main .shop-slider .slider-promo img
+	{
+	width: 550px;
+}
+
+/*附属布局均为190px*/
+.col-sub .shop-slider .slider-promo img,.col-extra .shop-slider .slider-promo img
+	{
+	width: 190px;
+}
+
+.shop-slider .bd {
+	padding: 0;
+}
+
+.shop-slider .slider-promo {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.slider-promo .lst-main {
+	overflow: hidden;
+	_width: 100%;
+	/* this time we have very large space for height */
+	position: absolute;
+	height: 20000em;
+	margin: 0px;
+}
+
+.shop-slider .lst-main a {
+	display: block;
+	overflow: hidden;
+}
+
+.shop-slider .lst-trigger {
+	position: absolute;
+	z-index: 100;
+	bottom: 9px;
+	right: 4px;
+	height: 19px;
+	line-height: 17px;
+	color: #fff;
+}
+
+.shop-slider .lst-trigger li {
+	float: left;
+	margin-right: 5px;
+	width: 17px;
+	font-weight: 700;
+	border: 1px solid #fff;
+	background-color: #999;
+	text-align: center;
+	cursor: pointer;
+}
+
+.shop-slider .lst-trigger .current {
+	width: 22px;
+	background-color: #000;
+}
+
+.shop-slider img {
+	vertical-align: center;
+}

@@ -1,0 +1,1 @@
+$(function() {var header = $('#header');if (header.length == 1 && $('.xt-fha',header).length == 0) {header.append('<div class="inner-header"><a id="xt-fha" href="http://taoke.alimama.com/tms/channel/jipiao.htm?pid=${pid}" target="_blank"><img src="http://www.xintaonet.com/assets/min/images/ads/jipiao_800X90.jpg" style="border:0px;"/></a></div>');}});

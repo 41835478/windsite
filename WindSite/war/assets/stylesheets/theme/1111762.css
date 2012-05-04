@@ -1,0 +1,208 @@
+.tb-shop .box .hd,.tb-shop .shopkeeper .box .hd {
+	height: 30px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/161554861/T2VMhzXkpXXXXXXXXX_!!161554861.gif)
+		no-repeat;
+}
+
+.tb-shop .box .hd h3 {
+	padding-left: 10px;
+	padding-top: 3px;
+	color: #077682;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tb-shop .col-main .box .hd h3 {
+	padding-left: 10px;
+	padding-top: 3px;
+	color: #077682;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tb-shop .col-main .box .hd {
+	height: 30px;
+	color: #ffffff;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/161554861/T2KwtzXe4XXXXXXXXX_!!161554861.gif)
+		no-repeat;
+}
+
+.tb-shop .h3 span {
+	border: 0px;
+}
+
+.tb-shop .box .hd {
+	border: 0px;
+}
+
+.tb-shop .shop-category .cats .cat {
+	border-top: none;
+}
+
+.tb-shop .shop-category .bd ul h4 a:hover {
+	line-height: 50px;
+	text-align: center;
+	color: #355167;
+	font-size: 14px;
+	width: 160px;
+	display: block;
+	text-decoration: none;
+	background-position: left -50px;
+}
+
+.tb-shop .shop-category .bd ul h4 a {
+	line-height: 50px;
+	text-align: center;
+	color: #0099CC;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/161554861/T2_fRzXahaXXXXXXXX_!!161554861.gif)
+		#ffffff no-repeat left top;
+	font-size: 14px;
+	width: 160px;
+	display: block;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd ul ul a:hover {
+	text-indent: 43px;
+	color: #3389f5;
+	text-decoration: none;
+	font-weight: bold;
+	background-position: left -130px;
+}
+
+.tb-shop .shop-category .bd ul ul a {
+	line-height: 30px;
+	text-indent: 35px;
+	height: 30px;
+	color: #3389f5;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/161554861/T2_fRzXahaXXXXXXXX_!!161554861.gif)
+		no-repeat scroll transparent;
+	width: 160px;
+	display: block;
+	text-decoration: none;
+	font-weight: normal;
+	background-position: left -100px;
+}
+
+.tb-shop .grid .more-items {
+	display: none;
+}
+
+.tb-shop .box .bd {
+	color: add6ff;
+	border: 1px;
+}
+
+/*---------------*/
+.tb-shop .pic a:hover img {
+	height: 97%;
+	width: 97%;
+	border: #3389f5 3px;
+}
+
+.tb-shop .xqimg-design a: {
+	height: 97%;
+	width: 97%;
+	border: #3389f5 3px;
+}
+
+.tb-shop .xqimg-design a:hover {
+	background: #3389f5;
+}
+
+.tb-shop .xqimg-design a {
+	display: block;
+	padding: 3px;
+}
+
+/*---------------*/
+.tb-shop .shop-header {
+	background-image:
+		url(http://img03.taobaocdn.com/imgextra/i3/161554861/T2xzJzXjVXXXXXXXXX_!!161554861.gif)
+		;
+}
+
+.tb-shop .shop-header .shop-summary .shop-title {
+	padding-left: 110px;
+	padding-top: 5px;
+	height: 40px;
+	text-align: center;
+	overflow: hidden;
+	width: 500px;
+}
+
+.tb-shop .shop-header .shop-summary .shop-title a {
+	line-height: 40px;
+	color: #57a5c5;
+	overflow: hidden;
+	font-size: 42px;
+	font-family: 雅黑;
+	text-decoration: none;
+}
+
+.tb-shop .shop-header .shop-summary .shop-title p {
+	display: none;
+}
+
+/*---------------*/
+.tb-shop a {
+	color: #3366cc;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.tb-shop a:hover {
+	color: #fd5a75;
+}
+
+/*---------------*/
+.tb-shop .shop-header .nav ul {
+	padding-buttom: 6px;
+}
+
+.tb-shop .shop-header .nav li {
+	margin-right: 5px;
+	height: 35px;
+}
+
+.tb-shop .shop-header .nav li a,.tb-shop .shop-header .nav li a em {
+	line-height: 28px !important;
+	height: 35px;
+	color: #000;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/161554861/T2GglzXm4XXXXXXXXX_!!161554861.gif)
+		0 0 no-repeat;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tb-shop .shop-header .nav li a {
+	text-decoration: none;
+	background-position: 100% -25px;
+}
+
+.tb-shop .shop-header .nav li a em {
+	background-position: 0px 0px;
+}
+
+.tb-shop .shop-header .nav li a:hover,.tb-shop .shop-header .nav li.current a
+	{
+	background-position: 100% -75px;
+}
+
+.tb-shop .shop-header .nav li a em:hover,.tb-shop .shop-header .nav li.current a em
+	{
+	color: #fff;
+	background-position: 0px -50px;
+}
+
+/*---------------*/
+.tb-shop .handle {
+	padding-right: 37px;
+	line-height: 35px;
+	height: 35px;
+}

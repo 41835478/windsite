@@ -1,0 +1,163 @@
+body {
+	background-color: #FFFFFF;
+	background-repeat: repeat-y;
+	background-position: center 0;
+}
+
+#hd {
+	background-position: center 0;
+	background-repeat: repeat-y;
+}
+
+/* 花开富贵 */
+.tb-shop a {
+	color: #F3DBAA;
+	text-decoration: none;
+}
+
+.tb-shop a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.tb-shop .col-main .hd {
+	border-bottom-width: 0px;
+	height: 66px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/31626722/T2OzlzXhXXXXXXXXXX_!!31626722.gif)
+		;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.tb-shop .col-main .box .hd h3 span {
+	line-height: 50px;
+	text-indent: 320px;
+	height: 40px;
+	text-align: center;
+	color: #bf495b;
+	font-size: 16px;
+	font-family: 宋体;
+	font-weight: bold;
+}
+
+.tb-shop .col-main .box .bd {
+	border-bottom-width: 0px;
+	overflow: hidden;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/31626722/T2BjlzXitXXXXXXXXX_!!31626722.gif)
+		repeat;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.tb-shop .col-sub .box .bd {
+	border-bottom-width: 0px;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/31626722/T2.OtzXb8bXXXXXXXX_!!31626722.gif)
+		repeat;
+	overflow: hidden;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.tb-shop .col-sub .hd {
+	border-bottom-width: 0px;
+	height: 40px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/31626722/T2LjlzXhhXXXXXXXXX_!!31626722.gif)
+		;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.tb-shop .col-sub .box .hd h3 span {
+	line-height: 50px;
+	text-indent: 10px;
+	height: 40px;
+	color: #bf495b;
+	font-size: 12px;
+	font-family: 宋体;
+	font-weight: bold;
+}
+
+.tb-shop .shop-search {
+	color: #F3DBAA;
+}
+
+.tb-shop .grid .item .pic {
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	background: #F3DBAA;
+	padding-bottom: 5px;
+}
+
+.tb-shop .grid .price strong {
+	color: #F3DBAA;
+	font-size: 14px;
+}
+
+.tb-shop .grid .price span {
+	padding-right: 2px;
+	padding-left: 2px;
+	padding-top: 2px;
+	color: #F3DBAA;
+	padding-bottom: 2px;
+}
+
+/*一口价*/
+.tb-shop .grid .pic {
+	border-bottom-width: 0px ! important;
+	border-right-width: 0px ! important;
+	border-left-width: 0px ! important;
+	border-top-width: 0px ! important;
+}
+
+.tb-shop .shop-rank .pic {
+	border-bottom-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.tb-shop .shop-rank .no-collect {
+	display: none;
+}
+
+.tb-shop .shop-rank .no-traded {
+	display: none;
+}
+
+.tb-shop .shop-rank .collecter {
+	color: #F3DBAA;
+}
+
+.tb-shop .shop-rank .sale {
+	color: #F3DBAA;
+}
+
+.tb-shop .cats .cat h4 a {
+	padding-left: 5px;
+	line-height: 35px;
+	text-align: left;
+	font-size: 12px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/31626722/T2IPpzXnxXXXXXXXXX_!!31626722.gif)
+		no-repeat;
+	overflow: hidden;
+	width: 138px;
+	display: block;
+	min-height: 34px;
+}
+
+.tb-shop .shop-category .cat {
+	border-bottom-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}

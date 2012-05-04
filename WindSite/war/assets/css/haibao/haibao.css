@@ -1,0 +1,270 @@
+/*  
+Sticky Footer Solution
+by Steve Hatcher 
+http://stever.ca
+http://www.cssstickyfooter.com
+*/
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td
+	{
+	margin: 0px;
+	padding: 0px;
+}
+
+ul,ol {
+	list-style: none;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 9pt;
+	font-family: Tahoma, SimSun, Arial;
+}
+
+/* must declare 0 margins on everything, also for main layout components use padding, not 
+vertical margins (top and bottom) to add spacing, else those margins get added to total height 
+and your footer gets pushed down a bit more, creating vertical scroll bars in the browser */
+html,body,#wrap {
+	height: 100%;
+}
+
+body>#wrap {
+	height: auto;
+	min-height: 100%;
+	background: #fefeff;
+}
+
+#main {
+	padding-bottom: 50px;
+	clear: both;
+	margin: 0px auto;
+	width: 950px;
+}  /* must be same height as the footer */
+#footer {
+	position: relative;
+	margin-top: -50px; /* negative value of footer height */
+	height: 50px;
+	clear: both;
+}
+
+/* CLEAR FIX*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+#wholeBodyLay {
+	width: 950px;
+	height: 100%;
+	padding-top: 5px;
+}
+
+#header {
+	height: 200px;
+	width: 950px;
+	margin-top: 0px;
+	z-index: 10;
+}
+
+.rc-tp,.bd {
+	background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em
+		0px;
+}
+
+#channel-nav {
+	background: #FED98A;
+}
+
+.rc-tp {
+	background-position: -96px -428px;
+	display: block;
+	height: 30px;
+	margin-bottom: -30px;
+	position: relative;
+}
+
+#channel-nav ul {
+	list-style: none;
+	margin: 5px;
+	margin-top: 0px;
+}
+
+#channel-nav li {
+	float: left;
+	background-position: 100% -523px;
+	color: white;
+	height: 30px;
+	margin: 0px -2px 0px 2px;
+}
+
+#channel-nav dd {
+	float: left;
+}
+
+#channel-nav li a {
+	color: white;
+	float: left;
+	font-weight: 700;
+	padding: 0px 0px 0px 7px;
+	background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em
+		0px;
+}
+
+#channel-nav li a:hover {
+	color: #FFEA00;
+}
+
+#channel-nav li a span {
+	font-size: 12px;
+	cursor: pointer;
+	float: left;
+	height: 30px;
+	line-height: 28px;
+	overflow: hidden;
+	padding: 0px 10px 0px 0px;
+	background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em
+		0px;
+}
+
+.rc-bt {
+	background-position: -96px -424px;
+	display: block;
+	height: 4px;
+	margin-top: -4px;
+	position: relative;
+}
+
+.bd {
+	background-position: 0px -459px;
+	background-repeat: repeat-x;
+	border-bottom: none;
+	border: 1px #F69968;
+	height: 33px;
+}
+
+.trade {
+	float: left;
+	font-size: 14px;
+	line-height: 33px;
+	margin-top: 3px;
+	overflow: hidden;
+	padding-left: 5px;
+	position: relative;
+}
+
+#container2 {
+	margin: 0px auto;
+	width: 572px;
+	font-size: 12px;
+}
+
+#containerUl2 li {
+	float: left;
+}
+
+#txt_mall2 input.keyword {
+	background: url(http://img.alimama.cn/cms/images/1269492989187.png)
+		no-repeat;
+	border: 0px;
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	margin-left: 5px;
+	padding: 8px;
+	width: 330px;
+}
+
+#search_btn button {
+	border: 0px;
+	background: url(http://img.alimama.cn/cms/images/1269408846342.png)
+		no-repeat;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+	width: 90px;
+	cursor: pointer;
+}
+
+.l-d-a-i-p {
+	position: relative;
+}
+
+.l-d-a-i-p a {
+	text-decoration: none;
+}
+
+.l-d-a-i-p div {
+	vertical-align: middle;
+}
+
+.l-d-a-i-p div a {
+	border: 1px solid #CCC;
+	vertical-align: middle;
+	cursor: pointer;
+	display: table-cell;
+	text-align: center; *
+	display: block;
+}
+
+.l-d-a-i-p div a:hover {
+	border: 1px solid #F60;
+}
+
+.l-d-a-i-p .title {
+	text-align: center;
+}
+
+.l-d-a-i-p .title span {
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.l-d-a-i-p a img {
+	vertical-align: middle;
+	border: 0px; #
+	margin-top: -2px; /*IE7*/
+}
+
+.item_links {
+	margin: 6px 0px;
+	height: 59px;
+	background-image:
+		url(/assets/min/images/custome/1239080134609.gif);
+	background-repeat: no-repeat;
+}
+
+.item_links ul {
+	padding: 8px 0px 0px 20px;
+}
+
+.item_links li {
+	float: left;
+	line-height: 18px;
+	margin: 2px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 165px;
+}
+
+.item_links a span {
+	color: #04D;
+}
+
+.highlight a span {
+	color: #F06;
+}

@@ -1,0 +1,401 @@
+.expressway-mytaobao {
+	font-size: 12px;
+}
+
+.expressway-mytaobao .ew-panel {
+	width: 233px;
+	background: url(/assets/min/images/custome/1276339931479.jpg) 0 0
+		no-repeat;
+}
+
+.expressway-mytaobao .ew-tab-panel {
+	background: url(/assets/min/images/custome/1276339931479.jpg) 0 bottom
+		no-repeat;
+}
+
+.expressway-mytaobao .ew-frame {
+	width: 223px;
+	height: 134px;
+	border: none;
+	background-color: transparent;
+}
+
+.expressway-mytaobao .ew-tab-menu {
+	margin: 0 0 0 1px;
+}
+
+.expressway-mytaobao .ew-tab-item-0 {
+	width: 59px;
+	text-indent: 1px
+}
+
+.expressway-mytaobao .ew-tab-item-1 {
+	width: 59px;
+	text-indent: 1px
+}
+
+.expressway-mytaobao .ew-tab-item-2 {
+	width: 59px;
+}
+
+.expressway-mytaobao .ew-panel-hd {
+	display: none;
+}
+
+.expressway-mytaobao ul.ew-tab-menu {
+	height: 29px;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li {
+	float: left;
+	height: 29px;
+	line-height: 25px;
+	list-style: none;
+	color: #555;
+	text-align: center;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+}
+
+.expressway-mytaobao UL.ew-tab-menu .logoLink {
+	display: none;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li.selected a {
+	background: url(http://pics.taobao.com/bao/album/sys/mytaobao.gif)
+		-185px 1px no-repeat;
+}
+
+.tab_left,.tab_right {
+	display: none;
+}
+
+/* iframe style */
+.fast-track {
+	
+}
+
+h5 {
+	display: none;
+}
+
+.select-game-style .sgs-menu li {
+	display: inline;
+}
+
+.sgs-menu {
+	float: left;
+	margin: 5px 0 0;
+	height: 24px;
+	overflow: hidden;
+	padding-left: 5px;
+}
+
+.ft-select {
+	clear: left;
+}
+
+.ft-mobile .ft-select {
+	margin: 11px 0 0 0;
+	padding-left: 6px;
+}
+
+.ft-game .ft-select {
+	margin-top: 11px;
+}
+
+.ft-select li {
+	display: block;
+	clear: both;
+}
+
+#game_union_sel {
+	_margin-left: 4px;
+}
+
+#game_area_sel {
+	width: 118px;
+}
+
+.ft-select li select,.ft-select li input {
+	margin: 2px 0;
+}
+
+.ft-select li span { *
+	margin-left: 6px;
+}
+
+.ft-select li input.dep_date {
+	width: 82px; *
+	margin-left: 4px;
+	background: url("http://img.alimama.cn/images/bg/input_calendar.png")
+		no-repeat scroll 2px center transparent;
+	height: 15px;
+	padding: 1px 0 0 19px;
+	border: 1px solid;
+	cursor: default;
+}
+
+#game_sel {
+	width: 118px;
+	height: 18px;
+}
+
+.ft-select li label {
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom; *
+	vertical-align: middle;
+	-moz-box-align: end;
+	-moz-box-pack: end;
+	width: 48px; *
+	height: auto;
+	_height: 1px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.ft-air .ft-select li label {
+	width: 50px;
+	margin-right: 5px;
+}
+
+form {
+	display: inline;
+}
+
+.view-list {
+	padding: 5px 0 0 53px;
+}
+
+.ft-mobile .view-list {
+	padding: 5px 0 0 48px;
+}
+
+.ft-air .view-list {
+	padding: 5px 0 0 60px;
+}
+
+.view-list a {
+	display: block;
+	height: 20px;
+	width: 100px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+	background:
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png') 0
+		-250px no-repeat;
+}
+
+h6 {
+	padding: 0 0 0 2px;
+	line-height: 24px;
+	height: 24px;
+	font-size: 12px;
+	border-bottom: 1px solid #ddd;
+	color: #000;
+	margin: 0;
+}
+
+h6 .title {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 3px;
+}
+
+h6 .price {
+	color: #f50;
+	font-weight: bold;
+	padding: 2px;
+	font-size: 14px;
+}
+
+h6 a {
+	text-decoration: underline;
+	padding: 0 5px;
+	color: #04d;
+}
+
+.tk-list {
+	float: left;
+	overflow: hidden;
+	width: 100%;
+	line-height: 20px;
+}
+
+.tk-list li {
+	position: relative;
+	clear: both;
+	margin: 0 2px 0 0;
+	padding: 0 0 2px 2px;
+	border-bottom: 1px solid #ddd;
+	color: #000; *
+	display: inline-block;
+}
+
+.tk-list li:hover {
+	background-color: #fff7e8;
+}
+
+.tk-list li:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.tk-list li a {
+	color: #000;
+	text-decoration: none;
+}
+
+.tk-list  span strong {
+	color: #F50;
+	font-weight: bold;
+}
+
+.tk-list li  div {
+	float: left;
+}
+
+.tk-list li .title {
+	width: 60px;
+	text-align: right;
+	height: 20px;
+	overflow: hidden;
+}
+
+.tk-list.wider li .title {
+	width: 68px;
+}
+
+.tk-list li .zdcz {
+	background-position: 0 5px;
+}
+
+.tk-list li .zxzc {
+	background-position: 0 -15px;
+}
+
+.tk-list li .zdfh {
+	background-position: 0 -35px;
+}
+
+.tk-list li .thdc {
+	background-position: 0 -55px;
+}
+
+.tk-list.wider li .zdcz {
+	background-position: 10px 5px;
+}
+
+.tk-list.wider li .zdfh {
+	background-position: 10px -35px;
+}
+
+.tk-list li .button1,.tk-list li .button2 {
+	display: block;
+	position: absolute;
+	width: 40px;
+	right: 2px;
+	top: 0;
+	height: 0;
+	padding-top: 20px;
+	overflow: hidden;
+	background: transparent
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png')
+		no-repeat;
+	text-align: center;
+}
+
+.tk-list li .button1 {
+	background-position: -129px -155px;
+}
+
+.tk-list li .button2 {
+	background-position: -129px -180px;
+}
+
+.tk-list li .button1:hover {
+	background-position: -129px -130px;
+}
+
+.tk-list li .button2:hover {
+	background-position: -129px -205px;
+}
+
+.tk-list li .gift {
+	width: 47px;
+	background: transparent
+		url(http://img01.taobaocdn.com/tps/i1/T1sIxnXoVmXXXXXXXX-47-40.png)
+		no-repeat right 3px;
+}
+
+.tk-list li .gift:hover {
+	background: transparent
+		url(http://img01.taobaocdn.com/tps/i1/T1sIxnXoVmXXXXXXXX-47-40.png)
+		no-repeat right -22px;
+}
+
+.shop-chongzhi p.more {
+	clear: both;
+	padding: 2px 0 0 2px;
+	overflow: hidden;
+	font-family: Arial;
+	font-size: 12px;
+	color: #666;
+	line-height: 18px;
+}
+
+.shop-chongzhi p.more a {
+	padding: 0 5px 0 0;
+}
+
+.shop-chongzhi p.more a:hover {
+	color: #f50;
+	text-decoration: underline;
+}
+
+.warning-alert {
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
+}
+
+.warning-alert a {
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom; *
+	vertical-align: baseline;
+	width: 88px;
+	height: 22px;
+	background:
+		url(http://img08.taobaocdn.com/tps/i8/T1rZtpXetrXXXXXXXX-88-21.png) 0
+		0 no-repeat;
+	overflow: hidden;
+}
+
+.warning-alert a em {
+	display: none;
+}
+
+.shop-chongzhi .blank {
+	display: none;
+}
+
+.game-ad,.mobile-ad {
+	margin: 10px 0px 0px 3px;
+}
+
+.game-ad img,.mobile-ad img {
+	border: none;
+}

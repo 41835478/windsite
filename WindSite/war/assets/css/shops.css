@@ -1,0 +1,167 @@
+.cats_list {
+	list-style: none;
+	float: left;
+	width: 200px;
+	margin: 0px;
+	padding: 0px;
+	margin-right: 5px;
+}
+
+.cats_list li {
+	margin-bottom: 10px;
+}
+
+.shop_list {
+	float: left;
+	width: 740px;
+}
+
+.bb-info {
+	margin-left: 5px;
+	margin-right: 0px;
+	height: 80px;
+}
+
+.bb-pic {
+	float: left;
+	width: 70px;
+	margin-top: 8px;
+	border: 1px solid #DDD;
+	height: 70px;
+}
+
+.bb-pic img {
+	max-width: 70px;
+	max-height: 70px;
+	width: 70px;
+	height: 70px;
+}
+
+.bb-disc {
+	float: left;
+	padding-left: 5px;
+}
+
+.key {
+	
+}
+
+.nick {
+	width: 200px;
+	float: left;
+}
+
+.nick-name {
+	font-weight: bold;
+}
+
+.level {
+	width: 180px;
+	float: left;
+}
+
+.title {
+	color: #36C;
+	font-weight: bold;
+}
+
+.title:hover {
+	color: #F60;
+}
+
+.page-info {
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	margin: 0px 3px 0px 0px;
+	overflow: hidden;
+	min-width: 8px;
+	padding: 0px 6px;
+	width: auto;
+}
+
+.page a {
+	text-decoration: none;
+	color: #555;
+	display: block;
+	float: left;
+	margin: 0px 3px 0px 0px;
+	background: transparent url(/assets/min/images/shops.png) no-repeat
+		scroll 500px 500px;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	padding: 0px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	border: 1px solid #CCC;
+}
+
+a.next-page {
+	background-position: -52px -5px;
+	padding: 0px 16px 0px 5px;
+}
+
+a.end-page {
+	background-position: -52px -21px;
+}
+
+a.start-page {
+	background-position: 6px -21px;
+	padding: 0px;
+	width: 20px;
+}
+
+a.prev-page {
+	width: 20px;
+	background-position: 6px -5px;
+	padding: 0px;
+}
+
+a.prev-page span,a.start-page span {
+	display: none;
+}
+
+a.prev-page:hover,a.prev-page:active,a.next-page:hover,a.next-page:active
+	{
+	border-color: #FD6D01;
+}
+
+.page-bar {
+	background-color: #F9F9F9;
+	border-bottom: 1px solid #F07002;
+	color: #565656;
+	height: 31px;
+}
+
+.rc-tp,.bd {
+	background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em
+		0px;
+}
+
+.rc-bt {
+	background-position: -96px -424px;
+	display: block;
+	height: 4px;
+	margin-top: -4px;
+	position: relative;
+}
+
+.bd {
+	background-position: 0px -459px;
+	background-repeat: repeat-x;
+	border-bottom: none;
+	border: 1px #F69968;
+	height: 33px;
+}
+
+.trade {
+	float: left;
+	font-size: 14px;
+	line-height: 33px;
+	margin-top: 3px;
+	overflow: hidden;
+	padding-left: 5px;
+	position: relative;
+}

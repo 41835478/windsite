@@ -1,0 +1,3 @@
+<#assign RATE=0 ISFANLI=(versionNo>=2&&''!=www)>
+<#if MEMBER??><#assign RATE=(MEMBER.commissionRate/100)?number></#if> 
+<#if items??&&items?size!=0><#list items as i><li class="item"><div class="pic"><a title="${i.title}" href="/titem/${i.num_iid}.html" target="_blank"><img src="${i.pic_url?replace("bao/uploaded", "imgextra")}_160x160.jpg"></a></div><div class="price"><strong>${i.price}元</strong><#if ISFANLI><div class="fanli" style="float:right;"><span class="fanli-desc">返利:</span><@ws.rate RATE=RATE commission=i.commission></@ws.rate></div></#if></div><div class="title"><a title="${i.title}" href="/aditem/${i.id}.html" target="_blank">${i.title}</a></div></li></#list></#if>

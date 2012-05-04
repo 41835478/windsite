@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	$(function() {
+		$("#headerSmallAlbum li").click(
+				function() {
+					var header =$('.ui-designer-header'); 
+					header.find('.header-flash').attr('src',
+							'').empty();
+					header.find.css('background',
+							'url(' + $('img', this).attr('src') + ')');
+					header.find.css('background-repeat',
+							'no-repeat');
+					$(this).toggleClass("ui-selected").siblings().removeClass(
+							"ui-selected");
+					return;
+				}).hover(
+				function() {
+					$(this).toggleClass("ui-selecting").siblings().removeClass(
+							"ui-selecting");
+				}, function() {
+					$(this).removeClass("ui-selecting");
+				});
+	});
+	//-->
+</script>
+<table border='0' cellspacing='0' cellpadding='0'
+	style='width: 99.8%; height: 250px;'>
+	<tbody>
+		<tr>
+			<td width='4'>
+			<div class='areaLeft'></div>
+			</td>
+			<td width='100%'>
+			<div class="areaCenter">
+			<ul id="headerSmallAlbum">
+				<li><img src="/designer/assets/images/header/img1_950x150.png" /></li>
+				<li><img src="/designer/assets/images/header/img2_950x150.png" /></li>
+				<li><img src="/designer/assets/images/header/img3_950x150.png" /></li>
+			</ul>
+			</div>
+			</td>
+			<td width='5'>
+			<div class='areaRight'></div>
+			</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,242 @@
+#detail {
+	color: #404040;
+}
+
+#detail .xt-shadow {
+	-moz-box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+	filter: progid :                      
+		  DXImageTransform.Microsoft.dropshadow (    
+		  
+		       
+		         OffX =          
+		    
+		           3, OffY =                           3, Color =  
+		                   
+		    #16000000, Positive =       
+		
+		        
+		         true );
+}
+
+#detail .xt-h {
+	color: #F50 !important;
+}
+
+#detail .xt-detail-hd {
+	background: none repeat scroll 0 0 #FFF;
+	border-color: #FFF;
+	margin-bottom: 1px;
+	position: relative;
+	text-indent: 0;
+	z-index: 2;
+}
+
+#detail .xt-detail-hd h3 {
+	color: #000;
+	font-size: 14px;
+	line-height: 21px;
+	overflow: hidden;
+	padding-left: 0;
+	text-align: left;
+	text-indent: 5px;
+	white-space: nowrap;
+	width: 530px;
+}
+
+#detail .xt-detail-bd {
+	background-color: #FFF;
+	border: 0 none;
+	padding: 0;
+}
+
+#detail .xt-summary {
+	padding: 10px 0;
+}
+
+.xt-detail-price strong {
+	color: #F50;
+	font-size: 24px;
+	font-weight: normal;
+	padding-right: 5px;
+}
+
+#detail .xt-property .xt-meta span {
+	text-align: right;
+	width: 72px;
+}
+
+#detail .xt-property .xt-meta li span,#detail .xt-property .xt-meta li ul,#detail .xt-property .xt-meta li li
+	{
+	float: left;
+}
+
+#detail .xt-property .xt-sold-out em {
+	color: #CEAA00;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	margin-right: 2px;
+}
+
+#detail .xt-property .xt-key .xt-skin {
+	background-color: #F9F9F9;
+	padding: 8px;
+}
+
+#detail .xt-property .xt-key:hover .xt-skin,#detail .xt-property .xt-key-hover .xt-skin
+	{
+	background-color: #FFF3D9;
+}
+
+#detail .xt-property .xt-key {
+	border: 1px solid #EDEDED;
+	margin-bottom: 10px;
+	padding: 1px;
+}
+
+#detail .xt-property .xt-key:hover,#detail .xt-property .xt-key-hover {
+	border-color: #FCBB29;
+}
+
+#detail .xt-property .xt-key .xt-action {
+	margin-left: 62px;
+	position: relative;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-buy,#detail .xt-property .xt-key .xt-action .xt-btn-bid,#detail .xt-property .xt-key .xt-action .xt-btn-add,#detail .xt-property .xt-key .xt-action .xt-btn-wait
+	{
+	float: left;
+	margin-right: 20px;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-buy a,#detail .xt-property .xt-key .xt-action .xt-btn-buy a b,#detail .xt-property .xt-key .xt-action .xt-btn-bid a,#detail .xt-property .xt-key .xt-action .xt-btn-bid a b,#detail .xt-property .xt-key .xt-action .xt-btn-add a,#detail .xt-property .xt-key .xt-action .xt-btn-add a b,#detail .xt-property .xt-key .xt-action .xt-btn-wait a
+	{
+	float: left;
+	height: 36px;
+	margin-right: 0;
+	overflow: hidden;
+	text-indent: -200px;
+	width: 127px;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-buy a,#detail .xt-property .xt-key .xt-action .xt-btn-bid a,#detail .xt-property .xt-key .xt-action .xt-btn-add a
+	{
+	position: relative;
+	text-indent: 0;
+	text-align: center;
+	font: bold 18px/ 36px arial;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-buy a b,#detail .xt-property .xt-key .xt-action .xt-btn-bid a b,#detail .xt-property .xt-key .xt-action .xt-btn-add a b
+	{
+	cursor: pointer;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url("images/T1srRKXkJMXXXXXXXX-635-36.png") no-repeat scroll
+		0 0 transparent;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-wait a {
+	background-image: url("images/T1srRKXkJMXXXXXXXX-635-36.png");
+	background-repeat: no-repeat;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-add a b {
+	background-position: -254px 0;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-bid a b {
+	background-position: -127px 0;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-add a.xt-disabled b {
+	background-position: -508px 0;
+	cursor: default;
+}
+
+#detail .xt-property .xt-key .xt-action .xt-btn-wait a {
+	background-position: -381px 0;
+}
+
+#detail .xt-gallery .xt-booth {
+	border: 1px solid #CDCDCD;
+	position: relative;
+	z-index: 1;
+}
+
+#detail .xt-gallery {
+	float: left;
+	margin-left: -100%;
+	width: 310px;
+}
+
+#detail .xt-pic {
+	overflow: hidden;
+}
+
+.xt-pic a {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center; *
+	display: block; *
+	font-family: Arial !important; *
+	line-height: 1;
+}
+
+.xt-pic a img {
+	vertical-align: middle;
+}
+
+.xt-s310 img {
+	max-width: 310px;
+	max-height: 310px;
+}
+
+#detail .xt-property {
+	float: left;
+	width: 100%;
+}
+
+#detail .xt-property .xt-wrap {
+	margin: 0 0 0 320px;
+}
+
+#detail .xt-property .xt-meta ul {
+	width: 348px;
+}
+
+#detail .xt-property .xt-sold-out em {
+	color: #C60 !important;
+}
+
+#detail .xt-property .xt-key .xt-action {
+	margin: 0 0 0 62px;
+}
+
+#detail .xt-property .xt-meta .xt-detail-price,#detail .xt-property .xt-meta .xt-detail-price span
+	{
+	height: 25px;
+	line-height: 25px;
+}
+
+#detail .xt-property .xt-meta .xt-detail-price span.xt-spec {
+	float: none;
+	color: #a0a0a0;
+	padding-left: 20px;
+	line-height: inherit;
+}
+
+#detail .xt-property .xt-meta .xt-detail-price strong {
+	vertical-align: baseline;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+
+#detail .xt-property .xt-meta .xt-price {
+	float: none;
+}
+
+#detail .xt-property .xt-meta li {
+	margin-bottom: 1px;
+	line-height: 24px;
+}

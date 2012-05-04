@@ -1,0 +1,80 @@
+.shop-complex-a .grid .desc {
+	height: 28px;
+}
+
+.shop-complex-a .items-right li {
+	width: 210px;
+	height: 26px;
+	line-height: 26px;
+	border-bottom: 1px dashed #CCC;
+	text-align: left;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tb-shop .shop-complex-a .grid li {
+	height: 168px;
+	width: 110px;
+	max-width: 110px;
+	min-width: 110px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tb-shop .shop-complex-a .grid-110 li {
+	margin: 0 4px 5px 5px;
+	_margin: 0 5px 5px 3px;
+	width: 110px;
+	padding: 0px;
+	max-width: 110px;
+	overflow: hidden;
+}
+
+.tb-shop .shop-complex-a .grid .item .pic {
+	width: 100px;
+	height: 100px;
+}
+
+.tb-shop .shop-complex-a .grid .item .pic a {
+	width: 100px;
+	height: 100px;
+	_width: 108px;
+}
+
+.tb-shop .shop-complex-a .grid-110 .item .pic {
+	width: 110px;
+	height: 110px;
+}
+
+.tb-shop .shop-complex-a .grid-110 .item .pic a {
+	width: 110px;
+	height: 110px;
+	_width: 108px;
+}
+
+.tb-shop .shop-complex-a .grid-100 .item .pic {
+	width: 100px;
+	height: 100px;
+}
+
+.tb-shop .shop-complex-a .grid-100 .item .pic a {
+	width: 100px;
+	height: 100px;
+	_width: 98px;
+}
+
+.tb-shop .shop-complex-a .grid .item .pic a:hover {
+	width: 106px;
+	height: 106px;
+}
+
+.tb-shop .shop-complex-a .grid-100 li {
+	margin: 0px 8px 5px 8px;
+	_margin: 0px 4px 5px 4px;
+	padding: 0px;
+	min-width: 100px;
+	max-width: 100px;
+}

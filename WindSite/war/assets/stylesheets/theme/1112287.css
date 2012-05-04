@@ -1,0 +1,153 @@
+.tb-shop  &lt ;style type =&quot;text/css&quot;&gt;    .tb-shop .shop-header .nav
+	{
+	height: 36px !important;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/196244414/T2gUdzXbxbXXXXXXXX_!!196244414.png)
+		0 0 no-repeat !important;
+}
+
+.tb-shop .shop-header .nav ul {
+	padding-top: 6px;
+}
+
+.tb-shop .shop-header .nav li {
+	margin-right: 5px;
+	height: 25px;
+}
+
+.tb-shop .shop-header .nav li a,.tb-shop .shop-header .nav li a em {
+	line-height: 15px;
+	height: 15px;
+	color: #666666;
+	font-size: 12px;
+	background: url() 0 0 no-repeat;
+	font-weight: bold;
+}
+
+.tb-shop .shop-header .nav li a {
+	text-decoration: none;
+	background-position: 0% 0px;
+}
+
+.tb-shop .shop-header .nav li a em {
+	background-position: 0px 0px;
+}
+
+.tb-shop .shop-header .nav li a:hover em {
+	color: #666666;
+}
+
+.tb-shop .shop-header .nav li a:hover {
+	line-height: 18px;
+	color: #666666;
+	font-size: 14px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.tb-shop .shop-header .nav li a em:hover,.tb-shop .shop-header .nav li.current a em
+	{
+	color: #000000;
+	background-position: 0px 0px;
+}
+
+.tb-shop .shop-banner .bd,.tb-shop .shop-header,.tb-shop .shop-header .nav
+	{
+	height: auto;
+	background: none;
+	padding: 0;
+}
+
+.tb-shop .col-main .box .hd {
+	height: 35px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/196244414/T2g_VzXcBbXXXXXXXX_!!196244414.png)
+		no-repeat;
+}
+
+.tb-shop .col-main .box .hd h3 {
+	padding-left: 30px;
+	padding-top: 5px;
+	color: #666;
+	font-size: 14px;
+}
+
+.tb-shop .col-sub .box .hd {
+	height: 35px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/196244414/T2NDVzXbRbXXXXXXXX_!!196244414.png)
+		no-repeat 0 0;
+	border: none;
+}
+
+.tb-shop .col-sub .box .hd h3 {
+	padding-left: 30px;
+	color: #FFF;
+	font-size: 14px;
+}
+
+.tb-shop .box .bd {
+	overflow: hidden;
+	border: 0px solid #ffff;
+	background-image:
+		url(http://img04.taobaocdn.com/imgextra/i4/196244414/T2JEVzXjdXXXXXXXXX_!!196244414.png)
+		;
+}
+
+.tb-shop .shop-category .bd ul h4 a {
+	line-height: 60px;
+	text-indent: 30px;
+	height: 60px;
+	color: #000000;
+	font-size: 14px;
+	background: #ffffff
+		url(http://img03.taobaocdn.com/imgextra/i3/196244414/T2dVlAXdtaXXXXXXXX_!!196244414.png)
+		left top no-repeat;
+	width: 160px;
+	display: block;
+}
+
+.tb-shop .shop-category .bd ul h4 a:hover {
+	color: #fec000;
+	text-decoration: none;
+	background-position: left -60px;
+}
+
+.tb-shop .shop-category .bd ul ul a {
+	line-height: 40px;
+	text-indent: 40px;
+	height: 40px;
+	color: #000;
+	font-size: 12px;
+	background: #ffffff
+		url(http://img03.taobaocdn.com/imgextra/i3/196244414/T2dVlAXdtaXXXXXXXX_!!196244414.png)
+		left -120px no-repeat;
+	width: 160px;
+	display: block;
+}
+
+.tb-shop .shop-category .bd ul ul a:hover {
+	color: #000;
+	text-decoration: none;
+	background-position: left -160px;
+}
+
+.tb-shop .shop-list li {
+	margin-right: 4px;
+	height: 268px;
+	min-width: 160px;
+	width: 162px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/196244414/T2znRzXdBbXXXXXXXX_!!196244414.png)
+		no-repeat;
+	margin-left: 4px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding: 8px;
+}
+
+.tb-shop .pic a:hover img {
+	height: 97%;
+	width: 97%;
+	border: 3px solid #990099;
+}

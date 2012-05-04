@@ -1,0 +1,197 @@
+.tb-shop .shop-search {
+	color: #B38055;
+}
+
+.tb-shop .grid .price strong {
+	color: #F86E5A;
+	font-weight: 700;
+}
+
+.tb-shop body {
+	background-color: #fff;
+	background-repeat: repeat;
+	background-position: center 0;
+}
+
+.tb-shop a {
+	color: #B38055;
+	text-decoration: none;
+}
+
+.tb-shop .col-main .box .hd,.tb-shop .col-main .box .hd h3,.tb-shop .col-main .box .hd h3 span
+	{
+	padding-left: 16px;
+	line-height: 55px;
+	height: 55px;
+	background: none;
+}
+
+.tb-shop .col-main .box .hd {
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/82595315/T2Q_xyXbXaXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	border: none;
+}
+
+.tb-shop .box .hd span {
+	color: #7B4D26;
+	font-size: 14px;
+	display: block;
+	font-weight: bold;
+}
+
+.tb-shop .col-sub .box .hd,.tb-shop .col-sub .box .hd h3,.tb-shop .col-sub .box .hd h3 span
+	{
+	padding-left: 16px;
+	line-height: 50px;
+	height: 55px;
+	background: none;
+}
+
+.tb-shop .col-sub .box .hd {
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T2dD0yXh8XXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	border: none;
+}
+
+.tb-shop .col-sub .box .hd h3 {
+	padding-left: 18px;
+	color: #FFF;
+	font-size: 14px;
+}
+
+/*FL*/
+.tb-shop .shop-category .bd .cat a {
+	height: 14px;
+	color: #B38055;
+	overflow: hidden;
+	background: none;
+	width: 46px;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd .cat a:hover {
+	font-weight: bold;
+}
+
+.tb-shop .shop-category .bd .cat h4 {
+	font-weight: 600;
+}
+
+.tb-shop .shop-category .bd .cat h4 a:hover {
+	color: #E01330;
+	background: url(http :// img02.taobaocdn.com/ imgextra/ i2/ 82595315/
+		T2_nVyXhBXXXXXXXXX_ !! 82595315 . gif no-repeat;
+}
+
+.tb-shop .shop-category .bd .cat h4 a {
+	padding-top: 17px;
+	line-height: 42px;
+	height: 46px;
+	text-align: center;
+	color: #895222;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/82595315/T2_nVyXhBXXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	font-size: 15px;
+	width: 165px;
+	text-decoration: none;
+	display: block;
+	font-weigth: 900;
+}
+
+/*xfl*/
+.tb-shop .shop-category .bd .cat-bd a {
+	line-height: 40px;
+	height: 40px;
+	color: #D07B48;
+	text-align: center;
+	font: 12px;
+	width: 160px;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T2e_tyXedbXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	display: block;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd .cat-bd a:hover {
+	color: #F99587;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T2e_tyXedbXXXXXXXX_!!82595315.gif)
+		no-repeat;
+}
+
+.tb-shop .shop-category .cats h4.collapse,.tb-shop .cats .expand .cat-hd,.tb-shop .cats .cat h4
+	{
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T28_ByXoXXXXXXXXXX_!!82595315.jpg)
+		no-repeat;
+}
+
+.tb-shop .box .bd {
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T28_ByXoXXXXXXXXXX_!!82595315.jpg)
+		repeat;
+}
+
+.tb-shop .col-extra .box .bd {
+	border-top: medium none;
+}
+
+.tb-shop .col-sub .box .bd {
+	border: medium none;
+}
+
+.tb-shop .shop-rank .rank-tab .rank-panel .collecter,.tb-shop .shop-rank .rank-tab .rank-panel .sale
+	{
+	color: #991C0B;
+}
+
+/*ph*/
+.tb-shop .shop-rank .rank-panels {
+	text-align: center;
+	border-top: 1px solid #B38055;
+}
+
+.tb-shop .shop-rank .tab-nav li {
+	height: 26px;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	margin-left: 4x;
+	border: 1px solid #B38055;
+	float: left;
+}
+
+.tb-shop .shop-rank .tab-nav span {
+	padding-right: 4px;
+	padding-top: 3px;
+	cursor: pointer;
+	color: #B38055;
+	background-color: #fff;
+	border-bottom: solid 1px #B38055;
+	display: block;
+	background-repeat: no-repeat;
+}
+
+.tb-shop .shop-rank .tab-nav .selected span {
+	padding-right: 2px;
+	padding-top: 3px;
+	cursor: pointer;
+	background-attachment: scroll;
+	color: #B38055;
+	background-color: #D5AD8B;
+	border-bottom: solid 1px #B38055;
+	display: block;
+	background-position: 100% 0;
+	background-repeat: no-repeat;
+}
+
+/*ss*/
+.tb-shop .shop-search .submit button {
+	color: #B38055;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/82595315/T26TdxXe0aXXXXXXXX_!!82595315.gif)
+		no-repeat;
+}

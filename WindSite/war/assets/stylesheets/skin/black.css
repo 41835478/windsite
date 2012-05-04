@@ -1,0 +1,93 @@
+.eshop .shop-header {
+	background: #4e4e4e
+		url(http://img03.taobaocdn.com/tps/i3/T1DKNpXjXCXXXXXXXX-5-150.png) 0
+		0 repeat-x;
+}
+
+.eshop .shop-header h2 {
+	color: #fff;
+}
+
+.eshop .shop-header .shop-summary p {
+	color: #fff;
+}
+
+div.c-c,.eshop .shop-header .nav,.eshop .shop-header .nav li a,.eshop .shop-header .nav li a em,.box .hd,.shopkeeper .box .hd
+	{
+	background:
+		url(http://img03.taobaocdn.com/tps/i3/T1TeBpXjdHXXXXXXXX-200-214.png)
+		0 0 no-repeat;
+}
+
+.eshop .shop-header .nav {
+	background-position: 0 -100px;
+	background-repeat: repeat-x;
+}
+
+.eshop .shop-header .nav li a {
+	background-position: 100% -25px;
+}
+
+.eshop .shop-header .nav li a em {
+	background-position: 0 0;
+}
+
+.eshop .shop-header .nav li.current a {
+	background-position: 100% -75px;
+}
+
+.eshop .shop-header .nav li.current a em {
+	background-position: 0 -50px;
+}
+
+.eshop .shop-header .nav a:link,.eshop .shop-header .nav a:visited {
+	color: #666;
+}
+
+.eshop .shop-header .nav a:hover,.eshop .shop-header .nav a:active {
+	color: #666;
+}
+
+.eshop .shop-header .nav .current a:link,.eshop .shop-header .nav .current a:visited
+	{
+	color: #fff;
+}
+
+.eshop .shop-header .nav .current a:hover,.eshop .shop-header .nav .current a:active
+	{
+	color: #fff;
+}
+
+.col-main .box .hd {
+	border-color: #cacbcc;
+	background-color: #f4f3f4;
+	background-position: 0 -129px;
+	background-repeat: repeat-x;
+}
+
+.col-main .box .bd {
+	background-color: #fff;
+}
+
+.col-main .box .hd h3 {
+	color: #000;
+}
+
+div.c-c,.box .hd,.shopkeeper .box .hd {
+	border-color: #cacbcc !important;
+	background-color: #656565;
+	background-position: 0 -153px;
+	background-repeat: repeat-x;
+}
+
+.box .bd,.shopkeeper .box .hd,.shopkeeper .box .bd {
+	border-color: #cacbcc !important;
+}
+
+div.c-c,.box .hd h3,.shopkeeper .box .hd h3 {
+	color: #fff;
+}
+
+.cat-items {
+	border-color: #cacbcc;
+}

@@ -1,0 +1,294 @@
+.tb-shop .box {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+/* 模块下边距*/
+.tb-shop .box .hd {
+	border-color: #CCCCCC;
+	margin-bottom: 0px;
+	border: 0px;
+}
+
+/* 模块标题下边距、边框宽度、颜色、背景*/
+.tb-shop .box .hd h3 span {
+	color: #D20B0B;
+	font-size: 14px;
+}
+
+/* 模块标题文字颜色、大小*/
+.tb-shop .box .bd {
+	border-color: #D3D3D3 !important;
+	border: 1px;
+}
+
+/* 模块主体边框宽度、颜色*/
+.tb-shop .col-sub .hd,.tb-shop .col-extra .hd {
+	height: 30px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/570088821/T24OXzXoXaXXXXXXXX_!!570088821.jpg)
+		0 0 no-repeat;
+}
+
+/* 左侧标题高度、背景定位*/
+.tb-shop .col-main .hd {
+	height: 30px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/570088821/T20OXzXohaXXXXXXXX_!!570088821.jpg)
+		0 0 no-repeat;
+}
+
+/* 右侧标题高度、背景定位*/
+.tb-shop .box .hd h3 {
+	padding-left: 25px;
+	padding-top: 4px;
+	text-align: left;
+}
+
+/* 左侧标题文字定位*/
+.tb-shop .col-main .box .hd h3 {
+	padding-left: 25px;
+	padding-top: 4px;
+	text-align: left;
+}
+
+.tb-shop .cats .cat h4 a {
+	padding-left: 40px;
+	line-height: 40px;
+	color: #cc0000;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/570088821/T22JtzXfxaXXXXXXXX_!!570088821.jpg)
+		no-repeat;
+	width: 160px;
+	display: block;
+}
+
+/* 大分类原图 字体*/
+.tb-shop .cats .cat h4 a:hover {
+	padding-left: 40px;
+	line-height: 40px;
+	color: #ffffff;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/570088821/T2wJVzXhpXXXXXXXXX_!!570088821.jpg)
+		no-repeat;
+	width: 160px;
+	text-decoration: none;
+	display: block;
+}
+
+/* 大分类鼠标经过图 字体*/
+.tb-shop .cats .cat .cat-bd li a {
+	padding-left: 40px;
+	line-height: 24px;
+	color: #333333;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/570088821/T2TdtzXfRaXXXXXXXX_!!570088821.gif)
+		no-repeat;
+	overflow: hidden;
+	width: 160px;
+	display: block;
+}
+
+/* 小分类原图 字体*/
+.tb-shop .cats .cat .cat-bd li a:hover {
+	padding-left: 40px;
+	line-height: 24px;
+	color: #ffffff;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/570088821/T2BdVzXhhXXXXXXXXX_!!570088821.gif)
+		no-repeat;
+	text-decoration: none;
+	display: block;
+}
+
+.tb-shop .item .pic a {
+	display: block;
+	border: 0px solid #000;
+}
+
+/*产品图片边距宽度、颜色*/
+.tb-shop .item .pic a:hover {
+	border-top: 5px solid #cc0000;
+}
+
+.tb-shop .aaa {
+	position: absolute;
+}
+
+.tb-shop .bbb {
+	position: absolute;
+}
+
+.tb-shop .shop-header .nav {
+	position: absolute;
+	height: 35px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/570088821/T2Fy8zXjXXXXXXXXXX_!!570088821.jpg)
+		repeat-x scroll 0 0;
+	width: 950px;
+	z-index: 1;
+}
+
+/*导航区域*/
+.tb-shop .shop-header .nav ul {
+	padding-left: 20px;
+	line-height: 10px;
+	height: 35px;
+}
+
+/*导航条行高、高度、左边距*/
+.tb-shop .shop-header .nav ul li {
+	line-height: 35px;
+	margin-right: 0;
+	height: 35px;
+	overflow: hidden;
+	background-image: none;
+}
+
+/*导航菜单*/
+.tb-shop .shop-header .nav li,.tb-shop .shop-header .nav li a,.tb-shop .shop-header .nav li a em
+	{
+	height: 35px;
+	width: 120px;
+	display: block;
+	float: left;
+}
+
+/*菜单宽度、显示方式、浮动、显示方向*/
+.tb-shop .shop-header .nav li.current a:hover  em {
+	line-height: 30px;
+	text-align: center;
+	color: #ffffff;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/570088821/T2v58zXjpXXXXXXXXX_!!570088821.jpg)
+		repeat-X center;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li.current a em {
+	line-height: 30px;
+	text-align: center;
+	color: #ffffff;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/570088821/T2Ay8zXjhXXXXXXXXX_!!570088821.jpg)
+		repeat-X;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li a:hover em {
+	line-height: 30px;
+	text-align: center;
+	color: #ffffff;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/570088821/T2Ay8zXjhXXXXXXXXX_!!570088821.jpg)
+		repeat-X;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li a em {
+	line-height: 30px;
+	text-align: center;
+	color: #ffffff;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/570088821/T2v58zXjpXXXXXXXXX_!!570088821.jpg)
+		no-repeat right;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 0;
+}
+
+/*菜单效果：颜色、字号、行高、对齐方式、样式、背景*/
+.tb-shop .shop-header .nav li a:hover {
+	font-size: 30px;
+	text-decoration: none !important;
+}
+
+/*？是鼠标经过效果生效？*/
+.tb-shop .cat-items {
+	max-height: none;
+	width: 630px;
+	background: none;
+	overflow: visible;
+	margin-top: 0;
+	border: none;
+	padding: 0;
+}
+
+/*查看所有宝贝宽度*/
+.tb-shop .cat-items .cat-all {
+	overflow-x: hidden;
+	color: #575757;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/249222881/T2ssByXnlaXXXXXXXX_!!249222881.gif)
+		left top no-repeat;
+	padding: 26px 10px 0 10px;
+}
+
+.tb-shop .cat-items .cat-all .cat-hd {
+	line-height: 30px;
+	height: 30px;
+	background-position: 0 8px;
+}
+
+.tb-shop .cat-items .cat-all p {
+	line-height: 30px;
+	height: 30px;
+}
+
+.tb-shop .cat-items .bd {
+	overflow-x: hidden;
+	background: none;
+	width: 600px;
+	background-color: #333;
+	margin-top: 0;
+	padding: 15px;
+}
+
+.tb-shop .cat-items .cat-item {
+	margin-right: 0;
+	width: 33%;
+	margin-left: 0;
+	margin-bottom: 5px;
+	margin-top: 0;
+	padding: 0;
+}
+
+.tb-shop .cat-items .cat-item .cat-bd {
+	line-height: 22px;
+	cursor: pointer;
+	color: #333;
+}
+
+.tb-shop .cat-items a.cat-hd {
+	width: 90%;
+	display: block;
+}
+
+.tb-shop .cat-items a.cat-hd:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.tb-shop .cat-items .cat-item a.cat-hd:hover {
+	background-color: #444;
+}
+
+.tb-shop .cat-items a {
+	color: #FFF;
+}
+
+.tb-shop .cat-items .cat-bd a:hover,.tb-shop .cat-items .cat-all p a:hover
+	{
+	color: #f00;
+	text-decoration: none;
+}
+
+.tb-shop .cat-items .cat-all a {
+	color: #FFF;
+}

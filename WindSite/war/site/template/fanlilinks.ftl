@@ -1,0 +1,1 @@
+<#if links??&&links?size!=0><ul class="links" style="width:845px;"><#list links as l><li><a href="${l.url}" target="_blank">${l.title}</a></li></#list></ul></#if>

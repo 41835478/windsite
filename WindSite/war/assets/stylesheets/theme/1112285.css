@@ -1,0 +1,125 @@
+body {
+	background-color: #FFFFFF;
+	background-position: center 0;
+	background-repeat: no-repeat;
+}
+
+#hd {
+	background-position: center 0;
+	background-repeat: no-repeat;
+}
+
+/*右侧推广区标头*/
+.tb-shop .box .hd {
+	height: 63px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/84740913/T2nEBzXctaXXXXXXXX_!!84740913.gif)
+		no-repeat;
+	border: none;
+}
+
+/*推广区标头文字大小*/
+.tb-shop .grid-s5m0 .col-main .box .hd h3,.tb-shop .grid-m0s5 .col-main .box .hd
+	{
+	padding-left: 0px;
+	padding-top: 20px;
+	color: #FF0066;
+	text-align: center;
+	font-size: 16px;
+}
+
+/*左侧推广区标头文字大小*/
+.tb-shop .shop-category .hd h3 span,.tb-shop .shop-rank .hd h3 span,.tb-shop .shop-search .hd h3 span,.tb-shop .shop-links .hd h3 span
+	{
+	padding-left: 50px;
+	line-height: 63px;
+	color: #FF0066;
+	font-size: 16px;
+}
+
+/*推广区背景*/
+.tb-shop .shop-category .bd,.tb-shop .shop-rank .bd,.tb-shop .shop-search .bd,.tb-shop .shop-links .bd,.tb-shop .shop-display .bd,.tb-shop .shop-bbs.bd,.tb-shop .shop-recommend .bd
+	{
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/84740913/T24ExzXdXaXXXXXXXX_!!84740913.gif)
+		repeat;
+}
+
+.tb-shop .item .pic {
+	max-height: none;
+	max-width: none;
+	border: 0px solid #c02e29;
+	padding-bottom: 5px;
+}
+
+.tb-shop .item .desc {
+	height: 13px;
+	overflow: hidden;
+	border: 0px solid #c02e29;
+}
+
+.tb-shop .item a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+
+.tb-shop .item a {
+	color: #A31C1B;
+	text-decoration: none;
+}
+
+.tb-shop .item .pic a:hover img {
+	position: relative;
+	padding-left: 3px;
+	padding-right: 3px;
+	max-height: none;
+	padding-top: 3px;
+	max-width: none;
+	z-index: 99;
+	padding-bottom: 3px;
+	margin-right: -3px;
+	background: #FD9FC5;
+	margin-left: -3px;
+	margin-top: -3px;
+	border: 0px solid #c02e29;
+}
+
+.tb-shop .pic a:hover img {
+	height: 94%;
+	width: 94%;
+	padding: 3%;
+}
+
+.tb-shop .shop-category .bd ul h4 a {
+	line-height: 90px;
+	height: 76px;
+	text-align: center;
+	color: #FF0066;
+	width: 160px;
+	font-size: 16px;
+	background:
+		url( 
+
+http://img01.taobaocdn.com/imgextra/i1/84740913/T2XEBzXc0aXXXXXXXX_!!84740913.gif)
+		no-repeat scroll left top #ffffff;
+	display: block;
+}
+
+.tb-shop .shop-category .bd ul ul a {
+	line-height: 40px;
+	text-indent: 20px;
+	height: 40px;
+	color: #990033;
+	width: 160px;
+	background:
+		url( 
+
+http://img04.taobaocdn.com/imgextra/i4/84740913/T2jUpzXjxaXXXXXXXX_!!84740913.gif)
+		no-repeat scroll left top transparent;
+	font-size: 14px;
+	display: block;
+}
+
+.tb-shop .shop-category .cats .cat {
+	border-top: none;
+}

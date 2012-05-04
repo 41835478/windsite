@@ -1,0 +1,4322 @@
+.widget-customer {
+	
+}
+
+div,ul,dl {
+	zoom: 1
+}
+
+#pre_custome_editor input.tb {
+	width: 240px;
+}
+
+#pre_custome_editor label {
+	color: #4C7E07;
+	font-weight: bold;
+}
+
+#custome_groups_items ul,#custome_shops_list ul,#custome_homeblog_list ul
+	{
+	list-style: none;
+}
+
+#custome_homeblog_list ul li {
+	padding: 5px;
+	border-bottom: 1px solid #DDD;
+}
+
+#custome_groups_items ul li,#custome_shops_list ul li {
+	float: left;
+	border: 1px solid #AAA;
+	float: left;
+	cursor: pointer;
+	margin-right: 5px;
+	margin-top: 5px;
+	overflow: hidden;
+	width: 200px;
+	height: 54px;
+}
+
+input.customechecked {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	cursor: pointer;
+}
+
+#custome_groups_items .item,#custome_shops_list .item {
+	float: right;
+	width: 140px;
+	position: relative;
+}
+
+#custome_groups_items .item .k,#custome_shops_list .item .k {
+	color: #274F80;
+	font-weight: bold;
+}
+
+#custome_groups_items .item .v,#custome_shops_list .item .v {
+	color: #F60;
+	font-weight: bold;
+}
+
+#custome_groups_items .item div,#custome_shops_list .item div {
+	height: 18px;
+	overflow: hidden;
+	width: 130px;
+}
+
+#custome_groups_items .pic,#custome_shops_list .pic {
+	width: 52px;
+	height: 52px;
+	float: left;
+}
+
+#custome_groups_items .pic img,#custome_shops_list .pic img {
+	max-width: 50px;
+	max-height: 50px;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.nav_pager {
+	background: #EEE;
+	border-top: 1px solid #999;
+	padding: 5px;
+}
+
+.nav_pager a {
+	padding: 0px 5px;
+	color: #005BD8;
+}
+
+.nav_pager a.highlight {
+	zoom: 1;
+	color: black;
+	font-weight: bold;
+}
+
+#custome-bar {
+	position: absolute;
+	height: 20px;
+	text-align: center;
+	background: #0080C0;
+	z-Index: 1000000;
+	/*border: 1px solid blue;opacity: 0.5;
+	filter: Alpha(Opacity =       0.5);*/
+}
+
+.custome-bar-border {
+	background: #0080C0;
+	position: absolute;
+	overflow: hidden; /*hack IE6 height*/
+}
+
+#custome-bar-modify {
+	color: white;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#custome-bar-delete,#custome-bar-add,#custome-bar-highlight {
+	color: white;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+#customeWidgetDialog .ui-button-text {
+	padding: 3px;
+}
+
+#custome_cats select {
+	width: 150px;
+}
+
+#custome_channels_list ul,#custome_activity_list ul,#custome_activity_cats ul
+	{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#custome_channels_list ul li,#custome_activity_list ul li {
+	float: left;
+	height: 125px;
+	width: 110px;
+	border: 1px solid #AAA;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+}
+
+#custome_channels_list ul li img,#custome_activity_list ul img {
+	margin: 2px auto;
+	padding: 4px;
+	height: 93px;
+	width: 96px;
+}
+
+#custome_channels_list ul li a,#custome_activity_list ul a {
+	text-align: center;
+}
+
+#custome_activity_list ul li a span {
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	width: 70px;
+}
+
+#custome_activity_list ul li a:hover {
+	zoom: 1;
+}
+
+#custome_channels_list ul li a:hover,#custome_activity_list ul li a:hover span
+	{
+	zoom: 1;
+	color: #F60;
+	font-weight: bold;
+}
+
+#custome_activity_cats ul li {
+	float: left;
+	margin-right: 5px;
+}
+
+#custome_activity_cats ul li label {
+	color: #005BD8;
+}
+
+#custome_activity_cats ul li label.highlight {
+	color: #F60;
+	font-weight: bold;
+}
+
+.custome-highlight .highlight a span {
+	color: #F06;
+}
+
+/**
+自定义组件
+*/
+.a-s,.l-a-s,.l-a-s-p,.d-a-i,.l-d-a-i,.l-d-a-i-p {
+	position: relative;
+}
+
+.l-a-s a,.a-s,.l-d-a-i a,.l-d-a-i-p a,.d-a-i a {
+	text-decoration: none;
+}
+
+.l-a-s a span,a.a-s span,.price {
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.l-a-s a:hover {
+	zoom: 1;
+}
+
+.l-a-s a:hover span {
+	color: #F60;
+}
+
+.l-d-a-i-p div,.l-d-a-i div,.d-a-i {
+	vertical-align: middle;
+}
+
+.l-d-a-i-p div a,.l-d-a-i div a,.d-a-i a {
+	border: 1px solid #CCC;
+	vertical-align: middle;
+	cursor: pointer;
+	display: table-cell;
+	_display: block;
+	text-align: center;
+}
+
+.l-d-a-i-p div a:hover,.l-d-a-i div a:hover,.d-a-i a:hover {
+	border: 1px solid #F60;
+}
+
+d-a-i .title,.l-d-a-i .title,.l-d-a-i-p .title {
+	text-align: center;
+}
+
+d-a-i .title span,.l-d-a-i .title span,.l-d-a-i-p .title span {
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.l-d-a-i-p a img,.l-d-a-i a img,.d-a-i a img {
+	vertical-align: middle;
+	border: 0px; #
+	margin-top: -2px; /*IE7*/
+}
+
+.level-desc,.seller-desc,.volume-desc {
+	color: #333;
+}
+
+.volume {
+	color: #FF2900;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+/**
+*自定义组件(橱窗-台湾)
+**/
+.custome-950-5 {
+	width: 950px;
+	height: 425px;
+	background: #FFF1F0;
+	padding-top: 4px;
+	background: url(/assets/min/images/custome/bg5.jpg) no-repeat;
+	padding-left: 10px;
+	margin: 0px;
+}
+
+.custome-950-5 .bar {
+	height: 35px;
+}
+
+.custome-950-5 .bar-logo span {
+	font-size: 18px;
+	color: #565553;
+	font-weight: bold;
+	width: 100px;
+}
+
+.custome-950-5 .bar-keywords li {
+	float: left;
+	margin-right: 30px;
+	width: 90px;
+}
+
+.custome-950-5 .bar-keywords .l-a-s span {
+	font-size: 13px;
+	color: #565553;
+	width: 90px;
+}
+
+.custome-950-5 .bar-keywords .l-a-s:hover {
+	zoom: 1;
+}
+
+.custome-950-5 .bar-keywords .l-a-s:hover span {
+	color: #F60;
+}
+
+.custome-950-5 .shopwindow-content {
+	
+}
+
+.custome-950-5 ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.custome-950-5 .left-middle {
+	width: 180px;
+	height: 250px;
+}
+
+.custome-950-5 .left-middle a {
+	width: 180px;
+	height: 250px; *
+	font-size: 219px;
+}
+
+.custome-950-5 .left-middle img {
+	height: 250px;
+	width: 180px;
+}
+
+.custome-950-5 .left-bottom li {
+	float: left;
+	display: inline;
+	width: 80px;
+	height: 100px;
+	margin-right: 10px;
+}
+
+.custome-950-5 .left-bottom .l-d-a-i .title span {
+	width: 55px;
+}
+
+.custome-950-5 .left-bottom .l-d-a-i img {
+	max-height: 60px;
+	max-width: 60px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                  60 ?                     
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                 
+		 
+		      
+		                    
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                    "60px" :     
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                  60 ?                     
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                 
+		 
+		      
+		                    
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                    "60px" :     
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-5 .middle-middle li {
+	float: left;
+	margin-right: 10px;
+	width: 100px;
+	height: 140px;
+}
+
+.custome-950-5 .middle-middle .l-d-a-i-p .title span {
+	width: 95px;
+}
+
+.custome-950-5 .middle-middle .l-d-a-i-p img {
+	max-height: 100px;
+	max-width: 100px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-5 .l-d-a-i-p span,.custome-950-5 .l-d-a-i-p span.price {
+	font-size: 12px;
+}
+
+.custome-950-5 a.title:hover {
+	zoom: 1;
+}
+
+.custome-950-5 a.title:hover span {
+	color: #f60;
+}
+
+.custome-950-5 .middle-bottom {
+	margin-left: 30px;
+	margin-top: 5px;
+}
+
+.custome-950-5 .middle-bottom li {
+	float: left;
+	margin-right: 10px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
+
+.custome-950-5 .middle-bottom img {
+	width: 50px;
+	height: 50px;
+	max-height: 50px;
+	max-width: 50px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                  50 ?                     
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                 
+		 
+		      
+		                    
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                    "50px" :     
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                  50 ?                     
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                 
+		 
+		      
+		                    
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                    "50px" :     
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-5 .right-middle li {
+	float: left;
+	margin-right: 10px;
+	width: 100px;
+	height: 160px;
+}
+
+.custome-950-5 .right-middle .l-d-a-i .title span {
+	width: 90px;
+}
+
+.custome-950-5 .right-middle .l-d-a-i img {
+	max-height: 100px;
+	max-width: 100px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*自定义组件（橱窗-女装）
+**/
+.custome-950-1 {
+	width: 950px;
+	height: 440px;
+	background: #FFF1F0;
+	padding: 0px;
+	margin: 0px;
+}
+
+.custome-950-1 .bar {
+	height: 35px;
+}
+
+.custome-950-1 .bar-logo span {
+	font-size: 18px;
+	color: #565553;
+	font-weight: bold;
+	width: 100px;
+}
+
+.custome-950-1 .d-a-i img {
+	width: 230px;
+	height: 350px;
+}
+
+.custome-950-1 .bar-tabs,.custome-950-1 .bar-keywords,.custome-950-1 .middle-middle,.custome-950-1 .middle-bottom,.custome-950-1  .right-middle
+	{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-950-1 .bar-tabs li {
+	float: left;
+	width: 130px;
+	text-align: center;
+	border: 1px solid #F8D5D5;
+	border-bottom: 0px;
+	padding-top: 10px;
+	margin-right: 5px;
+}
+
+.custome-950-1 .bar-tabs .l-a-s span {
+	color: #FF6201;
+	font-weight: bold;
+	font-size: 18px;
+	font-weight: bold;
+	width: 100px;
+}
+
+.custome-950-1 .bar-tabs .l-a-s:hover {
+	zoom: 1;
+}
+
+.custome-950-1 .bar-tabs .l-a-s:hover span {
+	color: #D55100;
+}
+
+.custome-950-1 .bar-keywords li {
+	float: left;
+	margin-right: 30px;
+	width: 90px;
+}
+
+.custome-950-1 .bar-keywords .l-a-s span {
+	font-size: 13px;
+	color: #565553;
+	width: 90px;
+}
+
+.custome-950-1 .bar-keywords .l-a-s:hover {
+	zoom: 1;
+}
+
+.custome-950-1 .bar-keywords .l-a-s:hover span {
+	color: #F60;
+}
+
+.custome-950-1 .shopwindow-content {
+	background: #FFFFFF;
+	height: 360px;
+	border: 1px solid #F8D5D5;
+	padding: 0px;
+	margin: 0px;
+	margin-left: 10px;
+	width: 920px;
+}
+
+.custome-950-1 .middle-middle li {
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.custome-950-1 .middle-middle .l-a-s span {
+	font-size: 14px;
+	color: #565553;
+	width: 330px;
+}
+
+.custome-950-1 .middle-middle .l-a-s:hover {
+	zoom: 1;
+}
+
+.custome-950-1 .middle-middle .l-a-s:hover span {
+	color: #F60;
+}
+
+.custome-950-1 .middle-bottom li {
+	float: left;
+	width: 100px;
+	height: 100px;
+	display: inline;
+	margin-right: 8px;
+}
+
+.custome-950-1 .middle-bottom li div {
+	width: 100px;
+	height: 100px;
+	vertical-align: middle; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-1 .middle-bottom li div a {
+	height: 100px; *
+	font-size: 88px;
+	width: 100px; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-1 .middle-bottom li div a img {
+	max-height: 100px;
+	max-width: 100px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-1 .middle-bottom .title span {
+	overflow: hidden;
+	white-space: nowrap;
+	width: 95px;
+	display: block;
+}
+
+.custome-950-1 .middle-top span {
+	color: #0072ff;
+	font-weight: bold;
+	font-size: 16px;
+	width: 300px;
+}
+
+.custome-950-1  .middle-top:hover span {
+	color: #F60;
+}
+
+.custome-950-1  .right-middle li {
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+.custome-950-1  .right-middle li div {
+	width: 100px;
+	height: 100px;
+	vertical-align: middle; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-1  .right-middle li div a {
+	height: 100px; *
+	font-size: 88px;
+	width: 100px; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-1  .right-middle li div a img {
+	max-height: 100px;
+	max-width: 100px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       100 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "100px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-1  .right-middle .title span {
+	color: #F60;
+	font-weight: bold;
+	text-align: left;
+	font-size: 12px;
+	display: inline;
+	overflow: visible;
+	white-space: normal;
+	display: inline;
+}
+
+.custome-950-1  .right-middle .title:hover span {
+	color: #D55100;
+}
+
+/**
+*自定义组件custome-235-1
+*/
+.custome-235-1 {
+	border: 1px solid #B5B5B5;
+	clear: both;
+	margin-top: -1px;
+	width: 230px;
+}
+
+.custome-235-1 h2 {
+	font-size: 100%;
+	background: #A97695;
+}
+
+.custome-235-1 .a-s {
+	display: block;
+	color: white;
+	background: #A97695;
+}
+
+.custome-235-1 .a-s span {
+	background: url(/assets/min/images/custome/1262744809679.gif) no-repeat;
+	background-position: -210px 4px;
+	font-size: 14px;
+	height: 24px;
+	line-height: 20px;
+	width: 200px;
+	padding-left: 20px;
+	padding-top: 3px;
+	text-align: left;
+	color: white;
+}
+
+.custome-235-1 ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-235-1 li {
+	border-bottom: 1px dashed #CCC;
+	height: 34px;
+	line-height: 34px;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 5px;
+}
+
+.custome-235-1 li span {
+	width: 190px;
+	font-size: 12px;
+	color: gray;
+	text-align: left;
+}
+
+/**
+*自定义组件custome-235-2
+*/
+.custome-235-2,.custome-235-3 {
+	border: 1px solid #B5B5B5;
+	clear: both;
+	margin-top: -1px;
+	width: 230px;
+}
+
+.custome-235-2 h2 {
+	background:
+		url(/assets/min/images/custome/T1rbXrXbXFXXXXXXXX-226-403.gif);
+	background-repeat: repeat-x;
+	height: 27px;
+	line-height: 27px;
+	position: relative;
+	text-align: left;
+}
+
+.custome-235-2 .a-s {
+	display: block;
+	color: white;
+	height: 27px;
+	line-height: 27px;
+	text-align: left;
+	background-color: #C363BD;
+	line-height: 27px;
+}
+
+.custome-235-2 .a-s span {
+	background:
+		url(/assets/min/images/custome/T1rbXrXbXFXXXXXXXX-226-403.gif)
+		no-repeat;
+	background-position: 2px -31px;
+	width: 200px;
+	font-size: 14px;
+	height: 27px;
+	line-height: 27px;
+	padding: 0px;
+	padding-left: 15px;
+	color: white;
+	padding-left: 15px;
+	line-height: 27px;
+}
+
+.custome-235-2 span.num {
+	background:
+		url(/assets/min/images/custome/T1rbXrXbXFXXXXXXXX-226-403.gif)
+		no-repeat;
+	background-position: -22px -122px;
+	color: white;
+	display: block;
+	float: left;
+	height: 23px;
+	line-height: 28px;
+	margin: 20px 8px 0px 5px;
+	text-align: center;
+	width: 26px;
+}
+
+.custome-235-2 ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-235-2 li {
+	border: solid #E4E4E4;
+	border-width: 1px 0px;
+	height: 76px;
+	margin: -1px 5px 5px;
+}
+
+.custome-235-2 .pair {
+	background: #FDDFDF;
+	border: none;
+}
+
+.custome-235-2 .title span {
+	width: 140px;
+	text-align: left;
+	color: #73359A;
+}
+
+.custome-235-2 li div {
+	width: 60px;
+	height: 60px;
+	vertical-align: middle; #
+	width: 62px; #
+	height: 63px;
+}
+
+.custome-235-2 li .price-desc,.custome-235-2 li .price {
+	color: #3AC1EE;
+}
+
+.custome-235-2 li div a {
+	height: 60px; *
+	font-size: 53px;
+	width: 60px; #
+	width: 62px; #
+	height: 63px;
+}
+
+.custome-235-2 li div a img {
+	max-height: 60px;
+	max-width: 60px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                   60 ?                      
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                     "60px" :      
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                   60 ?                      
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                                
+		                                                     "60px" :      
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*自定义组件custome-710-1
+*/
+.custome-710-1 {
+	border: 2px solid #FFC8FF;
+	border-top-width: 14px;
+	margin-top: 20px;
+	position: relative;
+	width: 700px;
+}
+
+.custome-710-1 h2 {
+	background:
+		url(/assets/min/images/custome/T17bJrXj0uXXXXXXXX-226-247.jpg)
+		no-repeat;
+	background-position: 0px -213px;
+	color: white;
+	font-size: 14px;
+	height: 34px;
+	left: 20px;
+	line-height: 34px;
+	position: absolute;
+	text-align: center;
+	top: -28px;
+	width: 124px;
+}
+
+.custome-710-1 h2 span {
+	color: white;
+	font-size: 14px;
+	width: 110px;
+}
+
+.custome-710-1 .more {
+	display: block;
+	position: absolute;
+	right: 3px;
+	top: -15px;
+}
+
+.custome-710-1 .d-a-i img {
+	width: 160px;
+	height: 160px;
+}
+
+.custome-710-1 ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-710-1 li {
+	background:
+		url(/assets/min/images/custome/T17bJrXj0uXXXXXXXX-226-247.jpg)
+		no-repeat;
+	background-position: 0px -295px;
+	display: inline;
+	float: left;
+	margin: 20px 0px 0px;
+	padding: 0px 6px;
+	width: 110px;
+}
+
+.custome-710-1 li.nobg {
+	background: none;
+}
+
+.custome-710-1 li div {
+	width: 110px;
+	height: 110px; #
+	width: 112px; #
+	height: 113px;
+}
+
+.custome-710-1 li .price-desc,.custome-710-1 li .price {
+	color: #820B8B;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+}
+
+.custome-710-1 .title span {
+	width: 100px;
+	text-align: center;
+	color: gray;
+}
+
+.custome-710-1 .title:hover span {
+	color: #992F89
+}
+
+.custome-710-1 li div a {
+	height: 110px; *
+	font-size: 96px;
+	width: 110px; #
+	width: 112px; #
+	height: 113px;
+}
+
+.custome-710-1 li div a img {
+	max-height: 110px;
+	max-width: 110px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       110 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "110px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                                                                   
+		                       110 ?                          
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                               
+		                                                         "110px" :   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*自定义组件custome-710-2
+*/
+.custome-710-2,.custome-710-2 h2 {
+	width: 705px;
+}
+
+.custome-710-2 h2 .a-s,.custome-710-2 h2 span {
+	width: 260px;
+}
+
+.custome-710-2 .d-a-i .title {
+	border: 0px;
+}
+
+.custome-710-2 .d-a-i img {
+	width: 160px;
+	height: 160px;
+}
+
+.custome-710-2 ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-710-2 li {
+	border-top: 1px solid white;
+	float: left;
+	height: 82px;
+	width: 165px;
+	margin-top: -1px;
+	min-height: 82px;
+	padding-right: 2px;
+	padding-bottom: 7px;
+	padding-top: 0px;
+}
+
+.custome-710-2 li div {
+	width: 80px;
+	height: 80px; #
+	width: 82px; #
+	height: 83px;
+}
+
+.custome-710-2 li .price-desc {
+	color: #619500
+}
+
+.custome-710-2 li .price {
+	color: #C00;;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+}
+
+.custome-710-2 li .title span {
+	width: 80px;
+	text-align: left;
+	height: 43px;
+	line-height: 14px;
+	font-size: 12px;
+	display: block;
+	white-space: normal;
+	color: gray;
+}
+
+.custome-710-2 .title:hover span {
+	color: #992F89
+}
+
+.custome-710-2 li div a {
+	height: 80px; *
+	font-size: 70px;
+	width: 80px; #
+	width: 82px; #
+	height: 83px;
+}
+
+.custome-710-2 li div a img {
+	max-height: 80px;
+	max-width: 80px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                    80 ?                       
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "80px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                    80 ?                       
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "80px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*自定义组件custome-185-1
+*/
+.custome-185-1 {
+	border: 4px solid #C25CBF;
+	width: 175px;
+}
+
+.custome-185-1 h2 {
+	background:
+		url(/assets/min/images/custome/T1rbXrXbXFXXXXXXXX-226-403.gif)
+		no-repeat;
+	background-repeat: repeat-x;
+	height: 27px;
+	background: #C25CBF;
+	line-height: 27px;
+	position: relative;
+	line-height: 27px;
+}
+
+.custome-185-1 h2 span {
+	background:
+		url(/assets/min/images/custome/T1rbXrXbXFXXXXXXXX-226-403.gif)
+		no-repeat;
+	background-position: 2px -31px;
+	color: white;
+	font-size: 14px;
+	padding-left: 15px;
+	width: 150px;
+}
+
+.custome-185-1 ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-185-1 li {
+	float: left;
+}
+
+.custome-185-1 .bottom li span {
+	width: 30px;
+}
+
+.custome-185-1 .bottom li {
+	border-left: 1px solid #818181;
+	line-height: 14px;
+	margin: 0px 0px 5px -1px;
+	padding: 0px 6px;
+}
+
+.custome-185-1 .middle .title span {
+	width: 70px;
+	color: black;
+}
+
+.custome-185-1 .middle .price,.custome-185-1 .middle .price-desc {
+	color: #C25CBF;
+}
+
+.custome-185-1 .middle li div a {
+	height: 80px; *
+	font-size: 70px;
+	width: 80px; #
+	width: 82px; #
+	height: 83px;
+}
+
+.custome-185-1 .l-a-s span {
+	color: gray;
+}
+
+.custome-185-1 .middle li div a img {
+	max-height: 80px;
+	max-width: 80px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                   80 ?                      
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		 
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "80px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                                                                    
+		                   80 ?                      
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		 
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "80px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*自定义组件custome-313-1,custome-950-6,custome-570-1,custome-472-1(常规图片类型),custome-950-7,custome-710-3,.custome-185-2(常规文字类型)
+*/
+.custome-table {
+	border: 1px solid #66B33A;
+}
+
+.custome-table .l-a-s a {
+	margin-left: -80px\9; /**IE Hack**/
+}
+
+.custome-header-h2 {
+	background: #EDEDEB;
+	color: white;
+	font-size: 14px;
+	height: 25px;
+	left: 20px;
+	line-height: 25px;
+	text-align: left;
+	line-height: 25px;
+}
+
+.custome-header-h2 span {
+	background: #C363BD;
+	color: white;
+	text-align: left;
+	font-weight: bold;
+	font-size: 14px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.custome-185-2,.custome-185-2 h2 {
+	width: 185px;
+}
+
+.custome-313-1,.custome-313-1 h2,.custome-313-2,.custome-313-2 h2 {
+	width: 310px;
+}
+
+.custome-950-6,.custome-950-6 h2,.custome-950-7,.custome-950-7 h2 {
+	width: 950px;
+}
+
+.custome-710-3,.custome-710-3 h2 {
+	width: 700px;
+}
+
+.custome-570-1,.custome-570-1 h2,.custome-570-2,.custome-570-2 h2 {
+	width: 570px;
+}
+
+.custome-472-1,.custome-472-1 h2 {
+	width: 470px;
+}
+
+.custome-313-1 .a-s,.custome-313-1 .a-s span {
+	width: 120px;
+}
+
+.custome-235-3 .a-s,.custome-235-3 .a-s span {
+	width: 100px;
+}
+
+.custome-313-2 .a-s,.custome-313-2 .a-s span {
+	width: 120px;
+}
+
+.custome-235-3 .l-a-s span {
+	width: 170px;
+	color: #333;
+}
+
+.custome-313-2 .l-a-s span {
+	width: 215px;
+	color: #333;
+}
+
+.custome-185-2 .a-s,.custome-185-2 .a-s span {
+	width: 80px;
+}
+
+.custome-950-6 .a-s,.custome-950-6 .a-s span,.custome-950-7 .a-s,.custome-950-7 .a-s span
+	{
+	width: 260px;
+}
+
+.custome-710-3 .a-s,.custome-710-3 .a-s span {
+	width: 220px;
+}
+
+.custome-570-1 .a-s,.custome-570-1 .a-s span,.custome-570-2 .a-s,.custome-570-2 .a-s span
+	{
+	width: 200px;
+}
+
+.custome-472-1 .a-s,.custome-472-1 .a-s span {
+	width: 160px;
+}
+
+.custome-235-3 ul,.custome-313-2 ul,.custome-313-1 ul,.custome-950-6 ul,.custome-950-7 ul,.custome-570-1 ul,.custome-570-2 ul,.custome-472-1 ul,.custome-710-3 ul,.custome-185-2 ul
+	{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-472-1 ul,.custome-185-2 ul {
+	padding-left: 8px;
+}
+
+.custome-950-6 ul,.custome-570-1 ul,.custome-570-2 ul,.custome-950-7 ul,.custome-710-3 ul
+	{
+	padding-left: 20px;
+}
+
+.custome-950-7 li,.custome-710-3 li,.custome-570-2 li {
+	float: left;
+	color: #999;
+	font-size: 12px;
+	line-height: 20px;
+	margin-right: 15px;
+}
+
+.custome-185-2 li {
+	color: #999;
+	font-size: 12px;
+	line-height: 20px;
+	margin-right: 15px;
+}
+
+.custome-185-2 li span {
+	width: 160px;
+	text-align: left;
+}
+
+.custome-950-7 li span,.custome-710-3 li span,.custome-185-2 li span,.custome-570-2 li span
+	{
+	color: gray;
+}
+
+.custome-950-7 .custome-table .l-a-s a,.custome-710-3 .custome-table .l-a-s a,.custome-185-2 .custome-table .l-a-s a,.custome-570-2 .custome-table .l-a-s a
+	{
+	margin-left: 0px\9;
+}
+
+.custome-235-3 li,.custome-313-2 li {
+	border-bottom: 1px dashed #CCC;
+	height: 34px;
+	line-height: 34px;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 5px;
+	margin-left: 20px\9;
+	_margin-left: 20px;
+	_padding-left: 45px;
+}
+
+.custome-235-3 li b {
+	width: 50px;
+	position: absolute;
+	color: #999;
+	right: 0px;
+	text-align: right;
+}
+
+.custome-235-3 li span {
+	width: 170px;
+	font-size: 12px;
+	color: gray;
+	text-align: left;
+}
+
+.custome-313-2 li b {
+	width: 80px;
+	position: absolute;
+	color: #999;
+	right: 0px;
+	text-align: right;
+}
+
+.custome-313-2 li span {
+	width: 200px;
+	font-size: 12px;
+	color: gray;
+	text-align: left;
+}
+
+.custome-313-1 li,.custome-950-6 li,.custome-570-1 li,.custome-472-1 li
+	{
+	border-top: 1px solid white;
+	float: left;
+	height: 60px;
+	width: 60px;
+	margin-right: 14px;
+	_margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.custome-313-1 li div,.custome-950-6 li div,.custome-570-1 li div,.custome-472-1 li div
+	{
+	width: 60px;
+	height: 60px; #
+	width: 62px; #
+	height: 63px;
+}
+
+.custome-313-1 li div a,.custome-950-6 li div a,.custome-570-1 li div a,.custome-472-1 li div a
+	{
+	height: 60px; *
+	font-size: 53px;
+	width: 60px; #
+	width: 62px; #
+	height: 63px;
+}
+
+.custome-313-1 li div a img,.custome-950-6 li div a img,.custome-570-1 li div a img,.custome-472-1 li div a img
+	{
+	max-height: 60px;
+	max-width: 60px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                    60 ?                       
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "60px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                    
+		                                                                    
+		                    60 ?                       
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                                
+		                                                                
+		                                                      "60px" :       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+/**
+*图形相册通用组件:custome-950-8
+*/
+.custome-header-img {
+	background: url(/assets/min/images/custome/hot.gif);
+	background-position: 0px -450px;
+	left: 0px;
+	position: absolute;
+	width: 65px;
+	height: 65px;
+	top: 0px;
+	z-index: 10;
+}
+
+.custome-header-nav {
+	background: url(/assets/min/images/custome/hotbg.png);
+	background-repeat: repeat-x;
+	background-position: 0px -294px;
+	color: #3B7583;
+	height: 36px;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+.custome-header-nav .a-s span {
+	width: 100px;
+	font-size: 14px;
+	height: 39px;
+	line-height: 39px;
+	font-weight: bold;
+	color: #7A18DE;
+	font-weight: bold;
+}
+
+.custome-header-nav ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.custome-header-nav li {
+	float: left;
+	margin-right: 15px;
+}
+
+.custome-header-nav li a span {
+	color: #A35AEF;
+	height: 39px;
+	line-height: 39px;
+	width: 150px;
+}
+
+.custome-box {
+	background-color: white;
+	border: 1px solid #E3CEFA;
+	margin: 0px 5px 5px;
+}
+
+.custome-list .title span {
+	width: 150px;
+	white-space: normal;
+	height: 48px;
+	color: #0063DC;
+	line-height: 16px;
+}
+
+.custome-list .title:hover span {
+	color: #F60;
+}
+
+.custome-list .price-desc {
+	color: #619500;
+}
+
+.custome-list .price {
+	font-size: 14px;
+	font-weight: bold;
+	color: #F60;
+}
+
+.custome-list {
+	list-style: none;
+	padding: 0px;
+	margin: 10px 0px 0px 20px;
+}
+
+.custome-list li {
+	float: left;
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+	text-align: center;
+	line-height: 16px;
+	margin-bottom: 10px;
+}
+
+.custome-list li div {
+	width: 160px;
+	height: 160px; #
+	width: 162px; #
+	height: 163px;
+	vertical-align: middle;
+}
+
+.custome-list li div a {
+	height: 160px; *
+	font-size: 140px;
+	width: 160px; #
+	width: 162px; #
+	height: 163px;
+}
+
+.custome-list li div a img {
+	max-height: 160px;
+	max-width: 160px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                   
+		                                                                   
+		                      160 ?                         
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                               
+		                                                               
+		                                                        "160px" :  
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                   
+		                                                                   
+		                      160 ?                         
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                               
+		                                                               
+		                                                        "160px" :  
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-8,.custome-950-9,.custome-950-10 {
+	width: 950px;
+	background-color: #EDDEFF;
+	border: 1px solid #DBC2F7;
+	height: 100%;
+	margin: 0px;
+	position: relative;
+}
+
+.custome-950-8 .custome-list li {
+	margin-right: 15px;
+}
+
+.custome-710-4,.custome-710-5 {
+	width: 700px;
+	background-color: #EDDEFF;
+	border: 1px solid #DBC2F7;
+	height: 100%;
+	margin: 0px;
+	position: relative;
+}
+
+.custome-710-4 .custome-header-nav li a span,.custome-710-5 .custome-header-nav li a span
+	{
+	width: 120px;
+}
+
+.custome-710-4 .custome-list li {
+	margin-right: 3px;
+}
+
+.custome-710-4 .custome-list,.custome-710-5 .custome-list {
+	margin: 10px 0px 0px 4px;
+}
+
+.custome-950-9 .num,.custome-710-5 .num {
+	background: #CBCCCC;
+	color: white;
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	FONT-SIZE: 45px;
+	PADDING-BOTTOM: 15px;
+	MARGIN: 0px;
+	WIDTH: 60px;
+	PADDING-TOP: 10px;
+	FONT-FAMILY: Engravers MT, arial black;
+	TEXT-ALIGN: center
+}
+
+.custome-950-9 .numhighlight,.custome-710-5 .numhighlight {
+	background: #ED1B23;
+	font-size: 45px;
+}
+
+.custome-950-9 .l-d-a-i-p div a,.custome-710-5 .l-d-a-i-p div a {
+	border: 0px;
+}
+
+.custome-950-9 .custome-list .price,.custome-950-9 .custome-list .price-desc,.custome-710-5 .custome-list .price,.custome-710-5 .custome-list .price-desc
+	{
+	height: 50px;
+	font-size: 14px;
+}
+
+.custome-950-9 .custome-list .title span,.custome-710-5 .custome-list .title span
+	{
+	width: 250px;
+	height: 60px;
+	line-height: 20px;
+	font-size: 14px;
+	text-align: left;
+}
+
+.custome-950-9 .custome-list li,.custome-710-5 .custome-list li {
+	float: none;
+	padding: 5px;
+	display: block;
+	border-bottom: 1px solid #DDD;
+}
+
+.custome-950-9 .custome-list li div,.custome-710-5 .custome-list li div
+	{
+	width: 100px;
+	height: 100px; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-9 .custome-list li div a,.custome-710-5 .custome-list li div a
+	{
+	height: 100px; *
+	font-size: 88px;
+	width: 100px; #
+	width: 102px; #
+	height: 103px;
+}
+
+.custome-950-9 .custome-list li div a img,.custome-710-5 .custome-list li div a img
+	{
+	max-height: 100px;
+	max-width: 100px;
+	width: expression(this.width >         
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                 
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                   
+		                                                                   
+		                      100 ?                         
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                               
+		                                                               
+		                                                        "100px" :  
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                                                            
+		                this.width);
+	height: expression(this.height >                 
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                                   
+		                                                                   
+		                                                                    
+		                                                                   
+		                                                                   
+		                      100 ?                         
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                 
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                  
+		
+		 
+		   
+		        
+		                
+		                                 
+		 
+		      
+		                    
+		                                                               
+		                                                               
+		                                                                
+		                                                               
+		                                                               
+		                                                        "100px" :  
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		               
+		                                
+		
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		                
+		                                
+		 
+		   
+		       
+		               
+		                               
+		 
+		         
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                                                           
+		                      this.height);
+}
+
+.custome-950-10 {
+	width: 945px;
+}
+
+.custome-950-10 .custome-list {
+	margin: 0px;
+	width: 945px;
+}
+
+.custome-950-10 .custome-box {
+	border: 0px;
+	margin: 0px;
+	width: 945px;
+}
+
+.custome-950-10 .custome-box li {
+	border-bottom: 1px dotted #C9C9C9;
+	border-right: 1px solid #C9C9C9;
+	height: 244px;
+	overflow: hidden;
+	padding: 15px 0px 10px;
+	margin: 0px;
+	width: 188px;
+	text-align: center;
+}
+
+.custome-950-10 .custome-box li:hover {
+	background-color: #DAEAFF;
+	zoom: 1;
+}
+
+.custome-950-10 .custome-box table {
+	margin-left: 13px; #
+	margin-left: -4px; /*IE7*/ #
+	margin-top: -4px; /*IE7*/
+	_margin-left: 3px; /*IE6*/
+}
+
+/**搜索组件**/
+.search-title h2,.search-title .search-btn,.answer {
+	background: url(/assets/min/images/custome/1282634905228.png) no-repeat;
+}
+
+.prop-list dd .open,.prop-list dd .close,div.show-more a span,.selected-attr dd a .close-icon
+	{
+	background: url(/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px
+		-9999px;
+}
+
+.selected-attr dl {
+	border: 1px solid white;
+	padding: 2px 9px 2px 76px;
+}
+
+.selected-attr dt,.selected-attr dd,.selected-attr h4 {
+	display: inline;
+	float: left;
+	height: 21px;
+	line-height: 21px;
+}
+
+.selected-attr dt {
+	margin-left: -67px;
+}
+
+.selected-attr dd a {
+	cursor: pointer;
+	background: white;
+	border: 1px solid #FF8040;
+	border-bottom-left-radius: 2px 2px;
+	border-bottom-right-radius: 2px 2px;
+	border-top-left-radius: 2px 2px;
+	border-top-right-radius: 2px 2px;
+	color: #FF8040;
+	display: inline;
+	float: left;
+	height: 15px;
+	line-height: 15px;
+	margin: 2px 5px 2px 0px;
+	padding: 0px 15px 0px 3px;
+	position: relative;
+	white-space: nowrap;
+	background: white;
+}
+
+.selected-attr dd h5 {
+	color: gray;
+	display: inline;
+	font-weight: normal;
+}
+
+.selected-attr {
+	background: #FFF7E6;
+	border: none;
+	border-bottom: 1px solid #FFC44C;
+	position: relative;
+	line-height: 18px;
+	padding: 5px 0px;
+}
+
+.answer {
+	background-position: -129px -18px;
+	display: block;
+	height: 23px;
+	width: 82px;
+}
+
+.custome-710-7 .selected-attr {
+	width: 700px;
+}
+
+.selected-attr dd a:hover {
+	border: 1px solid #F50;
+	color: #F50;
+	text-decoration: none;
+}
+
+.selected-attr dd a .close-icon {
+	background-position: -6px -242px;
+	height: 13px;
+	position: absolute;
+	right: 0px;
+	top: 1px;
+	width: 14px;
+}
+
+.selected-attr dd a:hover .close-icon {
+	background-position: -6px -223px;
+}
+
+.show-more {
+	background: #FFF7E5;
+	border: 1px solid #FFE6B3;
+	border-top: 1px solid #FFE6B3;
+	height: 5px;
+	margin: -1px 0px 18px;
+	position: relative;
+	width: 700px;
+}
+
+div.show-more a span {
+	display: inline-block;
+	height: 17px;
+	margin: 0px auto;
+	overflow: hidden;
+	padding-left: 10px;
+	background-position: -7px -205px;
+}
+
+.show-more a {
+	color: #666;
+	display: block;
+	height: 19px;
+	margin: 4px auto 0px;
+	outline: none;
+	overflow: hidden;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	width: 109px;
+	background: url(/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px
+		-9999px;
+	background-position: -10px -174px;
+}
+
+.show-more a.open span {
+	background-position: -7px -189px;
+}
+
+.search-title .search-box {
+	border: 1px solid #C6C6C8;
+	height: 14px;
+	margin-right: 8px;
+	padding: 3px;
+	vertical-align: middle;
+}
+
+.custome-710-7 .search-box {
+	width: 300px;
+}
+
+.search-title .search-btn {
+	background-position: -48px -18px;
+	border: none;
+	height: 23px;
+	vertical-align: middle;
+	width: 81px;
+	cursor: pointer;
+}
+
+.search-title {
+	background: #FFFDD5;
+	height: 27px;
+	padding-top: 4px;
+}
+
+.search-title h2 {
+	background-position: -246px -18px;
+	color: #FF5512;
+	float: left;
+	font-weight: normal;
+	height: 19px;
+	line-height: 19px;
+	margin: 2px 0px 0px 10px;
+	padding-left: 68px;
+}
+
+.custome-710-7 {
+	width: 700px;
+	border: 1px solid #FFC44C;
+	overflow: hidden;
+	height: 100%;
+	margin: 0px;
+	position: relative;
+}
+
+.custome-640-7 {
+	width: 630px;
+	border: 1px solid #FFC44C;
+	overflow: hidden;
+	height: 100%;
+	margin: 0px;
+	position: relative;
+}
+
+.prop-list {
+	border: none;
+	border-top: none;
+	line-height: 1em;
+	overflow: hidden;
+	position: relative;
+}
+
+.custome-710-7 .prop-list {
+	width: 700px;
+}
+
+.custome-640-7 .prop-list {
+	width: 630px;
+}
+
+.prop-item {
+	padding: 0px 9px;
+	clear: both;
+	position: relative;
+	zoom: 1;
+}
+
+.prop-item dl {
+	border-bottom: 1px solid #E5E5E5;
+	margin-bottom: -1px;
+}
+
+.prop-item dl {
+	padding-left: 84px;
+}
+
+.prop-item dt,.prop-item dd,.prop-item dd ul,.prop-item dd li {
+	display: inline;
+	float: left;
+}
+
+.prop-item dt {
+	line-height: 32px;
+	overflow: hidden;
+	text-align: right;
+	white-space: nowrap;
+	margin-left: -84px;
+	width: 84px;
+}
+
+.prop-list dd {
+	padding-right: 45px;
+}
+
+.prop-list dd .close {
+	background-position: -3px -156px;
+}
+
+.prop-list dd .open {
+	background-position: -3px -174px;
+}
+
+.custome-710-7 .prop-list dd {
+	width: 530px;
+}
+
+.custome-640-7 .prop-list dd {
+	width: 460px;
+}
+
+dl,dt,dd {
+	list-style: none;
+}
+
+.prop-list dd ul {
+	margin-left: -6px;
+	_margin-left: 0px;
+	padding: 2px 0px;
+	list-style: none;
+}
+
+.prop-list dd li a {
+	display: block;
+	padding: 3px;
+	margin-right: 10px;
+	white-space: nowrap;
+	line-height: 20px;
+	color: #0063DC;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.prop-list dd li a:hover {
+	color: #F60;
+	text-decoration: underline;
+}
+
+.moreValue {
+	clear: both;
+}
+
+.prop-list dd li a.selected {
+	border: 1px solid #FF3B6D;
+	color: #FF3B6D;
+	padding: 2px;
+}
+
+.prop-list dd .more {
+	color: gray;
+	float: right;
+	height: 14px;
+	line-height: 14px;
+	margin-top: 8px;
+	margin-right: -43px;
+	outline: none;
+	padding-left: 18px;
+	position: relative;
+}
+
+.prop-list dl {
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: -1px;
+	padding-top: 1px\9; *
+	position: relative; *
+	bottom: -1px;
+}
+
+.prop-list dt,.prop-list dd,.prop-list dd ul,.prop-list dd li {
+	float: left;
+	display: inline;
+}
+
+.prop-list dd ul {
+	margin-left: 0px;
+	_margin-left: 0px;
+	padding: 2px 0;
+}
+
+.prop-list dd li.moreValue {
+	float: none; *
+	clear: left;
+}
+
+.prop-list dd li.moreValue ul {
+	padding: 0;
+	margin: 0;
+	float: none;
+}
+
+.prop-list dd li.moreValue li:first-child {
+	clear: left;
+}

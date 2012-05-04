@@ -1,0 +1,37 @@
+<table align="center">
+	<tr>
+		<td align="center" width="100%">
+		<ul style="list-style: none;" align="center">
+			<li style="float: left; margin-right: 10px;"><a
+				href="http://www.xintaonet.com">新淘网</a></li>
+			<li style="float: left; margin-right: 10px;"><a
+				href="http://www.xintaonet.com">广告服务</a></li>
+			<li style="float: left; margin-right: 10px;"><a
+				href="http://www.xintaonet.com/router/site/view/about">关于我们</a></li>
+			<li style="float: left; margin-right: 10px;"><a
+				href="http://www.xintaonet.com/router/site/view/support">联系我们</a></li>
+			<li>Powered by <a href="http://www.xintaonet.com"
+				target="_blank">www.xintaonet.com</a></li>
+		</ul>
+
+		</td>
+	</tr>
+	<script>
+	$(function() {
+		var href = window.location.href;
+		var check = href.match(/check=mm_\d{0,24}_\d{0,24}_\d{0,24}/i);
+		if (check != null) {
+			var reg = /mm_\d{0,24}_\d{0,24}_\d{0,24}/gi;
+			if (check[0] && reg.test(check[0])) {//如果是检测PID
+				checkPID(check[0].replace('check=', ''));
+			}
+		}
+	});
+</script>
+	<!-- <tr>
+		<td align="center">合作伙伴:<a target="_blank"
+			href="http://www.alimama.com/"> <img
+			src="/assets/min/images/alimama.gif" width="82" height="20"
+			alt="淘宝联盟" /></a></td>
+	</tr> -->
+</table>

@@ -1,0 +1,126 @@
+.tb-shop .box {
+	margin-bottom: 2px;
+}
+
+.tb-shop a {
+	color: #705c5b;
+}
+
+.tb-shop .col-sub .hd {
+	padding-left: 35px;
+	padding-top: 3px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/539517596/T2zNRxXhNbXXXXXXXX_!!539517596.gif)
+		;
+	border: 0;
+	padding-bottom: 3px;
+}
+
+.tb-shop .col-main .hd {
+	padding-left: 35px;
+	padding-top: 3px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/539517596/T20OFxXjpXXXXXXXXX_!!539517596.gif)
+		;
+	border: 0;
+	padding-bottom: 3px;
+}
+
+.tb-shop .box .hd h3 {
+	color: #705c5b;
+	font-size: 14px;
+}
+
+.tb-shop .col-sub .bd {
+	border-color: #b3b3b3 !important;
+}
+
+.tb-shop .col-main .bd {
+	border-color: #b3b3b3 !important;
+	border: 1px;
+}
+
+.tb-shop .shop-banner .bd {
+	border: 0;
+}
+
+.tb-shop .cats h4 {
+	background:
+		url(http://img02.taobaocdn.com/tps/i2/T1pfFNXoxAXXXXXXXX-29-69.png)
+		no-repeat -20px 7px;
+}
+
+.tb-shop .cats h4.collapse {
+	background-position: -10px -22px !important;
+}
+
+.tb-shop .cats .expand h4 {
+	background-position: 0 -52px;
+}
+
+.tb-shop .cats .cat h4 a {
+	padding-left: 25px;
+	line-height: 40px;
+	color: #705c5b;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/539517596/T2Xj4xXgxXXXXXXXXX_!!539517596.gif)
+		no-repeat;
+	width: 160px;
+	display: block;
+}
+
+.tb-shop .cats .cat h4 a:hover {
+	line-height: 40px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/539517596/T2Ej4xXgVXXXXXXXXX_!!539517596.gif)
+		no-repeat;
+	width: 160px;
+	text-decoration: none;
+	display: block;
+}
+
+.tb-shop .cats .cat .cat-bd li a {
+	padding-left: 25px;
+	line-height: 25px;
+	color: #000;
+	background: #dbf1ff;
+	overflow: hidden;
+	width: 145px;
+	display: block;
+}
+
+.tb-shop .cats .cat .cat-bd li a:hover {
+	padding-left: 26px;
+	line-height: 25px;
+	background: #f7da39;
+	text-decoration: none;
+	display: block;
+}
+
+.tb-shop .item .pic {
+	border: 0;
+}
+
+.tb-shop .item .pic a {
+	display: block;
+	border: 2px solid #FFF;
+}
+
+.tb-shop .item .pic a:hover {
+	border: 2px solid #a0a0a0;
+}
+
+.tb-shop .grid .pic {
+	height: 164px;
+	width: 164px;
+}
+
+.tb-shop .big .pic {
+	height: 224px;
+	width: 224px;
+}
+
+.tb-shop .small .pic {
+	height: 124px;
+	width: 124px;
+}

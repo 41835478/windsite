@@ -1,0 +1,140 @@
+body {
+	background-color: #FFFFFF;
+	background-repeat: repeat-y;
+	background-position: center 0;
+}
+
+#hd {
+	background-repeat: repeat;
+}
+
+.tb-shop {
+	font-family: Verdana, Arial;
+}
+
+.tb-shop .shop-banner .bd {
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/99411638/T2ToxyXbhbXXXXXXXX_!!99411638.gif)
+		0 0 no-repeat;
+}
+
+.tb-shop .shop-header .shop-title h2 {
+	margin-left: 40px;
+}
+
+.tb-shop .shop-header .shop-title h2 a {
+	color: #fff;
+	font-size: 18px;
+	margin-left: 0px;
+}
+
+.tb-shop .shop-header .shop-title p {
+	line-height: 40px;
+	color: #fff;
+	font-size: 12px;
+	margin-left: 40px;
+}
+
+.tb-shop a {
+	color: #494949;
+}
+
+.tb-shop a:hover {
+	color: #0070a9;
+}
+
+.tb-shop .box {
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+.tb-shop .box .hd {
+	border-bottom-width: 0 !important;
+	height: 26px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/99411638/T28plzXfFXXXXXXXXX_!!99411638.png)
+		0 0 no-repeat;
+	background-color: #393430 !important;
+	border-color: #000 !important;
+	margin-bottom: 0;
+	border-width: 1px;
+	background-position: 0 0;
+}
+
+.tb-shop .box .bd {
+	background-color: #f0eeff !important;
+	border-color: #000 !important;
+	border-width: 1px;
+}
+
+.tb-shop .shop-category .cat h4 {
+	height: 41px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/99411638/T29plzXfBXXXXXXXXX_!!99411638.png)
+		0 -102px no-repeat;
+	width: 175px;
+	font-weight: 700;
+}
+
+.tb-shop .shop-category .cat h4 a {
+	line-height: 25px;
+	color: #FFF;
+	margin-left: 7px;
+}
+
+.tb-shop .cats h4.collapse {
+	background-position: 0 -2px;
+}
+
+.tb-shop .cats .expand h4 {
+	background-position: 0 -51px;
+}
+
+.tb-shop .cat-bd li {
+	height: 28px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/99411638/T29plzXfBXXXXXXXXX_!!99411638.png)
+		no-repeat -234px -282px;
+	width: 166px;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.tb-shop .cat-bd a {
+	line-height: 10px;
+	text-align: center;
+	margin-left: 15px;
+}
+
+.tb-shop .cat-bd a:hover {
+	margin-left: 10px;
+}
+
+.tb-shop .shop-banner .bd,.tb-shop .shop-custom .bd {
+	border-width: 0px;
+}
+
+.tb-shop .box .hd h3 span {
+	color: #FFF;
+	margin-left: 60px;
+}
+
+.tb-shop .shop-bbs .handle a {
+	color: #FFF;
+}
+
+.tb-shop .shop-bbs .handle {
+	margin-right: 80px;
+}
+
+.tb-shop .cats h4.collapse:hover {
+	background-position: 0 -154px;
+}
+
+.tb-shop .cats .expand h4:hover {
+	background-position: 0 -203px;
+}
+
+.tb-shop .shop-category .cat h4:hover {
+	background-position: 0 -203px;
+}

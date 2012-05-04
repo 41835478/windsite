@@ -1,0 +1,159 @@
+.shop-market-cat {
+	border: solid 1px #fff;
+	border-bottom: dotted 1px #e6e6e6;
+}
+
+.shop-market-cat:hover,.col-main .box .shop-market-cat:hover .bd,.select-cat
+	{
+	border: dotted 1px #cdf;
+	background: #eef4ff;
+}
+
+.shop-market-cat .bd h4 {
+}
+
+.shop-market-cat .bd h4 a {
+	background:
+		url('http://img02.taobaocdn.com/tps/i2/T1JuJ4XiBkXXXXXXXX-80-1060.png')
+		no-repeat scroll 0 0 transparent;
+	padding-left: 22px;
+	color: #d84600;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.shop-market-cat .bd .J_TBLikesTrigger {
+	letter-spacing: -0.31em; *
+	letter-spacing: normal;
+	word-spacing: -0.43em;
+}
+
+.shop-market-cat .bd .J_TBLikesTrigger .g-u {
+	display: inline-block;
+	zoom: 1; *
+	display: inline;
+	letter-spacing: normal;
+	word-spacing: normal;
+	vertical-align: top;
+}
+
+.shop-market-cat .bd h4 a.xuni {
+	background-position: -8px -70px;
+}
+
+.shop-market-cat .bd h4 a.shuma {
+	background-position: -8px -106px;
+}
+
+.shop-market-cat .bd h4 a.nvzhuang {
+	background-position: -8px -144px;
+}
+
+.shop-market-cat .bd h4 a.nanzhuang {
+	background-position: -8px -181px;
+}
+
+.shop-market-cat .bd h4 a.nvxie {
+	background-position: -8px -222px;
+}
+
+.shop-market-cat .bd h4 a.nanxie {
+	background-position: -8px -260px;
+}
+
+.shop-market-cat .bd h4 a.yundongxiefu {
+	background-position: -8px -300px;
+}
+
+.shop-market-cat .bd h4 a.neiyi {
+	background-position: -8px -338px;
+}
+
+.shop-market-cat .bd h4 a.xiangbao {
+	background-position: -8px -376px;
+}
+
+.shop-market-cat .bd h4 a.fushipeijian {
+	background-position: -8px -412px;
+}
+
+.shop-market-cat .bd h4 a.shipin {
+	background-position: -8px -449px;
+}
+
+.shop-market-cat .bd h4 a.zhubao {
+	background-position: -8px -482px;
+}
+
+.shop-market-cat .bd h4 a.shoubiao {
+	background-position: -8px -520px;
+}
+
+.shop-market-cat .bd h4 a.meirong {
+	background-position: -8px -560px;
+}
+
+.shop-market-cat .bd h4 a.muying {
+	background-position: -8px -602px;
+}
+
+.shop-market-cat .bd h4 a.jiankang {
+	background-position: -8px -636px;
+}
+
+.shop-market-cat .bd h4 a.jiaju {
+	background-position: -8px -673px;
+}
+
+.shop-market-cat .bd h4 a.jiadian {
+	background-position: -8px -708px;
+}
+
+.shop-market-cat .bd h4 a.riyong {
+	background-position: -8px -742px;
+}
+
+.shop-market-cat .bd h4 a.food {
+	background-position: -8px -776px;
+}
+
+.shop-market-cat .bd h4 a.yundonghuwai {
+	background-position: -8px -812px;
+}
+
+.shop-market-cat .bd h4 a.qiche {
+	background-position: -8px -842px;
+}
+
+.shop-market-cat .bd h4 a.wanju {
+	background-position: -8px -872px;
+}
+
+.shop-market-cat .bd h4 a.tuijian {
+	background-position: -8px -906px;
+}
+
+.shop-market-cat .bd .section {
+	width: 330px;
+	max-width: 330px;
+	overflow: hidden;
+	margin: 6px 0 10px 24px;
+}
+
+.shop-market-cat .bd .section .sub a {
+	color: #0092d2;
+	font-weight: bold;
+}
+
+.shop-market-cat .bd .section ul li {
+	float: left;
+	margin-right: 14px;
+	word-break: keep-all;
+	_height: 24px;
+	_overflow: hidden;
+	_zoom: 1;
+}
+
+.shop-market-cat .bd .section ul li a {
+	line-height: 24px;
+}

@@ -1,0 +1,100 @@
+.scrollable { /* required settings */
+	position: relative;
+	overflow: hidden;
+	/* custom decorations */
+	border: 1px solid #ccc;
+	background: url(images/ui-scrollable-h300.png) repeat-x;
+}
+
+.scrollable .items { /* this cannot be too large */
+	width: 20000em;
+	position: absolute;
+	clear: both;
+}
+
+.scrollable img {
+	float: left;
+	margin: 20px 5px 20px 20px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.scrollable .active {
+	border: 2px solid #000;
+	z-index: 9999;
+	position: relative;
+}
+
+/* this makes it possible to add next button beside scrollable */
+.scrollable {
+	float: left;
+}
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse {
+	background: url(images/ui-scrollable-hori_large.png) no-repeat;
+	display: block;
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin: 40px 10px;
+	cursor: pointer;
+	font-size: 1px;
+}
+
+/* left */
+a.aLeft				{ margin-left: 0px; } 
+a.aLeft:hover  		{ background-position:-30px 0; }
+a.aLeft:active  	{ background-position:-30px 0; }
+/* right */
+a.right {
+	background-position: 0px -30px;
+	clear: right;
+	margin-right: 0px;
+}
+
+a.right:hover {
+	background-position: -30px -30px;
+}
+
+a.right:active {
+	background-position: -60px -30px;
+}
+
+
+/* up and down */
+a.up,a.down {
+	background: url(images/ui-scrollable-vert_large.png) no-repeat;
+	float: none;
+	margin: 10px 50px;
+}
+
+/* up */
+a.up:hover {
+	background-position: -30px 0;
+}
+
+a.up:active {
+	background-position: -60px 0;
+}
+
+/* down */
+a.down {
+	background-position: 0 -30px;
+}
+
+a.down:hover {
+	background-position: -30px -30px;
+}
+
+a.down:active {
+	background-position: -60px -30px;
+}
+
+/* disabled navigational button */
+a.disabled {
+	visibility: hidden !important;
+}

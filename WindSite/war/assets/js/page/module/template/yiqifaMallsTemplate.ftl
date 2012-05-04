@@ -1,0 +1,1 @@
+var MALLS=<#if b2cMallsJson??&&''!=b2cMallsJson>${b2cMallsJson}<#else>[]</#if>;

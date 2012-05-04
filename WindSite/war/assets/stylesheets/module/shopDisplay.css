@@ -1,0 +1,19 @@
+.shop-display .item {
+	position: relative;
+}
+
+.col-sub .box .shop-display .bd,.col-extra .box .shop-display .bd {
+	padding: 0;
+}
+
+.col-sub .shop-display .big .shop-list,.col-extra .shop-display .big .shop-list
+	{ *
+	width: 185px; *
+	overflow: hidden;
+}
+
+.col-sub .shop-display .big .shop-list,.col-extra .shop-display .big .shop-list
+	{
+	overflow: hidden;
+	_width: 185px;
+}

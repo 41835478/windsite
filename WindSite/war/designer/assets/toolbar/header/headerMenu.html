@@ -1,0 +1,152 @@
+<script type="text/javascript">
+	var nav = $('.ui-designer-header-tabs ul');//当前菜单
+	var unSelectedMenu = [];
+	var selectedMenu = [];
+	var unSelectedPages=[];
+	var selectedPages=[];
+	//计算未选中的菜单
+	for ( var channel in channels) {
+		if ($('li[channel=' + channel + ']', nav).length == 0) {
+			unSelectedMenu[unSelectedMenu.length] = channels[channel];
+		}
+	}
+	var pagesTemp = $('body').data('pages');
+	if(pagesTemp&&pagesTemp!=null){
+		for(var p in pagesTemp){
+			if($('li[page='+p+']',nav).length==0&&1==pagesTemp[p].status){
+				unSelectedPages[unSelectedPages.length]=pagesTemp[p];
+			}
+		}
+	}
+	//计算已选中的菜单
+	$('li',nav).each(function(){
+			var channel=$(this).attr('channel');
+			var page = $(this).attr('page');
+			if(channel&&channel.length>0){
+				if(channels[channel]){
+					selectedMenu[selectedMenu.length] = channels[channel];
+				}
+			}else if(page&&page.length>0){
+				if(pagesTemp[page]){
+					selectedPages[selectedPages.length]=pagesTemp[page];
+				}
+			}
+		});
+	$('#headerMenu').empty();
+	$('#headerMenuSelected').empty();
+	if (selectedMenu.length > 0) {
+		for ( var i=0; i< selectedMenu.length; i++) {
+			$('#headerMenuSelected').append('<li channel="'+selectedMenu[i].value+'" href="/designer/assets/images/channel/'+selectedMenu[i].pic+'">'+$('li[channel="'+selectedMenu[i].value+'"]',nav).text()+'</li>');
+		}
+	}
+	if(selectedPages.length>0){
+		for( var i=0; i< selectedPages.length; i++){
+			$('#headerMenuSelected').append('<li page="'+selectedPages[i].id+'" href="/pages/'+selectedPages[i].created+'.html">'+$('li[page="'+selectedPages[i].id+'"]',nav).text()+'</li>');
+		}
+	}
+	if (unSelectedMenu.length > 0) {
+		for ( var i=0;i<unSelectedMenu.length;i++) {
+			$('#headerMenu').append('<li channel="'+unSelectedMenu[i].value+'" href="/designer/assets/images/channel/'+unSelectedMenu[i].pic+'">'+unSelectedMenu[i].name+'</li>');
+		}
+	}
+	if (unSelectedPages.length > 0) {
+		for ( var i=0;i<unSelectedPages.length;i++) {
+			$('#headerMenu').append('<li page="'+unSelectedPages[i].id+'" href="/pages/'+unSelectedPages[i].created+'.html">'+unSelectedPages[i].name+'</li>');
+		}
+	}
+	$("#headerMenu, #headerMenuSelected").sortable({
+		connectWith: '.headerMenu',
+		revert : true,
+		start : function() {
+			$('body').bind("selectstart",
+					function() {
+						return false
+					});
+		},
+		stop : function() {
+			$('body').unbind("selectstart");
+		},
+		update:function(event, ui){
+			/**if($(this).attr('id')=='headerMenu'){
+				return;
+			}
+			*/
+		}
+	}).disableSelection();
+	$('#confirmHeaderMenu').button().click(function(){
+		var lis = $('#headerMenuSelected li');
+		nav.empty();
+		var width=0;
+		lis.each(function(){
+				var channel=$(this).attr('channel');
+				var page = $(this).attr('page');
+				var li =null;
+				if(channel&&channel.length>0){
+					li	= $("<li channel='"+channel+"'><a target='_blank' href='/zone/channel/channel.html?channel="+channel+"&pid="+PID+"'><h2>"+$(this).text()+"</h2></a></li>");
+				}else if(page&&page.length>0){
+					li	= $("<li page='"+page+"'><a target='_blank' href='http://shop"+USERID+".xintaonet.com/pages/"+pagesTemp[page].created+".html'><h2>"+$(this).text()+"</h2></a></li>");
+				}
+				if(li!=null){
+					nav.append(li);
+				}
+			});
+		$('#ui-designer-header-tools-dialog').dialog('close');
+		});
+	$('#modifyHeaderMenuText').button().click(function(){
+		$('#modifyHeaderMenuTextDialog').dialog('open');
+		});
+	$('#modifyHeaderMenuTextDialog').dialog({
+		bgiframe : true,
+		autoOpen : false,
+		height : 500,
+		width : 300,
+		zIndex : 100000,
+		modal : true,
+		open:function(){
+		var self=$(this);
+		$(this).empty();
+		var lis = $('#headerMenuSelected li');
+		lis.each(function(){
+				var channel=$(this).attr('channel');
+				var page = $(this).attr('page');
+				var li =null;
+				if(channel&&channel.length>0){
+					self.append('<input type="text" class="modify-menu-text" channel="'+channel+'" value="'+$(this).text()+'"><br/><br/>');
+				}else if(page&&page.length>0){
+					self.append('<input type="text" class="modify-menu-text" page="'+page+'" value="'+$(this).text()+'"><br/><br/>');
+				}
+			});
+		},
+		buttons:{'取消':function(){$(this).dialog('close');},'确定':function(){
+				$('.modify-menu-text',$(this)).each(function(){
+					var channel=$(this).attr('channel');
+					var page = $(this).attr('page');
+					if(channel&&channel.length>0){
+						$('#headerMenuSelected li[channel="'+channel+'"]').text($(this).val());
+					}else if(page&&page.length>0){
+						$('#headerMenuSelected li[page="'+page+'"]').text($(this).val());
+					}
+					});
+				$(this).dialog('close');
+			}}
+		});
+</script>
+<h3 style="color: #FF0084; margin-bottom: 5px;">您可以拖拽下列菜单调整设计:</h3>
+<fieldset
+	style="background-color: #EFF8F9; border: 1px solid #D8EDFF; padding: 5px;"><legend><strong
+	style="color: #005BA5;">可选菜单:</strong></legend>
+<ul id="headerMenu" class="headerMenu ui-widget-content">
+</ul>
+</fieldset>
+
+<fieldset
+	style="background-color: #EFF8F9; border: 1px solid #D8EDFF; padding: 5px;"><legend><strong
+	style="color: #005BA5;">已选菜单:</strong></legend>
+<ul id="headerMenuSelected" class="headerMenu  ui-widget-content">
+</ul>
+</fieldset>
+
+<br />
+<button id="confirmHeaderMenu">确认</button>
+<button id="modifyHeaderMenuText">编辑链接文字</button>
+<div id="modifyHeaderMenuTextDialog" title="编辑导航栏链接文字"></div>

@@ -1,0 +1,779 @@
+.expressway-mytaobao {
+	font-size: 12px;
+}
+
+.expressway-mytaobao .ew-panel {
+	width: 250px;
+	background: url(http://pics.taobao.com/bao/album/sys/mytaobao.gif) 0 0
+		no-repeat;
+}
+
+.expressway-mytaobao .ew-tab-panel {
+	background: url(http://pics.taobao.com/bao/album/sys/mytaobao.gif) 0
+		bottom no-repeat;
+}
+
+.expressway-mytaobao .ew-frame {
+	width: 250px;
+	height: 154px;
+	border: none;
+	background-color: transparent;
+}
+
+.expressway-mytaobao .ew-tab-menu {
+	margin: 0 0 0 1px;
+}
+
+.expressway-mytaobao .ew-tab-item-0 {
+	width: 59px;
+	text-indent: 1px
+}
+
+.expressway-mytaobao .ew-tab-item-1 {
+	width: 59px;
+	text-indent: 1px
+}
+
+.expressway-mytaobao .ew-tab-item-2 {
+	width: 59px;
+}
+
+.expressway-mytaobao .ew-panel-hd {
+	display: none;
+}
+
+.expressway-mytaobao ul.ew-tab-menu {
+	height: 29px;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li {
+	float: left;
+	height: 29px;
+	line-height: 25px;
+	list-style: none;
+	color: #555;
+	text-align: center;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+}
+
+.expressway-mytaobao UL.ew-tab-menu .logoLink {
+	display: none;
+}
+
+.expressway-mytaobao ul.ew-tab-menu li.selected a {
+	background: url(http://pics.taobao.com/bao/album/sys/mytaobao.gif)
+		-185px 1px no-repeat;
+}
+
+.tab_left,.tab_right {
+	display: none;
+}
+
+/* diffrrent */
+.tab_left,.tab_right,.expressway-mytaobao .ew-panel {
+	background-image:
+		url(http://img.alimama.cn/cms/images/1251092081537.png);
+	background-repeat: no-repeat;
+}
+
+div.zdcz {
+	display: none;
+}
+
+.tab_left,.tab_right {
+	display: block;
+	width: 5px;
+	height: 29px;
+	overflow: hidden;
+	background-position: left -30px;
+	float: left;
+}
+
+.tab_right {
+	float: right;
+	background-position: -5px -30px;
+}
+
+.expressway-mytaobao .ew-panel {
+	background-position: left -60px;
+	background-repeat: repeat-x;
+	width: auto;
+	min-width: 470px;
+	overflow: hidden;
+}
+
+.expressway-mytaobao .ew-tab-panel {
+	background-image: none;
+	border: solid 1px #b4d7e7;
+	border-top-width: 0;
+}
+
+.expressway-mytaobao .ew-frame {
+	width: 100%;
+	height: 70px;
+	margin-left: 15px;
+}
+
+/* iframe style */
+.fast-track {
+	
+}
+
+h5 {
+	display: none;
+}
+
+.select-game-style .sgs-menu li {
+	display: inline;
+}
+
+.sgs-menu {
+	float: left;
+	margin: 5px 0 0;
+	height: 24px;
+	overflow: hidden;
+	padding-left: 5px;
+}
+
+.ft-select {
+	clear: left;
+}
+
+.ft-mobile .ft-select {
+	margin: 11px 0 0 0;
+	padding-left: 6px;
+}
+
+.ft-game .ft-select {
+	margin-top: 11px;
+}
+
+.ft-select li {
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+
+#game_union_sel {
+	_margin-left: 4px;
+}
+
+#game_area_sel {
+	width: 118px;
+}
+
+.ft-select li select,.ft-select li input {
+	margin: 2px 0;
+}
+
+.ft-select li input.dep_date {
+	width: 82px; *
+	margin-left: 4px;
+}
+
+#game_sel {
+	width: 118px;
+	height: 18px;
+}
+
+.ft-select li label {
+	display: inline-block;
+	vertical-align: text-bottom;
+	vertical-align: middle \9; *
+	vertical-align: middle; *
+	margin-top: -5px;
+	width: 48px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.ft-air .ft-select li label {
+	width: 50px;
+	margin-right: 5px;
+}
+
+form {
+	display: inline;
+}
+
+.view-list {
+	padding-left: 20px;
+}
+
+.view-list a {
+	display: block;
+	height: 20px;
+	width: 100px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+	background:
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png') 0
+		-250px no-repeat;
+}
+
+h6 {
+	padding: 0 0 0 2px;
+	line-height: 24px;
+	height: 24px;
+	font-size: 12px;
+	border-bottom: 1px solid #ddd;
+	color: #000;
+	margin: 0;
+}
+
+h6 .title {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 3px;
+}
+
+h6 .price {
+	color: #f50;
+	font-weight: bold;
+	padding: 2px;
+	font-size: 14px;
+}
+
+h6 a {
+	text-decoration: underline;
+	padding: 0 5px;
+	color: #04d;
+}
+
+.tk-list {
+	float: left;
+	overflow: hidden;
+	width: 100%;
+	line-height: 20px;
+}
+
+.tk-list li {
+	position: relative;
+	clear: both;
+	margin: 0 2px 0 0;
+	padding: 0 0 2px 2px;
+	border-bottom: 1px solid #ddd;
+	color: #000; *
+	display: inline-block;
+}
+
+.tk-list li:hover {
+	background-color: #fff7e8;
+}
+
+.tk-list li:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.tk-list li a {
+	color: #000;
+	text-decoration: none;
+}
+
+.tk-list  span strong {
+	color: #F50;
+	font-weight: bold;
+}
+
+.tk-list li  div {
+	float: left;
+}
+
+.tk-list li .title {
+	width: 60px;
+	text-align: right;
+	height: 20px;
+	overflow: hidden;
+}
+
+.tk-list.wider li .title {
+	width: 68px;
+}
+
+.tk-list li .zdcz {
+	background-position: 0 5px;
+}
+
+.tk-list li .zxzc {
+	background-position: 0 -15px;
+}
+
+.tk-list li .zdfh {
+	background-position: 0 -35px;
+}
+
+.tk-list li .thdc {
+	background-position: 0 -55px;
+}
+
+.tk-list.wider li .zdcz {
+	background-position: 10px 5px;
+}
+
+.tk-list.wider li .zdfh {
+	background-position: 10px -35px;
+}
+
+.tk-list li .button1,.tk-list li .button2 {
+	display: block;
+	position: absolute;
+	width: 40px;
+	right: 2px;
+	top: 0;
+	height: 0;
+	padding-top: 20px;
+	overflow: hidden;
+	background: transparent
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png')
+		no-repeat;
+	text-align: center;
+}
+
+.tk-list li .button1 {
+	background-position: -129px -155px;
+}
+
+.tk-list li .button2 {
+	background-position: -129px -180px;
+}
+
+.tk-list li .button1:hover {
+	background-position: -129px -130px;
+}
+
+.tk-list li .button2:hover {
+	background-position: -129px -205px;
+}
+
+.tk-list li .gift {
+	width: 47px;
+	background: transparent
+		url(http://img01.taobaocdn.com/tps/i1/T1sIxnXoVmXXXXXXXX-47-40.png)
+		no-repeat right 3px;
+}
+
+.tk-list li .gift:hover {
+	background: transparent
+		url(http://img01.taobaocdn.com/tps/i1/T1sIxnXoVmXXXXXXXX-47-40.png)
+		no-repeat right -22px;
+}
+
+.shop-chongzhi p.more {
+	clear: both;
+	padding: 2px 0 0 2px;
+	overflow: hidden;
+	font-family: Arial;
+	font-size: 12px;
+	color: #666;
+	line-height: 18px;
+}
+
+.shop-chongzhi p.more a {
+	padding: 0 5px 0 0;
+}
+
+.shop-chongzhi p.more a:hover {
+	color: #f50;
+	text-decoration: underline;
+}
+
+.warning-alert {
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
+}
+
+.warning-alert a {
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom; *
+	vertical-align: baseline;
+	width: 88px;
+	height: 22px;
+	background:
+		url(http://img08.taobaocdn.com/tps/i8/T1rZtpXetrXXXXXXXX-88-21.png) 0
+		0 no-repeat;
+	overflow: hidden;
+}
+
+.warning-alert a em {
+	display: none;
+}
+
+.shop-chongzhi .blank {
+	display: none;
+}
+
+.game-ad,.mobile-ad {
+	margin: 10px 0px 0px 3px;
+}
+
+.game-ad img,.mobile-ad img {
+	border: none;
+}
+
+/* iframe diffrent */
+.fast-track .ft-select li {
+	line-height: 16px;
+	float: left;
+	margin-right: 5px;
+	clear: none;
+}
+
+.h-container h6 {
+	text-align: center;
+}
+
+.ft-mobile .view-list {
+	padding: 2px 0 0 10px;
+}
+
+h6,.tk-list li,.warning-alert {
+	border-bottom: 0;
+}
+
+h6 .title,h6 .price,h6 a {
+	padding: 0;
+}
+
+.tk-list {
+	width: 200px !important;
+}
+
+.tk-list li {
+	width: 186px !important;
+}
+
+.tk-list li .title {
+	width: 66px !important;
+}
+
+.shop-chongzhi p.more {
+	clear: none;
+	line-height: 16px;
+	width: 260px;
+}
+
+.tk-list li .button1 {
+	background: url(http://img.alimama.cn/cms/images/1251084492781.png) left
+		-20px;
+	padding-top: 0;
+	width: 65px;
+	height: 15px;
+	line-height: 18px;
+}
+
+.tk-list li .button1:hover {
+	background-position: left top;
+}
+
+.tk-list li .title {
+	width: 55px;
+	text-align: left;
+}
+
+/* pannel_2 */
+.ft-game,.ft-mobile {
+	padding: 3px 0 0 0;
+	overflow: hidden;
+}
+
+.ft-air {
+	padding: 0;
+}
+
+.fast-track {
+	margin: 0 0 0 15px;
+}
+
+.ft-game h5 {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 69px;
+	height: 48px;
+	/*background:url(http://pics.taobao.com/bao/album/sys/hesper-game.gif) 0 0 no-repeat;*/
+	background:
+		url(http://pics.taobaocdn.com/bao/album/chl/game/express_list_icon_game.gif)
+		0 0 no-repeat;
+	margin: 0;
+}
+
+.ft-mobile h5 {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 69px;
+	height: 48px;
+	/*background:url(http://pics.taobao.com/bao/album/sys/hesper-mobile.gif) 0 0 no-repeat;*/
+	background:
+		url(http://pics.taobao.com/bao/album/chl/game/express_list_icon_mobile.gif)
+		0 0 no-repeat;
+	margin: 0;
+}
+
+h5 a {
+	display: block;
+	width: 69px;
+	height: 48px;
+}
+
+h5 span {
+	display: none;
+}
+
+form {
+	margin: 0;
+}
+
+.select-game-style li,.ft-select li {
+	display: inline;
+}
+
+.sgs-menu {
+	overflow: hidden;
+	margin-bottom: -3px;
+}
+
+.sgs-menu * {
+	vertical-align: middle;
+}
+
+.ft-mobile .ft-select * {
+	vertical-align: middle;
+}
+
+.ft-select li {
+	float: left;
+	height: 28px;
+	display: block;
+	margin: 0 3px;
+	line-height: 28px;
+}
+
+.view-list a {
+	cursor: pointer;
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom; *
+	vertical-align: baseline;
+	margin-bottom: -2px;
+	width: 100px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: 700;
+	color: #fff;
+	text-decoration: none;
+	background:
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png') 0
+		-250px no-repeat;
+}
+
+.h-container {
+	float: left;
+	padding-right: 5px;
+	width: 130px;
+	height: 48px;
+	font-size: 12px;
+	overflow: hidden;
+	border-right: 1px solid #ddd;
+	display: table; *
+	position: relative;
+}
+
+.h-container div {
+	display: table-cell;
+	vertical-align: middle; *
+	position: absolute; *
+	top: 50%; *
+	left: 0;
+}
+
+h6 {
+	font-size: 12px;
+	margin: 0;
+	width: 130px;
+	float: left; *
+	position: relative; *
+	top: -50%; *
+	left: 0;
+}
+
+h6 .title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+h6 .price {
+	color: #F50;
+	padding: 0 3px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 24px;
+}
+
+.tk-list {
+	line-height: 18px;
+	overflow: visible;
+	float: left;
+	height: 48px;
+}
+
+.tk-list li {
+	float: left;
+	width: 169px;
+	white-space: nowrap;
+	padding: 0 8px 0 5px;
+	border-right: 1px solid #ddd;
+	position: relative;
+}
+
+.tk-list li a {
+	color: #000;
+	text-decoration: none;
+}
+
+.tk-list li  div {
+	float: left;
+}
+
+.tk-list li .title {
+	width: 60px;
+	text-align: right;
+	height: 20px;
+	overflow: hidden;
+}
+
+.tk-list.wider li .title {
+	width: 68px;
+}
+
+.tk-list li .zdcz {
+	background-position: 0 6px;
+}
+
+.tk-list li .zxzc {
+	background-position: 0 -14px;
+}
+
+.tk-list li .zdfh {
+	background-position: 0 -34px;
+}
+
+.tk-list li .thdc {
+	background-position: 0 -54px;
+}
+
+.tk-list.wider li .zdcz {
+	background-position: 10px 6px;
+}
+
+.tk-list.wider li .zdfh {
+	background-position: 10px -34px;
+}
+
+.tk-list li .button1,.tk-list li .button2 {
+	display: block;
+	position: absolute;
+	width: 40px;
+	right: 4px;
+	top: 0;
+	height: 0;
+	padding-top: 20px;
+	overflow: hidden;
+	background: transparent
+		url('http://pics.taobaocdn.com/bao/album/sys/express_img.png')
+		no-repeat;
+	text-align: center;
+}
+
+.tk-list li .button1 {
+	background-position: -129px -156px;
+}
+
+.tk-list li .button2 {
+	background-position: -129px -179px;
+}
+
+.tk-list li .button1:hover {
+	background-position: -129px -131px;
+}
+
+.tk-list li .button2:hover {
+	background-position: -129px -204px;
+}
+
+.tk-list span strong {
+	color: #f50;
+	font-weight: bold;
+}
+
+.tk-list b span {
+	color: #F50;
+	font-weight: 700;
+}
+
+.tk-list li em {
+	margin: 0 8px 0 3px;
+	padding: 1px 7px 1px 7px; *
+	padding: 2px 7px 1px 7px;
+	font-style: normal;
+	background: url(http://pics.taobao.com/bao/album/sys/1207035209154)
+		-760px -63px;
+}
+
+.shop-chongzhi p.more {
+	width: 220px;
+	float: left;
+	margin-left: -1px;
+	height: 48px;
+	overflow: hidden;
+	font-family: Arial;
+	color: #666;
+	border-left: 1px #ddd solid;
+	padding-left: 4px;
+}
+
+.warning-alert {
+	float: left;
+	margin: 0 0 8px 10px;
+	padding: 5px 5px 0 5px;
+	height: 24px;
+	line-height: 24px;
+}
+
+.warning-alert a {
+	display: -moz-inline-block;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: text-bottom; *
+	vertical-align: baseline;
+	margin: 0 0 0 5px;
+	width: 111px;
+	height: 25px;
+	background: url(http://pics.taobao.com/bao/album/sys/1208145377619) 0
+		4px no-repeat;
+	overflow: hidden;
+}
+
+.warning-alert a em {
+	display: none;
+}
+
+.select-game-style li.blank,.ft-select li.blank {
+	display: none;
+}

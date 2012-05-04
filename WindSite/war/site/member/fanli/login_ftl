@@ -1,0 +1,40 @@
+<@ws.fanliheader2>
+<meta http-equiv="keywords" content="${sitetitle},会员注册">
+<meta http-equiv="description" content="会员注册 - ${sitetitle}">
+<title>会员登录-${sitetitle}</title>
+</@ws.fanliheader2>
+<script src="/assets/js/jquery/tools/validator.min.js?v=${dateVersion()}" type="text/javascript"></script>
+<script>
+var WWW='${www}';
+$(function(){
+	initLogin();
+})
+</script>
+<style>#fanli-site-map li{float:left;margin-right:20px;}#fanli-site-map li a{font-size:14px;}#fanli-site-map li a:hover{color:#f60;}</style>
+<@xt.fanlitemplate>
+<div id="fanli-site-map" title="快速通道" style="display:none;padding-top:20px;padding-left:60px;"><ul>
+<li><a href="http://${www}/router/fanlimember">会员中心</a></li>
+<li><a href="http://${www}">购物首页</a></li>
+<li><a href="http://${www}/huabao/index.html">画报返利</a></li>
+<#if weibo??&&''!=weibo><li><a href="http://${www}/router/fanli/loginuc?redirect=http://${weibo}">微博广场</a></li></#if>
+</ul></div>
+<div style="border: 1px solid #DDD;margin: 20px auto 0px;margin-top: 20px;width:100%;">
+<input type="hidden" id="referer" value="${referer}"/>
+<div class="fm-input" style="float:left;width:520px;margin-top:50px;">
+		<form id="fanliLoginForm" method="POST">
+		<fieldset><legend>会员登录</legend>
+		<div class="fm-item"><label for="username" class="fm-label"><span class="required">*</span>用户名：</label><input type="text"  required="required" minlength="3" maxlength="20" class="i-text J-autofocus" id="username" name="username" value=""></div>
+		<div class="fm-item"><label class="fm-label" for="pwd"><span class="required">*</span>密　码：</label><input type="password"  required="required" minlength="6" maxlength="20"  class="i-text J-pwdStrengthCheck" id="pwd" name="pwd" value=""></div>
+		<div class="fm-item"><span class="btn btn-ok"><input type="submit" value="登录"></span>&nbsp;&nbsp;&nbsp;<a href="http://${www}/router/fanli/registe" style="color:#f30;">注册新会员</a>&nbsp;&nbsp;&nbsp;<!--<a href="" style="color:#f30;">找回密码</a>--></div>
+		</fieldset>
+	</form>
+</div>
+<div style="width:400px;border-left: 2px dashed #CCC;float: left;line-height: 25px;margin-top: 20px;padding-left: 20px;"><b style="color: #F50;font-size: 16px;">&nbsp;&nbsp;本站声明文件：</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;1、本站只提供淘宝网(www.taobao.com)优质商品及店铺的相关链接和推广，不承担商品的质量及售后服务；<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2、本站不涉及网络支付等问题，所有商品购买最终都通过淘宝网及支付宝平台，故不存在账号泄露等问题，请买家放心；<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3、通过本站购买商品的买家均可获得一定现金金额的返还；<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4、当您通过本站去淘宝网购物（确认收货付款后），就可以登录会员中心查看返利记录，我们会及时将返利金额打到您的支付宝账户。<br></div>
+<div style="clear:both;"></div>
+</div>
+</@xt.fanlitemplate>
+

@@ -1,0 +1,105 @@
+.btm-cate {
+	width: 945px;
+	overflow: hidden;
+	padding: 10px 0;
+	background-color: #f8f8f8;
+	border-top: 2px solid #ccc;
+}
+
+.cate-list {
+	width: 110px;
+	padding: 5px 0;
+	float: left;
+	display: inline;
+	margin-left: 5px;
+	border: 1px solid #ebebeb;
+	background-color: #fff;
+}
+
+.cate-list dt {
+	margin: 2px 10px 10px;
+	text-align: center;
+}
+
+.cate-list strong {
+	display: block;
+	height: 18px;
+	overflow: hidden;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.cate-list dd {
+	height: 95px;
+	overflow: hidden;
+	margin: 0 5px 10px;
+}
+
+.cate-list dd a {
+	float: left;
+	height: 14px;
+	line-height: 14px;
+	margin: 0 4px 5px -1px;
+	white-space: nowrap;
+	padding-left: 5px;
+	cursor: pointer;
+	border-left: 1px solid #ccc;
+}
+
+.cate-list b {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	background: none;
+}
+
+.cate01 b {
+	background-position: 0 0;
+}
+
+.cate02 b {
+	background-position: -50px 0;
+}
+
+.cate03 b {
+	background-position: -100px 0;
+}
+
+.cate04 b {
+	background-position: -150px 0;
+}
+
+.cate05 b {
+	background-position: -200px 0;
+}
+
+.cate06 b {
+	background-position: -250px 0;
+}
+
+.cate07 b {
+	background-position: -300px 0;
+}
+
+.cate08 b {
+	background-position: -350px 0;
+}
+
+.btm-cate a {
+	color: #666;
+}
+
+.btm-brands {
+	width: 945px;
+	overflow: hidden;
+	padding: 10px 0 30px;
+}
+
+.btm-brands a {
+	float: left;
+	display: inline;
+	margin: 10px 10px 0 5px;
+	width: 100px;
+	height: 50px;
+}

@@ -1,0 +1,326 @@
+body {
+	background-color: #feefe7;
+	background-position: center 0;
+	background-repeat: repeat-y;
+	background-image:
+		url(http://img06.taobaocdn.com/bao/uploaded/i6/T1294WXfldXXartXjX.gif)
+		;
+}
+
+/* link style */
+.tb-shop a {
+	color: #dc7a8f;
+	text-decoration: none;
+}
+
+.tb-shop a:hover {
+	color: #ae2341;
+	text-decoration: underline;
+}
+
+/* col-main col-sub */
+.tb-shop .col-main .box .bd {
+	background-color: #fff8f5;
+	border: 0;
+}
+
+.tb-shop .col-main .box .hd {
+	padding-left: 15px;
+	line-height: 61px;
+	height: 61px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -59px !important;
+	border: 0;
+}
+
+.tb-shop .col-main .box .hd h3,.tb-shop .col-main .box .hd h3 span {
+	padding-left: 12px;
+	line-height: 34px;
+	color: #dc7a8f;
+}
+
+.tb-shop .col-sub .box .bd {
+	background-color: #fff8f5;
+	border: 0 !important;
+}
+
+.tb-shop .col-sub .box .hd {
+	height: 34px;
+	width: 190px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -120px;
+	border: 0;
+}
+
+.tb-shop .col-sub .box .hd h3,.tb-shop .col-sub .box .hd h3 span {
+	padding-left: 15px;
+	line-height: 34px;
+	color: #dc7a8f;
+	font-size: 12px;
+}
+
+/* shop-search */
+.tb-shop .shop-search ul li .button {
+	cursor: pointer;
+	color: #fff;
+	background-color: #e18d9e !important;
+	background-image: none;
+}
+
+.tb-shop .shop-search input {
+	color: #dc7a8f;
+	border: 1px #feefe7 solid;
+}
+
+.tb-shop .shop-search li {
+	color: #dc7a8f;
+}
+
+/* shop-rank */
+.tb-shop .shop-rank .tab-nav li {
+	-moz-border-radius: 0;
+	color: #dc7a8f;
+	background-color: #fff;
+	border: 0;
+}
+
+.tb-shop .shop-rank .tab-nav .selected span {
+	color: #dc7a8f;
+	font-weight: bold;
+}
+
+.tb-shop .shop-rank .pic {
+	border: 0;
+}
+
+.tb-shop .shop-rank .rank-panel ul li {
+	border-bottom: 1px dashed #dc7a8f;
+}
+
+.tb-shop .shop-rank .rank-panels {
+	border-top: 1px #dc7a8f solid;
+}
+
+.tb-shop .shop-rank .price {
+	color: #ae2341;
+	font-weight: bold;
+}
+
+.tb-shop .shop-rank .no-collect,.tb-shop .shop-rank .no-traded {
+	display: none;
+}
+
+.tb-shop .shop-rank .collecter,.tb-shop .shop-rank .sale {
+	color: #f7c9cb;
+}
+
+/* shop-link */
+.tb-shop .shop-links ul li {
+	border-bottom: 1px dashed #e29196;
+}
+
+/* more-items */
+.tb-shop .grid .more-items {
+	display: none;
+}
+
+/* shop-category */
+.tb-shop .shop-category hd {
+	margin-top: 5px !important;
+}
+
+.tb-shop .shop-category .cat h4 {
+	padding-left: 0px;
+	background: none;
+	margin-left: 0px;
+}
+
+.tb-shop .shop-category .cat-hd {
+	margin-left: 0px;
+}
+
+.tb-shop .shop-category .cat-bd {
+	margin-left: 0px;
+}
+
+.tb-shop .col-sub .bd,.tb-shop .col-extra .bd {
+	padding-left: 0px;
+}
+
+.tb-shop .shop-category .cat {
+	border: 0;
+}
+
+.tb-shop .shop-category .cats {
+	width: 188px;
+}
+
+.tb-shop .shop-category .bd ul h4 a {
+	line-height: 45px;
+	height: 37px;
+	color: #dc7a8f;
+	text-align: center;
+	width: 190px;
+	background: #000
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -164px no-repeat;
+	font-size: 14px;
+	display: block;
+	font-weight: bold;
+}
+
+.tb-shop .shop-category .bd ul h4 a:hover {
+	color: #dc7a8f;
+	text-decoration: none;
+	background-position: left -202px;
+}
+
+.tb-shop .shop-category .bd ul ul a {
+	line-height: 27px;
+	height: 35px;
+	color: #dc7a8f;
+	text-align: center;
+	width: 160px;
+	background: #fff
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -242px;
+	font-size: 12px;
+	display: block;
+}
+
+.tb-shop .shop-category .bd ul ul a:hover {
+	color: #dc7a8f;
+	text-decoration: none;
+	font-weight: bold;
+	background-position: left -242px;
+}
+
+/* dz-background */
+.tb-shop .shop-header {
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/36599414/T28KdzXnJaXXXXXXXX_!!36599414.gif)
+		!important;
+	border: 0;
+}
+
+.tb-shop .shop-logo {
+	visibility: hidden;
+}
+
+.tb-shop .shop-title {
+	margin-left: 25px;
+}
+
+.tb-shop .shop-title p {
+	color: #dc7a8f !important;
+	margin-left: 12px;
+	margin-top: 5px;
+}
+
+.tb-shop .shop-title h2 a {
+	color: #e29196;
+}
+
+.tb-shop .shop-title h2 a:hover {
+	color: #dc7a8f;
+	text-decoration: none;
+}
+
+/* nav */
+.tb-shop .shop-header .nav {
+	height: 28px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		repeat-x;
+}
+
+.tb-shop .shop-header .nav li a {
+	line-height: 28px;
+	height: 28px;
+	background: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li a em {
+	line-height: 30px;
+	height: 34px;
+	text-align: center;
+	color: #fff;
+	background: none no-repeat center top;
+	width: 78px;
+	font-weight: bold;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li a:hover {
+	text-decoration: none !important;
+}
+
+.tb-shop .shop-header .nav li a:hover em {
+	height: 34px;
+	color: #e29196;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -30px no-repeat;
+}
+
+.tb-shop .shop-header .nav ul {
+	line-height: 33px;
+	height: 33px;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav ul li {
+	margin-right: 0;
+	line-height: 33px;
+	height: 33px;
+}
+
+.tb-shop .shop-header .nav li.current a em {
+	color: #e29196;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/36599414/T2nKXzXa8bXXXXXXXX_!!36599414.png)
+		left -30px no-repeat;
+	margin-left: 5px;
+}
+
+.tb-shop .shop-header .nav li.current a:hover em {
+	color: #e29196 !important;
+}
+
+/* cat-items */
+.tb-shop .cat-items {
+	color: #fff;
+	margin-top: 5px;
+	padding: 5px;
+	border: 4px solid #dc7a8f;
+}
+
+.tb-shop .cat-items a {
+	color: #dc7a8f;
+	text-decoration: none;
+}
+
+.tb-shop .cat-items a:hover {
+	color: #ae2341;
+}
+
+/* pic */
+.tb-shop .grid .pic {
+	border: 0 !important;
+}
+
+.tb-shop .grid .price span {
+	color: #fff;
+	background-color: #dc7a8f;
+	padding: 2px;
+}
+
+.tb-shop .col-main .pic a:hover img,.tb-shop .shop-display .pic a:hover img
+	{
+	max-height: 95%;
+	max-width: 95%;
+	border: #dc7a8f solid 2px;
+}

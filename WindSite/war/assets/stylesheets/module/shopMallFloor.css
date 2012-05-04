@@ -1,0 +1,360 @@
+.shop-mall-floor .bd {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 5px;
+}
+
+.tb-shop .grid-m .col-main .main-wrap .shop-mall-floor .bd {
+	border-bottom-width: 0px;
+	border-top-width: 0px;
+}
+
+.shop-mall-floor .slider-promo {
+	margin-top: 5px;
+}
+
+.floor .logo-list li a,.s-box a,.s-box a img,.s-girds a,.m-box a,.f-trigger li a,.f-trigger li a img,.m-box a img
+	{
+	display: block;
+}
+
+.logo-list {
+	border-left: 1px #e6e6e6 solid;
+	border-right: 1px #e6e6e6 solid;
+	padding-top: 2px;
+	background-repeat: no-repeat;
+	background-position: 0 1px !important;
+	margin-top: 1px;
+}
+
+.logo-list li {
+	width: 88px;
+	height: 30px;
+	float: left;
+	border-bottom: 1px #e6e6e6 solid;
+	overflow: hidden;
+}
+
+.logo-list a {
+	display: block;
+	width: 88px;
+	height: 30px;
+}
+
+.m-box {
+	width: 174px;
+	margin-right: 6px;
+	position: relative;
+	float: left;
+	margin-left: -2px;
+	margin-top: 5px;
+}
+
+.m-box a {
+	border: 2px solid #fff;
+	border-bottom: none;
+	display: block;
+}
+
+.m-box span {
+	height: 30px;
+	line-height: 30px;
+	text-indent: 1em;
+	width: 170px;
+	left: 2px;
+	overflow: hidden;
+}
+
+.f-otitle span {
+	opacity: .8;
+	filter: alpha(opacity =                       80);
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: #FFF;
+	overflow: hidden;
+}
+
+.f-hd {
+	height: 26px;
+	line-height: 99em;
+	overflow: hidden;
+	background: transparent
+		url(http://img01.taobaocdn.com/tps/i1/T1gd4UXa8EXXXXXXXX-123-423.png)
+		no-repeat;
+}
+
+.f1 .f-hd {
+	background-position: -25px 0px;
+}
+
+.f2 .f-hd {
+	background-position: -25px -28px;
+}
+
+.f3 .f-hd {
+	background-position: -25px -56px;
+}
+
+.f4 .f-hd {
+	background-position: -25px -82px;
+}
+
+.f5 .f-hd {
+	background-position: -25px -110px;
+}
+
+.f6 .f-hd {
+	background-position: -25px -138px;
+}
+
+.f7 .f-hd {
+	background-position: -25px -166px;
+}
+
+.f8 .f-hd {
+	background-position: -25px -194px;
+}
+
+.f9 .f-hd {
+	background-position: -25px -222px;
+}
+
+.f10 .f-hd {
+	background-position: -40px -250px;
+}
+
+.f11 .f-hd {
+	background-position: -40px -276px;
+}
+
+.f1 .s-tag,.f1 .s-ul a:hover {
+	color: #ff81ce;
+}
+
+.f1 .m-box a:hover {
+	border-color: #ffcdeb;
+}
+
+.f2 .m-box a:hover {
+	border-color: #f9a8b1;
+}
+
+.f3 .m-box a:hover {
+	border-color: #d1c2b3;
+}
+
+.f4 .m-box a:hover {
+	border-color: #b1d3e1;
+}
+
+.f5 .m-box a:hover {
+	border-color: #e3e3e3;
+}
+
+.f6 .m-box a:hover {
+	border-color: #f9c3af;
+}
+
+.f10 .s-tag,.f10 .s-ul a:hover {
+	color: #dfa92f;
+}
+
+.f1 .f-otitle span {
+	background-color: #ff81ce;
+}
+
+.f2 .f-otitle span {
+	background-color: #f0263c;
+}
+
+.f3 .f-otitle span {
+	background-color: #8d6645;
+}
+
+.f4 .f-otitle span {
+	background-color: #3c8fb7;
+}
+
+.f5 .f-otitle span {
+	background-color: #a2a2a2;
+}
+
+.f6 .f-otitle span {
+	background-color: #f36a36;
+}
+
+.slider-promo .f-trigger {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 30px;
+	width: 540px;
+	overflow: hidden;
+}
+
+.slider-promo .f-trigger li {
+	float: left;
+	overflow: hidden;
+	width: 181px;
+	margin-right: -1px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.slider-promo .f-trigger a {
+	position: absolute;
+	z-index: 2;
+	color: #fff;
+	text-indent: 1em;
+	white-space: nowrap;
+}
+
+.slider-promo .f-trigger .bg {
+	z-index: 1;
+	background-image: none;
+	display: block;
+	width: 190px;
+	height: 30px;
+	opacity: .8;
+	filter: alpha(opacity =             80);
+}
+
+.slider-promo .f-trigger .ks-active a {
+	color: #000;
+}
+
+.f7 .f-trigger .bg {
+	background-color: #000;
+}
+
+.f7 .f-trigger .ks-active .bg {
+	background-color: #eaeaea;
+}
+
+.f8 .f-trigger .bg {
+	background-color: #52ac52;
+}
+
+.f8 .f-trigger .ks-active .bg {
+	background-color: #f1f9f1;
+}
+
+.f9 .f-trigger .bg {
+	background-color: #ba7ad0;
+}
+
+.f9 .f-trigger .ks-active .bg {
+	background-color: #f9f4fb;
+}
+
+.f10 .f-trigger .bg {
+	background-color: #dfa92f;
+}
+
+.f10 .f-trigger .ks-active .bg {
+	background-color: #fdf8ee;
+}
+
+.f11 .f-trigger .bg {
+	background-color: #5f9cd5;
+}
+
+.f11 .f-trigger .ks-active .bg {
+	background-color: #f2f7fc;
+}
+
+.s-ul,.s-box {
+	margin-bottom: 12px;
+	overflow: hidden;
+}
+
+.s-box {
+	border: 1px solid #e4e4e4;
+	height: 70px;
+	margin-top: 10px;
+}
+
+.s-ul {
+	height: 72px;
+}
+
+.s-ul li {
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+}
+
+.s-ul li a {
+	color: #666;
+}
+
+.s-girds {
+	border: 1px solid #e4e4e4;
+	height: 238px;
+	width: 238px;
+	overflow: hidden;
+}
+
+.s-girds li {
+	float: left;
+	border-right: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e4e4e4;
+	height: 79px;
+	width: 119px;
+	margin-right: -1px;
+	overflow: hidden;
+}
+
+.s-girds li a {
+	width: 119px;
+	height: 79px;
+	position: relative;
+}
+
+.s-girds li a img {
+	display: block;
+	padding: 2px 4px;
+}
+
+.s-girds li span {
+	visibility: hidden;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+}
+
+.s-girds li a:hover span {
+	visibility: visible;
+}
+
+.f-ft {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 14px;
+	line-height: 14px;
+	padding: 7px 0;
+	text-align: right;
+	width: 790px;
+	overflow: hidden;
+}
+
+.f-ft a {
+	padding: 0 10px;
+	vertical-align: bottom;
+	color: #666;
+	float: right;
+	border-right: 1px #CCC solid;
+	margin-right: -1px;
+}
+
+.s-ul-7 {
+	height: 156px;
+}
+
+.s-ul-7 li {
+	height: 23px;
+	line-height: 23px;
+}

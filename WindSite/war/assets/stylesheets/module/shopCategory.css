@@ -1,0 +1,70 @@
+.shop-category i {
+	display: none;
+}
+
+.shop-category .cat h4 {
+	padding-left: 16px;
+	background: url(images/T1AHpUXgliXXXXXXXX-80-134.png) no-repeat;
+}
+
+.cats .cat h4 {
+	background-position: -70px 7px;
+}
+
+.cats .collapse .cat-hd,.shop-category .cats h4.collapse {
+	background-position: -60px -13px;
+}
+
+.cats .collapse .cat-hd,.cats .expand .cat-hd {
+	background-position: -50px -33px;
+}
+
+.shop-category .cats {
+	width: 178px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.shop-category .cat {
+	padding: 4px 0;
+	border-bottom: 1px dashed #eee;
+	zoom: 1;
+}
+
+.shop-category img {
+	vertical-align: top;
+}
+
+.shop-category .cat h4 {
+	padding-top: 3px;
+	line-height: 16px;
+	_line-height: 14px;
+	font-weight: 700;
+	zoom: 1;
+}
+
+.shop-category .cat li a {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.shop-category .cat-bd {
+	margin: 0 0 0 15px;
+	overflow: hidden;
+}
+
+.shop-category .cat-bd li {
+	padding: 5px 0 0 0;
+}
+
+.shop-category i {
+	background-position: 0 -40px;
+}
+
+.shop-category .expand i {
+	background-position: -32px -40px;
+}
+
+.shop-category .collapse i {
+	background-position: -16px -40px;
+}

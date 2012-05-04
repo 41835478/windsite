@@ -1,0 +1,36 @@
+<script type="text/javascript">
+	$(function() {
+		$('#confirmHeaderSmartAds').button().click(function() {
+				var flash=$('.ui-designer-header').find('.header-flash');
+				if(flash.length>0&&flash.attr('src')==''&&flash.children().size()>0){
+					alert('当前已设置为智能广告牌');
+					return;
+				}
+				$('.ui-designer-header').css('background','');
+				$('.ui-designer-header').find('.header-image').remove();
+				if(flash.length>0){
+					flash.attr('src','');
+					WidgetUtils.addHeaderSmartAdsFlash(flash);
+				}else{
+					flash=$('<div class="header-flash"></div>');
+					$('.ui-designer-header').prepend(flash);
+					WidgetUtils.addHeaderSmartAdsFlash(flash);
+				}
+				$('#ui-designer-header-tools-dialog').dialog('close');
+		});
+	});
+	//-->
+</script>
+<div><span style="color: #FF0084;">
+<h3>智能广告牌:</h3>
+</span><br />
+<p>1.每次访问随机生成同类热卖商品广告牌</p>
+<p>2.此广告牌中任意商品发生购买您均能得到佣金。</p>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<button id="confirmHeaderSmartAds">确认使用智能广告牌</button>
+</div>

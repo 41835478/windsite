@@ -1,0 +1,115 @@
+.tb-shop .box .bd {
+	border-color: #FB167C !important;
+}
+
+.tb-shop .shop-search {
+	color: #F83172;
+}
+
+.tb-shop .grid .price strong {
+	color: #FB0E1E;
+	font-weight: 700;
+}
+
+.tb-shop a {
+	color: #F83172;
+	text-decoration: none;
+}
+
+/*FL*/
+.tb-shop .shop-category .bd .cat a:hover {
+	font-weight: bold;
+}
+
+.tb-shop .shop-category .bd .cat h4 {
+	font-weight: 600;
+}
+
+.tb-shop .shop-category .bd .cat h4 a:hover {
+	color: #F99587;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/82595315/T2ugpzXm8XXXXXXXXX_!!82595315.gif)
+		no-repeat;
+}
+
+.tb-shop .shop-category .bd .cat h4 a {
+	line-height: 85px;
+	padding-top: 5px;
+	height: 85px;
+	color: #000;
+	text-align: center;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/82595315/T2ugpzXm8XXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	font-size: 16px;
+	width: 160px;
+	text-decoration: none;
+	display: block;
+	font-weigth: 900;
+}
+
+.tb-shop .shop-category .bd .cat-bd a {
+	line-height: 38px;
+	height: 38px;
+	text-align: center;
+	color: #989898;
+	font-size: 12px;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T25MFzXdNXXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	width: 160px;
+	display: block;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.tb-shop .shop-category .bd .cat-bd a:hover {
+	color: #F99587;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/82595315/T25MFzXdNXXXXXXXXX_!!82595315.gif)
+		no-repeat;
+}
+
+/*BOX*/
+.tb-shop .col-main .box .hd,.tb-shop .col-main .box .hd h3,.tb-shop .col-main .box .hd h3 span
+	{
+	padding-left: 16px;
+	line-height: 24px;
+	height: 55px;
+	background: none;
+}
+
+.tb-shop .col-main .box .hd {
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/82595315/T24wdzXdFaXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	border: none;
+}
+
+.tb-shop .box .hd span {
+	color: #fff;
+	font-size: 14px;
+	display: block;
+	font-weight: bold;
+}
+
+.tb-shop .col-sub .box .hd,.tb-shop .col-sub .box .hd h3,.tb-shop .col-sub .box .hd h3 span
+	{
+	padding-left: 10px;
+	line-height: 28px;
+	height: 38px;
+	background: none;
+}
+
+.tb-shop .col-sub .box .hd {
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/82595315/T21h0zXdXbXXXXXXXX_!!82595315.gif)
+		no-repeat;
+	border: none;
+}
+
+.tb-shop .col-sub .box .hd h3 {
+	padding-left: 18px;
+	color: #FFF;
+	font-size: 14px;
+}

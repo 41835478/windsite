@@ -1,0 +1,23 @@
+.shop-child-logo .bd {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 5px;
+}
+
+.child-logo-list {
+	border-left: 1px solid #c1c1c1;
+}
+
+.child-logo-list li {
+	float: left;
+	border-bottom: 1px solid #c1c1c1;
+	border-right: 1px solid #c1c1c1;
+	padding: 1px;
+	height: 32px;
+}
+
+.child-logo-list li img {
+	vertical-align: top;
+	display: inline-block;
+	background-color: #eee;
+}

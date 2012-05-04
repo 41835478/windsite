@@ -1,0 +1,49 @@
+<script type="text/javascript">
+	$(function() {
+		var image=$('.ui-designer-header').find('.header-image');
+		if(image.length>0){
+			$('#headerImageSrc').val(image.attr('src'));
+			$('#headerImageHref').val(image.attr('href'));
+		}
+		$('#confirmHeaderImage').button().click(function() {
+			var src = $('#headerImageSrc').val();
+			var href = $('#headerImageHref').val();
+			if(href&&!DesignerUtils.isURL(href)){
+				alert('图片链接地址不正确');return;
+			}
+			if (src && src.length > 0) {
+				var image=$('.ui-designer-header').find('.header-image');
+				$('.ui-designer-header').find('.header-flash').remove();
+				$('.ui-designer-header').css('background','');
+				if(image.length>0){
+					var oldSrc=image.attr('src');
+					var oldHref=image.attr('href');
+					if(src!=oldSrc||oldHref!=href){
+						image.attr('src',src);
+						image.attr('href',href);
+						WidgetUtils.addHeaderImage(image);
+					}
+				}else{
+					image=$('<div class="header-image" src="'+src+'" href="'+href+'"></div>');
+					$('.ui-designer-header').prepend(image);
+					WidgetUtils.addHeaderImage(image);
+				}
+			}
+			$('#ui-designer-header-tools-dialog').dialog('close');
+		});
+	});
+	//-->
+</script>
+<h3 style="color: #FF0084;">您可以在新淘家园中我的相册上传您的图片。然后复制图片地址。图片大小为:宽度950</h3>
+<br />
+图片地址:
+<input type="text" id="headerImageSrc" size="80">
+<br />
+<br />
+图片链接地址:
+<input type="text" id="headerImageHref" size="80">
+<br />
+<br />
+<br />
+<br />
+<button id="confirmHeaderImage">确认</button>

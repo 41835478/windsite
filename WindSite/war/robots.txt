@@ -1,0 +1,25 @@
+User-agent: *
+Disallow: /assets
+Allow: /
+Crawl-delay: 500
+
+User-agent: BSpider
+Disallow: /
+
+User-agent: MSNBot-media
+Disallow: /
+
+User-agent: FeedSky
+Disallow: /
+
+User-agent: Netcraft
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: GigaBot
+Disallow: /
+
+User-agent: Python-urllib
+Disallow: /

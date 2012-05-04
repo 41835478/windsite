@@ -1,0 +1,221 @@
+.list-view {
+	clear: both;
+	_height: 1%
+}
+
+.list-view li.list-item {
+	position: relative;
+	padding: 15px 0 15px 110px;
+	width: 650px;
+	border-bottom: 1px solid #e5e5e5;
+	overflow: hidden;
+	float: left;
+	_height: 80px;
+	_overflow: none
+}
+
+.list-view h3 {
+	height: 42px;
+	margin-bottom: 18px;
+	width: 240px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: normal
+}
+
+.list-view h3 a {
+	font-size: 14px;
+}
+
+.list-view h3 a:visited {
+	color: #551a8b !important
+}
+
+.list-view .photo {
+	width: 80px;
+	height: 80px;
+	overflow: hidden;
+	border: 1px solid #d9d9d9;
+	position: absolute;
+	left: 10px;
+	top: 15px
+}
+
+.list-view .photo a {
+	width: 80px;
+	height: 80px; *
+	font-size: 70px
+}
+
+.list-view .attribute {
+	position: absolute;
+	right: 10px;
+	top: 15px
+}
+
+.list-view .attribute li {
+	float: right;
+	line-height: 16px;
+	text-align: center;
+	overflow: hidden;
+	padding-top: 2px
+}
+
+.list-view .attribute li.legend2 a:hover {
+	background-position: -10px -225px
+}
+
+.list-view .attribute li.legend2 {
+	width: 80px;
+	padding: 2px 0 0 10px
+}
+
+.list-view .attribute li.legend2 a {
+	display: block;
+	text-align: left;
+	height: 22px;
+	line-height: 20px;
+	color: #666
+}
+
+.list-view .attribute li.place {
+	width: 115px
+}
+
+.list-view .attribute li.sale {
+	width: 90px
+}
+
+.list-view .attribute li.price {
+	width: 110px;
+	text-align: right
+}
+
+.list-view .attribute .shipping {
+	line-height: 2em;
+	color: #666;
+	white-space: nowrap;
+	display: block
+}
+
+.list-view .creditcard,.list-view .discount {
+	float: right;
+	clear: both
+}
+
+.list-view .creditcard {
+	width: 36px;
+	margin-bottom: 5px
+}
+
+.list-view .place .COD,.list-view .place .autoDeliver {
+	display: block;
+	margin: 10px auto
+}
+
+.list-view .place .tao1site,.daigou,.list-view .place .autoCharge {
+	display: block;
+	margin: 5px auto
+}
+
+.list-view .place .COD {
+	width: 48px
+}
+
+.list-view .place .autoDeliver {
+	background-position: -205px -259px;
+	height: 42px;
+	width: 62px
+}
+
+.list-view div.icon-area {
+	position: absolute;
+	top: 58px
+}
+
+.list-view div.icon-area a,.list-view div.icon-area span {
+	float: left
+}
+
+.list-view .mall-icon,.list-view .shoe-mall-icon,.list-view .nameless-good-icon,.list-view .shopkeeper-hot-sell,.list-view .digital-icon,.list-view .hi-tao
+	{
+	margin-right: 6px
+}
+
+.list-view .seller {
+	height: 24px;
+	overflow: hidden
+}
+
+.list-view .seller a {
+	color: #555;
+	text-decoration: underline;
+	margin: 5px 5px 0 0;
+	float: left; *
+	position: relative; *
+	zoom: 1
+}
+
+.list-view .seller .hkshop {
+	float: left;
+	margin: 5px 5px 0 0
+}
+
+.list-view .seller a:hover {
+	color: #0063dc
+}
+
+.list-view .seller .wwicon {
+	margin-top: -2px;
+	float: left
+}
+
+.list-view .related-item {
+	margin: 5px 0 -5px
+}
+
+.list-view .attribute li.price {
+	margin-top: -1px; *
+	margin-top: 0
+}
+
+.list-view .attribute .shipping,.list-view .attribute .creditcard {
+	padding-top: 1px\9;
+	_padding-top: 0
+}
+
+.list-view .attribute li.sale {
+	margin-top: 1px; *
+	margin-top: 2px;
+	_margin-top: 1px
+}
+
+.list-view .attribute li.place {
+	margin-top: 1px;
+	margin-top: 2px\9; *
+	margin-top: 3px;
+	_margin-top: 1px
+}
+
+.list-view .place .COD,.list-view .place .autoDeliver {
+	margin: 6px auto;
+	margin-top: 5px\9; *
+	margin-top: 3px;
+	_margin-top: 4px
+}
+
+.list-view .attribute li.legend2 {
+	padding-top: 1px;
+	padding-top: 2px\9; *
+	padding-top: 3px;
+	_padding-top: 1px
+}
+
+.list-view h3 {
+	line-height: 22px\9
+}
+
+.list-view div.icon-area { *
+	top: 58px;
+	top: 57px\9
+}

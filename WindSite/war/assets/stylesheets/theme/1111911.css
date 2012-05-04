@@ -1,0 +1,237 @@
+.tb-shop .shop-header .nav {
+	height: 30px !important;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/35274384/T2nJVxXlVaXXXXXXXX_!!35274384.jpg)
+		0 0 no-repeat !important;
+}
+
+.tb-shop .shop-header .nav ul {
+	height: 30px;
+}
+
+.tb-shop .shop-header .nav ul li {
+	height: 30px;
+	width: 100px;
+	display: block;
+}
+
+.tb-shop .shop-header .nav ul li a em {
+	line-height: 32px;
+	height: 30px;
+	text-align: center;
+	color: #fff;
+	background: none;
+	width: 100px;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li a {
+	height: 30px;
+	background: none;
+	text-decoration: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .nav li  a:hover em,.tb-shop .shop-header .nav li.current a em
+	{
+	color: #000;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/35274384/T2J1hxXl8XXXXXXXXX_!!35274384.gif)
+		repeat-x top;
+}
+
+.tb-shop .shop-banner .bd,.tb-shop .shop-header,.tb-shop .shop-header .nav
+	{
+	height: auto;
+	background: none;
+	padding: 0;
+}
+
+.tb-shop .shop-header .shop-title {
+	letter-spacing: 3px;
+	margin-left: 100px;
+	margin-top: 8px;
+}
+
+.tb-shop .shop-header .shop-title h2 {
+	margin-bottom: 4px;
+	font-weight: normal;
+}
+
+.tb-shop .shop-header .shop-title h2 a {
+	color: #000;
+}
+
+.tb-shop .shop-header .shop-title p {
+	padding-left: 1px;
+	color: #000;
+}
+
+.tb-shop .shop-banner .bd {
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/35274384/T2fedxXk0XXXXXXXXX_!!35274384.jpg)
+		0 0 no-repeat;
+}
+
+.tb-shop .box .hd,.tb-shop .shopkeeper .box .hd {
+	height: 30px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/35274384/T2fg0xXcpXXXXXXXXX_!!35274384.jpg)
+		0 0 repeat-x;
+	display: block;
+	z-index: 99;
+}
+
+.tb-shop .col-main .box .hd h3 {
+	padding-left: 35px;
+	padding-top: 4pt;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tb-shop .col-main .box .hd {
+	color: #fff;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/35274384/T2fg0xXcpXXXXXXXXX_!!35274384.jpg)
+		0 0 no-repeat;
+	z-index: 99;
+}
+
+.tb-shop .h3 span {
+	border: 1px;
+}
+
+.tb-shop .box .hd {
+	border: 1px;
+}
+
+.tb-shop .box .hd h3 {
+	padding-left: 25px;
+	padding-top: 4pt;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tb-shop .col-main .box .more-items .button {
+	background: no-repeat
+		url(http://img02.taobaocdn.com/imgextra/i2/35274384/T2fg0xXcpXXXXXXXXX_!!35274384.jpg)
+		;
+}
+
+.tb-shop .col-main .box .more-items a {
+	color: #fff;
+	text-decoration: none;
+	margin-top: 2px;
+}
+
+.tb-shop .col-main .box .more-items a:hover {
+	color: #fff;
+}
+
+.tb-shop .shop-category .bd {
+	padding: 0;
+	border: none;
+}
+
+.tb-shop .shop-category .hd {
+	display: none;
+}
+
+.tb-shop .shop-category {
+	margin-top: -5px;
+}
+
+.tb-shop .shop-category  h4,.tb-shop .shop-category .bd {
+	background: none;
+	padding: 0;
+}
+
+.tb-shop .shop-category  h4 i {
+	display: none;
+}
+
+.tb-shop .shop-category .cats,.tb-shop .shop-category .cat,.tb-shop .shop-category ul
+	{
+	width: auto;
+	padding: 0;
+	border: none;
+}
+
+.tb-shop .shop-category .cat,.tb-shop .shop-category .cat h4,.tb-shop .shop-category .cat_hd,.tb-shop .shop-category  .cat-bd li
+	{
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/35274384/T2HwtxXnXaXXXXXXXX_!!35274384.gif)
+		0 0 no-repeat;
+}
+
+.tb-shop .shop-category .cat {
+	text-align: center;
+	margin-top: 5px;
+	background-position: 0 -30px;
+}
+
+.tb-shop .shop-category .cat a {
+	line-height: 30px;
+	color: #000;
+}
+
+.tb-shop .shop-category .cat h4 {
+	padding-left: 28px;
+	height: 30px;
+	text-align: left;
+	overflow: hidden;
+	background-position: 0 0;
+}
+
+.tb-shop .shop-category .cat h4,.tb-shop .shop-category .cat h4 a {
+	line-height: 32px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .cat h4:hover {
+	background-position: 0 -30px;
+}
+
+.tb-shop .shop-category .expand {
+	padding: 0;
+	background-position: 0 -30px;
+}
+
+.tb-shop .shop-category .cat-hd {
+	line-height: 30px;
+	margin-bottom: 0 !important;
+	margin-top: 5px;
+}
+
+.tb-shop .shop-category .expand .cat-hd {
+	background-position: 0 0px;
+}
+
+.tb-shop .shop-category .collapse {
+	background-position: 0 0px;
+}
+
+.tb-shop .shop-category  .cat-bd {
+	margin-left: 0;
+}
+
+.tb-shop .shop-category  .cat-bd li {
+	height: 30px;
+	text-align: left;
+	overflow: hidden;
+	padding: 0 0 0 30px;
+	background-position: 0 -89px;
+}
+
+.tb-shop .shop-category  .cat-bd a {
+	line-height: 32px;
+	color: #000;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category  .cat-bd li:hover {
+	background-position: 0 -118px;
+}

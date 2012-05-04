@@ -1,0 +1,623 @@
+#related-goods dt,.poster-page-navigation a.prev-page,.poster-page-navigation a.next-page,.poster-page-navigation a.view-all-images,#related-goods-v1-btn,.poster-sidebar #poster-prev,.poster-sidebar #poster-next,.poster-sidebar .poster-thumb .prev-thumb,.poster-sidebar .poster-thumb .next-thumb,#poster-detail .recommend-h2,.poster-original-image .related-goods-marker .marked-area .inner-border,#share-to li:hover,#share-to a
+	{
+	background: url(/assets/images/T1BYBFXnXnXXXXXXXX-140-472.png) no-repeat
+		;
+}
+
+.poster-pic-box a {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center; *
+	display: block; *
+	font-family: Arial; *
+	line-height: 1;
+}
+
+.poster-pic-box a img {
+	vertical-align: middle;
+}
+
+#poster-detail {
+	background: #232323;
+	min-width: 950px;
+}
+
+.crumbs {
+	height: 24px;
+	line-height: 24px;
+	background: #474340;
+	width: 100%;
+	text-indent: 10px;
+}
+
+.crumbs,.crumbs * {
+	color: #EFEFEF;
+}
+
+#poster-title h2 {
+	color: #C8C8C8;
+	font: 400 24px "microsoft yahei";
+	margin: 10px 0 0;
+}
+
+#poster-title span {
+	color: #F04720;
+}
+
+#poster-title .author {
+	float: left;
+	line-height: 20px;
+	margin-top: 5px;
+}
+
+#share-to,#share-to h4,#share-to ul,#share-to li {
+	float: left;
+}
+
+#share-to {
+	margin: 5px 0 5px 30px; *
+	margin-bottom: 0;
+}
+
+#share-to h4 {
+	font-weight: normal;
+	color: #c8c8c8;
+	width: 40px;
+	line-height: 20px;
+}
+
+#share-to li {
+	list-style-type: none;
+	margin-right: 3px;
+	width: 20px;
+}
+
+#share-to li:hover {
+	background-position: 0 -200px;
+}
+
+#share-to a {
+	display: block;
+	width: 16px;
+	padding: 2px;
+	height: 16px;
+	text-indent: -1000px;
+	overflow: hidden;
+}
+
+#share-to a:hover {
+	_background-color: #515151;
+}
+
+#share-to #share-qq {
+	background-position: 0 -230px;
+}
+
+#share-to #share-sina {
+	background-position: 0 -250px;
+}
+
+#share-to #share-kaixin {
+	background-position: 0 -270px;
+}
+
+#share-to #share-douban {
+	background-position: 0 -290px;
+}
+
+#share-to #share-renren {
+	background-position: 0 -310px;
+}
+
+#share-to #share-tao {
+	background-position: 0 -330px;
+}
+
+.poster-page-navigation {
+	position: absolute;
+	right: 0;
+	top: -45px;
+}
+
+.poster-page-navigation a,.poster-page-navigation .page-info {
+	float: left;
+	height: 42px;
+	text-indent: -1000px;
+	overflow: hidden;
+	outline: none;
+}
+
+.poster-page-navigation .page-info {
+	text-align: center;
+	text-indent: 0;
+	font: 700 27px/ 42px "Microsoft Yahei";
+	color: #95908A;
+}
+
+.poster-page-navigation .page-info strong {
+	font-size: 33px;
+}
+
+.poster-page-navigation a.prev-page {
+	width: 96px;
+	background-position: -39px -96px;
+}
+
+.poster-page-navigation a.next-page {
+	width: 96px;
+	background-position: -39px -136px;
+}
+
+.poster-page-navigation a.view-all-images {
+	width: 42px;
+	background-position: 2px -96px;
+}
+
+.poster-container {
+	background: #373634;
+	padding: 10px 0;
+	margin-top: 5px;
+	clear: both;
+	position: relative;
+}
+
+#related-goods {
+	height: 26px;
+	padding-left: 15px;
+}
+
+#related-goods dt,#related-goods dd {
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	color: #F43D1D;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+#related-goods dt {
+	background-position: -38px -448px;
+	width: 66px;
+}
+
+#related-goods dd {
+	background: #232323;
+	color: #F43D1D;
+	border: 1px solid #3E3E3E;
+	margin-right: 2px;
+	cursor: pointer;
+}
+
+#related-goods dd.current {
+	background: #5B5B5B;
+}
+
+.poster-box {
+	padding: 10px 10px 0;
+	width: 660px;
+}
+
+.poster-original-image {
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+	width: 660px;
+}
+
+.poster-original-image .wrap {
+	display: inline-block;
+}
+
+.poster-original-image img {
+	border: 3px solid #232323;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.poster-original-image .related-goods-marker {
+	position: absolute;
+	text-align: left;
+}
+
+.poster-original-image .related-goods-marker .marked-area {
+	display: block;
+	position: relative;
+	z-index: 1;
+}
+
+.poster-original-image .related-goods-marker .marked-area b {
+	display: block;
+	border: 1px solid #000;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.poster-original-image .related-goods-marker .marked-area .shadow-1 {
+	opacity: .05;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
+	filter: alpha(opacity =                                             5);
+	background: #CCC;
+	left: 1px;
+	top: 1px;
+}
+
+.poster-original-image .related-goods-marker .marked-area .shadow-2 {
+	opacity: .10;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+	filter: alpha(opacity =                                             10);
+	left: 2px;
+	top: 2px;
+}
+
+.poster-original-image .related-goods-marker .marked-area .shadow-3 {
+	opacity: .25;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+	filter: alpha(opacity =                                             25);
+	left: 3px;
+	top: 3px;
+}
+
+.poster-original-image .related-goods-marker .marked-area .inner-border
+	{
+	border: 1px solid #FFF;
+	background-position: -999px -999px;
+	left: 4px;
+	top: 4px;
+	z-index: 3;
+}
+
+.poster-original-image .tip-wrap {
+	width: 284px;
+	position: relative;
+	margin-top: -22px;
+	margin-left: 22px;
+	color: #A4A4A2;
+	text-align: left;
+}
+
+.poster-original-image .tip-wrap .corner {
+	clear: both;
+	border-top: 1px solid #000;
+	display: block;
+	margin: 0 1px;
+	height: 0;
+	overflow: hidden;
+	opacity: .80;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity =                                             80);
+}
+
+.poster-original-image .tip-wrap a {
+	color: #FFF;
+	text-decoration: underline;
+}
+
+.poster-original-image .tip-wrap img {
+	border: none;
+}
+
+.poster-original-image .goods-tip,.poster-original-image .p4p-goods-tip div
+	{
+	background: #232323;
+	padding: 6px;
+	clear: both;
+	cursor: pointer;
+}
+
+.poster-original-image .goods-tip a {
+	font-weight: bold;
+}
+
+.poster-original-image .goods-tip .goods-image {
+	float: left;
+	overflow: hidden;
+	background: #FFF;
+	border: 1px solid #E8E8E8;
+}
+
+.poster-original-image .goods-tip .goods-image,.poster-original-image .goods-tip .goods-image a
+	{
+	width: 100px;
+	height: 100px;
+}
+
+.poster-original-image .goods-tip .goods-image a { *
+	display: block; *
+	font-size: 88px;
+}
+
+.poster-original-image .goods-tip .goods-detail {
+	float: right;
+	width: 160px;
+	height: 110px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.poster-original-image .goods-tip .goods-detail dt {
+	float: left;
+	clear: left;
+}
+
+.poster-original-image .goods-tip .goods-detail dd {
+	clear: right;
+}
+
+.poster-original-image .goods-tip .goods-detail dt.goods-name {
+	display: none;
+}
+
+.poster-original-image .goods-tip .goods-detail dd.goods-price {
+	color: #EE2700;
+}
+
+.poster-original-image .p4p-goods-tip div {
+	margin-top: 1px;
+	height: 52px;
+	overflow: hidden;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-image {
+	float: left;
+	overflow: hidden;
+	width: 50px;
+	height: 50px;
+	border: 1px solid #E8E8E8;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-detail {
+	float: right;
+	width: 198px;
+	line-height: 24px;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-detail dt {
+	float: left;
+	clear: left;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-detail dd {
+	clear: right;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-detail dt.goods-name {
+	display: none;
+}
+
+.poster-original-image .p4p-goods-tip .p4p-goods-detail dd.p4p-goods-price
+	{
+	color: #EE2700;
+}
+
+.poster-desciption {
+	clear: both;
+	color: #FFF;
+	font: 14px/ 21px tahoma;
+	margin: 10px 0;
+	text-indent: 2em;
+	overflow: hidden;
+	word-break: break-all;
+}
+
+.poster-desciption a {
+	color: #FFF;
+}
+
+.poster-desciption a:hover {
+	color: #F60;
+}
+
+#poster-tags {
+	margin: 10px 0;
+}
+
+#poster-tags span,#poster-tags a.h {
+	color: #F04720;
+}
+
+#poster-tags a {
+	color: #948F89;
+	margin: 0 5px;
+}
+
+#related-goods-v1-btn {
+	float: right;
+	width: 114px;
+	height: 45px;
+	margin-top: -30px;
+	font: 700 14px/ 31px tahoma;
+	text-indent: 18px;
+	background-position: 0 -50px;
+}
+
+#related-goods-v1-btn a {
+	display: block;
+	width: 111px;
+	height: 30px;
+	color: #222;
+}
+
+.poster-sidebar {
+	width: 85px;
+}
+
+.poster-sidebar .corner {
+	clear: both;
+	border-top: 1px solid #1F1F1F;
+	display: block;
+	margin: 0 1px;
+	height: 0;
+	overflow: hidden;
+}
+
+.poster-sidebar .wrap {
+	padding: 3px;
+	background: #1F1F1F;
+}
+
+.poster-sidebar #poster-prev,.poster-sidebar #poster-next {
+	background-color: #353535;
+	height: 94px;
+	overflow: hidden;
+	margin: -1px 0;
+}
+
+.poster-sidebar #poster-prev {
+	background-position: -40px -180px;
+}
+
+.poster-sidebar #poster-next {
+	background-position: -40px -280px;
+}
+
+.poster-sidebar #poster-prev a,.poster-sidebar #poster-next a {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	overflow: hidden;
+	width: 84px;
+	height: 72px;
+	margin: 2px auto 0; *
+	display: block; *
+	font-family: Arial; *
+	line-height: 1; *
+	font-size: 63px;
+}
+
+.poster-sidebar #poster-prev img,.poster-sidebar #poster-next img {
+	vertical-align: middle;
+}
+
+.poster-sidebar #poster-prev span,.poster-sidebar #poster-next span {
+	display: none;
+}
+
+.poster-sidebar .poster-thumb .prev-thumb,.poster-sidebar .poster-thumb .next-thumb
+	{
+	display: block;
+	width: 24px;
+	height: 15px;
+	margin: 5px auto;
+	overflow: hidden;
+	text-indent: -10000px;
+	border: 1px solid #1F1F1F;
+	z-index: 99;
+	position: relative;
+	outline: none;
+}
+
+.poster-sidebar .poster-thumb .prev-thumb:hover,.poster-sidebar .poster-thumb .next-thumb:hover
+	{
+	border-color: #505050;
+	background-color: #383735;
+}
+
+.poster-sidebar .poster-thumb .prev-thumb {
+	background-position: 6px -166px;
+}
+
+.poster-sidebar .poster-thumb .next-thumb {
+	background-position: 6px -145px;
+}
+
+.poster-sidebar .poster-thumb-list {
+	height: 350px;
+	width: 83px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.poster-sidebar .poster-thumb-list li {
+	width: 83px;
+	height: 70px;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.poster-sidebar .poster-thumb-list a {
+	display: table-cell;
+	width: 84px;
+	height: 66px;
+	vertical-align: middle;
+	text-align: center;
+	overflow: hidden; *
+	display: block; *
+	font-family: Arial; *
+	line-height: 1; *
+	font-size: 58px;
+}
+
+.poster-sidebar .poster-thumb-list div {
+	display: table-cell;
+	width: 84px;
+	height: 67px;
+	vertical-align: middle;
+	text-align: center;
+	overflow: hidden; *
+	display: block; *
+	font-family: Arial; *
+	line-height: 1; *
+	font-size: 58px;
+}
+
+.poster-sidebar .poster-thumb-list img {
+	vertical-align: middle;
+	border: 1px solid #64635E;
+	cursor: pointer;
+}
+
+.poster-sidebar .poster-thumb-list .thumbCurrent {
+	position: absolute;
+	display: block;
+	width: 77px;
+	height: 63px;
+	left: 0;
+	top: 0;
+	border: 3px solid #F43D1D;
+}
+
+#poster-recommended li {
+	list-style-type: none;
+	text-align: center;
+	width: 140px;
+	height: 150px;
+}
+
+#poster-recommended li .thumb-wrap {
+	overflow: hidden;
+	border: 3px solid #2E2C2D;
+	width: 132px;
+	height: 114px;
+}
+
+#poster-recommended li .thumb-wrap:hover,#poster-recommended li .hover {
+	border-color: #F43D1D;
+}
+
+#poster-recommended li .thumb-wrap,#poster-recommended li .thumb-wrap a
+	{
+	width: 132px;
+	height: 114px; *
+	font-size: 104px;
+}
+
+#poster-recommended li a {
+	color: #7A7C7B;
+}
+
+#poster-recommended li span {
+	line-height: 27px;
+	font-weight: 700;
+}
+
+#poster-recommended li a:hover {
+	color: #e8e8e8;
+}
+
+#poster-detail .recommend-h2 {
+	height: 45px;
+	overflow: hidden;
+	text-indent: -10000px;
+}

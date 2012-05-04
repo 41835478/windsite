@@ -1,0 +1,109 @@
+body {
+	background-repeat: repeat;
+}
+
+.tb-shop .shop-category .bd {
+	padding: 0;
+	border: none;
+}
+
+.tb-shop .shop-category .hd {
+	display: none;
+}
+
+.tb-shop .shop-category {
+	margin-top: 0px;
+}
+
+.tb-shop .shop-category  h4,.tb-shop .shop-category .bd {
+	background: none;
+	padding: 0;
+}
+
+.tb-shop .shop-category  h4 i {
+	display: none;
+}
+
+.tb-shop .shop-category .cats,.tb-shop .shop-category .cat,.tb-shop .shop-category ul
+	{
+	width: auto;
+	padding: 0;
+	border: none;
+}
+
+.tb-shop .shop-category .cat,.tb-shop .shop-category .cat h4,.tb-shop .shop-category .cat_hd,.tb-shop .shop-category  .cat-bd li
+	{
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/35274384/T27wdyXcRaXXXXXXXX_!!35274384.png)
+		0 0 no-repeat;
+}
+
+.tb-shop .shop-category .cat {
+	text-align: center;
+	margin-top: 5px;
+	background-position: 0 -40px;
+}
+
+.tb-shop .shop-category .cat a {
+	line-height: 40px;
+	color: #ffffff;
+}
+
+.tb-shop .shop-category .cat h4 {
+	padding-left: 28px;
+	height: 40px;
+	text-align: left;
+	overflow: hidden;
+	background-position: 0 0;
+}
+
+.tb-shop .shop-category .cat h4,.tb-shop .shop-category .cat h4 a {
+	line-height: 42px;
+	color: #ffff00;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .cat h4:hover {
+	background-position: 0 -40px;
+}
+
+.tb-shop .shop-category .expand {
+	padding: 0;
+	background-position: 0 -40px;
+}
+
+.tb-shop .shop-category .cat-hd {
+	line-height: 30px;
+	margin-bottom: 0 !important;
+	margin-top: 5px;
+}
+
+.tb-shop .shop-category .expand .cat-hd {
+	background-position: 0 0px;
+}
+
+.tb-shop .shop-category .collapse {
+	background-position: 0 0px;
+}
+
+.tb-shop .shop-category  .cat-bd {
+	margin-left: 0;
+}
+
+.tb-shop .shop-category  .cat-bd li {
+	height: 20px;
+	text-align: left;
+	overflow: hidden;
+	padding: 0 0 0 36px;
+	background-position: 0 -120px;
+}
+
+.tb-shop .shop-category  .cat-bd a {
+	line-height: 22px;
+	color: #efefef;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category  .cat-bd li:hover {
+	background-position: 0 -140px;
+}

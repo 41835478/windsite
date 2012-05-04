@@ -1,0 +1,205 @@
+body {
+	background-color: #040404;
+	background-image:
+		url(http://img02.taobaocdn.com/bao/uploaded/i2/T1TL8UXgtnXXb1upjX.jpg)
+		;
+	background-repeat: repeat;
+}
+
+.tb-shop html {
+	background-position: center 0;
+	background-repeat: repeat-y;
+	background-image:
+		url(http://img07.taobaocdn.com/bao/uploaded/i7/T11YFWXmXwXXb1upjX.jpg)
+		;
+}
+
+.tb-shop a {
+	color: #000;
+	text-decoration: none;
+}
+
+.tb-shop .col-sub a {
+	color: #060605;
+	text-decoration: none;
+}
+
+.tb-shop .col-sub a:hover {
+	color: #1A2FBA;
+	text-decoration: none;
+}
+
+.tb-shop .pic a:hover img {
+	height: 96%;
+	border: #1A2FBA solid 3.2px;
+	padding: 0px;
+	z-index: 99;
+}
+
+.tb-shop .pic {
+	border: #8591DE solid 1px;
+}
+
+.tb-shop .col-sub .box .bd {
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/98466514/T2HK8zXjVaXXXXXXXX_!!98466514.jpg)
+		;
+}
+
+.tb-shop .col-main .box .bd {
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/98466514/T2HK8zXjVaXXXXXXXX_!!98466514.jpg)
+		;
+}
+
+.tb-shop .shop-category .bd .cat h4 a {
+	padding-left: 40px;
+	padding-top: 15px;
+	line-height: 14px;
+	height: 35px;
+	color: #000;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/98466514/T27vVzXe8XXXXXXXXX_!!98466514.jpg)
+		no-repeat;
+	font-size: 12px;
+	width: 165px;
+	text-decoration: none;
+	display: block;
+	font-weigth: 900;
+}
+
+.tb-shop .shop-category .bd .cat h4 a:hover {
+	color: #1A2FBA;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd .cat-bd a {
+	padding-left: 28px;
+	line-height: 20px;
+	height: 20px;
+	color: #000;
+	font: 12px;
+	width: 150px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/98466514/T2g1pzXf8XXXXXXXXX_!!98466514.gif)
+		no-repeat;
+	display: block;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd .cat-bd a:hover {
+	color: #1A2FBA;
+	text-decoration: none;
+}
+
+.tb-shop .col-main .hd {
+	height: 43px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/98466514/T21LdzXfVaXXXXXXXX_!!98466514.gif)
+		right top no-repeat;
+	border: none;
+}
+
+.tb-shop .col-main .hd h3 {
+	padding-left: 60px;
+	padding-top: 5px;
+	color: #000;
+	font-size: 14px;
+	font-family: & quot; &#40657; &#20307; & quot;;
+	font-weight: 800;
+}
+
+.tb-shop .col-sub .hd {
+	height: 43px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/98466514/T2m2tzXaVaXXXXXXXX_!!98466514.gif)
+		right top no-repeat;
+	border: none;
+}
+
+.tb-shop .col-sub .hd h3 {
+	padding-left: 60px;
+	padding-top: 5px;
+	color: #000;
+	font-size: 12px;
+	font-family: & quot; &#40657; &#20307; & quot;;
+	font-weight: 800;
+}
+
+.tb-shop .col-sub .bd .tab-nav .selected span {
+	background-color: #F2E3A8;
+}
+
+.tb-shop .col-sub .bd .tab-nav li {
+	background-color: #BA851B;
+}
+
+.tb-shop .shop-header .nav {
+	height: 40px;
+	width: 950px;
+	border: 0;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-image:
+		url(http://img02.taobaocdn.com/imgextra/i2/98466514/T2DfVzXX4XXXXXXXXX_!!98466514.jpg)
+		;
+}
+
+.tb-shop .shop-header .nav ul li a em {
+	height: 30px;
+	color: #180497;
+	text-align: center;
+	width: 140px;
+	background: none;
+	padding: 7px 0px 0px 0px;
+}
+
+.tb-shop .shop-header .nav li a {
+	background: none;
+	text-decoration: none;
+}
+
+.tb-shop .shop-header .nav li a:hover em {
+	height: 23px;
+	color: #000;
+	text-align: center;
+	background: url() no-repeat -12px;
+	width: 140px;
+}
+
+.tb-shop shop-header .nav li.current a em {
+	color: #763b58;
+}
+
+.tb-shop .slider-promo img {
+	background: #fff
+		url(http://img08.taobaocdn.com/tps/i8/T1LSBHXeRdXXXXXXXX-16-16.gif)
+		center no-repeat;
+	display: block;
+}
+
+.tb-shop .slider-promo .lst-trigger {
+	overflow-y: hidden;
+	height: 40px;
+	margin-bottom: -13px;
+}
+
+.tb-shop .slider-promo .lst-trigger .current {
+	height: 40px;
+	color: #fff;
+	width: 18px;
+	background-color: transparent;
+	margin-top: 0px;
+}
+
+.tb-shop .slider-promo .lst-trigger li {
+	height: 20px;
+	color: #FD2C7E;
+	width: 18px;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/98466514/T2aJhzXkRaXXXXXXXX_!!98466514.gif)
+		no-repeat;
+	background-color: transparent;
+	margin-top: 20px;
+	border: none;
+}

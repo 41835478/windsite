@@ -1,0 +1,47 @@
+.col-main .box .shop-brand .bd,.col-sub .box .shop-brand .bd,.col-extra .box .shop-brand .bd
+	{
+	background-color: #F1F1F1;
+}
+
+.shop-brand ul {
+	zoom: 1;
+}
+
+.shop-brand ul::after {
+	content: "\20";
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.shop-brand li {
+	float: left;
+	width: 180px;
+	height: 160px;
+	padding-left: 5px;
+	text-align: center;
+}
+
+.shop-brand li img {
+	width: 180px;
+	height: 123px;
+	margin-bottom: 5px;
+}
+
+.grid-s5m0e5 .shop-brand li,.grid-m0s5e5 .shop-brand li,.grid-s5e5m0 .shop-brand li,.col-sub .shop-brand li,.col-extra .shop-brand li
+	{
+	padding-left: 0px;
+	width: 171px;
+	height: 150px;
+}
+
+.grid-s5m0e5 .shop-brand li,.grid-m0s5e5 .shop-brand li,.grid-s5e5m0 .shop-brand li
+	{
+	padding-left: 8px;
+}
+
+.grid-s5m0e5 .shop-brand li img,.grid-m0s5e5 .shop-brand li img,.grid-s5e5m0 .shop-brand li img,.col-sub .shop-brand li img,.col-extra .shop-brand li img
+	{
+	width: 171px;
+	height: 117px;
+}

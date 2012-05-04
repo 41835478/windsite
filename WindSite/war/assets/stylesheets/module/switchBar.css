@@ -1,0 +1,57 @@
+.switch-bar span {
+	background: transparent url(images/T1bZ8vXjxAXXXXXXXX-300-900.png)
+		no-repeat scroll 500px 500px;
+}
+
+.switch-bar {
+	position: fixed;
+	_position: absolute;
+	z-index: 10;
+	overflow: hidden;
+	width: 11px;
+	margin-left: -20px;
+}
+
+.switch-bar a {
+	display: block;
+	border-right: 1px solid #F6EA89;
+	width: 10px;
+	height: 800px;
+}
+
+.switch-bar a:focus {
+	outline: none;
+}
+
+.switch-bar a:hover span {
+	background-position: -27px -121px;
+}
+
+.switch-bar span {
+	background-position: 1px -121px;
+	display: block;
+	text-indent: -999em;
+	height: 47px;
+	width: 10px;
+	position: absolute;
+	left: 0;
+	top: 360px;
+	z-index: 10;
+}
+
+.expanded .switch-bar {
+	margin-left: 0;
+}
+
+.expanded .switch-bar a {
+	border-right-width: 0;
+	border-left: 1px solid #F6EA89;
+}
+
+.expanded .switch-bar span {
+	background-position: -55px -121px;
+}
+
+.expanded .switch-bar a:hover span {
+	background-position: -84px -121px;
+}

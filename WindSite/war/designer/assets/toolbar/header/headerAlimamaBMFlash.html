@@ -1,0 +1,57 @@
+<script type="text/javascript">
+	$(function() {
+		var flash=$('.ui-designer-header').find('.header-flash');
+		if(flash.length>0){
+			$('#headerAlimamaBM').val(flash.attr('src'));
+		}
+		$('#modifyHeaderAlimamaBM')
+				.button()
+				.click(
+						function() {
+							var src = $('#headerAlimamaBM').val();
+							var url = DesignerUtils.validateAlimamaFlashBM(src);
+							if (url && url.length > 0) {
+								var win = window.open(url);
+								if (!win) {
+									alert('请设置浏览器允许打开当前弹出窗口');
+								}
+							}
+						});
+		$('#confirmHeaderAlimamaBM').button().click(function() {
+			var src = $('#headerAlimamaBM').val();
+			DesignerUtils.validateAlimamaFlashBM(src);
+			if (src && src.length > 0) {
+				$('.ui-designer-header').find('.header-image').remove();
+				$('.ui-designer-header').css('background','');
+				var flash=$('.ui-designer-header').find('.header-flash');
+				if(flash.length>0){
+					var oldSrc=flash.attr('src');
+					if(src!=oldSrc){
+						flash.attr('src',src);
+						WidgetUtils.addHeaderFlash(flash);
+					}
+				}else{
+					flash=$('<div class="header-flash" src="'+src+'"></div>');
+					$('.ui-designer-header').prepend(flash);
+					WidgetUtils.addHeaderFlash(flash);
+				}
+			}
+			$('#ui-designer-header-tools-dialog').dialog('close');
+		});
+	});
+	//-->
+</script>
+<h3><a style="color: #FF0084;"
+	href="http://banner.alimama.com/templets?channel_id=aboard&measurement=950x150"
+	target="_blank">去阿里妈妈制作广告牌</a></h3>
+<br />
+广告牌Flash地址:
+<input type="text" id="headerAlimamaBM" size="80">
+<br />
+<br />
+<button id="modifyHeaderAlimamaBM">编辑此广告牌</button>
+<br />
+<br />
+<br />
+<br />
+<button id="confirmHeaderAlimamaBM">确认</button>

@@ -1,0 +1,55 @@
+.shop-lady-category .category {
+	float: left;
+	margin: 5px;
+	width: 178px;
+	height: 93px;
+	overflow: hidden;
+	_display: inline;
+}
+
+.shop-lady-category .bd {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.grid-s5m0 .shop-lady-category .category,.grid-m0s5 .shop-lady-category .category
+	{
+	margin-left: 3px;
+	margin-right: 2px;
+}
+
+.shop-lady-category .category h5 {
+	margin: 0 0 7px;
+	padding: 0 0 0 11px;
+	height: 15px;
+	color: #fff;
+	line-height: 15px;
+	font-weight: 400;
+	background: #8aa5e2
+		url(http://a.tbcdn.cn/sys/modules/1.0/top_nav/top-nav.gif) 0 0
+		no-repeat;
+}
+
+.shop-lady-category .category h5 a {
+	color: #fff;
+}
+
+.shop-lady-category .category h5 a:hover {
+	color: #fff !important;
+}
+
+.shop-lady-category .category li {
+	float: left;
+	margin: 0 0 0 -5px;
+	line-height: 14px;
+	height: 18px;
+}
+
+.shop-lady-category .category li a {
+	display: block;
+	padding: 0 14px 0 9px;
+	border-left: 1px solid #ccc;
+	white-space: nowrap;
+	color: #666;
+}

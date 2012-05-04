@@ -1,0 +1,51 @@
+<script type="text/javascript">
+	$(function() {
+		$("#sTemplateSaveOther").button().click(function() {
+			var _name = $('#s_template_name').val();
+			var _skin = $('#s_template_skin').val();
+			var _desc = $('#s_template_desc').val();
+			if (_name == '') {
+				alert('系统模板名称不能为空');
+				return;
+			}
+			if (_skin == '') {
+				alert('英文名称不能为空');
+				return;
+			}
+			$('#ui-designer-topbar').designerTopBar('designerSysSaveOther');
+		});
+		//取消
+		$('#sTemplateUpdateClose').button().click(function() {
+			$('#ui-designer-topbar').tabs( {
+				selected : -1
+			});
+		});
+	});
+	//-->
+</script>
+<table cellspacing="5">
+	<tr>
+		<td><label for="s_template_name">模板名称:</label></td>
+		<td><input type="text" id="s_template_name"
+			style="height: 20px; width: 250px;"
+			class="text ui-widget-content ui-corner-all" /></td>
+	</tr>
+	<tr>
+		<td><label for="s_template_skin">英文名称:</label></td>
+		<td><input type="text" id="s_template_skin"
+			style="height: 20px; width: 250px;"
+			class="text ui-widget-content ui-corner-all" /></td>
+	</tr>
+	<tr>
+		<td><label for="template_desc">模板描述</label></td>
+		<td><textarea id="s_template_desc"
+			style="height: 100px; width: 250px;"
+			class="ui-widget-content ui-corner-all"></textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<button id="sTemplateSaveOther">新增</button>
+		<button id="sTemplateUpdateClose">关闭</button>
+		</td>
+	</tr>
+</table>

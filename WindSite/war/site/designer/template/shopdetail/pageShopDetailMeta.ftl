@@ -1,0 +1,1 @@
+${shop.title},掌柜:${shop.nick}

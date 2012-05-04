@@ -1,0 +1,318 @@
+body {
+	background-color: #FEE8EF;
+	background-repeat: no-repeat;
+	background-position: center 0;
+}
+
+#hd {
+	background-repeat: repeat;
+}
+
+.tb-shop a {
+	color: #b92757;
+	text-decoration: none;
+}
+
+.tb-shop a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+
+.tb-shop .shop-header .nav ul li {
+	margin-right: 0px;
+	line-height: 37px;
+	height: 37px;
+	overflow: hidden;
+	background-image: none;
+}
+
+.tb-shop .shop-header .nav li {
+	height: 37px;
+	width: 95px;
+	display: block;
+	float: left;
+}
+
+.tb-shop .shop-header .nav li a {
+	height: 37px;
+	width: 95px;
+	display: block;
+	float: left;
+}
+
+.tb-shop .shop-header .nav li a em {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	line-height: 37px;
+	height: 37px;
+	text-align: center;
+	color: #f05d8f;
+	width: 95px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/17714192/T21mBzXnNaXXXXXXXX_!!17714192.jpg)
+		center top;
+	font-size: 14px;
+	padding-bottom: 0px;
+}
+
+.tb-shop .shop-header .nav {
+	position: absolute;
+	height: 37px;
+	width: 950px;
+	overflow: hidden;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/17714192/T2wmFzXmVaXXXXXXXX_!!17714192.jpg)
+		repeat-x 0px 0px;
+	z-index: 1;
+}
+
+.tb-shop .shop-header .nav li.current a em {
+	color: #f05d8f;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/17714192/T2bCFzXnpaXXXXXXXX_!!17714192.jpg)
+		50%;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tb-shop .shop-header .nav ul {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	line-height: 37px;
+	height: 37px;
+	padding-bottom: 0px;
+}
+
+.tb-shop .shop-header .nav li a:hover em {
+	color: #f05d8f;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/17714192/T2bCFzXnpaXXXXXXXX_!!17714192.jpg)
+		50%;
+}
+
+.tb-shop .shop-header .nav li a:hover {
+	font-size: 14px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.tb-shop .shop-category .cats .cat {
+	border-top-style: none;
+}
+
+.tb-shop .shop-category .bd ul h4 a:hover {
+	line-height: 39px;
+	text-align: center;
+	color: #ed667d;
+	font-size: 14px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/17714192/T2ZmFzXmXaXXXXXXXX_!!17714192.jpg)
+		#ffffff no-repeat left top;
+	width: 150px;
+	display: block;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd ul h4 a {
+	line-height: 39px;
+	text-align: center;
+	color: #ed667d;
+	font-size: 14px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/17714192/T2_9FzXlNaXXXXXXXX_!!17714192.jpg)
+		#ffffff no-repeat left top;
+	width: 150px;
+	display: block;
+	text-decoration: none;
+}
+
+.tb-shop .shop-category .bd ul ul a:hover {
+	line-height: 30px;
+	height: 30px;
+	text-align: center;
+	color: #ed667d;
+	font-size: 12px;
+	background:
+		url(http://img03.taobaocdn.com/imgextra/i3/17714192/T2K9FzXmxaXXXXXXXX_!!17714192.jpg)
+		#ffffff no-repeat left top;
+	width: 150px;
+	display: block;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.tb-shop .shop-category .bd ul ul a {
+	line-height: 30px;
+	height: 30px;
+	text-align: center;
+	color: #ed667d;
+	font-size: 12px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/17714192/T2nmJzXlpaXXXXXXXX_!!17714192.jpg)
+		#ffffff no-repeat left top;
+	width: 150px;
+	display: block;
+}
+
+.tb-shop .shop-search-x .bd {
+	height: 36px;
+	width: 950px;
+	overflow: hidden;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/17714192/T2BmJzXk4aXXXXXXXX_!!17714192.jpg)
+		;
+}
+
+.tb-shop .shop-search .search-form .keyword {
+	color: #b92757;
+}
+
+.tb-shop .shop-search input.checkbox {
+	color: #b92757;
+}
+
+.tb-shop .shop-search-x .keys {
+	padding-left: 300px;
+	line-height: 36px;
+	height: 36px;
+	color: #b92757;
+	text-align: left;
+	width: 450px;
+	overflow: hidden;
+	font-size: 12px;
+	float: left;
+}
+
+.tb-shop .shop-search-x .keys a {
+	color: #b92757;
+}
+
+.tb-shop .shop-search-x .keys a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+.tb-shop .shop-search-x .search-x {
+	line-height: 36px;
+	height: 36px;
+	width: 940px;
+	background: none;
+	margin-left: 10px;
+	margin-top: 0px;
+	padding: 0;
+	border: none;
+}
+
+.tb-shop .shop-search-x .form .text {
+	padding-right: 0px;
+	padding-left: 0px;
+	border-top-style: none;
+	padding-top: 10px;
+	width: 108px;
+	border-right-style: none;
+	padding-bottom: 0px;
+	border-bottom-style: none;
+	margin-right: 0px;
+	height: 16px;
+	color: #b92757;
+	border-left-style: none;
+	background: none;
+	margin-left: 14px;
+}
+
+.tb-shop .shop-search-x .form {
+	line-height: 36px;
+	height: 36px;
+	color: #color : #b92757;
+	width: 180px;
+	float: right;
+}
+
+.tb-shop .shop-search-x .form .button {
+	margin-right: 7px;
+	text-indent: -99em;
+	cursor: pointer;
+	height: 25px;
+	width: 33px;
+	background: none;
+	overflow: hidden;
+	margin-top: 6px;
+	float: right;
+}
+
+.tb-shop .shop-search-x .form label {
+	color: #color : #b92757 !important;
+	margin-left: 0px !important;
+}
+
+.tb-shop .grid-m .col-main .box .hd {
+	height: 44px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/17714192/T2SCJzXkxaXXXXXXXX_!!17714192.jpg)
+		no-repeat;
+}
+
+.tb-shop .grid-s5m0 .col-main .box .hd,.tb-shop .grid-m0s5 .col-main .box .hd
+	{
+	height: 44px;
+	background:
+		url(http://img02.taobaocdn.com/imgextra/i2/17714192/T2_mJzXj4aXXXXXXXX_!!17714192.jpg)
+		no-repeat;
+}
+
+.tb-shop .grid-m .col-main .box .hd h3 {
+	padding-left: 0px;
+	padding-top: 2px;
+	color: #f778a5;
+	text-align: center;
+	font-size: 14px;
+}
+
+.tb-shop .grid-s5m0 .col-main .box .hd h3,.tb-shop .grid-m0s5 .col-main .box .hd
+	{
+	padding-left: 0px;
+	padding-top: 2px;
+	color: #f778a5;
+	text-align: center;
+	font-size: 14px;
+}
+
+.tb-shop .col-sub .hd,.tb-shop .col-extra .hd {
+	height: 38px;
+	background:
+		url(http://img01.taobaocdn.com/imgextra/i1/17714192/T2C9NzXi4aXXXXXXXX_!!17714192.jpg)
+		no-repeat;
+}
+
+.tb-shop .col-sub .hd h3,.tb-shop .col-extra .hd.h3 {
+	padding-left: 0px;
+	padding-top: 5px;
+	color: #f778a5;
+	text-align: center;
+	font-size: 14px;
+}
+
+.tb-shop .slider-promo .lst-trigger li {
+	margin-right: 0px;
+	line-height: 25px;
+	height: 25px;
+	color: #ffffff;
+	background:
+		url(http://img04.taobaocdn.com/imgextra/i4/17714192/T2omNzXjtaXXXXXXXX_!!17714192.jpg)
+		!important;
+	width: 22px;
+	border: none;
+}
+
+.tb-shop .slider-promo .lst-trigger .current {
+	line-height: 25px;
+	height: 25px;
+	color: #000000;
+	width: 25px;
+	background-color: none !important;
+	background-image:
+		url(http://img01.taobaocdn.com/imgextra/i1/17714192/T2TSxzXn8aXXXXXXXX_!!17714192.jpg)
+		!important;
+}

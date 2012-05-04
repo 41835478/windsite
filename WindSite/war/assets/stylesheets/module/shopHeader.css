@@ -1,0 +1,117 @@
+.cat-items {
+	background-color: #FFF;
+	border: 1px solid #787878;
+	border-top-width: 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 5px 0 5px 10px;
+	width: 320px;
+	max-height: 256px;
+	_height: 200px;
+	z-index: 999;
+	-moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+	zoom: 1;
+}
+
+.cat-items .cat-hd {
+	font-size: 12px;
+	zoom: 1;
+}
+
+.cat-items .bd {
+	background:
+		url("http://img05.taobaocdn.com/tps/i5/T1lFtwXjdhXXXXXXXX-1-4.png")
+		repeat-y scroll 145px 0;
+	margin-top: 5px;
+	overflow: auto;
+	zoom: 1;
+}
+
+.cat-item {
+	float: left;
+	margin: 0 10px 5px 0;
+	width: 140px;
+	zoom: 1;
+}
+
+.cat-item a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+	zoom: 1;
+}
+
+.shop-header {
+	position: relative;
+	overflow: hidden;
+	z-index: 101;
+	background-repeat: no-repeat;
+}
+
+.shop-header .hidden,.shop-banner .hidden {
+	display: none !important;
+}
+
+.shop-header .nav {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 102;
+	height: 29px;
+	width: 950px;
+	bottom: 0px;
+}
+
+.shop-header .nav-left {
+	
+}
+
+.shop-header .nav-right {
+	
+}
+
+.shop-header .nav-center {
+	position: static;
+	margin: 0px auto;
+}
+
+.shop-header .nav ul {
+	width: 100%;
+	height: 25px;
+	padding: 0px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.shop-header .nav li,.shop-header .nav li a,.shop-header .nav li a em {
+	float: left;
+	display: block;
+	height: 25px;
+	line-height: 27px;
+}
+
+.shop-header .nav li {
+	margin-right: 2px;
+	background-image: none;
+	overflow: hidden;
+}
+
+.shop-header .nav li a {
+	overflow: hidden;
+	padding-right: 5px;
+}
+
+.shop-header .nav li a em {
+	cursor: pointer;
+	overflow: hidden;
+	padding: 0 10px 0 15px;
+}
+
+.shop-header .nav li.current a em {
+	font-weight: 700;
+}

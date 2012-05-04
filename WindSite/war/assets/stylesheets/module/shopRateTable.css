@@ -1,0 +1,159 @@
+#XT_TabBar li,#XT_TabBar li a {
+	background:
+		url(http://img01.taobaocdn.com/tps/i1/T1zUFYXgpyXXXXXXXX-192-200.png)
+		no-repeat;
+}
+
+#XT_TabBar {
+	margin-top: 15px;
+	font-family: Tahoma, Helvetica, Arial, 'simsun', sans-serif;
+	border-bottom: 1px solid #8e0101;
+	height: 29px;
+	_overflow: hidden;
+}
+
+#XT_TabBar li {
+	float: left;
+	margin-right: 1px;
+	line-height: 29px;
+	overflow: hidden;
+	background-position: 0 -30px;
+	padding: 0 0 0 2px;
+	height: 29px;
+}
+
+#XT_TabBar li a {
+	display: block;
+	outline: none;
+	background-position: right -30px;
+	padding: 0 18px;
+	color: #333;
+}
+
+#XT_TabBar li a em {
+	color: #2853b4;
+	font-weight: bold;
+}
+
+#XT_TabBar li a:hover {
+	text-decoration: none;
+	color: #700800;
+}
+
+#XT_TabBar li.selected {
+	position: relative;
+	border-color: #f60;
+	font-weight: bold;
+	font-size: 14px;
+	background-position: 0 0;
+	height: 30px;
+}
+
+#XT_TabBar li.selected a,#XT_TabBar li.selected a:visited,#XT_TabBar li.selected a:hover
+	{
+	background-position: right 0;
+}
+
+.xt-rate {
+	table-layout: fixed;
+	border-top: 1px solid #e9e9e9;
+}
+
+.xt-rate tfoot td {
+	text-align: right;
+}
+
+.xt-rate th.ratee,.xt-rate th.things,.xt-rate .operate
+	{
+	text-align: center;
+}
+
+.xt-rate td {
+	padding: 17px 10px;
+	vertical-align: top;
+}
+
+.xt-rate td.cmt {
+	width: 85.5%;
+	width: 83.5% \9;
+	border-bottom: 1px solid #e9e9e9;
+}
+
+.xt-rate td.buyer {
+	width: 14.5%;
+	width: 17.5% \9;
+	border-bottom: 1px solid #e9e9e9;
+}
+
+.xt-rate .time-left {
+	color: #555;
+}
+
+.xt-rate td .btn {
+	font-size: 12px;
+	font-weight: normal;
+	margin-bottom: 5px;
+}
+
+.xt-rate .cmtInfo {
+	color: #999;
+}
+
+.xt-rate .date,.xt-rate .actSku {
+	padding-right: 12px;
+}
+
+.xt-rate p.rate {
+	max-width: 360px;
+	word-wrap: break-word;
+	margin-bottom: 6px;
+	line-height: 18px;
+	text-align: justify;
+	overflow: hidden; *
+	overflow: auto;
+}
+
+.xt-rate p.rate a,.xt-rate p.exp .link,.xt-rate p.rate .link
+	{
+	white-space: nowrap;
+	margin-right: 5px;
+}
+
+.xt-rate p.exp a {
+	margin-right: 5px;
+}
+
+.xt-rate p.exp {
+	color: #960;
+	margin-bottom: 2px;
+	max-width: 300px;
+	word-wrap: break-word;
+	overflow: hidden; *
+	overflow: auto;
+}
+
+.personal-info-fullwidth .xt-rate p.exp { *
+	width: 250px;
+}
+
+.xt-rate .price {
+	display: block;
+	line-height: 18px;
+}
+
+.xt-rate .price em {
+	color: #f60;
+	margin: 0 2px;
+}
+
+.xt-rate .things {
+	width: 300px;
+}
+
+.xt-rate .vip-icon {
+	margin-left: 4px;
+}
+
+.xt-rate .vip-icon img {
+	vertical-align: middle;
+}

@@ -1,0 +1,140 @@
+.col-sub .box .shop-rank .bd,.col-extra .box .shop-rank .bd {
+	padding: 3px 0 3px;
+}
+
+.shop-rank .tab-nav {
+	height: 27px;
+	_margin-bottom: -1px;
+	position: relative;
+	z-index: 1;
+}
+
+.shop-rank .tab-nav li {
+	float: left;
+	height: 26px;
+	margin-left: 5px;
+	border: 1px solid #b2d1ff;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	background-color: #f0f7ff;
+}
+
+.shop-rank .tab-nav span {
+	display: block;
+	line-height: 28px;
+	padding: 0 5px;
+	cursor: pointer;
+}
+
+.shop-rank .tab-nav .selected {
+	background-color: #FFF;
+	border-bottom: 1px solid #FFF;
+}
+
+.shop-rank .tab-nav .selected span {
+	color: #000;
+}
+
+.shop-rank .rank-panels {
+	border-top: 1px solid #b2d1ff;
+	text-align: center;
+}
+
+.shop-rank .rank-panel ul {
+	padding: 4px 8px;
+	margin-bottom: 15px;
+}
+
+.shop-rank .rank-panel ul li {
+	padding: 9px 0;
+	border-bottom: dashed 1px #eee;
+	height: 42px;
+	overflow: hidden;
+}
+
+.shop-rank .no-collect,.shop-rank .no-traded {
+	padding: 5px 15px;
+	border: 1px solid #ffd863;
+	zoom: 1;
+	display: inline-block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-image: -moz-linear-gradient(top, #fef7ca, #fff3a9);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fef7ca),
+		color-stop(1, #fff3a9) );
+	filter: progid :   DXImageTransform.Microsoft.gradient (   startColorStr
+		= 
+		 '#fef7ca', EndColorStr =   '#fff3a9' );
+}
+
+.shop-rank .no-collect a,.shop-rank .no-traded a {
+	line-height: 26px;
+	text-decoration: none;
+	color: #000;
+}
+
+.shop-rank .no-collect a:hover,.shop-rank .no-traded a:hover {
+	color: #f70;
+}
+
+.shop-rank .pic {
+	float: left;
+	margin-right: 10px;
+	border: 1px solid #CCC;
+	height: 40px;
+	text-align: center;
+	width: 40px;
+}
+
+.shop-rank .pic a {
+	display: table-cell;
+	height: 40px;
+	width: 40px; *
+	display: block; *
+	font-size: 30px; *
+	line-height: 1;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.shop-rank .pic img {
+	vertical-align: middle;
+}
+
+.shop-rank .desc,.shop-rank .price {
+	float: left;
+	width: 120px;
+	height: 14px;
+	line-height: 1.2;
+	text-align: left;
+	overflow: hidden;
+}
+
+.shop-rank .price {
+	font-size: 13px;
+	color: #F50;
+}
+
+.shop-rank .price i {
+	background-position: -96px -40px;
+}
+
+.shop-rank .collecter,.shop-rank .sale {
+	float: left;
+	width: 120px;
+	overflow: hidden;
+	line-height: 1.4;
+}
+
+.shop-rank .collecter i,.shop-rank .sale i {
+	float: left;
+	margin-right: 3px;
+}
+
+.shop-rank .collecter i {
+	background-position: -80px -56px;
+}
+
+.shop-rank .sale i {
+	background-position: -96px -56px;
+}

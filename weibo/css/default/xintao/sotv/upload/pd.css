@@ -1,0 +1,233 @@
+/*  */
+.navPdSub{height:36px;}#navPdSub{height:34px;line-height:34px;border-left:1px solid #cbcbcb;border-right:1px solid #cbcbcb;padding:0 15px;color:#bababa;}#navPdSub ul,#navPdSub li{display:inline;}#navPdSub li{margin-right:2px;font-size:14px;}#navPdSub p a{margin-left:13px;background:url(images/point.png) no-repeat 0 15px;padding-left:10px;display:inline-block;}#navPdSub .color1{margin-right:20px;}#navPdSub a{position:relative;display:inline;}#navPdSub img{position:absolute;z-index:8;top:-6px;right:-2px;}
+
+#contentA .left{width:700px;float:left;}
+#contentA .right{width:260px;float:right;}
+.bordA,.bordB{border:1px #c5c5c5 solid;background:#fff;}
+
+.title,.right h2,#contentA .blockLE h2,.pub .right h2{background:url(images/bg2.png) repeat-x;}
+.tab li,.navPdSub{background:url(images/bg3.png) repeat-x;}
+.pList li, .list12 li,.list14 li,.pg .arrow a span,.snList em,.menuA .now em{background:url(images/ico2.png) no-repeat;}
+.menuA li,#contentA .blockRG .search .btn{background:url(images/lnk.png) no-repeat;}
+
+/*  */
+.area{text-align:left;}
+.pp,.pt,.list12 ul,.list14 ul{width:100%;margin:0 auto;}
+.pp:after,.pt:after,.area:after,.clear:after{content:".";display:block;visibility:hidden;height:0;clear:both;}
+.left .pp{text-align:center;width:662px;}
+.pp img{display:block;margin:0 auto;}	
+.pp span{display:block;}
+.pt{line-height:20px;text-align:left;}
+.pt div{float:left;margin:0 10px 0 0;}			
+.pt p{clear:none}
+.pp li{float:left;display:inline;width:100%}
+.pt div img,.pp img,.pic img{border:1px #c5c5c5 solid;padding:1px}
+.pt div a:hover img,.pp a:hover img,.pic a:hover img{border:1px #dd0d0b solid}
+.pp li{position:relative;width:109px;height:148px;margin-right:29px;}
+.pp span{width:108px;margin:7px auto 0;display:block;line-height:18px;text-align:left}
+.pp span strong{display:block;font-weight:normal;margin:0 auto 2px;color:#4b4b4b;}
+.pp .end{margin:0}
+.pp .label{position:absolute;top:62px;left:2px;height:15px;width:103px;margin:0 auto;color:#FFF;line-height:14px;text-align:right;padding:3px 2px 0 0}
+.pp .label i{position:absolute;height:18px;width:105px;left:0;top:0;background:#000;filter:alpha(opacity=60);opacity: 0.60;}
+.pp .label code{background:url(images/q_c.gif) no-repeat;z-index:20;display:block;width:27px;height:16px;position:absolute;top:1px;left:1px;}
+.pp .label code.ch{background:url(images/q_g.gif) no-repeat;}
+.pp .label code.cb{background:url(images/q_b.gif) no-repeat;}
+.pp .label code.cc{background:url(images/q_c.gif) no-repeat;}
+.pp .label em{position:relative;z-index:2;color:#FFF}
+.pp .bp{top:129px}
+.bordA .pp{text-align:left;}
+.bordA .pp .subTitle a{color:#999999}
+
+.pp1 li{width:100px;margin-right:20px;_margin-right:16px;height:auto;}
+.pp1 .label{top:55px;width:94px;}
+.pp1 .label i{width:96px;}
+
+.pp2 li{width:153px;margin:0 16px 0 0;height:156px;}
+.pp2 li.end{margin-right:0;}
+.pp2 .label{top:76px;width:148px;}
+.pp2 .label i{width:149px;}
+
+.pp3 li{height:213px;}
+.pp3 .label{top:129px;}
+
+.pp4 li{width:109px;margin-right:29px;height:150px;}
+.pp4 .label{top:62px;width:103px;}
+.pp4 .label i{width:105px;}
+
+.pp6{margin:0 0 0 18px;}
+.pp6 span{width:136px;}
+.pp6 li{width:140px;height:170px;margin-right:33px;}
+.pp6 .label{top:85px;width:133px;}
+.pp6 .label i{width:135px;}
+
+.pp7 li{width:139px;height:175px;float:left;margin:0 10px;display:inline;}
+.pp7 span{width:139px;}
+.pp7 .label{top:74px;width:132px;}
+.pp7 .label i{width:134px;}
+.pp7 strong em{font-weight:bold;}
+
+.pbd{padding:1px;border:1px solid #c5c5c5;background:#fff;}
+a:hover .pbd{border-color:#dd0d0b;}
+
+.title{height:37px;line-height:25px;margin:0 2px;padding:15px 0 0;color:#c9c9c9;}
+.title span{float:left;margin-left:16px;display:inline}
+.title a{margin:0 12px}
+.title span a{margin:0}
+.right h2{height:25px;margin:0 2px;padding:12px 11px 3px;line-height:16px;text-align:right;}
+.right h2 span{float:left;font-weight:bold;font-size:14px;color:#333;}
+.right h2 a{color:#dd0d0b;}
+
+.news1 h3{font-weight:bold;font-size:14px;margin:5px 0 8px;}
+.news1 p{line-height:23px;}
+.news2 p{margin:5px 0 0;}
+
+.dDox .line{margin:0 10px 10px;width:auto;}
+
+/* 分类 */
+.list{width:240px;margin:0 auto 8px 12px;text-align:left;line-height:22px}
+.list li{width:48px;float:left}
+.list12 li{padding:3px 0;font-size:12px;line-height:16px;padding:3px 0 3px 12px}
+
+.c3 li{width:80px}
+.c4 li{width:60px;}
+.c5 li{width:115px;}
+
+.listL{float:left;margin:0 5px 0 15px;display:inline;}
+.listR{float:left;}
+
+.listA{padding:15px 0;margin:0 8px 0 21px;}
+.listA .news1{margin:0 0 20px;}
+.listA .news2{margin:10px 0 0;text-align:center;}
+.listA .listL{width:170px;margin:0 20px 0 0;}
+.listA .listR{width:470px;}
+
+.listB{margin:0 0 17px;}
+.listB .listL{width:338px;margin-right:20px;display:inline;}
+.listB .listR{width:310px;}
+.listB .line{margin:15px 0;}
+
+.listC .news1{width:205px;margin:3px 0 0;}
+
+.listD .photo{width:118px;float:left;}
+.listD dl{width:108px;float:right;text-align:left;}
+.listD dt{color:#dd0d0b;font-weight:bold;margin:8px 0 5px;font:18px "Microsoft YaHei";}
+.listD dd{color:#dd0d0b;}
+
+.pList li, .list12 li{padding:5px 0 5px 15px;background-position:0 6px;}
+
+.list21{text-align:left;}
+.list21  li{width:108px;float:left;padding:0 4px 8px 15px;display:inline; margin-right:0;}
+.list21  h4{margin:10px 0 5px;color:#4b4b4b;}
+.list21 h4 a{color:#4b4b4b;}
+.list21 .p2{color:#999;}
+.list21 .p1{margin-bottom:3px;line-height:15px;}
+.list21 .p1 img{padding:0;border:0;}
+.list21 .p1 a:hover img{border:0;}
+.list21 img{margin:0;}
+
+.tab{background:url(images/point1.png) repeat-x left bottom;height:26px;margin:-36px 8px 3px 5px;padding-left:120px;}
+.tab li{background-position:0 -55px;border:1px solid #C5C5C5;float:left;text-align:center;color:#5a5a5a;margin:0 5px 0 0;padding:6px 5px 0;height:18px;width:90px;cursor:pointer;}
+.tab li.active{background:#fff;border-bottom-color:#fff;}
+.tab li.active a{font-weight:bold;color:#dd0d0b;}
+.tab li a:hover{text-decoration:none;}
+.tab li a{margin:0;}
+
+.pg{padding:3px 15px;font-family:verdana;font-weight:bold;}
+.pg .arrow{width:30px;float:right;}
+.pg .arrow a{display:block;width:7px;height:13px;padding:0 3px;cursor:pointer;}
+.pg .arrow a span{display:inline-block;width:7px;height:13px;}
+.pg .arrow a.next{float:right;}
+.pg .arrow a.prev{float:left;}
+.pg .arrow a.disNext, .pg .arrow a.disPrev{cursor:default;}
+.pg .arrow a.next span{background-position:-8px -83px;}
+.pg .arrow a.disNext span{background-position:-8px -61px;}
+.pg .arrow a.prev span{background-position:0 -83px;}
+.pg .arrow a.disPrev span{background-position:0 -61px;}
+
+.menuA{height:28px;width:233px;margin:0 auto;}
+.menuA ul{height:22px;width:232px;border-left:1px #dedede solid;border-bottom:1px #dedede solid;}
+.menuA li{cursor:pointer;float:left;width:57px;height:17px;*height:16px;padding-top:4px;*padding-top:5px;text-align:center;border:1px #dedede solid;border-left:0;border-bottom:0;background:#FFF;color:#5c5c5c;line-height:14px}
+.menuA .now{position:relative;background:#F7F7F7;color:#dd0d0b
+;font-weight: bold;}
+.menuA .now em{position:absolute;top:21px;left:23px;display:block;width:11px;height:6px;background-position:-48px -57px;font-size:0}
+
+.snList{width:234px;margin:5px auto 10px 13px;height:260px}
+.snList li{padding:5px 0;text-align:left;line-height:16px}
+.snList li em{float:left;width:14px;text-align:center;font:600 11px/14px "Arial";color:#1D569C;background-position:-25px -84px;margin:0 10px 0 0;color:#FFF}
+.snList li span{float:right}
+.snList .colorA{background-position:-25px -57px;}
+.snList .trend{width:16px;height:16px;display:block;background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg10.gif) no-repeat 8px 2px}
+.snList .up{background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg09.gif) no-repeat 8px 2px}
+.snList .down{background:url(http://tv.sohu.com/upload/tvhot20100705/images/bg11.gif) no-repeat 8px 2px}
+.snList .grade{width:72px}
+.snList .grade strong{margin-right:4px;font-weight:normal;color:#FF6000}
+.snList .sn{float:left;width:14px;margin-right:5px;_margin-right:2px;background-position:-25px -84px;text-align:center;font:600 11px/14px "Arial";color:#FFF}
+
+/* 弹层 */
+.popInfo{position:absolute;top:0;left:108px;width:279px;height:171px;text-align:left;}
+.popInfo .popBG{position:absolute;top:0;left:0;width:279px;height:171px;_FILTER:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://tv.sohu.com/upload/tv110421/images/float.png',sizingMethod='image');background:url(http://tv.sohu.com/upload/tv110421/images/float.png) no-repeat !important;background:none;}
+.popInfo .popLay{width:253px;padding:10px 0 0 26px;position:relative;z-index:1001;}
+.popInfo h4{margin:0 auto 5px;padding:0 10px 0 0;line-height:18px;text-align:left}
+.popInfo h4 strong{display:inline}
+.popInfo h4 a{color:#dd0d0b;}
+.popInfo dl{height:20px;line-height:20px}
+.popInfo dt{float:left;width:125px}
+.popInfo dt b{color:#333;font-weight:normal}
+.popInfo dd{float:left;width:125px}
+.popInfo dd b{color:#FF6000;font:600 14px/16px "Arial";margin-right:4px}
+.popInfo p{padding:5px 10px 0 0;line-height:18px}
+
+#contentA .left .pp .payPos{position:absolute;top:2px;left:2px;width:45px;height:45px;margin:0;background:url(http://img04.taobaocdn.com/imgextra/i4/71614142/T2jvGwXaFaXXXXXXXX_!!71614142.png)}
+#channelNav,#contentA .center{display:none;}
+
+.tvCls,.mvCls,.dmCls,docCls{color:#999;}
+
+
+/*g_focus*/
+.fi_movie{position:relative;width:980px;height:380px;background:000;overflow:hidden;}
+.fi_movie a{outline:none;text-decoration:none;}
+.fi_movie .fi_ct{height:100%;width:100%;}
+.fi_movie .fi_note,.fi_movie .fi_ovl_note{position:absolute;height:284px;width:210px;right:0;top:0;z-index:10;background:transparent;}
+.fi_movie .fi_ovl_note{background:#000;opacity:.5;z-index:9;height:380px;width:250px;}               
+.fi_movie .fi_tab{position:absolute;height:624px;height:64px;bottom:0px;left:53px;} 
+.fi_movie .fi_tab_inner{position:relative;width:564px;margin:0 4px;padding:7px 0;overflow:hidden;}
+.fi_movie .fi_tab_{position:relative;width:2000px;}
+.fi_movie .fi_tab li{float:left;margin:0 5px;display:inline;position:relative;}
+.fi_movie .fi_tab img{width:80px;height:45px;background:#fff;padding:2px;}
+.fi_movie .fi_ovl_tab{position:absolute;left:0;top:0;width:84px;height:49px;background:#000;}
+.fi_movie .fi_btn,.fi_movie .fi_tab_inner{float:left;z-index:10;}
+.fi_movie .fi_btn{position:relative;width:27px;height:100%;}
+.fi_movie .fi_btn a{position:absolute;width:27px;height:32px;left:0;top:50%;margin-top:-16px;}
+.fi_movie .fi_prev a{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_on.png") no-repeat;}
+.fi_movie .fi_next a{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_on.png") no-repeat;}
+.fi_movie .fi_prev a:hover{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_hot.png") no-repeat;}
+.fi_movie .fi_next a:hover{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_hot.png") no-repeat;}
+.fi_movie .fi_prev a.fi_off,.fi_movie .fi_prev a.fi_off:hover{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_off.png") no-repeat;cursor:default;}
+.fi_movie .fi_next a.fi_off,.fi_movie .fi_next a.fi_off:hover{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_off.png") no-repeat;cursor:default;}
+.fi_movie .fi_note{padding:20px;text-align:left;}
+.fi_movie h2.fi_tt{text-align:left;padding:25px 0 0 0;}
+.fi_movie h2.fi_tt a{font-size:20px;font-family:"黑体";color:#fff;}
+.fi_movie .fi_tt0 a{font-size:14px;font-family:"Arial";line-height:22px;color:#fff;}
+.fi_movie .fi_acts a{color:#fff;font-family:"宋体";font-size:14px;}
+.fi_movie .fi_meta{margin-top:35px;padding-top:15px;color:#cbcbcb;line-height:22px;background:url("http://tv.sohu.com/upload/moviefocus1129/img/fi_movie_dot.gif") repeat-x left top;}
+.fi_movie .fi_meta a{color:#cbcbcb;margin-right:5px;}
+.fi_movie .fi_meta a:hover{color:#fff;text-decoration:underline;}
+.fi_movie .fi_meta label{float:left;}
+.fi_movie .fi_meta p{padding-left:42px;padding-bottom:2px;}
+.fi_movie .fi_meta .fi_mdesc{line-height:20px;}
+.fi_movie .fi_acts{position:absolute;width:210px;height:56px;;right:0;bottom:0;padding:0 20px;z-index:10;}
+.fi_movie .fi_btnplay{display:block;width:94px;height:27px;text-align:center;line-height:27px;background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_btn.png") no-repeat;}
+.fi_movie .fi_btnplay:hover{background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_btn1.png");}
+.fi_movie .fi_pointer{position:absolute;width:84px;height:54px;left:36px;top:2px;z-index:-1;background:url("http://tv.sohu.com/upload/moviefocus1129/img/jqf_pointer.png") no-repeat;}
+.fi_movie .fi_loading{position:absolute;left:0;top:0;width:100%;height:100%;background:#000;z-index:100;}
+.fi_movie .fi_loading img{display:block;position:absolute;width:47px;height:47px;left:50%;top:50%;margin-left:-23px;margin-top:-23px;}
+/* styles for goddawn ie6 */
+.fi_movie .fi_prev a{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_on.png");}
+.fi_movie .fi_next a{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_on.png");}
+.fi_movie .fi_prev a:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_hot.png");}
+.fi_movie .fi_next a:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_hot.png");}
+.fi_movie .fi_prev a.fi_off,.fi_movie .fi_prev a.fi_off:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_left_off.png");}
+.fi_movie .fi_next a.fi_off,.fi_movie .fi_next a.fi_off:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_right_off.png");}
+.fi_movie .fi_pointer{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://tv.sohu.com/upload/moviefocus1129/img/jqf_pointer.png");}
+/* /styles for goddawn ie6 */
+

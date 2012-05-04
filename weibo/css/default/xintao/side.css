@@ -1,0 +1,154 @@
+/**侧边栏**/
+.mod-side .bd {
+	padding: 0px;
+}
+
+/**侧边栏文字**/
+.side-text a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 145px;
+	display: block;
+}
+
+/**侧边栏大图**/
+ul.side-big {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 180px;
+	margin: 0 auto -1px;
+}
+
+ul.side-big li {
+	position: relative;
+	zoom: 1;
+	padding: 8px 9px;
+	border-bottom: 1px dashed #ccc;
+}
+
+ul.side-big li:hover,ul.side-big li.phover {
+	background-color: #fffcd1;
+}
+
+ul.side-big li.first {
+	padding-top: 5px;
+}
+
+ul.side-big li .pic {
+	height: 160px;
+	width: 160px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+	background: #fff;
+}
+
+ul.side-big li .pic a {
+	height: 160px;
+	width: 160px; *
+	font-size: 140px;
+	text-decoration: none !important;
+	outline: none;
+}
+
+ul.side-big li .title {
+	display: block;
+	text-align: center;
+	line-height: 16px !important;
+	width: 162px;
+	overflow: hidden;
+}
+
+ul.side-big li .price {
+	color: #3A3A3A;
+	_font-size: 11px;
+	display: block;
+	text-align: center;
+	line-height: 22px !important;
+	width: auto;
+}
+
+ul.side-big li .price strong {
+	color: #ff2900;
+	font-weight: bold;
+	background-position: -5px -82px;
+	padding-left: 16px;
+	font-size: 14px;
+}
+
+ul.side-big li .seller {
+	width: 100px;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: right;
+}
+
+/**侧边栏小图**/
+ul.side-small {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul.side-small li {
+	padding: 9px 0;
+	border-bottom: dashed 1px #EEE;
+	height: 42px;
+	overflow: hidden;
+}
+
+ul.side-small li .pic {
+	float: left;
+	margin-right: 10px;
+	border: 1px solid #CCC;
+	height: 40px;
+	text-align: center;
+	width: 40px;
+}
+
+ul.side-small li .pic a {
+	display: table-cell;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+ul.side-small li .pic img {
+	vertical-align: middle;
+}
+
+ul.side-small li .desc,ul.side-small li .price {
+	float: left;
+	width: 120px;
+	height: 14px;
+	line-height: 1.2;
+	text-align: left;
+	overflow: hidden;
+}
+
+ul.side-small li .price {
+	font-size: 13px;
+	color: #F50;
+}
+
+ul.side-small li .price i {
+	background-position: -96px -40px;
+}
+
+ul.side-small li .sale {
+	float: left;
+	width: 120px;
+	overflow: hidden;
+	line-height: 1.4;
+}
+
+ul.side-small li .sale i {
+	float: left;
+	margin-right: 3px;
+	background-position: -96px -56px;
+}

@@ -1,0 +1,56 @@
+/*.fullVideo,#video {
+	background: #161616
+		url(http://tv.sohu.com/upload/101116tvplay/images/bgx02.gif) repeat-x
+		center bottom
+}*/
+#video {
+	padding: 6px 0
+}
+
+#video .left,#video .right {
+	overflow: hidden;
+}
+
+#dragDiv {
+	border: 1px solid #000;
+	background: #000;
+	width: 640px;
+	height: 489px;
+	margin: 0 auto;
+	text-align: left
+}
+
+#dragDiv #rRightDown {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	z-index: 500;
+	font-size: 0;
+	cursor: nw-resize;
+	right: 0;
+	bottom: 0
+}
+
+#player {
+	position: absolute
+}
+
+#userFun {
+	width: 600px;
+	height: 28px;
+	margin: 0 auto;
+	line-height: 22px;
+	color: #999
+}
+
+#userFun a {
+	color: #999
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}

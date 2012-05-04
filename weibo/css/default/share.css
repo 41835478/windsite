@@ -1,0 +1,853 @@
+.vote-price .price-view .fix-price strong,.buyer-show .all-show,.no-result-text a.go-wow,.no-result-con s
+	{
+	background:
+		url("http://img04.taobaocdn.com/tps/i4/T1A3CCXjtJXXXXXXXX-77-1076.png")
+		no-repeat 0 0;
+}
+
+.chrisma-header {
+	background:
+		url("http://www.xintaowang.com/css/default/xintao/taobao/T1WcKIXdtmXXXXXXXX-578-52.png")
+		repeat-x;
+}
+
+.chrisma-wow-nav {
+	margin-left: 46px;
+	_margin-left: 34px;
+}
+
+#wow-nav li {
+	position: relative;
+	float: left;
+}
+
+#wow-nav li a {
+	display: inline-block; *
+	display: inline; *
+	zoom: 1;
+	float: left;
+	position: relative;
+	padding: 0 28px;
+	height: 52px;
+	line-height: 52px;
+	font-family: 'Î¢ÈíÑÅºÚ';
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#wow-nav li a:link,#wow-nav li a:visited,#wow-nav li a:hover,#wow-nav li a:active
+	{
+	text-decoration: none;
+	color: #fff;
+}
+
+#wow-nav li a .l-l,#wow-nav li a .r-l,#wow-nav li a .arrow {
+	display: block;
+	position: absolute;
+	font-size: 0;
+	line-height: 0;
+}
+
+#wow-nav li a .l-l,#wow-nav li a .r-l {
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background-color: #ca4127;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#bb3920),
+		to(#e64e32) );
+	background-image: -webkit-linear-gradient(top, #bb3920, #e64e32);
+	background-image: -moz-linear-gradient(top, #bb3920, #e64e32);
+	background-image: -ms-linear-gradient(top, #bb3920, #e64e32);
+	background-image: -o-linear-gradient(top, #bb3920, #e64e32);
+	background-image: linear-gradient(top, #bb3920, #e64e32);
+	filter: progid :   DXImageTransform.Microsoft.gradient (   startColorstr
+		=   
+		 #bb3920, endColorstr =     #e64e32 );
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#bb3920,endColorstr=#e64e32)"
+		;
+}
+
+#wow-nav li a .l-l {
+	left: 0;
+}
+
+#wow-nav li a .r-l {
+	right: 0;
+}
+
+#wow-nav li a .arrow {
+	width: 0;
+	height: 0;
+	left: 45%;
+	bottom: 0;
+	border-top: 0;
+	border-right: 5px dashed transparent;
+	border-bottom: 5px solid white;
+	border-left: 5px dashed transparent;
+}
+
+#wow-nav li a .ms {
+	visibility: hidden;
+}
+
+#wow-nav li a:hover,#wow-nav li.cur a {
+	background-color: #da492e;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#cf4429),
+		to(#e54e32) );
+	background-image: -webkit-linear-gradient(top, #cf4429, #e54e32);
+	background-image: -moz-linear-gradient(top, #cf4429, #e54e32);
+	background-image: -ms-linear-gradient(top, #cf4429, #e54e32);
+	background-image: -o-linear-gradient(top, #cf4429, #e54e32);
+	background-image: linear-gradient(top, #cf4429, #e54e32);
+	filter: progid :   DXImageTransform.Microsoft.gradient (   startColorstr
+		=   
+		 #cf4429, endColorstr =     #e54e32 );
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#cf4429,endColorstr=#e54e32)"
+		;
+}
+
+#wow-nav li.cur a .ms {
+	visibility: visible;
+}
+
+#wow-nav li s {
+	position: absolute;
+	top: 12px;
+	right: -12px;
+	display: block;
+	width: 36px;
+	height: 29px;
+	background:
+		url("http://img02.taobaocdn.com/tps/i2/T1GrSFXhpeXXXXXXXX-36-29.png")
+		no-repeat 0 0;
+}
+
+.cat-rank-wrap-v2 {
+	overflow: hidden;
+	height: 50px;
+	background-color: #F3F3F3;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.second-rank-cat .shadow-left,.second-rank-cat .shadow-right {
+	background:
+		url("http://img04.taobaocdn.com/tps/i4/T1wGyHXgVtXXXXXXXX-212-300.png")
+		no-repeat -9999px 0;
+}
+
+.second-rank-cat {
+	position: relative;
+	width: 958px;
+	background: white;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.cat-rank-wrap-v2 .second-rank-cat .second-cat-list {
+	position: relative;
+	height: 40px;
+	overflow: hidden;
+}
+
+.second-rank-cat .shadow-left,.second-rank-cat .shadow-right {
+	position: absolute;
+	bottom: -4px;
+	width: 100px;
+	height: 4px;
+	overflow: hidden;
+}
+
+.second-rank-cat .shadow-left {
+	left: -1px;
+	background-position: 0 -224px;
+}
+
+.second-rank-cat .shadow-right {
+	right: -1px;
+	background-position: 0 -231px;
+}
+
+ul.second-cat-list li {
+	_display: inline;
+	float: left;
+	margin-right: 30px;
+}
+
+ul.second-cat-list li a {
+	float: left;
+	padding: 0 20px;
+	height: 30px;
+	line-height: 30px;
+	font-family: 'Î¢ÈíÑÅºÚ';
+	font-size: 14px;
+	border-top: 5px solid white;
+	border-bottom: 5px solid white;
+}
+
+.cat-rank-wrap-v2 ul.second-cat-list li a {
+	padding: 0 10px 0 30px;
+}
+
+ul.second-cat-list li a,ul.second-cat-list li a:link,ul.second-cat-list li a:visited
+	{
+	text-decoration: none;
+	color: #333;
+}
+
+ul.second-cat-list li a:hover,ul.second-cat-list li a:active,ul.second-cat-list li.selected a,ul.second-cat-list li.selected a:link,ul.second-cat-list li.selected a:visited,ul.second-cat-list li.selected a:hover,ul.second-cat-list li.selected a:active
+	{
+	color: #EC6147;
+	border-bottom-color: #ec6147;
+}
+
+ul.second-cat-list li .cat-with-icon {
+	display: inline-block; *
+	display: inline; *
+	zoom: 1;
+	position: relative;
+}
+
+ul.second-cat-list li .cat-with-icon b {
+	display: inline-block; *
+	display: inline; *
+	zoom: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 32px;
+	width: 32px;
+	background: transparent
+		url(//img03.taobaocdn.com/tps/i3/T1TcWDXhNKXXXXXXXX-1120-80.png)
+		no-repeat -9999px -9999px;
+	line-height: 0;
+	font-size: 0;
+	overflow: hidden;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-hot-in {
+	background-position: -3px -6px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-hot-in,ul.second-cat-list li.selected .cat-with-icon .wow-hot-in
+	{
+	background-position: -3px -46px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-coa {
+	background-position: -43px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-coa,ul.second-cat-list li.selected .cat-with-icon .wow-f-coa
+	{
+	background-position: -43px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-pan {
+	background-position: -82px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-pan,ul.second-cat-list li.selected .cat-with-icon .wow-f-pan
+	{
+	background-position: -82px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-ski {
+	background-position: -122px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-ski,ul.second-cat-list li.selected .cat-with-icon .wow-f-ski
+	{
+	background-position: -122px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-sho {
+	background-position: -162px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-sho,ul.second-cat-list li.selected .cat-with-icon .wow-f-sho
+	{
+	background-position: -162px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-und {
+	background-position: -202px -2px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-und,ul.second-cat-list li.selected .cat-with-icon .wow-f-und
+	{
+	background-position: -202px -42px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-han {
+	background-position: -242px -5px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-han,ul.second-cat-list li.selected .cat-with-icon .wow-f-han
+	{
+	background-position: -242px -45px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-acc {
+	background-position: -282px -5px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-acc,ul.second-cat-list li.selected .cat-with-icon .wow-f-acc
+	{
+	background-position: -282px -45px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-f-bea {
+	background-position: -321px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-f-bea,ul.second-cat-list li.selected .cat-with-icon .wow-f-bea
+	{
+	background-position: -321px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-coa {
+	background-position: -360px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-coa,ul.second-cat-list li.selected .cat-with-icon .wow-m-coa
+	{
+	background-position: -360px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-pan {
+	background-position: -400px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-pan,ul.second-cat-list li.selected .cat-with-icon .wow-m-pan
+	{
+	background-position: -400px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-dre {
+	background-position: -442px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-dre,ul.second-cat-list li.selected .cat-with-icon .wow-m-dre
+	{
+	background-position: -442px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-sho {
+	background-position: -482px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-sho,ul.second-cat-list li.selected .cat-with-icon .wow-m-sho
+	{
+	background-position: -482px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-bag {
+	background-position: -522px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-bag,ul.second-cat-list li.selected .cat-with-icon .wow-m-bag
+	{
+	background-position: -522px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-und {
+	background-position: -561px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-und,ul.second-cat-list li.selected .cat-with-icon .wow-m-und
+	{
+	background-position: -561px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-m-out {
+	background-position: -604px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-m-out,ul.second-cat-list li.selected .cat-with-icon .wow-m-out
+	{
+	background-position: -604px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-hom {
+	background-position: -643px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-hom,ul.second-cat-list li.selected .cat-with-icon .wow-l-hom
+	{
+	background-position: -643px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-bed {
+	background-position: -683px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-bed,ul.second-cat-list li.selected .cat-with-icon .wow-l-bed
+	{
+	background-position: -683px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-goo {
+	background-position: -722px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-goo,ul.second-cat-list li.selected .cat-with-icon .wow-l-goo
+	{
+	background-position: -722px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-aut {
+	background-position: -763px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-aut,ul.second-cat-list li.selected .cat-with-icon .wow-l-aut
+	{
+	background-position: -763px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-ins {
+	background-position: -803px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-ins,ul.second-cat-list li.selected .cat-with-icon .wow-l-ins
+	{
+	background-position: -803px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-l-foo {
+	background-position: -842px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-l-foo,ul.second-cat-list li.selected .cat-with-icon .wow-l-foo
+	{
+	background-position: -842px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-off {
+	background-position: -884px -5px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-off,ul.second-cat-list li.selected .cat-with-icon .wow-c-off
+	{
+	background-position: -884px -45px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-hom {
+	background-position: -921px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-hom,ul.second-cat-list li.selected .cat-with-icon .wow-c-hom
+	{
+	background-position: -921px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-gee {
+	background-position: -962px -3px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-gee,ul.second-cat-list li.selected .cat-with-icon .wow-c-gee
+	{
+	background-position: -962px -43px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-pop {
+	background-position: -1002px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-pop,ul.second-cat-list li.selected .cat-with-icon .wow-c-pop
+	{
+	background-position: -1002px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-lap {
+	background-position: -1042px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-lap,ul.second-cat-list li.selected .cat-with-icon .wow-c-lap
+	{
+	background-position: -1042px -44px;
+}
+
+ul.second-cat-list li .cat-with-icon .wow-c-diy {
+	background-position: -1082px -4px;
+}
+
+ul.second-cat-list li .cat-with-icon:hover .wow-c-diy,ul.second-cat-list li.selected .cat-with-icon .wow-c-diy
+	{
+	background-position: -1082px -44px;
+}
+
+.result-box:after,.result-item:after,.result-item-bd:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.result-list-wrapper {
+	overflow: hidden;
+	width: 960px;
+	background: white;
+}
+
+.result-box .result-col {
+	_display: inline;
+	float: left;
+	margin-right: 10px;
+	_margin-right: 7px;
+	width: 232px;
+}
+
+.result-box .adjust {
+	margin-right: 0;
+}
+
+.result-item {
+	margin-bottom: 13px;
+	padding-bottom: 7px;
+	width: 232px;
+	background-color: white;
+	background:
+		url("http://www.xintaowang.com/css/default/xintao/taobao/T1aIyHXi8mXXXXXXXX-232-6.png")
+		left bottom no-repeat;
+}
+
+.result-item-wrap {
+	position: relative;
+	overflow: hidden;
+	width: 232px;
+	border: 1px solid #fff;
+	border-bottom: 0;
+	background: #f7f7f7;
+}
+
+.result-item:hover .result-item-wrap,.result-col .result-item.hover .result-item-wrap
+	{
+	border: 1px solid #efeff0;
+	border-bottom: 0;
+	background-color: #f7f7f7;
+}
+
+.result-item-bd {
+	padding: 16px 14px 9px; *
+	padding-bottom: 9px;
+}
+
+.result-item .result-item-ft {
+	width: 100%;
+	background: #efeff0;
+}
+
+.result-item .result-item-ft a,.result-item .result-item-ft a:visited,.result-item .result-item-ft a:hover
+	{
+	display: block;
+	background-color: #eee;
+	text-align: center;
+	height: 50px;
+	color: #cf4429 !important;
+	height: 39px;
+	line-height: 39px;
+	text-decoration: none;
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+
+.result-item a:link,.result-item a:visited,.result-item a:hover {
+	color: #787c8e;
+}
+
+.pic-brief .vote-price {
+	margin-top: 10px;
+}
+
+.vote-price .vote-area {
+	float: left;
+}
+
+.vote-area .vote-trigger,.vote-area .voted-trigger {
+	display: inline-block;
+	overflow: hidden;
+	width: 57px;
+	height: 23px;
+	line-height: 9;
+	vertical-align: top;
+}
+
+.vote-area .vote-trigger,.vote-area .vote-trigger:hover {
+	background-position: 0 -149px;
+}
+
+.vote-area .voted-trigger {
+	background-position: -62px -149px;
+}
+
+.vote-area .J_Counter {
+	display: inline-block;
+	height: 23px;
+	line-height: 23px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #999;
+}
+
+.vote-area .wow-dig {
+	position: relative;
+}
+
+.wow-dig .voted-tip {
+	position: absolute;
+	top: -50px;
+	left: 25px;
+	z-index: 3;
+	padding: 5px 7px 7px;
+	width: 169px;
+	height: 36px;
+	line-height: 1.4;
+	font-family: simsun;
+	color: #333;
+	background-position: 0 -172px;
+}
+
+.vote-price .price-view {
+	position: relative;
+	float: right;
+	width: 80px;
+}
+
+.vote-price .price-view .fix-price {
+	float: right;
+	margin-right: 2px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.vote-price .price-view .follow-price {
+	position: absolute;
+	top: -13px;
+	right: 0;
+	margin-right: 2px;
+}
+
+.vote-price .price-view .fix-price {
+	margin-top: 1px;
+}
+
+.vote-price .price-view .fix-price strong,.vote-price .price-view .follow-price em
+	{
+	padding-left: 9px;
+	font-weight: normal;
+	font-family: tahoma, "Î¢ÈíÑÅºÚ";
+}
+
+.vote-price .price-view .fix-price strong {
+	color: #999;
+	background-position: -70px -560px;
+}
+
+.vote-price .price-view .follow-price em {
+	font-weight: bold;
+	color: #ec6147;
+}
+
+.vote-price .price-view .fix-price .has-line {
+	text-decoration: line-through;
+}
+
+.recommand-count {
+	padding-bottom: 14px;
+	width: 100%;
+	font-family: "Î¢ÈíÑÅºÚ";
+	color: #999;
+	background:
+		url("http://img03.taobaocdn.com/tps/i3/T1FRmzXe0LXXXXXXXX-222-5.png")
+		no-repeat left bottom;
+}
+
+.recommand-count a:link,.recommand-count a:visited,.recommand-count a:hover
+	{
+	color: #126CCF;
+}
+
+.recommand-count strong {
+	font-family: Tahoma;
+}
+
+.fx-brief {
+	clear: both;
+	float: left;
+	margin-top: 14px;
+	width: 100%;
+}
+
+.fxer-archive {
+	position: relative;
+	overflow: hidden;
+	margin-top: 2px;
+	padding-left: 35px;
+	height: 30px;
+}
+
+.fxer-archive .fxer-avatar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+}
+
+.fxer-archive dl {
+	width: 100%;
+}
+
+.fxer-archive dl dt {
+	margin-top: -2px;
+}
+
+.result-item .fxer-archive dl dt a,.result-item .fxer-archive dl dt a:hover
+	{
+	color: #29A5C9;
+}
+
+.fxer-archive dl dd {
+	margin-top: -2px;
+	color: #c3c3c3;
+}
+
+.fx-cnt-bd {
+	margin-top: 8px;
+}
+
+.fx-cnt-bd .fx-txts {
+	padding-bottom: 0; *
+	padding-bottom: 0;
+	font-family: simsun;
+}
+
+.fx-txts a:link,.fx-txts a:visited,.fx-txts a:hover {
+	color: #888;
+	text-decoration: none;
+}
+
+.result-item:hover .fx-txts a:link,.result-item:hover .fx-txts a:visited,.result-item:hover .fx-txts a:hover,.hover .fx-txts a:link,.hover .fx-txts a:visited,.hover .fx-txts a:hover
+	{
+	color: #777;
+}
+
+.fx-cnt-bd .fxer-show {
+	position: relative;
+	clear: both;
+	float: left;
+	margin: 10px 0 0 0;
+	padding: 0; *
+	padding: 8px 0 0 0;
+	overflow: hidden;
+}
+
+.fxer-show .show-pic {
+	_display: inline;
+	display: block;
+	width: 55px;
+	height: 55px;
+	float: left;
+	margin-right: 2px;
+	vertical-align: bottom;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.fxer-show .pic-num {
+	float: left;
+	vertical-align: bottom;
+	position: relative;
+	top: 38px;
+	color: #c0c0c0;
+}
+
+.fxer-show .more-link {
+	float: left;
+	vertical-align: bottom;
+	position: relative;
+	top: 38px;
+	color: #c0c0c0;
+	display: block;
+}
+
+.result-item .J_del {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	background-color: #CF4429;
+	zoom: 1;
+}
+
+.no-result-tip {
+	padding: 20px 0 0 20px;
+	height: auto !important;
+	min-height: 230px;
+	height: 230px;
+}
+
+.no-result-tip .no-result-icon,.no-result-tip .no-result-con,.error-notify .notify-bd p.notify-face,.error-notify .notify-detail
+	{
+	_display: inline;
+	float: left;
+}
+
+.no-result-tip .no-result-con,.error-notify .notify-detail {
+	position: relative;
+	margin-left: 5px;
+}
+
+.no-result-tip .no-result-con {
+	width: 360px;
+}
+
+.no-result-con .no-result-text,.notify-detail .notify-txt {
+	width: 335px;
+	padding: 10px 15px;
+	border: 1px solid #eee7da;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	background: #faf9f4;
+}
+
+.no-result-text p,.notify-detail .notify-txt {
+	font-size: 14px;
+	color: #000;
+	line-height: 23px;
+}
+
+.no-result-text p a:link,.no-result-text p a:visited,.no-result-text p a:hover,.notify-detail .notify-txt a:link,.notify-detail .notify-txt a:visited,.notify-detail .notify-txt a:hover
+	{
+	color: #9e590e;
+}
+
+.no-result-text p a,.notify-detail .notify-txt a {
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.no-result-text a.go-wow,.notify-detail .notify-txt a.go-wow,.helpful-hints a.go-wow
+	{
+	padding-right: 12px;
+	background-position: right -905px;
+}
+
+.no-result-con s,.error-notify .notify-detail s {
+	position: absolute;
+	left: 12px;
+	bottom: -15px;
+	display: block;
+	width: 17px;
+	height: 16px;
+	background-position: -59px -882px;
+}

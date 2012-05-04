@@ -1,0 +1,519 @@
+dl {
+	margin: 0px;
+	padding: 0px
+}
+
+.top-all-h2 {
+	height: 23px;
+	width: 130px;
+	margin: 5px auto 0;
+	padding: 10px 0 0 12px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg03.gif);
+	line-height: 16px;
+	color: white;
+}
+
+.top-all-h2 span {
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+	color: white;
+}
+
+.top-all-h2 span a,.top-all-h2 span a:hover {
+	color: white;
+}
+
+.rankNav {
+	width: 142px;
+	padding-top: 7px;
+	margin: 5px auto 0;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg04.gif)
+		repeat-x top;
+	text-align: left;
+	color: #dd0d0b
+}
+
+.rankNav h3 {
+	font-size: 14px;
+	line-height: 30px;
+	font-weight: 600;
+	text-indent: 10px
+}
+
+.rankNav li {
+	font-size: 14px;
+	line-height: 30px;
+	text-indent: 16px
+}
+
+.rankNav li.now {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg05.gif);
+	color: #FF6901
+}
+
+.rankNav .now a {
+	color: #FF6901
+}
+
+.top-h3 {
+	height: 33px;
+	padding: 15px 0 0 14px;
+	background: #FFF
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg06.gif)
+		no-repeat 0 15px;
+	text-align: left;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 600;
+	color: #333
+}
+
+.top-all-h3 {
+	height: 23px;
+	padding: 7px 0 0 14px;
+	background: #FFF
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg06.gif)
+		no-repeat 0 8px;
+	text-align: left;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 600;
+	color: #333;
+	line-height: 16px;
+	font-weight: 600;
+}
+
+.top-h3 strong {
+	margin: 0 12px;
+	color: #dd0d0b
+}
+
+.top-h5 {
+	height: 26px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg03.gif);
+	color: #333
+}
+
+.top-h5 span {
+	width: 122px;
+	height: 16px;
+	padding-top: 8px;
+	float: left;
+	border: 1px #DADADA solid;
+	border-bottom: 1px #FFF solid;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 600;
+}
+
+.menu {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg07.gif)
+}
+
+.menu ul {
+	border-left: 1px #DDD solid;
+	width: 775px;
+	height: 26px
+}
+
+.menu li {
+	cursor: pointer;
+	float: left;
+	height: 20px;
+	padding: 4px 15px 0;
+	background: #F3F3F3;
+	border: 1px #DDD solid;
+	border-left: 0;
+	color: #0D56AE;
+	line-height: 18px
+}
+
+.menu .libg {
+	background: #FFF;
+	border-bottom: 1px #FFF solid;
+	color: #333;
+	font-weight: bold
+}
+
+.cont {
+	font: 12px '宋体';
+	padding-top: 11px;
+	border-top: 1px #DDD solid
+}
+
+.cont table {
+	margin: 0 auto
+}
+
+.cont tr {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/xx1.gif)
+		repeat-x 0 0
+}
+
+.cont th {
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	font-weight: normal
+}
+
+.cont td {
+	height: 30px;
+	line-height: 30px;
+	text-align: left
+}
+
+.cont .tr {
+	text-align: right
+}
+
+.cont .tc {
+	text-align: center
+}
+
+.cont .trend {
+	padding-right: 10px;
+	display: block;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg10.gif)
+		no-repeat right center
+}
+
+.cont .up {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg09.gif)
+		no-repeat right center
+}
+
+.cont .down {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg11.gif)
+		no-repeat right center
+}
+
+.cont .red {
+	color: #FF6000
+}
+
+.cont .sn {
+	display: block;
+	width: 14px;
+	height: 13px;
+	line-height: 13px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg14.gif);
+	font-size: 11px;
+	line-height: 12px;
+	font-weight: 400;
+	color: #FFF;
+	text-align: center;
+	margin: 0 auto 0 3px;
+}
+
+.cont td .sn {
+	line-height: 13px;
+}
+
+.cont .snBG {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg13.gif)
+}
+
+.cont .tjA {
+	text-indent: 16px
+}
+
+.cont .tjB {
+	text-indent: 70px
+}
+
+.cont .f14 {
+	font-size: 14px
+}
+
+.cont tr.noLine {
+	background: none
+}
+
+.cont .imgR img {
+	margin: -2px 0 0 8px;
+	vertical-align: middle
+}
+
+.cont .imgR a {
+	text-decoration: none
+}
+
+.cont .colA {
+	color: #0D56AE
+}
+
+.noBord {
+	border: 0
+}
+
+.noBordA {
+	border: 0;
+	padding: 0
+}
+
+.cont .more {
+	padding-right: 25px;
+	line-height: 32px
+}
+
+.blank10B {
+	background: #FFF;
+	height: 10px;
+	font-size: 0;
+	clear: both
+}
+
+.topBord {
+	border-top: 1px #DADADA solid
+}
+
+.cont .btnA {
+	padding-left: 18px;
+	padding-top: 2px;
+	line-height: 16px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg15.gif)
+		no-repeat 0 1px
+}
+
+.cont .btnB {
+	padding-left: 18px;
+	padding-top: 2px;
+	line-height: 16px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg16.gif)
+		no-repeat 0 1px
+}
+
+.cont .scorePic {
+	margin: 10px auto 0;
+	height: 30px;
+	width: 780px;
+	text-align: left
+}
+
+.cont .scoreBG1 {
+	border-bottom: 6px #CF0000 solid
+}
+
+.cont .scoreBG2 {
+	border-bottom: 6px #D55601 solid
+}
+
+.cont .scoreBG3 {
+	border-bottom: 6px #719B35 solid
+}
+
+.cont .scoreBG4 {
+	border-bottom: 6px #7F7F7F solid
+}
+
+.turn {
+	width: 750px;
+	margin: 0 auto 3px;
+	height: 19px;
+	border-bottom: 1px #F3F3F3 solid;
+}
+
+.turn li {
+	cursor: pointer;
+	float: left;
+	height: 19px;
+	width: 46px;
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg12.gif)
+		no-repeat right;
+	color: #0D56AE;
+	line-height: 19px;
+	text-align: center
+}
+
+.turn .libg {
+	font-weight: bold;
+	color: #333
+}
+
+.turn .nobg {
+	background: none
+}
+
+.popPos {
+	position: relative;
+	display: block
+}
+
+.popInfo {
+	position: absolute;
+	top: -53px;
+	left: 0;
+	width: 279px;
+	height: 152px;
+	text-align: left;
+	font-size: 12px;
+	text-indent: 0
+}
+
+.popInfo .popBG {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 279px;
+	height: 152px;
+	_FILTER: progid :                                            
+		                           
+		    DXImageTransform.Microsoft.AlphaImageLoader (       
+		 
+		   
+		      
+		              
+		    
+		                                    src =    
+		                                 
+		        
+		        
+		        
+		        
+		  'http://www.xintaotv.com/css/default/xintao/xintaotv/bg01.png',
+		sizingMethod =      
+		                                                        
+		             'scale' );
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg01.png)
+		!important;
+	background: none;
+}
+
+.popInfo .popLay {
+	width: 253px;
+	padding: 10px 0 0 26px;
+	position: relative;
+	z-index: 1001;
+}
+
+.popInfo h4 {
+	margin: 0 auto 5px;
+	padding: 0 10px 0 0;
+	line-height: 18px;
+	text-align: left
+}
+
+.popInfo dl {
+	clear: both;
+	height: 20px;
+	line-height: 20px
+}
+
+.popInfo dt {
+	float: left;
+	width: 125px
+}
+
+.popInfo dt b {
+	color: #333;
+	font-weight: normal
+}
+
+.popInfo dd {
+	float: left;
+	width: 125px
+}
+
+.popInfo dd b {
+	color: #FF6000;
+	font-size: 14px;
+	line-height: 20px;
+	margin-right: 4px;
+	font-weight: 600;
+}
+
+.popInfo p {
+	padding: 4px 10px 0 0;
+	line-height: 18px
+}
+
+.cont .imgR img {
+	margin: -2px 0 0 8px;
+	vertical-align: middle
+}
+
+.cont .imgR a {
+	text-decoration: none
+}
+
+.cont .scorePic {
+	margin: 10px auto 0;
+	height: 30px;
+	width: 750px;
+	text-align: left
+}
+
+.cont .scoreBG1 {
+	border-bottom: 6px #CF0000 solid
+}
+
+.cont .scoreBG2 {
+	border-bottom: 6px #D55601 solid
+}
+
+.cont .scoreBG3 {
+	border-bottom: 6px #719B35 solid
+}
+
+.cont .scoreBG4 {
+	border-bottom: 6px #7F7F7F solid
+}
+
+.blockRA,.blockRB {
+	margin: 0 auto;
+}
+
+.l,.c,.r {
+	display: block;
+	float: left;
+}
+
+.rankA ul.top-ul {
+	width: 255px;
+}
+
+.rankA .l,.rankA .c,.rankA .r {
+	width: 255px;
+}
+
+.blank5,.blank8 {
+	height: 5px;
+	font-size: 1px;
+}
+
+.contAll {
+	font: 12px '宋体';
+	height: 330px;
+	width: 253px;
+	padding-top: 7px;
+	border: 1px #DDD solid;
+	border-top: 0
+}
+
+.contAll .more {
+	text-align: right;
+	margin: 5px auto 0;
+	padding-right: 23px;
+	line-height: 20px;
+}
+
+.rankA .c {
+	margin-left: 5px;
+}

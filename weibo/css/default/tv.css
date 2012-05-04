@@ -1,0 +1,564 @@
+.payPos {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 45px;
+	height: 45px;
+	margin: 0;
+	background: url(http://img04.taobaocdn.com/imgextra/i4/71614142/T2jvGwXaFaXXXXXXXX_!!71614142.png);
+}
+
+.tvsearch {
+	background: url(http://tv.sohu.com/upload/tv110421/images/top.png)
+		no-repeat;
+	width: 191px;
+	height: 25px;
+	background-position: -38px -4px;
+	position: relative;
+	z-index: 1;
+}
+
+.tvsearch .tvinput {
+	width: 139px;
+	width: 135px\9; *
+	width: 137px;
+	height: 18px; *
+	height: 25px;
+	padding: 0 0 1px 5px;
+	border: 0;
+	color: #c1c1c1;
+	line-height: 25px;
+	background: none;
+}
+
+.tvsearch .tvsubmit {
+	cursor: pointer;
+	width: 40px;
+	height: 25px;
+	border: 0;
+	background: none;
+	color: #FFF;
+	line-height: 25px
+}
+
+.adA {
+	margin: 0 auto;
+	text-align: right
+}
+
+.adB {
+	float: left
+}
+
+#location {
+	height: 43px;
+	margin: 3px auto 2px;
+}
+
+#location .left {
+	width: 580px;
+	height: 22px;
+	padding-top: 18px;
+	text-align: left;
+	font: 14px/ 28px "宋体";
+	color: #333
+}
+
+#location .left span {
+	margin: 0 8px 0 5px;
+	font: 14px/ 26px "黑体";
+	color: #CB001B
+}
+
+#location .left span a,#location .left span em {
+	color: #CB001B;
+	font: 16px/ 28px "黑体";
+}
+
+#location .right {
+	width: 350px;
+	height: 43px;
+	text-align: right;
+	padding-top: 0
+}
+
+#sotv .content .vPic img,#sotv .content .pic img {
+	border: 1px #ddd solid;
+	background: #FFF;
+	padding: 1px
+}
+
+#sotv .content .vPic a:hover img,#sotv .content .pic a:hover img {
+	border: 1px #dd0d0b solid
+}
+
+#sotv .title-box {
+	display: none;
+}
+
+#sotv .feed-list {
+	margin: 25px 15px 10px 15px;
+}
+
+#sotv .content .pic img {
+	padding: 2px
+}
+
+#sotv .bord {
+	border: 1px #DDD solid;
+}
+
+.clear,.area,.pp,.pt { *
+	zoom: 1;
+}
+
+.pp::after,.pt::after,.area::after,.clear::after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+#sotv .left,#sotv .l,#sotv .right,#sotv .r,#sotv .c {
+	display: inline;
+	float: left;
+}
+
+#sotv .r {
+	float: right;
+}
+
+#sotv #container {
+	background: none;
+	background-color: white;
+}
+
+#sotv #container .extra {
+	width: 210px;
+}
+
+#sotv #container .content {
+	margin-left: 210px;
+}
+
+#sotv #container .extra .bord {
+	width: 208px;
+	background: #F8F8F8
+}
+
+#sotv #container .content .bord {
+	width: 700px
+}
+
+.indexMenu h2 {
+	height: 26px;
+	padding: 14px 0 0 41px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg01.gif)
+		;
+	color: #333
+}
+
+.indexMenu h2 span {
+	font: 600 14px/ 16px "宋体"
+}
+
+.indexMenu li {
+	height: 30px;
+	padding: 15px 0 0 43px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg02.gif)
+		;
+	font: 14px/ 16px "宋体";
+	color: #333;
+	text-align: left
+}
+
+.indexMenu .now {
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg03.gif)
+		;
+	color: #FFF;
+	font-weight: bold
+}
+
+.indexMenu .now a {
+	color: #FFF
+}
+
+.indexMenu .nobg {
+	background: none
+}
+
+.seleRe {
+	height: 39px
+}
+
+.seleRe .l {
+	height: 26px;
+	padding: 13px 10px 0;
+	border-right: 1px #DDD solid;
+	font: 600 14px/ 16px "宋体";
+	color: #333
+}
+
+.seleRe .c {
+	margin: 13px 0 0 14px
+}
+
+.seleRe .c .ll {
+	float: left;
+	line-height: 16px;
+	display: inline
+}
+
+.seleRe .c .cb li {
+	float: left;
+	margin-left: 6px;
+	display: inline
+}
+
+.seleRe .c .cb li span {
+	float: left
+}
+
+.seleRe .c .cb li em {
+	float: left;
+	cursor: pointer;
+	width: 13px;
+	height: 13px;
+	margin: 0 0 0 1px;
+	display: inline-block;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg08.gif)
+		;
+	line-height: 0
+}
+
+.seleRe .c .cc {
+	margin-left: 16px
+}
+
+.seleRe .c .cc span {
+	color: #FC0101
+}
+
+.seleRe .r {
+	margin: 14px 12px 0 0;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg09.gif)
+		no-repeat 0 0;
+	padding-left: 18px;
+	line-height: 14px
+}
+
+.seleRe .r a {
+	color: #333
+}
+
+.seaKey {
+	border-top: 0;
+	padding: 10px 0
+}
+
+.seaKey ul {
+	width: 680px;
+	margin: 0 auto;
+	clear: both
+}
+
+.seaKey li {
+	white-space: nowrap;
+	float: left;
+	display: block;
+	height: 24px;
+	margin: 0 6px;
+	line-height: 24px;
+}
+
+.seaKey .now {
+	padding: 0 6px;
+	margin: 0 2px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg07.gif)
+		repeat-x 0 3px
+}
+
+.seaKey .now a {
+	color: #FFF;
+	text-decoration: none
+}
+
+shLay {
+	cursor: pointer;
+	width: 45px;
+	height: 21px;
+	margin: 0 auto;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg10.gif)
+}
+
+.hdLay {
+	cursor: pointer;
+	width: 45px;
+	height: 21px;
+	margin: 0 auto;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg11.gif)
+}
+
+.menuC {
+	height: 23px;
+	margin: 12px auto 0;
+	border-bottom: 1px #D5D5D5 solid
+}
+
+.menuC .l li {
+	float: left;
+	width: 70px;
+	height: 18px;
+	padding-top: 5px;
+	margin-right: 5px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg12.gif)
+		;
+	line-height: 16px;
+	color: #333;
+	text-align: center;
+}
+
+.menuC .l .libg {
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg13.gif)
+		;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.menuC .l .libg a {
+	color: #FFF;
+	text-decoration: none
+}
+
+.jsonPP {
+	margin: 10px auto 5px;
+	width: 702px
+}
+
+.jsonPP .vData {
+	margin: 0 auto 10px
+}
+
+.jsonPP .vInfo {
+	float: left;
+	width: 175px;
+}
+
+.jsonPP .vInfo .vPic {
+	width: 122px;
+	margin: 0 auto;
+	position: relative
+}
+
+.jsonPP .vInfo .vTxt {
+	width: 120px;
+	margin: 5px auto 0;
+	text-align: left;
+	line-height: 20px
+}
+
+.jsonPP .vInfo .vTxt h4 {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+/*.jsonPP .vInfo .vTxt p {
+	height: 20px;
+	overflow: hidden;
+}
+*/
+.jsonPP .vInfo .vTxt p em {
+	color: #333
+}
+
+.jsonPT {
+	margin: 22px auto 0
+}
+
+.jsonPT .vInfo {
+	width: 745px;
+	margin: 0 auto 20px
+}
+
+.jsonPT .vInfo .vPic {
+	float: left;
+	width: 122px;
+	margin: 0 auto;
+	position: relative
+}
+
+.jsonPT .vInfo .vTxt {
+	width: 600px;
+	float: right;
+	text-align: left;
+	line-height: 20px
+}
+
+.jsonPT .vInfo .vTxt h4 {
+	height: 24px;
+	margin: 0 auto 6px;
+	font: 14px/ 24px "宋体";
+}
+
+.jsonPT .vInfo .vTxt .vName {
+	font-weight: bold;
+	float: left
+}
+
+.jsonPT .vInfo .vTxt span {
+	float: right
+}
+
+.jsonPT .vInfo .vTxt .vGra {
+	margin-top: -3px;
+	color: #FF6000;
+	font-weight: bold;
+}
+
+.jsonPT .vInfo .vTxt .vGra em {
+	font-size: 24px;
+	line-height: 20px
+}
+
+.jsonPT .vInfo .vTxt .vGra strong {
+	font-size: 16px
+}
+
+.jsonPT .vInfo .vTxt dl {
+	margin: 0 auto 6px;
+	clear: both;
+	line-height: 20px
+}
+
+.jsonPT .vInfo .vTxt dl em {
+	color: #333
+}
+
+.jsonPT .vInfo .vTxt dt {
+	width: 250px;
+	float: left
+}
+
+.jsonPT .vInfo .vTxt dd {
+	width: 350px;
+	float: left
+}
+
+.jsonPT .vInfo .vTxt p {
+	padding-bottom: 5px;
+	line-height: 18px;
+	clear: both
+}
+
+.jsonPT .vInfo .vTxt h5 a {
+	display: block;
+	width: 75px;
+	height: 21px;
+	padding-top: 5px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg17.gif)
+		;
+	color: #FFF;
+	font: 600 12px/ 18px "宋体";
+	text-indent: 20px
+}
+
+.label {
+	position: absolute;
+	bottom: 2px; *
+	bottom: 6px;
+	left: 2px;
+	height: 15px;
+	width: 115px;
+	margin: 0 auto;
+	color: #FFF;
+	line-height: 14px;
+	text-align: right;
+	padding: 3px 5px 0 0
+}
+
+.label i {
+	position: absolute;
+	height: 18px;
+	width: 120px;
+	left: 0;
+	top: 0;
+	background: #000;
+	filter: alpha(opacity =                                                 60)
+		;
+	opacity: 0.60;
+}
+
+.label em {
+	margin: 0;
+	position: relative;
+	z-index: 2;
+	color: #FFF;
+	font: 12px/ 14px "宋体"
+}
+
+.only {
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	background: url(http://tv.sohu.com/upload/suoy101026/images/only.gif);
+	width: 45px;
+	height: 45px
+}
+
+.noInfo {
+	margin: 50px auto
+}
+
+.noInfo .noA a em {
+	display: inline-block;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg08.gif)
+		no-repeat right 0;
+	cursor: pointer;
+	height: 13px;
+	line-height: 0;
+	margin: 0 0 0 5px;
+	width: 13px;
+}
+
+.noInfo .noB {
+	margin: 10px auto 0
+}
+
+.noInfo .noB a {
+	margin: 0 6px;
+	display: inline-block;
+	padding-left: 15px;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg09.gif)
+		no-repeat 0 0;
+	color: #FC0202;
+	line-height: 14px
+}
+
+.noInfo .noC {
+	margin: 10px auto 0
+}
+
+.noInfo .noC a {
+	width: 143px;
+	height: 20px;
+	padding-top: 2px;
+	display: inline-block;
+	background:
+		url(http://www.xintaowang.com/css/default/xintao/sotv/upload/feilei110419/images/bg18.gif)
+		;
+	color: #333;
+	line-height: 20px
+}

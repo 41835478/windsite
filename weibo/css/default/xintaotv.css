@@ -1,0 +1,340 @@
+html{background:none;}
+body{margin:0 auto;padding:0;background:#f1f1f1 url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg1.png) repeat-x 0 -239px;color:#999;font:12px Arial, Helvetica, sans-serif;}
+h1, h2, h3, h4, h5, h6 {font-size: 12px;font-weight: normal;}
+.wrap-in,#container{background:none;}#container{width:950px;}
+.left, .center, .l, .right, .r {display: inline;float: left;}
+.right, .r {float: right;}
+.blank12H{height:12px;clear:both;font-size:0}
+
+.tv-area{zoom: 1;width:950px;width: 950px; margin: 0 auto;}
+.tv-area:after{content:".";display:block;visibility:hidden;height:0;clear:both;}
+
+#logoBar .search form,#logoBar .lnk,#logoBar .lnk .aUpload,#logoBar .lnk .aHistory,#navMain li,#logoBar .aHisOver,#navMain li a:hover,#logoBar .vHis h3 span{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/lnk.png) no-repeat}
+
+.navBar,#navMainSub{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg1.png) repeat-x;}
+.navBar{margin:0 0 10px;min-width:950px;}
+.navBar a{color:#fff;}
+.navBar a:hover{color:#fff;text-decoration:none;}
+
+#navMain{width:540px;padding-top:16px;float:left;}
+#navMain li{float:left;text-align:center;height:31px;width:63px;font-size:14px;line-height:31px;margin-right:2px;background-position:-325px -103px;}
+#navMain li a{display:block;}
+#navMain li.active,#navMain li a:hover{background-position:-325px -72px;color:#dd0d0b;}
+#navMain li.active{font-weight:bold;}
+#navMain li.active a{color:#dd0d0b;}
+
+#navSub{width:400px;float:right;padding-top:20px;text-align:right;color:#F1ACAD;}
+#navSub a{position:relative;display:inline-block;width:34px;line-height:25px;height:27px;text-align:center;}
+#navSub img{top:-10px;right:-2px;position:absolute;z-index:8;}
+#navSub .mg{margin:0 7px 0 0;_margin:0 2px 0 0;display:inline-block;width:1px;line-height:25px;height:27px;}
+#navSub a.active,#navSub a:hover{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/lnk.png) no-repeat 0 -288px;color:#dd0d0b;}
+#navSub a.home{width:60px;}
+#navSub a.home:hover{background-position:0 -315px;}
+
+#logoBar{height:76px;}
+#logoBar .logo{width:150px;margin-top:0px;}
+#logoBar .logo .tvAd{margin:0 0 0 12px; line-height:0;}
+#logoBar .search{width:400px;height:32px;margin-top:8px;}
+#logoBar .search form{height:38px;background-position:0 -33px;position:relative;z-index:99;}
+#logoBar .search .tx{width:312px;color:#c1c1c1;height:18px;line-height:18px;border:0;margin:6px 7px;}
+#logoBar .search .btn{background:none;width:59px;height:30px;line-height:30px;text-align:center;border:0;cursor:pointer;font-weight:bold;font-size:14px;color:#5a5a5a;}
+#logoBar .search .text{padding:0 0 0 5px;text-align:left;}
+#logoBar .infos{width:290px;padding-top:4px;}
+#logoBar .login{height:15px;text-align:right;}
+#logoBar .login .num{padding-right:7px;display:inline-block;margin:0 8px 0 0;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/ico1.png) no-repeat right top}
+#logoBar .login .num em{font-style:normal;color:#fff;display:block;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/ico1.png) no-repeat 0 -18px;padding-left:7px;line-height:14px;*line-height:16px;}
+#logoBar .result{position:absolute;top:32px;left:2px;width:321px;background:#FFF;border:1px #c5c5c5 solid}
+#logoBar .result li{cursor:pointer;height:17px;padding:5px 5px 0;color:#9b9b9b;text-align:right;line-height:14px}
+#logoBar .result .libg{background:#DCEAF5}
+#logoBar .result li span{float:left;color:#333}
+#logoBar .result li em{margin-right:4px;color:#B9001E}
+#logoBar .result h5{background:#f0f0f0;height:18px;padding:4px 5px 0 0;text-align:right;line-height:16px;color:#000}
+#logoBar .result h5 a{color:#000}
+
+/* history */
+#logoBar .vHis{position:absolute;top:32px;right:10px;text-align:left;z-index:300;}
+#logoBar .vHis .vHisLay{width:363px;position:absolute;top:0;left:0;background:#000;padding-bottom:1px;filter:alpha(opacity=60);opacity: 0.60;z-index:299;display:none;text-align: center;}
+#logoBar .vHis .vHisLay p{ color: #FFF;font-size: 18px;}
+#logoBar .vHis .vHisLay a{ color: #FFF;font-size: 14px; }
+#logoBar .vHis .vHisCont{position:relative;width:359px;padding-bottom:10px;background:#FFF;border:1px #c8c8c8 solid;}
+#logoBar .vHis h3{height:24px;padding:9px 15px 0;line-height:20px;color:#333;text-align:right;background-position:left bottom;}
+#logoBar .vHis h3 span{float:left;font-weight: bold;padding-left:22px;background-position:-134px -328px;}
+#logoBar .vHis h3 a{color:#DD0D0B;}
+#logoBar .vHis .close{top:10px;right:10px}
+#logoBar .lnk{width:188px;margin-left:102px;height:28px;padding-top:3px;line-height:28px;position:relative;z-index:12;}
+#logoBar .lnk .aUpload{background-position:0 -71px;padding:0 14px 0 31px;float:left;}
+#logoBar .lnk .aHistory{background-position:-95px -71px;*background-position:-95px -72px;padding:0 17px 0 20px;float:left;display:block;}
+#logoBar .lnk .aHisOver{background-position:-231px -72px;position:relative;z-index:301;display:inline-block;height:30px;text-align:left;}
+
+#videoHis .cf:after {content:".";display:block;height:0;clear:both;visibility:hidden}.cf{display:inline-block}/* Hides from IE-mac \*/* html .cf {height:1%}.cf {display:block}/* End hide from IE-mac */
+#videoHis .record-box{padding:3px 10px 0 10px;line-height:auto;}
+#videoHis .record-tit,.record-bd li p,.icon-cls,.logged .record-tit{background:url('http://www.xintaotv.com/css/default/xintao/xintaotv/icons.gif') no-repeat;}
+#videoHis .record-tit{background-position:0 -180px;*background-position:0 -181px;color:#5a5a5a;border-bottom:solid 1px #e3e3e3;padding:0 0 0 35px;}
+#videoHis .record-tit em{float:left;display:block;}
+#videoHis .record-tit i{font-style:normal;float:right;display:block;}
+#videoHis .record-tit a{color:#C60226;padding:0 2px;}
+#videoHis .record-bd li{border-bottom:dotted 1px #c6c6c6;line-height:20px;position:relative;_zoom:1;_margin-top:-4px;}	.record-bd li.lastnl{border-bottom:none;}
+#videoHis .record-bd li p{background-position:0 -20px;*background-position:0 -21px;overflow:hidden;padding:5px 0 0 22px;color:#333;}
+#videoHis .record-bd li.on{background:#f3f3f3;}
+#videoHis .record-bd li.on p{background-position:0 -220px;*background-position:0 -221px;overflow:hidden;padding:5px 0 0 22px;color:#333;}
+#videoHis .record-bd li em{display:block;color:#989A99;padding:0 0 5px 20px;} .record-bd li em a{color:#C60226;}  .record-bd li em span{padding-right:10px;}
+#videoHis .record-bd li i{font-style:normal;color:#666;display:none;} .record-bd li i a{padding:0 3px;}
+#videoHis .icon-cls{background-position:0 -116px;width:10px;height:10px;display:block;overflow:hidden;text-indent:-1000em;position:absolute;top:8px;right:3px;}
+#videoHis .record-ft{border-top:solid 1px #c8c8c8;background:#f3f3f3;text-align:center;margin:0 -10px -10px -10px;}
+#videoHis .logged .record-tit{background-position:0 -142px;padding-left:40px;overflow:hidden;}
+#videoHis #layerPop{filter:alpha(opacity=80);opacity: 0.80}
+
+.navPdSub{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg3.png) repeat-x;}
+.navPdSub{height:36px;}
+#navPdSub{height:34px;line-height:34px;border-left:1px solid #cbcbcb;border-right:1px solid #cbcbcb;padding:0 15px;color:#bababa;}
+#navPdSub ul,#navPdSub li{display:inline;}
+#navPdSub li{margin-right:2px;font-size:14px;}
+#navPdSub p a{margin-left:13px;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/point.png) no-repeat 0 15px;padding-left:10px;display:inline-block;}
+#navPdSub .color1{margin-right:20px;}
+#navPdSub a{position:relative;}
+#navPdSub img{position:absolute;z-index:8;top:-6px;right:-2px;}
+
+
+/*g_focus*/
+.fi_movie{position:relative;width:950px;height:368px;background:000;overflow:hidden;}
+.fi_movie a{outline:none;text-decoration:none;}
+.fi_movie .fi_ct{height:100%;width:100%;}
+.fi_movie .fi_note,.fi_movie .fi_ovl_note{position:absolute;height:284px;width:210px;right:0;top:0;z-index:10;background:transparent;}
+.fi_movie .fi_ovl_note{background:#000;opacity:.5;z-index:9;height:368px;width:230px;}               
+.fi_movie .fi_tab{position:absolute;height:624px;height:64px;bottom:0px;left:53px;} 
+.fi_movie .fi_tab_inner{position:relative;width:564px;margin:0 4px;padding:7px 0;overflow:hidden;}
+.fi_movie .fi_tab_{position:relative;width:2000px;}
+.fi_movie .fi_tab li{float:left;margin:0 5px;display:inline;position:relative;}
+.fi_movie .fi_tab img{width:80px;height:45px;background:#fff;padding:2px;}
+.fi_movie .fi_ovl_tab{position:absolute;left:0;top:0;width:84px;height:49px;background:#000;}
+.fi_movie .fi_tab_inner{float:left;z-index:10;}
+.fi_movie .fi_note{padding:20px 5px;text-align:left;}
+.fi_movie h2.fi_tt{text-align:left;padding:25px 0 0 0;}
+.fi_movie h2.fi_tt a{font-size:20px;color:#fff;}
+.fi_movie .fi_tt0 a{font-size:14px;font-family:"Arial";line-height:22px;color:#fff;}
+.fi_movie .fi_acts a{color:#fff;font-size:14px;}
+.fi_movie .fi_meta{margin-top:35px;padding-top:15px;color:#cbcbcb;line-height:22px;background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/fi_movie_dot.gif") repeat-x left top;}
+.fi_movie .fi_meta a{color:#cbcbcb;margin-right:5px;}
+.fi_movie .fi_meta a:hover{color:#fff;text-decoration:underline;}
+.fi_movie .fi_meta label{float:left;}
+.fi_movie .fi_meta p{padding-left:42px;padding-bottom:2px;}
+.fi_movie .fi_meta .fi_mdesc{line-height:20px;}
+.fi_movie .fi_acts{position:absolute;width:180px;height:44px;;right:0;bottom:0;padding:0 20px;z-index:10;}
+.fi_movie .fi_btnplay{display:block;width:94px;height:27px;text-align:center;line-height:27px;background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_btn.png") no-repeat;}
+.fi_movie .fi_btnplay:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_btn1.png");}
+.fi_movie .fi_pointer{position:absolute;width:84px;height:54px;left:36px;top:2px;z-index:-1;background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_pointer.png") no-repeat;}
+.fi_movie .fi_loading{position:absolute;left:0;top:0;width:100%;height:100%;background:#000;z-index:100;}
+.fi_movie .fi_loading img{display:block;position:absolute;width:47px;height:47px;left:50%;top:50%;margin-left:-23px;margin-top:-23px;}
+/* styles for goddawn ie6 */
+.fi_movie .fi_pointer{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_pointer.png");}
+
+.fi_movie .fi_btnplay{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/movie-normal.png") no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop,src="http://www.xintaotv.com/css/default/xintao/xintaotv/movie-normal.png");_background:none;}
+.fi_movie .fi_btnplay:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/movie-over.png") no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop,src="http://www.xintaotv.com/css/default/xintao/xintaotv/movie-over.png");_background:none;}
+/* /styles for goddawn ie6 */
+.title, .right h2, #contentA .blockLE h2, .pub .right h2 {background: url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg2.png) repeat-x;}
+.bordA, .bordB {border: 1px #C5C5C5 solid;background: white;}
+.color1, .color1 a {color: #DD0D0B;}
+.title{height:37px;line-height:25px;margin:0 2px;padding:15px 0 0;color:#c9c9c9;}
+.title span{float:left;margin-left:16px;display:inline}
+.title a{margin:0 12px}
+.right h2{height:25px;margin:0 2px;padding:12px 11px 3px;line-height:16px;text-align:right;}
+.right h2 span{float:left;font-weight:bold;font-size:14px;color:#333;}
+.right h2 a{color:#dd0d0b;}
+
+.pp,.pt,.list12 ul,.list14 ul{width:100%;margin:0 auto;}
+.pp:after,.pt:after,.area:after,.clear:after{content:".";display:block;visibility:hidden;height:0;clear:both;}
+.left .pp{text-align:center;width:662px;}
+.pp img{display:block;margin:0 auto;}	
+.pp span{display:block;}
+.pt{line-height:20px;text-align:left;}
+.pt div{float:left;margin:0 10px 0 0;}			
+.pt p{clear:none}
+.pp li{float:left;display:inline;width:100%}
+.pt div img,.pp img,.pic img{border:1px #c5c5c5 solid;padding:1px}
+.pt div a:hover img,.pp a:hover img,.pic a:hover img{border:1px #dd0d0b solid}
+.pp li{position:relative;width:109px;height:148px;margin-right:29px;}
+.pp span{width:108px;margin:7px auto 0;display:block;line-height:18px;text-align:left}
+.pp span strong{display:block;font-weight:normal;margin:0 auto 2px;color:#4b4b4b;}
+.pp .end{margin:0}
+.pp .label{position:absolute;top:62px;left:2px;height:15px;width:103px;margin:0 auto;color:#FFF;line-height:14px;text-align:right;padding:3px 2px 0 0}
+.pp .label i{position:absolute;height:18px;width:105px;left:0;top:0;background:#000;filter:alpha(opacity=60);opacity: 0.60;}
+.pp .label code{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/q_c.gif) no-repeat;z-index:20;display:block;width:27px;height:16px;position:absolute;top:1px;left:1px;}
+.pp .label code.ch{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/q_g.gif) no-repeat;}
+.pp .label code.cb{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/q_b.gif) no-repeat;}
+.pp .label code.cc{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/q_c.gif) no-repeat;}
+.pp .label em{position:relative;z-index:2;color:#FFF}
+.pp .bp{top:129px}
+.bordA .pp{text-align:left;}
+.bordA .pp .subTitle a{color:#999999}
+.title span a{margin:0}
+.pp1 li{width:100px;margin-right:20px;_margin-right:16px;height:auto;}
+.pp1 .label{top:55px;width:94px;}
+.pp1 .label i{width:96px;}
+
+.pp2 li{width:153px;margin:0 16px 0 0;height:156px;}
+.pp2 li.end{margin-right:0;}
+.pp2 .label{top:76px;width:148px;}
+.pp2 .label i{width:149px;}
+
+.pp3 li{height:213px;}
+.pp3 .label{top:129px;}
+
+.pp4 li{width:109px;margin-right:29px;height:150px;}
+.pp4 .label{top:62px;width:103px;}
+.pp4 .label i{width:105px;}
+
+.pp6{margin:0 0 0 18px;}
+.pp6 span{width:136px;}
+.pp6 li{width:140px;height:170px;margin-right:33px;}
+.pp6 .label{top:85px;width:133px;}
+.pp6 .label i{width:135px;}
+
+.pp7 li{width:139px;height:175px;float:left;margin:0 10px;display:inline;}
+.pp7 span{width:139px;}
+.pp7 .label{top:74px;width:132px;}
+.pp7 .label i{width:134px;}
+.pp7 strong em{font-weight:bold;}
+
+.pList li li, .list12 li, .list14 li, .pg .arrow a span, .snList em, .menuA .now em {background: url(http://www.xintaotv.com/css/default/xintao/xintaotv/ico2.png) no-repeat;}
+
+.menuA{height:28px;width:213px;margin:0 auto;}
+.menuA ul{height:22px;width:212px;border-left:1px #dedede solid;border-bottom:1px #dedede solid;}
+.menuA li{cursor:pointer;float:left;width:57px;height:17px;*height:16px;padding-top:4px;*padding-top:5px;text-align:center;border:1px #dedede solid;border-left:0;border-bottom:0;background:#FFF;color:#5c5c5c;line-height:14px}
+.menuA .now{position:relative;background:#F7F7F7;color:#dd0d0b;font-weight: bold;}
+.menuA .now em{position:absolute;top:21px;left:23px;display:block;width:11px;height:6px;background-position:-48px -57px;font-size:0}
+.snList{width:214px;margin:5px auto 10px 5px;height:260px}
+.snList li{padding:5px 0;text-align:left;line-height:16px}
+.snList li em{float:left;width:14px;text-align:center;font:400 11px/14px "Arial";color:#1D569C;background-position:-25px -84px;margin:0 5px 0 0;color:#FFF}
+.snList li span{float:right}
+.snList .colorA{background-position:-25px -57px;}
+.snList .trend{width:16px;height:16px;display:block;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg10.gif) no-repeat 8px 2px}
+.snList .up{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg09.gif) no-repeat 8px 2px}
+.snList .down{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg11.gif) no-repeat 8px 2px}
+.snList .grade{width:82px}
+.snList .grade strong{margin-right:4px;font-weight:normal;color:#FF6000}
+.snList .sn{float:left;width:14px;margin-right:5px;_margin-right:2px;background-position:-25px -84px;text-align:center;font:600 11px/14px "Arial";color:#FFF}
+
+
+.dDox .line{margin:0 10px 10px;width:auto;}
+.list{width:222px;margin:0 auto 8px 5px;text-align:left;line-height:22px}
+.list li{width:45px;_width:42px;float:left}
+a{color: #5A5A5A;}a:hover {color: #DD0D0B;text-decoration: underline;}
+
+.pList{width:632px;margin:0 auto;float:left;}
+.pList li{float:left;width:58px;margin:8px 3px 0 2px;display:inline;}
+.pList li a{text-align:center;display:block;height:20px;padding-top:8px;border:1px #DEDEDE solid;background:#F6F6F6;line-height:14px;text-decoration:none}
+.pList li a:hover{background:#f9ece3;color:#000}
+.pList .now a,.pList .now a:hover{background:#CB001B;font-weight:bold;color:#FFF}
+
+.pListA{width:632px;margin:0 auto;float:left;}
+.pListA li{float:left;width:151px;margin:8px 4px 0 3px;display:inline; position:relative;}
+.pListA li span{position:absolute;bottom:8px;right:9px}
+.pListA li a{text-align:center;display:block;overflow:hidden;width:132px;height:32px;padding:7px 8px 5px 9px;border:1px #dedede solid;background:#f6f6f6;line-height:18px;text-decoration:none;text-align:left}
+.pListA li a.mvla{text-align:center;height:18px;}
+.pListA li a:hover{background:#F9ECE3;color:#DD0D0B}
+.pListA .now a,.pListA .now a:hover{background:#F9ECE3;color:#DD0D0B}
+
+#allist ul{width:632px;}
+#allist .fi_btn{position:relative;width:20px;height:76px;float:left;z-index:10;}
+#allist .fi_btn a{position:absolute;display:block;width:20px;height:32px;left:0;top:30%;}
+#allist .fi_prev a{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_on.png") no-repeat;}
+#allist .fi_next a{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_on.png") no-repeat;}
+#allist .fi_prev a:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_hot.png") no-repeat;}
+#allist .fi_next a:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_hot.png") no-repeat;}
+#allist .fi_prev a.fi_off,#allist .fi_prev a.fi_off:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_off.png") no-repeat;cursor:default;}
+#allist .fi_next a.fi_off,#allist .fi_next a.fi_off:hover{background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_off.png") no-repeat;cursor:default;}
+#allist .fi_prev a{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_on_ie6.png");}
+#allist .fi_next a{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_on_ie6.png");}
+#allist .fi_prev a:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_hot_ie6.png");}
+#allist .fi_next a:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_hot_ie6.png");}
+#allist .fi_prev a.fi_off,#allist .fi_prev a.fi_off:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_left_off_ie6.png");}
+#allist .fi_next a.fi_off,#allist .fi_next a.fi_off:hover{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://www.xintaotv.com/css/default/xintao/xintaotv/jqf_right_off_ie6.png");}
+
+#allist .ks-switchable-nav{display:none;margin-right: 2px;height: 18px;}
+#allist .ks-switchable-nav li{float:left;margin-right: 2px;}
+#allist .ks-switchable-nav li span{cursor:pointer;float: left;display: block;height: 20px;padding: 0 3px 0 2px;line-height: 22px;font-size: 14px;overflow: hidden;}
+#allist .ks-switchable-nav li.ks-active span {background: #F4021A;height: 18px;color: white;font-weight: bold;cursor: default;}
+.topx-4{width:300px;height:450px;}
+.topx-4 .ks-switchable-panel{width:300px}
+.topx-5{width:950px;height:280px;}
+.topx-20{width:950px;height:1030px;}
+.topx-5 .ks-switchable-panel,.topx-20 .ks-switchable-panel{width:950px}
+:focus{outline:0}
+.topx-hd{height:25px;overflow:hidden;width:950px}
+.topx-4 .topx-hd{width:300px}
+.topx-hd .topic{float:left;padding:0 15px;font-weight:700;font-size:14px;line-height:25px}
+.topx-hd ol{float:left;list-style:none}
+.topx-hd li{float:left;padding:3px 8px;font-weight:700;color:#666;height:18px;cursor:pointer;*position:relative}
+.topx-hd li.hover{border:solid #f78613;border-width:1px 1px 0 1px;background-color:#fff}
+.line{margin-top:-1px;border-top:1px solid #f78613;height:10px;font-size:0;line-height:0}
+.topx-bd ol{border:solid #ccc;list-style:none;border-width:1px 1px 0 1px}
+.topx-bd ol.dis{display:block}
+.topx-bd ol.undis{display:none}
+.topx-bd ol:after,.topx-ft:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.topx-bd ol,.topx-ft{*+height:1%}
+.topx-bd li{float:left;border-bottom:1px solid #ccc}
+.topx-bd li .unit{width:160px;height:240px;position:relative}
+.topx-4 .topx-bd li .unit{width:120px;height:200px;}
+.topx-bd li .unit a:hover,a:link,a:visited{text-decoration:none}
+.topx-bd li .unit span {display:block}
+.topx-bd li .unit .pic{display:table-cell;*font-size:120px;overflow:hidden;width:160px;height:160px;background-color:#fff;text-align:center}
+.topx-4 .topx-bd li .unit .pic{width:120px;height:120px;*font-size:90px;}
+.topx-bd li .unit .pic img{vertical-align:middle}
+.topx-bd li .unit .price{color:#a2a2a2}
+.topx-bd li .unit .price em{font-style:normal;font-weight:700;color:#f78613}
+.topx-bd li .unit .sales{color:#808080}
+.topx-bd li s{padding-right:15px;width:15px;height:30px;font-weight:700;text-decoration:none;text-align:center;color:#fff;background:url(http://img01.taobaocdn.com/tps/i1/T1L3ifXgXcXXXXXXXX-90-30.gif) no-repeat -30px 0;position:absolute;top:0;left:0}
+.topx-bd li s.fst{background-position: 0 0}
+.topx-ft {padding:0 5px;border:solid #ccc;border-width:0 1px 1px 1px;height:35px;font-weight:700;font-size:14px;overflow:hidden}
+.topx-ft a {color:#f78613}
+.topx-ft .tb-top{float:left;padding:7px 15px 7px 35px;background:url(http://img01.taobaocdn.com/tps/i1/T1L3ifXgXcXXXXXXXX-90-30.gif) no-repeat -60px 5px}
+.topx-ft .more{float:right;padding:7px 15px}
+
+ body{width:950px}
+.topx-hd .topic{color:#404040}
+.topx-bd li .title{display:block;overflow:hidden;color:#404040;height:36px;line-height: 18px;margin:0px;padding:0px;background:none;}
+.topx-bd ol{border-color:#D9D9D9}
+.topx-bd li{padding:10px 14px 0;border-bottom-color:#D9D9D9}
+.topx-bd li.first{padding-left:18px}.topx-4 .topx-bd li.first{padding-left:15px}
+.topx-bd li.last{padding-right:18px}.topx-4 .topx-bd li.last{padding-right:15px}
+.topx-ft{border-color:#D9D9D9}
+.topx-bd,.topx-ft{background-color:#FFFFFF}
+
+#picFocusout{position:relative;}
+#picFocusout img{}
+#picFocusout .aplay,#picFocusout .aall{position:absolute;top:168px;left:10px;display:block;width:116px;height:31px;padding:36px 0 0 65px;color:#F2B6BD;}
+#picFocusout .aplay:hover,#picFocusout .aall:hover{text-decoration:none;}
+#picFocusout .aall{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn4a.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn4a.png',sizingMethod='image');}
+#picFocusout .aplay{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn2a.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn2a.png',sizingMethod='image');}
+#picFocusout .apre{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn7a.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn4a.png',sizingMethod='image');}
+#picFocusout .aall:hover{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn4b.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn4b.png',sizingMethod='image');}
+#picFocusout .aplay:hover{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn2b.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn2b.png',sizingMethod='image');}
+#picFocusout .apre:hover{background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn7b.png) no-repeat !important;background-image:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.xintaotv.com/css/default/xintao/xintaotv/btn4a.png',sizingMethod='image');}
+#picFocusout #hisPlay{display:none;cursor:pointer;}
+
+.btns,.btns1,.btns2,.btns3,.btns4,.btns5,.btns6,.btns7,.btns8,.btns9{display:inline-block;width:68px;height:32px;line-height:32px;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/btn1.png) no-repeat;padding-left:30px;cursor:pointer;color:#000;}
+.btns9{background-position:0 -240px;width:60px;padding:0 0 0 10px;height:22px;line-height:22px;}
+.btns9Over{background-position:-93px -240px;}
+.btns9Down{background-position:-184px -239px;}
+.btns9:hover{text-decoration:none;}
+.page{text-align:right;line-height:18px;}
+.page em a,.page em span{border:1px solid #ccc;padding:1px 6px 0;text-align:center;margin-left:8px;display:inline-block;}
+.page em span.current{background:#dd0d0b;color:#fff;border:1px solid #dd0d0b;}
+.page .bd{background:#f4f4f4;display:inline-block;width:53px;vertical-align:bottom;text-align:center;padding:2px 0 0;}
+.page a:hover{text-decoration:none;}
+.listJs{line-height:19px;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/line1.png) repeat-x left bottom;padding:0 0 15px;margin-bottom:15px;}
+.listJs .wz{margin-bottom:15px;}
+.listJs .dp{height:31px;line-height:31px;background:#f8f8f8;border:1px solid #ddd;display:inline-block;padding:0 15px 0 50px;position:relative;}
+.listJs .dp .s1,.listJs .dp .s2{display:block;position:absolute;}
+.listJs .dp .s2{background-position:0 -47px;width:3px;height:33px;right:-2px;top:-1px;}
+.listJs .dp .s1{background-position:-28px -37px;width:51px;height:43px;left:-1px;top:-11px;}
+.listJs .dp .swz{height:31px;overflow:hidden;display:inline-block;}
+#ablum2{padding:15px;color:#646464;}
+#ablum2 h3{font-weight:bold;font-size:12px;color:#000;display:inline;margin-right:25px;}
+#ablum2 .bti{margin:0 0 10px;}
+#ablum2 .page a{cursor:pointer;border:1px solid #E0E0E0; margin-left:4px; background:#fff;}
+#ablum2 .page a:hover{background:#F7F7F7;}
+#ablum2 .page em a.current{background:#dd0d0b;color:#fff; font-weight:bold; border:none;}
+#ablum2 .page a.blur{border:0; cursor:text; background:#fff;color:#989A99;}
+#ablum2 h3 span{color:#646464;padding-right:10px;}
+.listJs .wz{text-indent:24px;}

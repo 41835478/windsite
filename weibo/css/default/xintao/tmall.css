@@ -1,0 +1,757 @@
+.tsCategory {
+	margin-top: -30px;
+	float: left;
+	width: 190px;
+	height: 898px;
+	background: #8d7f7e;
+	z-index: 100;
+	position: relative;
+	color: #fff;
+}
+
+.tsCategory-nav s,.hdBox-mask,.mallCategory .menuIcon,.elCategory .item-hd .cArrow,.paidWay .cArrow,.lst-subcategory dl,.pop-subcategory .lstInfo-item,.pop-subcategory .lstChl-prew .cArrow
+	{
+	background:
+		url(http://img01.taobaocdn.com/tps/i1/T13PeqXXljXXXXXXXX-140-364.png)
+		no-repeat;
+}
+
+.tsCategory-con {
+	height: 100%;
+}
+
+.tsCategory a {
+	color: #fff;
+}
+
+.tsCategory .entity {
+	width: 190px;
+	overflow: hidden;
+}
+
+.tsCategory .items {
+	margin-top: -1px;
+}
+
+.mallCategory {
+	position: relative;
+	height: 898px;
+}
+
+.mallCategory .hdBox {
+	height: 30px;
+	line-height: 30px;
+	text-indent: 10px;
+	background: #736867;
+	overflow: hidden;
+	position: relative;
+}
+
+.hdBox a {
+	display: block;
+	padding-left: 10px;
+}
+
+.hdBox a:hover {
+	text-decoration: none;
+}
+
+.hdBox-mask {
+	display: inline-block;
+	height: 14px;
+	width: 145px;
+	overflow: hidden;
+	background-position: 0 -80px;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+}
+
+.mallCategory .menuIcon {
+	display: inline-block;
+	width: 5px;
+	height: 9px;
+	background-position: -61px -150px;
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	overflow: hidden;
+}
+
+.mallCategory .selected .menuIcon {
+	display: none;
+}
+
+.mallCategory .entity .selected {
+	background: #736867;
+	border-top-color: #736867;
+	position: relative;
+}
+
+.mallCategory .entity .selected a {
+	color: #fff;
+}
+
+.mallCategory .item {
+	padding: 4px 0;
+	border-top: 1px solid #928685;
+	border-bottom: 1px solid #807473;
+	cursor: pointer;
+}
+
+.mallCategory .item h3,.elCategory .item h4 {
+	height: 24px;
+	line-height: 24px;
+	padding-left: 10px;
+	position: relative;
+}
+
+.mallCategory .item-col {
+	height: 20px;
+	overflow: hidden;
+	line-height: 20px;
+	padding: 0 10px 0 5px;
+}
+
+.mallCategory .item-col a {
+	color: #e2dfdf;
+	margin-left: 5px;
+}
+
+.tsCategory-nav {
+	width: 30px;
+	position: absolute;
+	top: 30px;
+	left: -30px;
+	text-align: right;
+	overflow: hidden;
+}
+
+.tsCategory-nav li {
+	overflow: hidden;
+	height: 65px;
+}
+
+.tsCategory-nav a,.tsCategory-nav s {
+	display: inline-block;
+	width: 25px;
+	height: 100%;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+}
+
+.tsCategory-nav a {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	color: #736867;
+}
+
+.tsCategory-nav .selected a {
+	background-color: transparent;
+}
+
+.tsCategory-nav .selected a,.tsCategory-nav .selected s {
+	width: 30px;
+}
+
+.tsCategory-nav s {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.tsCategory-nav .tn1 {
+	height: 74px;
+}
+
+.tsCategory-nav .tn2 {
+	height: 75px;
+}
+
+.tsCategory-nav .selected a {
+	width: 30px;
+}
+
+.pop-subcategory {
+	width: 625px;
+	left: 190px;
+	position: absolute;
+}
+
+.pop-subcategory .shadow {
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 20px;
+	height: 100%;
+	width: 100%;
+}
+
+.pop-subcategory .lst-subcategory {
+	float: left;
+	padding: 10px 0 10px 17px;
+	width: 292px;
+}
+
+.pop-subcategory .lst-subcategory dl {
+	background-position: 0 0;
+	padding-top: 1px;
+	margin-right: 10px;
+	background-repeat: repeat-x;
+}
+
+.pop-subcategory .lst-subcategory dt {
+	background-color: #736867;
+}
+
+.pop-subcategory .lst-subcategory dt a {
+	position: relative;
+}
+
+.pop-subcategory .lst-subcategory dd {
+	margin-top: -27px;
+	padding-left: 70px;
+	overflow: hidden;
+	zoom: 1;
+	background-color: #736867;
+}
+
+.pop-subcategory .entity-main,.pop-subcategory .lst-subcategory,.pop-subcategory .lst-top
+	{
+	max-height: 502px;
+	max-height: 505px\0;
+	overflow: hidden;
+	height: auto;
+}
+
+.pop-subcategory .lst-subcategory {
+	float: left;
+	padding: 10px 0 10px 17px;
+	width: 292px;
+}
+
+.pop-subcategory dl {
+	background:
+		url(http://img02.taobaocdn.com/tps/i2/T1vhh9XkXqXXXXXXXX-3-1.png);
+	background-position: 0 0;
+	padding-top: 1px;
+	margin-right: 10px;
+	background-repeat: repeat-x;
+}
+
+.pop-subcategory .lst-subcategory dl.first,.pop-subcategory .lst-topitems dl.first
+	{
+	background: none;
+}
+
+.pop-subcategory .lst-subcategory dt,.pop-subcategory .lst-subcategory dt a,.pop-subcategory .lst-topitems dt,.pop-subcategory .lst-topitems dt a
+	{
+	line-height: 30px;
+	font-weight: 700;
+	clear: both;
+}
+
+.pop-subcategory dt a {
+	position: relative;
+}
+
+.pop-subcategory dt {
+	width: 68px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.pop-subcategory dd {
+	margin-top: -27px;
+	padding-left: 70px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.pop-subcategory dd a {
+	padding: 0 5px;
+	border-left: 1px solid #736867;
+	display: inline-block;
+	height: 15px;
+	margin: 4px 0 7px;
+	line-height: 15px;
+	white-space: nowrap;
+}
+
+.pop-subcategory .lst-subcategory dd a {
+	border-left-color: #665d5c;
+}
+
+.pop-subcategory .lst-top {
+	width: 305px;
+	float: right;
+}
+
+.pop-subcategory .lst-top dt {
+	width: 85px;
+}
+
+.pop-subcategory .lst-top dd {
+	padding-left: 85px;
+}
+
+.pop-subcategory .lst-topitems dt b {
+	display: none;
+}
+
+.pop-subcategory .lst-topitems {
+	margin: 10px 10px 0;
+	overflow: hidden; *
+	zoom: 1;
+}
+
+.pop-subcategory .lst-recmd {
+	margin: 20px 0 0 20px;
+	width: 255px;
+}
+
+.pop-subcategory dt a {
+	height: 30px;
+	overflow: hidden;
+}
+
+.mallCategory .bottomBanner {
+	width: 190px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.mallCategory .bottomBanner a {
+	display: block;
+	width: 190px;
+	overflow: hidden;
+}
+
+.mallCategory .bottomBanner img {
+	vertical-align: top;
+}
+
+.tsCategory-nav .selected .all {
+	background-position: 0 -150px; *
+	height: 74px;
+}
+
+.tsCategory-nav .all {
+	height: 75px;
+	background-position: -30px -150px;
+	overflow: hidden;
+}
+
+.mallCategory .shadow {
+	background: #736867
+		url(http://img03.taobaocdn.com/tps/i3/T1b_qaXmxAXXXXXXXX-305-3.png)
+		320px 0 repeat-y;
+}
+
+.pop-subcategory .lst-recmd .lstChl {
+	display: block;
+	background-color: #8c7f7e;
+	overflow: hidden;
+	height: 46px;
+	cursor: pointer;
+}
+
+.pop-subcategory .lstChl-icon {
+	float: left;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	display: inline;
+	margin: 8px 9px 0 10px;
+}
+
+.pop-subcategory .lstChl-des {
+	width: 110px;
+	height: 35px;
+	margin-top: 5px;
+	float: left;
+	overflow: hidden;
+}
+
+.pop-subcategory .lstChl-prew {
+	float: right;
+	display: inline;
+	margin: 10px 10px 0 0;
+	color: #fff;
+	font-weight: normal;
+}
+
+.pop-subcategory .lstChl-prew .cArrow {
+	height: 15px;
+	width: 16px;
+	display: inline-block;
+	margin-left: 3px;
+	position: static;
+	vertical-align: middle;
+	margin-top: -1px;
+	background-position: -81px 0;
+}
+
+.pop-subcategory .lstChl-des-text {
+	line-height: 1.2;
+	color: #e6dad8;
+}
+
+.pop-subcategory .lst-recmd .lstChl:hover {
+	text-decoration: none;
+}
+
+.pop-subcategory .lst-recmd .lstChl:hover .lstChl-prew {
+	text-decoration: underline;
+}
+
+.pop-subcategory .lstInfo {
+	margin-top: 4px;
+	margin-bottom: 1px;
+}
+
+.pop-subcategory .lstInfo-item {
+	line-height: 21px;
+	height: 21px;
+	overflow: hidden;
+	padding-left: 10px;
+	background-position: -120px -7px;
+}
+
+.pop-subcategory .lstInfo-item a {
+	color: #e6dad8;
+}
+
+.cateBottom {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #8c7f7e;
+	overflow: hidden;
+	height: 50px;
+	padding-top: 20px;
+}
+
+.paidWay {
+	height: 50px;
+	overflow: hidden;
+	margin-top: -1px;
+}
+
+.paidWay a {
+	display: block;
+	height: 24px;
+	line-height: 24px;
+	background-color: #736867;
+	text-align: right;
+	padding-right: 36px;
+	border-bottom: 1px solid #665d5c;
+	border-top: 1px solid #7b706f;
+	font-weight: bold;
+	position: relative;
+}
+
+.paidWay .paidWay-phone {
+	border-top: none;
+}
+
+.paidWay .cArrow {
+	display: inline-block;
+	height: 15px;
+	width: 16px;
+	background-position: -65px 0;
+	position: absolute;
+	top: 4px;
+	right: 12px;
+}
+
+.elCategory .pop-subcategory .shadow {
+	background-color: #5568a3;
+}
+
+.tsCategory-nav .selected .electric {
+	background-position: -56px -159px;
+}
+
+.tsCategory-nav .electric {
+	background-position: -86px -158px;
+}
+
+.elCategory {
+	background: #637abd;
+	height: 898px;
+}
+
+.elCategory .shadow {
+	background:
+		url(http://img02.taobaocdn.com/tps/i2/T1QnCaXe0BXXXXXXXX-305-3.png)
+		320px 0 repeat-y;
+}
+
+.elCategory .hdBox {
+	background: #5568a3;
+}
+
+.elCategory .item-hd {
+	height: 23px;
+	width: 190px;
+	overflow: hidden;
+	border-top: 1px solid #7a92cf;
+	border-bottom: 1px solid #7a92cf;
+	background: #6f87c7;
+	position: relative;
+	margin-top: -1px;
+}
+
+.elCategory .item-hd a {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	line-height: 23px;
+	padding-left: 10px;
+}
+
+.elCategory .pop-subcategory dl {
+	background-image:
+		url(http://img02.taobaocdn.com/tps/i2/T1EXJ9XhXzXXXXXXXX-3-1.png);
+}
+
+.elCategory .item-hd .cArrow {
+	display: inline-block;
+	height: 13px;
+	width: 13px;
+	line-height: 13px;
+	overflow: hidden;
+	background-position: -52px 0;
+	position: absolute;
+	top: 5px;
+	left: 70px;
+}
+
+.elCategory .menuIcon {
+	background-position: -56px -150px;
+}
+
+.elCategory .entity .selected {
+	background: #5568a3;
+	border-color: #5568a3;
+}
+
+.elCategory .item {
+	border-top-color: #6981c2;
+	border-bottom-color: #5b71b0;
+}
+
+.elCategory .pop-subcategory {
+	background: #5568a3;
+}
+
+.elCategory .hdBox-mask {
+	background-position: 0 -94px;
+}
+
+.elCategory .entity {
+	border-bottom: 1px solid #6981c2;
+}
+
+.elCategory .item-col a {
+	color: #d8deee;
+}
+
+.elCategory .lst-subcategory dt,.elCategory .lst-subcategory dd {
+	background-color: #5568a3;
+}
+
+.elCategory .pop-subcategory dd a {
+	border-left-color: #4e6097;
+}
+
+.tsCategory-nav .beauty {
+	background-position: -30px -224px;
+}
+
+.tsCategory-nav .selected .beauty {
+	background-position: 0 -224px;
+}
+
+.beautyCategory {
+	background: #d78494;
+}
+
+.beautyCategory .shadow {
+	background:
+		url(http://img01.taobaocdn.com/tps/i1/T1ATmaXolzXXXXXXXX-305-3.png)
+		320px 0 repeat-y;
+}
+
+.beautyCategory .pop-subcategory dl {
+	background-image:
+		url(http://img02.taobaocdn.com/tps/i2/T1UvJ9Xb0vXXXXXXXX-3-1.png);
+}
+
+.beautyCategory .hdBox {
+	background: #bd7382;
+}
+
+.beautyCategory .hdBox-mask {
+	background-position: 0 -122px;
+}
+
+.beautyCategory .menuIcon {
+	background-position: -66px -150px;
+}
+
+.beautyCategory .item {
+	border-top-color: #dc8e9d;
+	border-bottom-color: #d27a8b;
+}
+
+.beautyCategory .item-col a {
+	color: #f3ebed;
+}
+
+.beautyCategory .entity .selected {
+	background: #bd7382;
+	border-color: #bd7382;
+}
+
+.beautyCategory .pop-subcategory .shadow,.beautyCategory .pop-subcategory,.beautyCategory .lst-subcategory dd,.beautyCategory .lst-subcategory dt
+	{
+	background-color: #bd7382;
+}
+
+.beautyCategory .entity {
+	border-bottom: 1px solid #DC8E9D;
+}
+
+.beautyCategory .pop-subcategory dd a {
+	border-left-color: #b06b79;
+}
+
+.tsCategory-nav .jia {
+	background-position: -86px -224px;
+}
+
+.tsCategory-nav .selected .jia {
+	background-position: -56px -224px;
+}
+
+.jiaCategory {
+	background: #998673;
+}
+
+.jiaCategory .pop-subcategory dl {
+	background-image:
+		url(http://img04.taobaocdn.com/tps/i4/T113V9Xn8qXXXXXXXX-3-1.png);
+}
+
+.jiaCategory .shadow {
+	background:
+		url(http://img04.taobaocdn.com/tps/i4/T1sS9aXXNAXXXXXXXX-305-3.png)
+		320px 0 repeat-y;
+}
+
+.jiaCategory .hdBox {
+	background: #807060;
+}
+
+.jiaCategory .hdBox-mask {
+	background-position: 0 -108px;
+}
+
+.jiaCategory .menuIcon {
+	background-position: -71px -150px;
+}
+
+.jiaCategory .item {
+	border-top-color: #a2907c;
+	border-bottom-color: #907c6a;
+}
+
+.jiaCategory .item-col a {
+	color: #f3ebed;
+}
+
+.jiaCategory .entity .selected {
+	background: #807060;
+	border-color: #807060;
+}
+
+.jiaCategory .pop-subcategory .shadow,.jiaCategory .pop-subcategory,.jiaCategory .lst-subcategory dd,.jiaCategory .lst-subcategory dt
+	{
+	background-color: #807060;
+}
+
+.jiaCategory .entity {
+	border-bottom: 1px solid #9a8b7b;
+}
+
+.jiaCategory .pop-subcategory dd a {
+	border-left-color: #736456;
+}
+
+.tsCategory-nav .chaoshi {
+	background-position: -30px -289px;
+}
+
+.tsCategory-nav .selected .chaoshi {
+	background-position: 0 -289px;
+}
+
+.csCategory {
+	background: #663829;
+}
+
+.csCategory .pop-subcategory dl {
+	background-image:
+		url(http://img01.taobaocdn.com/tps/i1/T1neWqXcBUXXXXXXXX-3-1.png);
+}
+
+.csCategory .shadow {
+	background:
+		url(http://img02.taobaocdn.com/tps/i2/T1q3GqXmXDXXXXXXXX-305-3.png)
+		320px 0 repeat-y;
+}
+
+.csCategory .hdBox {
+	background: #4c2a20;
+}
+
+.csCategory .hdBox-mask {
+	background-position: 0 -136px;
+}
+
+.csCategory .menuIcon {
+	background-position: -76px -150px;
+}
+
+.csCategory .item {
+	border-top-color: #6a3b2b;
+	border-bottom-color: #603427;
+}
+
+.csCategory .item-col a {
+	color: #f3ebed;
+}
+
+.csCategory .entity .selected {
+	background: #4c2a20;
+	border-color: #4c2a20;
+}
+
+.csCategory .pop-subcategory .shadow,.csCategory .pop-subcategory,.csCategory .lst-subcategory dd,.csCategory .lst-subcategory dt
+	{
+	background-color: #4c2a20;
+}
+
+.csCategory .entity {
+	border-bottom: 1px solid #6a3b2b;
+}
+
+.csCategory .pop-subcategory dd a {
+	border-left-color: #40221a;
+}

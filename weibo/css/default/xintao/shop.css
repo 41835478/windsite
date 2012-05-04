@@ -1,0 +1,344 @@
+.shop-score-ul {
+	width: 174px;
+	overflow: hidden;
+	padding-top: 5px;
+	border: 1px dashed #CCC;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 0;
+}
+
+.shop-btn .comment-shop,.shop-btn .collect-shop,.shop-btn .enter-shop {
+	background:
+		url(http://img04.taobaocdn.com/tps/i4/T1saOkXo8uXXXXXXXX-198-305.png)
+		no-repeat -999em -999em transparent;
+}
+
+.shop-btn a {
+	display: block;
+	width: 101px;
+	height: 35px;
+	margin-bottom: 11px;
+	margin-left: 10px;
+	overflow: hidden;
+	text-indent: -9999px;
+	position: relative;
+}
+
+.shop-btn .comment-shop {
+	margin-top: 10px;
+	background-position: -2px -12px;
+}
+
+.shop-btn .collect-shop {
+	background-position: -2px -48px;
+}
+
+.shop-btn .enter-shop {
+	background-position: -2px -84px;
+}
+
+.rank {
+	display: -moz-display-box;
+	display: inline-block;
+	width: 0;
+	height: 16px;
+	vertical-align: text-top;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(http://pics.taobao.com/2k7/sys/rank_bg.gif) repeat-x
+		scroll -999px -999px transparent;
+}
+
+.seller-rank-0 {
+	width: 0;
+}
+
+.seller-rank-1 {
+	background-position: 0 0;
+	width: 17px;
+}
+
+.seller-rank-2 {
+	background-position: 0 0;
+	width: 34px;
+}
+
+.seller-rank-3 {
+	background-position: 0 0;
+	width: 51px;
+}
+
+.seller-rank-4 {
+	background-position: 0 0;
+	width: 68px;
+}
+
+.seller-rank-5 {
+	background-position: 0 0;
+	width: 85px;
+}
+
+.seller-rank-6 {
+	background-position: 0 -32px;
+	width: 17px;
+}
+
+.seller-rank-7 {
+	background-position: 0 -32px;
+	width: 34px;
+}
+
+.seller-rank-8 {
+	background-position: 0 -32px;
+	width: 51px;
+}
+
+.seller-rank-9 {
+	background-position: 0 -32px;
+	width: 68px;
+}
+
+.seller-rank-10 {
+	background-position: 0 -32px;
+	width: 85px;
+}
+
+.seller-rank-11 {
+	background-position: 0 -64px;
+	width: 17px;
+}
+
+.seller-rank-12 {
+	background-position: 0 -64px;
+	width: 34px;
+}
+
+.seller-rank-13 {
+	background-position: 0 -64px;
+	width: 51px;
+}
+
+.seller-rank-14 {
+	background-position: 0 -64px;
+	width: 68px;
+}
+
+.seller-rank-15 {
+	background-position: 0 -64px;
+	width: 85px;
+}
+
+.seller-rank-16 {
+	background-position: 0 -80px;
+	width: 17px;
+}
+
+.seller-rank-17 {
+	background-position: 0 -80px;
+	width: 34px;
+}
+
+.seller-rank-18 {
+	background-position: 0 -80px;
+	width: 51px;
+}
+
+.seller-rank-19 {
+	background-position: 0 -80px;
+	width: 68px;
+}
+
+.seller-rank-20 {
+	background-position: 0 -80px;
+	width: 85px;
+}
+
+.c-value-no {
+	background:
+		url(http://img04.taobaocdn.com/tps/i4/T1k.xmXolhXXXXXXXX-215-864.png)
+		no-repeat scroll 500px 1000px transparent;
+}
+
+.c-value-no {
+	width: 60px;
+	height: 16px;
+	overflow: hidden;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: middle;
+	zoom: 1; *
+	display: inline;
+}
+
+.c-value-5d0 {
+	background-position: 0 -470px;
+}
+
+.c-value-4d9,.c-value-4d8,.c-value-4d7,.c-value-4d6,.c-value-4d5,.c-value-4d4,.c-value-4d3,.c-value-4d2,.c-value-4d1
+	{
+	background-position: 0 -486px;
+}
+
+.c-value-4d0 {
+	background-position: 0 -502px;
+}
+
+.c-value-3d9,.c-value-3d8,.c-value-3d7,.c-value-3d6,.c-value-3d5,.c-value-3d4,.c-value-3d3,.c-value-3d2,.c-value-3d1
+	{
+	background-position: 0 -518px;
+}
+
+.c-value-3d0 {
+	background-position: 0 -536px;
+}
+
+.c-value-2d9,.c-value-2d8,.c-value-2d7,.c-value-2d6,.c-value-2d5,.c-value-2d4,.c-value-2d3,.c-value-2d2,.c-value-2d1
+	{
+	background-position: 0 -552px;
+}
+
+.c-value-2d0 {
+	background-position: 0 -568px;
+}
+
+.c-value-1d9,.c-value-1d8,.c-value-1d7,.c-value-1d6,.c-value-1d5,.c-value-1d4,.c-value-1d3,.c-value-1d2,.c-value-1d1
+	{
+	background-position: 0 -586px;
+}
+
+.c-value-1d0 {
+	background-position: 0 -600px;
+}
+
+.c-value-0d9,.c-value-0d8,.c-value-0d7,.c-value-0d6,.c-value-0d5,.c-value-0d4,.c-value-0d3,.c-value-0d2,.c-value-0d1
+	{
+	background-position: 0 -616px;
+}
+
+.c-value-0d0 {
+	background-position: 0 -632px;
+}
+
+.store-item {
+	overflow: hidden;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.store-side {
+	border: 0px;
+	height: auto;
+}
+
+.store-item dt {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px 0 20px;
+}
+
+.store-item .title {
+	float: left;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.store-item .shopkeeper {
+	float: left;
+	color: #AAA;
+	margin-left: 5px;
+	line-height: 29px;
+}
+
+.store-item dd {
+	overflow: hidden;
+	padding: 20px 0;
+	float: left;
+}
+
+.store-item .shop {
+	width: 200px;
+	border-right: 1px solid #ede8e2;
+	padding: 20px 10px 0px 20px;
+	float: left;
+}
+
+.store-side .shop {
+	padding: 20px 0px 0px 5px;
+	background: none;
+	height: auto;
+}
+
+.store-item li.rank {
+	height: 50px;
+}
+
+.store-item .other a.toEnter {
+	display: block;
+	width: 90px;
+	height: 25px;
+	line-height: 26px;
+	color: #FFF;
+	text-align: center;
+	background-position: -100px -355px;
+	padding-left: 4px;
+	margin-bottom: 5px;
+}
+
+.store-item .other a.toEnter:hover {
+	text-decoration: none;
+}
+
+.store-item .other a.toEnter .jump-gt {
+	font-family: '\5b8b\4f53';
+	margin-left: 5px;
+}
+
+.store-item a.tb-fav {
+	text-decoration: underline;
+	margin-left: 20px;
+}
+
+.store-item .goods {
+	float: right;
+	width: 290px;
+	padding: 23px 15px 0px 5px;
+}
+
+.store-item .goods li {
+	float: left;
+	margin-left: 10px;
+	width: 84px;
+	height: 170px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.store-item .pic {
+	width: 80px;
+	height: 80px;
+	border: 1px solid #ccc;
+}
+
+.store-item .desc {
+	height: 35px;
+	margin-top: 3px;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.store-item .price {
+	background-position: -57px -121px;
+	font-family: Tahoma;
+	margin-top: 3px;
+}
+
+.store-item .price em {
+	color: #F50;
+	font-weight: 700;
+	margin-left: 10px;
+}
+
+.store-item .soldout {
+	color: #aaa;
+}

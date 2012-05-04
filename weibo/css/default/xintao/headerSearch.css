@@ -1,0 +1,341 @@
+#shop-search .shop-text,#shop-search button,#shop-search b,#shop-search label,#shop-info .shop-other a,#shop-rank-popup b
+	{
+	background:
+		url(http://img02.taobaocdn.com/tps/i2/T1IC5aXbXcXXXXXXXX-152-155.png)
+		no-repeat;
+}
+
+#shop-head:after,#shop-search .shop-form:after,#shop-info .shop-service:after,#shop-info .shop-details:after,#shop-info .shop-other:after
+	{
+	clear: both;
+	content: '\20';
+	display: block;
+	visibility: hidden;
+	height: 0;
+}
+
+#shop-head {
+	height: 68px;
+	padding: 18px 0 0 240px;
+}
+
+#shop-head .shop-wrap {
+	display: inline;
+	float: left;
+	width: 100%;
+}
+
+#shop-head .logo {
+	position: relative;
+	z-index: 1;
+	float: left;
+	width: 230px;
+	height: 70px;
+	overflow: hidden;
+	margin: -10px 0 0 -240px;
+	_display: inline;
+	_margin-bottom: -70px;
+}
+
+#shop-search {
+	height: 48px;
+	margin: 0 0 0 278px;
+	background-color: rgba(242, 242, 242, 0.7);
+	border: 1px solid #E5E5E5;
+	border-left: 0;
+	border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-webkit-border-radius: 0 3px 3px 0;
+	filter: progid :                 DXImageTransform.Microsoft.gradient (  
+		       
+		      startColorStr =        
+		        '#b2f2f2f2', EndColorStr =                 '#b2f2f2f2' );
+}
+
+#shop-search .shop-form {
+	position: relative;
+	z-index: 1;
+	margin: 12px 144px 0 12px; *
+	zoom: 1; *
+	margin-right: 0px;
+}
+
+#shop-search .shop-text {
+	float: right;
+	width: 100%;
+	height: 20px;
+	padding: 2px 0 1px;
+	text-indent: 5px;
+	border: 1px solid #9B9F9F;
+	background-color: #fff;
+	background-position: 0 -151px;
+	background-repeat: repeat-x;
+	_float: none;
+	_margin-top: -1px;
+	_margin-left:-18px;
+}
+
+#shop-search button {
+	position: absolute;
+	top: 0;
+	right: -139px;
+	z-index: 1;
+	width: 70px;
+	height: 25px;
+	font-weight: 700;
+	cursor: pointer;
+	color: #585858;
+	background-position: -69px -77px;
+	border: none;
+}
+
+#shop-search .searchtb {
+	right: -69px;
+	color: #fff;
+	background-position: -69px 0;
+}
+
+#shop-search button:hover,#shop-search .instore .hover {
+	background-position: -69px -101px;
+}
+
+#shop-search .searchtb:hover,#shop-search .global .hover {
+	background-position: -69px -25px;
+}
+
+#shop-search .searchmy:active {
+	background-position: -69px -126px;
+}
+
+#shop-search .searchtb:active {
+	background-position: -69px -50px;
+}
+
+#shop-search b {
+	position: absolute;
+	top: 0;
+	left: -3px;
+	z-index: 1;
+	width: 4px;
+	height: 25px;
+	overflow: hidden;
+	background-position: -143px 0;
+}
+
+#shop-info {
+	position: relative;
+	z-index: 120;
+	float: left;
+	width: 278px;
+	margin: 0 0 0 -100%;
+}
+
+#shop-info .shop-info-simple {
+	height: 44px;
+	padding: 4px 0 0 10px;
+	background-color: rgba(249, 249, 249, 0.8);
+	border: 1px solid #E7E7E7;
+	border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	filter: progid :                 DXImageTransform.Microsoft.gradient (  
+		       
+		      startColorStr =        
+		        '#ccf9f9f9', EndColorStr =                 '#ccf9f9f9' );
+}
+
+#shop-info .shop-info-simple a {
+	font-weight: 700;
+	color: #666;
+}
+
+#shop-info .shop-rank {
+	display: block;
+}
+
+#shop-info .shop-collect {
+	display: inline;
+	float: right;
+	margin-right: 12px;
+	font-weight: normal !important;
+	text-decoration: underline;
+}
+
+#shop-info .shop-collect:hover {
+	color: #36c;
+}
+
+#shop-info .arrow-wrap {
+	position: absolute;
+	right: 50%;
+	bottom: -9px;
+	z-index: 1000;
+	width: 30px;
+	height: 8px;
+	border: 1px solid #E7E7E7;
+	border-top-color: #fff;
+	background: #fff;
+}
+
+#shop-info .shop-arrow {
+	position: absolute;
+	left: 11px;
+	z-index: 130;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	-webkit-transition: -webkit-transform .2s ease-in;
+	-moz-transition: -moz-transform .2s ease-in;
+	-o-transition: -o-transform .2s ease-in;
+	transition: transform .2s ease-in;
+	border: 4px solid transparent;
+	_border-color: #f9f9f9;
+	border-top-color: #666;
+}
+
+#shop-info:hover .arrow-wrap,#shop-info.hover .arrow-wrap {
+	bottom: 0; *
+	bottom: 3px;
+	_bottom: 2px;
+	border-top-color: #E7E7E7;
+	border-bottom-color: #fff;
+}
+
+#shop-info:hover .shop-arrow,#shop-info.hover .shop-arrow {
+	top: 5px;
+	top: 0\9;
+	transform: rotate(180deg);
+	transform-origin: 50% 20%;
+	-moz-transform: rotate(180deg);
+	-moz-transform-origin: 50% 20%;
+	-webkit-transform: rotate(180deg);
+	-webkit-transform-origin: 50% 20%;
+	-o-transform: rotate(180deg);
+	-o-transform-origin: 50% 20%;
+	filter: progid :                 DXImageTransform.Microsoft.BasicImage (
+		  
+		      
+		      rotation =       
+		         2 );
+}
+
+#shop-info:hover .shop-info-simple,#shop-info.hover .shop-info-simple {
+	background-color: #f9f9f9;
+	box-shadow: 2px 2px 2px #999;
+	-moz-box-shadow: 2px 2px 2px #999;
+	-webkit-box-shadow: 2px 2px 2px #999;
+	filter: progid :                 DXImageTransform.Microsoft.Shadow (  
+		         
+		    color =     
+		   
+		       #999999, direction =                 135, strength =
+		              
+		 3 );
+}
+
+#shop-info:hover .shop-info-details,#shop-info.hover .shop-info-details
+	{
+	visibility: visible;
+}
+
+#shop-info .shop-info-details {
+	visibility: hidden;
+	position: absolute;
+	z-index: 999;
+	top: 49px;
+	left: 0;
+	width: 256px;
+	padding: 5px 10px 0;
+	background-color: #F9F9F9;
+	border: 1px solid #E7E7E7;
+	border-radius: 0 0 3px 0;
+	-moz-border-radius: 0 0 3px 0;
+	-webkit-border-radius: 0 0 3px 0;
+	box-shadow: 2px 2px 2px #999;
+	-moz-box-shadow: 2px 2px 2px #999;
+	-webkit-box-shadow: 2px 2px 2px #999;
+	filter: progid :                 DXImageTransform.Microsoft.Shadow (  
+		         
+		    color =     
+		   
+		       #999999, direction =                 135, strength =
+		              
+		 3 );
+}
+
+#shop-info .shop-info-details a:hover {
+	text-decoration: none;
+}
+
+#shop-info .shop-rate {
+	padding: 6px 0;
+	border-bottom: 1px dashed #d2d2d2; *
+	zoom: 1;
+}
+
+#shop-info .shop-rate a {
+	color: #545454;
+}
+
+#shop-info .shop-rate li {
+	margin: 5px 0 0;
+	line-height: 15px;
+}
+
+#shop-info .shop-rate em {
+	font-size: 12px;
+	font-weight: 700;
+	color: #B31102;
+}
+
+#shop-info .shop-rate em.count {
+	color: #3366de;
+}
+
+#shop-info .shop-rate em.lower {
+	color: #217311;
+}
+
+#shop-info .shop-other {
+	padding: 6px 0 0;
+}
+
+#shop-info .shop-other a {
+	display: inline;
+	float: left;
+	width: 69px;
+	height: 25px;
+	margin: 0 10px 6px 0;
+	text-indent: -999px;
+}
+
+#shop-info .shop-other .tb-feed {
+	background-position: 0 -50px;
+}
+
+#shop-info .shop-other .tb-shared {
+	background-position: 0 -101px;
+}
+
+#shop-info .shop-other .tb-more {
+	display: inline;
+	float: right;
+	width: 85px;
+	margin: 0;
+	text-align: right;
+	background-image: none;
+}
+
+#shop-info .shop-other a:hover {
+	background-position: 0 -25px;
+}
+
+#shop-info .shop-other .tb-feed:hover {
+	background-position: 0 -75px;
+}
+
+#shop-info .shop-other .tb-shared:hover {
+	background-position: 0 -126px;
+}

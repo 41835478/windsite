@@ -1,0 +1,498 @@
+.special-offer-top {
+	margin-top: 10px
+}
+
+.col li span {
+	text-align: center
+}
+
+.logoBar {
+	margin-bottom: 10px
+}
+
+.logoBar-trigger {
+	border: 1px solid #e1e1e1;
+	width: 944px;
+	overflow: hidden;
+	position: relative
+}
+
+.logoBar-trigger:hover {
+	border: 1px solid #bbb
+}
+
+.logoBar-slide {
+	height: 0
+}
+
+.logoBar .logoBar-slide {
+	background: #fff
+}
+
+.hover .logoBar-trigger {
+	border-bottom: 0
+}
+
+.hover .logoBar-slide {
+	border: 1px solid #e1e1e1;
+	border-top: 0
+}
+
+.logoTitle .title,.logoTitle .logo {
+	display: block
+}
+
+.logoTitle .title {
+	padding-top: 5px;
+	color: #999
+}
+
+.show .zoom {
+	opacity: 1;
+	filter: alpha(opacity =                   100)
+}
+
+.bottomBlock .price {
+	display: block
+}
+
+.ls-logoList img,.logoList img,.imglist .logo,.logoTitle .logo img {
+	max-width: 60px;
+	max-height: 30px;
+	_width: expression((                   this.offsetWidth >                   60)
+		?    
+		          
+		     "60px" :         
+		         this.offsetWidth +                   "px" );
+	_height: expression((                   this.offsetWidth >                   30)
+		?    
+		         
+		      "30px" :         
+		         this.offsetHeight +                   "px" )
+}
+
+.col-list .sell-out,.imglist .sell-out {
+	width: 230px;
+	background: #838282;
+	height: 45px;
+	color: #fff;
+	position: absolute;
+	font-weight: bold;
+	font-size: 32px;
+	ling-height: 45px;
+	bottom: 0;
+}
+
+.price .discountPrice {
+	color: #cb0000;
+	font-weight: bold;
+	font-size: 40px;
+	line-height: 40px;
+	height: 40px;
+	padding-left: 0;
+	text-align: right;
+	overflow: hidden
+}
+
+.price .discountPrice s,.price .marketPrice {
+	display: inline-block;
+	background:
+		url(http://img04.taobaocdn.com/tps/i4/T1Pt49XoBzXXXXXXXX-15-28.png)
+		no-repeat
+}
+
+.price .marketPrice {
+	color: #b5b5b5;
+	padding-left: 8px;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 12px;
+	background-position: 0 1px;
+	height: 10px;
+	line-height: 10px;
+	height: 9px\0;
+	position: relative;
+	right: 2px
+}
+
+.price .discountPrice,.price .marketPrice {
+	display: inline-block
+}
+
+.price .discountPrice s {
+	width: 15px;
+	height: 20px;
+	background-position: 0 -9px;
+	top: 5px;
+	position: relative;
+	vertical-align: top
+}
+
+.col {
+	float: left;
+	width: 190px;
+	padding-bottom: 9px
+}
+
+.col-list {
+	position: relative;
+	border: 1px solid #e6e6e6;
+	border-bottom: 0;
+	margin-left: -1px
+}
+
+.col-1 .col-list {
+	margin-left: 0
+}
+
+.col-list .bottomBlock {
+	width: 224px;
+	margin-top: 10px;
+	height: 50px;
+	margin-bottom: 15px;
+	padding: 0 3px
+}
+
+.col-list .logoTitle {
+	margin-left: 0;
+	float: left;
+	width: 96px
+}
+
+.col-list .logoTitle .desc {
+	color: #999;
+	display: inline-block;
+	height: 30px;
+	overflow: hidden;
+	line-height: 15px
+}
+
+.col-list .bottomBlock .price {
+	text-align: right;
+	overflow: hidden;
+	_float: right
+}
+
+.col-list .logo {
+	display: block
+}
+
+.col-list .img {
+	display: block;
+	position: relative
+}
+
+.col-list .img img {
+	width: 230px
+}
+
+.col-list li .saled {
+	position: absolute;
+	bottom: 0;
+	_bottom: 103px;
+	width: 230px;
+	height: 22px;
+	line-height: 22px;
+	background: #838282;
+	opacity: .8;
+	filter: alpha(opacity =                 80);
+	color: #fff
+}
+
+.col-list .leftNum,.imglist .selected .leftNum {
+	display: block;
+	width: 35px;
+	height: 35px;
+	background: #cf1818;
+	position: absolute;
+	color: #fff;
+	padding: 5px;
+	overflow: hidden;
+	text-align: left;
+	line-height: 17px;
+	-webkit-line-height: 16px;
+	z-index: 10000
+}
+
+.col-list .leftNum b,.imglist .selected .leftNum b {
+	font-size: 18px;
+	font-weight: 700
+}
+
+.col-lists-content {
+	margin-top: 10px;
+	margin-bottom: 85px
+}
+
+.col {
+	border-right: 0;
+	width: 237px;
+	display: inline
+}
+
+.col-list li {
+	padding: 3px;
+	background: #fff;
+	zoom: 1;
+	border-bottom: 1px solid #e6e6e6
+}
+
+.col-1 .col-list li {
+	margin-left: 0
+}
+
+.col-1,.col-4 {
+	width: 238px
+}
+
+.col-list a:hover {
+	cursor: hand
+}
+
+.col-list .logo:hover {
+	cursor: pointer
+}
+
+.col-list .zoom {
+	display: block
+}
+
+.shop-show {
+	overflow: hidden;
+	background: #f0f0f0;
+	position: relative
+}
+
+.shop-show .banner-img {
+	display: block;
+	height: 239px;
+	vertical-align: middle
+}
+
+.shop-desc {
+	width: 230px;
+	height: 219px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	background: #fff;
+	opacity: .8;
+	filter: alpha(opacity =                 80)
+}
+
+.shop-desc .logoText {
+	text-align: center;
+	height: 134px
+}
+
+.shop-desc .logoText,.shop-desc .shop-name {
+	margin-left: 20px
+}
+
+.shop-desc p {
+	overflow: hidden;
+	text-align: left;
+	width: 200px;
+	height: 99px;
+	margin-top: 20px;
+	line-height: 20px
+}
+
+.shop-logo {
+	display: block;
+	margin-top: 15px
+}
+
+.shop-name {
+	border-top: 1px dotted #999;
+	margin-right: 10px;
+	padding-top: 30px
+}
+
+.shop-show .shop-name s {
+	display: inline-block;
+	height: 18px;
+	width: 67px;
+	background-position: -71px 0;
+	position: relative;
+	top: 4px
+}
+
+.shop-name a {
+	color: #2953a6
+}
+
+.preheat {
+	margin: 10px 0;
+	width: 950px;
+	overflow: hidden
+}
+
+.col-lists-content {
+	margin-bottom: 10px
+}
+
+.tmsspr,.tmsspr-img {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.tmsspr {
+	position: relative;
+}
+
+.tmsspr-img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.tmsspr {
+	width: 60px;
+	height: 30px;
+}
+
+.tmsspr .tmsspr-img {
+	background:
+		url(http://www.xintaotv.com/css/default/xintao/xintaotv/T1llGOXmttXXXXXXXX.gif)
+		no-repeat;
+}
+
+.logoWrapper {
+	width: 944px;
+	border: 1px solid #e1e1e1;
+	overflow: hidden;
+	position: relative;
+}
+
+.tabWrapper {
+	width: 949px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: -1px;
+}
+
+.logoWrapper:hover {
+	border: 1px solid #bbbbbb;
+}
+
+.logoList {
+	width: 946px;
+	overflow: hidden;
+}
+
+.logoTab {
+	width: 946px;
+}
+
+.hideClass {
+	display: none !important;
+}
+
+.logoTab li {
+	float: left;
+	width: 85px;
+	overflow: hidden;
+	height: 49px;
+	text-align: center;
+	display: inline;
+	position: relative;
+	border: 1px solid #E1E1E1;
+	zoom: 1;
+	margin-bottom: -1px;
+	margin-right: -1px;
+	background: #F3F3F3;
+	cursor: pointer;
+}
+
+.logoTab .cur {
+	position: relative;
+	background: #fff;
+	height: 48px;
+}
+
+.logoTab .cat  a {
+	width: 33px;
+	height: 20px;
+	margin: 10px auto 0 23px;
+	text-align: center;
+	display: block;
+	zoom: 1;
+	font-family: \5FAE\8F6F\96C5\9ED1, \9ED1\4F53, \5B8B\4F53;
+	font-size: 16px;
+	color: #333333;
+	text-decoration: none;
+}
+
+.logoTab .arrow {
+	right: 20px;
+	position: absolute;
+	top: 21px;
+	-webkit-transition: -webkit-transform 0.2s ease-in;
+	-moz-transition: -moz-transform 0.2s ease-in;
+	-o-transition: -o-transform 0.2s ease-in;
+	transition: transform 0.2s ease-in;
+	/*用border造三角形*/
+	height: 0;
+	width: 0;
+	font-size: 0;
+	line-height: 0;
+	border-color: #cfcfcf transparent transparent transparent;
+	border-style: solid dashed dashed dashed;
+	border-width: 5px;
+}
+
+.logoList li {
+	float: left;
+	width: 85px;
+	overflow: hidden;
+	height: 49px;
+	text-align: center;
+	display: inline;
+	border-bottom: 1px solid #E1E1E1;
+	border-right: 1px solid #E1E1E1;
+}
+
+.logoList li  a {
+	width: 86px;
+	height: 42px;
+	padding-top: 8px;
+	text-align: center;
+	display: block;
+	zoom: 1;
+	position: relative;
+}
+
+.logoList:hover li .mask,.hover .mask {
+	visibility: visible;
+}
+
+.logoList li:hover .mask {
+	visibility: hidden;
+}
+
+.logoList:hover li {
+	border-bottom: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
+}
+
+.mask {
+	visibility: hidden;
+	background: #000;
+	filter: alpha(opacity =                           15);
+	opacity: 0.15;
+	position: absolute;
+	width: 85px;
+	height: 49px;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	zoom: 1;
+}
+
+.shop-desc p {
+	line-height: 18px;
+}

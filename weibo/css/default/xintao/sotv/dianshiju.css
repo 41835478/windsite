@@ -1,0 +1,551 @@
+#sotv  .blockRA #doStar,#sotv  .blockRA #doStar span,#sotv  .blockRA .starInfo em,.clsFrag .menuB .r .uN,.clsFrag .menuB .r .dN,.clsFrag .menuB .r .down,.clsFrag .menuB .r a,.clsFrag .search .btn
+	{
+	background: url(http://tv.sohu.com/upload/tv110421/images/icon.png)
+		no-repeat;
+}
+
+#sotv .listYp .pic1 img,#sotv  .blockLA .d1 .d1s .tex,#sotv  .blockLA .d1 .d1s .arrow,#sotv  .blockLA .d1 .d1s .arrowUp,#sotv  .blockLA .d2 li a:hover,#sotv  .blockLA .d2 li.active,#sotv  .blockRA .d3 .a1,#sotv  .blockRA .d3 .a1hid,.wyPl .listF .rPic img,#ablum1 .d3 li .txt a,.wyPl .listF .rPic
+	{
+	background: url(http://tv.sohu.com/upload/album110711/images/bg2.png)
+		no-repeat;
+}
+
+#sotv .pp li {
+	float: left;
+	display: inline;
+	width: 100%;
+}
+
+#sotv .pp span strong {
+	display: block;
+	margin: 0 auto 2px;
+}
+
+.line1 {
+	height: 1px;
+	overflow: hidden;
+	background: url(http://tv.sohu.com/upload/album110711/images/line1.png)
+		repeat-x;
+}
+
+#sotv .blockRA h2 {
+	height: 25px;
+	margin: 0 2px;
+	padding: 12px 11px 3px;
+	line-height: 16px;
+	text-align: right;
+}
+
+#sotv .blockRA h2 span {
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+	color: #333;
+}
+
+#sotv .blockRA h2 a {
+	color: #dd0d0b;
+}
+
+#sotv  .blockRA  h2 {
+	background: none;
+}
+
+#sotv  .blockRA .cont {
+	line-height: 21px;
+	padding: 0 15px 15px;
+}
+
+#sotv  .blockRA .line1 {
+	margin: 10px 0;
+}
+
+/*tsohu*/
+#sotv  .blockRA .d2 {
+	margin: 10px auto;
+}
+
+#sotv  .blockRA .d2 .p {
+	height: 32px;
+	background: url(images/bg1.png) no-repeat;
+	font-weight: bold;
+	line-height: 32px;
+	padding-left: 15px;
+	color: #000;
+}
+
+#sotv  .blockRA .d2 .d2s {
+	width: 266px;
+	min-height: 70px;
+	_height: 70px;
+	overflow: hidden;
+	border: 1px solid #E5E5E5;
+	border-top: 0;
+	background: #F8F8F8;
+}
+
+#sohut .tCast {
+	border: 0;
+	background: transparent;
+	padding: 0 10px;
+}
+
+#sohut .tCast h3 {
+	display: none;
+}
+
+#sotv  .blockRA .d2 .tCast .p {
+	height: 20px;
+	padding: 0;
+	background: transparent;
+}
+
+/*tsohu*/
+#sotv  .blockRA .d3 {
+	margin-bottom: 5px;
+}
+
+#sotv  .blockRA .d3 .a1,#sotv  .blockRA .d3 .a1hid {
+	background-position: 30px -164px;
+	padding-right: 19px;
+	color: #dd0d0b;
+	float: right;
+}
+
+#sotv  .blockRA .d3 .a1hid {
+	background-position: 30px -184px;
+}
+
+#sotv  .blockRA .p4 {
+	margin: 10px 0;
+	position: relative;
+	height: 35px;
+	z-index: 10;
+}
+
+.tn {
+	float: left;
+}
+
+#turnId {
+	height: 21px;
+	overflow: hidden;
+	float: right;
+	width: 218px;
+	position: absolute;
+	left: 49px;
+}
+
+#turnId a img {
+	padding: 0 3px;
+}
+
+#sotv  .blockRA .p4 img {
+	vertical-align: middle;
+	padding-bottom: 5px;
+}
+
+#sotv  .blockRA .s1,#sotv  .blockRA .s2 {
+	display: inline-block;
+	margin-top: 11px;
+}
+
+#sotv  .blockRA .doStar {
+	position: relative;
+	width: 120px;
+	float: left;
+	margin: 11px 0 0 6px;
+	display: inline;
+	line-height: 20px;
+	text-align: left
+}
+
+#sotv  .blockRA .doStar p {
+	position: absolute;
+	top: -4px;
+	left: 0;
+	background: #fff;
+	text-align: center;
+	line-height: 30px;
+	width: 170px;
+	height: 31px
+}
+
+#sotv  .blockRA #doStar {
+	cursor: pointer;
+	float: left;
+	display: inline;
+	height: 18px;
+	width: 120px;
+	margin-right: 4px;
+	background-position: 0 -220px
+}
+
+#sotv  .blockRA #doStar span {
+	float: left;
+	width: 0;
+	display: block;
+	height: 18px;
+	background-position: 0 -240px
+}
+
+#sotv  .blockRA .starInfo {
+	display: none;
+	position: absolute;
+	top: -28px;
+	left: 0;
+	width: 130px;
+	height: 15px;
+	padding-top: 5px;
+	background: #f6f6f6;
+	border: 1px #A9CFEF solid;
+	line-height: 14px;
+	text-align: center
+}
+
+#sotv  .blockRA .starInfo em {
+	position: absolute;
+	top: 19px;
+	left: 2px;
+	width: 7px;
+	height: 5px;
+	background-position: -135px -170px;
+	font-size: 0
+}
+
+#sotv  .blockRA .mark {
+	float: left;
+	display: inline;
+	margin: 2px 4px 0 4px;
+	color: #FF6000
+}
+
+#sotv  .blockRA .mark span {
+	font: 24px/ 32px "Arial"
+}
+
+#sotv  .blockRA .mark em {
+	margin-right: 4px;
+	font: 18px/ 32px "Arial"
+}
+
+#sotv  .blockRA .per {
+	float: left;
+	display: inline;
+	margin: 13px 0 0 0;
+	line-height: 20px
+}
+
+.tab1 {
+	background: #F3F3F3;
+	margin: 0 1px;
+	line-height: 34px;
+}
+
+.tab1 li {
+	background: #F3F3F3;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	font-size: 14px;
+	float: left;
+	display: inline-block;
+}
+
+.tab1 li a {
+	display: inline-block;
+	height: 34px;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+.tab1 li a:hover {
+	text-decoration: none;
+	background: #fff;
+}
+
+.tab1 li.active {
+	font-weight: bold;
+	background: #fff;
+	border-bottom: 1px solid #fff;
+	position: relative;
+	z-index: 9;
+}
+
+.tab1 li.active a,.tab1 li.active a:hover {
+	color: #000;
+}
+
+.tab1 strong {
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 0 20px;
+}
+
+.tab1 .more {
+	margin-right: 20px;
+}
+
+.tab1cont {
+	display: none;
+}
+
+#sotv .blockLA {
+	border-bottom: 1px #DDD solid
+}
+
+#sotv .blockLA .title {
+	width: 660px;
+	margin: 0 auto;
+	height: 51px;
+	background: url(http://tv.sohu.com/upload/zjcss100707/images/xx1.gif)
+		repeat-x bottom left;
+	color: #333
+}
+
+#sotv .blockLA .title .l {
+	margin-top: 12px;
+	font: 12px/ 30px "宋体"
+}
+
+#sotv .blockLA .title .l strong {
+	font: 600 16px/ 30px "宋体"
+}
+
+#sotv .blockLA .title .r {
+	margin: 7px 10px 0 0;
+}
+
+#sotv .blockLA .title .r span {
+	font: 24px/ 40px "Arial";
+	color: #FF6901
+}
+
+#sotv .blockLA .pp {
+	width: 656px;
+	margin: 15px auto 0;
+}
+
+#sotv .blockLA .pp ul {
+	width: 656px;
+	overflow: hidden;
+}
+
+#sotv .blockLA .pp li {
+	height:200px;
+	width: 124px;
+	padding: 0 20px 10px;
+	margin: 0;
+	overflow: hidden;
+	position: static;
+}
+
+#sotv .blockLA .pp li a {
+	position: relative;
+	display: block;
+	width: 124px;
+}
+
+#sotv .blockLA .pp li span a {
+	position: static;
+	display: inline;
+}
+
+#sotv #ablum3 .pp li span a {
+	display: block;
+	height: 38px;
+	overflow: hidden;
+}
+
+#sotv .blockLA .pp .label i,#sotv .blockLA .pp .label {
+	width: 120px;
+}
+
+#sotv .blockLA .pp .label {
+	background: none;
+	margin: 0;
+	left: 2px;
+	top: 74px;
+}
+
+#sotv .blockLA .pp .label code {
+	top: 2px;
+	left: 0;
+}
+
+#sotv .blockLA .pp span {
+	width: 124px;
+}
+
+#sotv .blockLA .pp li span img {
+	border: 0;
+	display: inline;
+}
+
+#sotv .blockLA .d {
+	background: #F6F6F6;
+	height: 25px;
+	line-height: 25px;
+	margin: 0 20px;
+}
+
+#sotv .blockLA .d li {
+	float: left;
+}
+
+#sotv .blockLA .d a {
+	display: inline-block;
+	width: 45px;
+	height: 17px;
+	padding: 0 15px;
+}
+
+#sotv .blockLA .d .active {
+	background: url(http://tv.sohu.com/upload/album110711/images/bg2.png)
+		no-repeat;
+	width: 55px;
+	height: 17px;
+	line-height: 17px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#sotv .blockLA .d .active a {
+	color: #fff;
+}
+
+#sotv .blockLA .d1 {
+	padding: 15px 15px 10px 20px;
+	width: 623px;
+	line-height: 23px;
+}
+
+#sotv .blockLA .d1 .d1s {
+	margin-left: 15px;
+	position: relative; /*z-index:9;*/
+}
+
+#sotv .blockLA .d1 .d1s .tex {
+	background-position: 0 -104px;
+	display: block;
+	width: 56px;
+	height: 21px;
+	line-height: 21px;
+	float: left;
+	text-align: center;
+}
+
+#sotv .blockLA .d1 .d1s .arrow,#sotv .blockLA .d1 .d1s .arrowUp {
+	background-position: -56px -104px;
+	display: block;
+	width: 20px;
+	height: 21px;
+	float: left;
+	cursor: pointer;
+}
+
+#sotv .blockLA .d1 .d1s .arrowUp {
+	background-position: -56px -125px;
+}
+
+#sotv .blockLA .d1 .d1s ul {
+	background: #fff;
+	border: 1px solid #ddd;
+	position: absolute;
+	top: 20px;
+	left: 0;
+	width: 74px;
+}
+
+#sotv .blockLA .d1 .d1s li {
+	line-height: 21px;
+	float: left;
+	width: 74px;
+}
+
+#sotv .blockLA .d1 .d1s li a {
+	display: block;
+	padding-left: 15px;
+	width: 59px;
+	cursor: pointer;
+}
+
+#sotv .blockLA .d1 .d1s li a:hover {
+	background: #f6f6f6;
+	text-decoration: none;
+}
+
+#sotv .blockLA .d2 {
+	background: #f6f6f6;
+	margin: 0 15px;
+	height: 17px;
+	padding: 3px 0;
+}
+
+#sotv .blockLA .d2 li {
+	display: block;
+	width: 56px;
+	height: 17px;
+	line-height: 17px;
+	text-align: center;
+	float: left;
+	margin-right: 5px;
+}
+
+#sotv .blockLA .d2 li a {
+	display: block;
+	cursor: pointer;
+}
+
+#sotv .blockLA .d2 li a:hover,#sotv .blockLA .d2 li.active a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#sotv .blockLA .d2 li.active {
+	font-weight: bold;
+}
+
+#sotv .blockLA .d2 .a1 {
+	line-height: 17px;
+	text-decoration: underline;
+	margin-left: 5px;
+}
+
+#sotv .blockLA #ablum1 {
+	height: 24px;
+	width: 628px;
+	margin-top: 16px;
+}
+
+#sotv .blockLA #ablum1 div {
+	float: left;
+	padding-left: 20px;
+	margin-top: 6px;
+}
+
+#sotv .blockLA #ablum1 ul {
+	display: inline-block;
+	padding-top: 2px;
+	margin-top: 2px;
+}
+
+#sotv .blockLA #ablum1 ul li.active {
+	font-weight: normal;
+}
+
+#sotv .blockLA .s1 {
+	font-weight: bold;
+	font-size: 14px;
+	color: #353535;
+}
+
+#sotv .blockLA .tab1line {
+	height: 1px;
+	overflow: hidden;
+	background: #ddd;
+	margin-top: -1px;
+}
+
+#sotv .blockLA .pp1 span strong {
+	text-align: center;
+}

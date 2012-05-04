@@ -1,0 +1,69 @@
+<project basedir="." default="compile">
+	<property file="weibo-build.properties" />
+	<target name="compile" depends="clean,compile.js,compile.css">
+	</target>
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<!--清理-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${output}" includes="**/*.*" />
+		</delete>
+	</target>
+	<target name="compile.js">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xintao.min.js">
+			<sources dir="${war}/js/xintao/autocomplete">
+				<file name="jquery.autocomplete.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/lazyload">
+				<file name="jquery.lazyload.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/jquerytools">
+				<file name="jquery.tools.min.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/later">
+				<file name="jquery.later.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/base64">
+				<file name="jquery.base64.min.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/">
+				<file name="xintao.func.js" />
+			</sources>
+			<sources dir="${war}/js/xintao/">
+				<file name="xintao.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<path id="yuiClasspath">
+		<fileset dir="lib">
+			<include name="yuicompressor-2.4.2.jar" />
+			<include name="YUIAnt.jar" />
+		</fileset>
+	</path>
+	<!--编译设计器css-->
+	<target name="compile.css" description="xintao.min.css">
+		<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+			<classpath>
+				<path refid="yuiClasspath" />
+			</classpath>
+		</taskdef>
+		<yuicompress linebreak="300" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/">
+			<fileset dir="${war}/css/default/xintao/">
+				<include name="*.css" />
+			</fileset>
+			<fileset dir="${war}/css/default/">
+				<include name="xintao.css" />
+			</fileset>
+			<fileset dir="${war}/js/xintao/autocomplete/">
+				<include name="jquery.autocomplete.css" />
+			</fileset>
+		</yuicompress>
+		<!--生成新版本站点CSS文件-->
+		<concat destfile="${output}/xintao.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}/" files="jquery.autocomplete.css,xintao.css,side.css,shop.css,headerSearch.css" />
+		</concat>
+		<delete>
+			<filelist dir="${output}/" files="jquery.autocomplete.css,xintao.css,side.css,shop.css,headerSearch.css" />
+		</delete>
+	</target>
+</project>

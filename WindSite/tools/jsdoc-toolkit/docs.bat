@@ -1,0 +1,1 @@
+java -jar jsrun.jar app/run.js ../../war/assets/js/taobao/** -t=templates/jsdoc

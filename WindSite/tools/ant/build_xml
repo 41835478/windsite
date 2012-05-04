@@ -1,0 +1,42 @@
+<project name="windsite" basedir="." default="copy.local">
+	<description>local copy</description>
+	<property file="build.properties" />
+	<!-- ================= -->
+	<!-- === CLASSPATH === -->
+	<!-- ================= -->
+
+	<path id="classpath">
+		<fileset dir="../../war/WEB-INF/lib" includes="*.jar" />
+		<fileset dir="../../lib" includes="*.jar" />
+		<fileset dir="lib" includes="*.jar" />
+		<pathelement path="../../src" />
+		<pathelement path="../../src-test" />
+	</path>
+
+
+	<!-- 清除打包结果 -->
+	<!--<target name="clean" description="clean all">
+		<delete dir="build" />
+		<mkdir dir="build/classes" />
+	</target>-->
+
+	<target name="copy.local" description="copy local">
+		<copy todir="${local}/war" overwrite="true">
+			<fileset dir="../../war" excludes="**/*SVN*,**/*/.class" />
+		</copy>
+		<copy todir="${local}/src" overwrite="true">
+			<fileset dir="../../src" includes="**/*.java" excludes="**/*SVN*" />
+		</copy>
+		<copy todir="${local}/config/local" overwrite="true">
+			<fileset dir="../../config/local" includes="**/*.xml" />
+		</copy>
+		<copy todir="${local}/config/wind" overwrite="true">
+			<fileset dir="../../config/wind" includes="**/*.xml" />
+		</copy>
+	</target>
+	<!--<target name="compile.local" depends="clean" description="compile local">
+		<javac srcdir="../../src" encoding="utf-8" destdir="build/classes" source="1.5" target="1.5" debug="on" fork="yes">
+			<classpath refid="classpath" />
+		</javac>
+	</target>-->
+</project>

@@ -1,0 +1,826 @@
+<project basedir="." default="compile">
+	<property file="build.properties" />
+	<target name="compile" depends="clean,compile.designer,compile.template,compile.site,compile.widgetdesigner,compile.analytics,compile.css,copy.apache">
+	</target>
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<!--清理-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${output}" includes="**/*.*" excludes="**/theme/**" />
+			<fileset dir="${apache}/help" includes="**/*.*" />
+		</delete>
+	</target>
+	<target name="compile.widgetdesigner">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/widgetdesigner.min.js">
+			<sources dir="${war}/designer/assets/js">
+				<file name="DesignerConstants.js" />
+				<file name="DesignerUtils.js" />
+				<file name="customeWidgetEditor.js" />
+				<file name="widgetDesigner.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/htmldesigner.min.js">
+			<sources dir="${war}/designer/assets/js">
+				<file name="DesignerConstants.js" />
+				<file name="DesignerUtils.js" />
+				<file name="htmlWidgetEditor.js" />
+				<file name="htmlDesigner.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.analytics">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/ad.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="ad.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/fha.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="fha.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/tools.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="tools.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/weibo.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="weibo.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/fanli.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="fanli.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/fanlisite.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="fanlisite.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/blogAd.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="blogAd.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/analytics.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="analytics.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/selleranalytics.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="selleranalytics.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/keywords.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="keywords.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/seller.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="seller.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/huabao.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="huabao.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/link.min.js">
+			<sources dir="${war}/assets/js/site">
+				<file name="link.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<!--编译设计器-->
+	<target name="compile.designer">
+		<!--编译Designer-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/designer.min.js">
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindResponse.js" />
+				<file name="WindSender.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site">
+				<file name="channels.js" />
+			</sources>
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+			</sources>
+			<sources dir="${war}/designer/assets/js">
+				<file name="DesignerConstants.js" />
+				<file name="analytics.js" />
+				<file name="container.js" />
+				<file name="designer.js" />
+				<file name="DesignerUtils.js" />
+				<file name="footer.js" />
+				<file name="content.js" />
+				<file name="header.js" />
+				<!--<file name="itemCatsSelect.js" />-->
+				<file name="netLinkViewEditor.js" />
+				<!--<file name="topicEditor.js" />-->
+				<!--<file name="searchBoxEditor.js" />-->
+				<!--<file name="smartAdsFlashEditor.js" />
+				<file name="fixedSmartAdsFlashEditor.js" />-->
+				<!--<file name="taokeItemsSelect.js" />-->
+				<!--<file name="ucBlogEditor.js" />-->
+				<file name="themeRoller.js" />
+				<file name="topBar.js" />
+				<file name="widget.js" />
+				<file name="widgetHandle.js" />
+				<!--<file name="contentHandle.js" />
+				<file name="contentBar.js" />-->
+				<file name="widgetUtils.js" />
+				<file name="huabaoEditor.js" />
+				<file name="searchWidget.js" />
+				<!--<file name="designerZoom.js" />-->
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/widgets.min.js">
+			<sources dir="${war}/designer/assets/js/widget">
+				<file name="catsListView.js" />
+				<file name="flashView.js" />
+				<file name="itemsAppleView.js" />
+				<file name="itemsCycleView.js" />
+				<file name="itemsLinkView.js" />
+				<file name="itemsListView.js" />
+				<file name="itemsRotatorView.js" />
+				<file name="itemsScrollableView.js" />
+				<file name="itemsShopWindowView.js" />
+				<file name="itemsSmartAdsFlashView.js" />
+				<file name="itemsFixedSmartAdsFlashView.js" />
+				<file name="itemsThumbView.js" />
+				<file name="itemsZoomView.js" />
+				<file name="netLinkView.js" />
+				<file name="topicView.js" />
+				<file name="richEditor.js" />
+				<file name="searchBox.js" />
+				<file name="channelView.js" />
+				<file name="ucBlogView.js" />
+
+				<file name="shopsListView.js" />
+
+				<file name="widgetCustomer.js" />
+				<file name="huabaoView.js" />
+				<file name="chongzhiView.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本模块-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/ext_fanli.min.js">
+			<sources dir="${war}/assets/js/page">
+				<file name="ext_fanli.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本模块-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/poster.min.js">
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindSender.js" />
+				<file name="WindResponse.js" />
+			</sources>
+			<sources dir="${war}/assets/js/page">
+				<file name="poster.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本模块-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/fanli.min.js">
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindSender.js" />
+				<file name="WindResponse.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/tools">
+				<file name="jquery.overlay.min.js" />
+				<file name="jquery.expose.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/page">
+				<file name="unlogin.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本模块-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/jquery.tooltip.min.js">
+			<sources dir="${war}/assets/js/jquery/tools">
+				<file name="jquery.tooltip.min.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本模块-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/modules.min.js">
+			<sources dir="${war}/assets/js/page/module/">
+				<file name="ItemSearch.js" />
+				<file name="ShopHeader.js" />
+				<file name="ShopDisplay.js" />
+				<file name="ShopCustom.js" />
+				<file name="ShopTemplate.js" />
+				<file name="ShopFlashShow.js" />
+				<file name="ShopSearch.js" />
+				<file name="ShopCategory.js" />
+				<file name="ShopLinks.js" />
+				<file name="ShopChannel.js" />
+				<file name="ShopChannelTab.js" />
+				<file name="ShopChongzhi.js" />
+				<file name="ShopSlider.js" />
+				<file name="ShopTopCode.js" />
+				<file name="ShopClass.js" />
+				<file name="ShopBlog.js" />
+				<file name="ShopKeyword.js" />
+				<file name="ShopTenOrder.js" />
+				<file name="ShopItemList.js" />
+				<file name="ShopCategoryVancl.js" />
+				<file name="ShopLogo.js" />
+				<file name="ShopRank.js" />
+				<file name="ShopBrand.js" />
+				<file name="ShopComplexA.js" />
+				<file name="ShopComplexB.js" />
+				<file name="ShopBaidu.js" />
+				<file name="ShopGoogle.js" />
+				<file name="ShopAlimama.js" />
+				<file name="ShopShiYi.js" />
+				<file name="ShopDianPu.js" />
+				<file name="ShopDianpuPaiHang.js" />
+				<file name="ShopDianPuCat.js" />
+				<file name="ShopDianPuList.js" />
+				<file name="ShopMarketCat.js" />
+				<file name="ShopMallFloor.js" />
+				<file name="ShopMallNewFloor.js" />
+				<file name="ShopMallCategory.js" />
+				<file name="ShopSliderTemplate.js" />
+				<file name="ShopMallFooter.js" />
+				<file name="ShopMallJingXi.js" />
+				<file name="ShopLadyCategory.js" />
+				<file name="ShopChildCategory.js" />
+				<file name="ShopChildLogo.js" />
+				<file name="ShopChildFloor.js" />
+				<file name="ShopTabNav.js" />
+				<file name="ShopMallTabNav.js" />
+				<file name="ShopMallSideNav.js" />
+				<file name="ShopB2CMall.js" />
+				<!--详情侧边栏特有-->
+				<file name="ShopDetailShop.js" />
+				<file name="ShopDetailHot.js" />
+				<!--搜索侧边栏特有-->
+				<file name="ShopSearchHot.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本会员中心-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/member.min.js">
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindSender.js" />
+				<file name="WindResponse.js" />
+			</sources>
+			<sources dir="${war}/assets/js/util">
+				<file name="DateUtils.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site">
+				<file name="fanlisite.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本设计器-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/designer.min.js">
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindSender.js" />
+				<file name="WindResponse.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site">
+				<file name="channels.js" />
+			</sources>
+			<sources dir="${war}/assets/js/page">
+				<file name="modules.js" />
+				<file name="Page.js" />
+				<file name="PageItemConfig.js" />
+				<file name="PageB2CMallConfig.js" />
+				<file name="PagePageConfig.js" />
+				<file name="PageShopConfig.js" />
+				<file name="PageBrandConfig.js" />
+				<file name="PageComplexAConfig.js" />
+				<file name="PagePosterConfig.js" />
+				<file name="PageBaiduConfig.js" />
+				<file name="PageGoogleConfig.js" />
+				<file name="PageAlimamaConfig.js" />
+				<file name="PageCategoryVanclConfig.js" />
+				<file name="PageDianPuConfig.js" />
+				<file name="PageDianPuCatConfig.js" />
+				<file name="PageDianPuListConfig.js" />
+				<file name="PageB2CMallListConfig.js" />
+				<file name="PageFtlConfig.js" />
+				<file name="PageRegion.js" />
+				<file name="PageModule.js" />
+				<file name="PageHeaderEditor.js" />
+				<file name="PageModuleBar.js" />
+				<file name="PageModuleEditor.js" />
+				<file name="PageUtils.js" />
+				<file name="PageModuleUtils.js" />
+				<file name="PageCidsEditor.js" />
+				<file name="PageCategoryEditor.js" />
+				<file name="PageBar.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本设计器-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/page.min.js">
+			<sources dir="${war}/assets/js/jquery">
+				<file name="jquery-1.4.2.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/timer">
+				<file name="jquery.timers.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/tools">
+				<file name="jquery.scrollable.all.min.js" />
+				<file name="jquery.tools.flashembed.min.js" />
+				<file name="jquery.tooltip.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/log">
+				<file name="jquery.log.1.0.1.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/lazyload">
+				<file name="jquery.lazyload.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/floatingbox">
+				<file name="jquery.floatingbox.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/autocomplete">
+				<file name="jquery.autocomplete.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/gotop">
+				<file name="jquery.gotop.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/later">
+				<file name="jquery.later.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site">
+				<file name="channels.js" />
+			</sources>
+			<sources dir="${war}/assets/js/page">
+				<file name="PageModuleUtils.js" />
+				<file name="PageModuleInit.js" />
+			</sources>
+		</jscomp>
+		<!--编译新版本设计器工具类-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/page/designer-utils.min.js">
+			<sources dir="${war}/assets/js/jquery">
+				<file name="jquery-1.4.2.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/ui">
+				<file name="jquery-ui.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/bgiframe">
+				<file name="jquery.bgiframe.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/timer">
+				<file name="jquery.timers.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/dotimeout">
+				<file name="jquery.dotimeout.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/tools">
+				<file name="jquery.scrollable.all.min.js" />
+				<file name="jquery.tools.flashembed.min.js" />
+				<file name="jquery.expose.min.js" />
+				<file name="jquery.tooltip.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/pager">
+				<file name="jquery.pager.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/jqtransform">
+				<file name="jquery.jqtransform.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/log">
+				<file name="jquery.log.1.0.1.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/url">
+				<file name="jquery.url.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/gotop">
+				<file name="jquery.gotop.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/autocomplete">
+				<file name="jquery.autocomplete.js" />
+			</sources>
+		</jscomp>
+		<!--编译Jquery-others.min.js-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/designer-jquery-others.min.js">
+			<sources dir="${war}/assets/js/jquery/tools/">
+				<file name="tools.overlay.gallery-1.0.0.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/bgiframe">
+				<file name="jquery.bgiframe.js" />
+			</sources>
+			<!--<sources dir="${war}/assets/js/jquery/supersleight">
+				<file name="jquery.supersleight.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/pngfix">
+				<file name="jquery.pngFix.js" />
+			</sources>-->
+			<sources dir="${war}/assets/js/jquery/lazyload">
+				<file name="jquery.lazyload.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/hotkeys">
+				<file name="jquery.hotkeys.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/log/">
+				<file name="jquery.log.1.0.1.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/treeview">
+				<file name="jquery.treeview.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/cycle">
+				<file name="jquery.cycle.min.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/scrollfollow">
+				<file name="jquery.scrollfollow.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/timer">
+				<file name="jquery.timers.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/colorpicker">
+				<file name="colorpicker.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/color">
+				<file name="jquery.color.utils-0.1.0.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/pager">
+				<file name="jquery.pager.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/cookie">
+				<file name="jquery.cookie.js" />
+			</sources>
+			<!--<sources dir="${war}/assets/js/jquery/imgpreview">
+				<file name="jquery.imgpreview.0.22.js" />
+			</sources>-->
+		</jscomp>
+		<!--编译YUI-->
+		<concat destfile="${output}/js/designer-yui.min.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${war}/assets/js/yui/yahoo-dom-event">
+				<include name="yahoo-dom-event-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/element">
+				<include name="element-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/swf">
+				<include name="swf-min.js" />
+			</fileset>
+			<!--<fileset dir="${war}/assets/js/yui/container">
+				<include name="container_core-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/menu">
+				<include name="menu-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/button">
+				<include name="button-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/editor">
+				<include name="editor-min.js" />
+			</fileset>-->
+		</concat>
+		<concat destfile="${output}/js/designer-utils-all.min.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${war}/assets/js/jquery">
+				<include name="jquery-1.4.2.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/tools">
+				<include name="jquery.tools.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/tools">
+				<include name="jquery.tools.flashembed.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/ui">
+				<include name="jquery-ui.min.js" />
+			</fileset>
+			<fileset dir="${output}/js">
+				<include name="designer-jquery-others.min.js" />
+			</fileset>
+			<!--<fileset dir="${output}/js">
+				<include name="designer-yui.min.js" />
+			</fileset>-->
+		</concat>
+		<concat destfile="${output}/js/designer-all.min.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${output}/js">
+				<include name="designer.min.js" />
+			</fileset>
+			<fileset dir="${output}/js">
+				<include name="widgets.min.js" />
+			</fileset>
+		</concat>
+	</target>
+	<!--编译模板-->
+	<target name="compile.template">
+		<!--组件-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/template-all.min${version}.js">
+			<sources dir="${war}/designer/assets/js">
+				<file name="lazyload.js" />
+				<file name="widgetInit.js" />
+				<file name="widgetUtils.js" />
+				<file name="searchWidget.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site">
+				<file name="channels.js" />
+			</sources>
+		</jscomp>
+		<!--jquery-others-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/template-jquery-others.min.js">
+			<sources dir="${war}/assets/js/jquery/timer">
+				<file name="jquery.timers.js" />
+			</sources>
+			<!--<sources dir="${war}/assets/js/jquery/tools">
+				<file name="tools.overlay.gallery-1.0.0.js" />
+			</sources>-->
+			<!--<sources dir="${war}/assets/js/jquery/cycle">
+				<file name="jquery.cycle.min.js" />
+			</sources>-->
+			<!--<sources dir="${war}/assets/js/jquery/lazyload">
+				<file name="jquery.lazyload.js" />
+			</sources>-->
+			<sources dir="${war}/assets/js/jquery/log/">
+				<file name="jquery.log.1.0.1.js" />
+			</sources>
+		</jscomp>
+		<!--yui-swf-->
+		<concat destfile="${output}/js/template-yui.min.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${war}/assets/js/yui/yahoo-dom-event">
+				<include name="yahoo-dom-event-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/element">
+				<include name="element-min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/yui/swf">
+				<include name="swf-min.js" />
+			</fileset>
+		</concat>
+		<concat destfile="${output}/js/template-utils-all.min${version}.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${war}/assets/js/jquery">
+				<include name="jquery-1.4.2.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/tools">
+				<include name="jquery.scrollable.all.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/tools">
+				<include name="jquery.tools.flashembed.min.js" />
+			</fileset>
+			<!--<fileset dir="${war}/assets/js/jquery/ui">
+				<include name="jquery-ui.min.js" />
+			</fileset>-->
+			<fileset dir="${output}/js">
+				<include name="template-jquery-others.min.js" />
+			</fileset>
+			<!--<fileset dir="${output}/js">
+				<include name="template-yui.min.js" />
+			</fileset>-->
+		</concat>
+	</target>
+	<!--编译网站-->
+	<target name="compile.site">
+		<!--组件-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/site-all.min.js">
+			<sources dir="${war}/assets/js/util">
+				<file name="DateUtils.js" />
+				<file name="AlertUtils.js" />
+			</sources>
+			<sources dir="${war}/assets/js/taobao/core">
+				<file name="TaobaoConstants.js" />
+				<file name="TaobaoUtils.js" />
+				<file name="TaobaoRequest.js" />
+				<file name="TaobaoResponse.js" />
+				<file name="TaobaoSender.js" />
+			</sources>
+			<sources dir="${war}/assets/js/taobao/trade/taobaoke">
+				<file name="TaobaokeItemsGetRequest.js" />
+				<file name="TaobaokeReportGetRequest.js" />
+				<file name="TaobaokeIntervalReportGetRequest.js" />
+			</sources>
+			<sources dir="${war}/assets/js/taobao/trade/user">
+				<file name="TaobaoUserGetRequest.js" />
+				<file name="TaobaoUsersGetRequest.js" />
+			</sources>
+			<sources dir="${war}/assets/js/taobao/sns">
+				<file name="TaobaoJianghuFeedPublishRequest.js" />
+				<file name="TaobaoJianghuFriendsGetFriendListRequest.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/">
+				<file name="page.js" />
+				<file name="site.js" />
+			</sources>
+			<sources dir="${war}/assets/js/guide/">
+				<file name="guide.js" />
+			</sources>
+			<sources dir="${war}/assets/js/site/core">
+				<file name="WindResponse.js" />
+				<file name="WindSender.js" />
+			</sources>
+		</jscomp>
+		<!--jquery-others-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/js/site-jquery-others.min.js">
+			<sources dir="${war}/assets/js/jquery/alert">
+				<file name="jquery.alerts.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/pager">
+				<file name="jquery.pager.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/bgiframe">
+				<file name="jquery.bgiframe.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/lazyload">
+				<file name="jquery.lazyload.js" />
+			</sources>
+			<!--<sources dir="${war}/assets/js/jquery/fancybox">
+				<file name="jquery.fancybox-1.2.6.js" />
+			</sources>-->
+			<sources dir="${war}/assets/js/jquery/supersleight">
+				<file name="jquery.supersleight.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/scrollfollow">
+				<file name="jquery.scrollfollow.js" />
+			</sources>
+			<!--<sources dir="${war}/assets/js/jquery/corner">
+				<file name="jquery.corner.js" />
+			</sources>-->
+			<sources dir="${war}/assets/js/jquery/cookie">
+				<file name="jquery.cookie.js" />
+			</sources>
+			<sources dir="${war}/assets/js/jquery/aop">
+				<file name="jquery.aop.js" />
+			</sources>
+		</jscomp>
+		<concat destfile="${output}/js/site-utils-all.min.js" fixlastline="true" encoding="UTF-8">
+			<fileset dir="${war}/assets/js/jquery">
+				<include name="jquery-1.4.2.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/tools">
+				<include name="jquery.tools.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/ui">
+				<include name="jquery-ui.min.js" />
+				<include name="jquery.ui.datepicker-zh-CN.min.js" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/url">
+				<include name="jquery.url.min.js" />
+			</fileset>
+			<fileset dir="${output}/js">
+				<include name="site-jquery-others.min.js" />
+			</fileset>
+		</concat>
+	</target>
+	<path id="yuiClasspath">
+		<fileset dir="lib">
+			<include name="yuicompressor-2.4.2.jar" />
+			<include name="YUIAnt.jar" />
+		</fileset>
+	</path>
+	<!--编译设计器css-->
+	<target name="compile.css" description="designer.min.css">
+		<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+			<classpath>
+				<path refid="yuiClasspath" />
+			</classpath>
+		</taskdef>
+		<!--压缩新版本Xintao-->
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/stylesheets">
+			<fileset dir="${war}/assets/stylesheets" excludes="**/theme/**">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>
+		<!--压缩新版本Module
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/stylesheets">
+			<fileset dir="${war}/assets/stylesheets/module">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>-->
+		<!--压缩新版本Skin
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/stylesheets/skin">
+			<fileset dir="${war}/assets/stylesheets/skin">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>-->
+		<!--压缩新版本Theme
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/stylesheets/theme">
+			<fileset dir="${war}/assets/stylesheets/theme">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>-->
+		<yuicompress linebreak="300" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/css/haibao">
+			<fileset dir="${war}/assets/css/haibao">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>
+		<yuicompress linebreak="300" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}/css">
+			<fileset dir="${war}/assets/css/ui">
+				<include name="jquery-ui.css" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/alert">
+				<include name="jquery.alerts.css" />
+			</fileset>
+			<!--<fileset dir="${war}/assets/js/jquery/fancybox">
+				<include name="jquery.fancybox-1.2.6.css" />
+			</fileset>-->
+			<fileset dir="${war}/assets/js/jquery/colorpicker/css">
+				<include name="colorpicker.css" />
+			</fileset>
+			<fileset dir="${war}/designer/assets/css">
+				<include name="style.css" />
+				<include name="designer.css" />
+				<include name="template.css" />
+				<include name="widgets.css" />
+			</fileset>
+			<fileset dir="${war}/designer/assets/css/skin">
+				<include name="*.css" />
+			</fileset>
+			<fileset dir="${war}/assets/js/jquery/treeview">
+				<include name="jquery.treeview.css" />
+			</fileset>
+			<!--<fileset dir="${war}/assets/js/yui/assets/skins/sam">
+				<include name="skin.css" />
+			</fileset>-->
+			<fileset dir="${war}/assets/css">
+				<include name="site.css" />
+				<include name="posterdetail.css" />
+				<include name="huabao.css" />
+				<include name="huabaosearch.css" />
+				<include name="itemsearch.css" />
+				<include name="default_vertical.css" />
+				<include name="default_float.css" />
+				<include name="keywordssearch.css" />
+				<include name="items.css" />
+				<include name="fanli.css" />
+				<include name="fanlisite.css" />
+				<include name="blog.css" />
+				<include name="shops.css" />
+				<include name="taoke.css" />
+				<include name="seller.css" />
+			</fileset>
+		</yuicompress>
+		<!--copy treeview images-->
+		<copy todir="${output}/images/treeview">
+			<fileset dir="${war}/assets/js/jquery/treeview/images/" excludes="**/.svn/**" />
+		</copy>
+		<copy todir="${output}/css/images">
+			<fileset dir="${war}/assets/css/ui/images" excludes="**/.svn/**" />
+		</copy>
+		<!--copy alert images-->
+		<copy todir="${output}/css/images">
+			<fileset dir="${war}/assets/js/jquery/alert/images" excludes="**/.svn/**" />
+		</copy>
+		<!--copy fancybox images-->
+		<copy todir="${output}/css">
+			<fileset dir="${war}/assets/js/jquery/fancybox" excludes="**/.svn/**,*.js" />
+		</copy>
+		<!--copy colorpicker images-->
+		<copy todir="${output}/images">
+			<fileset dir="${war}/assets/js/jquery/colorpicker/images" excludes="**/.svn/**" />
+		</copy>
+		<!--copy designer images-->
+		<copy todir="${output}/images">
+			<fileset dir="${war}/designer/assets/images" excludes="**/.svn/**" />
+		</copy>
+		<!--copy yui sam images-->
+		<!--<copy todir="${output}/css">
+			<fileset dir="${war}/assets/js/yui/assets/skins/sam" excludes="**/.svn/**,*.css,*.psd" />
+		</copy>-->
+		<!--copy 新版本 images-->
+		<copy todir="${output}/stylesheets/images">
+			<fileset dir="${war}/assets/stylesheets/images" excludes="**/.svn/**" />
+		</copy>
+		<!--生成新版本站点CSS文件-->
+		<concat destfile="${output}/stylesheets/xintao.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}/stylesheets" files="common.css,xintao.css" />
+			<filelist dir="${output}/stylesheets/module" files="shopRank.css,grid.css,itemSearch.css,shopHeader.css,shopDisplay.css,shopCustom.css,shopSearch.css,shopLinks.css,shopSlider.css,shopCategory.css,switchBar.css,shopDetail.css,shopList.css,shopBlog.css,shopDetailShop.css,shopKeyword.css,shopItemList.css,shopCategoryVancl.css,shopBrand.css,shopScrollable.css,shopComplexA.css,shopComplexB.css,shopDianPuCat.css,shopDianPuList.css,shopDianPu.css,shopMarketCat.css,shopMallFloor.css,shopMallCategory.css,shopMallFooter.css,shopMallJingXi.css,shopLadyCategory.css,shopChildCategory.css,shopChildLogo.css,shopChildFloor.css,shopTabNav.css,shopB2cMall.css,shopRateTable.css,shopMallNewFloor.css,shopDianpuPaihang.css" />
+		</concat>
+		<!--生成设计器CSS文件-->
+		<concat destfile="${output}/css/designer-all.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}/css" files="jquery-ui.css,jquery.alerts.css,colorpicker.css,style.css,designer.css,widgets.css,posterdetail.css,keywordssearch.css,fanlisite.css" />
+		</concat>
+		<!--生成模板CSS文件-->
+		<concat destfile="${output}/css/template-all.min${version}.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}/css" files="style.css,template.css,widgets.css,posterdetail.css,keywordssearch.css,fanlisite.css" />
+		</concat>
+		<!--生成网站CSS文件-->
+		<concat destfile="${output}/css/site-all.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}/css" files="jquery-ui.css,jquery.alerts.css,site.css,fanlisite.css" />
+		</concat>
+		<delete>
+			<filelist dir="${output}/css" files="site.css,jquery-ui.css,jquery.alerts.css,colorpicker.css,style.css,designer.css,fanlisite.css" />
+		</delete>
+	</target>
+	<target name="copy.apache" description="copy assets min">
+		<copy todir="${apache}/assets/min">
+			<fileset dir="${war}/assets/min" excludes="**/.svn/**" />
+		</copy>
+		<copy todir="${apache}/zone/channel">
+			<fileset dir="${war}/zone/channel" excludes="**/.svn/**" />
+		</copy>
+		<copy todir="${apache}/zone/ads">
+			<fileset dir="${war}/zone/ads" excludes="**/.svn/**" />
+		</copy>
+		<!--<copy todir="${apache}/help">
+			<fileset dir="${war}/help" excludes="**/.svn/**" />
+		</copy>-->
+	</target>
+
+</project>

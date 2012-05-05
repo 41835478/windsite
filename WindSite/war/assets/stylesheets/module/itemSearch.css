@@ -73,6 +73,7 @@
 	background: url('/assets/min/stylesheets/images/bg_search.png')
 		no-repeat;
 	float: left;
+	overflow:hidden;
 }
 
 .item-search-form input.focus {
@@ -91,8 +92,8 @@
 	color: #999;
 	margin-top: 6px;
 	margin-top: -6px\9; *
-	margin-top: 6px; /* IE7支持 */
-	_margin-top: 4px; /* IE6支持 */
+	margin-top: 6px;
+	_margin-top: 4px;
 }
 
 .item-search-form #search-button {

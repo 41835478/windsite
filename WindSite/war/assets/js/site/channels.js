@@ -5,7 +5,7 @@ var channels = {
 		pic : '/assets/min/images/channel/brand_lib.jpg',
 		bigPic : '/assets/min/images/channel/brand_lib_big.jpg',
 		height : 4120,
-		clickUrl : 'http://pindao.huoban.taobao.com/channel/brand_lib.htm?pid=mm_10011550_0_0&mode=86'
+		clickUrl : 'http://www.taobao.com/go/chn/taoke/mingdian.php?pid=mm_10011550_0_0&eventid=102305'
 	},
 	'shop_street' : {
 		name : '店铺街',

@@ -101,6 +101,10 @@
 		no-repeat;
 	border: 0px;
 	cursor: pointer;
+	margin-top: 0px;
+	margin-top: 4px\9; *
+	margin-top: 0px; /* IE7支持 */
+	_margin-top: 2px; /* IE6支持 */
 }
 
 .item-search ul.words {

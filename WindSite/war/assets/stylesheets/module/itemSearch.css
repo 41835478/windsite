@@ -85,12 +85,14 @@
 	border: 0px;
 	padding-left: 20px;
 	padding-right: 5px;
-	margin-top: 6px;
-	_margin-top: 4px;
 	width: 340px;
 	background: url("/assets/min/stylesheets/images/bg_search_input.gif")
 		no-repeat scroll 0 50% transparent;
 	color: #999;
+	margin-top: 6px;
+	margin-top: 0px\9; *
+	margin-top: 6px; /* IE7支持 */
+	_margin-top: 4px; /* IE6支持 */
 }
 
 .item-search-form #search-button {

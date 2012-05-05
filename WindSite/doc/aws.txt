@@ -170,6 +170,13 @@ service mysqld restart
 你的团队是如何走到一起的？
 
 
+http://hackmysql.com/mysqlsla
+
+tar zxvf mysqlsla-2.03.tar.gz 
+cp mysqlsla-2.03/bin/mysqlsla /usr/local/bin 
+yum install perl-DBI perl-DBD-MySQL -y 
+
+mysqlsla -lt slow /usr/local/mysql/mysql-tmp/slowquery.log
 
 
 大量close_wait

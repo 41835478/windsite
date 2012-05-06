@@ -632,7 +632,8 @@ public class SiteRest {
 		}
 		Page<UCBlog> page = new Page<UCBlog>(pageNo, 15);
 		result.put("blogs", ucService.findByHql(page,
-				"from UCBlog b where b.friend=5 order by b.dateline desc",
+				"from UCBlog b where b.friend=5 and b.uid=" + userId
+						+ " order by b.dateline desc",
 				new HashMap<String, Object>()));
 		Object versionNo = result.get("versionNo");
 		if ((versionNo != null && (Float) versionNo >= 1.5)) {// 如果是高版本
@@ -1482,6 +1483,11 @@ public class SiteRest {
 	@RequestMapping(value = "/ads", method = RequestMethod.GET)
 	public ModelAndView getAds(HttpServletRequest request,
 			HttpServletResponse response) {
+		try {
+			response.sendError(404);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		String partner = request.getParameter("partner");
 		String page = request.getParameter("page");
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -1972,7 +1978,7 @@ public class SiteRest {
 	}
 
 	private Boolean validateTaobao(HttpServletRequest request) {
-		//SystemException.handleMessageException("服务器数据同步中....请稍候登录，预计1-2小时");
+		// SystemException.handleMessageException("服务器数据同步中....请稍候登录，预计1-2小时");
 		String topParams = request.getParameter("top_parameters");
 		String topSession = request.getParameter("top_session");
 		String topSign = request.getParameter("top_sign");

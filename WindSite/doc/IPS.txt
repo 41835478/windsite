@@ -25,6 +25,9 @@ iptables -I INPUT -s 66.249.73.0/24 -j DROP
 #iptables -I INPUT -s 121.9.222.0/24 -j DROP
 
 iptables -I INPUT -s 113.14.90.115 -j DROP
+iptables -I INPUT -s 183.249.125.252 -j DROP
+
+iptables -I INPUT -s 118.78.204.118 -j DROP
 
 #中国移动？
 iptables -I INPUT -s 111.13.8.0/24 -j DROP

@@ -72,6 +72,7 @@
 	padding-right: 10px;
 	background: url('/assets/min/stylesheets/images/bg_search.png')
 		no-repeat;
+	float:left;
 	overflow: hidden; *
 	zoom: 1;
 }

@@ -108,12 +108,12 @@
 	float:right;
 	width: 77px;
 	height: 28px;
-	line-height: 38px;
+	line-height: 28px;
 	background: url("/assets/min/stylesheets/images/bg_search_button.gif")
 		no-repeat;
 	border: 0px;
 	cursor: pointer;
-	margin-top: 0px;
+	margin-top: 5px;
 }
 
 .item-search ul.words {

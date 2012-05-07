@@ -12,11 +12,11 @@
 		<#elseif SITEIMPL??&&(SITEIMPL.versionNo==1.5)&&''!=SITEIMPL.www><li rel="poster"><a href="javascript:;" target="_self" class="self">画报</a></li></#if>
 	</ul>
 	<div class="search-auto" style="margin-top:-3px;">
-		<input name="is_mall" type="hidden" value="">
 		<input name="q" class="search-input" autocomplete="off">
 		<input type="button" id="search-button"/>
 	</div>
 </fieldset>
+<input name="is_mall" type="hidden" value="">
 </form>
 </div>
 </div>

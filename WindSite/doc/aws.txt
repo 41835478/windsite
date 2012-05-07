@@ -13,6 +13,9 @@ ls -al /dev/x*
 sudo mkdir /mnt/ebs
 sudo mount -t ext3 /dev/xvdp   /mnt/ebs
 
+chown -R mysql:mysql /usr/local/mysql/
+chown -R mysql:mysql /usr/local/mysql/var/
+
 sudo ln -s /mnt/ebs/mysql/ /usr/local/
 sudo ln -s /mnt/ebs/apache2/ /usr/local/
 sudo ln -s /mnt/ebs/tomcat/ /usr/local/

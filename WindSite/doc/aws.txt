@@ -1,3 +1,121 @@
+Amazon AMI
+
+sudo su -
+vi /etc/ssh/sshd_config
+		PermitRootLogin without-password
+Reload the SSH daemon configuration by running:
+		/etc/init.d/sshd reload
+vi ~/.ssh/authorized_keys
+		ssh-rsa
+
+ls -al /dev/x*
+
+sudo mkdir /mnt/ebs
+sudo mount -t ext3 /dev/xvdp   /mnt/ebs
+
+sudo ln -s /mnt/ebs/mysql/ /usr/local/
+sudo ln -s /mnt/ebs/apache2/ /usr/local/
+sudo ln -s /mnt/ebs/tomcat/ /usr/local/
+sudo ln -s /mnt/ebs/php5/ /usr/local/
+
+sudo umount /mnt/ebs
+sudo nano /etc/fstab
+/dev/xvdp  /mnt/ebs  ext3    defaults        0 0
+sudo mount -a
+
+cd /mnt/ebs/opt
+#httpd
+yum -y install gcc automake autoconf libtool make
+
+yum list|grep apr 
+	yum -y install apr-devel
+yum list|grep apr-util 
+	yum -y install apr-util-devel
+#yum list|grep gcc	
+#	yum -y install gcc-c++.x86_64
+	
+rm -rf httpd-2.2.22
+tar xvf httpd-2.2.22.tar
+cd httpd-2.2.22
+./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so
+make
+make install
+
+yum list|grep curses
+	yum -y install ncurses-devel
+yum list|grep termcap
+ 	yum -y install compat-libtermcap.x86_64
+rm -rf mysql-5.1.62
+tar xvf mysql-5.1.62.tar
+ cd mysql-5.1.62
+./configure --prefix=/usr/local/mysql --datadir=/mnt/ebs/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
+make
+make install
+groupadd mysql
+useradd -g mysql -s /sbin/nologin mysql
+chown -R mysql:mysql /usr/local/mysql/
+cp  /mnt/ebs/opt/mysql-5.1.62/support-files/my-medium.cnf /etc/my.cnf
+ /usr/local/mysql/bin/mysql_install_db --user=mysql
+chown -R mysql:mysql /usr/local/mysql/var/ 
+cp /mnt/ebs/opt/mysql-5.1.62/support-files/mysql.server /etc/init.d/mysqld
+chmod 755 /etc/init.d/mysqld 
+chkconfig --add mysqld 
+chkconfig mysqld on 
+service mysqld restart  
+/etc/profile
+ PATH=$PATH:/usr/local/mysql/bin
+ source /etc/profile
+#php
+yum -y install libxml2-devel
+yum -y install openssl-devel 
+yum -y install curl-devel
+yum -y install libjpeg-devel 
+yum -y install libpng-devel 
+yum -y install freetype-devel
+yum -y install gmp-devel  
+yum -y install bzip2-devel
+
+rm -rf php-5.4.0
+tar xvf php-5.4.0.tar
+cd php-5.4.0
+'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib'
+make
+make install
+
+/etc/rc.d/rc.local
+# Start Apache 
+/usr/local/apache2/bin/apachectl start
+
+# Start MySQL Service
+/usr/local/mysql/bin/mysqld_safe &
+
+# Start Tomcat
+/usr/local/tomcat/bin/startup.sh
+
+
+编辑/etc/sysctl.conf文件，增加三行：
+　　引用
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 120
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_close_wait = 60
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_fin_wait = 120
+
+/etc/rc.d/init.d/network restart 
+
+ulimit -a  显示当前所有的 limit 信息
+ ulimit -n 可以打开最大文件描述符的数量
+ ulimit -n 65536 限制最大可以使用 65536个文件描述符
+ /etc/security/limits.conf
+ * soft nofile 65536
+ * hard nofile 65536
+ 
+ cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+
+
 1.Confirm that your new volume exists from within the EC2 instance.
 2.“ls -al /dev/s*” or “ls -al /dev/x*” should show you the new volume
 	ls -al /dev/s*
@@ -8,7 +126,8 @@
 5.The volume is now ready. Now create a directory unto which this can be mounted
 	sudo mkdir /mnt/ebs
 6.Mount the volume
-	sudo mount  /dev/xvdt   /mnt/ebs	
+	sudo mount  /dev/xvdt   /mnt/ebs 
+	
 7.Confirm that the  mount worked
 	ls /mnt/ebs	
 8.To ensure that this volume is automatically mounted on system startup, modify  your fstab

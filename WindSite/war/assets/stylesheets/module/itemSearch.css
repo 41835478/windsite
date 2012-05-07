@@ -72,8 +72,15 @@
 	padding-right: 10px;
 	background: url('/assets/min/stylesheets/images/bg_search.png')
 		no-repeat;
-	float: left;
-	overflow: hidden;
+	overflow: hidden; *
+	zoom: 1;
+}
+
+.search-auto::after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
 }
 
 .item-search-form input.focus {
@@ -86,12 +93,12 @@
 	border: 0px;
 	padding-left: 20px;
 	padding-right: 5px;
-	width: 330px;
+	width: 340px;
 	background: url("/assets/min/stylesheets/images/bg_search_input.gif")
 		no-repeat scroll 0 50% transparent;
 	color: #999;
 	margin: 0px;
-	margin-top : 6px;
+	margin-top: 6px;
 	margin-top: -6px\9; *
 	margin-top: 6px;
 	_margin-top: 4px;
@@ -106,7 +113,7 @@
 	border: 0px;
 	cursor: pointer;
 	margin-top: 0px;
-	margin-top: 6px\9; *
+	margin-top: 8px\9; *
 	margin-top: 0px; /* IE7支持 */
 	_margin-top: 2px; /* IE6支持 */
 }

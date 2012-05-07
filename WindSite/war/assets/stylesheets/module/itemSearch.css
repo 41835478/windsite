@@ -102,13 +102,10 @@
 	color: #999;
 	margin: 0px;
 	margin-top: 6px;
-	margin-top: -6px\9; *
-	margin-top: 6px;
-	_margin-top: 4px;
 }
 
 .item-search-form #search-button {
-	float:left;
+	float:right;
 	width: 77px;
 	height: 28px;
 	line-height: 24px;
@@ -116,10 +113,7 @@
 		no-repeat;
 	border: 0px;
 	cursor: pointer;
-	margin-top: 0px;
-	margin-top: 8px\9; *
-	margin-top: 0px; /* IE7支持 */
-	_margin-top: 2px; /* IE6支持 */
+	margin-top: 5px;
 }
 
 .item-search ul.words {

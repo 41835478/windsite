@@ -89,6 +89,8 @@
 }
 
 .item-search-form .search-input {
+	float:left;
+	vertical-align: middle;
 	height: 26px;
 	line-height: 26px;
 	border: 0px;
@@ -106,6 +108,7 @@
 }
 
 .item-search-form #search-button {
+	float:left;
 	width: 77px;
 	height: 28px;
 	line-height: 24px;

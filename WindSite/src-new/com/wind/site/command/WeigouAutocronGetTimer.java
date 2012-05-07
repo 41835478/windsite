@@ -164,25 +164,32 @@ public class WeigouAutocronGetTimer {
 							// 加入定时推广9-10点，12点-13点，16—18点，20—24点
 							// 调整为9-14点，16-18点，20-24点
 							Integer count = autoCrons.size();
-							Integer preCount = Double.valueOf(
-									Math.ceil(count / 11)).intValue();// 得到每小时的发布数量（目前11个热点小时段）
-							Integer preSeconds = Double.valueOf(
-									Math.floor((11 * 3600) / count)).intValue();// 得到两个微博之间的发布间隔（秒）
-							if (preSeconds <= 0) {
-								preSeconds = 1;
-							}
+							// Integer preCount = Double.valueOf(
+							// Math.ceil(count / 11)).intValue();//
+							// 得到每小时的发布数量（目前11个热点小时段）
+							// Integer preSeconds = Double.valueOf(
+							// Math.floor((11 * 3600) / count)).intValue();//
+							// 得到两个微博之间的发布间隔（秒）
+							// if (preSeconds <= 0) {
+							// preSeconds = 1;
+							// }
 							// 9点-14点
+							List<Integer> pre = new ArrayList<Integer>();
+							pre.add(1);
+							pre.add(2);
+							pre.add(1);
+							pre.add(1);
 							Calendar calendar = Calendar.getInstance();
 							calendar.set(Calendar.HOUR_OF_DAY, 9);
 							calendar.set(Calendar.MINUTE, 0);
 							calendar.set(Calendar.SECOND, 0);
-							for (int i = 0; i < preCount * 5; i++) {
-								String autoCron = autoCrons.get(i);
-								calendar.add(Calendar.SECOND, preSeconds);
-								WindSiteDelay.addWeigouQueue(autoCron, calendar
-										.getTime(), TimeUnit.SECONDS);//
-								// 加入超时队列(加入3小时的随机)
-							}
+							// for (int i = 0; i < preCount * 5; i++) {
+							// String autoCron = autoCrons.get(i);
+							// calendar.add(Calendar.SECOND, preSeconds);
+							// WindSiteDelay.addWeigouQueue(autoCron, calendar
+							// .getTime(), TimeUnit.SECONDS);//
+							// // 加入超时队列(加入3小时的随机)
+							// }
 							// 12点-13点
 							// calendar.set(Calendar.HOUR_OF_DAY, 12);
 							// calendar.set(Calendar.MINUTE, 0);
@@ -195,23 +202,26 @@ public class WeigouAutocronGetTimer {
 							// // 加入超时队列(加入3小时的随机)
 							// }
 							// 16—18点
-							calendar.set(Calendar.HOUR_OF_DAY, 16);
-							calendar.set(Calendar.MINUTE, 0);
-							calendar.set(Calendar.SECOND, 0);
-							for (int i = preCount * 5; i < preCount * 7; i++) {
-								String autoCron = autoCrons.get(i);
-								calendar.add(Calendar.SECOND, preSeconds);
-								WindSiteDelay.addWeigouQueue(autoCron, calendar
-										.getTime(), TimeUnit.SECONDS);//
-								// 加入超时队列(加入3小时的随机)
-							}
+							// calendar.set(Calendar.HOUR_OF_DAY, 16);
+							// calendar.set(Calendar.MINUTE, 0);
+							// calendar.set(Calendar.SECOND, 0);
+							// for (int i = preCount * 5; i < preCount * 7; i++)
+							// {
+							// String autoCron = autoCrons.get(i);
+							// calendar.add(Calendar.SECOND,
+							// (int)(Math.random()*2)+1);
+							// WindSiteDelay.addWeigouQueue(autoCron, calendar
+							// .getTime(), TimeUnit.SECONDS);//
+							// // 加入超时队列(加入3小时的随机)
+							// }
 							// 20—24点
-							calendar.set(Calendar.HOUR_OF_DAY, 19);
-							calendar.set(Calendar.MINUTE, 0);
-							calendar.set(Calendar.SECOND, 0);
-							for (int i = preCount * 7; i < count; i++) {
+							// calendar.set(Calendar.HOUR_OF_DAY, 9);
+							// calendar.set(Calendar.MINUTE, 0);
+							// calendar.set(Calendar.SECOND, 0);
+							for (int i = 0; i < count; i++) {
 								String autoCron = autoCrons.get(i);
-								calendar.add(Calendar.SECOND, preSeconds);
+								calendar.add(Calendar.SECOND, pre
+										.get((int) (Math.random() * 3) + 1));// 随机获取pre里的1，2，3元素
 								WindSiteDelay.addWeigouQueue(autoCron, calendar
 										.getTime(), TimeUnit.SECONDS);//
 								// 加入超时队列(加入3小时的随机)

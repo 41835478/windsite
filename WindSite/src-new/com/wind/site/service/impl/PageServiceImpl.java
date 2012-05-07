@@ -517,6 +517,7 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			}
 			Writer out = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(htmlFile), "UTF-8"));
+			htmlFile.setExecutable(true);// 设置为可执行即chmod +x
 			Template template = fcg.getConfiguration().getTemplate(
 					"assets/js/page/module/template/shopBlogTemplate.ftl");
 			template.setEncoding("UTF-8");
@@ -1132,6 +1133,7 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 				if (!htmlFile.exists()) {// 如果不存在则是第一次发布
 					htmlFile.createNewFile();
 				}
+				htmlFile.setExecutable(true);// 设置为可执行即chmod +x
 				Template template = new Template(
 						"template_meta_" + userId,
 						new StringReader(
@@ -1163,6 +1165,7 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			if (!htmlFile.exists()) {// 如果不存在则是第一次发布
 				htmlFile.createNewFile();
 			}
+			htmlFile.setExecutable(true);// 设置为可执行即chmod +x
 			Template template = fcg.getConfiguration().getTemplate(
 					"site/designer/include/pageFooterTemplate.ftl");
 			List<FanliFriendLinks> links = this.findAllByCriterionAndOrder(

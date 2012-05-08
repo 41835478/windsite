@@ -247,7 +247,7 @@
 							<li class="legend2">
 							</li>
 							<li class="sale">商品数量${normal.num}</li>
-							<li class="place">${normal.location}</li>
+							<li class="place"><#if normal.location??>${normal.location.city}</#if></li>
 							<li class="price"><em>${normal.price}</em></li>
 						</ul>
 						<p class="seller lister hCard">

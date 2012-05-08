@@ -73,16 +73,9 @@
 	background: url('/assets/min/stylesheets/images/bg_search.png')
 		no-repeat;
 	float:left;
-	overflow: hidden; *
-	zoom: 1;
+	overflow: hidden;
 }
 
-.search-auto::after {
-	content: '\20';
-	display: block;
-	height: 0;
-	clear: both;
-}
 
 .item-search-form input.focus {
 	color: black;

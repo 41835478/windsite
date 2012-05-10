@@ -345,6 +345,18 @@ public class AdminRest {
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping(value = "/cache/view/commonds")
+	@ResponseBody
+	public String cacheViewCommonds(HttpServletRequest request) {
+		return CommandExecutor.getCommands().toString();
+	}
+
+	/**
+	 * 队列数据
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/cache/view")
 	@ResponseBody
 	public String cacheView(HttpServletRequest request) {

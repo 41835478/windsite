@@ -44,8 +44,9 @@ iptables -I INPUT -s 125.39.78.0 -j DROP
 iptables -I INPUT -s 114.250.131.134 -j DROP
 iptables -I INPUT -s 110.102.7.148 -j DROP
 iptables -I INPUT -s 182.99.226.127 -j DROP
-#中电华通
-iptables -I INPUT -s 221.122.127.91 -j DROP
+#中电华通(亿起发)
+#iptables -I INPUT -s 221.122.127.91 -j DROP
+#iptables -I INPUT -s 221.122.127.42 -j DROP
 
 #中国移动？
 iptables -I INPUT -s 111.13.8.0/24 -j DROP
@@ -84,7 +85,6 @@ iptables -I INPUT -s 59.51.51.238 -j DROP
 iptables -I INPUT -s 207.46.13.0/24 -j DROP
 iptables -I INPUT -s 220.181.158.0/24 -j DROP
 iptables -I INPUT -s 218.17.162.213 -j DROP
-iptables -I INPUT -s 221.122.127.42 -j DROP
 iptables -I INPUT -s 182.128.176.71 -j DROP
 iptables -I INPUT -s 208.99.198.26 -j DROP
 iptables -I INPUT -s 220.181.158.213 -j DROP

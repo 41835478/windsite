@@ -1,7 +1,63 @@
+cd /mnt/ebs/opt/httpd-2.2.22/modules/metadata/
+/usr/local/apache2/bin/apxs -c -i -a mod_expires.c
+cd /mnt/ebs/opt/httpd-2.2.22/modules/filters/
+/usr/local/apache2/bin/apxs -i -c -a mod_deflate.c
+
 /usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/mysql /usr/local/apache2/htdocs/
+/usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/iweibo /usr/local/apache2/htdocs/
 /usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/piwik /usr/local/apache2/htdocs/
 /usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/weibo21 /usr/local/apache2/htdocs/
 /usr/bin/rsync -avzuP  root@223.4.88.215:/data/htdocs/weibo21/var /usr/local/apache2/htdocs/weibo21
+
+/usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/mysqldata/ /mnt/ebs/opt/
+
+01 0 * * * root wget http://www.xintaowang.com/map.synTvCovers
+05 0 * * * root wget http://www.xintaowang.com/map.synDiscount
+07 0 * * * root wget http://www.xintaowang.com/map.synTvMap
+08 0 * * * root wget http://www.xintaowang.com/map.synTvJuqing
+00 1 * * * root /var/www/mysqldata/bakmysql.sh
+01 2 * * * root wget http://www.xintaowang.com/map.synTopItem
+
+50 1 * * * root wget http://www.xintaowang.com/map.synItemAdminItemStatus
+
+10 2 * * 1 root wget http://www.xintaowang.com/map.synItemAdmin/index-1
+10 5 * * 1 root wget http://www.xintaowang.com/map.synItemAdmin/index-2
+
+10 2 * * 2 root wget http://www.xintaowang.com/map.synItemAdmin/index-3
+10 5 * * 2 root wget http://www.xintaowang.com/map.synItemAdmin/index-4
+
+10 2 * * 3 root wget http://www.xintaowang.com/map.synItemAdmin/index-5
+10 5 * * 3 root wget http://www.xintaowang.com/map.synItemAdmin/index-6
+
+10 2 * * 4 root wget http://www.xintaowang.com/map.synItemAdmin/index-7
+10 5 * * 4 root wget http://www.xintaowang.com/map.synItemAdmin/index-8
+
+10 2 * * 5 root wget http://www.xintaowang.com/map.synItemAdmin/index-9
+
+
+10 4 * * 2,6 root wget http://www.xintaowang.com/map.synTaokeItem
+30 4 * * 1,4 root wget http://www.xintaowang.com/map.synWow
+50 4 * * * root wget http://www.xintaowang.com/map.autoFansAdmin
+50 5 * * * root wget http://www.xintaowang.com/map.synWeiboType
+05 6 * * 1 root wget http://www.xintaowang.com/map.synWowUserItemAdmin
+#35 6 * * 1,4 root wget http://www.xintaowang.com/map.synWowTaokeItem
+05 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1
+10 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=2
+15 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=7
+20 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=8
+25 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=13
+30 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=16
+35 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=21
+40 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=24
+45 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1300
+50 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=1301
+55 7 * * * root wget http://www.xintaowang.com/map.tvUpdate?cat=9001
+01 8 * * * root wget http://www.xintaowang.com/map.posterUpdate
+20 8 * * * root wget http://www.xintaowang.com/map.synItemAdminFixed
+30 8 * * * root wget http://www.xintaowang.com/map.synCatAdmin
+40 8 * * * root wget http://www.xintaowang.com/map.synCatAdmin
+01 10 * * * root wget http://www.xintaowang.com/map.synTvBrand
+
 
 Amazon AMI
 

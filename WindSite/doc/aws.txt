@@ -11,6 +11,25 @@ cd /mnt/ebs/opt/httpd-2.2.22/modules/filters/
 
 /usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/mysqldata/ /mnt/ebs/opt/
 
+ chown -R root:root xintao/
+ chmod -R 777 xintao/
+ 
+ 
+ #iweibo
+ chmod -R 777 cache/
+ chmod -R 777 config/
+ chmod -R 777 data/
+ chmod -R 777 uploadfile/
+ chown -R root:root cache/
+ chown -R root:root config/
+ chown -R root:root data/
+ chown -R root:root uploadfile/
+ #piwik 
+chmod -R 777 config/
+chmod -R 777 tmp/
+chown -R root:root config/
+chown -R root:root tmp/
+
 01 0 * * * root wget http://www.xintaowang.com/map.synTvCovers
 05 0 * * * root wget http://www.xintaowang.com/map.synDiscount
 07 0 * * * root wget http://www.xintaowang.com/map.synTvMap

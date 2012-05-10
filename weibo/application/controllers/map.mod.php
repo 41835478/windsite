@@ -401,7 +401,7 @@ class map_mod {
 
 				$switch = CACHE :: get(TB_CACHE_KEY_PRE . 'autoFansSwitch');
 				if ($switch == 'completed') { //是否开启了自动关注
-					//return;
+					return;
 				}
 				ignore_user_abort(); //即使Client断开(如关掉浏览器)，PHP脚本也可以继续执行
 				set_time_limit(1800); //设置总执行时间限制，预期不可超过30分钟。

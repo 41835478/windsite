@@ -1,3 +1,8 @@
+/usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/mysql /usr/local/apache2/htdocs/
+/usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/piwik /usr/local/apache2/htdocs/
+/usr/bin/rsync -avzuP  root@223.4.88.215:/var/www/htdocs/weibo21 /usr/local/apache2/htdocs/
+/usr/bin/rsync -avzuP  root@223.4.88.215:/data/htdocs/weibo21/var /usr/local/apache2/htdocs/weibo21
+
 Amazon AMI
 
 sudo su -
@@ -35,7 +40,7 @@ yum list|grep apr
 yum list|grep apr-util 
 	yum -y install apr-util-devel
 #yum list|grep gcc	
-#	yum -y install gcc-c++.x86_64
+	yum -y install gcc-c++.x86_64
 	
 rm -rf httpd-2.2.22
 tar xvf httpd-2.2.22.tar
@@ -64,10 +69,15 @@ cp /mnt/ebs/opt/mysql-5.1.62/support-files/mysql.server /etc/init.d/mysqld
 chmod 755 /etc/init.d/mysqld 
 chkconfig --add mysqld 
 chkconfig mysqld on 
-service mysqld restart  
+service mysqld restart 
+ 
 /etc/profile
  PATH=$PATH:/usr/local/mysql/bin
  source /etc/profile
+ 
+  update user set host = '%' where user ='root';
+ flush privileges;
+ 
 #php
 yum -y install libxml2-devel
 yum -y install openssl-devel 
@@ -106,7 +116,12 @@ net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 120
 net.ipv4.netfilter.ip_conntrack_tcp_timeout_close_wait = 60
 net.ipv4.netfilter.ip_conntrack_tcp_timeout_fin_wait = 120
 
+net.ipv6.conf.all.disable_ipv6 = 1
+
 /etc/rc.d/init.d/network restart 
+
+/etc/sysconfig/iptables
+
 
 ulimit -a  显示当前所有的 limit 信息
  ulimit -n 可以打开最大文件描述符的数量
@@ -171,8 +186,11 @@ java -version
 /usr/bin/rsync -avzuP  root@175.41.19.18:/opt/apache-tomcat-6.0.35.tar /mnt/ebs/opt/
 tar xvf apache-tomcat-6.0.35.tar
  cp -r /mnt/ebs/opt/apache-tomcat-6.0.35/ /mnt/ebs/
+#php
+/usr/bin/rsync -avzuP  root@175.41.19.18:/opt/php-5.4.0.tar /mnt/ebs/opt/
 #apache2
 /usr/bin/rsync -avzuP  root@175.41.19.18:/opt/httpd-2.2.22.tar /mnt/ebs/opt/
+
 tar xvf httpd-2.2.22.tar
 ./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so
 make

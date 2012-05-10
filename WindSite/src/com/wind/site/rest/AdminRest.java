@@ -87,6 +87,7 @@ import com.wind.site.command.YiqifaReportsGetTimer;
 import com.wind.site.command.YiqifaReportsOrderStatusCommand;
 import com.wind.site.command.impl.ADPlanCommand;
 import com.wind.site.command.impl.ItemDetailCommand;
+import com.wind.site.command.impl.ShopBlogCommand;
 import com.wind.site.command.impl.ShopCatsCommand;
 import com.wind.site.command.impl.UpdateUserTemplateCommand;
 import com.wind.site.command.impl.UserItemDetailCommand;
@@ -138,6 +139,7 @@ import com.wind.site.service.IPageService;
 import com.wind.site.util.PageUtils;
 import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WindSiteRestUtil;
+import com.wind.uc.service.IUCService;
 
 import freemarker.template.Template;
 
@@ -154,6 +156,8 @@ public class AdminRest {
 			.getName());
 	@Autowired
 	private IAdminService adminService;
+	@Autowired
+	private IUCService ucService;
 
 	@Autowired
 	private FreeMarkerConfigurer fcg;
@@ -202,6 +206,36 @@ public class AdminRest {
 	private WeigouAutocronGetTimer autoCronCommand;
 	@Autowired
 	private WeeklyMailCreateCommand mailCommand;
+
+	/**
+	 * 根据软文分类查找并更新组件和页面
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/synblog")
+	@ResponseBody
+	public String updateSynShopBlog(HttpServletRequest request) {
+		// 更新新版本
+		List<PageModule> modules = (List<PageModule>) adminService.findByHql(
+				"select m from PageModule m where m.name='shopBlog'",
+				new HashMap<String, Object>());
+		if (modules != null && modules.size() > 0) {
+			for (PageModule module : modules) {
+				// 生成文章模块异步命令
+				ShopBlogCommand command = new ShopBlogCommand();
+				command.setFcg(fcg);
+				command.setModule(pageService.get(PageModule.class, module
+						.getId()));
+				command.setPageService(pageService);
+				command.setUcService(ucService);
+				CommandExecutor.getCommands().add(command);
+			}
+			// 如果会员设置了新版本的文章列表，则不再更新旧版本的
+			return WindSiteRestUtil.SUCCESS;
+		}
+		return WindSiteRestUtil.SUCCESS;
+	}
 
 	@RequestMapping(value = "/unvalid", method = RequestMethod.GET)
 	@ResponseBody

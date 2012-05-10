@@ -55,16 +55,25 @@ public class CommandExecutor {
 	 */
 	public void runCommand() {
 		ScheduledExecutorService executor = Executors
-				.newScheduledThreadPool(10);
+				.newScheduledThreadPool(12);
 		/**
-		 * 执行常规任务完成后等待10秒继续执行
+		 * 执行常规任务完成后等待10秒继续执行1
 		 */
 		executor.scheduleWithFixedDelay(new Runnable() {
 			public void run() {
 				executeCommands();
 			}
 
-		}, 10, 10, TimeUnit.SECONDS);
+		}, 2, 2, TimeUnit.SECONDS);
+		/**
+		 * 执行常规任务完成后等待10秒继续执行2
+		 */
+		executor.scheduleWithFixedDelay(new Runnable() {
+			public void run() {
+				executeCommands();
+			}
+
+		}, 2, 2, TimeUnit.SECONDS);
 		/**
 		 * 执行缓存生成命令等待10秒继续执行
 		 */

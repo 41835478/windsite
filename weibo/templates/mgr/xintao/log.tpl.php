@@ -11,6 +11,10 @@
 <body class="main-body">
 	<div class="path"><p>当前位置：更新日志</div>
     <div class="main-cont">
+    	<h3 class="title">2012-5-11</h3>
+		<div class="box">
+		微购升级服务器同时搬迁至海外，如果部分用户无法访问，请重启自己的路由器测试！已绑定独立域名且未使用cname(别名)指向www.xintaowang.com的站长，请尽快解除A记录解析，同时换成cname解析
+		</div>
     	<h3 class="title">2012-3-24</h3>
 		<div class="box">
 		针对卖家服务会员，开放商品营销(卖家)关闭自动挑选，开启自动挑选功能，进入商品营销(卖家)---自动挑选，卖家服务会员可根据自己的需要，关闭或开启自动挑选，默认为开启状态

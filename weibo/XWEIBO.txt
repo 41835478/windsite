@@ -45,10 +45,10 @@ comments[_id,parent_id,user_id,username,nums,depth,path,votes,voters,ip,dateline
 播放页面定时刷新session
 
 新淘网取消域名绑定474529217
-select user_id,nick from w_user  where nick='晓飞0706';
-select www from w_site where user_id=483857380;
-delete from w_domain where user_id=483857380;
-update w_site set www=null  where user_id=483857380;
+select user_id,nick from w_user  where nick='a849555698';
+select www from w_site where user_id=678683596;
+delete from w_domain where user_id=678683596;
+update w_site set www=null  where user_id=678683596;
 domains.txt
 更换缓存
 

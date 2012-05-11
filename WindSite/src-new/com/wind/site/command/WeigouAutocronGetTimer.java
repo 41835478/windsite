@@ -180,7 +180,9 @@ public class WeigouAutocronGetTimer {
 							pre.add(1);
 							pre.add(1);
 							Calendar calendar = Calendar.getInstance();
-							calendar.set(Calendar.HOUR_OF_DAY, 9);
+							int hour = calendar.get(Calendar.HOUR_OF_DAY);
+							calendar.set(Calendar.HOUR_OF_DAY, hour > 9 ? hour
+									: 9);
 							calendar.set(Calendar.MINUTE, 0);
 							calendar.set(Calendar.SECOND, 0);
 							// for (int i = 0; i < preCount * 5; i++) {

@@ -10,82 +10,40 @@
 <style>.table td{height:30px;}</style>
 <?php
 echo '123';
-/**
-	 * 远程抓取综艺
-	 */
-function getRemoteFocus($type) {
-	$html = "//<![CDATA[jQuery('#mFocus1').ImgSlide({loop : true,timeout : 15e3,data : 布莱克-莱弗利莉顿.梅斯特//]]>"; //F('http_get_contents', 'http://tv.sohu.com/' . $type . '/');
-	preg_match("'//<\!\[CDATA\[(.*)//\]\]>'si", $html, $match);
-	print_r($match);
-	exit;
-	if ($match) {
-		$match[1] = iconv("gbk", "utf-8//IGNORE", $match[1]);
-		print_r($match[1]);
-		preg_match("'data\s+:\s+(.*)\]'si", $match[1], $match);
-		print_r($match);
-		$text = str_replace(array (
-			'p:"',
-			'p1:"',
-			'l:"',
-			't:"',
-			't_:"',
-			't1:"',
-			'mtype:[{"',
-			'mtype:["',
-			'mdirector:[{"',
-			'mdirector:["',
-			'mactor:[{"',
-			'mactor:["'
-		), array (
-			'"p":"',
-			'"p1":"',
-			'"l":"',
-			'"t":"',
-			'"t_":"',
-			'"t1":"',
-			'"mtype":[{"',
-			'"mtype":["',
-			'"mdirector":[{"',
-			'"mdirector":["',
-			'"mactor":[{"',
-			'"mactor":["'
-		), $match[1] . ']');
-		echo $text;
-		$zongyi = (json_decode($text, true));
-		print_r($zongyi);
-		$result = array ();
-		if (!empty ($zongyi)) {
-			foreach ($zongyi as $z) { //查询每一个的VID
-				if (!empty ($z['l'])) {
-					try {
-						$html = F('http_get_contents', $z['l']);
-						preg_match("'var\s+vid=\"([0-9]+)\";'si", $html, $match);
-						if ($match) {
-							$z['vid'] = $match[1];
-						} else {
-							continue;
-						}
-						if (!isset ($z['mtype'])) {
-							continue;
-						}
-						if (!is_array($z['mtype'][0])) {
-							$z['mtype'] = array_slice($z['mtype'], 1, count($z['mtype']) - 1);
-						}
-						if (!is_array($z['mdirector'][0])) {
-							$z['mdirector'] = array_slice($z['mdirector'], 1, count($z['mdirector']) - 1);
-						}
-						if (!is_array($z['mactor'][0])) {
-							$z['mactor'] = array_slice($z['mactor'], 1, count($z['mactor']) - 1);
-						}
-						$result[] = $z;
-					} catch (Exception $e) {
-					}
-				}
-			}
+function check_appa($app_key, $app_secret) {
+	global $_LANG;
+	define('XWEIBO_ACCESS', true);
+	//include_once dirname(__FILE__) . "/../../../install/libs/oauth.class.php";
+	if (xwb_function_exists('fsockopen')) {
+		include_once dirname(__FILE__) . "/../../../install/libs/fsockopen.php";
+		if (!ini_get('allow_url_fopen')) {
+			exit ('fsockopen' . $_LANG['advice_fsockopen']);
+			//show_msg('fsockopen'.$_LANG['advice_fsockopen']);
 		}
-		return array_slice($result, 0, 6);
+	} else
+		if (xwb_function_exists('curl', array (
+				'init',
+				'exec'
+			))) {
+			dirname(__FILE__) . "/../../../install/libs/curl_http.php";
+		}
+	$http = new Http_Client();
+	$url = 'http://api.t.sina.com.cn/oauth/request_token';
+	$sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
+	$consumer = new OAuthConsumer($app_key, $app_secret);
+	$request = OAuthRequest :: from_consumer_and_token($consumer, null, 'GET', $url, null);
+	$request->sign_request($sha1_method, $consumer, null);
+	$http_url = $request->to_url();
+	$http->setUrl($http_url);
+	$result = $http->request();
+	$code = $http->getState();
+	//echo 'code:'.$code;
+	if ($code != '200') {
+		return false;
 	}
+	return true;
 }
+echo 'check:' ;print_r(check_appa('1664744212', 'efe06920475f4e7142d2b63cc1ad4914'));
 //F('get_taobao_cat.get_taobao_cat_item');		
 //print_r(getRemoteFocus('teleplay'));
 

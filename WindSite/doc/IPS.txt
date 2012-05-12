@@ -14,8 +14,20 @@ chinaz工具的IP地址
 万网
 iptables -A INPUT -i eth1 -j DROP -p tcp --dport 80 -s 112.125.33.60
 
+
+iptables -I INPUT -s 220.181.108.0/24 -j DROP
+
+iptables -I INPUT -s 14.153.168.220 -j DROP
+
+
+iptables -I INPUT -s 157.56.94.0/24 -j DROP
 iptables -I INPUT -s 66.249.73.0/24 -j DROP
 
+iptables -I INPUT -s 125.90.93.141 -j DROP
+iptables -I INPUT -s 74.125.16.0/24 -j DROP
+
+iptables -I INPUT -s 118.78.201.150 -j DROP
+iptables -I INPUT -s 70.161.177.214 -j DROP
 
 #牵扯到DNS解析，有可能造成会员无法访问
 #iptables -I INPUT -s 183.201.255.41 -j DROP
@@ -28,6 +40,8 @@ iptables -I INPUT -s 113.14.90.115 -j DROP
 iptables -I INPUT -s 183.249.125.252 -j DROP
 #阿里巴巴
 iptables -I INPUT -s 121.0.30.253 -j DROP
+
+iptables -I INPUT -s 14.153.168.220 -j DROP
 
 iptables -I INPUT -s 60.209.178.3 -j DROP
 
@@ -47,6 +61,8 @@ iptables -I INPUT -s 182.99.226.127 -j DROP
 #中电华通(亿起发)
 #iptables -I INPUT -s 221.122.127.91 -j DROP
 #iptables -I INPUT -s 221.122.127.42 -j DROP
+#浙江省杭州市 阿里软件（上海）有限公司
+#iptables -I INPUT -s 110.75.186.216 -j DROP ?
 
 #中国移动？
 iptables -I INPUT -s 111.13.8.0/24 -j DROP

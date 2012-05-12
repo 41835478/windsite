@@ -273,7 +273,7 @@ class active_admin_mod {
 			$app_key = WB_DEFAULT_AKEY;
 			$app_secret = WB_DEFAULT_SKEY;
 		}
-		if (!F('xintao.check_app', $app_key, $app_secret, false)) {
+		if (!F('xintao.check_app', $app_key, $app_secret)) {
 			exit ('{"msg":"您输入的APPKEY,APPKEY SECRET不正确","state":"1001"}');
 		}
 		if ($app_key != WB_AKEY || $app_secret != WB_SKEY) { //如果App和Secret发生变化，则保存该变化

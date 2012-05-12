@@ -297,7 +297,7 @@ function check_versionno() {
  * @param unknown_type
  * @return unknown
  */
-function check_app($app_key, $app_secret, & $http_res) {
+function check_app($app_key, $app_secret) {
 	global $_LANG;
 	define('XWEIBO_ACCESS', true);
 	include_once dirname(__FILE__) . "/../../install/libs/oauth.class.php";
@@ -315,7 +315,6 @@ function check_app($app_key, $app_secret, & $http_res) {
 			dirname(__FILE__) . "/../../install/libs/curl_http.php";
 		}
 	$http = new Http_Client();
-	$http_res = $http;
 	$url = 'http://api.t.sina.com.cn/oauth/request_token';
 	$sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
 	$consumer = new OAuthConsumer($app_key, $app_secret);

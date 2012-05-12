@@ -685,6 +685,8 @@ iptables -I INPUT -s 111.161.54.0/24 -j DROP
 iptables -I INPUT -s 119.147.11.0/24 -j DROP
 //163 牵扯到网易微博授权，不能屏蔽
 #iptables -I INPUT -s 123.58.179.0/24 -j DROP
+//新浪微博开放平台
+#iptables -I INPUT -s 180.149.135.224 -j DROP
 
 iptables -I INPUT -s 58.215.180.0/24 -j DROP
 iptables -I INPUT -s 211.154.151.0/24 -j DROP

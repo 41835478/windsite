@@ -575,7 +575,7 @@ var MODULES = [{
 			order : 0,
 			type : 0,
 			adType : 'other',
-			layout : '2,3,4',
+			layout : '1,2,3,4',
 			content : 'bd',
 			limit : 1,
 			isHd : false,

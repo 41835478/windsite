@@ -632,8 +632,8 @@ public class SiteRest {
 		}
 		Page<UCBlog> page = new Page<UCBlog>(pageNo, 15);
 		result.put("blogs", ucService.findByHql(page,
-				"from UCBlog b where b.friend=5 and b.uid=" + userId
-						+ " order by b.dateline desc",
+				"from UCBlog b where b.friend=5 and b.uid="
+						+ result.get("uc_id") + " order by b.dateline desc",
 				new HashMap<String, Object>()));
 		Object versionNo = result.get("versionNo");
 		if ((versionNo != null && (Float) versionNo >= 1.5)) {// 如果是高版本

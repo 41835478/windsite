@@ -40,10 +40,11 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "domainName", column = "domainName") }) })
 @NamedNativeQueries( {
 		@NamedNativeQuery(name = "findSiteImplNativeSQL", query = "select u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id", resultSetMapping = "siteImpl"),
-		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
+		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
 public class SiteImpl {
 	private String sid;
 	private String user_id;
+	private String uc_id;
 	private String nick;
 	private String pid;
 	private String siteTitle;
@@ -576,6 +577,14 @@ public class SiteImpl {
 	@Transient
 	public String getUyan() {
 		return uyan;
+	}
+
+	public void setUc_id(String uc_id) {
+		this.uc_id = uc_id;
+	}
+
+	public String getUc_id() {
+		return uc_id;
 	}
 
 }

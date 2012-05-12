@@ -122,6 +122,7 @@ public class WindSiteRestUtil {
 					result.put("nick", siteImpl.getNick());
 					result.put("sid", siteImpl.getSid());
 					result.put("user_id", siteImpl.getUser_id());
+					result.put("uc_id", siteImpl.getUc_id());
 					result.put("www", siteImpl.getWww());
 					result.put("weibo", siteImpl.getWeibo());
 					result.put("discuzx", siteImpl.getDiscuzx());
@@ -183,6 +184,7 @@ public class WindSiteRestUtil {
 						result.put("gid", site.getGid());
 						result.put("sid", site.getId());
 						result.put("user_id", site.getUser_id());
+						result.put("uc_id", EnvManager.getUser().getUc_id());
 						result.put("nick", EnvManager.getUser().getNick());
 						result.put("www", site.getWww());
 						result.put("weibo", site.getWeibo());
@@ -233,6 +235,7 @@ public class WindSiteRestUtil {
 					result.put("nick", siteImpl.getNick());
 					result.put("sid", siteImpl.getSid());
 					result.put("user_id", siteImpl.getUser_id());
+					result.put("uc_id", siteImpl.getUc_id());
 					result.put("www", siteImpl.getWww());
 					result.put("weibo", siteImpl.getWeibo());
 					result.put("discuzx", siteImpl.getDiscuzx());
@@ -298,6 +301,7 @@ public class WindSiteRestUtil {
 				result.put("sitetitle", "新淘网");
 				result.put("nick", "fxy060608");
 				result.put("user_id", "71614142");
+				result.put("uc_id", 1);
 				result.put("www", "www.xintaonet.com");
 				result.put("domainName", "fxy060608");
 				result.put("versionNo", "3");
@@ -340,6 +344,7 @@ public class WindSiteRestUtil {
 				result.put("nick", siteImpl.getNick());
 				result.put("sid", siteImpl.getSid());
 				result.put("user_id", siteImpl.getUser_id());
+				result.put("uc_id", siteImpl.getUc_id());
 				result.put("www", siteImpl.getWww());
 				result.put("weibo", siteImpl.getWeibo());
 				result.put("discuzx", siteImpl.getDiscuzx());
@@ -391,6 +396,7 @@ public class WindSiteRestUtil {
 					result.put("gid", site.getGid());
 					result.put("sid", site.getId());
 					result.put("user_id", site.getUser_id());
+					result.put("uc_id", EnvManager.getUser().getUc_id());
 					result.put("nick", EnvManager.getUser().getNick());
 					result.put("www", site.getWww());
 					result.put("weibo", site.getWeibo());
@@ -419,6 +425,7 @@ public class WindSiteRestUtil {
 		impl.setNick(String.valueOf(result.get("nick")));
 		impl.setSid(String.valueOf(result.get("sid")));
 		impl.setUser_id(String.valueOf(result.get("user_id")));
+		impl.setUc_id(String.valueOf(result.get("uc_id")));
 		if (result.get("www") != null)
 			impl.setWww(String.valueOf(result.get("www")));
 		if (result.get("domainName") != null)

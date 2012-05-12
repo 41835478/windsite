@@ -27,6 +27,7 @@
 		<property name="hibernate.c3p0.idle_test_period">7200</property>
 		<!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
 		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<property name="hibernate.c3p0.validate">true</property>
 		<property name="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</property>
 		<property name="hibernate.search.analyzer">org.apache.lucene.analysis.cjk.CJKAnalyzer</property>
 		<!-- 本地索引 -->

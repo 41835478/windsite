@@ -25,6 +25,7 @@ import com.wind.site.util.WindSiteRestUtil;
 @SqlResultSetMapping(name = "siteImpl", entities = { @EntityResult(entityClass = SiteImpl.class, fields = {
 		@FieldResult(name = "sid", column = "sid"),
 		@FieldResult(name = "user_id", column = "user_id"),
+		@FieldResult(name = "uc_id", column = "uc_id"),
 		@FieldResult(name = "appType", column = "appType"),
 		@FieldResult(name = "nick", column = "nick"),
 		@FieldResult(name = "pid", column = "pid"),
@@ -39,7 +40,7 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "versionNo", column = "versionNo"),
 		@FieldResult(name = "domainName", column = "domainName") }) })
 @NamedNativeQueries( {
-		@NamedNativeQuery(name = "findSiteImplNativeSQL", query = "select u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id", resultSetMapping = "siteImpl"),
+		@NamedNativeQuery(name = "findSiteImplNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id", resultSetMapping = "siteImpl"),
 		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
 public class SiteImpl {
 	private String sid;

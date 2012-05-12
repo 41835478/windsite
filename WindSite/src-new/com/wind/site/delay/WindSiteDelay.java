@@ -66,8 +66,8 @@ public class WindSiteDelay {
 				if (delayPage != null) {
 					String pageId = delayPage.getItem();
 					if (pageId.startsWith("weigou")) {// 微购
-						logger.info("weigou[" + pageId + "] "
-								+ delayPage.getDelay(TimeUnit.SECONDS));
+					// logger.info("weigou[" + pageId + "] "
+					// + delayPage.getDelay(TimeUnit.SECONDS));
 						WeigouAutoCronCommand command = new WeigouAutoCronCommand();
 						command.setFetch(fetch);
 						command.setKey(pageId);

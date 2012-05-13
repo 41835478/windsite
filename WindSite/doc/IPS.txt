@@ -1,3 +1,7 @@
+yjjd2010,原来的http://www.xq0356.com
+
+
+
 netstat -nat|grep 223.4.86.100:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 
 /etc/rc.d/init.d/iptables stop 
@@ -13,7 +17,12 @@ chinaz工具的IP地址
 125.90.88.96
 万网
 iptables -A INPUT -i eth1 -j DROP -p tcp --dport 80 -s 112.125.33.60
+#北京市（南三环洋桥电信机房） 电信
+iptables -I INPUT -s 220.181.51.0/24 -j DROP
+iptables -I INPUT -s 220.181.124.0/24 -j DROP
 
+iptables -I INPUT -s 89.107.127.0/24 -j DROP
+iptables -I INPUT -s 218.83.246.72 -j DROP
 #阿里云
 iptables -I INPUT -s 110.75.186.0/24 -j DROP
 
@@ -292,6 +301,7 @@ iptables -I INPUT -s 110.75.173.0/24 -j DROP
 iptables -I INPUT -s 110.75.174.0/24 -j DROP
 iptables -I INPUT -s 110.75.175.0/24 -j DROP
 iptables -I INPUT -s 110.75.176.0/24 -j DROP
+iptables -I INPUT -s 1.202.216.0/24 -j DROP
 iptables -I INPUT -s 1.202.218.0/24 -j DROP
 iptables -I INPUT -s 1.202.219.0/24 -j DROP
 iptables -I INPUT -s 1.202.220.0/24 -j DROP

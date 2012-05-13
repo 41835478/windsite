@@ -224,6 +224,9 @@ public class AdminRest {
 					+ id, params);// 删除域名申请
 			adminService.executeNativeSql(
 					"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
+			// 刷新该站点缓存
+			EnvManager.getSites().put(String.valueOf(id),
+					adminService.getSiteImplByUserId(String.valueOf(id)));
 			// 重新刷新绑定文件
 			List<Map<String, Object>> sites = (List<Map<String, Object>>) adminService
 					.findByHql(

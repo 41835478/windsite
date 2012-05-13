@@ -390,6 +390,7 @@ http://hackmysql.com/mysqlsla
 tar zxvf mysqlsla-2.03.tar.gz 
 cp mysqlsla-2.03/bin/mysqlsla /usr/local/bin 
 yum install perl-DBI perl-DBD-MySQL -y 
+yum install perl-Time-HiRes
 
 mysqlsla -lt slow /usr/local/mysql/mysql-tmp/slowquery.log
 

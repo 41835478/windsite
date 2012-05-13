@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.math.BigInteger;
@@ -206,6 +208,85 @@ public class AdminRest {
 	private WeigouAutocronGetTimer autoCronCommand;
 	@Autowired
 	private WeeklyMailCreateCommand mailCommand;
+
+	/**
+	 * 解除绑定
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/unbind/{id}")
+	@ResponseBody
+	public String unbindWWW(@PathVariable Long id) {
+		if (id > 0) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			adminService.executeNativeSql("delete from w_domain where user_id="
+					+ id, params);// 删除域名申请
+			adminService.executeNativeSql(
+					"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
+			// 重新刷新绑定文件
+			List<Map<String, Object>> sites = (List<Map<String, Object>>) adminService
+					.findByHql(
+							"select new map(www as www,user_id as user_id) from Site where www!=''",
+							null);
+			logger.info(" wwws[" + sites.size() + "]");
+			try {
+				FileWriter fw = new FileWriter(EnvManager.getApachePath()
+						+ File.separator + "domain.txt", false);
+				BufferedWriter bw = new BufferedWriter(fw);
+				for (Map<String, Object> site : sites) {
+					if (null != site.get("www")) {
+						String user_id = String.valueOf(site.get("user_id"));
+						bw.write(site.get("www") + "					     http://shop"
+								+ user_id + ".xintaonet.com");
+						bw.newLine();
+					}
+				}
+				bw.flush();
+				bw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return String.valueOf(sites.size());
+		}
+		return "";
+	}
+
+	/**
+	 * 重新生成绑定
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/refreshWWW")
+	@ResponseBody
+	public String refreshWWW() {
+		List<Map<String, Object>> sites = (List<Map<String, Object>>) adminService
+				.findByHql(
+						"select new map(www as www,user_id as user_id) from Site where www!=''",
+						null);
+		logger.info(" wwws[" + sites.size() + "]");
+		try {
+			FileWriter fw = new FileWriter(EnvManager.getApachePath()
+					+ File.separator + "domain.txt", false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Map<String, Object> site : sites) {
+				if (null != site.get("www")) {
+					String user_id = String.valueOf(site.get("user_id"));
+					bw.write(site.get("www") + "					     http://shop"
+							+ user_id + ".xintaonet.com");
+					bw.newLine();
+				}
+			}
+			bw.flush();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(sites.size());
+	}
 
 	/**
 	 * 根据软文分类查找并更新组件和页面

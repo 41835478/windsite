@@ -220,9 +220,9 @@ public class AdminRest {
 	public String unbindWWW(@PathVariable Long id) {
 		if (id > 0) {
 			Map<String, Object> params = new HashMap<String, Object>();
-			adminService.executeNativeSql("delete from w_domain where user_id="
-					+ id, params);// 删除域名申请
-			adminService.executeNativeSql(
+			adminService.executeNativeUpdateSql(
+					"delete from w_domain where user_id=" + id, params);// 删除域名申请
+			adminService.executeNativeUpdateSql(
 					"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
 			// 刷新该站点缓存
 			EnvManager.getSites().put(String.valueOf(id),

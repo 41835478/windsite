@@ -119,66 +119,6 @@ var PageAlimamaConfig = {
 			alert('alimama_pid不能为空');
 			return false;
 		}
-		var titlecolorReg = /alimama_titlecolor\s*=\s*"(.*)"/;
-		var titlecolor = this.getParams(code, titlecolorReg);
-		if (titlecolor == null) {
-			alert('titlecolor不能为空');
-			return false;
-		}
-		var descolorReg = /alimama_descolor\s*=\s*"(.*)"/;
-		var descolor = this.getParams(code, descolorReg);
-		if (descolor == null) {
-			alert('descolor不能为空');
-			return false;
-		}
-		var bgcolorReg = /alimama_bgcolor\s*=\s*"(.*)"/;
-		var bgcolor = this.getParams(code, bgcolorReg);
-		if (bgcolor == null) {
-			alert('bgcolor不能为空');
-			return false;
-		}
-		var bordercolorReg = /alimama_bordercolor\s*=\s*"(.*)"/;
-		var bordercolor = this.getParams(code, bordercolorReg);
-		if (bordercolor == null) {
-			alert('bordercolor不能为空');
-			return false;
-		}
-		var linkcolorReg = /alimama_linkcolor\s*=\s*"(.*)"/;
-		var linkcolor = this.getParams(code, linkcolorReg);
-		if (linkcolor == null) {
-			alert('linkcolor不能为空');
-			return false;
-		}
-		var bottomcolorReg = /alimama_bottomcolor\s*=\s*"(.*)"/;
-		var bottomcolor = this.getParams(code, bottomcolorReg);
-		if (bottomcolor == null) {
-			alert('bottomcolor不能为空');
-			return false;
-		}
-		var anglesizeReg = /alimama_anglesize\s*=\s*"(.*)"/;
-		var anglesize = this.getParams(code, anglesizeReg);
-		if (anglesize == null) {
-			alert('anglesize不能为空');
-			return false;
-		}
-		var bgpicReg = /alimama_bgpic\s*=\s*"(.*)"/;
-		var bgpic = this.getParams(code, bgpicReg);
-		if (bgpic == null) {
-			alert('bgpic不能为空');
-			return false;
-		}
-		var iconReg = /alimama_icon\s*=\s*"(.*)"/;
-		var icon = this.getParams(code, iconReg);
-		if (icon == null) {
-			alert('icon不能为空');
-			return false;
-		}
-		var sizecodeReg = /alimama_sizecode\s*=\s*"(.*)"/;
-		var sizecode = this.getParams(code, sizecodeReg);
-		if (sizecode == null) {
-			alert('sizecode不能为空');
-			return false;
-		}
 		var widthReg = /alimama_width\s*=\s*([0-9]+)/;
 		var width = this.getParams(code, widthReg);
 		if (width == null) {
@@ -191,11 +131,83 @@ var PageAlimamaConfig = {
 			alert('height不能为空');
 			return false;
 		}
+		var titlecolorReg = /alimama_titlecolor\s*=\s*"(.*)"/;
+		var titlecolor = this.getParams(code, titlecolorReg);
+		if (titlecolor == null) {
+			// alert('titlecolor不能为空');
+			// return false;
+			titlecolor = '';
+		}
+		var descolorReg = /alimama_descolor\s*=\s*"(.*)"/;
+		var descolor = this.getParams(code, descolorReg);
+		if (descolor == null) {
+			// alert('descolor不能为空');
+			// return false;
+			descolor = '';
+		}
+		var bgcolorReg = /alimama_bgcolor\s*=\s*"(.*)"/;
+		var bgcolor = this.getParams(code, bgcolorReg);
+		if (bgcolor == null) {
+			// alert('bgcolor不能为空');
+			// return false;
+			bgcolor = '';
+		}
+		var bordercolorReg = /alimama_bordercolor\s*=\s*"(.*)"/;
+		var bordercolor = this.getParams(code, bordercolorReg);
+		if (bordercolor == null) {
+			// alert('bordercolor不能为空');
+			// return false;
+			bordercolor = '';
+		}
+		var linkcolorReg = /alimama_linkcolor\s*=\s*"(.*)"/;
+		var linkcolor = this.getParams(code, linkcolorReg);
+		if (linkcolor == null) {
+			// alert('linkcolor不能为空');
+			// return false;
+			linkcolor = '';
+		}
+		var bottomcolorReg = /alimama_bottomcolor\s*=\s*"(.*)"/;
+		var bottomcolor = this.getParams(code, bottomcolorReg);
+		if (bottomcolor == null) {
+			// alert('bottomcolor不能为空');
+			// return false;
+			bottomcolor = '';
+		}
+		var anglesizeReg = /alimama_anglesize\s*=\s*"(.*)"/;
+		var anglesize = this.getParams(code, anglesizeReg);
+		if (anglesize == null) {
+			// alert('anglesize不能为空');
+			// return false;
+			anglesize = '';
+		}
+		var bgpicReg = /alimama_bgpic\s*=\s*"(.*)"/;
+		var bgpic = this.getParams(code, bgpicReg);
+		if (bgpic == null) {
+			// alert('bgpic不能为空');
+			// return false;
+			bgpic = '';
+		}
+		var iconReg = /alimama_icon\s*=\s*"(.*)"/;
+		var icon = this.getParams(code, iconReg);
+		if (icon == null) {
+			// alert('icon不能为空');
+			// return false;
+			icon = '';
+		}
+		var sizecodeReg = /alimama_sizecode\s*=\s*"(.*)"/;
+		var sizecode = this.getParams(code, sizecodeReg);
+		if (sizecode == null) {
+			// alert('sizecode不能为空');
+			// return false;
+			sizecode = '';
+		}
+
 		var typeReg = /alimama_type\s*=\s*([0-9])/;
 		var type = this.getParams(code, typeReg);
 		if (type == null) {
-			alert('type不能为空');
-			return false;
+			// alert('type不能为空');
+			// return false;
+			type = '';
 		}
 		params.isHd = ($('#module-ishd').attr('checked') + "");
 		params.ali_pid = ali_pid;
@@ -236,66 +248,72 @@ var PageAlimamaConfig = {
 			alert('alimama_pid不能为空');
 			return false;
 		}
-		var titlecolorReg = /alimama_titlecolor\s*=\s*"(.*)"/;
-		var titlecolor = this.getParams(code, titlecolorReg);
-		if (titlecolor == null) {
-			alert('titlecolor不能为空');
-			return false;
-		}
-		var descolorReg = /alimama_descolor\s*=\s*"(.*)"/;
-		var descolor = this.getParams(code, descolorReg);
-		if (descolor == null) {
-			alert('descolor不能为空');
-			return false;
-		}
-		var bgcolorReg = /alimama_bgcolor\s*=\s*"(.*)"/;
-		var bgcolor = this.getParams(code, bgcolorReg);
-		if (bgcolor == null) {
-			alert('bgcolor不能为空');
-			return false;
-		}
-		var bordercolorReg = /alimama_bordercolor\s*=\s*"(.*)"/;
-		var bordercolor = this.getParams(code, bordercolorReg);
-		if (bordercolor == null) {
-			alert('bordercolor不能为空');
-			return false;
-		}
-		var linkcolorReg = /alimama_linkcolor\s*=\s*"(.*)"/;
-		var linkcolor = this.getParams(code, linkcolorReg);
-		if (linkcolor == null) {
-			alert('linkcolor不能为空');
-			return false;
-		}
-		var bottomcolorReg = /alimama_bottomcolor\s*=\s*"(.*)"/;
-		var bottomcolor = this.getParams(code, bottomcolorReg);
-		if (bottomcolor == null) {
-			alert('bottomcolor不能为空');
-			return false;
-		}
-		var anglesizeReg = /alimama_anglesize\s*=\s*"(.*)"/;
-		var anglesize = this.getParams(code, anglesizeReg);
-		if (anglesize == null) {
-			alert('anglesize不能为空');
-			return false;
-		}
-		var bgpicReg = /alimama_bgpic\s*=\s*"(.*)"/;
-		var bgpic = this.getParams(code, bgpicReg);
-		if (bgpic == null) {
-			alert('bgpic不能为空');
-			return false;
-		}
-		var iconReg = /alimama_icon\s*=\s*"(.*)"/;
-		var icon = this.getParams(code, iconReg);
-		if (icon == null) {
-			alert('icon不能为空');
-			return false;
-		}
-		var sizecodeReg = /alimama_sizecode\s*=\s*"(.*)"/;
-		var sizecode = this.getParams(code, sizecodeReg);
-		if (sizecode == null) {
-			alert('sizecode不能为空');
-			return false;
-		}
+		// var titlecolorReg = /alimama_titlecolor\s*=\s*"(.*)"/;
+		// var titlecolor = this.getParams(code, titlecolorReg);
+		// if (titlecolor == null) {
+		// alert('titlecolor不能为空');
+		// return false;
+		// }
+		// var descolorReg = /alimama_descolor\s*=\s*"(.*)"/;
+		// var descolor = this.getParams(code, descolorReg);
+		// if (descolor == null) {
+		// alert('descolor不能为空');
+		// return false;
+		// }
+		// var bgcolorReg = /alimama_bgcolor\s*=\s*"(.*)"/;
+		// var bgcolor = this.getParams(code, bgcolorReg);
+		// if (bgcolor == null) {
+		// alert('bgcolor不能为空');
+		// return false;
+		// }
+		// var bordercolorReg = /alimama_bordercolor\s*=\s*"(.*)"/;
+		// var bordercolor = this.getParams(code, bordercolorReg);
+		// if (bordercolor == null) {
+		// alert('bordercolor不能为空');
+		// return false;
+		// }
+		// var linkcolorReg = /alimama_linkcolor\s*=\s*"(.*)"/;
+		// var linkcolor = this.getParams(code, linkcolorReg);
+		// if (linkcolor == null) {
+		// alert('linkcolor不能为空');
+		// return false;
+		// }
+		// var bottomcolorReg = /alimama_bottomcolor\s*=\s*"(.*)"/;
+		// var bottomcolor = this.getParams(code, bottomcolorReg);
+		// if (bottomcolor == null) {
+		// alert('bottomcolor不能为空');
+		// return false;
+		// }
+		// var anglesizeReg = /alimama_anglesize\s*=\s*"(.*)"/;
+		// var anglesize = this.getParams(code, anglesizeReg);
+		// if (anglesize == null) {
+		// alert('anglesize不能为空');
+		// return false;
+		// }
+		// var bgpicReg = /alimama_bgpic\s*=\s*"(.*)"/;
+		// var bgpic = this.getParams(code, bgpicReg);
+		// if (bgpic == null) {
+		// alert('bgpic不能为空');
+		// return false;
+		// }
+		// var iconReg = /alimama_icon\s*=\s*"(.*)"/;
+		// var icon = this.getParams(code, iconReg);
+		// if (icon == null) {
+		// alert('icon不能为空');
+		// return false;
+		// }
+		// var sizecodeReg = /alimama_sizecode\s*=\s*"(.*)"/;
+		// var sizecode = this.getParams(code, sizecodeReg);
+		// if (sizecode == null) {
+		// alert('sizecode不能为空');
+		// return false;
+		// }
+		// var typeReg = /alimama_type\s*=\s*([0-9])/;
+		// var type = this.getParams(code, typeReg);
+		// if (type == null) {
+		// alert('type不能为空');
+		// return false;
+		// }
 		var widthReg = /alimama_width\s*=\s*([0-9]+)/;
 		var width = this.getParams(code, widthReg);
 		if (width == null) {
@@ -308,12 +326,7 @@ var PageAlimamaConfig = {
 			alert('height不能为空');
 			return false;
 		}
-		var typeReg = /alimama_type\s*=\s*([0-9])/;
-		var type = this.getParams(code, typeReg);
-		if (type == null) {
-			alert('type不能为空');
-			return false;
-		}
+
 		return true;
 	}
 };

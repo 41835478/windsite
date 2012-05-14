@@ -24,6 +24,7 @@ var cpro_id = '${cpro_id}';
 <#if pid??>
 <script type="text/javascript">
 alimama_pid="${pid}";
+<#if type??&&type!=''>
 alimama_titlecolor="${titlecolor!'0000FF'}"; 
 alimama_descolor ="${descolor!'000000'}"; 
 alimama_bgcolor="${bgcolor!'FFFFFF'}"; 
@@ -33,10 +34,11 @@ alimama_bottomcolor="${bottomcolor!'FFFFFF'}";
 alimama_anglesize="${anglesize!'0'}"; 
 alimama_bgpic="${bgpic!'0'}"; 
 alimama_icon="${icon!'0'}"; 
-alimama_sizecode="${sizecode!'14'}"; 
+alimama_sizecode="${sizecode!'14'}";
+alimama_type=${type};
+</#if> 
 alimama_width=${width}; 
 alimama_height=${height}; 
-alimama_type=${type}; 
 </script>
 <script src="http://a.alimama.cn/inf.js" type="text/javascript"> 
 </script>

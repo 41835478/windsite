@@ -12,6 +12,7 @@ google_ad_height = ${ad.adMeta.height};
 <#if ad.adMeta??>
 <script type="text/javascript">
 alimama_pid="${ad.adMeta.ali_pid}";
+<#if ad.adMeta.type??&&ad.adMeta.type!=''>
 alimama_titlecolor="${ad.adMeta.titlecolor!'0000FF'}"; 
 alimama_descolor ="${ad.adMeta.descolor!'000000'}"; 
 alimama_bgcolor="${ad.adMeta.bgcolor!'FFFFFF'}"; 
@@ -21,10 +22,11 @@ alimama_bottomcolor="${ad.adMeta.bottomcolor!'FFFFFF'}";
 alimama_anglesize="${ad.adMeta.anglesize!'0'}"; 
 alimama_bgpic="${ad.adMeta.bgpic!'0'}"; 
 alimama_icon="${ad.adMeta.icon!'0'}"; 
-alimama_sizecode="${ad.adMeta.sizecode!'14'}"; 
+alimama_sizecode="${ad.adMeta.sizecode!'14'}";
+alimama_type=${ad.adMeta.type}; 
+</#if> 
 alimama_width=${ad.adMeta.width}; 
 alimama_height=${ad.adMeta.height}; 
-alimama_type=${ad.adMeta.type}; 
 </script>
 <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
 </#if>

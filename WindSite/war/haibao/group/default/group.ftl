@@ -3,7 +3,7 @@
 <meta name="description" content="${group.name},${sitetitle}">
 <title>${group.name}- ${sitetitle}</title>
 </@p.pageHeader>
-<div class="layout grid-m ks-clear">
+<!--<div class="layout grid-m ks-clear">
 	<div class="col-main">
 		<div class="main-wrap J_TRegion">
 			<div name="itemSearch" class="box J_TBox ks-clear">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
 <div class="layout grid-s5m0 ks-clear">
 	<div class="col-main">
 		<div class="main-wrap J_TRegion">

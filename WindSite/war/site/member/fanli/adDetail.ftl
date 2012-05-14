@@ -36,6 +36,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <#if ad.code??>
 <script type="text/javascript">
 alimama_pid="${ad.code.ali_pid}";
+<#if ad.code.type??&&ad.code.type!=''>
 alimama_titlecolor="${ad.code.titlecolor!'0000FF'}"; 
 alimama_descolor ="${ad.code.descolor!'000000'}"; 
 alimama_bgcolor="${ad.code.bgcolor!'FFFFFF'}"; 
@@ -45,10 +46,11 @@ alimama_bottomcolor="${ad.code.bottomcolor!'FFFFFF'}";
 alimama_anglesize="${ad.code.anglesize!'0'}"; 
 alimama_bgpic="${ad.code.bgpic!'0'}"; 
 alimama_icon="${ad.code.icon!'0'}"; 
-alimama_sizecode="${ad.code.sizecode!'14'}"; 
+alimama_sizecode="${ad.code.sizecode!'14'}";
+alimama_type=${ad.code.type}; 
+</#if>
 alimama_width=${ad.code.width}; 
 alimama_height=${ad.code.height}; 
-alimama_type=${ad.code.type}; 
 </script>
 <script src="http://a.alimama.cn/inf.js" type="text/javascript"> 
 </script>

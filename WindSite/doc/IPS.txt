@@ -21,6 +21,13 @@ iptables -A INPUT -i eth1 -j DROP -p tcp --dport 80 -s 112.125.33.60
 iptables -I INPUT -s 220.181.51.0/24 -j DROP
 iptables -I INPUT -s 220.181.124.0/24 -j DROP
 
+
+iptables -I INPUT -s 118.78.202.107 -j DROP
+
+iptables -I INPUT -s 208.115.113.0/24 -j DROP
+iptables -I INPUT -s 123.125.67.0/24 -j DROP
+iptables -I INPUT -s 182.118.20.0/24 -j DROP
+
 iptables -I INPUT -s 89.107.127.0/24 -j DROP
 iptables -I INPUT -s 218.83.246.72 -j DROP
 #阿里云
@@ -70,6 +77,8 @@ iptables -I INPUT -s 125.39.78.0 -j DROP
 iptables -I INPUT -s 114.250.131.134 -j DROP
 iptables -I INPUT -s 110.102.7.148 -j DROP
 iptables -I INPUT -s 182.99.226.127 -j DROP
+
+iptables -I INPUT -s 116.76.163.250 -j DROP
 #中电华通(亿起发)
 #iptables -I INPUT -s 221.122.127.91 -j DROP
 #iptables -I INPUT -s 221.122.127.42 -j DROP

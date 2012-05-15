@@ -160,7 +160,6 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 		<li><a href="${www}" target="_blank">${s.title}</a></li>
 	</#list>
 	</#if>
-	<li><a href="http://www.xintaotv.com" target="_blank">新淘高清视频</a></li>
 	</ul>
 </div>
 <div  class="today box ui-corner-top" style="width:100%;height:100px;margin-top:10px;margin-bottom:10px;">

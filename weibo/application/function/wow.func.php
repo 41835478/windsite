@@ -237,11 +237,11 @@ function _getWowTaokeItem($table, $page) {
 		if (!empty ($taobaokeItems)) { //卖家服务，根据淘客商品同步
 			foreach ($taobaokeItems as $item) {
 				$set = ' `title`=\'' . $db->escape($item['title']) . '\',`price`=\'' . $db->escape($item['price']) . '\',`commission`=\'' . $db->escape($item['commission']) . '\',`commission_rate`=\'' . $db->escape($item['commission_rate']) . '\',`nick`=\'' . $db->escape($item['nick']) . '\' ';
-				$db->execute('UPDATE ' . $db->getTable($table) . ' SET ' . $set . ' WHERE `nid`=' . $item['num_iid']);
 				$db->checksql_set(array (
 					'sub_select_allow' => true,
 					'union_select_allow' => true
 				));
+				$db->execute('UPDATE ' . $db->getTable($table) . ' SET ' . $set . ' WHERE `nid`=' . $item['num_iid']);
 				$taokeIdArray[] = $item['num_iid'];
 			}
 			//删除所有非淘宝客商品

@@ -14,6 +14,7 @@ $('#kefuButton').click(function(){
 		var bzooz=/bzooz.com/gi;
 		var mpn=/mpnco.com.cn/gi;
 		var talk=/lead.soperson.com/gi;
+		var tq=/tq.cn/gi;
 		var result = code.match(reg);
 		if (result != null) {
 			if(result.length!=3){
@@ -38,8 +39,12 @@ $('#kefuButton').click(function(){
 						if(result!=null){
 							isTrue=true;
 						}else{
-							//未匹配
-							alert('请确认您的在线客服代码是否正确');return false;
+							result=code.match(tq);
+							if(result!=null){
+								isTrue=true;
+							}else{
+								alert('请确认您的在线客服代码是否正确');return false;
+							}
 						}
 					}
 				}

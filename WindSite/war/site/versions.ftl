@@ -56,9 +56,7 @@ $(function(){
 		<thead>
 			<tr>
 				<th class="features" width=120>功能/资源</th>
-				<th class="starter">普及版<br/>（免费）</th>
 				<th class="standard">分成版<br/>（未绑定域名）</th>
-				<th class="standard">分成版<br/>（绑定域名:不再提供）</th>
 				<th class="starter">普及版<br/>（收费）</th>
 				<th class="medium">返利版<br/>（月租型）<a href="http://www.lovezippo.com" target="_blank">演示站点</a></div></th>
 				<th class="large">卖家版<br/>（月租型）</th>
@@ -67,9 +65,7 @@ $(function(){
 		<tbody>
 			<tr class="odd">
 				<td class="features">淘客建站</td>
-				<td><span class="yes">yes</span></td>
 				<td class="active"><span class="yes">yes</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
@@ -77,57 +73,47 @@ $(function(){
 			<tr>
 				<td colspan=5>
 					<table class="order-table page-table">
-						<tr><td class="features" width=120>个性化模板</td><td width=105><span class="no">no</span></td><td class="active" width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td></tr>
-						<tr><td class="features">自定义页面</td><td><strong>5</strong></td><td class="active"><strong>10</strong></td><td><strong>10</strong></td><td><strong>10</strong></td><td><strong>10</strong></td><td><strong>15</strong></td></tr>
-						<tr><td class="features">布局容器</td><td><strong>2</strong></td><td class="active"><strong>5</strong></td><td><strong>5</strong></td><td><strong>5</strong></td><td><strong>5</strong></td><td><strong>5</strong></td></tr>
-						<tr><td class="features">单页面模块</td><td><strong>12</strong></td><td class="active"><strong>30</strong></td><td><strong>30</strong></td><td><strong>30</strong></td><td><strong>30</strong></td><td><strong>30</strong></td></tr>
-						<tr title="投放第三方广告联盟各种形式的广告，站长收入多样化"><td class="features" style="color:red;font-weight:bold;">广告代码投放</td><td><span class="no">no</span></td><td><span class="no">no</span></td><td><span class="no">no</span></td><td class="active"><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td width=80><span class="yes">yes</span></td></tr>
-						<tr title="系统每天按照站长设计的页面自动更新站内商品"><td class="features" style="color:#f60;font-weight:bold;">站点自动更新</td><td><span class="no">no</span></td><td class="active"><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td width=80><span class="yes">yes</span></td></tr>
+						<tr><td class="features" width=120>个性化模板</td><td class="active" width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td><td width=105><span class="yes">yes</span></td></tr>
+						<tr><td class="features">自定义页面</td><td class="active"><strong>10</strong></td><td><strong>10</strong></td><td><strong>10</strong></td><td><strong>15</strong></td></tr>
+						<tr><td class="features">布局容器</td><td class="active"><strong>5</strong></td><td><strong>5</strong></td><td><strong>5</strong></td><td><strong>5</strong></td></tr>
+						<tr><td class="features">单页面模块</td><td class="active"><strong>30</strong></td><td><strong>30</strong></td><td><strong>30</strong></td><td><strong>30</strong></td></tr>
+						<tr title="投放第三方广告联盟各种形式的广告，站长收入多样化"><td class="features" style="color:red;font-weight:bold;">广告代码投放</td><td><span class="no">no</span></td><td class="active"><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td width=80><span class="yes">yes</span></td></tr>
+						<tr title="系统每天按照站长设计的页面自动更新站内商品"><td class="features" style="color:#f60;font-weight:bold;">站点自动更新</td><td class="active"><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td><span class="yes">yes</span></td><td width=80><span class="yes">yes</span></td></tr>
 					</table>
 				</td>
 				
 			</tr>
 			<tr class="odd">
 				<td class="features">淘客推广</td>
-				<td><span class="yes">yes</span></td>
 				<td class="active"><span class="yes">yes</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr>
 				<td class="features">推广统计</td>
-				<td><span class="yes">yes</span></td>
 				<td class="active"><span class="yes">yes</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr class="odd">
 				<td class="features">收入报表</td>
-				<td><span class="yes">yes</span></td>
 				<td class="active"><span class="yes">yes</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr class="odd">
 				<td class="features">导购画报</td>
-				<td><span class="no">no</span></td>
 				<td class="active"><span class="no">no</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr class="odd">
 				<td class="features">淘店铺</td>
-				<td><span class="no">no</span></td>
 				<td class="active"><span class="no">no</span></td>
-				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
@@ -136,70 +122,54 @@ $(function(){
 				<td class="features">返利管理</td>
 				<td><span class="no">no</span></td>
 				<td><span class="no">no</span></td>
-				<td><span class="no">no</span></td>
-				<td><span class="no">no</span></td>
 				<td><span class="yes">yes</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr>
 				<td class="features">找淘客</td>
-				<td><span class="no">no</span></td>
 				<td class="active"><span class="no">no</span></td>
-				<td><span class="no">no</span></td>
 				<td><span class="no">no</span></td>
 				<td><span class="no">no</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr class="odd">
 				<td class="features">广告投放</td>
-				<td><span class="no">no</span></td>
 				<td class="active"><span class="no">no</span></td>
-				<td><span class="no">no</span></td>
 				<td><span class="no">no</span></td>
 				<td><span class="no">no</span></td>
 				<td><span class="yes">yes</span></td>
 			</tr>
 			<tr>
 				<td class="features pay">按月付</td>
-				<td><strong>0</strong></td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong>0</strong></td>
 				<td><strong class="action">10元</strong></td>
 				<td><strong class="action">15元</strong></td>
 				<td><strong class="action">25元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按季度付</td>
-				<td><strong>0</strong></td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong>0</strong></td>
 				<td><strong class="action">25元</strong></td>
 				<td><strong class="action">35元</strong></td>
 				<td><strong class="action">65元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按半年付</td>
-				<td><strong>0</strong></td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong>0</strong></td>
 				<td><strong class="action">40元</strong></td>
 				<td><strong class="action">60元</strong></td>
 				<td><strong class="action">120元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按年付</td>
-				<td><strong>0</strong></td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong>0</strong></td>
 				<td><strong class="action">70元</strong></td>
 				<td><strong class="action">100元</strong></td>
 				<td><strong class="action">200元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">新淘网分成</td>
-				<td><strong>0</strong></td>
 				<td class="active"><strong>10%</strong></td>
-				<td><strong>10%</strong></td>
 				<td><strong class="action">0</strong></td>
 				<td><strong class="action">0</strong></td>
 				<td><strong class="action">0</strong></td>

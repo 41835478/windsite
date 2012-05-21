@@ -24,10 +24,19 @@ iptables -I INPUT -s 122.228.196.0/24 -j DROP
 万网
 iptables -A INPUT -i eth1 -j DROP -p tcp --dport 80 -s 
 iptables -I INPUT -s 112.125.33.60 -j DROP
+
+
+
+iptables -I INPUT -s 125.39.78.0/24 -j DROP
+iptables -I INPUT -s 60.220.213.0/24 -j DROP
+
+iptables -I INPUT -s 222.122.186.200 -j DROP
+
 #北京市（南三环洋桥电信机房） 电信
 iptables -I INPUT -s 220.181.51.0/24 -j DROP
 iptables -I INPUT -s 220.181.124.0/24 -j DROP
-
+iptables -I INPUT -s 220.181.125.0/24 -j DROP
+iptables -I INPUT -s 220.181.94.0/24 -j DROP
 
 
 

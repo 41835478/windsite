@@ -48,7 +48,7 @@ class products_mod {
 				'cid' => $cid
 			)); //仅查询分类
 		}
-		elseif (!empty ($search) && strpos($search, '------------------------------') !== 0) { //如果搜索参数存在
+		elseif (!empty ($search) && strpos($search, '-------------------------------') !== 0) { //如果搜索参数存在
 			$mod['param'] = F('taobao.taobao_convert_search', $search); //根据URL参数查询,转换search参数
 		} else { //默认配置
 			//补充默认参数列表
@@ -63,6 +63,7 @@ class products_mod {
 		), XT_SHOPS); //使用当前站点的店铺集合
 		$mod['param']['show_num'] = 40;
 		$params = $mod['param'];
+		//print_r($mod);
 		//第二步
 		$params['fields'] = 'num_iid,title,nick,pic_url,cid,price,type,delist_time,post_fee,location,score,volume,has_discount,num,is_prepay,promoted_service,ww_status,list_time';
 		$rst = array ();

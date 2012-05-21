@@ -75,7 +75,7 @@
 	
 	<div class="hd-in">
 		<?php if('www.xintaowang.com'==$_SERVER['SERVER_NAME']&&($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '')){/*TPL :: module('xintao/yingxiao');*/}else{?>
-		<div id="shop-head">
+		<div id="shop-head" style="padding-top:8px;">
 			<?php 
 				$headerModel 		= V('-:sysConfig/'.HEADER_MODEL_SYSCONFIG ); 
 				$customHeader 		= 2;
@@ -83,7 +83,7 @@
 				if ( $customHeader==$headerModel ) 	// 输入页头Html模式
 				{ 
 					$logo = F('get_logo_src','web');
-					echo '<h1 class="logo" style="margin: -10px 0 0 -240px;"><a href="http://'.XT_SITE_DOMAIN.'">'.(!empty($logo)?('<img src="'.$logo.'" id="logo" alt="" />'):'').'</a></h1>';
+					echo '<h1 class="logo" style="margin: 0px 0 0 -240px;"><a href="http://'.XT_SITE_DOMAIN.'">'.(!empty($logo)?('<img src="'.$logo.'" id="logo" alt="" />'):'').'</a></h1>';
 					echo V('-:sysConfig/'.HEADER_HTMLCODE_SYSCONFIG );
 				}
 				else if ( $interfaceHeader==$headerModel ) 	// 接口调用页头
@@ -93,7 +93,7 @@
 				else {	// 默认页面
 				$logo = F('get_logo_src','web');
 			?>
-				<h1 class="logo" style="margin: -10px 0 0 -240px;">
+				<h1 class="logo" style="margin: 0px 0 0 -240px;">
 					<a href="http://<?php echo XT_SITE_DOMAIN;?>">
 						<?php if(!empty($logo)){?><img src="<?php echo $logo;?>" id="logo" alt="" /><?php }?>
 					</a>

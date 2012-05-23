@@ -166,7 +166,7 @@ yum -y install bzip2-devel
 rm -rf php-5.4.0
 tar xvf php-5.4.0.tar
 cd php-5.4.0
-'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib'
+'./configure' '--prefix=/usr/local/php5.2.14' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5.2.14/lib'
 make
 make install
 

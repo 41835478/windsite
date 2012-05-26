@@ -542,7 +542,7 @@
 		</property>
 		<!-- 每周五凌晨2点触发-->
 		<property name="cronExpression">
-			<value>0 0 2 * * ?</value>
+			<value>0 0 2 ? * FRI</value>
 		</property>
 	</bean>
 	<!--自动发布高版本会员页面-->

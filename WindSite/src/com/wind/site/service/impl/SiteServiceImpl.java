@@ -826,7 +826,9 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 					tus.setVersionNo(1f);
 					EnvManager.setUser(null);
 					SystemException
-							.handleMessageException("您尚未订购新淘网月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a>，或分成版步骤：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)淘宝联盟--->淘宝客--->API接入--->新淘网分成版--->立即使用");
+							.handleMessageException("当前淘宝帐号【"
+									+ user.getNick()
+									+ "】尚未订购新淘网月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a>，或分成版步骤：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)淘宝联盟--->淘宝客--->API接入--->新淘网分成版--->立即使用");
 				}
 			}
 			if (isRefresh) {// 如果之前是无效的，则刷新最新

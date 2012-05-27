@@ -50,11 +50,11 @@ import com.taobao.api.domain.TaobaokeItem;
 import com.taobao.api.domain.TaobaokeItemDetail;
 import com.taobao.api.domain.TaobaokeShop;
 import com.taobao.api.request.ItemcatsGetRequest;
-import com.taobao.api.request.ItempropsGetRequest;
 import com.taobao.api.request.ItemsSearchRequest;
 import com.taobao.api.request.TaobaokeCaturlGetRequest;
 import com.taobao.api.request.TaobaokeItemsDetailGetRequest;
 import com.taobao.api.request.TaobaokeItemsGetRequest;
+import com.taobao.api.request.TaobaokeListurlGetRequest;
 import com.taobao.api.request.TaobaokeShopsGetRequest;
 import com.taobao.api.response.ItemsSearchResponse;
 import com.taobao.api.response.TaobaokeItemsDetailGetResponse;
@@ -345,6 +345,69 @@ public class TaobaoRest {
 		return new ModelAndView("site/itemSearch", result);
 	}
 
+	private void searchWords(HttpServletResponse response, String q,
+			String appType, String nick) {
+		if (StringUtils.isEmpty(q)) {
+			searchCid(response, null, appType, nick);
+		}
+		if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
+			TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
+			getRequest.setNick(nick);// 昵称
+			getRequest.setNumIids(q);
+			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+					.getItemsDetail(appType, getRequest);
+			TaobaokeItemDetail item = null;
+			if (getResponse != null) {
+				List<TaobaokeItemDetail> itemList = getResponse
+						.getTaobaokeItemDetails();
+				if (itemList != null && itemList.size() == 1) {
+					item = itemList.get(0);// 单个商品
+					String clickUrl = item.getClickUrl();
+					if (StringUtils.isNotEmpty(clickUrl)) {
+						try {
+							response.sendRedirect(clickUrl);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
+		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
+		req.setNick(nick);
+		req.setOuterCode(EnvManager.getKeywordsOuterCode());
+		req.setQ(q);
+		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req);
+		if (StringUtils.isNotEmpty(clickUrl)) {
+			try {
+				response.sendRedirect(clickUrl);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		searchCid(response, null, appType, nick);
+	}
+
+	private void searchCid(HttpServletResponse response, String cid,
+			String appType, String nick) {
+		if (StringUtils.isEmpty(cid)) {
+			cid = "16";
+		}
+		TaobaokeCaturlGetRequest request = new TaobaokeCaturlGetRequest();
+		request.setCid(Long.valueOf(cid));
+		request.setNick(nick);
+		request.setOuterCode(EnvManager.getCatsOuterCode());
+		try {
+			String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
+			response.sendRedirect(url);
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
+	}
+
 	/**
 	 * 查询淘宝客商品(先查后转换)
 	 * 
@@ -352,28 +415,16 @@ public class TaobaoRest {
 	 * @param response
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+
 	@RequestMapping(value = "/items/search")
 	public ModelAndView itemsSearch(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		ItemsSearchRequest req = new ItemsSearchRequest();
 		String userId = request.getParameter("USER");
-		String pid = WindSiteRestUtil.covertPID(siteService, result, userId);
-		if (StringUtils.isEmpty(pid)) {
-			result.put("pid", EnvManager.getDefaultPid());
-			result.put("nick", "fxy060608");
-		}
-		String view = request.getParameter("view");
-		if (StringUtils.isEmpty(view)) {
-			if (result.get("site_searchView") != null) {
-				view = String.valueOf(result.get("site_searchView"));
-			} else {
-				view = "list";
-			}
-		}
-		// 搜索字段。 用来搜索商品的title以及关键属性值的名称。
+		WindSiteRestUtil.covertPID(siteService, result, userId);
 		String q = request.getParameter("q");
+		String appType = String.valueOf(result.get("appType"));
+		String nick = String.valueOf(result.get("nick"));
 		if (StringUtils.isNotEmpty(q)) {
 			if ("get".equalsIgnoreCase(request.getMethod())) {
 				try {
@@ -382,384 +433,425 @@ public class TaobaoRest {
 					q = "";
 				}
 			}
-			req.setQ(q);
+			searchWords(response, q, appType, nick);
 		} else {
-			q = "";
-		}
-		TaobaokeItemDetail item = null;
-		Item normal = null;
-		if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
-			TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-			getRequest.setNick((String) result.get("nick"));// 昵称
-			getRequest.setNumIids(q);
-			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(String.valueOf(result.get("appType")),
-							getRequest);
-			if (getResponse != null) {
-				List<TaobaokeItemDetail> itemList = getResponse
-						.getTaobaokeItemDetails();
-				if (itemList != null && itemList.size() == 1) {
-					item = itemList.get(0);// 单个商品
-				}
+			String cid = request.getParameter("cid");
+			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
+			} else {
+				cid = null;
 			}
-			if (item == null) {
-				normal = TaobaoFetchUtil.taobaoItemGet(String.valueOf(result
-						.get("appType")), Long.valueOf(q));
-			}
+			searchCid(response, cid, appType, nick);
 		}
-		if (item != null) {
-			q = item.getItem().getTitle();
-			view = "list";
-			result.put("taokeItem", item.getItem());
-			req.setQ(q);
-		} else if (normal != null) {
-			q = normal.getTitle();
-			view = "list";
-			result.put("normal", normal);
-			req.setQ(q);
-		}
-		String nick = String.valueOf(result.get("nick"));
-		if (StringUtils.isEmpty(nick)) {
-			SystemException.handleMessageException("淘宝会员昵称不能为空");
-		}
-		String fields = request.getParameter("fields");
-		if (StringUtils.isNotEmpty(fields)) {
-			req.setFields(fields);
-		} else {
-			req
-					.setFields("num_iid,post_fee,is_prepay,promoted_service,ww_status");// 只获取NUM_IID
-		}
-		// 增加外部商品标识
-		// req.setOuterCode(EnvManager.getItemsOuterCode());
-
-		// 商品所属类目Id。ItemCat中的cid。 可以通过taobao.itemcats.get.v2取到
-		String cid = request.getParameter("cid");
-		if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
-			req.setCid(Long.valueOf(cid));
-		} else {
-			cid = "";
-		}
-		// 卖家昵称列表。多个之间用“,”分隔；最多支持5个卖家昵称。如:nick1,nick2,nick3。
-		String nicks = request.getParameter("nicks");
-		if (StringUtils.isNotEmpty(nicks)) {
-			if ("get".equalsIgnoreCase(request.getMethod())) {
-				try {
-					nicks = new String(nicks.getBytes("ISO-8859-1"), "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					q = "";
-				}
-			}
-			req.setNicks(nicks);
-		} else {
-			nicks = "";
-		}
-		// 商品属性。商品属性。可以搜到拥有和输入属性一样的商品列表。字段格式为：pid1:vid1;pid2:vid2.属性的pid调用
-		// taobao.itemprops.get.v2取得，属性值的vid用taobao.itempropvalues.get取得vid。
-		String props = request.getParameter("props");
-		if (StringUtils.isNotEmpty(props)) {
-			req.setProps(props);
-		} else {
-			props = "";
-		}
-		// 默认查询16
-		if (StringUtils.isEmpty(q) && StringUtils.isEmpty(cid)
-				&& StringUtils.isEmpty(nicks) && StringUtils.isEmpty(props)) {
-			req.setCid(16L);
-		}
-		// 可以根据产品Id搜索属于这个spu的商品。这个字段可以通过查询 taobao.products.get 取到
-		String product_id = request.getParameter("product_id");
-		if (StringUtils.isNotEmpty(product_id)) {
-			req.setProductId(Long.valueOf(product_id));
-		} else {
-			product_id = "";
-		}
-		// 排序方式。格式为column:asc/desc,column可选值为: price, delist_time,
+		return null;
+		// Map<String, Object> result = new HashMap<String, Object>();
+		// ItemsSearchRequest req = new ItemsSearchRequest();
+		// String userId = request.getParameter("USER");
+		// String pid = WindSiteRestUtil.covertPID(siteService, result, userId);
+		// if (StringUtils.isEmpty(pid)) {
+		// result.put("pid", EnvManager.getDefaultPid());
+		// result.put("nick", "fxy060608");
+		// }
+		// String view = request.getParameter("view");
+		// if (StringUtils.isEmpty(view)) {
+		// if (result.get("site_searchView") != null) {
+		// view = String.valueOf(result.get("site_searchView"));
+		// } else {
+		// view = "list";
+		// }
+		// }
+		// // 搜索字段。 用来搜索商品的title以及关键属性值的名称。
+		// String q = request.getParameter("q");
+		// if (StringUtils.isNotEmpty(q)) {
+		// if ("get".equalsIgnoreCase(request.getMethod())) {
+		// try {
+		// q = new String(q.getBytes("ISO-8859-1"), "UTF-8");
+		// } catch (UnsupportedEncodingException e) {
+		// q = "";
+		// }
+		// }
+		// req.setQ(q);
+		// } else {
+		// q = "";
+		// }
+		// TaobaokeItemDetail item = null;
+		// Item normal = null;
+		// if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
+		// TaobaokeItemsDetailGetRequest getRequest = new
+		// TaobaokeItemsDetailGetRequest();
+		// getRequest.setNick((String) result.get("nick"));// 昵称
+		// getRequest.setNumIids(q);
+		// getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+		// getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+		// TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+		// .getItemsDetail(String.valueOf(result.get("appType")),
+		// getRequest);
+		// if (getResponse != null) {
+		// List<TaobaokeItemDetail> itemList = getResponse
+		// .getTaobaokeItemDetails();
+		// if (itemList != null && itemList.size() == 1) {
+		// item = itemList.get(0);// 单个商品
+		// }
+		// }
+		// if (item == null) {
+		// normal = TaobaoFetchUtil.taobaoItemGet(String.valueOf(result
+		// .get("appType")), Long.valueOf(q));
+		// }
+		// }
+		// if (item != null) {
+		// q = item.getItem().getTitle();
+		// view = "list";
+		// result.put("taokeItem", item.getItem());
+		// req.setQ(q);
+		// } else if (normal != null) {
+		// q = normal.getTitle();
+		// view = "list";
+		// result.put("normal", normal);
+		// req.setQ(q);
+		// }
+		// String nick = String.valueOf(result.get("nick"));
+		// if (StringUtils.isEmpty(nick)) {
+		// SystemException.handleMessageException("淘宝会员昵称不能为空");
+		// }
+		// String fields = request.getParameter("fields");
+		// if (StringUtils.isNotEmpty(fields)) {
+		// req.setFields(fields);
+		// } else {
+		// req
+		// .setFields("num_iid,post_fee,is_prepay,promoted_service,ww_status");//
+		// 只获取NUM_IID
+		// }
+		// // 增加外部商品标识
+		// // req.setOuterCode(EnvManager.getItemsOuterCode());
+		//
+		// // 商品所属类目Id。ItemCat中的cid。 可以通过taobao.itemcats.get.v2取到
+		// String cid = request.getParameter("cid");
+		// if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
+		// req.setCid(Long.valueOf(cid));
+		// } else {
+		// cid = "";
+		// }
+		// // 卖家昵称列表。多个之间用“,”分隔；最多支持5个卖家昵称。如:nick1,nick2,nick3。
+		// String nicks = request.getParameter("nicks");
+		// if (StringUtils.isNotEmpty(nicks)) {
+		// if ("get".equalsIgnoreCase(request.getMethod())) {
+		// try {
+		// nicks = new String(nicks.getBytes("ISO-8859-1"), "UTF-8");
+		// } catch (UnsupportedEncodingException e) {
+		// q = "";
+		// }
+		// }
+		// req.setNicks(nicks);
+		// } else {
+		// nicks = "";
+		// }
+		// // 商品属性。商品属性。可以搜到拥有和输入属性一样的商品列表。字段格式为：pid1:vid1;pid2:vid2.属性的pid调用
+		// // taobao.itemprops.get.v2取得，属性值的vid用taobao.itempropvalues.get取得vid。
+		// String props = request.getParameter("props");
+		// if (StringUtils.isNotEmpty(props)) {
+		// req.setProps(props);
+		// } else {
+		// props = "";
+		// }
+		// // 默认查询16
+		// if (StringUtils.isEmpty(q) && StringUtils.isEmpty(cid)
+		// && StringUtils.isEmpty(nicks) && StringUtils.isEmpty(props)) {
+		// req.setCid(16L);
+		// }
+		// // 可以根据产品Id搜索属于这个spu的商品。这个字段可以通过查询 taobao.products.get 取到
+		// String product_id = request.getParameter("product_id");
+		// if (StringUtils.isNotEmpty(product_id)) {
+		// req.setProductId(Long.valueOf(product_id));
+		// } else {
+		// product_id = "";
+		// }
+		// // 排序方式。格式为column:asc/desc,column可选值为: price, delist_time,
+		// //
 		// seller_credit；默认按上架时间倒序.如按价格升序排列表示为：price:asc。新增排序字段：volume（30天成交量）；新增排序字段：popularity(商品的人气值)
-		String order_by = request.getParameter("order_by");
-		if (StringUtils.isNotEmpty(order_by)) {
-			req.setOrderBy(order_by);
-		} else {
-			order_by = "volume:desc";
-		}
-		// 旺旺在线状态（不设置结果包含所有状态，设置为true结果只有旺旺在线卖家的商品）不能单独使用，要和其他条件一起用才行。
-		String ww_status = request.getParameter("ww_status");
-		if (StringUtils.isNotEmpty(ww_status)) {
-			req.setWwStatus("true".equals(ww_status) ? true : false);
-		} else {
-			ww_status = "";
-		}
-		// 免运费（不设置包含所有邮费状态，设置为true结果只有卖家包邮的商品）不能单独使用，要和其他条件一起用才行。
-		String post_free = request.getParameter("post_free");
-		if (StringUtils.isNotEmpty(post_free)) {
-			req.setPostFree("true".equals(post_free) ? true : false);
-		} else {
-			post_free = "";
-		}
-		// 所在省。如：浙江
-		String state = request.getParameter("state");
-		if (StringUtils.isNotEmpty(state)) {
-			try {
-				state = new String(state.getBytes("ISO-8859-1"), "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				state = "";
-			}
-			req.setLocationState(state);
-		} else {
-			state = "";
-		}
-		// 所在市。如：杭州
-		String city = request.getParameter("city");
-		if (StringUtils.isNotEmpty(city)) {
-			try {
-				city = new String(city.getBytes("ISO-8859-1"), "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				city = "";
-			}
-			req.setLocationCity(city);
-		} else {
-			city = "";
-		}
-		// 是否是3D淘宝的商品,置为false或为空表示不对是否3D商品进行判断
-		String is_3D = request.getParameter("is_3D");
-		if (StringUtils.isNotEmpty(is_3D)) {
-			req.setIs3D("true".equals(is_3D) ? true : false);
-		} else {
-			is_3D = "";
-		}
-		// 商品所属卖家的最小信用等级数，1表示1心，2表示2心……，设置此条件表示搜索结果里的商品，所属的卖家信用必须大于等于设置的
-		// start_score。
-		String start_score = request.getParameter("start_score");
-		if (StringUtils.isNotEmpty(start_score)) {
-			req.setStartScore(Long.parseLong(start_score));
-		} else {
-			start_score = "";
-		}
+		// String order_by = request.getParameter("order_by");
+		// if (StringUtils.isNotEmpty(order_by)) {
+		// req.setOrderBy(order_by);
+		// } else {
+		// order_by = "volume:desc";
+		// }
+		// // 旺旺在线状态（不设置结果包含所有状态，设置为true结果只有旺旺在线卖家的商品）不能单独使用，要和其他条件一起用才行。
+		// String ww_status = request.getParameter("ww_status");
+		// if (StringUtils.isNotEmpty(ww_status)) {
+		// req.setWwStatus("true".equals(ww_status) ? true : false);
+		// } else {
+		// ww_status = "";
+		// }
+		// // 免运费（不设置包含所有邮费状态，设置为true结果只有卖家包邮的商品）不能单独使用，要和其他条件一起用才行。
+		// String post_free = request.getParameter("post_free");
+		// if (StringUtils.isNotEmpty(post_free)) {
+		// req.setPostFree("true".equals(post_free) ? true : false);
+		// } else {
+		// post_free = "";
+		// }
+		// // 所在省。如：浙江
+		// String state = request.getParameter("state");
+		// if (StringUtils.isNotEmpty(state)) {
+		// try {
+		// state = new String(state.getBytes("ISO-8859-1"), "UTF-8");
+		// } catch (UnsupportedEncodingException e) {
+		// state = "";
+		// }
+		// req.setLocationState(state);
+		// } else {
+		// state = "";
+		// }
+		// // 所在市。如：杭州
+		// String city = request.getParameter("city");
+		// if (StringUtils.isNotEmpty(city)) {
+		// try {
+		// city = new String(city.getBytes("ISO-8859-1"), "UTF-8");
+		// } catch (UnsupportedEncodingException e) {
+		// city = "";
+		// }
+		// req.setLocationCity(city);
+		// } else {
+		// city = "";
+		// }
+		// // 是否是3D淘宝的商品,置为false或为空表示不对是否3D商品进行判断
+		// String is_3D = request.getParameter("is_3D");
+		// if (StringUtils.isNotEmpty(is_3D)) {
+		// req.setIs3D("true".equals(is_3D) ? true : false);
+		// } else {
+		// is_3D = "";
+		// }
+		// // 商品所属卖家的最小信用等级数，1表示1心，2表示2心……，设置此条件表示搜索结果里的商品，所属的卖家信用必须大于等于设置的
+		// // start_score。
+		// String start_score = request.getParameter("start_score");
+		// if (StringUtils.isNotEmpty(start_score)) {
+		// req.setStartScore(Long.parseLong(start_score));
+		// } else {
+		// start_score = "";
+		// }
+		// //
 		// 商品所属卖家的最大信用等级数，1表示1心，2表示2心……，设置此条件表示搜索结果里的商品，所属的卖家信用必须小于等于设置的end_score
-		String end_score = request.getParameter("end_score");
-		if (StringUtils.isNotEmpty(end_score)) {
-			req.setEndScore(Long.parseLong(end_score));
-		} else {
-			end_score = "";
-		}
-		// 商品30天内最小销售数，设置此条件表示搜索结果里的商品，30天内的销售量必须大于等于设置的start_volume
-		String start_volume = request.getParameter("start_volume");
-		if (StringUtils.isNotEmpty(start_volume)) {
-			req.setStartVolume(Long.parseLong(start_volume));
-		} else {
-			start_volume = "";
-		}
-		// 商品30天内最大销售数，设置此条件表示搜索结果里的商品，30天内的销售量必须小于等于设置的end_volume
-		String end_volume = request.getParameter("end_volume");
-		if (StringUtils.isNotEmpty(end_volume)) {
-			req.setEndVolume(Long.parseLong(end_volume));
-		} else {
-			end_volume = "";
-		}
-		// 是否淘1站代购商品，设置为true表示淘1站商品，设置为false或不设置表示不判断这个属性
-		String one_station = request.getParameter("one_station");
-		if (StringUtils.isNotEmpty(one_station)) {
-			req.setOneStation("true".equals(one_station) ? true : false);
-		} else {
-			one_station = "";
-		}
-		// 是否支持货到付款，设置为true表示支持货到付款，设置为false或不设置表示不判断这个属性
-		String is_cod = request.getParameter("is_cod");
-		if (StringUtils.isNotEmpty(is_cod)) {
-			req.setIsCod("true".equals(is_cod) ? true : false);
-		} else {
-			is_cod = "";
-		}
-		// 是否商城的商品，设置为true表示该商品是属于淘宝商城的商品，设置为false或不设置表示不判断这个属性
-		String is_mall = request.getParameter("is_mall");
-		if (StringUtils.isNotEmpty(is_mall)) {
-			req.setIsMall("true".equals(is_mall) ? true : false);
-		} else {
-			is_mall = "";
-		}
-		// 是否如实描述(即:先行赔付)商品，设置为true表示该商品是如实描述的商品，设置为false或不设置表示不判断这个属性
-		String is_prepay = request.getParameter("is_prepay");
-		if (StringUtils.isNotEmpty(is_prepay)) {
-			req.setIsPrepay("true".equals(is_prepay) ? true : false);
-		} else {
-			is_prepay = "";
-		}
+		// String end_score = request.getParameter("end_score");
+		// if (StringUtils.isNotEmpty(end_score)) {
+		// req.setEndScore(Long.parseLong(end_score));
+		// } else {
+		// end_score = "";
+		// }
+		// // 商品30天内最小销售数，设置此条件表示搜索结果里的商品，30天内的销售量必须大于等于设置的start_volume
+		// String start_volume = request.getParameter("start_volume");
+		// if (StringUtils.isNotEmpty(start_volume)) {
+		// req.setStartVolume(Long.parseLong(start_volume));
+		// } else {
+		// start_volume = "";
+		// }
+		// // 商品30天内最大销售数，设置此条件表示搜索结果里的商品，30天内的销售量必须小于等于设置的end_volume
+		// String end_volume = request.getParameter("end_volume");
+		// if (StringUtils.isNotEmpty(end_volume)) {
+		// req.setEndVolume(Long.parseLong(end_volume));
+		// } else {
+		// end_volume = "";
+		// }
+		// // 是否淘1站代购商品，设置为true表示淘1站商品，设置为false或不设置表示不判断这个属性
+		// String one_station = request.getParameter("one_station");
+		// if (StringUtils.isNotEmpty(one_station)) {
+		// req.setOneStation("true".equals(one_station) ? true : false);
+		// } else {
+		// one_station = "";
+		// }
+		// // 是否支持货到付款，设置为true表示支持货到付款，设置为false或不设置表示不判断这个属性
+		// String is_cod = request.getParameter("is_cod");
+		// if (StringUtils.isNotEmpty(is_cod)) {
+		// req.setIsCod("true".equals(is_cod) ? true : false);
+		// } else {
+		// is_cod = "";
+		// }
+		// // 是否商城的商品，设置为true表示该商品是属于淘宝商城的商品，设置为false或不设置表示不判断这个属性
+		// String is_mall = request.getParameter("is_mall");
+		// if (StringUtils.isNotEmpty(is_mall)) {
+		// req.setIsMall("true".equals(is_mall) ? true : false);
+		// } else {
+		// is_mall = "";
+		// }
+		// // 是否如实描述(即:先行赔付)商品，设置为true表示该商品是如实描述的商品，设置为false或不设置表示不判断这个属性
+		// String is_prepay = request.getParameter("is_prepay");
+		// if (StringUtils.isNotEmpty(is_prepay)) {
+		// req.setIsPrepay("true".equals(is_prepay) ? true : false);
+		// } else {
+		// is_prepay = "";
+		// }
+		// //
 		// 是否正品保障商品(既是如实描述，又是7天无理由退换货的商品，设置了这个属性时：is_prepay和promoted_service不能再行设置)，设置为true表示该商品是正品保障的商品，设置为false或不设置表示不判断这个属性
-		String genuine_security = request.getParameter("genuine_security");
-		if (StringUtils.isNotEmpty(genuine_security)) {
-			req.setGenuineSecurity("true".equals(genuine_security) ? true
-					: false);
-		} else {
-			genuine_security = "";
-		}
-		// 是否提供保障服务的商品。可选入参有：2、4。设置为2表示该商品是“假一赔三”的商品，设置为4表示该商品是“7天无理由退换货”的商品
-		String promoted_service = request.getParameter("promoted_service");
-		if (StringUtils.isNotEmpty(promoted_service)) {
-			req.setPromotedService(promoted_service);
-		} else {
-			promoted_service = "";
-		}
-		// 商品的新旧状态。可选入参有：new、second、unused
-		// 。设置为new表示该商品是全新的商品，设置为second表示该商品是二手的商品，设置为unused表示该商品是闲置的商品
-		String stuff_status = request.getParameter("stuff_status");
-		if (StringUtils.isNotEmpty(stuff_status)) {
-			req.setStuffStatus(stuff_status);
-		} else {
-			stuff_status = "";
-		}
-		// 商品最低价格。单位:元。正整数，取值范围:0-100000000。
-		String start_price = request.getParameter("start_price");
-		if (StringUtils.isNotEmpty(start_price)) {
-			req.setStartPrice(Long.valueOf(start_price));
-		}
-		// 商品最高价格。单位:元。正整数，取值范围:0-100000000
-		String end_price = request.getParameter("end_price");
-		if (StringUtils.isNotEmpty(end_price)) {
-			req.setEndPrice(Long.valueOf(end_price));
-		} else {
-			end_price = "";
-		}
-		// 页码。取值范围:大于零的整数;默认值为1，即返回第一页数据。
-		String page_no = request.getParameter("page_no");
-		Integer pageNo = 1;
-		if (StringUtils.isNotEmpty(page_no)) {
-			pageNo = Integer.parseInt(page_no);
-		} else {
-			pageNo = 1;
-		}
-		req.setPageNo(Long.valueOf(pageNo));
-		// 每页条数。取值范围:大于零的整数;最大值：200；默认值：40
-		String page_size = request.getParameter("page_size");
-		if (StringUtils.isNotEmpty(page_size)) {
-			req.setPageSize(Long.valueOf(page_size));
-		} else {
-			req.setPageSize(30L);
-		}
-		// 商品是否为虚拟商品 true：是虚拟商品 false：不是虚拟商品
-		String auction_flag = request.getParameter("auction_flag");
-		if (StringUtils.isNotEmpty(auction_flag)) {
-			req.setAuctionFlag(false);// 默认不查询虚拟商品
-		} else {
-			auction_flag = "false";
-		}
-		// 商品是否为自动发货 true：自动发货 false：非自动发货
-		String auto_post = request.getParameter("auto_post");
-		if (StringUtils.isNotEmpty(auto_post)) {
-			// req("true".equals(auto_post) ? true : false);
-		}
-		// 商品是否对会员打折
-		String has_discount = request.getParameter("has_discount");
-		if (StringUtils.isNotEmpty(has_discount)) {
-
-		}
-
-		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(String
-				.valueOf(result.get("appType")), req);
-		Page<?> page = new Page(pageNo, 30);
-		if (resp.getTotalResults() > 0 && resp.getItemSearch() != null) {
-			page.setTotalCount(resp.getTotalResults().intValue());
-			ItemSearch search = resp.getItemSearch();
-			List<Item> items = search.getItems();
-			if (items.size() > 0) {
-				String numiids = "";
-				Boolean isFirst = true;
-				Map<String, Item> itemsMap = new HashMap<String, Item>();
-				for (Item i : items) {
-					if (isFirst) {
-						isFirst = false;
-					} else {
-						numiids += ",";
-					}
-					numiids += i.getNumIid();
-					itemsMap.put(String.valueOf(i.getNumIid()), i);
-				}
-				result.put("itemsMap", itemsMap);
-				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appType")), numiids, nick);
-				List<ItemCategory> categories = search.getItemCategories();
-				if (categories != null && categories.size() > 0) {
-					List<T_ItemCat> itemCats = EnvManager.getCats();
-					Iterator<ItemCategory> itr = categories.iterator();
-					while (itr.hasNext()) {
-						ItemCategory cat = itr.next();
-						List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils.find(
-								itemCats, T_ItemCat.class, "cid", cat
-										.getCategoryId(), null);// 查找类目
-						if (cs != null && cs.size() == 1) {
-							T_ItemCat c = cs.get(0);
-							if (c.getName().equals("其它")) {
-								itr.remove();
-							} else {
-								cat.setName(c.getName());
-							}
-						} else {
-							itr.remove();
-						}
-					}
-				}
-				Collections.sort(categories, new ItemCategoryComparator());
-				if (categories.size() == 1) {
-					ItempropsGetRequest propsRequest = new ItempropsGetRequest();
-					propsRequest
-							.setFields(TaobaoFetchUtil.TAOBAOITEMCATITEMPROP_FIELDS);
-					propsRequest.setCid(categories.get(0).getCategoryId());
-					List<ItemProp> propsList = TaobaoFetchUtil
-							.getItemProps(
-									String.valueOf(result.get("appType")),
-									propsRequest);
-					// if (propsList.size() > 0)
-					// Collections.sort(propsList, new ItemPropsComparator());
-					result.put("itemProps", propsList);
-				}
-				if (StringUtils.isNotEmpty(order_by) && taokeItems != null
-						&& taokeItems.size() > 0) {
-					if ("volume:desc".equals(order_by)) {
-						Collections.sort(taokeItems,
-								new ItemVolumeDescComparator());
-					} else if ("seller_credit:desc".equals(order_by)) {
-						Collections.sort(taokeItems,
-								new ItemCreditDescComparator());
-					} else if ("price:asc".equals(order_by)) {
-						Collections.sort(taokeItems,
-								new ItemPriceAscComparator());
-					} else if ("price:desc".equals(order_by)) {
-						Collections.sort(taokeItems,
-								new ItemPriceDescComparator());
-					}
-				}
-				result.put("categories", categories);
-				result.put("items", taokeItems);
-				if (taokeItems != null)
-					result
-							.put("invalidCount", items.size()
-									- taokeItems.size());
-				else
-					result.put("invalidCount", 30);
-				result.put("totalResults", resp.getTotalResults());
-			}
-		} else {
-			result.put("categories", new ArrayList<ItemCategory>());
-			result.put("items", new ArrayList<TaobaokeItem>());
-			result.put("invalidCount", 0);
-			result.put("totalResults", 0);
-		}
-		result.put("q", q);
-		result.put("nicks", nicks);
-		result.put("cid", cid);
-		result.put("is_mall", is_mall);
-		result.put("is_cod", is_cod);
-		result.put("post_free", post_free);
-		result.put("order_by", order_by);
-		result.put("state", state);
-		result.put("city", city);
-		result.put("start_price", start_price);
-		result.put("end_price", end_price);
-		result.put("page_no", page_no);
-		result.put("page", page);
-		result.put("view", view);
-		result.put("props", props);
-		return new ModelAndView("site/itemSearch", result);
+		// String genuine_security = request.getParameter("genuine_security");
+		// if (StringUtils.isNotEmpty(genuine_security)) {
+		// req.setGenuineSecurity("true".equals(genuine_security) ? true
+		// : false);
+		// } else {
+		// genuine_security = "";
+		// }
+		// // 是否提供保障服务的商品。可选入参有：2、4。设置为2表示该商品是“假一赔三”的商品，设置为4表示该商品是“7天无理由退换货”的商品
+		// String promoted_service = request.getParameter("promoted_service");
+		// if (StringUtils.isNotEmpty(promoted_service)) {
+		// req.setPromotedService(promoted_service);
+		// } else {
+		// promoted_service = "";
+		// }
+		// // 商品的新旧状态。可选入参有：new、second、unused
+		// // 。设置为new表示该商品是全新的商品，设置为second表示该商品是二手的商品，设置为unused表示该商品是闲置的商品
+		// String stuff_status = request.getParameter("stuff_status");
+		// if (StringUtils.isNotEmpty(stuff_status)) {
+		// req.setStuffStatus(stuff_status);
+		// } else {
+		// stuff_status = "";
+		// }
+		// // 商品最低价格。单位:元。正整数，取值范围:0-100000000。
+		// String start_price = request.getParameter("start_price");
+		// if (StringUtils.isNotEmpty(start_price)) {
+		// req.setStartPrice(Long.valueOf(start_price));
+		// }
+		// // 商品最高价格。单位:元。正整数，取值范围:0-100000000
+		// String end_price = request.getParameter("end_price");
+		// if (StringUtils.isNotEmpty(end_price)) {
+		// req.setEndPrice(Long.valueOf(end_price));
+		// } else {
+		// end_price = "";
+		// }
+		// // 页码。取值范围:大于零的整数;默认值为1，即返回第一页数据。
+		// String page_no = request.getParameter("page_no");
+		// Integer pageNo = 1;
+		// if (StringUtils.isNotEmpty(page_no)) {
+		// pageNo = Integer.parseInt(page_no);
+		// } else {
+		// pageNo = 1;
+		// }
+		// req.setPageNo(Long.valueOf(pageNo));
+		// // 每页条数。取值范围:大于零的整数;最大值：200；默认值：40
+		// String page_size = request.getParameter("page_size");
+		// if (StringUtils.isNotEmpty(page_size)) {
+		// req.setPageSize(Long.valueOf(page_size));
+		// } else {
+		// req.setPageSize(30L);
+		// }
+		// // 商品是否为虚拟商品 true：是虚拟商品 false：不是虚拟商品
+		// String auction_flag = request.getParameter("auction_flag");
+		// if (StringUtils.isNotEmpty(auction_flag)) {
+		// req.setAuctionFlag(false);// 默认不查询虚拟商品
+		// } else {
+		// auction_flag = "false";
+		// }
+		// // 商品是否为自动发货 true：自动发货 false：非自动发货
+		// String auto_post = request.getParameter("auto_post");
+		// if (StringUtils.isNotEmpty(auto_post)) {
+		// // req("true".equals(auto_post) ? true : false);
+		// }
+		// // 商品是否对会员打折
+		// String has_discount = request.getParameter("has_discount");
+		// if (StringUtils.isNotEmpty(has_discount)) {
+		//
+		// }
+		//
+		// ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(String
+		// .valueOf(result.get("appType")), req);
+		// Page<?> page = new Page(pageNo, 30);
+		// if (resp.getTotalResults() > 0 && resp.getItemSearch() != null) {
+		// page.setTotalCount(resp.getTotalResults().intValue());
+		// ItemSearch search = resp.getItemSearch();
+		// List<Item> items = search.getItems();
+		// if (items.size() > 0) {
+		// String numiids = "";
+		// Boolean isFirst = true;
+		// Map<String, Item> itemsMap = new HashMap<String, Item>();
+		// for (Item i : items) {
+		// if (isFirst) {
+		// isFirst = false;
+		// } else {
+		// numiids += ",";
+		// }
+		// numiids += i.getNumIid();
+		// itemsMap.put(String.valueOf(i.getNumIid()), i);
+		// }
+		// result.put("itemsMap", itemsMap);
+		// List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
+		// String.valueOf(result.get("appType")), numiids, nick);
+		// List<ItemCategory> categories = search.getItemCategories();
+		// if (categories != null && categories.size() > 0) {
+		// List<T_ItemCat> itemCats = EnvManager.getCats();
+		// Iterator<ItemCategory> itr = categories.iterator();
+		// while (itr.hasNext()) {
+		// ItemCategory cat = itr.next();
+		// List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils.find(
+		// itemCats, T_ItemCat.class, "cid", cat
+		// .getCategoryId(), null);// 查找类目
+		// if (cs != null && cs.size() == 1) {
+		// T_ItemCat c = cs.get(0);
+		// if (c.getName().equals("其它")) {
+		// itr.remove();
+		// } else {
+		// cat.setName(c.getName());
+		// }
+		// } else {
+		// itr.remove();
+		// }
+		// }
+		// }
+		// Collections.sort(categories, new ItemCategoryComparator());
+		// if (categories.size() == 1) {
+		// ItempropsGetRequest propsRequest = new ItempropsGetRequest();
+		// propsRequest
+		// .setFields(TaobaoFetchUtil.TAOBAOITEMCATITEMPROP_FIELDS);
+		// propsRequest.setCid(categories.get(0).getCategoryId());
+		// List<ItemProp> propsList = TaobaoFetchUtil
+		// .getItemProps(
+		// String.valueOf(result.get("appType")),
+		// propsRequest);
+		// // if (propsList.size() > 0)
+		// // Collections.sort(propsList, new ItemPropsComparator());
+		// result.put("itemProps", propsList);
+		// }
+		// if (StringUtils.isNotEmpty(order_by) && taokeItems != null
+		// && taokeItems.size() > 0) {
+		// if ("volume:desc".equals(order_by)) {
+		// Collections.sort(taokeItems,
+		// new ItemVolumeDescComparator());
+		// } else if ("seller_credit:desc".equals(order_by)) {
+		// Collections.sort(taokeItems,
+		// new ItemCreditDescComparator());
+		// } else if ("price:asc".equals(order_by)) {
+		// Collections.sort(taokeItems,
+		// new ItemPriceAscComparator());
+		// } else if ("price:desc".equals(order_by)) {
+		// Collections.sort(taokeItems,
+		// new ItemPriceDescComparator());
+		// }
+		// }
+		// result.put("categories", categories);
+		// result.put("items", taokeItems);
+		// if (taokeItems != null)
+		// result
+		// .put("invalidCount", items.size()
+		// - taokeItems.size());
+		// else
+		// result.put("invalidCount", 30);
+		// result.put("totalResults", resp.getTotalResults());
+		// }
+		// } else {
+		// result.put("categories", new ArrayList<ItemCategory>());
+		// result.put("items", new ArrayList<TaobaokeItem>());
+		// result.put("invalidCount", 0);
+		// result.put("totalResults", 0);
+		// }
+		// result.put("q", q);
+		// result.put("nicks", nicks);
+		// result.put("cid", cid);
+		// result.put("is_mall", is_mall);
+		// result.put("is_cod", is_cod);
+		// result.put("post_free", post_free);
+		// result.put("order_by", order_by);
+		// result.put("state", state);
+		// result.put("city", city);
+		// result.put("start_price", start_price);
+		// result.put("end_price", end_price);
+		// result.put("page_no", page_no);
+		// result.put("page", page);
+		// result.put("view", view);
+		// result.put("props", props);
+		// return new ModelAndView("site/itemSearch", result);
 	}
 
 	/**

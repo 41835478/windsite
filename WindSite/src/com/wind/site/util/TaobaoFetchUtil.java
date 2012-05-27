@@ -100,7 +100,7 @@ public class TaobaoFetchUtil {
 	public static final String VAS_APPSTORE_5 = "appstore-10911-5";// 返利版独立代码
 	public static final String VAS_APPSTORE_6 = "appstore-10911-6";// 卖家版独立代码
 	public static final String TAOBAO_SHOPCAT_FIELDS = "cid,parent_cid,name,is_parent";
-	public static final String DETAIL_FIELDS = "shop_click_url,seller_credit_score,num_iid,title,nick,cid,desc,pic_url,num,list_time,delist_time,location,price,post_fee,express_fee,ems_fee,volume,second_kill,sell_promise";
+	public static final String DETAIL_FIELDS = "click_url,shop_click_url,seller_credit_score,num_iid,title,nick,cid,desc,pic_url,num,list_time,delist_time,location,price,post_fee,express_fee,ems_fee,volume,second_kill,sell_promise";
 	public static final String TAOBAOKEITEM_FIELDS = "iid,title,nick,pic_url,price,click_url,commission,commission_num,commission_rate,commission_volume,num_iid,shop_click_url,seller_credit_score,item_location,volume";
 	public static final String TAOBAOUSER_FIELDS = "user_id,nick,sex,buyer_credit,seller_credit,location.city,created,last_visit,birthday,type,has_more_pic,item_img_num,item_img_size,prop_img_num,prop_img_size,auto_repost,promoted_type,status,alipay_bind,consumer_protection,alipay_account,alipay_no";
 	public static final String TAOBAOSHOP_FIELDS = "sid,cid,nick,title,desc,shop_score,bulletin,pic_path,created,modified";

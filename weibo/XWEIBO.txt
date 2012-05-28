@@ -646,6 +646,9 @@ TP-LINK:20:07:20:08:11
 
 
 iptables-save >/etc/sysconfig/iptables
+
+#2012-05-28
+
 	
 封单个IP的命令是： 
 iptables -I INPUT -s 211.1.0.0 -j DROP 

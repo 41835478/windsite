@@ -345,53 +345,23 @@ public class TaobaoRest {
 		return new ModelAndView("site/itemSearch", result);
 	}
 
-	private void searchWords(HttpServletResponse response, String q,
+	private String searchWords(HttpServletResponse response, String q,
 			String appType, String nick) {
 		if (StringUtils.isEmpty(q)) {
-			searchCid(response, null, appType, nick);
+			return searchCid(response, null, appType, nick);
 		}
-		if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
-			TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-			getRequest.setNick(nick);// 昵称
-			getRequest.setNumIids(q);
-			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(appType, getRequest);
-			TaobaokeItemDetail item = null;
-			if (getResponse != null) {
-				List<TaobaokeItemDetail> itemList = getResponse
-						.getTaobaokeItemDetails();
-				if (itemList != null && itemList.size() == 1) {
-					item = itemList.get(0);// 单个商品
-					String clickUrl = item.getClickUrl();
-					if (StringUtils.isNotEmpty(clickUrl)) {
-						try {
-							response.sendRedirect(clickUrl);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-
 		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
 		req.setNick(nick);
 		req.setOuterCode(EnvManager.getKeywordsOuterCode());
 		req.setQ(q);
 		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req);
 		if (StringUtils.isNotEmpty(clickUrl)) {
-			try {
-				response.sendRedirect(clickUrl);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			return clickUrl;
 		}
-		searchCid(response, null, appType, nick);
+		return searchCid(response, null, appType, nick);
 	}
 
-	private void searchCid(HttpServletResponse response, String cid,
+	private String searchCid(HttpServletResponse response, String cid,
 			String appType, String nick) {
 		if (StringUtils.isEmpty(cid)) {
 			cid = "16";
@@ -400,12 +370,8 @@ public class TaobaoRest {
 		request.setCid(Long.valueOf(cid));
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
-		try {
-			String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
-			response.sendRedirect(url);
-		} catch (Exception e) {
-			logger.info(e.toString());
-		}
+		String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
+		return url;
 	}
 
 	/**
@@ -425,6 +391,9 @@ public class TaobaoRest {
 		String q = request.getParameter("q");
 		String appType = String.valueOf(result.get("appType"));
 		String nick = String.valueOf(result.get("nick"));
+		String clickUrl = null;
+		String cid = request.getParameter("cid");
+
 		if (StringUtils.isNotEmpty(q)) {
 			if ("get".equalsIgnoreCase(request.getMethod())) {
 				try {
@@ -433,16 +402,76 @@ public class TaobaoRest {
 					q = "";
 				}
 			}
-			searchWords(response, q, appType, nick);
+			if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
+				TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
+				getRequest.setNick(nick);// 昵称
+				getRequest.setNumIids(q);
+				getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+				getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+				TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+						.getItemsDetail(appType, getRequest);
+				TaobaokeItemDetail item = null;
+				if (getResponse != null) {
+					List<TaobaokeItemDetail> itemList = getResponse
+							.getTaobaokeItemDetails();
+					if (itemList != null && itemList.size() == 1) {
+						item = itemList.get(0);// 单个商品
+						clickUrl = item.getClickUrl();
+						if (StringUtils.isNotEmpty(clickUrl)) {
+							try {
+								Object versionNo = result.get("versionNo");
+								if (versionNo != null) {
+									if ((Float) versionNo >= 2) {
+										Object www = result.get("www");
+										if (www != null
+												&& StringUtils
+														.isNotEmpty((String) www)) {
+											response
+													.sendRedirect(WindSiteRestUtil
+															.getUrl(
+																	siteService,
+																	result,
+																	userId)
+															+ "titem/"
+															+ q
+															+ ".html");
+											return null;
+										}
+									}
+								}
+							} catch (Exception e) {
+
+							}
+						}
+					}
+				}
+			}
+			if (StringUtils.isEmpty(clickUrl))
+				clickUrl = searchWords(response, q, appType, nick);
 		} else {
-			String cid = request.getParameter("cid");
 			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
+				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class, R
+						.eq("cid", cid));
+				if (cat == null) {
+					ItemcatsGetRequest getReq = new ItemcatsGetRequest();
+					getReq.setCids(cid);
+					getReq.setFields(TaobaoFetchUtil.TAOBAO_SHOPCAT_FIELDS);
+					List<ItemCat> cats = TaobaoFetchUtil.getItemCats(appType,
+							getReq);
+					if (cats != null && cats.size() == 1) {
+						result.put("cat", cats.get(0));
+					}
+				} else {
+					result.put("cat", cat);
+				}
 			} else {
 				cid = null;
 			}
-			searchCid(response, cid, appType, nick);
+			clickUrl = searchCid(response, cid, appType, nick);
 		}
-		return null;
+		result.put("q", q);
+		result.put("clickUrl", clickUrl);
+		return new ModelAndView("site/newItemSearch", result);
 		// Map<String, Object> result = new HashMap<String, Object>();
 		// ItemsSearchRequest req = new ItemsSearchRequest();
 		// String userId = request.getParameter("USER");

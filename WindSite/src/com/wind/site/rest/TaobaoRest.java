@@ -471,7 +471,13 @@ public class TaobaoRest {
 		}
 		result.put("q", q);
 		result.put("clickUrl", clickUrl);
-		return new ModelAndView("site/newItemSearch", result);
+		try {
+			response.sendRedirect(clickUrl);
+		} catch (Exception e) {
+
+		}
+		return null;
+		// return new ModelAndView("site/newItemSearch", result);
 		// Map<String, Object> result = new HashMap<String, Object>();
 		// ItemsSearchRequest req = new ItemsSearchRequest();
 		// String userId = request.getParameter("USER");

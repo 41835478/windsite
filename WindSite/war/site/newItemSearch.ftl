@@ -10,6 +10,6 @@
 <title><#if isCat>${cat.name}<#else><#if q??&&q!=''>${q}<#else>类目${cid}搜索</#if></#if>-${sitetitle}</title>
 </head>
 <body>
-<iframe frameborder="0" scrolling="no" src="${clickUrl}" marginwidth="0" marginheight="0" width="100%"></iframe>
+<iframe frameborder="0" scrolling="no" src="${clickUrl}&taoke_type=1" marginwidth="0" marginheight="0" width="100%"></iframe>
 </body>
 </html>

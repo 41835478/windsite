@@ -17,8 +17,6 @@
 								<ul class="search-tab">
 									<li class="selected" rel="poster"><a href="javascript:;" target="_self" class="self">画报</a></li>
 									<li rel="item"><a href="javascript:;" target="_self" class="self">宝贝</a></li>
-									<li rel="mall"><a href="javascript:;" target="_self">商城</a></li>
-									<li rel="shop"><a href="javascript:;" target="_self">店铺</a></li>
 								</ul>
 								<div class="search-auto" style="margin-top:-3px;">
 									<input name="is_mall" type="hidden" value="">

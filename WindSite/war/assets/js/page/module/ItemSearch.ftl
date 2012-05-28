@@ -6,8 +6,6 @@
 	<fieldset><legend>搜索</legend>
 	<ul class="search-tab">
 		<li class="selected" rel="item"><a href="javascript:;" target="_self" class="self">宝贝</a></li>
-		<li rel="mall"><a href="javascript:;" target="_self">商城</a></li>
-		<li rel="shop"><a href="javascript:;" target="_self">店铺</a></li>
 		<#if SITEIMPL??&&(SITEIMPL.versionNo>1.5)><li rel="poster"><a href="javascript:;" target="_self" class="self">画报</a></li>
 		<#elseif SITEIMPL??&&(SITEIMPL.versionNo==1.5)&&''!=SITEIMPL.www><li rel="poster"><a href="javascript:;" target="_self" class="self">画报</a></li></#if>
 	</ul>

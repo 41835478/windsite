@@ -356,7 +356,7 @@ public class TaobaoRest {
 		req.setQ(q);
 		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req);
 		if (StringUtils.isNotEmpty(clickUrl)) {
-			return clickUrl;
+			return clickUrl + "&taoke_type=1";
 		}
 		return searchCid(response, null, appType, nick);
 	}
@@ -371,7 +371,7 @@ public class TaobaoRest {
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
-		return url;
+		return url + "&taoke_type=1";
 	}
 
 	/**

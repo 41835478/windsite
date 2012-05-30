@@ -181,6 +181,7 @@ function createShopBlogModuleContent(name, title, region, next, func) {
  */
 function updateShopBlogModuleContent(id, title, func) {
 	var params = {};
+	params.isHd = $('#module-ishd').attr('checked') + "";// 是否显示标题
 	params.showtype = $('#module-content input[name="shop-blog-showtype"]:checked')
 			.val();// 显示类型
 	params.cid = $('#shop-blog-cids').val();

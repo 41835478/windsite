@@ -25,7 +25,7 @@ body{color: #666;font-family: Tahoma, SimSun, Arial;font-size: 12px;font-weight:
 						    </div> 
 						    <div class="error-notice-text"> 
 						        <div class="error-notice-hd">
-						        	<#if code=="404">
+						        	<#if code??&&code=="404">
 										对不起！您浏览的网页可能已被删除,重命名或暂时不可用！
 									<#else>
 										<#if msg??&&msg!=''>

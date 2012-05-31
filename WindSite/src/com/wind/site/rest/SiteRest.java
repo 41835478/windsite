@@ -925,6 +925,8 @@ public class SiteRest {
 							.get("nick"), sid);
 			if (taokeShops == null || taokeShops.size() != 1) {
 				try {
+					response
+							.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 							result, userId)
 							+ "error/shop404");
@@ -1153,6 +1155,7 @@ public class SiteRest {
 						getRequest);
 		if (getResponse == null) {
 			try {
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 						result, userId)
 						+ "error/item404");
@@ -1164,6 +1167,7 @@ public class SiteRest {
 				.getTaobaokeItemDetails();
 		if (itemList == null || itemList.size() != 1) {
 			try {
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 						result, userId)
 						+ "error/item404");

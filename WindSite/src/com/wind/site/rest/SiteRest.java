@@ -127,6 +127,44 @@ public class SiteRest {
 	private WidgetCustomerMethod widgetCustomer;
 
 	/**
+	 * 404|500，生成404错误
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws NoSuchRequestHandlingMethodException
+	 */
+	@RequestMapping(value = "/error/item404")
+	public ModelAndView errorItem404(HttpServletRequest request,
+			HttpServletResponse response) {
+		String userId = request.getParameter("USER");
+		Map<String, Object> result = new HashMap<String, Object>();
+		WindSiteRestUtil.covertPID(siteService, result, userId);
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		result.put("msg", "您浏览的商品不存在或已下架");
+		return new ModelAndView("site/siteError", result);
+	}
+
+	/**
+	 * 404|500，生成404错误
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws NoSuchRequestHandlingMethodException
+	 */
+	@RequestMapping(value = "/error/shop404")
+	public ModelAndView errorShop404(HttpServletRequest request,
+			HttpServletResponse response) {
+		String userId = request.getParameter("USER");
+		Map<String, Object> result = new HashMap<String, Object>();
+		WindSiteRestUtil.covertPID(siteService, result, userId);
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		result.put("msg", "您浏览的店铺不存在");
+		return new ModelAndView("site/siteError", result);
+	}
+
+	/**
 	 * 根据软文分类查找并更新组件和页面
 	 * 
 	 * @return
@@ -886,7 +924,12 @@ public class SiteRest {
 					String.valueOf(result.get("appType")), (String) result
 							.get("nick"), sid);
 			if (taokeShops == null || taokeShops.size() != 1) {
-				SystemException.handleMessageException("该店铺不存在，或者未加入淘宝推广计划");
+				try {
+					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+							result, userId)
+							+ "error/shop404");
+				} catch (Exception e) {
+				}
 			}
 			Long cid = null;
 			TaobaokeShop shop = taokeShops.get(0);
@@ -1110,7 +1153,9 @@ public class SiteRest {
 						getRequest);
 		if (getResponse == null) {
 			try {
-				response.sendError(404);
+				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+						result, userId)
+						+ "error/item404");
 			} catch (Exception e) {
 			}
 			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
@@ -1119,7 +1164,9 @@ public class SiteRest {
 				.getTaobaokeItemDetails();
 		if (itemList == null || itemList.size() != 1) {
 			try {
-				response.sendError(404);
+				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+						result, userId)
+						+ "error/item404");
 			} catch (Exception e) {
 			}
 			// SystemException.handleMessageException("该商品已移除或者被卖家下架");

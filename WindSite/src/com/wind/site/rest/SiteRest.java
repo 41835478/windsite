@@ -1109,12 +1109,20 @@ public class SiteRest {
 				.getItemsDetail(String.valueOf(result.get("appType")),
 						getRequest);
 		if (getResponse == null) {
-			SystemException.handleMessageException("该商品已移除或者被卖家下架");
+			try {
+				response.sendError(404);
+			} catch (Exception e) {
+			}
+			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
 		}
 		List<TaobaokeItemDetail> itemList = getResponse
 				.getTaobaokeItemDetails();
 		if (itemList == null || itemList.size() != 1) {
-			SystemException.handleMessageException("该商品已移除或者被卖家下架");
+			try {
+				response.sendError(404);
+			} catch (Exception e) {
+			}
+			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
 		}
 		TaobaokeItemDetail item = itemList.get(0);// 单个商品
 		List<TradeRate> rates = new ArrayList<TradeRate>();

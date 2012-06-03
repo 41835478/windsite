@@ -96,7 +96,11 @@ class admin_mod extends action {
 				'广兴',
 				'nalanruoruo',
 				'广州市牛仔裤',
-				'wangzhonghua77'
+				'wangzhonghua77',
+				'yhlly70',
+				'望成有限公司',
+				'石喻璇',
+				'暖赤乌'
 			))) {
 			exit ('无效用户，不予登录，详情咨询客服QQ：153647646');
 		}

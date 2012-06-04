@@ -38,6 +38,7 @@ public class WindSiteRestUtil {
 		UNVALIDS.add("f0y520");
 		UNVALIDS.add("ybq198309222009");
 		UNVALIDS.add("一切杰杰有可能");
+		UNVALIDS.add("yydyl1989love");
 	}
 
 	/**

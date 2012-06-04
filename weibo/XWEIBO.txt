@@ -74,7 +74,7 @@ select nick '会员名',versionNo '版本号',TIMESTAMPDIFF(day,startDate,endDat
 select group_id,count(*) from xwb_admin group by group_id;
 
 快速删除海量文件
-rsync --delete-before -a -H -v --progress --stats /var/www/htdocs/weibo21/var/cache_xt/test/ /var/www/htdocs/weibo21/var/cache_xt/cache_tv/
+rsync --delete-before -a -H -v --progress --stats /mnt/ebs/apache2/htdocs/weibo21/var/cache_xt/test/ /mnt/ebs/apache2/htdocs/weibo21/var/cache_xt/cache_taobao/
 
 
 0:尚未归类
@@ -671,6 +671,8 @@ iptables -I INPUT -s 183.60.193.35 -j DROP
 
 
 iptables-save >/etc/sysconfig/iptables
+//2012-06-04
+iptables -I INPUT -s 180.153.206.0/24 -j DROP
 //黑客
 iptables -I INPUT -s 118.192.35.57 -j DROP
 iptables -I INPUT -s 109.230.216.203 -j DROP

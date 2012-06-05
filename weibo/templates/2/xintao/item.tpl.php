@@ -53,7 +53,7 @@ TPL :: module('xintao/item', array (
 	'items' => $items
 ));
 if($item&&count($items)==0){
-	Xpipe :: pagelet('xintao.convertItemDetail');	
+	//Xpipe :: pagelet('xintao.convertItemDetail');	
 }
 ?>
                             </div>

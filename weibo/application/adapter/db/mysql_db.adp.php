@@ -254,8 +254,8 @@ class mysql_db extends interface_db {
 	 * @return string
 	 */
 	function escape($str) {
-		//return mysql_escape_string($str);
-		return mysql_real_escape_string($str);
+		return mysql_escape_string($str);
+		//return mysql_real_escape_string($str);
 	}
 
 	/**

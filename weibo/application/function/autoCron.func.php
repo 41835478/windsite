@@ -67,6 +67,7 @@ function autoCron($index = -1) {
 		$WEIBO_TYPE = 'ITEM';
 	}
 	elseif ($index >= 500) { //淘客商品
+		echo '555720354::';
 		$weibo = autoCronTaokeItem();
 		$WEIBO_TYPE = 'TAOKE_ITEM';
 	}

@@ -671,6 +671,11 @@ iptables -I INPUT -s 183.60.193.35 -j DROP
 
 
 iptables-save >/etc/sysconfig/iptables
+//2012-06-08
+iptables -I INPUT -s 182.118.22.0/24 -j DROP
+//2012-06-07
+iptables -I INPUT -s 14.0.36.0/24 -j DROP
+iptables -I INPUT -s 14.0.37.0/24 -j DROP
 //2012-06-04
 iptables -I INPUT -s 180.153.206.0/24 -j DROP
 //黑客

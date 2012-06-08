@@ -45,7 +45,7 @@ if ($position == 1) {
 			</div>
 			<div class="shop-btn" style="float:left;">
             	<a href="<?php echo $shopUrl?>" class="enter-shop J_TrackShop<?php echo $shopNo?>" rel="nofollow" <?php echo $rel;?> target="_blank" style="margin-top:-15px;" target="_blank">进店逛逛</a>
-            	<a href="#" class="collect-shop J_FavTrigger" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
+            	<a href="#" class="collect-shop J_FavTrigger hidden" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
             	<a href="#" class="comment-shop" rel="e:tbs,m:<?php echo $text?>">我要点评</a>
         	</div>
 		</li>
@@ -137,7 +137,7 @@ if ($position == 1) {
 			</div>
 			<div class="shop-btn" style="float:left;">
             	<a href="<?php echo $shopUrl?>" class="enter-shop J_TrackShop<?php echo $shopNo?>" rel="nofollow" <?php echo $rel;?> target="_blank" style="margin-top:-15px;" target="_blank">进店逛逛</a>
-            	<a href="#" class="collect-shop J_FavTrigger" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
+            	<a href="#" class="collect-shop J_FavTrigger hidden" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
             	<a href="#" class="comment-shop" rel="e:tbs,m:<?php echo $text?>">我要点评</a>
         	</div>
 		</li>

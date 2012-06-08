@@ -64,7 +64,7 @@ if (!empty ($list)) {
 			$pic = $picUrl . $pic_jpg;
 		}
 
-		$buttons = '<div class="ks-clear"><a class="addfollow-btn item-share" rel="e:tbs,h:' . $row['id'] . ',t:' . $title . ',u:' . base64_encode($picUrl) . '" href="#"><span class="plus">+</span>分享</a><a class="addfollow-btn item-fav" rel="e:tbf,h:' . $row['id'] . '" href="#"><span class="plus">+</span>收藏</a></div>';
+		$buttons = '<div class="ks-clear"><a class="addfollow-btn item-share" rel="e:tbs,h:' . $row['id'] . ',t:' . $title . ',u:' . base64_encode($picUrl) . '" href="#"><span class="plus">+</span>分享</a><a class="addfollow-btn item-fav hidden" rel="e:tbf,h:' . $row['id'] . '" href="#"><span class="plus">+</span>收藏</a></div>';
 		if ($count % $row_size == ($row_size -1) || $count == $length -1) {
 			echo '<li style="margin-right:0px;"><div class="item"><div class="pic"><a href="' . $url . '" title="' . $title . '" target="_blank"><img src="' . $pic . '" alt="' . $title . '" title="' . $title . '"/></a></div>' . $buttons . '<div class="desc"><a href="' . $url . '" target="_blank">' . $title . '</a></div><div class="sales-amount">点击数<em>' . $row['hits'] . '</em>次</div></div></li>';
 			echo '</ul></div>';

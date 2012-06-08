@@ -44,7 +44,7 @@ if ($shop) {
     </div>
     <div class="shop-btn floatright">
        <a href="<?php echo $shopUrl?>" class="enter-shop J_TrackShop Go" rel="nofollow" <?php echo $rel;?> target="_blank" style="margin-top:24px;" target="_blank">进店逛逛</a>
-       <a href="#" class="collect-shop J_FavTrigger" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
+       <a href="#" class="collect-shop J_FavTrigger hidden" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>">我要收藏</a>
        <a href="#" class="comment-shop" rel="e:tbs,m:<?php echo $text?>">我要点评</a>
     </div>
 </div>

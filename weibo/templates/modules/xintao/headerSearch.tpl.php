@@ -23,7 +23,7 @@ if (!empty ($shop)) {
 	<div id="shop-info">
 		<div class="shop-info-simple">
 			<a href="http://shop<?php echo $shop['sid'];?>.taobao.com" target="_blank" class="hCard fn J_TrackShop Go" rel="nofollow" <?php echo $rel;?>><?php echo $shop['nick']?></a>
-			<span class="shop-rank"> <a rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>" class="shop-collect" href="#">点击收藏</a></span>
+			<span class="shop-rank hidden"> <a rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>" class="shop-collect" href="#">点击收藏</a></span>
 		</div>
 		<!--<b class="arrow-wrap"><i class="shop-arrow"></i></b>-->
 		<div class="shop-info-details">
@@ -46,7 +46,7 @@ if (!empty ($shop)) {
 			</div>
 		<?php }?>	
 			<div class="shop-other">
-				<a class="tb-fav collection xshop_sc" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>" href="#">收藏</a>
+				<a class="tb-fav collection xshop_sc hidden" rel="e:tbf,s:<?php echo $shop['sid']?>,n:<?php echo $shop['nick']?>" href="#">收藏</a>
 				<!--<a class="tb-feed subscribe-rss" title="关注后，你可以进入我的淘宝查看该店铺的最新动态。" href="#" rel="e:tbfan,f:"><i></i>关注</a>-->
 				<a class="tb-shared share-jianghu" href="#" rel="e:tbs,m:<?php echo $text;?>"><i></i>分享</a>
 			</div>

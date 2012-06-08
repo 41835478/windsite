@@ -97,26 +97,34 @@ function synAppstore() {
 			}
 			//第二步：真实订购（真实付费使用的）
 			if (empty ($appstore)) { //真实订购
-				$codes = F('top.vasSubscribeGet', -999, '登录模块', array (
-					'nick' => $nick,
-					'article_code' => TB_ARTICLE_CODE_1,
-					'app_key' => TB_APP_KEY_1,
-					'app_secret' => TB_APP_SECRET_1
-				), true);
-				if ($codes == 9999 || $codes == 6001) { //如果该API出现错误，则停止该站长的同步
+				try {
+					$codes = F('top.vasSubscribeGet', -999, '登录模块', array (
+						'nick' => $nick,
+						'article_code' => TB_ARTICLE_CODE_1,
+						'app_key' => TB_APP_KEY_1,
+						'app_secret' => TB_APP_SECRET_1
+					), true);
+					if ($codes == 9999 || $codes == 6001) { //如果该API出现错误，则停止该站长的同步
+						continue;
+					}
+					if (!is_array($codes)) {
+						continue;
+					}
+					if (!empty ($codes)) {
+						foreach ($codes as $key) {
+							$data = array ();
+							$data[0] = $key['item_code'];
+							$data[1] = $key['deadline'];
+							$data[2] = $userId;
+							$codesRs = DR('mgr/adminCom.saveAppstoreById', '', $data); //更新订购的服务项目
+							$appstore[] = '[' . $key['item_code'] . ']';
+						}
+						$APPSTORE_DATELINE = F('getAppstoreDateline', $codes);
+					}
+				} catch (Exception $e) {
 					continue;
 				}
-				if (!empty ($codes)) {
-					foreach ($codes as $key) {
-						$data = array ();
-						$data[0] = $key['item_code'];
-						$data[1] = $key['deadline'];
-						$data[2] = $userId;
-						$codesRs = DR('mgr/adminCom.saveAppstoreById', '', $data); //更新订购的服务项目
-						$appstore[] = '[' . $key['item_code'] . ']';
-					}
-					$APPSTORE_DATELINE = F('getAppstoreDateline', $codes);
-				}
+
 			}
 			//第三步：免费授权（是指为了吸引用户，提供3天的免费使用）
 			if (count($appstore) == 1 && $appstore[0] == XT_APPSTORE_FREE) { //如果该用户仅订购了免费服务，提供3天的免费服务

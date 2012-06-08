@@ -32,8 +32,10 @@ define('WB_WY_DEFAULT_AKEY', 'SpgW49M9w0G6J8TG');
 define('WB_WY_DEFAULT_SKEY', 'RXRd5cOFwwz2tMPxQL7S3krq2TxfH5Js');
 
 ///通用登录应用密钥（登录接口使用）
-define('TB_LOGIN_APP_KEY', '12378141');
-define('TB_LOGIN_APP_SECRET', 'eb69061c2e1c46a64f4acc691932fca4');
+//define('TB_LOGIN_APP_KEY', '12378141');
+//define('TB_LOGIN_APP_SECRET', 'eb69061c2e1c46a64f4acc691932fca4');
+define('TB_LOGIN_APP_KEY', '12321683');
+define('TB_LOGIN_APP_SECRET', 'b1348afe4faff204a334a6e6e79ef597');
 ///淘宝沙箱应用密钥
 define('TB_APP_KEY_0', '12321683');
 define('TB_APP_SECRET_0', 'sandboxe4faff204a334a6e6e79ef597');

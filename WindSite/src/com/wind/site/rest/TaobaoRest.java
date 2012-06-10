@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -391,6 +392,7 @@ public class TaobaoRest {
 		String q = request.getParameter("q");
 		String appType = String.valueOf(result.get("appType"));
 		String nick = String.valueOf(result.get("nick"));
+		String pid = String.valueOf(result.get("pid"));
 		String clickUrl = null;
 		String cid = request.getParameter("cid");
 
@@ -441,6 +443,21 @@ public class TaobaoRest {
 								}
 							} catch (Exception e) {
 
+							}
+						}
+					} else {
+						String is_mall = request.getParameter("is_mall");
+						if ("true".equals(is_mall)) {
+							try {
+								response
+										.sendRedirect("http://s.click.taobao.com/t_9?p="
+												+ pid
+												+ "&l="
+												+ URLEncoder.encode(
+														"http://detail.tmall.com/item.htm?id="
+																+ q, "UTF-8"));
+								return null;
+							} catch (IOException e) {
 							}
 						}
 					}

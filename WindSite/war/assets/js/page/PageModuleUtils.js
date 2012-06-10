@@ -1248,7 +1248,7 @@ var PageModuleUtils = {
 							}
 							q.val(iid);
 							if (_url.match(/(.*\.?tmall.com(\/|$))/i)) {
-								from.find('input[name="is_mall"]').val('true');
+								form.find('input[name="is_mall"]').val('true');
 							}
 						}
 					}

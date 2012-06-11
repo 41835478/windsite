@@ -24,7 +24,7 @@ class adminCom {
 	 */
 	function getAdmins() {
 		$db = APP :: ADP('db');
-		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `group_id`>0 ORDER BY `id`';
+		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `group_id`>4 ORDER BY `id`';
 		return RST($db->query($sql));
 	}
 	/**

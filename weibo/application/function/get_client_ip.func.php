@@ -28,7 +28,7 @@ function get_client_ip() {
 				if (isset ($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
 					$ip = $_SERVER['REMOTE_ADDR'];
 				else
-					$ip = '54.248.108.253';
+					$ip = '54.248.105.30';
 	$ip = preg_match('/^((25[0-5]|2[0-4]\d|(1\d|[1-9])?\d)\.){3}(25[0-5]|2[0-4]\d|(1\d|[1-9])?\d)$/', $ip) ? $ip : '54.248.108.253';
-	return $ip == '54.248.108.253' ? XT_CLIENT_IP : $ip;
+	return $ip == '54.248.105.30' ? XT_CLIENT_IP : $ip;
 }

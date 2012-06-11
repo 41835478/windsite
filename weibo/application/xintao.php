@@ -169,7 +169,7 @@ if (file_exists($CONFIG_FILE)) { //微博站长是否配置了个人微博信息
 	define('XT_SID', isset ($CONFIG_ARRAY['XT_SID']) ? $CONFIG_ARRAY['XT_SID'] : '');
 	define('XT_IS_ICP', isset ($CONFIG_ARRAY['XT_IS_ICP']) ? $CONFIG_ARRAY['XT_IS_ICP'] : '');
 	define('XT_IS_SIMPLE', isset ($CONFIG_ARRAY['XT_IS_SIMPLE']) ? $CONFIG_ARRAY['XT_IS_SIMPLE'] : 'true');
-	define('XT_CLIENT_IP', isset ($CONFIG_ARRAY['XT_CLIENT_IP']) ? $CONFIG_ARRAY['XT_CLIENT_IP'] : '54.248.108.253');
+	define('XT_CLIENT_IP', isset ($CONFIG_ARRAY['XT_CLIENT_IP']) ? $CONFIG_ARRAY['XT_CLIENT_IP'] : '54.248.105.30');
 	define('XT_DEF_SHARE_MOD', isset ($CONFIG_ARRAY['XT_DEF_SHARE_MOD']) ? $CONFIG_ARRAY['XT_DEF_SHARE_MOD'] : 'lady');
 	define('XT_DEF_SHARE_SUB', isset ($CONFIG_ARRAY['XT_DEF_SHARE_SUB']) ? $CONFIG_ARRAY['XT_DEF_SHARE_SUB'] : '102');
 	define('XT_IS_TAOKE_SHOP', isset ($CONFIG_ARRAY['XT_IS_TAOKE_SHOP']) ? $CONFIG_ARRAY['XT_IS_TAOKE_SHOP'] : 'false');

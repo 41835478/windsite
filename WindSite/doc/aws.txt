@@ -359,7 +359,7 @@ service mysqld restart
  w_ad_blog_status is_valid
  
  
- netstat -nat|grep 54.248.108.253:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+ netstat -nat|grep 54.248.105.30:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
  用户与产品
 新用户为何试用你的产品？
 你现在有多少用户？

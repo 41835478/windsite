@@ -1188,7 +1188,7 @@ var PageModuleUtils = {
 			var form = $('form', widget);
 			$('input[name="is_mall"]', widget).val('');
 			if ('item' == rel) {// 商品搜索
-				form.attr('action', '/search?v=' + Math.random());
+				form.attr('action', '/searchbox?v=' + Math.random());
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
 					q.val('输入 宝贝 名称或网址');
 				}
@@ -1202,7 +1202,7 @@ var PageModuleUtils = {
 				q.unbind('focus').unbind('blur').focusText('输入 店铺 名称');
 			} else if ('mall' == rel) {// 商城搜索
 				$('input[name="is_mall"]', widget).val('true');
-				form.attr('action', '/search?v=' + Math.random());
+				form.attr('action', '/searchbox?v=' + Math.random());
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
 					q.val('输入 宝贝 名称');
 				}
@@ -1230,7 +1230,7 @@ var PageModuleUtils = {
 				q.val('');
 			}
 			if ('item' == rel) {// 商品搜索
-				form.attr('action', '/search?v=' + Math.random());
+				form.attr('action', '/searchbox?v=' + Math.random());
 				if (q.val()) {
 					var _url = q.val();
 					q.val(_url.replace('-', ' '));
@@ -1348,7 +1348,7 @@ var PageModuleUtils = {
 					+ (widget.width() - 10) + 'px;font-size:12px;"></ul>');
 			for (var i = 0; i < length; i++) {
 				try {
-					ul.append('<li><a target="_blank" href="/search?q='
+					ul.append('<li><a target="_blank" href="/searchbox?q='
 							+ (encodeURIComponent(arr_data[i + j * length][0]))
 							+ '">' + arr_data[i + j * length][0] + '</a></li>');
 				} catch (e) {

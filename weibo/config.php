@@ -468,26 +468,26 @@ $cfg['writeableCheckRouter']=array('api/weibo/action.comment',
 //----------------------------------------------------------------------
 /// 缓存时间设置, route+desc=time, time 以秒为单位
 $tpl['cache_time'] = array(
-	'output_nologin' 				=> 6000,
-	'output_type1_login' 			=> 6000,			// 微博秀
-	'output_type2_login' 			=> 6000,			// 推荐guanz
-	'output_type3_login' 			=> 6000,			// 互动话题
-	'pagelet_component1'			=> 6000,			// 热门转发与评论
-	'pagelet_component2'			=> 6000,			// 用户组
-	'pagelet_component3'			=> 6000,			// 推荐用户
-	'pagelet_component4'			=> 6000,			// 人气关注榜模块
-	'pagelet_component5'			=> 6000,			// 群组微博
-	'pagelet_component6'			=> 6000,			// 话题推荐列表
-	'pagelet_component7'			=> 6000,			// 可能感兴趣的人(未登录，不显示)
-	'pagelet_component8'			=> 6000,			// 同城微博(未登录缓存, 登录不缓存)
-	'pagelet_component9'			=> 6000,			// 随便看看
-	'pagelet_component10'			=> 6000,			// 今日话题(未登录缓存, 登录不缓存)
-	'pagelet_component11'			=> 6000,			// 用户组
-	'pagelet_component12'			=> 6000,			// 话题微博
+	'output_nologin' 				=> 259200,
+	'output_type1_login' 			=> 259200,			// 微博秀
+	'output_type2_login' 			=> 259200,			// 推荐guanz
+	'output_type3_login' 			=> 259200,			// 互动话题
+	'pagelet_component1'			=> 259200,			// 热门转发与评论
+	'pagelet_component2'			=> 259200,			// 用户组
+	'pagelet_component3'			=> 259200,			// 推荐用户
+	'pagelet_component4'			=> 259200,			// 人气关注榜模块
+	'pagelet_component5'			=> 259200,			// 群组微博
+	'pagelet_component6'			=> 259200,			// 话题推荐列表
+	'pagelet_component7'			=> 259200,			// 可能感兴趣的人(未登录，不显示)
+	'pagelet_component8'			=> 259200,			// 同城微博(未登录缓存, 登录不缓存)
+	'pagelet_component9'			=> 259200,			// 随便看看
+	'pagelet_component10'			=> 259200,			// 今日话题(未登录缓存, 登录不缓存)
+	'pagelet_component11'			=> 259200,			// 用户组
+	'pagelet_component12'			=> 259200,			// 话题微博
 	'pagelet_component14'			=> 300,			// 最新微博
 	'pagelet_component15'			=> 6000,			// 最新用户
-	'pagelet_component18'			=> 6000,			// 活动列表
-	'pagelet_component19'			=> 6000			// 本地关注榜
+	'pagelet_component18'			=> 259200,			// 活动列表
+	'pagelet_component19'			=> 259200			// 本地关注榜
 );
 									 
 /// xweibo模板配置

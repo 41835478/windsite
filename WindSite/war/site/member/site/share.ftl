@@ -11,7 +11,7 @@ $('#shareButton').click(function(){
 		var isTrue=false;
 		var reg = /script/gi;
 		var srcreg=/src=/gi;
-		var jiathis=/v2.jiathis.com/gi;
+		var jiathis=/jiathis.com/gi;
 		var baidu=/share.baidu.com/gi;
 		var result = code.match(baidu);
 		if(result != null){//baidu

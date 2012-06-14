@@ -368,7 +368,11 @@ public class TaobaoRest {
 			cid = "16";
 		}
 		TaobaokeCaturlGetRequest request = new TaobaokeCaturlGetRequest();
-		request.setCid(Long.valueOf(cid));
+		try {
+			request.setCid(Long.valueOf(cid));
+		} catch (Exception e) {
+			request.setCid(16L);
+		}
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
@@ -589,7 +593,12 @@ public class TaobaoRest {
 		// 商品所属类目Id。ItemCat中的cid。 可以通过taobao.itemcats.get.v2取到
 		String cid = request.getParameter("cid");
 		if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
-			req.setCid(Long.valueOf(cid));
+			try {
+				req.setCid(Long.valueOf(cid));
+			} catch (Exception e) {
+				if (StringUtils.isEmpty(q))
+					req.setCid(16L);
+			}
 		} else {
 			cid = "";
 		}
@@ -851,19 +860,19 @@ public class TaobaoRest {
 					}
 				}
 				Collections.sort(categories, new ItemCategoryComparator());
-//				if (categories.size() == 1) {
-//					ItempropsGetRequest propsRequest = new ItempropsGetRequest();
-//					propsRequest
-//							.setFields(TaobaoFetchUtil.TAOBAOITEMCATITEMPROP_FIELDS);
-//					propsRequest.setCid(categories.get(0).getCategoryId());
-//					List<ItemProp> propsList = TaobaoFetchUtil
-//							.getItemProps(
-//									String.valueOf(result.get("appType")),
-//									propsRequest);
-//					// if (propsList.size() > 0)
-//					// Collections.sort(propsList, new ItemPropsComparator());
-//					result.put("itemProps", propsList);
-//				}
+				// if (categories.size() == 1) {
+				// ItempropsGetRequest propsRequest = new ItempropsGetRequest();
+				// propsRequest
+				// .setFields(TaobaoFetchUtil.TAOBAOITEMCATITEMPROP_FIELDS);
+				// propsRequest.setCid(categories.get(0).getCategoryId());
+				// List<ItemProp> propsList = TaobaoFetchUtil
+				// .getItemProps(
+				// String.valueOf(result.get("appType")),
+				// propsRequest);
+				// // if (propsList.size() > 0)
+				// // Collections.sort(propsList, new ItemPropsComparator());
+				// result.put("itemProps", propsList);
+				// }
 				if (StringUtils.isNotEmpty(order_by) && taokeItems != null
 						&& taokeItems.size() > 0) {
 					if ("volume:desc".equals(order_by)) {

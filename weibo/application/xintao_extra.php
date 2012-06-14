@@ -23,7 +23,7 @@ define('CACHE_24X30', '2592000');
 define('CACHE_24X60', '2592000');
 $tpl = & $cfg['tpl'];
 $tpl['title']['_suf'] = '';
-$tpl['cache_time']['pagelet_24'] = 100; //店铺搜索类缓存时间24小时
+$tpl['cache_time']['pagelet_24'] = 259200; //店铺搜索类缓存时间24小时
 $tpl['cache_time']['pagelet_24X30'] = 2592000; //分类搜索类缓存时间30天
 ///BETA测试人员
 $cfg['beta'] = include_once (dirname(__FILE__) . '/../xintao/betas.php'); //临时授权用户

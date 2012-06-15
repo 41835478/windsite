@@ -5,7 +5,7 @@
 	<div class="bd">
 		<div class="search-x">
 			<div class="form">
-				<form class="" name="SearchForm" action="/search" method="get" target="_blank">
+				<form class="" name="SearchForm" action="/searchbox" method="get" target="_blank">
 					<input type="hidden" name="cid" value="0">
 					<label for="J_ShopSKey"></label>
 					<input id="J_ShopSKey" name="q" type="text" class="text J_SEKeyword" value="" onfocus="this.select();">
@@ -31,7 +31,7 @@
 	<div class="hd" <#if 'false'==isHd>style="display:none;"</#if>><h3><span>${title}</span></h3></div>
 	<div class="bd">
 		<div class="search-form">
-			<form name="SearchForm" action="/search" method="get" target="_blank">
+			<form name="SearchForm" action="/searchbox" method="get" target="_blank">
 				<input type="hidden" name="cid" value="0">
 				<ul>
 					<li class="keyword"><label for="keyword">关键字：</label><input type="text" size="18" name="q" id="KeywordBox" value="" onfocus="this.select();"></li>

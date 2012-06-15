@@ -169,7 +169,7 @@ function search($id = -999, $title = '未知模块', $params, $isCache = true) {
 		'cat' => '',
 		'year' => ''
 	), $params);
-	return TV('sotv/includes/SoClient.search', ($isCache ? ('g0/' . CACHE_2) : ''), $params['page_no'], $params['show_num'], $params['key'], $params['c'], $params['tvType'], $params['cat'], $params['area'], $params['year'], $params['cs'], str_replace('_', '-', $params['age']), $params['language'], $params['fee'], $params['o']);
+	return TV('sotv/includes/SoClient.search', ($isCache ? ('g0/' . CACHE_24) : ''), $params['page_no'], $params['show_num'], $params['key'], $params['c'], $params['tvType'], $params['cat'], $params['area'], $params['year'], $params['cs'], str_replace('_', '-', $params['age']), $params['language'], $params['fee'], $params['o']);
 }
 /**
  * 获得TV分类信息

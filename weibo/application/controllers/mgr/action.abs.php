@@ -111,12 +111,12 @@ class action {
 							'mgr/xintao/yingxiaoWeibo.itemWeiboList'
 						)
 					),
-					array (
+					/*array (
 						'title' => '商品分享(卖家)',
 						'url' => array (
 							'mgr/xintao/wowMgr.userItemList'
 						)
-					),
+					),*/
 					array (
 						'title' => '商品营销(淘客)',
 						'url' => array (
@@ -141,12 +141,12 @@ class action {
 							'mgr/xintao/xintao.top'
 						)
 					),
-					array (
+					/*array (
 						'title' => '最近访客',
 						'url' => array (
 							'mgr/xintao/track.getLastVisitsDetails'
 						)
-					),
+					),*/
 					array (
 						'title' => '淘客推广',
 						'url' => array (

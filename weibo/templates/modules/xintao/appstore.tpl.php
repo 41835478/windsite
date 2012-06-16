@@ -125,13 +125,13 @@
 
 
 if (F('xintao.check_appstore', explode(',', XT_APPSTORE_TAOKE)) && XT_FREE_DATELINE == '') {
-	echo '<a id="J_Appstore_Taoke_Buy" target="_blank" href="http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:3" class="btn-charge" style="display:block;background:url(http://img04.taobaocdn.com/tps/i4/T1SVipXelhXXXXXXXX-161-153.png) no-repeat scroll 0 0;margin: 6px 10px 0 0;width: 79px;height: 22px;text-indent: -9999px;overflow: hidden;background-position: 0 -92px;">续订</a>';
+	echo '<a id="J_Appstore_Taoke_Buy" data-href="http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:3" target="_blank" href="javascript:vold(0);" class="btn-charge" style="display:block;background:url(http://img04.taobaocdn.com/tps/i4/T1SVipXelhXXXXXXXX-161-153.png) no-repeat scroll 0 0;margin: 6px 10px 0 0;width: 79px;height: 22px;text-indent: -9999px;overflow: hidden;background-position: 0 -92px;">续订</a>';
 }
 elseif (XT_IS_TAOKE == 'true' && XT_FREE_DATELINE == '') {
 	echo '卖家服务已包含';
 } else {
 ?>
-    			<a id="J_Appstore_Taoke_Buy" target="_blank" href="http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:3" class="btn-ordernow" style="display:block;background:url(http://img04.taobaocdn.com/tps/i4/T1SVipXelhXXXXXXXX-161-153.png) no-repeat scroll 0 0;margin-right: 10px;width: 161px;height: 35px;text-indent: -9999px;overflow: hidden;vertical-align: middle;background-position: 0 0;"><span>立即订购</span></a>
+    			<a id="J_Appstore_Taoke_Buy" data-href="http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:3" target="_blank" href="javascript:vold(0);" class="btn-ordernow" style="display:block;background:url(http://img04.taobaocdn.com/tps/i4/T1SVipXelhXXXXXXXX-161-153.png) no-repeat scroll 0 0;margin-right: 10px;width: 161px;height: 35px;text-indent: -9999px;overflow: hidden;vertical-align: middle;background-position: 0 0;"><span>立即订购</span></a>
     			<?php } ?>
 			</td>
     		<td>
@@ -161,7 +161,16 @@ $(function(){
 		$('#J_Appstore_Seller_Buy').attr('href','http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-4:'+$(this).val());
 	});
 	$('#J_Appstore_Taoke input[type="radio"]').change(function(){
-		$('#J_Appstore_Taoke_Buy').attr('href','http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:'+$(this).val());
+		$('#J_Appstore_Taoke_Buy').attr('data-href','http://fuwu.taobao.com/item/subsc.htm?items=ts-14975-5:'+$(this).val());
+	});
+	var taokeWin;
+	$('#J_Appstore_Taoke_Buy').click(function(){
+		Xwb.ui.MsgBox.confirm('您确定要订购淘客服务？',
+			'<strong style="color:red;">淘客服务针对淘宝客用户，可赚取推广佣金，不会对自己店铺的商品进行营销！</strong>', function(id) {
+				if (id == 'ok') {
+					window.open($('#J_Appstore_Taoke_Buy').attr('data-href'), 'taokeWin', "resizable=1,location=0,status=0,scrollbars=0,width=670,height=660");
+				}
+			});	
 	});
 	
 });

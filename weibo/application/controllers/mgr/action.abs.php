@@ -664,12 +664,12 @@ class action {
 							'mgr/xintao/yingxiaoWeibo.itemWeiboList'
 						)
 					),
-					array (
+					/*array (
 						'title' => '商品分享(卖家)',
 						'url' => array (
 							'mgr/xintao/wowMgr.userItemList'
 						)
-					),
+					),*/
 					array (
 						'title' => '商品营销(淘客)',
 						'url' => array (

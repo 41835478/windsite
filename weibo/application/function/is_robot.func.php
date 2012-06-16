@@ -18,6 +18,10 @@ function is_robot() {
 		}
 		if (!empty ($whiteRobot)) {
 			if (isset ($_SERVER['HTTP_USER_AGENT']) && preg_match("/{$whiteRobot}/i", $_SERVER['HTTP_USER_AGENT'])) { //取消对百度和Goolge的检验
+				if ((XT_SITE_DOMAIN == 't' . XT_USER_ID . '.xintaowang.com' || XT_SITE_DOMAIN == '')) {
+					$is_robot = true;
+					return $is_robot;
+				}
 				$is_robot = false;
 				return $is_robot;
 			}

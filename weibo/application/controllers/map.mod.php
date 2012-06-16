@@ -359,7 +359,7 @@ class map_mod {
 	function synWowUserItem() {
 		ignore_user_abort(); //即使Client断开(如关掉浏览器)，PHP脚本也可以继续执行
 		set_time_limit(300); //设置总执行时间限制，预期不限时。
-		F('user_item.synWowUserItem');
+		//F('user_item.synWowUserItem');
 	}
 	function synWowDetails() {
 		if ('www.xintaowang.com' == $_SERVER['SERVER_NAME']) {

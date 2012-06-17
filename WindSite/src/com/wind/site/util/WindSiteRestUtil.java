@@ -25,7 +25,7 @@ import com.wind.site.service.ISiteService;
  * 
  */
 public class WindSiteRestUtil {
-
+	public static final String DOMAIN = "www.xintaonet.com";
 	public static final List<String> UNVALIDS = new ArrayList<String>();
 	static {
 		UNVALIDS.add("jiege0316");

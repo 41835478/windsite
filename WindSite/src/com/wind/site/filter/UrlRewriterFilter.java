@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wind.site.util.WindSiteRestUtil;
+
 /**
  * URL重写
  * 
@@ -36,7 +38,7 @@ public class UrlRewriterFilter implements Filter {
 			String domainName = urlArray[1];
 			isRedirect = true;
 			response.sendRedirect("http://"
-					+ request.getServerName()
+					+ WindSiteRestUtil.DOMAIN
 					+ "/zone/"
 					+ domainName.substring(domainName.length() - 2, domainName
 							.length()) + "/"

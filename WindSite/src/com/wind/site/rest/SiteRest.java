@@ -1717,20 +1717,20 @@ public class SiteRest {
 						if (versionNo > 2 && StringUtils.isNotEmpty(sid)
 								&& !"0".equals(sid)) {// 收费版（卖家）
 							response.sendRedirect("http://"
-									+ request.getServerName()
+									+ WindSiteRestUtil.DOMAIN
 									+ "/router/member/sellermanager");
 						} else {// 免费版（淘客）
 							response.sendRedirect("http://"
-									+ request.getServerName()
+									+ WindSiteRestUtil.DOMAIN
 									+ "/router/member/sitemanager");
 						}
 					} else {
 						response.sendRedirect("http://"
-								+ request.getServerName()
+								+ WindSiteRestUtil.DOMAIN
 								+ "/router/site/redirect");
 					}
 				} else {
-					response.sendRedirect("http://" + request.getServerName()
+					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 							+ "/router/site/redirect");
 				}
 				return null;
@@ -1739,7 +1739,7 @@ public class SiteRest {
 			}
 		} else {
 			try {
-				response.sendRedirect("http://" + request.getServerName()
+				response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 						+ "/router/site");
 				return null;
 			} catch (IOException e) {

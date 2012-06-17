@@ -1841,7 +1841,7 @@ public class MemberRest {
 					}
 				}
 				memberService.updateCoolSite(id);
-				response.sendRedirect("http://" + request.getServerName()
+				response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 						+ "/router/member/sitemanager/coolsite");
 			}
 		} catch (Exception e) {

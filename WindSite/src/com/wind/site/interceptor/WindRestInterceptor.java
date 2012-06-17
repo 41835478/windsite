@@ -76,7 +76,7 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 									command.setIp(ip);
 									CommandExecutor.getCommands().add(command);
 									response.sendRedirect("http://"
-											+ request.getServerName()
+											+ WindSiteRestUtil.DOMAIN
 											+ "/help/crawler.html");
 								}
 							} else {// 不存在,带过期值进入缓存
@@ -221,7 +221,7 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 			SystemException.handleException("100", "未登录或登录超时");
 		} else {
 			EnvManager.clear();// 跳转前清除数据
-			response.sendRedirect("http://" + request.getServerName()
+			response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 					+ "/router/site/redirect");
 		}
 		return false;

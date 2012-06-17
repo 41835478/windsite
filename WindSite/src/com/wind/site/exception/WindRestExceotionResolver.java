@@ -50,7 +50,7 @@ public class WindRestExceotionResolver implements HandlerExceptionResolver {
 					BaseException e = (BaseException) exception;
 					if ("27".equals(e.getKey()) || ("100").equals(e.getKey())) {// 如果是淘宝Session超时或新淘未登录,定向至淘宝登录页面
 						response.sendRedirect("http://"
-								+ request.getServerName()
+								+ WindSiteRestUtil.DOMAIN
 								+ "/router/site/redirect");
 					} else if ("200".equals(e.getKey())) {// 返利会员转向
 						String userId = request.getParameter("USER");

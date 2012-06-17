@@ -29,12 +29,15 @@ public class YiqifaClient {
 	 * @param request
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static YiqifaResponse reportsGet(YiqifaRequest request) {
 		if (request == null) {
 			return null;
 		}
 		YiqifaResponse response = null;
 		HttpClient httpClient = new HttpClient(); // 构造HttpClient的实例
+		httpClient.setConnectionTimeout(5000);
+		httpClient.setTimeout(5000);
 		GetMethod getMethod = new GetMethod(
 				"http://o.yiqifa.com/servlet/queryCpsMultiRow"); // 创建GET方法的实
 		getMethod.setQueryString(request.toUrlParams());

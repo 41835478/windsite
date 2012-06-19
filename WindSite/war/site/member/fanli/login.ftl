@@ -13,10 +13,10 @@ $(function(){
 });
 </script>
 <style>
-.apple_overlay {display:none;background-image:url(/assets/min/stylesheets/images/white.png);width:330px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
+.apple_overlay {display:none;background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/white.png);width:330px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
 <!--[if lt IE 7]><style>div.apple_overlay {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_IE6.gif);color:#fff;}div.apple_overlay div.close {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_close_IE6.gif);}</style><![endif]-->
 </style>
-<link href="/assets/min/stylesheets/ext_fanli.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/ext_fanli.css?v=${dateVersion()}" rel="stylesheet"/>
 <div id="fanli-site-map" style="display:none;padding-top:80px;" class="apple_overlay">
 	<div style="margin:10px 30px 0 0px; border-bottom:1px solid #E6E6E6; padding-bottom:12px;"><span style="color:#313131; font-size:14px;">登录成功，点击进入快速通道!</span></div>
 	<ul>

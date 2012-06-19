@@ -5,14 +5,14 @@
 <meta name="description" content="新淘网 - 新淘网实现了多种酷炫图片组件封装，向广大普通互联网用户提供一站式的建站方案，大幅度降低建站门槛，会用鼠标就可以拖拽生成独立而漂亮的淘宝推广网站，让更多的普通互联网用户成为专业淘客、推广淘宝、赚取佣金">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>淘站装修市场-新淘网</title>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/common.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/xintao.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/designer.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/theme.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/common.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/xintao.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/designer.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/theme.css" rel="stylesheet"/>
 <!--[if IE 6]><style>html {background: url(null) fixed;}#ds-toolbar {top: expression(documentElement.scrollTop);}</style><![endif]-->
 <style>
-.apple_overlay {display:none;background-image:url(/assets/min/stylesheets/images/white.png);width:300px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
+.apple_overlay {display:none;background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/white.png);width:300px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
 <!--[if lt IE 7]><style>div.apple_overlay {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_IE6.gif);color:#fff;}div.apple_overlay div.close {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_close_IE6.gif);}</style><![endif]-->
 </style>
 </head>

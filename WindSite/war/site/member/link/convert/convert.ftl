@@ -5,7 +5,7 @@
 </@ws.header>
 <script language="javascript" type="text/javascript" src="/assets/js/site/convert.js?v=${dateVersion()}"></script>
 <style>
-#tableProfile td{line-height:20px;text-align:left}.btn{background: url(/assets/images/btn_bg.gif) no-repeat;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 100px;background-position: 0px -350px;}
+#tableProfile td{line-height:20px;text-align:left}.btn{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 100px;background-position: 0px -350px;}
 #convertWizard {font-size:12px;width:750px;height:600px;overflow-x:hidden;position:relative;}  
 #convertWizard .items {width:20000em;clear:both;position:absolute;}
 #convertWizard .step {padding:20px 30px;width:680px;float:left;}
@@ -21,7 +21,7 @@
 #convertWizard label span {color:#b8128f;font-weight:bold;position:relative;top:4px;font-size:20px;}#convertWizard .double label {width:50%;float:left;}#convertWizard .double .text {width:93%;}
 #convertWizard .clearfix {clear:both;padding-top:10px;}#convertWizard .right {float:right;}
 #convertWizard #status {border: 1px solid #8AB78A;margin:0px !important;height:35px;background:#F0F5F9;padding-left:25px !important;}#status li {list-style-type:none;list-style-image:none;float:left;color:#414141;padding:10px 30px;}#status li.active {background-color:#5DAE40;color:#fff;font-weight:bold;}
-.button{background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 80px;background-position: 0px 0px;}
+.button{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 80px;background-position: 0px 0px;}
 .link{padding:3px;width:500px;}.num{width:30px;display:inline-block;}
 .error {height:15px;background-color:#FFFE36;font-size:11px;border:1px solid #E1E16D;padding:4px 10px;color:#000;-moz-border-radius:4px;-webkit-border-radius:4px;-moz-border-radius-bottomleft:0;-moz-border-radius-topleft:0;-webkit-border-bottom-left-radius:0; -webkit-border-top-left-radius:0;-moz-box-shadow:0 0 6px #ddd;-webkit-box-shadow:0 0 6px #ddd;}
 .link-error{border-color:red;}li.more{display:none;}

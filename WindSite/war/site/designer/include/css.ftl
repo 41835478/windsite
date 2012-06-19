@@ -1,2 +1,2 @@
-<link href="/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
-<link href="/assets/css/ui/jquery-ui.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css?v=${dateVersion()}" rel="stylesheet"/>

@@ -9,8 +9,8 @@ $(function(){
 </script>
 <style>
 .order-table{border:1px solid #e1e1e1;border-bottom:none;border-collapse:collapse;margin:0;table-layout: fixed;width:100%;}
-.order-table th{background:#3d3d3d url(/assets/images/version/bg-th.gif) repeat-x;color:#fff;padding:5px;}
-.order-table th.active{background:#51732b url(/assets/images/version/images/bg-th-active.gif) repeat-x;}
+.order-table th{background:#3d3d3d url(http://static.xintaonet.com/assets/images/version/bg-th.gif) repeat-x;color:#fff;padding:5px;}
+.order-table th.active{background:#51732b url(http://static.xintaonet.com/assets/images/version/images/bg-th-active.gif) repeat-x;}
 .order-table .features{text-align:left;}
 .order-table .starter{width:100px;}
 .order-table .standard{width:100px;}
@@ -19,8 +19,8 @@ $(function(){
 .order-table .ultra{width:100px;}
 .order-table td{padding:10px;text-align:center;border-bottom:1px solid #e1e1e1;}
 .order-table td.features{text-align:left;padding-left:15px;text-decoration:underline;}
-.order-table .odd td{background:url(/assets/images/version/bg-td.png) repeat-x 0 100%;}
-.order-table .yes,.order-table .no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(/assets/images/version/bg-yes.gif) no-repeat;}.order-table .no{background:url(/assets/images/version/bg-no.gif) no-repeat;}.order-table strong{font-size:14px;color:#3d3d3d;}.order-table .action{color:#2d6200;}.order-table .pay{color:red;}.order-table .description{background:#eff5e9;}.order-version{color:red;font-weight:bold;font-size:14px;padding:5px 0px;}
+.order-table .odd td{background:url(http://static.xintaonet.com/assets/images/version/bg-td.png) repeat-x 0 100%;}
+.order-table .yes,.order-table .no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(http://static.xintaonet.com/assets/images/version/bg-yes.gif) no-repeat;}.order-table .no{background:url(http://static.xintaonet.com/assets/images/version/bg-no.gif) no-repeat;}.order-table strong{font-size:14px;color:#3d3d3d;}.order-table .action{color:#2d6200;}.order-table .pay{color:red;}.order-table .description{background:#eff5e9;}.order-version{color:red;font-weight:bold;font-size:14px;padding:5px 0px;}
 </style>
 <@xt.taoketemplate navselected='taoke' bdselected='site-versions'>
 <#assign version='starter' versionDesc='普及版'>

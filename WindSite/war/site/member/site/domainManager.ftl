@@ -28,7 +28,7 @@ $(function(){
 					style="color: red">请先在域名注册商处将您的域名指向到www.xintaonet.com，域名绑定方可顺利完成
 				</span><br/>
 				<strong style="color:red;">即日起：不再要求域名已备案！</strong> 
-				<img style="position: absolute; cursor: pointer; float: right; top: -14px; right: 0px;" src="/assets/images/delete.gif" onclick="$(this).parent().hide();">
+				<img style="position: absolute; cursor: pointer; float: right; top: -14px; right: 0px;" src="http://static.xintaonet.com/assets/images/delete.gif" onclick="$(this).parent().hide();">
 				</div>
 				<table>
 					<tr height=35px>

@@ -7,7 +7,7 @@
 #coolsitesul li{float:left;width:161px;height:121px;padding:2px;margin-right:12px;margin-bottom:15px;border:1px solid #DDD;}
 #coolsitesul li div{float:left;width:160px;height:120px;}
 .ui-selecting {background: #FF7C00;}.pages a{color:#0073EA;font-weight:bold}.pages span{font-weight:bold}
-.tooltip {display:none;background:transparent url(/assets/images/black_arrow.png);font-size:12px;height:70px;width:160px;padding:25px;padding-top:20px;color:#fff;}
+.tooltip {display:none;background:transparent url(http://static.xintaonet.com/assets/images/black_arrow.png);font-size:12px;height:70px;width:160px;padding:25px;padding-top:20px;color:#fff;}
 </style>
 <script>
 $(function() {
@@ -22,7 +22,7 @@ $(function() {
 	$('#coolsitesul li[title]').tooltip('#tooltip');
 });
 </script>
-<div class="ui-widget-content ui-corner-all" style="padding-top:50px;background:url('/assets/images/coolsitebg.gif') repeat-x;width:950px;height:100%;margin-bottom:10px;" align="center">
+<div class="ui-widget-content ui-corner-all" style="padding-top:50px;background:url('http://static.xintaonet.com/assets/images/coolsitebg.gif') repeat-x;width:950px;height:100%;margin-bottom:10px;" align="center">
 <table width="900px">
 <tr  height="50px">
 	<td align="left" width="100px">酷站展示</td>

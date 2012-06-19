@@ -5,10 +5,10 @@
 <meta name="description" content="新淘网 - 新淘网实现了多种酷炫图片组件封装，向广大普通互联网用户提供一站式的建站方案，大幅度降低建站门槛，会用鼠标就可以拖拽生成独立而漂亮的淘宝推广网站，让更多的普通互联网用户成为专业淘客、推广淘宝、赚取佣金">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>布局管理--站点设计器</title>
-<link href="/assets/min/stylesheets/xintao.min.css" rel="stylesheet"/>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/designer.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/layout.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/designer.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/layout.css" rel="stylesheet"/>
 <link href="/assets/js/jquery/jqtransform/jqtransform.css" rel="stylesheet"/>
 <!--淘宝-->
 <!--[if lt IE 8]>
@@ -81,7 +81,7 @@
 <@p.moduleEditor></@p.moduleEditor>
 <!--页头编辑器-->
 <div id="page-layout-editor" title="添加布局" style="display:none;position:relative;">
-<ul class="layout-list"><li><a class="l-grid-m" layout="grid-m"></a></li><li><a class="l-grid-s5m0" layout="grid-s5m0"></a><a class="l-grid-m0s5" layout="grid-m0s5"></a></li><li><a class="l-grid-s5m0e5" layout="grid-s5m0e5"></a><a class="l-grid-m0s5e5" layout="grid-m0s5e5"></a><a class="l-grid-s5e5m0" layout="grid-s5e5m0"></a><a style="background:none;" layout="grid-s310m0e310"><img src="/assets/stylesheets/images/layout310.jpg"/></a></li></ul>
+<ul class="layout-list"><li><a class="l-grid-m" layout="grid-m"></a></li><li><a class="l-grid-s5m0" layout="grid-s5m0"></a><a class="l-grid-m0s5" layout="grid-m0s5"></a></li><li><a class="l-grid-s5m0e5" layout="grid-s5m0e5"></a><a class="l-grid-m0s5e5" layout="grid-m0s5e5"></a><a class="l-grid-s5e5m0" layout="grid-s5e5m0"></a><a style="background:none;" layout="grid-s310m0e310"><img src="http://static.xintaonet.com/assets/stylesheets/images/layout310.jpg"/></a></li></ul>
 </div>
 <!--xintao-->
 <script src="/assets/min/js/page/designer-utils.min.js"></script>
@@ -107,7 +107,7 @@
 <!--Designer-->
 <script type="text/javascript">
 var ISLAYOUT=true,DEBUG=true,MODE='${mode}',APP=${USER.appType},ISDESIGNER=true,PAGEID='${page.id}',USERID='${USER.user_id}',USERNICK='${USER.nick}',PID='${USER.pid}',VERSIONNO=${VN},LIMIT_LAYOUTS=${USER.limit.layouts},LIMIT_MODULES=${USER.limit.modules},LIMIT_HEARDS=${USER.limit.headers};
-var CUSTOMLINKS=['http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css'<#if ''!=skin>,'http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}.css'<#else>,'http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css'</#if><#if (USER.usb.versionNo>1)&&''!=css>,'http://www.xintaonet.com/assets/min/stylesheets/theme/${css}.css'</#if><#if ''!=skin>,'http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css'<#else>,'http://www.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css'</#if>];
+var CUSTOMLINKS=['http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css'<#if ''!=skin>,'http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}.css'<#else>,'http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css'</#if><#if (USER.usb.versionNo>1)&&''!=css>,'http://static.xintaonet.com/assets/min/stylesheets/theme/${css}.css'</#if><#if ''!=skin>,'http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css'<#else>,'http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css'</#if>];
 $(function(){
 	$('#content .page-edit').pageLayoutManager();
 });

@@ -24,13 +24,13 @@ ul {
 #sidebar li a:link, #sidebar li a:visited {
 	color: #656556;
 	display: block;
-	background:  url(/assets/images/sidebar.gif);
+	background:  url(http://static.xintaonet.com/assets/images/sidebar.gif);
 	padding: 8px 0 0 20px;
 	}
 	
 #sidebar li a:hover {
 	color: #474739;
-	background:  url(/assets/images/sidebar.gif) 0 -32px;
+	background:  url(http://static.xintaonet.com/assets/images/sidebar.gif) 0 -32px;
 	padding: 8px 0 0 20px;
 	}
 </style>

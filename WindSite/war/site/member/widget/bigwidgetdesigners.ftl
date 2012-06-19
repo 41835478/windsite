@@ -7,8 +7,8 @@
 <title>新淘组件设计大侠排行-新淘网</title>
 
 <#include "/site/template/import.ftl">
-<link rel="stylesheet" type="text/css" href="/assets/min/css/widgets.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/sitewidgets.css">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/widgets.css">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/css/sitewidgets.css">
 </head>
 <body>
 <div id="wrap" style="background-color: #F5F6F7;">
@@ -43,7 +43,7 @@
 			<table width=100%>
 			<tr>
 			<td align=left valign=top>
-			<div><a href="/"><img src="/assets/images/logo.png"></a></div></td><td valign=bottom>
+			<div><a href="/"><img src="http://static.xintaonet.com/assets/images/logo.png"></a></div></td><td valign=bottom>
 			  <div class="wm_mac_nav" align=center>
 			    <ul style="width:400px">
 			      <li class="first"><a href="/router/member/widget/hotdesigners" class="current">组件大师排行</a></li>

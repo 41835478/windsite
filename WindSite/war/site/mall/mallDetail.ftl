@@ -9,7 +9,7 @@
 .store_show_box{ float:left; margin:5px 0px; padding:0; width:945px; height:auto;}.store_show_box_logo{ float:left; margin:0px 0px 0px 5px; padding:0; width:222px; height:182px;color:#333333; overflow:hidden;}
 .store_show_box_logo p.t1,.store_show_box_logo p.t2,.store_show_box_logo p.t3,.store_show_box_logo p.t4{ margin:0; padding:0;width:222px;}.store_show_box_logo .pic { width:100px; height:100px; margin:25px 61px 10px 61px; padding:0; display:block; overflow:hidden;}
 .store_show_box_logo b{ color:#FF6600;}.store_show_box_logo p.t2,.store_show_box_logo p.t3{ height:25px; line-height:25px; overflow:hidden;}.store_show_box_logo p.t4{ margin:5px 0 0 0;}
-.store_show_box_logo .jump{ display:block; width:125px; height:35px; margin:0 auto; padding:0; background:url(/assets/min/stylesheets/images/dinggou.gif) no-repeat;}
+.store_show_box_logo .jump{ display:block; width:125px; height:35px; margin:0 auto; padding:0; background:url(http://static.xintaonet.com/assets/min/stylesheets/images/dinggou.gif) no-repeat;}
 .store_show_box_info{ float:left; margin:0px 0px 0px 8px; padding:0; width:710px; color:#4e4e4e;}.store_show_box_info ul{ float:left; margin:0; padding:0;}
 .store_show_box_info ul li{ float:left; width:700px; margin:5px 0px; text-align:left; line-height:20px; overflow:hidden;border-bottom:1px solid #CCCCCC;padding-bottom:5px;}
 .store_show_box_info ul li h1{font-size:13px; font-weight:700;padding:0;display:inline;}a.zhuying{height:25px; line-height:25px;color:#0163C8;}
@@ -18,7 +18,7 @@
 <#if ((versionNo??&&(versionNo>=2)))&&www??&&www!=''&&'true'==site_isLogin&&!MEMBER??>
 <script src="/assets/min/js/page/fanli.min.js?v=${dateVersion()}"></script>
 <style>
-.apple_overlay {display:none;background-image:url(/assets/min/stylesheets/images/white.png);width:300px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
+.apple_overlay {display:none;background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/white.png);width:300px;padding:35px;font-size:11px;}.apple_overlay .close {background-image:url(http://static.xintaonet.com/assets/min/stylesheets/images/close.png);position:absolute; right:5px; top:5px;cursor:pointer;height:35px;width:35px;}.apple_overlay .field {padding-top: 12px;zoom: 1;}.apple_overlay .field label {display: inline-block;padding-right: 10px;text-align: right;width: 66px;}.apple_overlay .login-text {border: 1px solid #C8C8C8;height: 18px;line-height: 18px;margin-right: 3px;padding: 3px;vertical-align: middle;width: 180px;}
 <!--[if lt IE 7]><style>div.apple_overlay {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_IE6.gif);color:#fff;}div.apple_overlay div.close {background-image:url(http://static.flowplayer.org/tools/img/overlay/overlay_close_IE6.gif);}</style><![endif]-->
 </style>
 <div id="J_FanliLoginBox" class="apple_overlay">

@@ -12,11 +12,11 @@
 <script language="javascript" type="text/javascript" src="/assets/min/js/analytics.min.js?v=${dateVersion()}"></script>
 <style>
 #tableProfile th,#tableProfile td{text-align:center}.nick{font-size: 14px;height: 16px;line-height: 16px;}.key{color:#404040;line-height:14px;height:14px;font-size:12px;}
-.member-info{background: #E0EAF0 url(/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -400px;border: none;padding: 10px;position: relative;}
-.xintao-taoke-header{background: white url(/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -299px;border-top: 1px solid #C4D5E0;height: 22px;}
+.member-info{background: #E0EAF0 url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -400px;border: none;padding: 10px;position: relative;}
+.xintao-taoke-header{background: white url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -299px;border-top: 1px solid #C4D5E0;height: 22px;}
 .xintao-taoke-button{background: url(http://a.tbcdn.cn/app/mytaobao/img/alipay_bg.png) no-repeat scroll 1000px 1000px;background-position: 0px 0px;float: left;height: 30px;line-height: 30px;margin: 0px 5px;text-align: center;width: 70px;}
 .mytaobao-bd {background-color: transparent;}.mytaobao-bd .section {border: 1px solid #c4d5e0;margin-bottom: 10px;position: relative;padding: 0 0 10px; *zoom: 1;}
-.mytaobao-bd .section h3 {border-bottom: 1px solid #c4d5e0;padding: 1px;margin-bottom: 10px;}.mytaobao-bd .section h3 span {display: block;font-size: 12px;font-weight: bold;height: 21px;line-height: 21px;padding-left: 10px;background: #ebf1f4 url(/assets/images/myxintao_v3_bg.gif) scroll repeat-x center -300px;margin: 0;}
+.mytaobao-bd .section h3 {border-bottom: 1px solid #c4d5e0;padding: 1px;margin-bottom: 10px;}.mytaobao-bd .section h3 span {display: block;font-size: 12px;font-weight: bold;height: 21px;line-height: 21px;padding-left: 10px;background: #ebf1f4 url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) scroll repeat-x center -300px;margin: 0;}
 .mytaobao-list {margin-left: 12px;}.mytaobao-list li {margin: 2px 0;width:200px;overflow:hidden;margin-bottom:5px;}.mytaobao-list li a{overflow:hidden;width:200px;display:inline;white-space:nowrap}.mytaobao-list li a:hover{color:#f60;}
 </style>
 <script>

@@ -13,7 +13,7 @@
 .store_show_box{ float:left; margin:5px 0px; padding:0; width:945px; height:auto;}.store_show_box_logo{ float:left; margin:0px 0px 0px 5px; padding:0; width:222px; height:182px;color:#333333; overflow:hidden;}
 .store_show_box_logo p.t1,.store_show_box_logo p.t2,.store_show_box_logo p.t3,.store_show_box_logo p.t4{ margin:0; padding:0;width:222px;}.store_show_box_logo .pic { width:100px; height:100px; margin:25px 61px 10px 61px; padding:0; display:block; overflow:hidden;}
 .store_show_box_logo b{ color:#FF6600;}.store_show_box_logo p.t2,.store_show_box_logo p.t3{ height:25px; line-height:25px; overflow:hidden;}.store_show_box_logo p.t4{ margin:5px 0 0 0;}
-.store_show_box_logo .jump{ display:block; width:125px; height:35px; margin:0 auto; padding:0; background:url(/assets/min/stylesheets/images/jump.gif) no-repeat;}
+.store_show_box_logo .jump{ display:block; width:125px; height:35px; margin:0 auto; padding:0; background:url(http://static.xintaonet.com/assets/min/stylesheets/images/jump.gif) no-repeat;}
 .store_show_box_info{ float:left; margin:0px 0px 0px 8px; padding:0; width:710px; height:142px;}.store_show_box_info ul{ float:left; margin:0; padding:0;}
 .store_show_box_info ul li{ float:left; width:350px; margin:5px 0px; text-align:left; height:30px; line-height:30px; overflow:hidden;border-bottom:1px dashed #CCCCCC;}
 .store_show_box_info ul li h1{font-size:13px; font-weight:700;padding:0;display:inline;}

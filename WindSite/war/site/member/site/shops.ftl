@@ -64,9 +64,9 @@ $(function(){
 .a-disabled{color:gray;}
 .a-enabled{color:#1C94C4;}
 .wTable-shops-item{height:80px;padding-bottom:5px;border-bottom:1px solid #DDD;position:relative;z-Index:1}
-.search-nav, .search-nav .crumbs li,.filter-tabbar li,.filter-tabbar li .l, .filter-tabbar li .r,.toolbarWrapper,.filter .select-item  {background: url(/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;}
-.filter .select-item span,.filter-tabbar li.status a, .filter-tabbar li.combine a, .filter-tabbar li.status a span, .toolbar .order .order-options li a , .page-start, .page-next, .page-prev, .page-end{background: url(/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px -9999px;}
-.toolbar .order a, .toolbar .protection .title,.filter button.submit,  .mall-icon, .shoe-mall-icon{background: url(/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px -9999px;}
+.search-nav, .search-nav .crumbs li,.filter-tabbar li,.filter-tabbar li .l, .filter-tabbar li .r,.toolbarWrapper,.filter .select-item  {background: url(http://static.xintaonet.com/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;}
+.filter .select-item span,.filter-tabbar li.status a, .filter-tabbar li.combine a, .filter-tabbar li.status a span, .toolbar .order .order-options li a , .page-start, .page-next, .page-prev, .page-end{background: url(http://static.xintaonet.com/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px -9999px;}
+.toolbar .order a, .toolbar .protection .title,.filter button.submit,  .mall-icon, .shoe-mall-icon{background: url(http://static.xintaonet.com/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px -9999px;}
 .filter {margin-top: 5px;width: 760px;}.filter-tabbar {border-bottom: 2px solid #F50;height: 27px;padding-top: 1px;position: relative;width: 100%;z-index: 100;}
 .filter-tabbar li {background-position: 0px -361px;float: left;margin: 3px 3px 0px 0px;position: relative;}
 .filter-tabbar li.selected {background-position: 0px -310px;margin-top: 0px;}
@@ -102,7 +102,7 @@ $(function(){
 .toolbar .by-sale-desc .order-by span span {background-position: 0px -451px;padding-left: 23px;}.toolbar .by-price-asc .order-by span span {background-position: 0px -392px;padding-left: 23px;}
 .toolbar .by-price-desc .order-by span span {background-position: 0px -412px;padding-left: 23px;}.toolbar .by-credit-desc .order-by span span {background-position: 0px -432px;padding-left: 23px;}
 ul.pages li{background:none;padding:3px;}ul.pages li a{height: 14px;line-height: 14px;padding: 0px;}
-.button{background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
+.button{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
 </style>
 <@xt.taoketemplate navselected='taoke' bdselected='site-shops'>
 <@ws.info>

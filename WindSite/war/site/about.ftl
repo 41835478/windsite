@@ -26,19 +26,19 @@ h3{color:#FF6600;font-size:13pt;}p{text-indent: 2em;padding-top:10px;padding-bot
 $(function() {
 	$('.nav li').click(function(){
 					var did = $(this).attr('did');
-					$(this).css('background','url(/assets/images/about'+did+'over.gif)').siblings().each(function(){
+					$(this).css('background','url(http://static.xintaonet.com/assets/images/about'+did+'over.gif)').siblings().each(function(){
 						var odid = $(this).attr('did');
-						$(this).css('background','url(/assets/images/about'+odid+'.gif)');
+						$(this).css('background','url(http://static.xintaonet.com/assets/images/about'+odid+'.gif)');
 					});
 					$('#'+did).show().siblings().hide();
 				});
 });
 
 </script>
-<div style="background:url('/assets/images/coolsitebg.gif') repeat-x;width:950px;height:450px;">
+<div style="background:url('http://static.xintaonet.com/assets/images/coolsitebg.gif') repeat-x;width:950px;height:450px;">
 <ul class="nav" style="list-style:none;float:left;width:200px;margin-top:60px;">
-<li class="ui-corner-top ui-corner-bottom" style="background:url(/assets/images/abouttaokeover.gif)" did="taoke"></li>
-<li class="ui-corner-top ui-corner-bottom" style="background:url(/assets/images/aboutxintao.gif)"did="xintao"></li>
+<li class="ui-corner-top ui-corner-bottom" style="background:url(http://static.xintaonet.com/assets/images/abouttaokeover.gif)" did="taoke"></li>
+<li class="ui-corner-top ui-corner-bottom" style="background:url(http://static.xintaonet.com/assets/images/aboutxintao.gif)"did="xintao"></li>
 </ul>
 <div style="float:left;width:600px;margin-top:30px;">
 	<div id="xintao" style="display:none;">

@@ -1,6 +1,6 @@
 <style>
 .get_codeing {display: inline;float: left;margin-left: 40px;padding-top: 10px;}
-.tip-ok {background: url(/assets/images/icon-tip-ok.png) no-repeat 0% 50%;color: #004425;padding-left: 20px;}
+.tip-ok {background: url(http://static.xintaonet.com/assets/images/icon-tip-ok.png) no-repeat 0% 50%;color: #004425;padding-left: 20px;}
 .dialog-bd-tip {background-color: #FFFDC1;border-bottom: 1px solid #E6A200;line-height: 20px;padding: 5px 10px;}
 .get_codeing h3 {font-size: 14px;}textarea {font-family: arial;font-size: 10px;padding: 2px;}.get_codeing .get_codeing_but {position:relative;margin-bottom: 2px;text-align:left;height:50px;}
 .get_codeing_but button {right:0px;position:absolute;cursor: pointer;line-height: 20px;margin: 10px 0px;padding: 0px;width: 120px;bottom:0px;}

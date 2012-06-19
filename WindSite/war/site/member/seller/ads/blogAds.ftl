@@ -36,7 +36,7 @@ $(function() {
 			<li title="30天总销量:${i.volume}&#13;30天推广量:${i.commission_num}" nid="${i.num_iid}"><div class="pic" align="center"><img src="${i.pic_url?replace('bao/uploaded', 'imgextra')}_60x60.jpg" alt="${i.title}"/></div>
 	<div class="item"><div class="title"><a onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'item-d-${i.nick}-${i.num_iid}', '${i.title}']);" target="_blank" title="${i.title}">${i.title}</a></div>
 	<div><span class="k">价格:</span><span class="v">${i.price}</span></div>
-	<div><span class="k">佣金:</span><span class="v">${i.commission}</span></div><img class="customechecked" src="/assets/images/delete.gif"/></div>
+	<div><span class="k">佣金:</span><span class="v">${i.commission}</span></div><img class="customechecked" src="http://static.xintaonet.com/assets/images/delete.gif"/></div>
 	</li></#list></#if></ul></div>
 			<div align="center" style="width:100%;height:30px;clear:both;"><input type="text" id="q" value="" style="padding:2px;width:300px;"><a id="itemSearchButton" class="button">搜索</a></div>
 			<div id="itemSearchResult" style="width:100%;height:100%;"></div>

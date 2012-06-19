@@ -18,8 +18,8 @@
 					<div class="xt-key">
 						<div class="xt-skin xt-naked">
 							<div class="xt-action xt-clearfix" style="margin-left:20px;">
-								<div class="xt-btn-buy"><a id="J_LinkBuy" href="/gitem/${item.numIid}.html" class="fl-link" target="_blank" style="width:170px;"><img src="/assets/min/stylesheets/images/gomai.gif"></a></div>
-								<#if shopId??&&''!=shopId><div class="xt-btn-buy"><a href="/gshop/${shopId}.html" class="fl-link" target="_blank" style="width:170px;"><img src="/assets/min/stylesheets/images/gozhanggui.gif"></a></div></#if>
+								<div class="xt-btn-buy"><a id="J_LinkBuy" href="/gitem/${item.numIid}.html" class="fl-link" target="_blank" style="width:170px;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/gomai.gif"></a></div>
+								<#if shopId??&&''!=shopId><div class="xt-btn-buy"><a href="/gshop/${shopId}.html" class="fl-link" target="_blank" style="width:170px;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/gozhanggui.gif"></a></div></#if>
 							</div>
 						</div>
 					</div>

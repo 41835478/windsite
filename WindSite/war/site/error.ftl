@@ -13,7 +13,7 @@ body{color: #666;font-family: Tahoma, SimSun, Arial;font-size: 12px;font-weight:
 </style>
 <div id="error-notice"> 
     <div class="ant-emotion"> 
-        <img src="/assets/images/error.gif" alt="Search"> 
+        <img src="http://static.xintaonet.com/assets/images/error.gif" alt="Search"> 
     </div> 
     <div class="error-notice-text"> 
         <div class="error-notice-hd">

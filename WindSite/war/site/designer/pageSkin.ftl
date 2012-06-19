@@ -5,11 +5,11 @@
 <meta name="description" content="新淘网 - 新淘网实现了多种酷炫图片组件封装，向广大普通互联网用户提供一站式的建站方案，大幅度降低建站门槛，会用鼠标就可以拖拽生成独立而漂亮的淘宝推广网站，让更多的普通互联网用户成为专业淘客、推广淘宝、赚取佣金">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>淘站主题-新淘网</title>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/common.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/xintao.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/designer.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/pagemanager.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/common.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/xintao.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/designer.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/pagemanager.css" rel="stylesheet"/>
 <!--[if IE 6]><style>html {background: url(null) fixed;}#ds-toolbar {top: expression(documentElement.scrollTop);}</style><![endif]-->
 </head>
 <body>

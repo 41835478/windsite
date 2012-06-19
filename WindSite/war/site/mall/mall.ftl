@@ -40,7 +40,7 @@ $(function(){
 </script>
 <style>
 .tb-shop .shop-b2c-cat .bd {margin: 0px;padding: 0px;}.shop-b2c-cat .navList {font-size: 12px;line-height: 16px;background-color: #f7f7f7;border: 1px solid #DDD;}.shop-b2c-cat .bd a {color: #333;cursor: pointer;display: block;height: 31px;line-height: 31px;padding: 0 5px;border-bottom: 1px solid #f2f2f2;margin: 0 5px;}
-#J_FocusBar {position: absolute;left: 0;top: 0;color: #fff;font-size: 12px;font-weight: bold;line-height: 31px;width: 197px;height: 31px;padding-left: 10px;background:url(/assets/min/stylesheets/images/T15K02XXRtXXXXXXXX-197-31.png) no-repeat;margin: 1px 0 0 1px;display:none;}
+#J_FocusBar {position: absolute;left: 0;top: 0;color: #fff;font-size: 12px;font-weight: bold;line-height: 31px;width: 197px;height: 31px;padding-left: 10px;background:url(http://static.xintaonet.com/assets/min/stylesheets/images/T15K02XXRtXXXXXXXX-197-31.png) no-repeat;margin: 1px 0 0 1px;display:none;}
 </style>
 <#assign objectConstructor = "freemarker.template.utility.ObjectConstructor"?new()>
 <#assign file = objectConstructor("java.io.File", htmlPath+"/htdocs/zone/ymall/mallCateogry.html")> 

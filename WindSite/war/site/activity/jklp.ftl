@@ -37,7 +37,7 @@ h2{color:red;font-size:13pt;}h4{color:red;font-size:12pt;}
 <td align="right"><strong>活动时间：2010年7月1日-2010年10月1日</strong></td>
 </tr></table>
 <br/>
-	<img src="/assets/images/activity/activity0.jpg" width="940px" height="263px"/>
+	<img src="http://static.xintaonet.com/assets/images/activity/activity0.jpg" width="940px" height="263px"/>
 <h2>本店主推产品：</h2>
 <br/>
 <h4>左旋360（334元）佣金比例14%  单品佣金46.76元<#if USER??>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a numiid="da6d3d72c23b97e5c1947349b95e2f8c" class="addMyItemGroup button-red-100x30" style="color:white;">加入推广组</a></#if></h4>

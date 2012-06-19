@@ -1,4 +1,4 @@
-<link type="text/css" href="/assets/min/css/default_${layout}.css?v=${dateVersion()}" rel="stylesheet">
+<link type="text/css" href="http://static.xintaonet.com/assets/min/css/default_${layout}.css?v=${dateVersion()}" rel="stylesheet">
 <div id="ew:container4MyTaobao4" class="expressway-mytaobao">
   <div class="ew-panel">
     <div class="ew-tab" id="ew:tabContainer0">

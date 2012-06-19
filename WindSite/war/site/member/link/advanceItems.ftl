@@ -5,14 +5,14 @@
 </@ws.header>
 <style>
 .wTable td{line-height:20px;}
-.filter .select-item span,.filter-tabbar li.status a, .filter-tabbar li.combine a, .filter-tabbar li.status a span, .toolbar .order .order-options li a , .page-start, .page-next, .page-prev, .page-end{background: url(/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px -9999px;}
-.toolbar .order a, .toolbar .protection .title,.filter button.submit,  .mall-icon, .shoe-mall-icon{background: url(/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px -9999px;}
+.filter .select-item span,.filter-tabbar li.status a, .filter-tabbar li.combine a, .filter-tabbar li.status a span, .toolbar .order .order-options li a , .page-start, .page-next, .page-prev, .page-end{background: url(http://static.xintaonet.com/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px -9999px;}
+.toolbar .order a, .toolbar .protection .title,.filter button.submit,  .mall-icon, .shoe-mall-icon{background: url(http://static.xintaonet.com/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px -9999px;}
 .search_goods {background: #F3F3F3;border-top: 1px solid white;height: 30px;padding: 10px 0px;}
 .search_goods .search_con {margin: 0px auto;width: 700px;}.search_goods select {border: 1px solid #C1C1C1;float: left;font-size: 12px;height: 21px;margin-right: 5px;}
 .txt_sea {border: 1px solid #C1C1C1;float: left;height: 19px;margin-right: 5px;width: 243px;}
 .btn_alltype_sea {background-position: -105px -61px;border: none;color: white;cursor: pointer;font-size: 14px;font-weight: bold;height: 21px;line-height: 25px;overflow: hidden;padding-bottom: 2px;width: 63px;}
-.button{background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
-.search-nav, .search-nav .crumbs li,.filter-tabbar li,.filter-tabbar li .l, .filter-tabbar li .r,.toolbarWrapper,.filter .select-item  {background: url(/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;}
+.button{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
+.search-nav, .search-nav .crumbs li,.filter-tabbar li,.filter-tabbar li .l, .filter-tabbar li .r,.toolbarWrapper,.filter .select-item  {background: url(http://static.xintaonet.com/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;}
 .search-nav {background-position: 0px 0px;border: 1px solid #E5E5E5;border-bottom-left-radius: 3px 3px;border-bottom-right-radius: 3px 3px;border-top-left-radius: 3px 3px;border-top-right-radius: 3px 3px;line-height: 25px;padding: 0px 6px;}
 .search-nav {line-height: 25px;width:740px;}
 .search-nav .crumbs li {background-position: 100% -25px;background-repeat: no-repeat;margin-right: 8px;padding-right: 17px;}

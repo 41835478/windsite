@@ -38,9 +38,9 @@ a.ads-desc{color:red;font-size:10pt;}a.ads-desc:hover{color:#A10000;}
 	width: 99%;
 }
 div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0; visibility:hidden; }
-.tooltip{display:none;background:transparent url(/assets/images/black_arrow.png);font-size:12px;height:70px;width:160px;padding:25px;padding-top:20px;color:#fff;	}
+.tooltip{display:none;background:transparent url(http://static.xintaonet.com/assets/images/black_arrow.png);font-size:12px;height:70px;width:160px;padding:25px;padding-top:20px;color:#fff;	}
 .ui-selecting {background: #FF7C00;}
-.function-li{position:relative;margin-bottom:13px;width:590px;height:80px;background:url(/assets/images/functionbg.png) no-repeat;}
+.function-li{position:relative;margin-bottom:13px;width:590px;height:80px;background:url(http://static.xintaonet.com/assets/images/functionbg.png) no-repeat;}
 .function-li img{margin:10px;float:left;}
 .function{float:left;}
 .function-title{display:block;color:#FF0000;padding:5px;font-size:12pt;font-weight:bold;}
@@ -59,7 +59,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 		</div>
 		<ul style="margin:0px;padding:0px;height:360px;width:590px;list-style:none;">
 			<li class="function-li">
-				<img src="/assets/images/function-site.png">
+				<img src="http://static.xintaonet.com/assets/images/function-site.png">
 				<div class="function ui-corner-top  ui-corner-bottom">
 					<span class="function-title">淘站建设</span>
 					<span class="function-profile">丰富的酷炫图文工具,集成阿里妈妈推广</span>
@@ -67,7 +67,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 				</div>
 			</li>
 			<li class="function-li">
-				<img src="/assets/images/function-manager.png">
+				<img src="http://static.xintaonet.com/assets/images/function-manager.png">
 				<div class="function ui-corner-top  ui-corner-bottom">
 					<span class="function-title">淘站管理</span>
 					<span class="function-profile">基本信息设置 ,SEO优化,多种第三方统计集成</span>
@@ -75,7 +75,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 				</div>
 			</li>
 			<li class="function-li">
-				<img src="/assets/images/function-business.png">
+				<img src="http://static.xintaonet.com/assets/images/function-business.png">
 				<div class="function ui-corner-top  ui-corner-bottom">
 					<span class="function-title">商务平台</span>
 					<span class="function-profile">基于淘宝TOP平台,整合阿里妈妈淘客推广</span>
@@ -83,7 +83,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 				</div>
 			</li>
 			<li class="function-li">
-				<img src="/assets/images/function-trait.png">
+				<img src="http://static.xintaonet.com/assets/images/function-trait.png">
 				<div class="function ui-corner-top  ui-corner-bottom">
 					<span class="function-title">特色功能</span>
 					<span class="function-profile">拖拽式建站操作,淘站检测卫士</span>
@@ -103,9 +103,9 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 				<span class="num">02</span><a href="javascript:;">授权新淘网</a>
 			</li>
 			<li>
-			<table width="100%"><tr><td><a onClick="$('#site-login-dialog').dialog('open');"><img src="/assets/images/login-button.gif"></a></td>
+			<table width="100%"><tr><td><a onClick="$('#site-login-dialog').dialog('open');"><img src="http://static.xintaonet.com/assets/images/login-button.gif"></a></td>
 			<td align="right">
-			<img src="/assets/images/help.png"/><a href="/router/site/view/support" target="_blank" style="margin-left:3px;color:#6189b7;font-weight:bold;font-size:11pt;">寻求更多帮助？</a>
+			<img src="http://static.xintaonet.com/assets/images/help.png"/><a href="/router/site/view/support" target="_blank" style="margin-left:3px;color:#6189b7;font-weight:bold;font-size:11pt;">寻求更多帮助？</a>
 			</td></tr></table>
 			</li>
 		</ul>
@@ -132,26 +132,26 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 <br/>
 
 <!--<div  class="today box ui-corner-top" style="width:100%;height:200px;margin-top:10px;margin-right:5px;margin-bottom:10px;float:left;">
-<h3 style="width:100%;font-weight:bold;color:#888888;background:url(/assets/images/bg_box_title.png) repeat-x;">&nbsp;热卖/推荐-<a href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzd%2BCSt1Aov%2B23rb64Kz7iutHx1KeJ1ajGc00ak2XtaBY%2FWEj9Hvx02COU&c=0ef1cf3ba0572f0c65a858abe1b6b43b&p=13667242&n=19&u=12034285xintao003" onclick="Track('ads-zzwlj321','进入店铺');" target="_blank">魔力俏美人邀您共赢</a>:</h3>
+<h3 style="width:100%;font-weight:bold;color:#888888;background:url(http://static.xintaonet.com/assets/images/bg_box_title.png) repeat-x;">&nbsp;热卖/推荐-<a href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzd%2BCSt1Aov%2B23rb64Kz7iutHx1KeJ1ajGc00ak2XtaBY%2FWEj9Hvx02COU&c=0ef1cf3ba0572f0c65a858abe1b6b43b&p=13667242&n=19&u=12034285xintao003" onclick="Track('ads-zzwlj321','进入店铺');" target="_blank">魔力俏美人邀您共赢</a>:</h3>
 	<table width=100% height=170><tr><td width="590px;">
-	<a target="_blank" class="ads-tuiguang" partner="zzwlj321" href="http://taoke.alimama.com/spreader/auction_list.htm?c=&advsort=&mid=1&q=zzwlj321&cat=0&od=1&conts=&conte=&hs=&he=&cs=&ce=&rs=&re=&loc=" target="_blank"><img src="/assets/images/activity/zzwlj321_index.gif" alt="" width="590" height="170" style="border:1px solid #DDD;"></a> 
+	<a target="_blank" class="ads-tuiguang" partner="zzwlj321" href="http://taoke.alimama.com/spreader/auction_list.htm?c=&advsort=&mid=1&q=zzwlj321&cat=0&od=1&conts=&conte=&hs=&he=&cs=&ce=&rs=&re=&loc=" target="_blank"><img src="http://static.xintaonet.com/assets/images/activity/zzwlj321_index.gif" alt="" width="590" height="170" style="border:1px solid #DDD;"></a> 
 	</td>
 	<td width="350px" style="" valign="top">
 		<dl style="padding:10px;"> 
 		<dt class="partner-desc"><a class="ads-desc" partner="zzwlj321" href="http://taoke.alimama.com/spreader/gen_auction_code.htm?_tb_token_=ee54e59f31d4e&auction_id=2173491317" target="_blank">加速360左旋肉碱 健康减肥 </a></dt>
 		<dt class="partner-desc"><a class="ads-desc" partner="zzwlj321" href="http://taoke.alimama.com/spreader/gen_auction_code.htm?_tb_token_=ee54e59f31d4e&auction_id=3710779591" target="_blank">百年育发液 防脱生发克星 </a></dt>
 		<dt><a href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzd%2BCSt1Aov%2B23rb64Kz7iutHx1KeJ1ajGc00ak2XtaBY%2FWEj9Hvx02COU&c=0ef1cf3ba0572f0c65a858abe1b6b43b&p=13667242&n=19&u=12034285xintao003" onclick="Track('ads-zzwlj321','进入店铺');" target="_blank">
-		<img src="/assets/images/activity/click_shop.jpg" alt="" width="100" height="25" border="0"></a>
+		<img src="http://static.xintaonet.com/assets/images/activity/click_shop.jpg" alt="" width="100" height="25" border="0"></a>
 		&nbsp;&nbsp;
 		<a href="http://taoke.alimama.com/spreader/auction_list.htm?c=&advsort=&mid=1&q=zzwlj321&cat=0&od=1&conts=&conte=&hs=&he=&cs=&ce=&rs=&re=&loc="  target="_blank" onclick="Track('ads-zzwlj321','推广店铺');">
-		<img src="/assets/images/activity/click_tuiguang.jpg" alt="" width="100" height="25" border="0"></a></dt>
+		<img src="http://static.xintaonet.com/assets/images/activity/click_tuiguang.jpg" alt="" width="100" height="25" border="0"></a></dt>
 	</dl> 
 	</td>
 	</tr></table>
 </div>-->
 <br/>
 <div  class="today box ui-corner-top" style="width:100%;height:auto;margin-top:10px;margin-bottom:10px;">
-		<h3 style="width:100%;font-weight:bold;color:#888888;background:url(/assets/images/bg_box_title.png) repeat-x;">&nbsp;今日新增站点:</h3>
+		<h3 style="width:100%;font-weight:bold;color:#888888;background:url(http://static.xintaonet.com/assets/images/bg_box_title.png) repeat-x;">&nbsp;今日新增站点:</h3>
 	<ul>
 	<#if lastSites??>
 	<#list lastSites as s>
@@ -163,7 +163,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 	</ul>
 </div>
 <div  class="today box ui-corner-top" style="width:100%;height:100px;margin-top:10px;margin-bottom:10px;">
-		<h3 style="width:100%;font-weight:bold;color:#888888;background:url(/assets/images/bg_box_title.png) repeat-x;">&nbsp;今日新增会员:</h3>
+		<h3 style="width:100%;font-weight:bold;color:#888888;background:url(http://static.xintaonet.com/assets/images/bg_box_title.png) repeat-x;">&nbsp;今日新增会员:</h3>
 		<ul>
 		<#if lastUsers??>
 		<#list lastUsers as u>

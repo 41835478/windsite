@@ -47,7 +47,7 @@ $(function(){
 <body>
 <#if USER??&&USER.isNew==true>
 <style>
-.ui-dialog-titlebar{background:url(/assets/images/bg_box_title.png);}
+.ui-dialog-titlebar{background:url(http://static.xintaonet.com/assets/images/bg_box_title.png);}
 </style>
 <script>
 $(function() {
@@ -123,15 +123,15 @@ $(function() {
 					<!--|&nbsp;<a href="/router/site/onlinemembers">在线会员</a>&nbsp;
 					|&nbsp;<a href="/router/site/search" target="_blank">搜索</a>-->
 					</td>
-					<td align="right"><img src="/assets/images/help.png"/><a href="http://www.xintaonet.com/help/index.html" target="_blank">帮助文档</a></td>
+					<td align="right"><img src="http://static.xintaonet.com/assets/images/help.png"/><a href="http://www.xintaonet.com/help/index.html" target="_blank">帮助文档</a></td>
 				</tr>
 			</table>
 		</div>
 	</div>
 	<div id="main" class="clearfix">
 		<div id="header" align="left" style="position:relative;">
-			<div style="float: left;"><a href="/"><img src="/assets/images/logo.png" style="margin-top:13px;"/></a></div>
-			<ul class="index-menu ui-corner-top" style="position:absolute; right: 0px; width:795px;height:37px;margin:0px;padding:0px;padding-left:10px;top:20px;background:url(/assets/images/indexmenu.gif);background-position: 0px 0px;background-repeat: repeat-x;">
+			<div style="float: left;"><a href="/"><img src="http://static.xintaonet.com/assets/images/logo.png" style="margin-top:13px;"/></a></div>
+			<ul class="index-menu ui-corner-top" style="position:absolute; right: 0px; width:795px;height:37px;margin:0px;padding:0px;padding-left:10px;top:20px;background:url(http://static.xintaonet.com/assets/images/indexmenu.gif);background-position: 0px 0px;background-repeat: repeat-x;">
 				<li class="selected"><a href="/router/site/login"><span>首页</span></a></li>
 				<#if USER??>
 				<li id="myXintao"><a href="/router/member/view/personal"><span>我的新淘网</span></a></li>

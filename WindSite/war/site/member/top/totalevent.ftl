@@ -16,7 +16,7 @@ $(function(){
 <style>
 .top_box{background: #F9FCF7;}
 .top_box{display: inline;float: left;margin: 0px 12px 12px 0px;overflow: ;width: 370px;}
-.top_box .title{background: url(/assets/images/top_greenbox_title_bg.gif);height: 28px;margin: 0px;padding: 0px 0px 0px 6px;}
+.top_box .title{background: url(http://static.xintaonet.com/assets/images/top_greenbox_title_bg.gif);height: 28px;margin: 0px;padding: 0px 0px 0px 6px;}
 .top_box .title h3{color: #455409;float: left;margin: 8px 0px 0px;font-size:14px;}
 .top_box .note{border:1px solid #D6D6D6;border-width: 0px 1px;clear: both;padding: 8px 5px 5px;}
 .top_box .note p{background: #FDFDE0;border: 1px dashed #CCC;margin: 0px 5px;padding: 5px;}

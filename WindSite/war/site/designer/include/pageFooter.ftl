@@ -7,17 +7,17 @@
 						<div class="custom-area">
 							<#if (versionNo??&&(versionNo>1))>
 							<div style="width:auto; text-align:center; margin:10px auto; height:50px;">
-								<!--<img src="http://www.xintaonet.com/assets/min/stylesheets/images/fot_1.jpg">-->
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/fot_2.jpg">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/taoke.gif">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/fot_3.jpg">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/fot_4.jpg">
+								<!--<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_1.jpg">-->
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_2.jpg">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/taoke.gif">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_3.jpg">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_4.jpg">
 							</div>
 							<div style="width:auto; text-align:center; margin:10px auto; height:50px;">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/buliang.gif">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/bottom.gif">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/110.jpg">
-								<img src="http://www.xintaonet.com/assets/min/stylesheets/images/315online.gif">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/buliang.gif">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/bottom.gif">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/110.jpg">
+								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/315online.gif">
 							</div>
 							</#if>
 							<p>

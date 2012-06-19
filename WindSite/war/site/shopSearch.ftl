@@ -7,7 +7,7 @@
 <title><#if isCat>${catName}-<#else><#if q??&&q!=''>${q}-</#if></#if>店铺搜索-${sitetitle}</title>
 </@p.pageHeader>
 <script src="/assets/min/js/page/jquery.tooltip.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/assets/min/stylesheets/shopSearch.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/stylesheets/shopSearch.css?v=${dateVersion()}" type="text/css"/>
 <style>.result-container a{color:#36c;}.result-container a:hover{color:#f60;}.ww-inline {width: 77px;height: 20px;display: inline-block;vertical-align: text-bottom;overflow: hidden;}</style>
 <div class="layout grid-m ks-clear">
 	<div class="col-main">

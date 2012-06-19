@@ -7,14 +7,14 @@
 						<div class="custom-area">
 							<div class="store_show_box">
 							    <div class="store_show_box_logo">
-									<p class="t1"><a href="/gshop/${shop.sid}.html" target="_blank"><img src="http://logo.taobao.com/shop-logo${shop.picPath}" class="pic" alt="${shop.title}"></a></p><p class="t4"><a href="/gshop/${shop.sid}.html" target="_blank"><img src="/assets/min/stylesheets/images/jump.gif" class="jump" alt="${shop.title}"></a></p>
+									<p class="t1"><a href="/gshop/${shop.sid}.html" target="_blank"><img src="http://logo.taobao.com/shop-logo${shop.picPath}" class="pic" alt="${shop.title}"></a></p><p class="t4"><a href="/gshop/${shop.sid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/jump.gif" class="jump" alt="${shop.title}"></a></p>
 								</div>
 								<div class="store_show_box_info">
 									<ul>
 										<li style="width:550px;">店铺名称：<h1><a href="/gshop/${shop.sid}.html" target="_self" title="${shop.title}">${shop.title}</a></h1></li>
-										<li style="width:145px;"><img src="/assets/min/stylesheets/images/315.gif" alt="品质卖家"></li>
+										<li style="width:145px;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/315.gif" alt="品质卖家"></li>
 										<li>店铺掌柜：${shop.nick}<a href="http://amos.im.alisoft.com/msg.aw?v=2&amp;uid=${shop.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" target="_blank"><img src="http://amos.im.alisoft.com/online.aw?v=2&amp;uid=${shop.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" alt="点击这里给我发消息"></a></li>
-										<#if tShop.sellerCredit??&&''!=tShop.sellerCredit><li>卖家信用：<span><img src="/assets/min/stylesheets/images/${tShop.sellerCredit}.gif" style="vertical-align: text-bottom;"/></span></li></#if>
+										<#if tShop.sellerCredit??&&''!=tShop.sellerCredit><li>卖家信用：<span><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${tShop.sellerCredit}.gif" style="vertical-align: text-bottom;"/></span></li></#if>
 										<#if tShop.auctionCount??><li>商品总数：<span>${tShop.auctionCount}件</span></li></#if>
 										<#if shop.shopScore??><#assign score=shop.shopScore>
 										<li>商品描述：<span class="c-value-no" title="${score.itemScore}/5.0"><i style="width: ${score.itemScore}em"></i></span></li>

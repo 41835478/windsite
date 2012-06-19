@@ -15,23 +15,23 @@
 <#if site_ico??&&''!=site_ico>
 <link rel="shortcut icon" type="image/ico" href="${site_ico}">
 </#if>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion}" rel="stylesheet"/>
 <#if !page.isIndex&&page.skin??&&''!=page.skin><#assign skin=page.skin></#if>
 <#if !page.isIndex&&page.css??&&''!=page.css><#assign theme=page.css></#if>
 <#if skin??&&''!=skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}.css" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
 </#if>
 <#if versionNo??&&(versionNo>1)>
 <#if theme??&&''!=theme>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/theme/${theme}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/theme/${theme}.css" rel="stylesheet"/>
 </#if>
 </#if>
 <#if skin??&&''!=skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css?v=${dateVersion}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css?v=${dateVersion}" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion}" rel="stylesheet"/>
 </#if>
 </head>
 <body>

@@ -10,7 +10,7 @@ $(function(){
 });
 </script>
 <style>
-#tableProfile td{line-height:20px;text-align:left}.btn{background: url(/assets/images/btn_bg.gif) no-repeat;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 100px;background-position: 0px -350px;}
+#tableProfile td{line-height:20px;text-align:left}.btn{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 100px;background-position: 0px -350px;}
 #planWizard {font-size:12px;width:750px;height:650px;overflow-x:hidden;position:relative;}  
 #planWizard .items {width:20000em;clear:both;position:absolute;}
 #planWizard .step {padding:20px 30px;width:680px;float:left;}
@@ -26,7 +26,7 @@ $(function(){
 #planWizard label span {color:#b8128f;font-weight:bold;position:relative;top:4px;font-size:20px;}#planWizard .double label {width:50%;float:left;}#planWizard .double .text {width:93%;}
 #planWizard .clearfix {clear:both;padding-top:10px;}#planWizard .right {float:right;}
 #planWizard #status {border: 1px solid #8AB78A;margin:0px !important;height:35px;background:#F0F5F9;padding-left:25px !important;}#status li {list-style-type:none;list-style-image:none;float:left;color:#414141;padding:10px 30px;}#status li.active {background-color:#5DAE40;color:#fff;font-weight:bold;}
-.button{background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 80px;background-position: 0px 0px;}
+.button{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 25px;line-height: 25px;text-align: center;width: 80px;background-position: 0px 0px;}
 .nav_pager {background: #EEE;border-top: 1px solid #999;padding: 5px;}.nav_pager a {padding: 0px 5px;color: #005BD8;}.nav_pager a.highlight {zoom: 1;color: black;font-weight: bold;}
 .itemSearchResult li {margin-bottom:0px;float: left;border: 1px solid #AAA;float: left;cursor: pointer;margin-right: 15px;margin-top: 5px;overflow: hidden;width: 200px;height: 54px;}img.customechecked,input.customechecked {position: absolute;right: 0px;bottom: 0px;cursor: pointer;}.itemSearchResult .item,.itemSearchResult .item {float: right;width: 140px;position: relative;}.itemSearchResult li .title a{line-height:12px;height:12px;overflow: hidden;white-space: nowrap;}
 .itemSearchResult .item .k,.itemSearchResult .item .k {color: #274F80;font-weight: bold;}.itemSearchResult .item .v,.itemSearchResult .item .v {color: #F60;font-weight: bold;}.itemSearchResult .item div,.itemSearchResult .item div {height: 18px;overflow: hidden;width: 130px;}.itemSearchResult .pic,.itemSearchResult .pic {width: 52px;height: 52px;float: left;}.itemSearchResult .pic img,.itemSearchResult .pic img {max-width: 50px;max-height: 50px;width: 50px;height: 50px;cursor: pointer;vertical-align: middle;}

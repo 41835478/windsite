@@ -8,8 +8,8 @@
 
 <#include "/site/template/import.ftl">
 <script src="/assets/js/site/sitewidgets.js?v=${dateVersion()}" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/assets/min/css/widgets.css?v=${dateVersion()}">
-<link rel="stylesheet" type="text/css" href="/assets/css/sitewidgets.css?v=${dateVersion()}">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/widgets.css?v=${dateVersion()}">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/css/sitewidgets.css?v=${dateVersion()}">
 <script>
 $(function(){
 	$('#hot_history').tabs();
@@ -56,7 +56,7 @@ getFavoriteHistoryList('${widget.id}',pageNo);
 	   	<div id="wholeBodyLay">
 			<div class="wm_content" align=center>
 			<table width=100%><tr><td align=left valign=top>
-			<div><a href="/"><img src="/assets/images/logo.png"></a></div></td><td valign=bottom>
+			<div><a href="/"><img src="http://static.xintaonet.com/assets/images/logo.png"></a></div></td><td valign=bottom>
 			  <div class="wm_mac_nav" align=center>
 			    <ul style="width:500px">
 			      <li class="first"><a href="/">新淘首页</a></li>

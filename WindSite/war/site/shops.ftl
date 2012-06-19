@@ -3,7 +3,7 @@
 <meta name="description" content="${sitetitle}挑选了淘宝网热卖人气店铺,这些${cidKeywords}热卖的店铺都提供了人气高而且价格便宜的热卖商品">
 <title>店铺搜索-${keyword}-${sitetitle}</title>
 
-<link rel="stylesheet" href="/assets/min/css/shops.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/shops.css?v=${dateVersion()}" type="text/css"/>
 </@ws.siteHeader>
 <script>
 $(function(){

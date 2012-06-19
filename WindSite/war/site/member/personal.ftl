@@ -6,8 +6,8 @@
 <style>
 #sidebar {width: 140px;margin: 0px;}ul {list-style: none;margin: 0;padding: 0;}	
 #sidebar li a {height: 32px;height: 24px;text-decoration: none;}
-#sidebar li a:link, #sidebar li a:visited {color: #656556;display: block;background:  url(/assets/images/sidebar.gif);padding: 8px 0 0 20px;}
-#sidebar li a:hover,#sidebar li a.selected {color: #474739;background:  url(/assets/images/sidebar.gif) 0 -32px;padding: 8px 0 0 20px;}
+#sidebar li a:link, #sidebar li a:visited {color: #656556;display: block;background:  url(http://static.xintaonet.com/assets/images/sidebar.gif);padding: 8px 0 0 20px;}
+#sidebar li a:hover,#sidebar li a.selected {color: #474739;background:  url(http://static.xintaonet.com/assets/images/sidebar.gif) 0 -32px;padding: 8px 0 0 20px;}
 
 </style>
 <script type="text/javascript">

@@ -5,9 +5,9 @@
 <meta name="description" content="新淘网 - 新淘网实现了多种酷炫图片组件封装，向广大普通互联网用户提供一站式的建站方案，大幅度降低建站门槛，会用鼠标就可以拖拽生成独立而漂亮的淘宝推广网站，让更多的普通互联网用户成为专业淘客、推广淘宝、赚取佣金">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title><#if 'user'==mode>${page.title}<#elseif 'detail'==mode>宝贝详情页<#elseif 'search'==mode>搜索列表页</#if>-页面设计器</title>
-<link href="/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link href="/assets/min/stylesheets/designer.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/designer.css?v=${dateVersion()}" rel="stylesheet"/>
 <link href="/assets/js/jquery/jqtransform/jqtransform.css" rel="stylesheet"/>
 <#assign skin='' css=''>
 <#if !page.isIndex>
@@ -22,20 +22,20 @@
 	</#if>
 </#if>
 <#if ''!=skin>
-<link href="/assets/min/stylesheets/skin/${skin}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}.css" rel="stylesheet"/>
 <#else>
-<link href="/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
 </#if>
 <#if (USER.usb.versionNo>1)&&''!=css>
-<link href="/assets/min/stylesheets/theme/${css}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/theme/${css}.css" rel="stylesheet"/>
 </#if>
 <!--淘宝-->
 <link href="http://a.tbcdn.cn/s/kissy/1.1.5/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
 <!--[if IE 6]><style>html {background: url(null) fixed;}#ds-toolbar {top: expression(documentElement.scrollTop);}</style><![endif]-->
 <#if ''!=skin>
-<link href="/assets/min/stylesheets/skin/${skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 <#else>
-<link href="/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 </#if>
 <style>a.J_PageFixed{font-size:16px;font-weight:bold;color:red;text-decoration: underline;}</style>
 </head>
@@ -62,7 +62,7 @@
 	    			<div class="shop-custom no-border">
 						<div class="bd">
 							<div class="custom-area" style="line-height:400px;text-align:center;height:400px;" align=center>
-								<div style="height:500px;position:relative;"><span style="position: absolute;top: 50%;line-height: 21px;left: 50%;text-align: center;margin: -25px 0 0 -63px;font: 12px/21px simsun!important;color: #939395!important;"><img src="/assets/stylesheets/images/load.gif" alt="loading..."><br>页面加载中，请稍候...</span></div>
+								<div style="height:500px;position:relative;"><span style="position: absolute;top: 50%;line-height: 21px;left: 50%;text-align: center;margin: -25px 0 0 -63px;font: 12px/21px simsun!important;color: #939395!important;"><img src="http://static.xintaonet.com/assets/stylesheets/images/load.gif" alt="loading..."><br>页面加载中，请稍候...</span></div>
 							</div>
 						</div>
 					</div>
@@ -179,7 +179,7 @@
 <!--Designer-->
 <script type="text/javascript">
 var DEBUG=true,MODE='${mode}',ISDESIGNER=true,APP=${USER.appType},SITEID='${site.id}',<#if page??>PAGEID='${page.id}',ISINDEX=<#if page.isIndex??&&page.isIndex>true<#else>false</#if>,</#if>USERID='${USER.user_id}',USERNICK='${USER.nick}',PID='${USER.pid}',VERSIONNO=${VN},LIMIT_LAYOUTS=${USER.limit.layouts},LIMIT_MODULES=${USER.limit.modules},LIMIT_HEARDS=${USER.limit.headers}<#if 'detail'==mode>,SELLERNICK='${item.nick}',CID='${item.cid}'<#else>,KEYWORD='',CID='16'</#if>;
-var CUSTOMLINKS=['http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css'<#if ''!=skin>,'http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}.css'<#else>,'http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css'</#if><#if (USER.usb.versionNo>1)&&''!=css>,'http://www.xintaonet.com/assets/min/stylesheets/theme/${css}.css'</#if><#if ''!=skin>,'http://www.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css'<#else>,'http://www.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css'</#if>];
+var CUSTOMLINKS=['http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css'<#if ''!=skin>,'http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}.css'<#else>,'http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css'</#if><#if (USER.usb.versionNo>1)&&''!=css>,'http://static.xintaonet.com/assets/min/stylesheets/theme/${css}.css'</#if><#if ''!=skin>,'http://static.xintaonet.com/assets/min/stylesheets/skin/${skin}_fixed.css'<#else>,'http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css'</#if>];
 $(function(){
 	$('#page').page();
 });

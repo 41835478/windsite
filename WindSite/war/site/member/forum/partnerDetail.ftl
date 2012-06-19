@@ -7,8 +7,8 @@
 <title>${forum.title}盟友-新淘网</title>
 
 <#include "/site/template/import.ftl">
-<link rel="stylesheet" type="text/css" href="/assets/min/css/widgets.css?v=${dateVersion()}">
-<link rel="stylesheet" type="text/css" href="/assets/css/siteforums.css?v=${dateVersion()}">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/widgets.css?v=${dateVersion()}">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/css/siteforums.css?v=${dateVersion()}">
 <script>
 $(function(){
 	$('.addHomeFriend').click(function(){
@@ -52,7 +52,7 @@ $(function(){
 	   	<div id="wholeBodyLay">
 			<div class="wm_content" align=center>
 			<table width=100%><tr><td align=left valign=top>
-			<div><a href="/"><img src="/assets/images/logo.png"></a></div></td><td valign=bottom>
+			<div><a href="/"><img src="http://static.xintaonet.com/assets/images/logo.png"></a></div></td><td valign=bottom>
 			  <div class="wm_mac_nav" align=center>
 			     <ul style="width:500px">
 			      <li class="first"><a href="/">新淘首页</a></li>

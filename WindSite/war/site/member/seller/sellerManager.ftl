@@ -13,7 +13,7 @@
 <script language="javascript" type="text/javascript" src="/assets/min/js/seller.min.js?v=${dateVersion()}"></script>
 <style>
 #tableProfile th,#tableProfile td{text-align:center}
-.xintao-seller-header{background: white url(/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -299px;border-top: 1px solid #C4D5E0;height: 22px;}
+.xintao-seller-header{background: white url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) repeat-x scroll 50% -299px;border-top: 1px solid #C4D5E0;height: 22px;}
 </style> 
 <script>
 var isSyn=false;
@@ -36,7 +36,7 @@ $(function(){
 <table style="padding:15px;line-height:20px;">
 	<tr><td><span class="key">店铺名称：</span>${shop.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#F60;" id="synShop" target="_blank">同步店铺推广信息</a></td></tr>
 	<tr><td><span class="key">佣金比例：</span><#if shop.commissionRate??>${shop.commissionRate}%<#else>您尚未加入推广</#if></td></tr>
-	<tr><td><span class="key">店铺等级：</span>:<img src="/assets/min/stylesheets/images/${shop.sellerCredit}.gif"/></td></tr>	
+	<tr><td><span class="key">店铺等级：</span>:<img src="http://static.xintaonet.com/assets/min/stylesheets/images/${shop.sellerCredit}.gif"/></td></tr>	
 </table>
 </td></tr>
 </table>

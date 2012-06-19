@@ -12,7 +12,7 @@ legend{color: #005BA5;display: block;font-size: 14px;font-weight: bolder;left: 1
         版式
     </legend>
 <ul>
-<li class="selected" t="0"><img id="checkedImg" src="/assets/images/link/checked.gif" style="position:absolute;"/><img src="/assets/images/link/group-default.gif"/></li>
+<li class="selected" t="0"><img id="checkedImg" src="http://static.xintaonet.com/assets/images/link/checked.gif" style="position:absolute;"/><img src="http://static.xintaonet.com/assets/images/link/group-default.gif"/></li>
 </ul>
 <div style="clear:both;"></div>
  </fieldset>

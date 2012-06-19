@@ -12,7 +12,7 @@
 .rc-bt{background-position: -96px -424px;display: block;height: 4px;margin-top: -4px;position: relative;}
 .bd{background-position: 0px -459px;background-repeat: repeat-x;border-bottom: none;border: 1px #F69968;height: 33px;}
 .trade{float: left;font-size: 14px;line-height: 33px;margin-top: 3px;overflow: hidden;padding-left: 5px;position: relative;}
-.tabs{width:950px;background: url(/assets/images/titleBg.png) repeat-x 0px -121px;border:1px solid #DFDFDF;color: #C9C9C9;height: 29px;line-height: 29px;}
+.tabs{width:950px;background: url(http://static.xintaonet.com/assets/images/titleBg.png) repeat-x 0px -121px;border:1px solid #DFDFDF;color: #C9C9C9;height: 29px;line-height: 29px;}
 .tabs a{border:1px solid #C9C9C9;float: left;font-size: 14px;height: 29px;margin-left: -1px;padding: 0px 20px;}
 .tabs a:hover{color: #4C7E07;font-weight: bold;}
 .tabs-selected,.tabs-selected:hover{background: white;color: #4C7E07;font-weight: bold;height: 30px;margin-bottom: -1px;position: relative;text-decoration: none;}
@@ -29,7 +29,7 @@
 .search-form label {float:left;width:60px;background: url(http://img.alimama.cn/images/cps/tb_logo1.gif) no-repeat 0px 2px;display: block;height: 46px;}
 
 .widget-itemsscrollableview-items {display: none;padding: 0px;overflow: hidden;width: 100%;}.widget-itemsscrollableview-items {position: relative;overflow: hidden;height: 200px;width: 100%;}.widget-itemsscrollableview-items .items {width: 20000em;left: 0px;position: absolute;clear: both;}.widget-itemsscrollableview-items .items div.item {float: left;width: 100%;}.widget-itemsscrollableview-items .d-a-i {float: left;margin: 10px 4px 15px 4px;_margin: 10px 3px 15px 3px;background-color: #fff;padding: 2px;_padding: 1px;-moz-border-radius: 4px;-webkit-border-radius: 4px;vertical-align: middle;width: 160px;height: 160px;float: left;vertical-align: middle;border: 1px solid #ccc;}.widget-itemsscrollableview-items .d-a-i a {background-color: #F7F7F7;width: 160px;height: 160px; *font-size: 140px;}.widget-itemsscrollableview-items .d-a-i img {vertical-align: middle;border: 0px; #margin-top: -2px; /*IE7*/}
-.navi {position: absolute;right: 70px;top: 7px;}.navi a {width: 8px;height: 8px;float: left;margin: 3px;background: url(/assets/images/navigator.png) 0 0 no-repeat;display: block;font-size: 1px;}.navi a:hover {background-position: 0 -8px;}.navi a.active {background-position: 0 -16px;}
+.navi {position: absolute;right: 70px;top: 7px;}.navi a {width: 8px;height: 8px;float: left;margin: 3px;background: url(http://static.xintaonet.com/assets/images/navigator.png) 0 0 no-repeat;display: block;font-size: 1px;}.navi a:hover {background-position: 0 -8px;}.navi a.active {background-position: 0 -16px;}
 .ui-designer-widget{background-color: #F6F6F6;border: 1px solid #CCC;}b.widget-title {color: #F50;font-size: 14px;font-weight: bold;line-height: 18px;padding-left: 20px;}
 .ui-designer-widget-header{position:relative;height:25px;line-height:25px;border-bottom: 1px solid #CCC;}.ui-designer-widget-more{position:absolute;right:0px;}
 </style>

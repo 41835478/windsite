@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/assets/min/css/posterdetail.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/posterdetail.css?v=${dateVersion()}" type="text/css"/>
 <div id="poster-detail">
 			<div class="crumbs">
 		<div class="poster-area-950">

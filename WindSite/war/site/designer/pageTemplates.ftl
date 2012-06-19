@@ -5,17 +5,17 @@
 <meta name="description" content="新淘网 - 新淘网实现了多种酷炫图片组件封装，向广大普通互联网用户提供一站式的建站方案，大幅度降低建站门槛，会用鼠标就可以拖拽生成独立而漂亮的淘宝推广网站，让更多的普通互联网用户成为专业淘客、推广淘宝、赚取佣金">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>淘站模板市场-新淘网</title>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/common.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/xintao.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/designer.css" rel="stylesheet"/>
-<link href="/assets/stylesheets/theme.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/common.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/xintao.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/designer.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/stylesheets/theme.css" rel="stylesheet"/>
 <!--[if IE 6]><style>html {background: url(null) fixed;}#ds-toolbar {top: expression(documentElement.scrollTop);}</style><![endif]-->
 <style>
 .step li span{display: -moz-inline-box;display: inline-block; *zoom: 1; *display: inline;vertical-align: middle;line-height: 100%;text-align: left;font-size: 12px;}
 .step {width: 100%;margin-bottom: 10px;overflow: hidden;}.step li,.step li span {background-image: url('/assets/min/images/bg-step.png');background-repeat: no-repeat;text-align: center;}.step li {width: 207px;height: 29px;line-height: 29px;padding-left: 20px;float: left;overflow: hidden;text-align: center;position: relative;background-position: right -108px;border: none;color: #605F5F;}.step li span {width: 100%;font-size: 14px;line-height: 27px;line-height: 29px;display: block;position: absolute;left: -17px;background-position: 0 -108px;text-indent: 17px;}.step li.finished {background-position: -4px -108px;}.step li.finished span {left: 0;background-position: 0 -108px;}.step li.current {height: 29px;background-position: right -51px;border: none;}.step li.current span {background-position: 17px -51px;font-weight: bold;color: #AB4400;}.step li.last {border-right: 1px #DBDBDB solid;background-position: right -406px;}.step li.last span {background: none;left: 0;}.step li.last-current {height: 29px;background-position: right -166px;border: none;border-right: 1px solid #ffab0a;}.step li.last-current span {background-position: 15px -166px;font-weight: bold;color: #AB4400;left: -15px;}
 .step-three li{width:450px;}.fm-input .i-text{width:300px}
-.layout-list {position: relative;z-index: 1;padding: 10px;}.layout-list .extra {position: absolute;z-index: 1;right: 12px;top: 8px;}.layout-list a {background: url(/assets/min/stylesheets/images/T1o9toXe8gXXXXXXXX-308-141.png) no-repeat 1px 1px;border: 1px solid #FFF;display: inline-block;height: 41px;margin-right: 20px;padding: 1px;width: 151px;cursor: pointer;}.layout-list a:hover,.layout-list a.selected {border-color: #ffc500;}.layout-list .l-grid-s5m0 {background-position: 1px -48px;}.layout-list .l-grid-m0s5 {background-position: -156px -48px;}.layout-list .l-grid-s5m0e5 {background-position: 1px -99px;}.layout-list .l-grid-m0s5e5 {background-position: -156px -99px;}.layout-list .l-grid-s5e5m0 {background-position: -156px 1px;}
+.layout-list {position: relative;z-index: 1;padding: 10px;}.layout-list .extra {position: absolute;z-index: 1;right: 12px;top: 8px;}.layout-list a {background: url(http://static.xintaonet.com/assets/min/stylesheets/images/T1o9toXe8gXXXXXXXX-308-141.png) no-repeat 1px 1px;border: 1px solid #FFF;display: inline-block;height: 41px;margin-right: 20px;padding: 1px;width: 151px;cursor: pointer;}.layout-list a:hover,.layout-list a.selected {border-color: #ffc500;}.layout-list .l-grid-s5m0 {background-position: 1px -48px;}.layout-list .l-grid-m0s5 {background-position: -156px -48px;}.layout-list .l-grid-s5m0e5 {background-position: 1px -99px;}.layout-list .l-grid-m0s5e5 {background-position: -156px -99px;}.layout-list .l-grid-s5e5m0 {background-position: -156px 1px;}
 </style>
 </head>
 <body>
@@ -152,7 +152,7 @@
 					    							<#if '1.6'==t.versionNo><#assign versionDesc='普及版（付费）'></#if>
 					    							<li style="float:left;" t="${t.versionNo}">
 					    							<dl>
-					                                    <dt class="temp-thumb"><a title="${t.title}" href="${t.url}" target="_blank"><img src="/assets/stylesheets/images/templates/${t.id}.jpg"></a></dt>
+					                                    <dt class="temp-thumb"><a title="${t.title}" href="${t.url}" target="_blank"><img src="http://static.xintaonet.com/assets/stylesheets/images/templates/${t.id}.jpg"></a></dt>
 					                                    <dt class="temp-info">
 					                                       <div class="temp-title"><a title="${t.title}" href="${t.url}" target="_blank">${t.title}</a></div>
 					                                       <div class="temp-site">适用版本:<span title="${versionDesc}">${versionDesc}&nbsp;以上</span></div>
@@ -167,7 +167,7 @@
 			    						<div class="ks-clear"></div>
 			    					</div>
 			    					<div id="page-layout-div" class="page-templates-content" style="text-align:left;display:none;">
-			    						<ul class="layout-list" style="margin-top:0px;"><li style="float:none;margin-bottom:0px;"><a class="l-grid-m" layout="grid-m"></a></li><li style="float:none;margin-bottom:0px;"><a class="l-grid-s5m0" layout="grid-s5m0"></a><a class="l-grid-m0s5" layout="grid-m0s5"></a></li><li style="float:none;margin-bottom:0px;"><a class="l-grid-s5m0e5" layout="grid-s5m0e5"></a><a class="l-grid-m0s5e5" layout="grid-m0s5e5"></a><a class="l-grid-s5e5m0" layout="grid-s5e5m0"></a><a style="background:none;" layout="grid-s310m0e310"><img src="/assets/stylesheets/images/layout310.jpg"/></a></li></ul>
+			    						<ul class="layout-list" style="margin-top:0px;"><li style="float:none;margin-bottom:0px;"><a class="l-grid-m" layout="grid-m"></a></li><li style="float:none;margin-bottom:0px;"><a class="l-grid-s5m0" layout="grid-s5m0"></a><a class="l-grid-m0s5" layout="grid-m0s5"></a></li><li style="float:none;margin-bottom:0px;"><a class="l-grid-s5m0e5" layout="grid-s5m0e5"></a><a class="l-grid-m0s5e5" layout="grid-m0s5e5"></a><a class="l-grid-s5e5m0" layout="grid-s5e5m0"></a><a style="background:none;" layout="grid-s310m0e310"><img src="http://static.xintaonet.com/assets/stylesheets/images/layout310.jpg"/></a></li></ul>
 			    						<div class="fm-item ks-clear"><span id="secondStepButton" class="btn btn-ok"><input type="button" value="确认"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 			    						<div class="ks-clear"></div>
 			    					</div>

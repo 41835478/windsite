@@ -34,7 +34,7 @@
 	</THEAD>
 	<TBODY>
 	<#if (doctors?size>0)>
-		<tr><td colspan="6" style="height:30px;background: #FFC url(/assets/images/light.gif) no-repeat 20px 8px;padding-left:50px;"><span>下述列表为最近一次商品检测结果</span></td></tr>
+		<tr><td colspan="6" style="height:30px;background: #FFC url(http://static.xintaonet.com/assets/images/light.gif) no-repeat 20px 8px;padding-left:50px;"><span>下述列表为最近一次商品检测结果</span></td></tr>
 		<#list doctors as d>
 			<TR class="<#if d_index%2==0>odd<#else>even</#if>">
 				<TD>

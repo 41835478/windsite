@@ -17,7 +17,7 @@
 <title>${blog.subject}- ${sitetitle}</title>
 </@p.pageHeader>
 <script>function adBlog(b){!b||b==""||$.ajax({url:"/router/ad/page/blog?sid="+b,type:"GET",data:{},dataType:"html",beforeSend:function(a){a.setRequestHeader("WindType","AJAX");a.setRequestHeader("WindDataType","HTML")},error:function(a,c,d){},success:function(a){$("#adShopDisplay").append(a);$("#adShopDisplay .pic img").each(function(){var o=$(this).attr('original');if(o){$(this).attr('src',o);}});}})};</script>
-<link href="/assets/min/stylesheets/reset-post.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/reset-post.css" rel="stylesheet"/>
 <style>* {word-wrap: break-word;word-break: break-all;}.cvl-line li {margin-bottom:0px;}.blog-detail .blog-title h3 {color: black;font-size: 14px;line-height: 21px;overflow: hidden;padding-left: 0px;text-align: left;text-indent: 5px;white-space: nowrap;width: 530px;}</style>
 <div class="layout grid-s5m0 ks-clear">
 	<div class="col-main">

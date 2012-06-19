@@ -84,7 +84,7 @@
 	
 </script>
 <style>
-.button{background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
+.button{background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;color: white;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 20px;line-height: 20px;text-align: center;width: 80px;background-position: 0px 0px;}
 .wTable td{line-height:20px;}
 .bb-info{width:350px;height:85px;}
 .bb-selectbox{margin:30px 0px 30px 0px;float:left;width:20px;}
@@ -172,7 +172,7 @@
 								<ul style="list-style-type:none">
 									<li><a href="${shopClickUrl}" target="_blank">${s.title}</a></li>
 									<li><a href="${shopClickUrl}" style="color:#555;font-weight:normal;" target="_blank">掌柜:${s.nick}</a></li>
-									<li style="position:relative;"><#if ''!=s.sellerCredit>信用:<img src="/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="${shopClickUrl}" mamaUrl="" onClick="openItemAdsDialog($(this));return false;">推广此店铺</a></li>
+									<li style="position:relative;"><#if ''!=s.sellerCredit>信用:<img src="http://static.xintaonet.com/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="${shopClickUrl}" mamaUrl="" onClick="openItemAdsDialog($(this));return false;">推广此店铺</a></li>
 								</ul>	
 							</div>
 							<#else>
@@ -181,7 +181,7 @@
 								<ul style="list-style-type:none">
 									<li><a href="javascript:;" target="_blank">${s.title}</a></li>
 									<li><a href="javascript:;" style="color:#555;font-weight:normal;" target="_blank">掌柜:${s.nick}</a></li>
-									<li style="position:relative;"><#if ''!=s.sellerCredit>信用:<img src="/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if></li>
+									<li style="position:relative;"><#if ''!=s.sellerCredit>信用:<img src="http://static.xintaonet.com/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if></li>
 								</ul>	
 							</div>
 							</#if>

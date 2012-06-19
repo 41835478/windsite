@@ -5,7 +5,7 @@
 <meta name="description" content="${item.title},价格:${item.price},掌柜:${item.nick}">
 <title>${item.title}- ${sitetitle}</title>
 </@ws.siteHeader>
-<link rel="stylesheet" href="/assets/min/css/items.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/items.css?v=${dateVersion()}" type="text/css"/>
 <script type="text/javascript">
 $(function(){
 		$('#J_TabBar li').click(function(){

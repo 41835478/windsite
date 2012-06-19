@@ -162,7 +162,7 @@
 							<ul style="list-style-type:none">
 								<li><a href="${s.clickUrl}"  <#if isExtra&&local.sid??>onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'shop-d-${local.sid}', '${s.shopTitle}']);"</#if> target="_blank">${s.shopTitle}</a></li>
 								<#if isExtra><li><a href="${s.clickUrl}" <#if local.sid??>onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'shop-d-${local.sid}', '${s.shopTitle}']);"</#if> style="color:#555;font-weight:normal;" target="_blank">掌柜:${local.nick}</a></li></#if>
-								<li style="position:relative;"><#if s.sellerCredit??&&''!=s.sellerCredit>信用:<img src="/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="<#if isExtra>http://<#if site.www??&&site.www!=''>${site.www}<#else>${site.domainName}.xintaonet.com</#if>/tshop/${local.sid}.html</#if>" mamaUrl="${s.clickUrl}" onClick="openItemAdsDialog($(this));return false;">推广此店铺</a></li>
+								<li style="position:relative;"><#if s.sellerCredit??&&''!=s.sellerCredit>信用:<img src="http://static.xintaonet.com/assets/min/stylesheets/images/${s.sellerCredit}.gif"/></#if><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="<#if isExtra>http://<#if site.www??&&site.www!=''>${site.www}<#else>${site.domainName}.xintaonet.com</#if>/tshop/${local.sid}.html</#if>" mamaUrl="${s.clickUrl}" onClick="openItemAdsDialog($(this));return false;">推广此店铺</a></li>
 							</ul>	
 						</div>
 					</div>

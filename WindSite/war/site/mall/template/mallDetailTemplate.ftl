@@ -42,7 +42,7 @@ $(function(){
 							<div class="main_curpath"><h3>您的当前位置：<a href="/" target="_self">首页</a> &gt; <a href="/ymall.html" title="商城大全">商城大全</a> &gt; <#if cat??><a href="/ymall.html?cat=${cat.id}">${cat.title}</a> &gt; </#if>${mallTitle}</h3></div>
 							<div class="store_show_box">
 							    <div class="store_show_box_logo">
-									<p class="t1"><a target="_blank"><img src="${mall.logo}" class="pic" alt="${mallTitle}"></a></p><p class="t4"><a href="/ymall-go-${mall.b2cId}.html" target="_blank" id="J_MallFirst"><img src="/assets/min/stylesheets/images/dinggou.gif" class="jump" alt="${mallTitle}"></a></p>
+									<p class="t1"><a target="_blank"><img src="${mall.logo}" class="pic" alt="${mallTitle}"></a></p><p class="t4"><a href="/ymall-go-${mall.b2cId}.html" target="_blank" id="J_MallFirst"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/dinggou.gif" class="jump" alt="${mallTitle}"></a></p>
 								</div>
 								<div class="store_show_box_info">
 									<ul id="J_MallInfo">

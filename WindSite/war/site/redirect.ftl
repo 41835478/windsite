@@ -23,7 +23,7 @@ $(function() {
 <BODY>
 <div id="site-login-dialog" style="display:none;position:relative;" title="未登录或登录超时" align=center>
 <style>
-.btn-web-account {background:url(/assets/images/btn_bg.png) no-repeat;outline:none;}.btn-web-account{text-align:left;color:#000;display:inline-block;font-size:14px;height:32px;line-height:32px;margin:10px 0;padding:0 5px 0 40px;width:163px;outline:none;}.btn-web-account{background-position:0 0;}.btn-web-account:hover {background-position:-228px 0;}
+.btn-web-account {background:url(http://static.xintaonet.com/assets/images/btn_bg.png) no-repeat;outline:none;}.btn-web-account{text-align:left;color:#000;display:inline-block;font-size:14px;height:32px;line-height:32px;margin:10px 0;padding:0 5px 0 40px;width:163px;outline:none;}.btn-web-account{background-position:0 0;}.btn-web-account:hover {background-position:-228px 0;}
 
 </style>
 <#if USER??&&USER.appType??&&USER.usb??>

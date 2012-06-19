@@ -17,8 +17,8 @@ function getFanliMemberSearchHtmlByBtn(){
 	getFanliMemberSearchHtml($('#q').val(),1);
 };
 </script>
-<link rel="stylesheet" href="/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
-<link rel="stylesheet" href="/assets/min/css/huabaosearch.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/huabaosearch.css?v=${dateVersion()}" type="text/css"/>
 <style>.wTable td{text-align:center}</style>
 <@xt.taoketemplate navselected='taoke' bdselected='fanli-members' group=2>
 <div class="search-form">

@@ -50,7 +50,7 @@ if (!String.prototype.replaceAll) {String.prototype.replaceAll = function(b, a) 
 					<div class="poster-container" style="float:none;">
 						<div class="poster-tags"><span>标签:</span><span id="J_PosterTag">${poster.tag}</span></div>
 						<div class="poster-box J_PosterImageArea">
-					        <div class="image-wrapper J_ImageWrap" style="position:relative;"><img <#if pics??&&pics?size!=0>src="${pics[0]['picUrl']}_620x10000.jpg"</#if> style="display:none;"/><span id="J_PosterImageLoading" style="background:url(http://www.xintaonet.com/assets/min/stylesheets/images/loading.gif) no-repeat;width:32px;height:32px;position:absolute;top:100px;left:294px;"></span></div>
+					        <div class="image-wrapper J_ImageWrap" style="position:relative;"><img <#if pics??&&pics?size!=0>src="${pics[0]['picUrl']}_620x10000.jpg"</#if> style="display:none;"/><span id="J_PosterImageLoading" style="background:url(http://static.xintaonet.com/assets/min/stylesheets/images/loading.gif) no-repeat;width:32px;height:32px;position:absolute;top:100px;left:294px;"></span></div>
 					    </div>
 					    <div class="poster-sidebar">
 					    	<#if prev??&&prev.cover_urls??>

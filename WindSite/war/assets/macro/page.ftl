@@ -49,8 +49,8 @@
 			<li class="release" style="position:relative;"><a onclick="$('#fixed-dialog').dialog('open');" title="修复页面">修复</a></li>
 			<li class="release" style="position:relative;"><a href="javascript:;" id="J_TRelease">发布</a>
 			<div id="J_PageNotDeploy" style="position: absolute;z-index:99999;left:-50px; top:0;width:200px;margin-top: 26px; text-align:left;text-indent:0;overflow:visible;height:auto;padding:5px 24px 5px 5px;background:#ffffce;border:#f0e5ba 1px solid;color:#666;-moz-border-radius: 6px;-moz-box-shadow: 2px 2px 2px #f0e5ba;-webkit-border-radius: 6px;-webkit-box-shadow: 2px 2px 2px #f0e5ba;">
-			<div style="position:absolute;width:15px;height:8px;left:0;top:0;margin:-8px 0 0 60px;font-size:1px;line-height:1px;background:url(/assets/images/wblogin_bt_v2.png) 0 -30px no-repeat;celar:both;zoom:1;"><div style="font-size:1px;line-height:1px;"></div></div>
-			<div style="position:absolute;top:0;right:0;width:15px;height:15px;margin:4px;background:url(/assets/images/wblogin_bt_v3.png) 0 -45px no-repeat;font-size:1px;line-height:1px;cursor:pointer;"><a onclick="$('#J_PageNotDeploy').fadeOut();" style="background-color: transparent;"><span style="display:none;">关闭</span></a></div>
+			<div style="position:absolute;width:15px;height:8px;left:0;top:0;margin:-8px 0 0 60px;font-size:1px;line-height:1px;background:url(http://static.xintaonet.com/assets/images/wblogin_bt_v2.png) 0 -30px no-repeat;celar:both;zoom:1;"><div style="font-size:1px;line-height:1px;"></div></div>
+			<div style="position:absolute;top:0;right:0;width:15px;height:15px;margin:4px;background:url(http://static.xintaonet.com/assets/images/wblogin_bt_v3.png) 0 -45px no-repeat;font-size:1px;line-height:1px;cursor:pointer;"><a onclick="$('#J_PageNotDeploy').fadeOut();" style="background-color: transparent;"><span style="display:none;">关闭</span></a></div>
 			<div>
 				<div>
 					<span style="color:#666;">设计完成后，记得点击发布按钮喔！</span>
@@ -178,19 +178,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if site_ico??&&''!=site_ico>
 <link rel="shortcut icon" type="image/ico" href="${site_ico}">
 </#if>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
 <#if site_skin??&&''!=site_skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
 </#if>
 <#if site_theme??&&''!=site_theme>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/theme/${site_theme}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/theme/${site_theme}.css" rel="stylesheet"/>
 </#if>
 <#if site_skin??&&''!=site_skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${site_skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${site_skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 </head>
@@ -301,23 +301,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if site_ico??&&''!=site_ico>
 <link rel="shortcut icon" type="image/ico" href="${site_ico}">
 </#if>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
 <#if site_skin??&&''!=site_skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
 </#if>
 <#if site_skin??&&''!=site_skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${site_skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${site_skin}_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion()}" rel="stylesheet"/>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 <script src="/assets/js/jquery/ui/jquery-ui.min.js"></script>
 <script src="/assets/js/jquery/tools/dateinput.min.js" type="text/javascript"></script>
 <script src="/assets/min/js/page/member.min.js?v=${dateVersion()}" type="text/javascript"></script>
-<link href="/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/min/stylesheets/fanlifront.css?v=${dateVersion()}" type="text/css"/>
+<link href="http://static.xintaonet.com/assets/css/ui/jquery-ui.css" rel="stylesheet"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/stylesheets/fanlifront.css?v=${dateVersion()}" type="text/css"/>
 </head>
 <body>
 <div id="site-nav"><div id="site-nav-bd"><#include "site/designer/include/pageHeader.ftl"></div></div>
@@ -409,14 +409,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if site_ico??&&''!=site_ico>
 <link rel="shortcut icon" type="image/ico" href="${site_ico}">
 </#if>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/xintao.min.css?v=${dateVersion()}" rel="stylesheet"/>
 <#if site_skin??&&''!=site_skin>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/${site_skin}.css" rel="stylesheet"/>
 <#else>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow.css" rel="stylesheet"/>
 </#if>
 <#if site_theme??&&''!=site_theme>
-<link href="http://www.xintaonet.com/assets/min/stylesheets/theme/${site_theme}.css" rel="stylesheet"/>
+<link href="http://static.xintaonet.com/assets/min/stylesheets/theme/${site_theme}.css" rel="stylesheet"/>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 </head>

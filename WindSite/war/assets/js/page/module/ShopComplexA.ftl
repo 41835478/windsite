@@ -103,7 +103,7 @@
 						<div class="item" cr='${d.commissionRate}'>
 							<div class="pic"><a target="_blank" href="/tshop/${d.sid}.html" title="${d.title}"><img ${imgAttr}="<#if ''!=d.picPath>http://logo.taobao.com/shop-logo${d.picPath}<#else>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png</#if>" alt="${d.title}" width=100px height=100px></a></div>
 							<div class="desc"><a target="_blank" href="/tshop/${d.sid}.html" class="permalink">${d.title}</a></div>
-							<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+							<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 						</div>
 						</li>
 					</#list>

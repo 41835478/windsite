@@ -37,7 +37,7 @@
 
 .taoke-bar span,.taoke-bar-grey span {
 	color: #404040;
-	background: #F0F5F9 url(/assets/images/myxintao_v3_bg.gif) repeat-x
+	background: #F0F5F9 url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) repeat-x
 		scroll 0px -100px;
 	display: block;
 	font-size: 12px;
@@ -48,7 +48,7 @@
 }
 
 .taoke-bar button.menu-open,.taoke-bar button.menu-close {
-	background: url(/assets/images/myxintao_v3_bg.gif) no-repeat scroll
+	background: url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) no-repeat scroll
 		2000px 2000px;
 	border: 0px;
 	cursor: pointer;
@@ -99,7 +99,7 @@ select,input,button,textarea {
 
 .menu-box .group li a,.menu-box .group li span a,.menu-box .group li ul li a
 	{
-	background: transparent url(/assets/images/myxintao_v3_bg.gif) no-repeat
+	background: transparent url(http://static.xintaonet.com/assets/images/myxintao_v3_bg.gif) no-repeat
 		scroll 2000px 2000px;
 	display: block;
 	font-size: 12px;

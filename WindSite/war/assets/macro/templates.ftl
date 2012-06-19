@@ -5,7 +5,7 @@
 #sys_Templates ul,#self_Templates ul {width:100%;height:100%;margin-left:5px;margin-top:5px;list-style: none;}
 
 #sys_Templates li,#self_Templates li {border:1px solid #DDD;float: left;padding: 5px;margin-right: 15px;margin-bottom:15px;position:relative;display:inline;overflow:hidden;}
-.t_details{background: transparent url(/designer/assets/images/template_detail.gif) no-repeat scroll 0px 0px;border: none;bottom: 10px;color: black;height: 26px;line-height: 29px;overflow: hidden;position: absolute;right: 5px;text-align: center;width: 78px;z-index: 2;}
+.t_details{background: transparent url('http://static.xintaonet.com/designer/assets/images/template_detail.gif) no-repeat scroll 0px 0px;border: none;bottom: 10px;color: black;height: 26px;line-height: 29px;overflow: hidden;position: absolute;right: 5px;text-align: center;width: 78px;z-index: 2;}
 </style>
 <script type="text/javascript">
 	$(function() {

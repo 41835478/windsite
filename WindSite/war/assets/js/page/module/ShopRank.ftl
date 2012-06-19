@@ -28,13 +28,13 @@
 									<li>
 									<div class="pic" cr='${d.commissionRate}'><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}"><img ${imgAttr}="<#if ''!=local.picPath>http://logo.taobao.com/shop-logo${local.picPath}<#else><#if d.shopType=='C'>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png<#else>http://img03.taobaocdn.com/tps/i3/T1N.tyXcNpXXXXXXXX-70-70.png</#if></#if>" alt="${d.shopTitle}" onerror="javascript:this.src='http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png'" width=40px height=40px></a></div>
 									<div class="desc"><a href="${shopClickUrl}" title="${d.shopTitle}" target="_blank">${d.shopTitle}</a></div>
-									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 									</li>
 								<#else>
 									<li>
 									<div class="pic" cr='${d.commissionRate}'><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}"><img ${imgAttr}="<#if d.shopType=='C'>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png<#else>http://img03.taobaocdn.com/tps/i3/T1N.tyXcNpXXXXXXXX-70-70.png</#if>" alt="${d.shopTitle}" onerror="javascript:this.src='http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png'" width=40px height=40px></a></div>
 									<div class="desc"><a href="${shopClickUrl}" title="${d.shopTitle}" target="_blank">${d.shopTitle}</a></div>
-									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 									</li>
 								</#if>
 								</#list>
@@ -43,7 +43,7 @@
 									<li>
 									<div class="pic" cr='${d.commissionRate}'><a href="/tshop/${d.sid}.html" target="_blank" title="${d.title}"><img ${imgAttr}="<#if ''!=d.picPath>http://logo.taobao.com/shop-logo${d.picPath}<#else>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png</#if>" alt="${d.title}" onerror="javascript:this.src='http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png'" width=40px height=40px></a></div>
 									<div class="desc"><a href="/tshop/${d.sid}.html" title="${d.title}" target="_blank">${d.title}</a></div>
-									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount" style="text-align:left;"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount" style="text-align:left;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 									</li>
 								</#list>	
 							</#if>

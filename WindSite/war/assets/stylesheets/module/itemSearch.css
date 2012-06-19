@@ -48,7 +48,7 @@
 }
 
 .search-tab li.selected {
-	background: url(/assets/min/stylesheets/images/bg_so_type.gif) no-repeat
+	background: url(http://static.xintaonet.com/assets/min/stylesheets/images/bg_so_type.gif) no-repeat
 		;
 	color: #000;
 	font-weight: bold;
@@ -70,7 +70,7 @@
 	line-height: 38px;
 	padding-left: 10px;
 	padding-right: 10px;
-	background: url('/assets/min/stylesheets/images/bg_search.png')
+	background: url('http://static.xintaonet.com/assets/min/stylesheets/images/bg_search.png')
 		no-repeat;
 	float:left;
 	overflow: hidden;
@@ -90,7 +90,7 @@
 	padding-left: 20px;
 	padding-right: 5px;
 	width: 340px;
-	background: url("/assets/min/stylesheets/images/bg_search_input.gif")
+	background: url("http://static.xintaonet.com/assets/min/stylesheets/images/bg_search_input.gif")
 		no-repeat scroll 0 50% transparent;
 	color: #999;
 	margin: 0px;
@@ -102,7 +102,7 @@
 	width: 77px;
 	height: 28px;
 	line-height: 28px;
-	background: url("/assets/min/stylesheets/images/bg_search_button.gif")
+	background: url("http://static.xintaonet.com/assets/min/stylesheets/images/bg_search_button.gif")
 		no-repeat;
 	border: 0px;
 	cursor: pointer;
@@ -167,7 +167,7 @@
 }
 
 .acLoading {
-	background: url('/assets/min/stylesheets/images/indicator.gif') right
+	background: url('http://static.xintaonet.com/assets/min/stylesheets/images/indicator.gif') right
 		center no-repeat;
 }
 

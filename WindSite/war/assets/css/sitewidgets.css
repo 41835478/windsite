@@ -1,7 +1,7 @@
 #wrap{background-color: #F5F6F7;}
 .widget-customer{background:#F5F6F7;width:100%;}
 .ui-selecting {background: #FECA40;}.ui-selected {background: #F39814;}
-.wm_mac_nav li,.wm_mac_nav a,.wm_mac_nav i{background-image: url(/assets/images/wm_template_nav.gif)}
+.wm_mac_nav li,.wm_mac_nav a,.wm_mac_nav i{background-image: url(http://static.xintaonet.com/assets/images/wm_template_nav.gif)}
 .wm_content{}
 .wm_mac_nav{height: 32px;margin: 0px auto;position: relative;text-align: center;top: -14px;}
 .wm_mac_nav ul{display: inline-block;list-style:none;margin:0px;padding:0px;}
@@ -13,9 +13,9 @@
 .wm_mac_nav a.current{background-position: 100% -100px;}
 .wm_mac_nav .last a{background-position: 100% -30px;padding-right: 20px;}
 .wm_list{list-style:none;margin:0px;padding:0px;}.wm_list_li{padding:0px;margin:0px;padding-bottom:15px;padding-left:2px;padding-right:2px;}
-.opera{display: block;height: 27px;margin-top: 0px;width: 92px;background-image: url(/assets/images/wm_list_opeato.gif);background-repeat: no-repeat;line-height: 14px;}
-.wm_search_input, .wm_search_but{background-image: url(/assets/images/wm_search_bg.gif);background-repeat: no-repeat;}
-.search_sort_ul .current,.pagina_span,.wm_wrap_filters,.ssd_left,.ssd_right,.page_pre,.page_next{background-image: url(/assets/images/wm_list_bg.gif);background-repeat: no-repeat;}
+.opera{display: block;height: 27px;margin-top: 0px;width: 92px;background-image: url(http://static.xintaonet.com/assets/images/wm_list_opeato.gif);background-repeat: no-repeat;line-height: 14px;}
+.wm_search_input, .wm_search_but{background-image: url(http://static.xintaonet.com/assets/images/wm_search_bg.gif);background-repeat: no-repeat;}
+.search_sort_ul .current,.pagina_span,.wm_wrap_filters,.ssd_left,.ssd_right,.page_pre,.page_next{background-image: url(http://static.xintaonet.com/assets/images/wm_list_bg.gif);background-repeat: no-repeat;}
 .search_sort_div{margin: 10px auto;width: 950px;}.search_sort_ul{float: left;height: 35px;padding-left: 10px;list-style: none;margin: 0px;padding: 0px;}
 .search_sort_ul a, .search_sort_ul :visited{color: #666;text-decoration: none;}a, a:visited{color: #2654A1;text-decoration: none;}
 .search_sort_ul a:hover, .search_sort_ul .current a, .search_sort_ul .current a:visited{color: #0968BA;}
@@ -35,9 +35,9 @@
 .clearing{clear: both;display: block;font-size: 0px;height: 0px;line-height: 0;overflow: hidden;visibility: hidden;}
 .editor-bar{color:gray}.editor-bar .k{color:#EF6F07;font-weight:bold;}
 .wm_list_tools{width:800px;text-align:center;list-style:none;display: inline-block;height: 28px;margin: 6px auto auto;margin-top: 6px;margin-top: 6px;}.wm_list_tools li{float: left;line-height: 28px;margin-right: 18px;}
-.designer_detail{margin:0px;padding:0px;list-style:none;}.designer_detail li{margin-bottom:7px}.widget_detail{background-image: url(/assets/images/wm_list_opeato.gif);background-repeat: no-repeat;color: #EF6F07;background-position: 0% -129px;padding-left: 15px;}
-.w-addfav,.w-deletefav,.w-modifywidget,.w-viewcommission,.w-hidecommission{display: block;height: 27px;margin-top: 0px;width: 92px;background-repeat: no-repeat;line-height: 14px;background-image: url(/assets/images/widgets-operate.png);}.w-addfav{background-position: 0px -68px;}.w-deletefav{background-position: 0px -34px;}.w-modifywidget{background-position: 0px -102px;}.w-viewcommission{background-position: 0px 0px;}.w-hidecommission{background-position: 0px -136px;}
+.designer_detail{margin:0px;padding:0px;list-style:none;}.designer_detail li{margin-bottom:7px}.widget_detail{background-image: url(http://static.xintaonet.com/assets/images/wm_list_opeato.gif);background-repeat: no-repeat;color: #EF6F07;background-position: 0% -129px;padding-left: 15px;}
+.w-addfav,.w-deletefav,.w-modifywidget,.w-viewcommission,.w-hidecommission{display: block;height: 27px;margin-top: 0px;width: 92px;background-repeat: no-repeat;line-height: 14px;background-image: url(http://static.xintaonet.com/assets/images/widgets-operate.png);}.w-addfav{background-position: 0px -68px;}.w-deletefav{background-position: 0px -34px;}.w-modifywidget{background-position: 0px -102px;}.w-viewcommission{background-position: 0px 0px;}.w-hidecommission{background-position: 0px -136px;}
 .wm_wrap{margin: 0px auto;width: 950px;}.designer_list{width:950px;list-style: none;margin: 0px;padding: 0px;}.designer_list li{float: left;line-height: 18px;margin-bottom: 15px;text-align: center;width: 158px;}
 #hot_history th{background: #F6F9FC;border-bottom: 2px solid #DDE4EA;font-weight: bold;text-align: left;}
 #hot_history td{border-bottom: 1px solid #EEF1F4;padding: 5px;}#hot_history td a{color:#f60;}
-.odd td{background: #D4F396;}.w-getcode{display: block;height: 25px;margin-top: 0px;width: 90px;background-image: url(/assets/images/getcode.png);}
+.odd td{background: #D4F396;}.w-getcode{display: block;height: 25px;margin-top: 0px;width: 90px;background-image: url(http://static.xintaonet.com/assets/images/getcode.png);}

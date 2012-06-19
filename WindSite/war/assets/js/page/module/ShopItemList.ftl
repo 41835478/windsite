@@ -17,14 +17,14 @@
 						<#if extra??&&extra[d.userId+'']??><#assign isExtra=true local=extra[d.userId+'']></#if>
 						<#if isExtra>
 							<#if ''!=local.sid><#assign shopClickUrl='/tshop/'+local.sid+'.html'></#if>
-							<li><div class="mc"><b class="r${d_index+1}"></b><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}">${d.shopTitle}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
+							<li><div class="mc"><b class="r${d_index+1}"></b><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}">${d.shopTitle}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
 						<#else>
-							<li><div class="mc"><b class="r${d_index+1}"></b><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}">${d.shopTitle}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
+							<li><div class="mc"><b class="r${d_index+1}"></b><a href="${shopClickUrl}" target="_blank" title="${d.shopTitle}">${d.shopTitle}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
 						</#if>
 						</#list>
 					<#else><!--店铺分组-->
 						<#list data as d>
-							<li><div class="mc"><b class="r${d_index+1}"></b><a href="/tshop/${d.sid}.html" target="_blank" title="${d.title}">${d.title}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
+							<li><div class="mc"><b class="r${d_index+1}"></b><a href="/tshop/${d.sid}.html" target="_blank" title="${d.title}">${d.title}</a></div><div class="num"><#if d.sellerCredit??&&''!=d.sellerCredit><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></div></li>
 						</#list>
 					</#if>
 				<#break>

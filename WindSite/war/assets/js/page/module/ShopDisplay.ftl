@@ -35,7 +35,7 @@
 										<div class="item" cr='${d.commissionRate}'>
 											<div class="pic"><a target="_blank" href="${shopClickUrl}" title="${d.shopTitle}"><img ${imgAttr}="<#if ''!=local.picPath>http://logo.taobao.com/shop-logo${local.picPath}<#else><#if d.shopType=='C'>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png<#else>http://img03.taobaocdn.com/tps/i3/T1N.tyXcNpXXXXXXXX-70-70.png</#if></#if>" alt="${d.shopTitle}" onerror="javascript:this.src='http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png'" ${w_h}></a></div>
 											<div class="desc"><a target="_blank" href="${shopClickUrl}" class="permalink">${d.shopTitle}</a></div>
-											<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+											<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 										</div>
 									</li>
 								<#else>
@@ -43,7 +43,7 @@
 									<div class="item" cr='${d.commissionRate}'>
 										<div class="pic"><a target="_blank" href="${shopClickUrl}" title="${d.shopTitle}"><img ${imgAttr}="<#if d.shopType=='C'>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png<#else>http://img03.taobaocdn.com/tps/i3/T1N.tyXcNpXXXXXXXX-70-70.png</#if>" alt="${d.shopTitle}" ${w_h}></a></div>
 										<div class="desc"><a target="_blank" href="${shopClickUrl}" class="permalink">${d.shopTitle}</a></div>
-										<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+										<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 									</div>
 									</li>	
 								</#if>
@@ -54,7 +54,7 @@
 								<div class="item" cr='${d.commissionRate}'>
 									<div class="pic"><a target="_blank" href="/tshop/${d.sid}.html" title="${d.title}"><img ${imgAttr}="<#if ''!=d.picPath>http://logo.taobao.com/shop-logo${d.picPath}<#else>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png</#if>" alt="${d.title}" ${w_h}></a></div>
 									<div class="desc"><a target="_blank" href="/tshop/${d.sid}.html" class="permalink">${d.title}</a></div>
-									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
+									<#if d.sellerCredit??&&''!=d.sellerCredit><div class="sales-amount"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${d.sellerCredit}.gif" style="vertical-align: text-bottom;"/></div></#if>
 								</div>
 								</li>
 								</#list>	

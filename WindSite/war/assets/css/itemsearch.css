@@ -99,13 +99,13 @@ div,ul,dl {
 
 .price em,.price strong,.prop-list dd .close,.prop-list dd .open,.show-more a span,.filter .select-item span,.filter-tabbar li.status a,.filter-tabbar li.combine a,.filter-tabbar li.status a span,.toolbar .order .order-options li a,.page-start,.page-next,.page-prev,.page-end,.legend2 a span,.toolbar .thumb-mode a span,.toolbar .list-mode a span,.selected-attr dd a .close-icon
 	{
-	background: url(/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px
+	background: url(http://static.xintaonet.com/assets/images/T18VtIXbdwXXXXXXXX.png) no-repeat -9999px
 		-9999px;
 }
 
 .show-more a,.toolbar .order a,.toolbar .protection .title,.filter button.submit,.mall-icon,.shoe-mall-icon,.legend2 a:hover,.mall-icon
 	{
-	background: url(/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px
+	background: url(http://static.xintaonet.com/assets/images/T1omRHXmpHXXXXXXXX.png) no-repeat -9999px
 		-9999px;
 }
 
@@ -124,7 +124,7 @@ div,ul,dl {
 }
 
 .button {
-	background: url(/assets/images/btn_bg.gif) no-repeat 0px 0px;
+	background: url(http://static.xintaonet.com/assets/images/btn_bg.gif) no-repeat 0px 0px;
 	color: white;
 	cursor: pointer;
 	display: inline-block;
@@ -139,7 +139,7 @@ div,ul,dl {
 
 .search-nav,.search-nav .crumbs li,.filter-tabbar li,.filter-tabbar li .l,.filter-tabbar li .r,.toolbarWrapper,.filter .select-item,.toolbar .mode a
 	{
-	background: url(/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;
+	background: url(http://static.xintaonet.com/assets/images/T1MBVHXjdeXXXXXXXX.png) repeat-x;
 }
 
 .search-nav {

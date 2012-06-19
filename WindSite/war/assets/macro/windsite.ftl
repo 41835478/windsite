@@ -109,7 +109,7 @@ ${taobaoCredit(level)}
 <#macro info>
 <div id="macro_info" class="info" align="left" style="position:relative;">
 	<#nested>
-	<img style="position:absolute;cursor:pointer;float:right;top:-14px;right:0px;" src="/assets/images/delete.gif" onclick="$(this).parent().hide();"/>
+	<img style="position:absolute;cursor:pointer;float:right;top:-14px;right:0px;" src="http://static.xintaonet.com/assets/images/delete.gif" onclick="$(this).parent().hide();"/>
 </div>
 </#macro>
 <#macro help>
@@ -140,7 +140,7 @@ $(function() {
 <body>
 <#if USER??&&(!USER.uc_id??)>
 <style>
-.ui-dialog-titlebar{background:url(/assets/images/bg_box_title.png);}
+.ui-dialog-titlebar{background:url(http://static.xintaonet.com/assets/images/bg_box_title.png);}
 </style>
 <script>
 $(function() {
@@ -164,7 +164,7 @@ $(function() {
 </#if>
 <div id="site-login-dialog" style="display:none;position:relative;" title="请选择要登录的应用" align=center>
 <style>
-.btn-web-account {background:url(/assets/images/btn_bg.png) no-repeat;outline:none;}.btn-web-account{text-align:left;color:#000;display:inline-block;font-size:14px;height:32px;line-height:32px;margin:10px 0;padding:0 5px 0 40px;width:163px;outline:none;}.btn-web-account{background-position:0 0;}.btn-web-account:hover {background-position:-228px 0;}
+.btn-web-account {background:url(http://static.xintaonet.com/assets/images/btn_bg.png) no-repeat;outline:none;}.btn-web-account{text-align:left;color:#000;display:inline-block;font-size:14px;height:32px;line-height:32px;margin:10px 0;padding:0 5px 0 40px;width:163px;outline:none;}.btn-web-account{background-position:0 0;}.btn-web-account:hover {background-position:-228px 0;}
 
 </style>
 <div class="fm-item"><a class="btn-web-account" href="${taobaoEnv.container}" title="适合普及版，返利版(月租型)，卖家版">登录淘客卖家联盟</a><br/><span>适合普及版，返利版(月租型)，卖家版</span></div>
@@ -195,8 +195,8 @@ $(function() {
 	</div>
 	<div id="main" class="clearfix">
 		<div id="header" align="left" style="position:relative;">
-			<div style="float: left;"><a href="/"><img src="/assets/images/logo.png" style="margin-top:13px;"/></a></div>
-			<ul class="index-menu ui-corner-top" style="position:absolute; right: 0px; width:795px;height:37px;margin:0px;padding:0px;padding-left:10px;top:20px;background:url(/assets/images/headernavbg.jpg);background-position: 0px 0px;background-repeat: repeat-x;">
+			<div style="float: left;"><a href="/"><img src="http://static.xintaonet.com/assets/images/logo.png" style="margin-top:13px;"/></a></div>
+			<ul class="index-menu ui-corner-top" style="position:absolute; right: 0px; width:795px;height:37px;margin:0px;padding:0px;padding-left:10px;top:20px;background:url(http://static.xintaonet.com/assets/images/headernavbg.jpg);background-position: 0px 0px;background-repeat: repeat-x;">
 				<li id="myIndex"><a href="/router/site"><span>首页</span></a></li>
 				<#if USER??>
 				<li id="myXintao"><a href="/router/member/sitemanager"><span>我的新淘网</span></a></li>
@@ -226,8 +226,8 @@ $(function() {
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <#nested>
-<link rel="stylesheet" href="/assets/min/css/haibao/haibao.css?v=${dateVersion()}" type="text/css"/>
-<link rel="stylesheet" href="/assets/min/css/haibao/skin/${tSkin}.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/haibao/haibao.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/haibao/skin/${tSkin}.css?v=${dateVersion()}" type="text/css"/>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push( [ '_setAccount', 'UA-10891782-8' ]);
@@ -270,7 +270,7 @@ $(function() {
 <#nested>
 <#include "/site/template/import.ftl">
 <script src="/assets/min/js/fanlisite.min.js?v=${dateVersion()}" type="text/javascript"></script>
-<link rel="stylesheet" href="/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push( [ '_setAccount', 'UA-10891782-8' ]);
@@ -317,7 +317,7 @@ $(function() {
 <#nested>
 <#include "/site/template/import.ftl">
 <script src="/assets/min/js/fanli.min.js?v=${dateVersion()}" type="text/javascript"></script>
-<link rel="stylesheet" href="/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push( [ '_setAccount', 'UA-10891782-8' ]);

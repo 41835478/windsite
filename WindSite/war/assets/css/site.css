@@ -118,7 +118,7 @@ body {
 
 /**BUTTON**/
 .btn,.btn input,.btn button,.btn span {
-	background-image: url(/assets/images/bg-btn.png);
+	background-image: url(http://static.xintaonet.com/assets/images/bg-btn.png);
 	background-repeat: repeat-x;
 	cursor: pointer;
 	font-family: Tahoma;
@@ -225,7 +225,7 @@ body {
 	float: left;
 	font-weight: bold;
 	padding-left: 24px;
-	background-image: url(/assets/images/t_buttons.png);
+	background-image: url(http://static.xintaonet.com/assets/images/t_buttons.png);
 }
 
 .t_button:hover {
@@ -237,7 +237,7 @@ body {
 }
 
 .t_button span {
-	background-image: url(/assets/images/t_buttons.png);
+	background-image: url(http://static.xintaonet.com/assets/images/t_buttons.png);
 	background-position: 100% 0px;
 	cursor: pointer;
 	display: inline-block;
@@ -261,7 +261,7 @@ body {
 	padding-top: 5px;
 	padding-left: 3px;
 	font-weight: bold;
-	background: url(/assets/images/bc-bg-corners.gif) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/bc-bg-corners.gif) no-repeat;
 }
 
 .buttonBar a,.buttonBar a:link,.buttonBar a:visited {
@@ -355,7 +355,7 @@ body {
 
 .wind-header {
 	background: #f6a828
-		url(/assets/images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% 50%
+		url(http://static.xintaonet.com/assets/images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% 50%
 		repeat-x;
 	font-size: 11pt;
 	font-weight: bold;
@@ -395,7 +395,7 @@ body {
 }
 
 .button-red {
-	background: url(/assets/images/button-red.jpg) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/button-red.jpg) no-repeat;
 	color: white;
 	display: inline-block;
 	font-size: 14px;
@@ -409,7 +409,7 @@ body {
 }
 
 .button-red-100x30 {
-	background: url(/assets/images/button-red_100x30.jpg) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/button-red_100x30.jpg) no-repeat;
 	color: white;
 	cursor: pointer;
 	display: inline-block;
@@ -480,7 +480,7 @@ div.box {
 }
 
 div.box h3 {
-	background-image: url(/assets/images/bg_box_title.png);
+	background-image: url(http://static.xintaonet.com/assets/images/bg_box_title.png);
 	color: black;
 	display: block;
 	font-size: 12px;
@@ -494,11 +494,11 @@ div.box h3 {
 	padding-bottom: 2px;
 }
 
-#bulletin li { /*list-style-image: url(/assets/images/dot_blue.gif);*/
+#bulletin li { /*list-style-image: url(http://static.xintaonet.com/assets/images/dot_blue.gif);*/
 	
 }
 
-#news li { /*list-style-image: url(/assets/images/dot_blue.gif);*/
+#news li { /*list-style-image: url(http://static.xintaonet.com/assets/images/dot_blue.gif);*/
 	
 }
 
@@ -526,7 +526,7 @@ div.box h3 {
 
 #div_lastusers li {
 	display: list-item;
-	/*list-style-image: url(/assets/images/board-tab-list.png);*/
+	/*list-style-image: url(http://static.xintaonet.com/assets/images/board-tab-list.png);*/
 	padding-bottom: 2px;
 	margin-left: 0px;
 	padding-left: 0px;
@@ -554,7 +554,7 @@ div.box h3 {
 	background-attachment: scroll;
 	background-clip: border-box;
 	background-color: #F2F2F2;
-	background-image: url(/assets/images/xintaobarbg.png);
+	background-image: url(http://static.xintaonet.com/assets/images/xintaobarbg.png);
 	background-origin: padding-box;
 	border-bottom-color: #D2D2D2;
 	border-bottom-style: solid;
@@ -588,7 +588,7 @@ div.box h3 {
 	width: 950px;
 	margin-top: 0px;
 	z-index: 10;
-	background: url(/assets/images/topbg.gif);
+	background: url(http://static.xintaonet.com/assets/images/topbg.gif);
 }
 
 #header .index-menu {
@@ -597,7 +597,7 @@ div.box h3 {
 }
 
 #header .index-menu li {
-	background: url(/assets/images/indexmenu.gif);
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif);
 	background-repeat: no-repeat;
 	background-position: 100% -50px;
 	float: left;
@@ -607,7 +607,7 @@ div.box h3 {
 }
 
 #header .index-menu li.selected a {
-	background: url(/assets/images/indexmenu.gif);
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif);
 	background-position: 0px -90px;
 	color: #D02200;
 	cursor: pointer;
@@ -633,7 +633,7 @@ div.box h3 {
 }
 
 #header .index-menu li a span {
-	background: url(/assets/images/indexmenu.gif);
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif);
 	background-repeat: no-repeat;
 	color: white;
 	cursor: pointer;
@@ -655,7 +655,7 @@ div.box h3 {
 }
 
 #header .index-menu li a:hover {
-	background: url(/assets/images/indexmenu.gif);
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif);
 	background-repeat: no-repeat;
 	background-position: 0px -134px;
 	color: #D02200;

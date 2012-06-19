@@ -11,7 +11,7 @@
 		<#if data??&&data?size!=0>
 		<#list data as d>
 			<#assign dTitle=d.title?replace('<span class=H>','')?replace('</span>','')>
-			<li co='${d.commission}'><a class="dianpu-logo" href="/titem/${d.num_iid}.html" target="_blank"><img ${imgAttr}="${d.pic_url?replace("bao/uploaded", "imgextra")}_120x120.jpg" alt="${dTitle}"></a><h4><a href="/titem/${d.num_iid}.html" target="_blank" title="${dTitle}">${d.title}</a></h4><div><label>价格：</label><span>${d.price}&nbsp;元</span></div><div><label>销量：</label><span>${d.volume}&nbsp;件</span></div><div><label>店铺等级：</label><span class="rank r${d.seller_credit_score}"></span></div><div><label>商品地址：</label><span>${d.item_location}</span></div><div><a href="/titem/${d.num_iid}.html" target="_blank"><img src="/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看商品详情"></a></div></li>
+			<li co='${d.commission}'><a class="dianpu-logo" href="/titem/${d.num_iid}.html" target="_blank"><img ${imgAttr}="${d.pic_url?replace("bao/uploaded", "imgextra")}_120x120.jpg" alt="${dTitle}"></a><h4><a href="/titem/${d.num_iid}.html" target="_blank" title="${dTitle}">${d.title}</a></h4><div><label>价格：</label><span>${d.price}&nbsp;元</span></div><div><label>销量：</label><span>${d.volume}&nbsp;件</span></div><div><label>店铺等级：</label><span class="rank r${d.seller_credit_score}"></span></div><div><label>商品地址：</label><span>${d.item_location}</span></div><div><a href="/titem/${d.num_iid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看商品详情"></a></div></li>
 		</#list>
 		</#if>
 		<#break>
@@ -19,7 +19,7 @@
 		<#if data??&&data?size!=0>
 		<#list data as m>
 			<#assign mallTitle=m.title?replace('CPS|ROI|CPA|CPC','','ir') mallCat=extra[m.cid+'']>
-			<li><a class="dianpu-logo" href="/ymall-${m.b2cId}.html" target="_blank"><img ${imgAttr}="${m.logo}" alt="${mallTitle}"></a><h4><a href="/ymall-${m.b2cId}.html" target="_blank" title="${mallTitle}">${mallTitle}</a></h4><div  class="b2c-fl"><label>最高返利：</label><span>${m.topRate}</span></div><div><label>所属分类：</label><span><#if mallCat??><a target="_blank" href="/ymall.html?cat=${mallCat.id}">${mallCat.title}</a></#if></span></div><div><label>开始时间：</label><span>${m.startDate}</span></div><div><label>结束时间：</label><span>${m.endDate}</span></div><div><a href="/ymall-${m.b2cId}.html" target="_blank"><img src="/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看商城详情"></a></div></li>
+			<li><a class="dianpu-logo" href="/ymall-${m.b2cId}.html" target="_blank"><img ${imgAttr}="${m.logo}" alt="${mallTitle}"></a><h4><a href="/ymall-${m.b2cId}.html" target="_blank" title="${mallTitle}">${mallTitle}</a></h4><div  class="b2c-fl"><label>最高返利：</label><span>${m.topRate}</span></div><div><label>所属分类：</label><span><#if mallCat??><a target="_blank" href="/ymall.html?cat=${mallCat.id}">${mallCat.title}</a></#if></span></div><div><label>开始时间：</label><span>${m.startDate}</span></div><div><label>结束时间：</label><span>${m.endDate}</span></div><div><a href="/ymall-${m.b2cId}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看商城详情"></a></div></li>
 		</#list>
 		</#if>
 		<#break>
@@ -51,7 +51,7 @@
 		<#list data as d>
 		<#assign pic=d.coverUrls>
 		<#if d.coverUrls?contains(',')><#assign pic=d.coverUrls?split(',')[1]></#if>
-		<li><a class="dianpu-logo" href="/huabao/${d.id}.html" target="_blank"><img ${imgAttr}="${pic}" alt="${d.title}" title="${d.title}"></a><h4><a href="/huabao/${d.id}.html" target="_blank" title="${d.title}">${d.shortTitle}</a></h4><div><label style="float:left;">标签：</label> <span class="shop-dianpu-goods" title="${d.tags}">${d.tags}</span><div class="ks-clear"></div></div><div><label>点击：</label><span>${d.hits}</span></div><div><label>创建时间：</label><span>${d.created?date}</span></div><div><label>修改时间：</label> <span>${d.modified?date}</span></div><div><a href="/huabao/${d.id}.html" target="_blank"><img src="/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看画报详情"></a></div></li>
+		<li><a class="dianpu-logo" href="/huabao/${d.id}.html" target="_blank"><img ${imgAttr}="${pic}" alt="${d.title}" title="${d.title}"></a><h4><a href="/huabao/${d.id}.html" target="_blank" title="${d.title}">${d.shortTitle}</a></h4><div><label style="float:left;">标签：</label> <span class="shop-dianpu-goods" title="${d.tags}">${d.tags}</span><div class="ks-clear"></div></div><div><label>点击：</label><span>${d.hits}</span></div><div><label>创建时间：</label><span>${d.created?date}</span></div><div><label>修改时间：</label> <span>${d.modified?date}</span></div><div><a href="/huabao/${d.id}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/gotosee.gif" width="67" height="19" alt="查看画报详情"></a></div></li>
 		</#list></#if>
 		</#if>
 		<#break>

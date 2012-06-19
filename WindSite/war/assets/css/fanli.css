@@ -6,7 +6,7 @@ body {
 
 .large-button a,.large-button a span,.simple-list .tlist-item .actions a.del,.post-opinion .details .arrow,.simple-list .batch-actions i,.common-button i.icon,.common-list .tlists thead,.common-list .list-body .batch-actions i,.new-icon i,div#navigation,div#navigation .lc,div#navigation .rc,div#navigation .mc li.current a,div#navigation .mc li.current a span,.paginate .pages li a span i,.flow-steps li i,.flow-steps li.arrow,#header #guider li.member i,#header #guider li.help i,#header #guider li.nav a,#header #guider li.nav a span
 	{
-	background-image: url(/assets/images/myalimama_bg.png);
+	background-image: url(http://static.xintaonet.com/assets/images/myalimama_bg.png);
 }
 
 ul,li {
@@ -105,7 +105,7 @@ div#navigation .mc li.current a,div#navigation .mc li.current a:hover {
 	height: 34px;
 	background-repeat: no-repeat;
 	background-position: right -68px;
-	background-image: url(/assets/images/myalimama_bg.png);
+	background-image: url(http://static.xintaonet.com/assets/images/myalimama_bg.png);
 	border: 0 none;
 	float: left;
 	line-height: 40px;
@@ -121,7 +121,7 @@ div#navigation .mc li.current a span,div#navigation .mc li.current a:hover span
 	line-height: 40px;
 	background-position: left -68px;
 	padding: 0 8px 0 28px;
-	background-image: url(/assets/images/myalimama_bg.png);
+	background-image: url(http://static.xintaonet.com/assets/images/myalimama_bg.png);
 	float: none;
 }
 
@@ -709,7 +709,7 @@ textarea.i-textarea {
 }
 
 .btn,.btn input,.btn button,.btn span {
-	background-image: url(/assets/images/bg-btn.png);
+	background-image: url(http://static.xintaonet.com/assets/images/bg-btn.png);
 	background-repeat: repeat-x;
 	cursor: pointer;
 	font-family: Tahoma;

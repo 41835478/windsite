@@ -17,7 +17,7 @@
 		<table>
 			<tr><td><div><a onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${s.sid}', '${s.title}']);" href="${s.click_url?replace('13667242',spid)}" target="_blank" title="${s.title}"><img src="<#if (s.pic_path!="")>http://logo.taobao.com/shop-logo/${s.pic_path}<#else>http://s.yijia.com/taobao/i/no_shop.gif</#if>"  alt="${s.title}"/></a></div></td></tr>
 			<tr><td height=50px valign=top><a class="title" onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${s.sid}', '${s.title}']);" href="${s.click_url?replace('13667242',spid)}" target="_blank"><span>${s.title}</span></a></td></tr>
-			<tr><td><span class="price-desc">店铺等级:</span><span class="price"><img src="/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></span></td></tr>
+			<tr><td><span class="price-desc">店铺等级:</span><span class="price"><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></span></td></tr>
 		</table>
 		</li></#list>
 	</ul>

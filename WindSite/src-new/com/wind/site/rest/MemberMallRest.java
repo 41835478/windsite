@@ -331,7 +331,7 @@ public class MemberMallRest {
 					// 批量更新
 					memberService.synMyYiqifaMalls(userId, malls);
 				}
-				response.sendRedirect("http://" + request.getServerName()
+				response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 						+ "/router/member/fl/mall/yiqifa");
 			}
 		} catch (Exception e) {

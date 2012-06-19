@@ -11,7 +11,7 @@
 .ui-selected {background: #F39814;color: white;}
 .channel_show_small{margin:0px;padding:0px;padding-top: 10px;list-style:none;}
 .channel_show_small li{display: inline;float: left;padding:2px;height: 200px;margin-right: 10px;position: relative;width: 217px;cursor:pointer;}
-.channel_show_small .smoothbox_btn{background: transparent url(/assets/min/images/template_detail.gif) no-repeat scroll 0px 0px;border: none;bottom: 14px;color: black;height: 26px;line-height: 29px;line-height: 29px;overflow: hidden;position: absolute;right: 5px;text-align: center;width: 78px;z-index: 2;}
+.channel_show_small .smoothbox_btn{background: transparent url(http://static.xintaonet.com/assets/min/images/template_detail.gif) no-repeat scroll 0px 0px;border: none;bottom: 14px;color: black;height: 26px;line-height: 29px;line-height: 29px;overflow: hidden;position: absolute;right: 5px;text-align: center;width: 78px;z-index: 2;}
 .channel_show_small .smoothbox_word{color: #0065FF;display: block;font-weight: bolder;text-align: center;}
 .smoothbox_img img{width:210px;height:160px;}#channel_show_big{width:365px;386px;}
 </style>

@@ -264,7 +264,7 @@
 	 	<a class="prev">上一个</a> 
 	 	<a class="next">下一个</a> 
 	 	<div class="info" style="width:auto;"></div> 
-	 	<img class="progress" src="/assets/min/images/scrollable_loading.gif" /> 
+	 	<img class="progress" src="http://static.xintaonet.com/assets/min/images/scrollable_loading.gif" /> 
 </div>
 <!--搜索框编辑器-->
 <div id="searchBoxEditor" title="编辑当前搜索框设计" style="display:none;height:250px;position:relative;">

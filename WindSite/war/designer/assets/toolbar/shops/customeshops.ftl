@@ -12,7 +12,7 @@
 		<div class="title">
 		<a href="${s.click_url?replace('13667242',spid)}" target="_blank">${s.title}</a>
 		</div>
-		<div><span class="k">信用:</span><span class="v"><img src="/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></span></div>
+		<div><span class="k">信用:</span><span class="v"><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></span></div>
 		<div><span class="k">佣金:</span><span class="v">${s.commission_rate}%</span></div>
 		<input class="customechecked" type="radio" name="checkedshop"/></div></li>
 	<#if s_index%15==14>

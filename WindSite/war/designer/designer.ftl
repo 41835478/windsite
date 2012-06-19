@@ -203,54 +203,54 @@
 </div>
 <!--组件预览--> <!-- itemsLinkView -->
 <div wname="itemsLinkView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsLinkView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsLinkView.png" /></div>
 <!-- itemsThumbView -->
 <div wname="itemsThumbView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsThumbView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsThumbView.png" /></div>
 <!-- itemsListView -->
 <div wname="itemsListView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsListView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsListView.png" /></div>
 <!-- itemsRotatorView -->
 <div wname="itemsRotatorView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsRotatorView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsRotatorView.png" /></div>
 <!-- itemsZoomView -->
 <div wname="itemsZoomView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsZoomView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsZoomView.png" /></div>
 <!-- itemsAppleView -->
 <div wname="itemsAppleView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsAppleView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsAppleView.png" /></div>
 <!-- itemsCycleView -->
 <div wname="itemsCycleView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsCycleView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsCycleView.png" /></div>
 <!-- itemsScrollableView -->
 <div wname="itemsScrollableView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/itemsScrollableView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/itemsScrollableView.png" /></div>
 <!-- richEditor -->
 <div wname="richEditor" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/richEditor.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/richEditor.png" /></div>
 <!-- flashView -->
 <div wname="flashView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/flashView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/flashView.png" /></div>
 <!-- searchBox -->
 <div wname="searchBox" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/searchBox.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/searchBox.png" /></div>
 <!-- netLinkView -->
 <div wname="netLinkView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/netLinkView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/netLinkView.png" /></div>
 <!-- channelView -->
 <div wname="channelView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/channelView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/channelView.png" /></div>
 <div wname="ucBlogView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/ucBlogView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/ucBlogView.png" /></div>
 <!-- widgetCustomer -->
 <div wname="widgetCustomer" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/widgetCustomer.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/widgetCustomer.png" /></div>
 <!-- huabaoView -->
 <div wname="huabaoView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/huabaoView.jpg" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/huabaoView.jpg" /></div>
 <!-- chongzhiView -->
 <div wname="chongzhiView" class="previewWidgetImg"><img
-	src="/assets/min/images/widget/chongzhiView.png" /></div>
+	src="http://static.xintaonet.com/assets/min/images/widget/chongzhiView.png" /></div>
 <!--组件工具栏-->
 <div id="ui-designer-widget-handle" title="移动此组件" class="ui-designer-widget-handle ui-corner-top">
 	<ul style="margin-top:3px;margin-left:5px;">
@@ -358,21 +358,21 @@
 <ul style="height:160px;"><li><a href="#widgettype-custome">自定义组件</a></li><li><a href="#widgettype-group">推广组组件</a></li><li><a href="#widgettype-alimama">阿里妈妈组件</a></li><li><a href="#widgettype-other">其他组件</a></li></ul>
 <ul id="widgettype-custome" class="designer-widgets designer-widgets-custome"></ul>
 <ul id="widgettype-group" class="designer-widgets">
-<li class="widget" layout="0,1,2,3,4,5,6" widget="itemsLinkView" align="center" title="" wtype="group"><div class="img"><a><img src="/assets/min/images/widget/itemsLinkView_160.png" /></a></div><div><span class="title">文字链接</span></div></li>
-<li class="widget" layout="0,1,2,3,4,5,6" widget="itemsThumbView" align="center" title="" wtype="group"><div class="img"><a><img src="/assets/min/images/widget/itemsThumbView_160.png" /></a></div><div><span class="title">图形相册</span></div></li>
-<li class="widget" layout="0,1,2" widget="itemsListView" align="center" title="" wtype="group"><div class="img"><a><img src="/assets/min/images/widget/itemsListView_160.png" /></a></div><div align="center"><span class="title">商品列表</span></div></li>
-<li class="widget" layout="0,1,2" widget="itemsScrollableView" align="center" title="" wtype="group"><div class="img"><a><img src="/assets/min/images/widget/itemsScrollableView_160.png" /></a></div><div align="center"><span class="title">横向滚动</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="itemsLinkView" align="center" title="" wtype="group"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/itemsLinkView_160.png" /></a></div><div><span class="title">文字链接</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="itemsThumbView" align="center" title="" wtype="group"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/itemsThumbView_160.png" /></a></div><div><span class="title">图形相册</span></div></li>
+<li class="widget" layout="0,1,2" widget="itemsListView" align="center" title="" wtype="group"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/itemsListView_160.png" /></a></div><div align="center"><span class="title">商品列表</span></div></li>
+<li class="widget" layout="0,1,2" widget="itemsScrollableView" align="center" title="" wtype="group"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/itemsScrollableView_160.png" /></a></div><div align="center"><span class="title">横向滚动</span></div></li>
 </ul>
 <ul id="widgettype-alimama" class="designer-widgets">
-<li class="widget" layout="0,1,2,3,4,5,6" widget="searchBox" align="center" title="" wtype="alimama"><div class="img"><a><img src="/assets/min/images/widget/searchBox_160.png" /></a></div><div align="center"><span class="title">新版搜索框</span></div></li>
-<li class="widget" layout="0" widget="channelView" align="center" title="" wtype="alimama"><div class="img"><a><img src="/assets/min/images/widget/channelView_160.png" /></a></div><div align="center"><span class="title">频道推广</span></div></li>
-<li class="widget" layout="0,1,2,3,4,5,6" widget="flashView" align="center" title="" wtype="alimama"><div class="img"><a><img src="/assets/min/images/widget/flashView_160.png" /></a></div><div align="center"><span class="title">阿里妈妈广告牌</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="searchBox" align="center" title="" wtype="alimama"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/searchBox_160.png" /></a></div><div align="center"><span class="title">新版搜索框</span></div></li>
+<li class="widget" layout="0" widget="channelView" align="center" title="" wtype="alimama"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/channelView_160.png" /></a></div><div align="center"><span class="title">频道推广</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="flashView" align="center" title="" wtype="alimama"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/flashView_160.png" /></a></div><div align="center"><span class="title">阿里妈妈广告牌</span></div></li>
 </ul>
 <ul id="widgettype-other" class="designer-widgets">
-<li class="widget" layout="0,1,2,3,4,5,6" widget="netLinkView" align="center" title="" wtype="other"><div class="img"><a><img src="/assets/min/images/widget/netLinkView_160.png" /></a></div><div align="center"><span class="title">友情链接</span></div></li>
-<li class="widget" layout="0,1,2,3,4,5" widget="chongzhiView" align="center" title="" wtype="other"><div class="img"><a><img src="/assets/min/images/widget/chongzhiView_160.jpg" /></a></div><div><span class="title">虚拟充值组件</span></div></li>
-<li class="widget" layout="0" widget="huabaoView" align="center" title="" wtype="other"><div class="img"><a><img src="/assets/min/images/widget/huabaoView_160.jpg" /></a></div><div><span class="title">导购画报组件</span></div></li>
-<li class="widget" layout="0,1,2,3,4,5,6" widget="richEditor" align="center" title="" wtype="other"><div class="img"><a><img src="/assets/min/images/widget/richEditor_160.png" /></a></div><div align="center"><span class="title">html高级编辑器</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="netLinkView" align="center" title="" wtype="other"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/netLinkView_160.png" /></a></div><div align="center"><span class="title">友情链接</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5" widget="chongzhiView" align="center" title="" wtype="other"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/chongzhiView_160.jpg" /></a></div><div><span class="title">虚拟充值组件</span></div></li>
+<li class="widget" layout="0" widget="huabaoView" align="center" title="" wtype="other"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/huabaoView_160.jpg" /></a></div><div><span class="title">导购画报组件</span></div></li>
+<li class="widget" layout="0,1,2,3,4,5,6" widget="richEditor" align="center" title="" wtype="other"><div class="img"><a><img src="http://static.xintaonet.com/assets/min/images/widget/richEditor_160.png" /></a></div><div align="center"><span class="title">html高级编辑器</span></div></li>
 </ul>
 </td><td></td></tr></table>
 </div>

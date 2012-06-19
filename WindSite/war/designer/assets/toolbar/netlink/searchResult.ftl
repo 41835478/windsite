@@ -25,7 +25,7 @@
 		<tr>
 			<td width=100%>
 				<div style="width:100%;">
-					<div style="float:left;width:60px;"><img src="/assets/images/searchNoResult.gif"/></div>
+					<div style="float:left;width:60px;"><img src="http://static.xintaonet.com/assets/images/searchNoResult.gif"/></div>
 					<div style="float:left;color:#999;">对不起,查询不到符合条件的会员<br/>你可以改变一下搜索条件,再次搜索试试...</div>
 				</div>	
 			</td>

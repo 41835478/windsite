@@ -7,7 +7,7 @@
 <title>软文组件设计器</title>
 <script src="/assets/min/js/site-utils-all.min.js?v=${dateVersion()}" type="text/javascript"></script>
 <script src="/assets/min/js/site-all.min.js?v=${dateVersion()}" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/assets/min/css/designer-all.min.css?v=${dateVersion()}">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/designer-all.min.css?v=${dateVersion()}">
 <script type="text/javascript" src="/designer/assets/js/blogDesigner.js?v=${dateVersion()}"></script>
 <script type="text/javascript">
 	var PID = '${USER.pid}';
@@ -27,7 +27,7 @@ $(function() {
 </script>
 <style>
 select,input{border: 1px solid #DDD;line-height: 16px;padding: 3px 2px;}
-.info {background: #FFC url(/assets/images/light.gif) no-repeat 20px 8px;background-image: url(/assets/images/light.gif);border: 1px solid #FC6;color: #666;line-height: 18px;padding: 14px 0px 14px 60px;}
+.info {background: #FFC url(http://static.xintaonet.com/assets/images/light.gif) no-repeat 20px 8px;background-image: url(http://static.xintaonet.com/assets/images/light.gif);border: 1px solid #FC6;color: #666;line-height: 18px;padding: 14px 0px 14px 60px;}
 </style>
 <script type="text/javascript">
 	var _gaq = _gaq || [];

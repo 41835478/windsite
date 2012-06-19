@@ -25,7 +25,7 @@ $(function(){
 })
 </script>
 <@xt.steptemplate navselected='taoke'>
-<link rel="stylesheet" href="/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
+<link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/fanli.css?v=${dateVersion()}" type="text/css"/>
 <ol class="step step-three"><li><span>填写站点基本信息</span></li><li class="last last-current"><span>选择淘站模板</span></li></ol>
 <div id="channel_show_small_dialog" style="display:none;">
 <table>

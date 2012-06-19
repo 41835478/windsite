@@ -1,6 +1,6 @@
 <#if preview??&&"true"==preview>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="/assets/min/css/template-all.min-v3.css">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/template-all.min-v3.css">
 </#if>
 <div class="shopwindow-lady" align="center">
 <div class="lady-bar">

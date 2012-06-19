@@ -13,13 +13,13 @@
 <!--[if gte IE 8]><!-->
 <link href="http://a.tbcdn.cn/s/kissy/1.1.5/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
 <!--<![endif]-->
-<link rel="stylesheet" type="text/css" href="/assets/min/css/designer-all.min.css?v=${dateVersion()}4">
+<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/designer-all.min.css?v=${dateVersion()}4">
 <#if utemplate??&&utemplate.skin??&&'default'!=utemplate.skin>
-<link title="siteStyle" rel="stylesheet" type="text/css" href="/assets/min/css/${utemplate.skin}.css?v=${dateVersion()}">
+<link title="siteStyle" rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/${utemplate.skin}.css?v=${dateVersion()}">
 <#else>
-<link title="siteStyle" rel="stylesheet" type="text/css" href="/assets/min/css/pink.css?v=${dateVersion()}">
+<link title="siteStyle" rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/pink.css?v=${dateVersion()}">
 </#if>
-<link title="siteStyle" rel="stylesheet" type="text/css" href="/assets/min/css/jquery.treeview.css?v=${dateVersion()}">
+<link title="siteStyle" rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/jquery.treeview.css?v=${dateVersion()}">
 <#import "/assets/macro/widgets.ftl" as w>
 <#import "/assets/macro/themeroller.ftl" as theme>
 <#import "/assets/macro/templates.ftl" as template>
@@ -64,7 +64,7 @@
 </ul>
 <!--顶部工具栏-->
 <div id="ui-designer-topbar" class="ui-designer-topbar" align="center">
- 	<ul style="width:940px;padding-left:30px;margin:0px;background:url(/assets/images/bgbar.png) repeat-x top;border:0px;">
+ 	<ul style="width:940px;padding-left:30px;margin:0px;background:url(http://static.xintaonet.com/assets/images/bgbar.png) repeat-x top;border:0px;">
 		<li title="设计整个页面的布局"><a href="#view-contents">布局设计</a></li>
 		<li title="选择不同系统皮肤或自定义皮肤"><a href="#themeRoller">风格/皮肤</a></li>
 		<form id="checkoutMySiteForm" name="checkoutMySiteForm" target="_blank" method="get" action="http://<#if site??>${site.domainName}<#else>shop${USER.user_id}</#if>.xintaonet.com">

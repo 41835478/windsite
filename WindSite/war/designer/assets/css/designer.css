@@ -116,15 +116,15 @@
 }
 
 .sort-number .item1 {
-	background: url(/assets/images/number1.png) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/number1.png) no-repeat;
 }
 
 .sort-number .item2 {
-	background: url(/assets/images/number2.png) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/number2.png) no-repeat;
 }
 
 .sort-number .item3 {
-	background: url(/assets/images/number3.png) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/number3.png) no-repeat;
 }
 
 .disabled {
@@ -394,7 +394,7 @@ div,ul,dl {
 
 .wTable thead tr {
 	background: #f6a828
-		url(/assets/images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% 50%
+		url(http://static.xintaonet.com/assets/images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% 50%
 		repeat-x;
 }
 
@@ -757,7 +757,7 @@ div {
 }
 
 .button-red {
-	background: url(/assets/images/button-red.jpg) no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/button-red.jpg) no-repeat;
 	color: white;
 	display: inline-block;
 	font-size: 14px;
@@ -1206,11 +1206,11 @@ div {
 }
 
 .ui-designer-topbar .ui-state-hover {
-	background: url(/assets/images/indexmenu.gif) no-repeat 0px -134px;
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif) no-repeat 0px -134px;
 }
 
 .ui-designer-topbar .ui-tabs-selected {
-	background: url(/assets/images/indexmenu.gif) no-repeat 100% -50px;
+	background: url(http://static.xintaonet.com/assets/images/indexmenu.gif) no-repeat 100% -50px;
 }
 */
 .ui-designer-topbar .ui-button-text {
@@ -1387,7 +1387,7 @@ div {
 }
 
 .ui-designer-widgetbar h3 {
-	background: url(/assets/images/bg_box_title.png);
+	background: url(http://static.xintaonet.com/assets/images/bg_box_title.png);
 	font-size: 10pt;
 	color: gray;
 	height: 25px;
@@ -2269,7 +2269,7 @@ div {
 	height: 8px;
 	float: left;
 	margin: 3px;
-	background: url(/assets/images/navigator.png) 0 0 no-repeat;
+	background: url(http://static.xintaonet.com/assets/images/navigator.png) 0 0 no-repeat;
 	display: block;
 	font-size: 1px;
 }

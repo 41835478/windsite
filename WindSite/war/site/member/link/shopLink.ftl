@@ -27,7 +27,7 @@ legend{color: #005BA5;display: block;font-size: 14px;font-weight: bolder;left: 1
 						<ul>
 							<li><strong>掌柜：</strong><i>${shop.nick}</i></li>
 							<li><strong>佣金比率：</strong><span style="color:red;font-weight:bold;">${shop.commission_rate}%</span></li>
-							<li id="sellerCredit" style="_padding-top:5px;"><strong>掌柜信用：<img src="/assets/min/images/credit/<@ws.credit shop.level></@ws.credit>.gif"/></li>
+							<li id="sellerCredit" style="_padding-top:5px;"><strong>掌柜信用：<img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit shop.level></@ws.credit>.gif"/></li>
 							<li><strong>创建时间：</strong>${shop.t_created}</li>
 						</ul>
 					</div>

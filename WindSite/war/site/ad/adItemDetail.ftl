@@ -52,7 +52,7 @@ $(function(){
 				<li>30天售出：${item.volume}件</li>
 				<li>所在地区：${item.item_location}</li>
 				<#if ISFANLI><li>返利金额:<@ws.rate RATE=RATE commission=item.commission></@ws.rate></li></#if>
-				<li><a  href="/titem/${item.num_iid}.html" target="_blank"><img src="/assets/min/images/list_buy_now_sch.gif"/></a></li>
+				<li><a  href="/titem/${item.num_iid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/images/list_buy_now_sch.gif"/></a></li>
 			</ul>
 		</div>
 	</div>

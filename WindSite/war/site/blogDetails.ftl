@@ -8,7 +8,7 @@
 
 <#include "/site/template/import.ftl">
 <style>
-.rc-tp,.bd{background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}
+.rc-tp,.bd{background: url(http://static.xintaonet.com/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}
 .rc-bt{background-position: -96px -424px;display: block;height: 4px;margin-top: -4px;position: relative;}
 .bd{background-position: 0px -459px;background-repeat: repeat-x;border-bottom: none;border: 1px #F69968;height: 33px;}
 .trade{float: left;font-size: 14px;line-height: 33px;margin-top: 3px;overflow: hidden;padding-left: 5px;position: relative;}
@@ -18,7 +18,7 @@
 .tabs-selected,.tabs-selected:hover{background: white;color: #4C7E07;font-weight: bold;height: 30px;margin-bottom: -1px;position: relative;text-decoration: none;}
 #blog-div{clear: none;color: #444;display: block;font-family: Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;font-size: 14px;font-style: normal;font-variant: normal;font-weight: normal;line-height: 25px;overflow-x: visible;overflow-y: visible;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;word-break: break-all;word-wrap: break-word;}
 .search-form {margin: 5px 0px 0px 156px;padding-top: 26px;position: relative;width: 670px;}.search-form fieldset{border:0px;}.search-form legend {display: none;}.search-tab {left: 0px;position: absolute;top: 0px;z-index: 2;}.search-tab li {float: left;height: 26px;line-height: 26px;padding: 0px 15px;position: relative;text-align: center;top: 1px;z-index: 1;}
-.search-auto,.search-form .input, .search-tab li.selected, .search-tab li.selected .l, .search-tab li.selected .r, .search-form .l, .search-form button, .search-form .r {background: url(/assets/min/images/T1.udLXn4aXXXXXXXX.png) repeat-x;}
+.search-auto,.search-form .input, .search-tab li.selected, .search-tab li.selected .l, .search-tab li.selected .r, .search-form .l, .search-form button, .search-form .r {background: url(http://static.xintaonet.com/assets/min/images/T1.udLXn4aXXXXXXXX.png) repeat-x;}
 .search-tab li.selected {background-position: 0px -100px;}.search-tab li.selected .l, .search-tab li.selected .r {height: 26px;position: absolute;top: 0px;width: 4px;}.search-tab li.selected .l {background-position: -142px 0px;left: 0px;}.search-tab li.first .l {background-position: -131px -40px;height: 28px;}
 .search-tab li.selected .r {background-position: -146px 0px;right: 0px;}.search-tab li a {display: block;outline: none;white-space: nowrap;}.search-tab li.selected a {border: none;color: #333;font-weight: bold;}
 .search-auto {background-position: 0px -126px;height: 32px;padding: 5px;position: relative;width: 594px;}.search-auto .l, .search-auto .r {height: 42px;position: absolute;top: 0px;width: 5px;}.search-auto .l {background-position: -142px -26px;left: 0px;}.search-auto .r {background-position: -146px -26px;right: 0px;}
@@ -134,7 +134,7 @@ function adBlog(b,a){!b||!a||b==""||a==""||$.ajax({url:"/router/ad/blog?sid="+b+
 			<table>
 				<tr><td>Copyright 2009-2010 版权所有  <a href="http://www.xintaonet.com" style="color:#888">新淘网(www.xintaonet.com)</a>（<a  style="color:#888" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备10035914号</a>）</td></tr>
 				<tr><td align="center">合作伙伴:<a target="_blank" href="http://www.alimama.com/"> 
-		<img src="/assets/min/images/alimama.gif" width="82" height="20" alt="淘宝联盟" /></a></td></tr>
+		<img src="http://static.xintaonet.com/assets/min/images/alimama.gif" width="82" height="20" alt="淘宝联盟" /></a></td></tr>
 			</table>
 		</div>
 </body>

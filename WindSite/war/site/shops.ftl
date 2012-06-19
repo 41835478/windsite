@@ -175,7 +175,7 @@ $(function(){
 							<br/>
 							<li><a onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${s.sid}', '${s.title}']);" href="${href}" target="_blank" class="title">${s.title}</a></li>
 							<br/>
-							<li><div class="nick"><span class="key">掌柜:</span><span class="nick-name">${s.nick}</span></div><div class="level"><span class="key">店铺等级:</span><img src="/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></div></li>
+							<li><div class="nick"><span class="key">掌柜:</span><span class="nick-name">${s.nick}</span></div><div class="level"><span class="key">店铺等级:</span><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></div></li>
 						</ul>	
 					</div>
 				</div>

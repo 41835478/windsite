@@ -39,7 +39,7 @@ function searchSellerAdsItems(){
 </script>
 <style>
 .page-info{float: left;height: 20px;line-height: 20px;margin: 0px 3px 0px 0px;overflow: hidden;min-width: 8px;padding: 0px 6px;width: auto;}
-.page a{text-decoration: none;color: #555;display:block;float:left;margin: 0px 3px 0px 0px;background: transparent url(/assets/min/images/shops.png) no-repeat scroll 500px 500px;height: 20px;line-height: 20px;overflow: hidden;padding: 0px;text-align: center;vertical-align: middle;white-space: nowrap;border: 1px solid #CCC;}
+.page a{text-decoration: none;color: #555;display:block;float:left;margin: 0px 3px 0px 0px;background: transparent url(http://static.xintaonet.com/assets/min/images/shops.png) no-repeat scroll 500px 500px;height: 20px;line-height: 20px;overflow: hidden;padding: 0px;text-align: center;vertical-align: middle;white-space: nowrap;border: 1px solid #CCC;}
 a.next-page{background-position: -52px -5px;padding: 0px 16px 0px 5px;}
 a.end-page{background-position: -52px -21px;}
 a.start-page{background-position: 6px -21px;padding: 0px;width:20px;}

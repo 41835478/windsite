@@ -246,7 +246,7 @@ $(function() {
 				<ul style="list-style-type:none">
 					<li><a href="${s.click_url?replace('13667242',spid)}" onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'shop-d-${s.sid}', '${s.title}']);" target="_blank"  style="color:#00E;">${s.title}</a></li>
 					<li>掌柜:${s.nick}</li>
-					<li>店铺等级:<img src="/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></li>
+					<li>店铺等级:<img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/></li>
 				</ul>	
 			</div>
 		</div>

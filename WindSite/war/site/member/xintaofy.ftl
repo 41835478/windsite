@@ -53,7 +53,7 @@ openMyItemGroupByItem($(this).attr('numiid'));
 	<tbody>
 	<#if shops??&&shops?size!=0>
 	<#list shops as s>
-	<tr><td class="db"><strong>${s_index+1}</strong></td><td><a href="${s.click_url?replace('=-[0-9]+_','=-'+(USER.pid?replace('mm_','')?replace('_0_0',''))+'_','r')}" target="_blank"  class="title">${s.title}</a><br/><span class="key">店铺等级:</span><img src="/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/><br/><br/><a class="fav-add" href="#" sid="${s.sid}">收藏该店铺</a></td><td>${s.scount}</td><td>${s.nick}</td><td>${s.commission_rate}%</td></tr>
+	<tr><td class="db"><strong>${s_index+1}</strong></td><td><a href="${s.click_url?replace('=-[0-9]+_','=-'+(USER.pid?replace('mm_','')?replace('_0_0',''))+'_','r')}" target="_blank"  class="title">${s.title}</a><br/><span class="key">店铺等级:</span><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit s.level></@ws.credit>.gif"/><br/><br/><a class="fav-add" href="#" sid="${s.sid}">收藏该店铺</a></td><td>${s.scount}</td><td>${s.nick}</td><td>${s.commission_rate}%</td></tr>
 	</#list>
 	</#if>
 	</tbody>

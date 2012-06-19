@@ -9,7 +9,7 @@
 <#include "/site/template/import.ftl">
 <style>
 .nick,.title{color:#36C;cursor:pointer;font-size:11pt;}.nick:hover,.title:hover{color: #F60}
-.rc-tp,.bd{background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}
+.rc-tp,.bd{background: url(http://static.xintaonet.com/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}
 .rc-bt{background-position: -96px -424px;display: block;height: 4px;margin-top: -4px;position: relative;}
 .bd{background-position: 0px -459px;background-repeat: repeat-x;border-bottom: none;border: 1px #F69968;height: 33px;}
 .trade{float: left;font-size: 14px;line-height: 33px;margin-top: 3px;overflow: hidden;padding-left: 5px;position: relative;}
@@ -23,7 +23,7 @@
 #blogs dd{background: white;border: 1px solid #CCC;color: #6C6C6C;margin-bottom: 10px;margin-top: 10px;padding: 25px 35px;position: relative;text-align: left;width: 830px;zoom: 1;}
 .bzArrow{background: url(http://static.xintaonet.com/assets/images/bzBg.png) no-repeat -240px -87px;display: block;height: 8px;left: 30px;position: absolute;top: -8px;width: 15px;}
 .page-info{float: left;height: 20px;line-height: 20px;margin: 0px 3px 0px 0px;overflow: hidden;min-width: 8px;padding: 0px 6px;width: auto;}
-.page a{text-decoration: none;color: #555;display:block;float:left;margin: 0px 3px 0px 0px;background: transparent url(/assets/min/images/shops.png) no-repeat scroll 500px 500px;height: 20px;line-height: 20px;overflow: hidden;padding: 0px;text-align: center;vertical-align: middle;white-space: nowrap;border: 1px solid #CCC;}
+.page a{text-decoration: none;color: #555;display:block;float:left;margin: 0px 3px 0px 0px;background: transparent url(http://static.xintaonet.com/assets/min/images/shops.png) no-repeat scroll 500px 500px;height: 20px;line-height: 20px;overflow: hidden;padding: 0px;text-align: center;vertical-align: middle;white-space: nowrap;border: 1px solid #CCC;}
 a.next-page{background-position: -52px -5px;padding: 0px 16px 0px 5px;}
 a.end-page{background-position: -52px -21px;}
 a.start-page{background-position: 6px -21px;padding: 0px;width:20px;}

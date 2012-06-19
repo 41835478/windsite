@@ -12,7 +12,7 @@
 						<li><span>库存数量：</span>${item.num}件</li>
 						<li style="display:none;"><span>下架时间：</span>${item.delistTime?datetime}</li>
 						<li><span>卖　　家：</span>${item.nick}</li>
-						<li><span>卖家信用：</span><img src="/assets/min/images/credit/<@ws.credit detail.sellerCreditScore></@ws.credit>.gif"/></li>   
+						<li><span>卖家信用：</span><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit detail.sellerCreditScore></@ws.credit>.gif"/></li>   
 						<#if item.location??><li><span>所在地区：</span>${item.location.state} ${item.location.city}</li></#if>
 					</ul>
 					<div class="xt-key">

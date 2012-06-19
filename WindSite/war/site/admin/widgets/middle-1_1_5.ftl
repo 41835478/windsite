@@ -69,8 +69,8 @@
 </td></tr></table></td>
 <td valign=top>
 <table>
-<tr><td width=232 height=25 style="background:url(/assets/min/images/custome/icon5_02.jpg) no-repeat;">
-<table><tr><td width=20 align=center><img src="/assets/min/images/custome/icon5_01.gif"/></td><td style="color: white;font-size: 14px;font-weight: bold;">
+<tr><td width=232 height=25 style="background:url(http://static.xintaonet.com/assets/min/images/custome/icon5_02.jpg) no-repeat;">
+<table><tr><td width=20 align=center><img src="http://static.xintaonet.com/assets/min/images/custome/icon5_01.gif"/></td><td style="color: white;font-size: 14px;font-weight: bold;">
 店铺促销</td></tr></table>
 </td></tr>
 <tr><td>

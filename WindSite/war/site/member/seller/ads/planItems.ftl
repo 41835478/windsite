@@ -20,7 +20,7 @@
 							<ul style="list-style-type:none">
 								<li><a href="${i.click_url}"  onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'item-d-${i.nick}-${i.num_iid}', '${i.title}']);" target="_blank">${i.title}</a></li>
 								<li><a href="${i.shop_click_url}" style="color:#555;font-weight:normal;" target="_blank">掌柜:${i.nick}</a></li>
-								<li style="position:relative;">信用:<img src="/assets/min/images/credit/<@ws.credit i.seller_credit_score></@ws.credit>.gif"/></li>
+								<li style="position:relative;">信用:<img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit i.seller_credit_score></@ws.credit>.gif"/></li>
 							</ul>	
 						</div>
 					</div>

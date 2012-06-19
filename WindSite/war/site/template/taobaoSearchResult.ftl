@@ -224,7 +224,7 @@
 							<ul style="list-style-type:none">
 								<li><a href="${i.clickUrl}"  onClick="_gaq.push(['_trackEvent', 'xt-${USER.pid}', 'item-d-${i.nick}-${i.numIid}', '${i.title}']);" target="_blank">${i.title}</a></li>
 								<li><a href="${i.shopClickUrl}" style="color:#555;font-weight:normal;" target="_blank">掌柜:${i.nick}</a></li>
-								<li style="position:relative;">信用:<img src="/assets/min/images/credit/<@ws.credit i.sellerCreditScore></@ws.credit>.gif"/><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="http://<#if site.www??&&site.www!=''>${site.www}<#else>${site.domainName}.xintaonet.com</#if>/titem/${i.numIid}.html" mamaUrl="${i.clickUrl}" onClick="openItemAdsDialog($(this));return false;">推广此商品</a></li>
+								<li style="position:relative;">信用:<img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit i.sellerCreditScore></@ws.credit>.gif"/><a style="color:#f60;position:absolute;right:0px;" href="#" xtUrl="http://<#if site.www??&&site.www!=''>${site.www}<#else>${site.domainName}.xintaonet.com</#if>/titem/${i.numIid}.html" mamaUrl="${i.clickUrl}" onClick="openItemAdsDialog($(this));return false;">推广此商品</a></li>
 							</ul>	
 						</div>
 					</div>

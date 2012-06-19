@@ -6,7 +6,7 @@
 <title>${title}- ${sitetitle}</title>
 </@ws.siteHeader>
 <style>
-.rc-tp,.bd{background: url(/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}.rc-bt{background-position: -96px -424px;display: block;height: 4px;margin-top: -4px;position: relative;}.bd{background-position: 0px -459px;background-repeat: repeat-x;border-bottom: none;border: 1px #F69968;height: 33px;}.trade{float: left;font-size: 14px;line-height: 33px;margin-top: 3px;overflow: hidden;padding-left: 5px;position: relative;}.bb-info{margin-left:5px;margin-right:0px;width:320px;height:80px;}.bb-selectbox{margin-top:20px;margin-left:-5px;float:left;width:15px;}.bb-pic{float:left;width:80px;margin-top:3px;border:1px solid #DDD;height:80px;}.bb-disc{float:left;padding-left:5px;width:220px;}.wTable td{line-height:20px}
+.rc-tp,.bd{background: url(http://static.xintaonet.com/assets/min/images/shops_header_bg.png) no-repeat -999em 0px;}.rc-bt{background-position: -96px -424px;display: block;height: 4px;margin-top: -4px;position: relative;}.bd{background-position: 0px -459px;background-repeat: repeat-x;border-bottom: none;border: 1px #F69968;height: 33px;}.trade{float: left;font-size: 14px;line-height: 33px;margin-top: 3px;overflow: hidden;padding-left: 5px;position: relative;}.bb-info{margin-left:5px;margin-right:0px;width:320px;height:80px;}.bb-selectbox{margin-top:20px;margin-left:-5px;float:left;width:15px;}.bb-pic{float:left;width:80px;margin-top:3px;border:1px solid #DDD;height:80px;}.bb-disc{float:left;padding-left:5px;width:220px;}.wTable td{line-height:20px}
 </style>
 <table><tr><td width="700px" valign=top>
 <#if items?size!=0>
@@ -28,7 +28,7 @@
 						<ul style="list-style:none;padding:0px;margin:0px;">
 							<li><a href="/item/${i.id}.html" target="_blank"  style="color:#00E;">${i.title}</a></li>
 							<li>掌柜:<a <#if i.sid??>onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${i.sid}', '${i.shop_title}']);"</#if> href="<@ws.convertLink href=i.shop_click_url></@ws.convertLink>" target="_blank"  style="color:#F60;">${i.nick}</a></li>
-							<li>店铺等级:<img src="/assets/min/images/credit/<@ws.credit i.seller_credit_score></@ws.credit>.gif"/></li>
+							<li>店铺等级:<img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit i.seller_credit_score></@ws.credit>.gif"/></li>
 						</ul>	
 					</div>
 				</div>

@@ -66,7 +66,7 @@ $(function(){
 <div class="why_d">
 <div class="l"><div class="l50_s"><img src="http://www.xintaonet.com/discuz72/uc_server/images/noavatar_middle.gif" width="50" height="50"></div></div>
 <div class="l" style="margin-left:5px;"><p class="ts41p f12">${t.nick}</p>
-<div class="c9" style="width:220px;"><p style="">买家信用:<span class="star_com"><#if t.level??><img src="/assets/min/images/credit/<@ws.credit t.level></@ws.credit>.gif"/></#if></span></p></div>
+<div class="c9" style="width:220px;"><p style="">买家信用:<span class="star_com"><#if t.level??><img src="http://static.xintaonet.com/assets/min/images/credit/<@ws.credit t.level></@ws.credit>.gif"/></#if></span></p></div>
 <div class="c9" style="width:220px;margin-top:10px;"><p><a target="_blank" title="${t.nick}" href="http://amos1.taobao.com/msg.ww?v=2&uid=${t.nick}&s=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=${t.nick}&s=1" alt="联系站长-${t.nick}" /></a></p></div>
 </div>
 <div class="l c9" style="margin-top:25px;">

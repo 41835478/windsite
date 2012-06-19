@@ -27,7 +27,7 @@ $('.ads-tuiguang').click(function(){
 <style>
 a.ads-desc{color:red;font-size:10pt;}a.ads-desc:hover{color:#A10000;}
 .box .partner-desc{
-	background: url(/assets/min/images/linkview-li_img.gif) no-repeat 8px
+	background: url(http://static.xintaonet.com/assets/min/images/linkview-li_img.gif) no-repeat 8px
 		12px;
 	padding-left:20px;
 	height: 25px;
@@ -48,7 +48,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 .function-desc{margin-left:15px;margin-top:8px;color:#888888;}
 .today li{height:20px;float:left;margin:10px;white-space:nowrap;display: inline;}
 .today ul{list-style:none}
-.service-mall{background: transparent url(/assets/min/images/shops.png) no-repeat scroll 500px 1000px;display: inline-block;height: 16px;margin: 5px 5px 0px 0px;overflow: hidden;vertical-align: text-bottom;width: 16px;zoom: 1;background-position: 100% -190px;margin: 2px 0px 0px 5px;width: 28px;}
+.service-mall{background: transparent url(http://static.xintaonet.com/assets/min/images/shops.png) no-repeat scroll 500px 1000px;display: inline-block;height: 16px;margin: 5px 5px 0px 0px;overflow: hidden;vertical-align: text-bottom;width: 16px;zoom: 1;background-position: 100% -190px;margin: 2px 0px 0px 5px;width: 28px;}
 #news{width:950px;height:25px;line-height:25px;overflow:hidden}
 #news li{height:25px;}
 </style>

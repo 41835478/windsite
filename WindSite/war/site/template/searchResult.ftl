@@ -3,7 +3,7 @@
 	$(function() {
 		//$("a.fb").fancybox();
 		$(".bb-pic img").bind("error",function(){ 
-			this.src="/assets/min/images/nopicture.gif"; 
+			this.src="http://static.xintaonet.com/assets/min/images/nopicture.gif"; 
 		});
 		//$(".bb-pic img").lazyload({ 
 		//	placeholder : "/assets/images/loadingImg.gif",
@@ -118,7 +118,7 @@
 	padding-bottom:0px;
 }
 .ads-items{background:#FFF8E7;}.wTable td{line-height:20px;}
-span.rcomicon{background-image: url(/assets/min/images/ads-items.gif);background-repeat: no-repeat;background-position: 0px -75px;display: inline-block;height: 15px;width: 35px;}
+span.rcomicon{background-image: url(http://static.xintaonet.com/assets/min/images/ads-items.gif);background-repeat: no-repeat;background-position: 0px -75px;display: inline-block;height: 15px;width: 35px;}
 </style>
 <table class="items-pages" width="500px" height="20px">
 	<TR>

@@ -30,7 +30,7 @@ li a:hover span.title{color:#F60;}
 	<#assign count=(count+1)>
 	<#if s_index%30==0><ul class="order-list"><#assign h=(h+1)></#if>
 		<#if s_index%10==0><li class="order order-${h}"><h3>淘宝店铺综合Top${s_index+1}-${(s_index+10)}</h3><ol></#if>
-		<li class="ol-${count}"><a onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${s.sid}', '${s.title}']);" href="/tshop/${s.sid}.html"  target="_blank" title="${s.title}"><span class="title">${s.title}</span><span class="star_com"><#if s.sellerCredit??&&''!=s.sellerCredit><img src="/assets/min/stylesheets/images/${s.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></span></a></li>
+		<li class="ol-${count}"><a onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${s.sid}', '${s.title}']);" href="/tshop/${s.sid}.html"  target="_blank" title="${s.title}"><span class="title">${s.title}</span><span class="star_com"><#if s.sellerCredit??&&''!=s.sellerCredit><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${s.sellerCredit}.gif" style="vertical-align: text-bottom;"/></#if></span></a></li>
 		<#if s_index%10==9||!s_has_next></ol></li></#if>
 	<#if s_index%30==29||!s_has_next></ul><div style="clear:both"></div></#if>
 	<#if count==10><#assign count=0></#if>

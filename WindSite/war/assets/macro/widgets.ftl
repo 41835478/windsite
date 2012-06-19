@@ -87,7 +87,7 @@
 					<div class="price-div"><span class="price-desc">价格:</span><span  class="price"><b>${i.price}元</b></span>
 					<br/><span class="volume-desc">最近成交:</span><span class="volume">${i.volume}</span>
 					</div>
-					<div class="buy-button"><a nid="${i.num_iid}" nk="${i.nick}" title="${i.title?replace('<span class=H>','')?replace('</span>','')}" onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'item-d-${i.nick}-${i.num_iid}', '${i.title}']);" title="${i.title?replace('<span class=H>','')?replace('</span>','')}" href="/titem/${i.num_iid}.html" target="_blank"><img src="/assets/min/images/list_buy_now_sch.gif"></a></div>
+					<div class="buy-button"><a nid="${i.num_iid}" nk="${i.nick}" title="${i.title?replace('<span class=H>','')?replace('</span>','')}" onClick="_gaq.push(['_trackEvent', 'xt-${pid}', 'item-d-${i.nick}-${i.num_iid}', '${i.title}']);" title="${i.title?replace('<span class=H>','')?replace('</span>','')}" href="/titem/${i.num_iid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/images/list_buy_now_sch.gif"></a></div>
 				</li>
 				<#if i_index==(length-1)>
 				<#break>
@@ -101,7 +101,7 @@
 					</div>
 					<div class="title"><a target="_blank" title="商品标题">商品标题</a></div>
 					<div class="price-div"><span class="price-desc">价格:</span><span  class="price"><b>0元</b></span></div>
-					<div class="buy-button"><a  target="_blank"><img src="/assets/min/images/list_buy_now_sch.gif"></a></div>
+					<div class="buy-button"><a  target="_blank"><img src="http://static.xintaonet.com/assets/min/images/list_buy_now_sch.gif"></a></div>
 				</li>
 			</#list>
 		</#if>

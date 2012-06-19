@@ -106,7 +106,7 @@
 	<#list templates as t>
 		<li>
 			<div class="pic"><img
-				src="/assets/min/images/template/${t.skin}_190x120.png" /></div>
+				src="http://static.xintaonet.com/assets/min/images/template/${t.skin}_190x120.png" /></div>
 			<div class="desc">
 				${t.description}
 			</div>

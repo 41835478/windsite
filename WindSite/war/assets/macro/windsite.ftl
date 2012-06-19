@@ -351,7 +351,7 @@ $(function() {
 <#if isSearch>
 <style>
 .search-form {margin: 5px 0px 0px 156px;padding-top: 0px;position: relative;width: 670px;}.search-form fieldset{border:0px;}.search-form legend {display: none;}
-.search-auto,.search-form .input, .search-form .l, .search-form button, .search-form .r {background: url(/assets/min/images/T1.udLXn4aXXXXXXXX.png) repeat-x;}
+.search-auto,.search-form .input, .search-form .l, .search-form button, .search-form .r {background: url(http://static.xintaonet.com/assets/min/images/T1.udLXn4aXXXXXXXX.png) repeat-x;}
 .search-auto {background-position: 0px -126px;height: 32px;padding: 5px;position: relative;width: 594px;}.search-auto .l, .search-auto .r {height: 42px;position: absolute;top: 0px;width: 5px;}.search-auto .l {background-position: -142px -26px;left: 0px;}.search-auto .r {background-position: -146px -26px;right: 0px;}
 .search-form .input {background-color: white;background-position: 0px -68px;float: left;height: 32px;position: relative;width: 463px;}.search-form .input .l, .search-form .input .r {height: 32px;position: absolute;top: 0px;width: 3px;}
 .search-form .input .l {background-position: -136px -36px;left: 0px;}.search-form .input .r {background-position: -139px -36px;right: 0px;z-index: 1;}

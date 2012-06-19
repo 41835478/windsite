@@ -8,11 +8,11 @@
 		<meta name="keywords" content="${metadata}">
 		<meta name="description" content="${description}">
 		<title>${title}</title>
-		<link rel="stylesheet" type="text/css" href="/assets/min/css/template-all.min-v4.css?v=${dateVersion}">
+		<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/template-all.min-v4.css?v=${dateVersion}">
 		<#if skin??&&'default'!=skin>
-		<link rel="stylesheet" type="text/css" href="/assets/min/css/${skin}.css?v=${dateVersion}">
+		<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/${skin}.css?v=${dateVersion}">
 		<#else>
-		<link rel="stylesheet" type="text/css" href="/assets/min/css/pink.css?v=${dateVersion}">
+		<link rel="stylesheet" type="text/css" href="http://static.xintaonet.com/assets/min/css/pink.css?v=${dateVersion}">
 		</#if>
 		<script type="text/javascript">
 		var PID='${pid}',TID='${templateid}';

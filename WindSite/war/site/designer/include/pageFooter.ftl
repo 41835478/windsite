@@ -9,7 +9,6 @@
 							<div style="width:auto; text-align:center; margin:10px auto; height:50px;">
 								<!--<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_1.jpg">-->
 								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_2.jpg">
-								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/taoke.gif">
 								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_3.jpg">
 								<img src="http://static.xintaonet.com/assets/min/stylesheets/images/fot_4.jpg">
 							</div>

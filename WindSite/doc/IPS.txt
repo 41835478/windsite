@@ -21,6 +21,8 @@ iptables -I INPUT -s 58.83.224.217 -j DROP
 #2012-06-20
 iptables -I INPUT -s 113.243.58.43 -j DROP
 iptables -I INPUT -s 192.114.71.13 -j DROP
+#msnbot
+iptables -I INPUT -s 157.56.95.0/24 -j DROP
 #2012-06-19
 iptables -I INPUT -s 95.9.96.191 -j DROP
 iptables -I INPUT -s 210.21.243.21 -j DROP

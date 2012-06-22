@@ -28,8 +28,8 @@ import com.wind.site.service.IPageService;
 public class WindSiteDelay {
 	private static final Logger logger = Logger.getLogger(WindSiteDelay.class
 			.getName());
-	public static final int DAYS = 4, DAYS_1 = 1, DAYS_2 = 2, DAYS_3 = 7,
-			DAYS_4 = 10;// 不同版本超时发布
+	public static final int DAYS = 4, DAYS_1 = 2, DAYS_2 = 3, DAYS_3 = 7,
+			DAYS_5 = 5, DAYS_4 = 10;// 不同版本超时发布
 	private static ConcurrentMap<String, Date> cacheObjMap = new ConcurrentHashMap<String, Date>();
 	private static DelayQueue<DelayItem<String>> pageQueue = new DelayQueue<DelayItem<String>>();
 
@@ -66,8 +66,8 @@ public class WindSiteDelay {
 				if (delayPage != null) {
 					String pageId = delayPage.getItem();
 					if (pageId.startsWith("weigou")) {// 微购
-//						logger.info("weigou[" + pageId + "] "
-//								+ delayPage.getDelay(TimeUnit.SECONDS));
+						// logger.info("weigou[" + pageId + "] "
+						// + delayPage.getDelay(TimeUnit.SECONDS));
 						WeigouAutoCronCommand command = new WeigouAutoCronCommand();
 						command.setFetch(fetch);
 						command.setKey(pageId);

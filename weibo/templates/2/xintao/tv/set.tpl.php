@@ -32,8 +32,8 @@ if (isset ($video) && !empty ($video)) {
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
 <script src="<?php echo W_BASE_URL;?>js/xintao/reverseorder/jquery.reverseorder.packed.js"></script>
-<link href="http://www.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
-<link href="http://www.xintaowang.com/css/default/xintao/sotv/dianshiju.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/xintao/sotv/dianshiju.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="sotv">

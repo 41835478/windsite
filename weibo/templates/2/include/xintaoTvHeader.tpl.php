@@ -48,7 +48,7 @@ if (!in_array($_URI, array (
 	</div>
 </div>
 <?php if($channel=='brand'){?>
-<link href="http://www.xintaowang.com/css/default/brand.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/brand.css" rel="stylesheet" type="text/css" />
 <div style="background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/T1Dn5uXeJIXXXXXXXX-950-46.png) no-repeat;width:948px;height:46px;border: 1px solid #D9D9D9;margin:20px auto 0px;position:relative;"><a title="返回品牌特价首页" <?php echo $isNoFollow?> href="/brand" style="display:block;width:125px;height:48px;position:absolute;top:0;left:0;"></a></div>
 <?php }else{?>
 <?php if(!in_array($channel,array('movie','teleplay','zongyi','real','yule','comic','education','music','news','health','boke'))){$channel='movie';} ?>
@@ -89,7 +89,7 @@ if (!in_array($_URI, array (
 		</div>
 		<?php }else{?>
 		<div class="lnk">
-			<a rel="nofollow" href="<?php echo TB_XTTV_CONTAINER;?>" style="padding-left:20px;margin-left:30px;background:url(http://www.xintaowang.com/css/default/xintao/xintaotv/taobao_n.png) no-repeat;">淘宝帐号登录</a>
+			<a rel="nofollow" href="<?php echo TB_XTTV_CONTAINER;?>" style="padding-left:20px;margin-left:30px;background:url(http://static.xintaowang.com/css/default/xintao/xintaotv/taobao_n.png) no-repeat;">淘宝帐号登录</a>
 		</div>
 		<?php }?>	
 	</div>

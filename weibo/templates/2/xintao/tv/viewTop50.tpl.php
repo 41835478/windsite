@@ -13,7 +13,7 @@ if (!defined('IN_APPLICATION')) {
 <meta name="description" content="新淘高清视频<?php echo $topTitle?>">
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="http://www.xintaowang.com/css/default/xintaotv_top.css?v=20120131" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/xintaotv_top.css?v=20120131" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 var TOP_C='<?php echo $c;?>';
 </script>

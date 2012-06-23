@@ -64,9 +64,9 @@ if (isset ($video) && !empty ($video)) {
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
 <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
-<link href="http://www.xintaowang.com/css/default/tv.css?v=1" rel="stylesheet" type="text/css" />
-<link href="http://www.xintaowang.com/css/default/xintao/sotv/dianshiju.css" rel="stylesheet" type="text/css" />
-<link href="http://www.xintaowang.com/css/default/xintao/sotv/play.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/tv.css?v=1" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/xintao/sotv/dianshiju.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/xintao/sotv/play.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 var VID='<?php echo $isBoke ? V('g:bid') : V('g:vid');?>',SID='<?php echo isset ($sid) ? $sid : $video['sid'];?>';
 </script>

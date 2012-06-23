@@ -31,8 +31,8 @@
 .table .weibo-pic { width:90px; height:100px; margin:0; padding:0; border:1px solid #c1c9cf; padding:2px; margin:10px auto; display:block;}
 .td-foot-bg {background:#f4f4f4;}
 .td-foot-bg .btn-general{ vertical-align:middle;}
-.yes,.no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(http://www.xintaowang.com/css/default/xintao/check_green.gif) no-repeat;}
-.no{background:url(http://www.xintaowang.com/css/default/xintao/close_red.gif) no-repeat;}
+.yes,.no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(http://static.xintaowang.com/css/default/xintao/check_green.gif) no-repeat;}
+.no{background:url(http://static.xintaowang.com/css/default/xintao/close_red.gif) no-repeat;}
 .w30{ width:30px;}.w40{ width:40px;}.w50{ width:50px; }.w60{ width:60px; }.w70{ width:70px; }.w80{ width:80px; }.w90{ width:90px; }.w100{ width:100px; }.w110{ width:110px; }.w120{ width:120px; }.w130{ width:130px; }.w140{ width:140px; }.w150{ width:150px; }.w160{ width:160px; }.w170{ width:170px; }.w180{ width:180px; }.w190{ width:190px; }.w200 { width:200px;}.w210{ width:210px; } .w240{ width:240px; }.w250 { width:250px;}
 </style>
 </head>

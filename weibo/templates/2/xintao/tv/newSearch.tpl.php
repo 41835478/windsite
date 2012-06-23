@@ -73,7 +73,7 @@ elseif (!empty ($cats['name'])) {
 ?>
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="http://www.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="sotv">
 	<div id="wrap">

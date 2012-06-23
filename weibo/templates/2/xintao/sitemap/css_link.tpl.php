@@ -4,8 +4,8 @@ if(!defined('IN_APPLICATION')){
 }
 ?>
 <link rel="shortcut icon" href="<?php echo W_BASE_URL ?>favicon.ico">
-<link href="http://www.xintaowang.com/css/default/base.css" rel="stylesheet" type="text/css" />
-<link href="http://www.xintaowang.com/css/default/tpl_1.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/base.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/tpl_1.css" rel="stylesheet" type="text/css" />
 <?php
 if(defined('SKIN_CONSTUM_PATH')||defined('SKIN_PREIVEW')):
 ?>
@@ -28,9 +28,9 @@ elseif(defined('SKIN_CONSTUM_DIR')):
 <!-- 皮肤目录 -->
 
 <?php if (WB_LANG_TYPE_CSS):?>
-<link href="http://www.xintaowang.com/css/default/<?php echo SKIN_CONSTUM_DIR;?>/skin_<?php echo WB_LANG_TYPE_CSS;?>.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/<?php echo SKIN_CONSTUM_DIR;?>/skin_<?php echo WB_LANG_TYPE_CSS;?>.css" rel="stylesheet" type="text/css" />
 <?php else:?>
-<link href="http://www.xintaowang.com/css/default/<?php echo SKIN_CONSTUM_DIR;?>/skin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/<?php echo SKIN_CONSTUM_DIR;?>/skin.css" rel="stylesheet" type="text/css" />
 <?php endif;?>
 
 
@@ -41,7 +41,7 @@ else:
 
 
 <?php if (!WB_LANG_TYPE_CSS):?>
-<link href="http://www.xintaowang.com/css/default/skin_default/skin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/skin_default/skin.css" rel="stylesheet" type="text/css" />
 <?php endif;?>
 
 
@@ -50,6 +50,6 @@ else:
 endif;
 ?>
 <?php if (WB_LANG_TYPE_CSS):?>
-<link href="http://www.xintaowang.com/css/default/language/<?php echo WB_LANG_TYPE_CSS;?>.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/language/<?php echo WB_LANG_TYPE_CSS;?>.css" rel="stylesheet" type="text/css" />
 <?php endif;?>
 <link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />

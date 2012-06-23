@@ -13,7 +13,7 @@ if (!defined('IN_APPLICATION')) {
 <meta name="description" content="新淘高清视频每日5折频道为您提供淘宝网女装，居家，箱包，男鞋，女鞋，内衣，男装精品皇冠店铺每日优惠折扣">
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="http://www.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/tv.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 #J_Discount a{cursor:pointer;}dl{margin:0px;padding:0px;}
 .cgd_info {border: 1px solid #E1E1E1;display: block;border-bottom: 4px solid #E1E1E1;margin-bottom: 25px;padding: 4px 0 4px 4px;cursor: pointer;}

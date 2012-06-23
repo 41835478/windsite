@@ -61,8 +61,8 @@ define('XT_PIWIK_TOKEN', '7b5032253da51988db274fd11d9c9d1e');
 define('XT_PIWIK_REST_URL', 'http://track.xintaowang.com/?module=API&language=zh-cn&format=JSON&token_auth=' . XT_PIWIK_TOKEN);
 //是否沙箱
 define('XT_IS_SANDBOX', 'false');
-define('XT_LAZYLOAD_PIC', 'http://www.xintaowang.com/css/default/xintao/lazy.gif');
-define('XT_LOADING_PIC', 'http://www.xintaowang.com/css/default/xintao/loading.gif');
+define('XT_LAZYLOAD_PIC', 'http://static.xintaowang.com/css/default/xintao/lazy.gif');
+define('XT_LOADING_PIC', 'http://static.xintaowang.com/css/default/xintao/loading.gif');
 //后台管理员登录淘宝回调
 define('TB_CALLBACK', 'http://www.xintaowang.com/admin.php?m=mgr/admin.topCallback');
 //前台淘宝会员登录淘宝回调

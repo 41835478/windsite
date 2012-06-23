@@ -671,6 +671,9 @@ iptables -I INPUT -s 183.60.193.35 -j DROP
 
 
 iptables-save >/etc/sysconfig/iptables
+#2012-6-17
+(搜狐视频)
+#iptables -I INPUT -s 219.234.82.48 -j DROP
 //2012-06-08
 iptables -I INPUT -s 182.118.22.0/24 -j DROP
 //2012-06-07

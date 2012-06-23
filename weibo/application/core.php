@@ -2320,6 +2320,7 @@ class dsMgr {
 		}
 		// 让 cache id 始终不为空
 		$gCacheId .= ' -';
+		
 		//--------------------------------------------------------------
 		//var_dump(array($useCache,$gCacheName,$gCacheId, $cacheType));
 		//echo "CACHE TRY TO FIND [$useCache] [$gCacheName], [$gCacheId]\n";
@@ -2578,6 +2579,7 @@ class dsMgr {
 		}
 		// 让 cache id 始终不为空
 		$gCacheId .= ' -';
+		//TODO 临时禁用缓存
 		//--------------------------------------------------------------
 		//var_dump(array($useCache,$gCacheName,$gCacheId, $cacheType));
 		//echo "CACHE TRY TO FIND [$useCache] [$gCacheName], [$gCacheId]\n";

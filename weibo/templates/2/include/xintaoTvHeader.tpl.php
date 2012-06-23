@@ -18,7 +18,7 @@ if (!in_array($_URI, array (
 	$isNoFollow = ' rel="nofollow" ';
 }
 ?>
-<link type="text/css" rel="stylesheet" <?php echo $isNoFollow?> href="http://www.xintaotv.com/css/default/xintaotv.css?v=20120205" />
+<link type="text/css" rel="stylesheet" <?php echo $isNoFollow?> href="http://static.xintaowang.com/css/default/xintaotv.css?v=20120205" />
 <script type="text/javascript" src="http://www.xintaotv.com/js/xintao/xintaotv.js?v=20120209"></script>
 <script type="text/javascript" src="http://a.tbcdn.cn/apps/stargate/ac/js/proxy.js?t=<?php echo date("Ymd"); ?>"></script>
 <?php if(!isset($channel)||empty($channel)){$channel='movie';}?>
@@ -30,13 +30,13 @@ if (!in_array($_URI, array (
 			<li<?php echo $channel=='zongyi'?'  class="active"':'';?>><em><a <?php echo $isNoFollow?> href="/zongyi">综艺</a></em></li>
 			<li<?php echo $channel=='comic'?'  class="active"':'';?>><em><a <?php echo $isNoFollow?> href="/comic">动漫</a></em></li>
 			<li<?php echo $channel=='music'?'  class="active"':'';?>><em><a <?php echo $isNoFollow?> href="/music">音乐</a></em></li>
-			<li<?php echo $channel=='discount'?'  class="active"':'';?> style="position:relative;"><em><a <?php echo $isNoFollow?> href="/discount">每日5折</a></em><img alt="hot" src="http://www.xintaotv.com/css/default/xintao/xintaotv/hot.png" width="20" height="14" style="top: -15px;right: -12px;position: absolute;z-index: 8;"></li>
-			<li<?php echo $channel=='brand'?'  class="active"':'';?> style="position:relative;"><em><a title="品牌特价包邮" <?php echo $isNoFollow?> href="/brand">特价包邮</a></em><img alt="hot" src="http://www.xintaotv.com/css/default/xintao/xintaotv/new.png" width="20" height="14" style="top: -15px;right: -12px;position: absolute;z-index: 8;"></li>
+			<li<?php echo $channel=='discount'?'  class="active"':'';?> style="position:relative;"><em><a <?php echo $isNoFollow?> href="/discount">每日5折</a></em><img alt="hot" src="http://static.xintaowang.com/css/default/xintao/xintaotv/hot.png" width="20" height="14" style="top: -15px;right: -12px;position: absolute;z-index: 8;"></li>
+			<li<?php echo $channel=='brand'?'  class="active"':'';?> style="position:relative;"><em><a title="品牌特价包邮" <?php echo $isNoFollow?> href="/brand">特价包邮</a></em><img alt="hot" src="http://static.xintaowang.com/css/default/xintao/xintaotv/new.png" width="20" height="14" style="top: -15px;right: -12px;position: absolute;z-index: 8;"></li>
 			<!--<li<?php echo $channel=='zongyi'?'  class="active"':'';?>><em><a href="/zongyi">爆单淘</a></em></li>
 			<li<?php echo $channel=='zongyi'?'  class="active"':'';?>><em><a href="/zongyi">皇冠淘</a></em></li>-->
 		</ul>
 		<p id="navSub">
-			<strong><a <?php echo $isNoFollow?> href="/video.search/search--13--------------------1-40">娱乐<img alt="hot" src="http://www.xintaotv.com/css/default/xintao/xintaotv/hot.png" width="20" height="14"></a></strong>
+			<strong><a <?php echo $isNoFollow?> href="/video.search/search--13--------------------1-40">娱乐<img alt="hot" src="http://static.xintaowang.com/css/default/xintao/xintaotv/hot.png" width="20" height="14"></a></strong>
 			<span class="mg">|</span>
 			<strong><a <?php echo $isNoFollow?> href="/video.search/search--1300--------------------1-40">新闻</a></strong>
 			<a <?php echo $isNoFollow?> href="/video.search/search--21--------------------1-40">教育</a>
@@ -49,12 +49,12 @@ if (!in_array($_URI, array (
 </div>
 <?php if($channel=='brand'){?>
 <link href="http://static.xintaowang.com/css/default/brand.css" rel="stylesheet" type="text/css" />
-<div style="background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/T1Dn5uXeJIXXXXXXXX-950-46.png) no-repeat;width:948px;height:46px;border: 1px solid #D9D9D9;margin:20px auto 0px;position:relative;"><a title="返回品牌特价首页" <?php echo $isNoFollow?> href="/brand" style="display:block;width:125px;height:48px;position:absolute;top:0;left:0;"></a></div>
+<div style="background:url(http://static.xintaowang.com/css/default/xintao/xintaotv/T1Dn5uXeJIXXXXXXXX-950-46.png) no-repeat;width:948px;height:46px;border: 1px solid #D9D9D9;margin:20px auto 0px;position:relative;"><a title="返回品牌特价首页" <?php echo $isNoFollow?> href="/brand" style="display:block;width:125px;height:48px;position:absolute;top:0;left:0;"></a></div>
 <?php }else{?>
 <?php if(!in_array($channel,array('movie','teleplay','zongyi','real','yule','comic','education','music','news','health','boke'))){$channel='movie';} ?>
 <div id="logoBar" class="tv-area" style="height:50px;">
 	<div class="logo l">
-		<div class="tvAd l"><a><img alt="" src="http://www.xintaotv.com/css/default/xintao/xintaotv/<?php echo $channel?>.gif" width="128" height="50"></a></div>
+		<div class="tvAd l"><a><img alt="" src="http://static.xintaowang.com/css/default/xintao/xintaotv/<?php echo $channel?>.gif" width="128" height="50"></a></div>
 	</div>
 	<div class="search l" sizset="24" sizcache="1">
 		<form id="sform" method="GET" name="sform" autocomplete="off" onsubmit="return newTvSearch();">

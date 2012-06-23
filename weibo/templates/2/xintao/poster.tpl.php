@@ -20,8 +20,8 @@ if($poster){
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
 <script type="text/javascript" src="/js/xintao/hotkeys/jquery.hotkeys.js"></script>
-<link href="<?php echo W_BASE_URL;?>css/default/pub.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo W_BASE_URL;?>css/default/xintao/poster.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/xintao/poster.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/xintao/poster/poster.js?v=20111115"></script>
 <script>
 <?php echo 'var PID=\''.XT_USER_PID.'\';';?>

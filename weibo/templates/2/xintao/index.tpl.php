@@ -12,7 +12,7 @@ if (!defined('IN_APPLICATION')) {
 <meta name="description" content="微购以淘宝网为主，实现与新浪微博（其他平台陆续支持）互通，为淘宝卖家，淘宝客提供集淘宝店铺，自动化营销与一身的独立的新一代微博购物平台。">
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="<?php echo W_BASE_URL;?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 <style>
 ul, li {list-style-type: none;}
 body, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, textarea, label {margin: 0;padding: 0;}

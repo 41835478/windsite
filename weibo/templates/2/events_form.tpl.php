@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo F('web_page_title');?></title>
 <?php TPL::plugin('include/css_link');?>
-<link href="<?php echo W_BASE_URL ?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 <?php TPL::plugin('include/js_link');?>
 <script type="text/javascript" src="<?php echo W_BASE_URL ?>js/datepick/jquery.datepick.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL ?>js/datepick/jquery.datepick-<?php echo APP::getLang();?>.js"></script>

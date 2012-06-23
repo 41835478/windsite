@@ -15,7 +15,7 @@ if (!defined('IN_APPLICATION')) {
 <?php TPL::plugin('include/js_link');?>
 <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
 <style type="text/css">
-.fi_movie .fi_jb{width:92px;height:92px;position:absolute;top:0;left:138px;background:url("http://www.xintaotv.com/css/default/xintao/xintaotv/movie-p.png") no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop,src="http://www.xintaotv.com/css/default/xintao/xintaotv/movie-p.png");_background:none;}
+.fi_movie .fi_jb{width:92px;height:92px;position:absolute;top:0;left:138px;background:url("http://static.xintaowang.com/css/default/xintao/xintaotv/movie-p.png") no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop,src="http://static.xintaowang.com/css/default/xintao/xintaotv/movie-p.png");_background:none;}
 </style>
 </head>
 

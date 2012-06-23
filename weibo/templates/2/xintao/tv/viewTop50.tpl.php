@@ -24,7 +24,7 @@ var TOP_C='<?php echo $c;?>';
 		<div class="wrap-in">
 			<?php $channel=$c;if($c=='korea'){$channel = 'teleplay';} TPL::plugin('include/xintaoTvHeader',array('channel'=> $channel,'key'=>'')); ?>
 			<div class="blank12H"></div>
-			<div id="container" class="ks-clear" style="margin-bottom:0px;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg111.gif) repeat-y left;border-top: 1px #f3b6b4 solid">
+			<div id="container" class="ks-clear" style="margin-bottom:0px;background:url(http://static.xintaowang.com/css/default/xintao/xintaotv/bg111.gif) repeat-y left;border-top: 1px #f3b6b4 solid">
 				<div class="extra" style="width: 160px;">
 					<h2 class="top-all-h2"><span><a href="/video.top">全部排行榜</a></span></h2>
 					<div class="rankNav clear">
@@ -65,7 +65,7 @@ var TOP_C='<?php echo $c;?>';
 					</div>
 				</div>
 			</div>
-			<div class="ks-clear" style="background: url(http://www.xintaotv.com/css/default/xintao/xintaotv/bg021.gif) no-repeat;font-size: 0px;margin: 0 auto;height: 2px;margin-bottom:10px;"></div>
+			<div class="ks-clear" style="background: url(http://static.xintaowang.com/css/default/xintao/xintaotv/bg021.gif) no-repeat;font-size: 0px;margin: 0 auto;height: 2px;margin-bottom:10px;"></div>
 			<!-- 尾部 开始 -->
 			<?php TPL::module('xintaoTvFooter');?>
 			<!-- 尾部 结束 -->

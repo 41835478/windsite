@@ -52,4 +52,4 @@ endif;
 <?php if (WB_LANG_TYPE_CSS):?>
 <link href="http://static.xintaowang.com/css/default/language/<?php echo WB_LANG_TYPE_CSS;?>.css" rel="stylesheet" type="text/css" />
 <?php endif;?>
-<link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />

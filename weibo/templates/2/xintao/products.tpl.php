@@ -45,7 +45,7 @@ elseif (count($cat) == 1) {
 
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="<?php echo W_BASE_URL;?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="items">
 	<div id="wrap">

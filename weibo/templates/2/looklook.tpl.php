@@ -10,7 +10,7 @@ if(!defined('IN_APPLICATION')){
 <title><?php echo F('web_page_title', false, L('lookLook__pug__casualLookTitle'));?></title>
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="<?php echo W_BASE_URL; ?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="pub">

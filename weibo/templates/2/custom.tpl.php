@@ -11,7 +11,7 @@ $web_page_title = isset($pageInfo['page_name']) ?  APP::F('escape', $pageInfo['p
 <title><?php echo F('web_page_title', null, $web_page_title);?></title>
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="<?php echo W_BASE_URL;?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 <?php 
 // 专题自定义背景
 if (isset($pageInfo) && $pageInfo['params'] && ($params = json_decode($pageInfo['params'],true)) && isset($params['bg']) && !empty($params['bg'])) {

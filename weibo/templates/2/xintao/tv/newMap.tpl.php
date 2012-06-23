@@ -26,13 +26,13 @@ echo '<meta name="description" content="' . $cName . '大全,' . $site . '是提
 .tab .s1{display:inline-block;color:#7f7f7f;height:28px;line-height:28px;padding-left:5px;}
 .tab a,.tab span{display:inline-block;width:31px;height:28px;line-height:28px;border-right:1px solid #dedede;background:#f6f6f6;text-align:center;font-weight:bold;font-family:arial;}
 .tab a:hover,.tab .active{text-decoration:none;background:#fdf4f4;border-top:1px solid #f9ece3;margin-top:-1px;}
-.tab .one{border-left:1px solid #fef6ee;width:30px;padding-left:15px;border-left-color:#fff;background:#fdf4f4 url(http://www.xintaotv.com/css/default/xintao/xintaotv/bgsy.gif) no-repeat;color:#dd0d0b;}
+.tab .one{border-left:1px solid #fef6ee;width:30px;padding-left:15px;border-left-color:#fff;background:#fdf4f4 url(http://static.xintaowang.com/css/default/xintao/xintaotv/bgsy.gif) no-repeat;color:#dd0d0b;}
 .tab a.last{width:43px;font-family: Simsun,Arial,sans-serif;border-right-color:#f6f6f6; font-weight:normal}
 .tab a.one:hover,.tab .active{background-color:#f9ece3;}
-.tab a.one:hover{background:#f9ece3 url(http://www.xintaotv.com/css/default/xintao/xintaotv/bgsy.gif) no-repeat}
-.listA dt{color:#000;font:17px arial;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/point1.png) no-repeat 0 33px;padding-left:17px;padding-top:30px;font-weight:bold;margin:0 0 5px;*padding-top:5px;*background-position:0 8px;}
+.tab a.one:hover{background:#f9ece3 url(http://static.xintaowang.com/css/default/xintao/xintaotv/bgsy.gif) no-repeat}
+.listA dt{color:#000;font:17px arial;background:url(http://static.xintaowang.com/css/default/xintao/xintaotv/point1.png) no-repeat 0 33px;padding-left:17px;padding-top:30px;font-weight:bold;margin:0 0 5px;*padding-top:5px;*background-position:0 8px;}
 .listA dd{border:1px solid #EAEAEA;padding:0 0 10px 10px;margin:0 0 15px;padding-top:10px;}
-.listA dd li{width:159px;margin-right:10px;float:left;overflow:hidden;height:22px;line-height:22px;background:url(http://www.xintaotv.com/css/default/xintao/xintaotv/point2.png) no-repeat 0 6px;*background-position:0 5px;padding:0 0 0 18px;}
+.listA dd li{width:159px;margin-right:10px;float:left;overflow:hidden;height:22px;line-height:22px;background:url(http://static.xintaowang.com/css/default/xintao/xintaotv/point2.png) no-repeat 0 6px;*background-position:0 5px;padding:0 0 0 18px;}
 .tab span.dark_bg{background:#eaeaea;}
 .muluCon{ position:absolute;z-index:3;width:123px;left:35px;top:30px;background:#FFFFFF;border: 1px solid #dedede;display:none}
 .muluCon p {border-bottom: 1px solid #dedede;height: 20px;line-height: 18px;padding-top: 5px;text-indent: 13px; text-align:left;font-size:12px;}

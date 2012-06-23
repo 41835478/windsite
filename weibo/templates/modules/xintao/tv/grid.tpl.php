@@ -1,7 +1,7 @@
 <div class="blockLB bordA clear" id="theLatest">
 	<div class="title">
 		<?php if(isset($moreUrl)&&!empty($moreUrl)){?><a class="color1 r" href="<?php echo $moreUrl;?>" >更多&gt;&gt;</a><?php }?>
-		<span><?php if(isset($titlePic)&&!empty($titlePic)){?><a><img height="18" src="http://www.xintaotv.com/css/default/xintao/xintaotv/<?php echo $titlePic?>"></a><?php }?></span>
+		<span><?php if(isset($titlePic)&&!empty($titlePic)){?><a><img height="18" src="http://static.xintaowang.com/css/default/xintao/xintaotv/<?php echo $titlePic?>"></a><?php }?></span>
 	</div>
 	<div class="pp pp3" style="width: 662px;">
 		<ul>

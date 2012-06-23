@@ -5,7 +5,7 @@
 
 <title><?php echo F('web_page_title');?></title>
 <?php TPL::plugin('include/css_link');?>
-<link rel="stylesheet" type="text/css" href="<?php echo W_BASE_URL ?>css/default/pub.css" />
+<link rel="stylesheet" type="text/css" href="http://static.xintaowang.com/css/default/pub.css" />
 <?php TPL::plugin('include/js_link');?>
 </head>
 <body id="guide-narrow">

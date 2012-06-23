@@ -1,4 +1,4 @@
-<div class="tt" style="background-color:#fff;height: 30px;padding-top: 15px;text-align: left;"><img src="http://www.xintaotv.com/css/default/xintao/xintaotv/tt002.gif" width="82" height="20" alt="观看排行榜"></div>
+<div class="tt" style="background-color:#fff;height: 30px;padding-top: 15px;text-align: left;"><img src="http://static.xintaowang.com/css/default/xintao/xintaotv/tt002.gif" width="82" height="20" alt="观看排行榜"></div>
 <div class="blockRA rankA ks-clear" style="width:776px;">
 <div class="l">
 <h3 class="top-all-h3">电影排行榜</h3>

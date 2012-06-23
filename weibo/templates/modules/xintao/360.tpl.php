@@ -1,54 +1,54 @@
 <style>
 .radar{float:left;position:relative;width:126px;height:109px;}
 .radar .skan-num{margin-left:0px;position:absolute;top:0px;right:0px;}
-.health0 .radar{background:url(http://www.xintaowang.com/css/default/xintao/360/Radar0.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/Radar0_ie6.png) no-repeat;}
-.health60 .radar{background:url(http://www.xintaowang.com/css/default/xintao/360/Radar60.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/Radar60_ie6.png) no-repeat;}
-.health90 .radar{background:url(http://www.xintaowang.com/css/default/xintao/360/Radar90.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/Radar90_ie6.png) no-repeat;}
-.health100 .radar{background:url(http://www.xintaowang.com/css/default/xintao/360/Radar100.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/Radar100_ie6.png) no-repeat;}
-.skan-num{margin-left:20px;width:50px;height:109px;background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Number.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Number_ie6.png) no-repeat;}.skan-num-1{background-position:0px 0px;}.skan-num-2{background-position:-47px 0px;}.skan-num-3{background-position:-94px 0px;}.skan-num-4{background-position:-141px 0px;}.skan-num-5{background-position:-188px 0px;}.skan-num-6{background-position:-235px 0px;}.skan-num-7{background-position:-282px 0px;}.skan-num-8{background-position:-329px 0px;}.skan-num-9{background-position:-376px 0px;}.skan-num-10{background-position:-423px 0px;}.skan-num-11{background-position:-470px 0px;}.skan-num-12{background-position:-517px 0px;}.skan-num-13{background-position:-564px 0px;}.skan-num-14{background-position:-611px 0px;}.skan-num-15{background-position:-658px 0px;}.skan-num-16{background-position:-705px 0px;}.skan-num-17{background-position:-752px 0px;}.skan-num-18{background-position:-799px 0px;}.skan-num-19{background-position:-846px 0px;}	
+.health0 .radar{background:url(http://static.xintaowang.com/css/default/xintao/360/Radar0.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/Radar0_ie6.png) no-repeat;}
+.health60 .radar{background:url(http://static.xintaowang.com/css/default/xintao/360/Radar60.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/Radar60_ie6.png) no-repeat;}
+.health90 .radar{background:url(http://static.xintaowang.com/css/default/xintao/360/Radar90.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/Radar90_ie6.png) no-repeat;}
+.health100 .radar{background:url(http://static.xintaowang.com/css/default/xintao/360/Radar100.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/Radar100_ie6.png) no-repeat;}
+.skan-num{margin-left:20px;width:50px;height:109px;background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Number.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Number_ie6.png) no-repeat;}.skan-num-1{background-position:0px 0px;}.skan-num-2{background-position:-47px 0px;}.skan-num-3{background-position:-94px 0px;}.skan-num-4{background-position:-141px 0px;}.skan-num-5{background-position:-188px 0px;}.skan-num-6{background-position:-235px 0px;}.skan-num-7{background-position:-282px 0px;}.skan-num-8{background-position:-329px 0px;}.skan-num-9{background-position:-376px 0px;}.skan-num-10{background-position:-423px 0px;}.skan-num-11{background-position:-470px 0px;}.skan-num-12{background-position:-517px 0px;}.skan-num-13{background-position:-564px 0px;}.skan-num-14{background-position:-611px 0px;}.skan-num-15{background-position:-658px 0px;}.skan-num-16{background-position:-705px 0px;}.skan-num-17{background-position:-752px 0px;}.skan-num-18{background-position:-799px 0px;}.skan-num-19{background-position:-846px 0px;}	
 .skan-score{float:left;margin-left:20px;width:290px;}.skan-score em{font-size:32px;font-style: italic;font-weight:bolder;}.health0 .skan-score em,.health-required strong{color:red;}.health60 .skan-score em{color:#F3890D;}.health90 .skan-score em,.health-recommend strong{color:#047BC2;}.health100 .skan-score em,.health-optimized strong{color:#22940C;}
 .health-header{margin-bottom:10px;}.health-header strong{font-size:14px;}.health-header span{color:#666;font-size:12px;}
 .health-profile{margin-bottom:15px;}.health-required,.health-recommend,.health-optimized{margin-bottom:5px;}
-/*.health-required li.false{background:url(http://www.xintaowang.com/css/default/xintao/360/danger.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/danger_ie6.png) no-repeat;}
-.health-recommend li.false{background:url(http://www.xintaowang.com/css/default/xintao/360/suggest.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/suggest_ie6.png) no-repeat;}
-.health-optimized li.false{background:url(http://www.xintaowang.com/css/default/xintao/360/warning.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/warning_ie6.png) no-repeat;}
+/*.health-required li.false{background:url(http://static.xintaowang.com/css/default/xintao/360/danger.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/danger_ie6.png) no-repeat;}
+.health-recommend li.false{background:url(http://static.xintaowang.com/css/default/xintao/360/suggest.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/suggest_ie6.png) no-repeat;}
+.health-optimized li.false{background:url(http://static.xintaowang.com/css/default/xintao/360/warning.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/warning_ie6.png) no-repeat;}
 */
 	
-.health-required li.false,.health-recommend li.false,.health-optimized li.false{background:url(http://www.xintaowang.com/css/default/xintao/360/fail.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/fail_ie6.png) no-repeat;}
-.health-optimized li.danger{background:url(http://www.xintaowang.com/css/default/xintao/360/danger.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/danger_ie6.png) no-repeat;}	
+.health-required li.false,.health-recommend li.false,.health-optimized li.false{background:url(http://static.xintaowang.com/css/default/xintao/360/fail.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/fail_ie6.png) no-repeat;}
+.health-optimized li.danger{background:url(http://static.xintaowang.com/css/default/xintao/360/danger.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/danger_ie6.png) no-repeat;}	
 	
 .health-status{zoom:1;margin-bottom:15px;}.skan-main,.skan-left,.skan-right{float: left;zoom: 1;}.skan-main{width: 100%;}
-.skan-middle{zoom: 1;margin:0px 70px 0px 55px;height:109px;background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Min.png) repeat-x;_background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Min_ie6.png) repeat-x;}
-.skan-left{width:55px;margin-left: -100%;height:109px;background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Left.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Left_ie6.png) no-repeat;}
-.skan-right{width:70px;margin-left: -70px;height:109px;background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Right.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/SkanBack_Right_ie6.png) no-repeat;}
+.skan-middle{zoom: 1;margin:0px 70px 0px 55px;height:109px;background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Min.png) repeat-x;_background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Min_ie6.png) repeat-x;}
+.skan-left{width:55px;margin-left: -100%;height:109px;background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Left.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Left_ie6.png) no-repeat;}
+.skan-right{width:70px;margin-left: -70px;height:109px;background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Right.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/SkanBack_Right_ie6.png) no-repeat;}
 .health::after,.health-main::after,.skan-middle::after,.skan-left::after,.skan-right::after { content:'\20'; display:block; height:0; clear:both; }
-.skan-radar{width:102px;height:109px;background:url(http://www.xintaowang.com/css/default/xintao/360/Radio.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/Radio_ie6.png) no-repeat;}
+.skan-radar{width:102px;height:109px;background:url(http://static.xintaowang.com/css/default/xintao/360/Radio.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/Radio_ie6.png) no-repeat;}
 .health0 .skan-radar{background-position:0px 0px;}.health60 .skan-radar{background-position:-102px 0px;}.health90 .skan-radar{background-position:-204px 0px;}.health100 .skan-radar{background-position:-306px 0px}
 .health-status .skan-score{margin:0px;padding-left:55px;padding-top:2px;}
 
 
 .health-result{padding:5px;}.health-result li{width:180px;float:left;margin-bottom:10px;margin-right:15px;padding-left:20px;}
-.health-result li.true{background:url(http://www.xintaowang.com/css/default/xintao/360/safeico.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/safeico_ie6.png) no-repeat;}
+.health-result li.true{background:url(http://static.xintaowang.com/css/default/xintao/360/safeico.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/safeico_ie6.png) no-repeat;}
 .health-result li.true span{color:#f60}	
 .health-category{zoom: 1;margin-bottom:5px;}.health-category-header{float: left;width:88px;padding-left:10px;}.health-category ul{float:left;width:440px;}
-a.health-home{cursor:pointer;display:block;width:98px;height:38px;float:right;margin-top:30px;background:url(http://www.xintaowang.com/css/default/xintao/360/home.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/home_ie6.png) no-repeat;}
+a.health-home{cursor:pointer;display:block;width:98px;height:38px;float:right;margin-top:30px;background:url(http://static.xintaowang.com/css/default/xintao/360/home.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/home_ie6.png) no-repeat;}
 a.health-home:hover{background-position:-98px 0px;}
 .health-yingxiao{width:242px;height:64px;position:relative;}
-.health-yingxiao-closed{background:url(http://www.xintaowang.com/css/default/xintao/360/yingxiao_closed.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/yingxiao_closed_ie6.png) no-repeat;}
-.health-yingxiao-opened{background:url(http://www.xintaowang.com/css/default/xintao/360/yingxiao_opened.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/yingxiao_opened_ie6.png) no-repeat;}	
-a.health-yingxiao-open{position:absolute;right:8px;top:18px;display:block;width:48px;height:26px;background:url(http://www.xintaowang.com/css/default/xintao/360/TitleButton.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/TitleButton_ie6.png) no-repeat;}
+.health-yingxiao-closed{background:url(http://static.xintaowang.com/css/default/xintao/360/yingxiao_closed.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/yingxiao_closed_ie6.png) no-repeat;}
+.health-yingxiao-opened{background:url(http://static.xintaowang.com/css/default/xintao/360/yingxiao_opened.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/yingxiao_opened_ie6.png) no-repeat;}	
+a.health-yingxiao-open{position:absolute;right:8px;top:18px;display:block;width:48px;height:26px;background:url(http://static.xintaowang.com/css/default/xintao/360/TitleButton.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/TitleButton_ie6.png) no-repeat;}
 a.health-yingxiao-open:hover{background-position:-48px 0px;}
-a.health-yingxiao-close{position:absolute;right:8px;top:18px;display:block;width:48px;height:26px;background:url(http://www.xintaowang.com/css/default/xintao/360/TitleButtonClose.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/TitleButtonClose_ie6.png) no-repeat;}
+a.health-yingxiao-close{position:absolute;right:8px;top:18px;display:block;width:48px;height:26px;background:url(http://static.xintaowang.com/css/default/xintao/360/TitleButtonClose.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/TitleButtonClose_ie6.png) no-repeat;}
 a.health-yingxiao-close:hover{background-position:-96px 0px;}
 
 a.health-yingxiao-go{position:absolute;top:4px;left:5px;width:54px;height:55px;display:block;}
-.health-yingxiao-closed	a.health-yingxiao-go{background:url(http://www.xintaowang.com/css/default/xintao/360/state_danger.png) no-repeat -486px 0px;_background:url(http://www.xintaowang.com/css/default/xintao/360/state_danger_ie6.png) no-repeat -486px 0px;}
-.health-yingxiao-opened	a.health-yingxiao-go{background:url(http://www.xintaowang.com/css/default/xintao/360/state_safe.png) no-repeat -486px 0px;_background:url(http://www.xintaowang.com/css/default/xintao/360/state_safe_ie6.png) no-repeat -486px 0px;}
+.health-yingxiao-closed	a.health-yingxiao-go{background:url(http://static.xintaowang.com/css/default/xintao/360/state_danger.png) no-repeat -486px 0px;_background:url(http://static.xintaowang.com/css/default/xintao/360/state_danger_ie6.png) no-repeat -486px 0px;}
+.health-yingxiao-opened	a.health-yingxiao-go{background:url(http://static.xintaowang.com/css/default/xintao/360/state_safe.png) no-repeat -486px 0px;_background:url(http://static.xintaowang.com/css/default/xintao/360/state_safe_ie6.png) no-repeat -486px 0px;}
 .health-yingxiao-opened	a.health-yingxiao-open{display:none;}
 .health-yingxiao-detail{margin-top:20px;zoom:1}
 .health-yingxiao-detail li.yingxiao-item{margin-bottom:10px;padding-left:50px;zoom:1}
-.health-yingxiao-detail li.item-opened{background:url(http://www.xintaowang.com/css/default/xintao/360/item_opened.png) no-repeat top left;_background:url(http://www.xintaowang.com/css/default/xintao/360/item_opened_ie6.png) no-repeat top left;}
-.health-yingxiao-detail li.item-closed{background:url(http://www.xintaowang.com/css/default/xintao/360/item_closed.png) no-repeat top left;_background:url(http://www.xintaowang.com/css/default/xintao/360/item_closed_ie6.png) no-repeat top left;}
+.health-yingxiao-detail li.item-opened{background:url(http://static.xintaowang.com/css/default/xintao/360/item_opened.png) no-repeat top left;_background:url(http://static.xintaowang.com/css/default/xintao/360/item_opened_ie6.png) no-repeat top left;}
+.health-yingxiao-detail li.item-closed{background:url(http://static.xintaowang.com/css/default/xintao/360/item_closed.png) no-repeat top left;_background:url(http://static.xintaowang.com/css/default/xintao/360/item_closed_ie6.png) no-repeat top left;}
 .health-yingxiao-detail span{color:#666;}
 .health-yingxiao-detail .item-opened strong{color:#3e752a;}
 .health-yingxiao-detail .item-closed strong,.health-yingxiao-detail .item-closed em{color:#a22f2f;}	
@@ -281,7 +281,7 @@ elseif ($SCORE >= 60) {
 					<div class="skan-score">
 						<ul>
 							<li><strong style="font-size:18px;color:#666;">微购体检得分&nbsp;:&nbsp;</strong><em style="" class="score"><?php echo $SCORE;?></em></li>
-							<li><?php if($COUNT==$TOTAL){echo '<span style="color:#22940C;">您的微购很健康，请继续保持！</span>';}else{?><span style="color:#666;">共体检了&nbsp;<span style="color:#F3890D"><?php echo $TOTAL;?></span>&nbsp;项，其中&nbsp;<span style="color:#F3890D;background:url(http://www.xintaowang.com/css/default/xintao/360/fail.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/fail_ie6.png) no-repeat;padding-left:16px"><?php echo $TOTAL-$COUNT;?></span>&nbsp;项有问题</span><?php }?></li>
+							<li><?php if($COUNT==$TOTAL){echo '<span style="color:#22940C;">您的微购很健康，请继续保持！</span>';}else{?><span style="color:#666;">共体检了&nbsp;<span style="color:#F3890D"><?php echo $TOTAL;?></span>&nbsp;项，其中&nbsp;<span style="color:#F3890D;background:url(http://static.xintaowang.com/css/default/xintao/360/fail.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/fail_ie6.png) no-repeat;padding-left:16px"><?php echo $TOTAL-$COUNT;?></span>&nbsp;项有问题</span><?php }?></li>
 							<li><span style="color:#666;"><strong style="color:red;font-size:16px;"><?php echo F('yingxiao.getWeiboAccount');?></strong>名淘客为淘宝卖家带来<strong style="color:red;font-size:16px;"><?php echo F('yingxiao.getWeiboYingxiao');?></strong>次营销</span></li>
 						</ul>
 						

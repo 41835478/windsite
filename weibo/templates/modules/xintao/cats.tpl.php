@@ -45,7 +45,7 @@ if (count($cats) > 1) {
 		$count++;
 	}
 	if ($rows > 3) {
-		echo '<div class="selectareabtn"><img id="itoggle" style="cursor:pointer" src="http://www.xintaowang.com/css/default/xintao/downbar.jpg"></div>';
+		echo '<div class="selectareabtn"><img id="itoggle" style="cursor:pointer" src="http://static.xintaowang.com/css/default/xintao/downbar.jpg"></div>';
 	}
 	echo '</div></div>';
 }
@@ -110,7 +110,7 @@ elseif (count($props) > 0) {
 		}
 	}
 	if ($count > 3) {
-		echo '<div class="selectareabtn"><img id="itoggle" style="cursor:pointer" src="http://www.xintaowang.com/css/default/xintao/downbar.jpg"></div>';
+		echo '<div class="selectareabtn"><img id="itoggle" style="cursor:pointer" src="http://static.xintaowang.com/css/default/xintao/downbar.jpg"></div>';
 	}
 	if(!empty($selectedProps)){//存在已选中属性
 		echo '<div class="selectedarea" id="J_SelectedArea"><dl><dt>您已选择:</dt>';

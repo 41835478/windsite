@@ -5,7 +5,7 @@ small { font-size: 12px; -webkit-text-size-adjust: none;}small.rank {display: in
 #rank-section h3 {background: #FFF;color: #3391D4;font-size: 16px;line-height: 30px;margin-bottom: 0px;}#rank-section h3,#rank-section .head {padding-left: 10px;font-weight: bold;}
 #rank-section .head {border-top: #E0E0E0;background: #ECECEC;color: #999;}#rank-section ol {background: #F8F8F8;height: 300px;margin: 0 5px;padding:0px;}#rank-section li,#rank-section .head {height: 29px;line-height: 29px;}#rank-section span {display: inline-block;text-indent: 3px;}#rank-section span * {text-indent: 0;}#rank-section li {border-bottom: 1px dashed #CCC;padding: 0 5px;}#rank-section li.last,#rank-section ol li:last-child {border-bottom: none;}
 #rank-section li .key a {color: #106099;}#rank-section span.rank {width: 30px;}#rank-section small.rank {min-width: 14px;width: auto;_width: 14px;}#rank-section .key {width: 150px;}#rank-section .value {width: 55px;}
-#rank-section li .rise {background: url(http://www.xintaowang.com/css/default/xintao/taobao/bc_color_arrow.png) no-repeat 0 -900px;height: 20px;padding-left: 12px;}#rank-section .up .rise {background-position: 0 5px;}#rank-section .down .rise {background-position: 0 -16px;}
+#rank-section li .rise {background: url(http://static.xintaowang.com/css/default/xintao/taobao/bc_color_arrow.png) no-repeat 0 -900px;height: 20px;padding-left: 12px;}#rank-section .up .rise {background-position: 0 5px;}#rank-section .down .rise {background-position: 0 -16px;}
 </style>
 <?php $my = F('yingxiao.getMyYingxiao');?>
 <div id="rank-section" class="ks-clear">

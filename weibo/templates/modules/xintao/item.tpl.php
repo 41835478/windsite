@@ -37,8 +37,8 @@ if ($item&&count($items)==0) {
 				    <div class="tb-key">
 						<div class="tb-skin tb-naked">
 							<div class="tb-action ks-clear" style="margin-left:0px;">
-								<div class="tb-btn-buy"><a href="#" <?php echo $itemRel;?> rel="nofollow"  class="J_TrackItem Go" target="_blank" style="width:170px;"><img src="http://www.xintaowang.com/css/default/xintao/taobao/gomai.gif"></a></div>
-								<?php if($item['sid']||$item['shop_click_url']){?><div class="tb-btn-buy"><a href="<?php if($item['sid']){echo 'http://shop'.$item['sid'].'.taobao.com';}else{echo '#';}?>" <?php echo $shopRel;?> rel="nofollow" class="J_TrackShop Go" target="_blank" style="width:170px;"><img src="http://www.xintaowang.com/css/default/xintao/taobao/gozhanggui.gif"></a></div><?php }?>
+								<div class="tb-btn-buy"><a href="#" <?php echo $itemRel;?> rel="nofollow"  class="J_TrackItem Go" target="_blank" style="width:170px;"><img src="http://static.xintaowang.com/css/default/xintao/taobao/gomai.gif"></a></div>
+								<?php if($item['sid']||$item['shop_click_url']){?><div class="tb-btn-buy"><a href="<?php if($item['sid']){echo 'http://shop'.$item['sid'].'.taobao.com';}else{echo '#';}?>" <?php echo $shopRel;?> rel="nofollow" class="J_TrackShop Go" target="_blank" style="width:170px;"><img src="http://static.xintaowang.com/css/default/xintao/taobao/gozhanggui.gif"></a></div><?php }?>
 							</div>
 						</div>
 					</div>

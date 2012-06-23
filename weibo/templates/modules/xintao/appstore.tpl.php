@@ -1,6 +1,6 @@
 <?php $nums = F('user_item.getPreYingxiaoNums');?>
 <style>
-#J_Appstore .yes,#J_Appstore .no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;background:url(http://www.xintaowang.com/css/default/xintao/bg-yes.gif) no-repeat;}#J_Appstore .no{background:url(http://www.xintaowang.com/css/default/xintao/bg-no.gif) no-repeat;}
+#J_Appstore .yes,#J_Appstore .no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;background:url(http://static.xintaowang.com/css/default/xintao/bg-yes.gif) no-repeat;}#J_Appstore .no{background:url(http://static.xintaowang.com/css/default/xintao/bg-no.gif) no-repeat;}
 </style>
 <table id="J_Appstore" name="J_Appstore" class="table" cellpadding="0" cellspacing="0" width="100%" border="0">
 	<colgroup>

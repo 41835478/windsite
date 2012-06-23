@@ -15,13 +15,13 @@
 		<div class="set-area">
 			第一步：使用淘宝帐号[<strong style="color:red;font-size:16px;"><?php echo XT_USER_NICK;?></strong>]<a href="http://www.alimama.com/membersvc/member/login.htm" target="_blank">登录淘宝联盟</a>
 			<br/>
-			<img src="http://www.xintaowang.com/css/default/xintao/taobao/alimama_step1.png" style="border:0px;">
+			<img src="http://static.xintaowang.com/css/default/xintao/taobao/alimama_step1.png" style="border:0px;">
 			<br/>
 			第二步：点击进入我的联盟，查看淘宝客推广收入
 			<br/>
-			<img src="http://www.xintaowang.com/css/default/xintao/taobao/alimama_step2.png" style="border:0px;">
+			<img src="http://static.xintaowang.com/css/default/xintao/taobao/alimama_step2.png" style="border:0px;">
 			<br/>
-			<img src="http://www.xintaowang.com/css/default/xintao/taobao/alimama_step3.png" style="border:0px;">
+			<img src="http://static.xintaowang.com/css/default/xintao/taobao/alimama_step3.png" style="border:0px;">
 			<br/>
     	</div>
 </div>

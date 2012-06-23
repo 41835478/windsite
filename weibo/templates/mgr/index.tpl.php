@@ -8,7 +8,7 @@
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin.js?v=1234"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
-<style>#side-menu li{width:146px;}a.a-menu{width:115px;float:left;}.tips-help{ display:inline-block; height:22px;width:22px; background:url( http://www.xintaowang.com/css/default/bgimg/ico_bg.png ) no-repeat; background-position:3px -700px;}</style>
+<style>#side-menu li{width:146px;}a.a-menu{width:115px;float:left;}.tips-help{ display:inline-block; height:22px;width:22px; background:url( http://static.xintaowang.com/css/default/bgimg/ico_bg.png ) no-repeat; background-position:3px -700px;}</style>
 <script>
 $(function() {
 	admin.index.init();

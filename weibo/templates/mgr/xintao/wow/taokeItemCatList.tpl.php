@@ -11,7 +11,7 @@
 </script>
 </head>
 <body id="star-catlist" class="main-body">
-	<?php if(!(XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购淘客/卖家服务，无法自主挑选商品分享，<a href="#" rel="e:openAppstore">立刻订购？</a></div></div>'); }?>
+	<?php if(!(XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购淘客/卖家服务，无法自主挑选商品分享，<a href="#" rel="e:openAppstore">立刻订购？</a></div></div>'); }?>
 	<div class="path"><p>当前位置：营销管理<span>&gt;</span>商品分享<span>&gt;</span>分类列表</p></div>
     <div class="main-cont">
         <h3 class="title"><?php echo (XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=='')?'<a href="http://'.XT_SITE_DOMAIN.'/wow.item" target="_blank">查看分享频道</a>':'<a href="http://t.xintaowang.com/wow.item" target="_blank">查看分享演示</a>　<a href="#" rel="e:openAppstore">订购淘客/卖家服务</a>';?>　　只有配置了分类名称，且添加了商品，设置为启用的分类才会显示在站点分享中!</h3>

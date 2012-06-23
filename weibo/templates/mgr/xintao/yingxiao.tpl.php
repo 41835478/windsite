@@ -106,9 +106,9 @@ $FREE_CRONS = $TOTAL_CRONS - $taokeItemCron - $xiaohuaCron - $posterCron - $tvCr
 
 
 if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
-	echo '<a href="#" class="cron-minus" data-value="J_Cron_TaokeItem"><img src="http://www.xintaowang.com/css/default/xintao/' . ($taokeItemCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_TaokeItem" name="crons[taokeItem]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $taokeItemCron . '">&nbsp;<a href="#" class="cron-plus" data-max="10" data-value="J_Cron_TaokeItem"><img src="http://www.xintaowang.com/css/default/xintao/' . ($taokeItemCron >= 10 || $FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
+	echo '<a href="#" class="cron-minus" data-value="J_Cron_TaokeItem"><img src="http://static.xintaowang.com/css/default/xintao/' . ($taokeItemCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_TaokeItem" name="crons[taokeItem]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $taokeItemCron . '">&nbsp;<a href="#" class="cron-plus" data-max="10" data-value="J_Cron_TaokeItem"><img src="http://static.xintaowang.com/css/default/xintao/' . ($taokeItemCron >= 10 || $FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
 } else {
-	echo '<a href="#" class="cron-minus"><img src="http://www.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[taokeItem]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $taokeItemCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://www.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
+	echo '<a href="#" class="cron-minus"><img src="http://static.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[taokeItem]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $taokeItemCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://static.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
 }
 ?>
 			    		</td>
@@ -121,9 +121,9 @@ if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
 
 
 if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
-	echo '<a href="#" class="cron-minus" data-value="J_Cron_Share"><img src="http://www.xintaowang.com/css/default/xintao/' . ($shareCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Share" name="crons[share]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $shareCron . '">&nbsp;<a href="#" class="cron-plus" data-max="10" data-value="J_Cron_Share"><img src="http://www.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
+	echo '<a href="#" class="cron-minus" data-value="J_Cron_Share"><img src="http://static.xintaowang.com/css/default/xintao/' . ($shareCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Share" name="crons[share]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $shareCron . '">&nbsp;<a href="#" class="cron-plus" data-max="10" data-value="J_Cron_Share"><img src="http://static.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
 } else {
-	echo '<a href="#" class="cron-minus"><img src="http://www.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[share]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $shareCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://www.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
+	echo '<a href="#" class="cron-minus"><img src="http://static.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[share]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $shareCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://static.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
 }
 ?>
 			    		</td>
@@ -150,9 +150,9 @@ foreach ($wow as $key => $value) {
 
 
 if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
-	echo '<a href="#" class="cron-minus" data-value="J_Cron_Xiaohua"><img src="http://www.xintaowang.com/css/default/xintao/' . ($xiaohuaCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Xiaohua" name="crons[xiaohua]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $xiaohuaCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Xiaohua"><img src="http://www.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
+	echo '<a href="#" class="cron-minus" data-value="J_Cron_Xiaohua"><img src="http://static.xintaowang.com/css/default/xintao/' . ($xiaohuaCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Xiaohua" name="crons[xiaohua]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $xiaohuaCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Xiaohua"><img src="http://static.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
 } else {
-	echo '<a href="#" class="cron-minus"><img src="http://www.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[xiaohua]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $xiaohuaCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://www.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
+	echo '<a href="#" class="cron-minus"><img src="http://static.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[xiaohua]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $xiaohuaCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://static.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
 }
 ?>
 			    		</td>
@@ -178,9 +178,9 @@ foreach ($xiaohua as $xh) {
 
 
 if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
-	echo '<a href="#" class="cron-minus" data-value="J_Cron_Poster"><img src="http://www.xintaowang.com/css/default/xintao/' . ($posterCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Poster" name="crons[poster]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $posterCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Poster"><img src="http://www.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
+	echo '<a href="#" class="cron-minus" data-value="J_Cron_Poster"><img src="http://static.xintaowang.com/css/default/xintao/' . ($posterCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Poster" name="crons[poster]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $posterCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Poster"><img src="http://static.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
 } else {
-	echo '<a href="#" class="cron-minus"><img src="http://www.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[poster]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $posterCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://www.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
+	echo '<a href="#" class="cron-minus"><img src="http://static.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[poster]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $posterCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://static.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
 }
 ?>
 			    		</td>
@@ -205,9 +205,9 @@ foreach ($poster as $p) {
 
 
 if (XT_IS_WEIBO == 'true' && XT_FREE_DATELINE == '') { //VIP
-	echo '<a href="#" class="cron-minus" data-value="J_Cron_Tv"><img src="http://www.xintaowang.com/css/default/xintao/' . ($tvCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Tv" name="crons[tv]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $tvCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Tv"><img src="http://www.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
+	echo '<a href="#" class="cron-minus" data-value="J_Cron_Tv"><img src="http://static.xintaowang.com/css/default/xintao/' . ($tvCron == 0 ? 'minus_disable.gif' : 'minus.gif') . '"/></a>&nbsp;<input id="J_Cron_Tv" name="crons[tv]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $tvCron . '">&nbsp;<a href="#" class="cron-plus" data-value="J_Cron_Tv"><img src="http://static.xintaowang.com/css/default/xintao/' . ($FREE_CRONS == 0 ? 'plus_disable.gif' : 'plus.gif') . '"/></a>';
 } else {
-	echo '<a href="#" class="cron-minus"><img src="http://www.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[tv]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $tvCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://www.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
+	echo '<a href="#" class="cron-minus"><img src="http://static.xintaowang.com/css/default/xintao/minus_disable.gif"/></a>&nbsp;<input name="crons[tv]" type="text" readonly style="width:20px;height:15px;color:#4B4B4B;" value="' . $tvCron . '">&nbsp;<a href="#" class="cron-plus"><img src="http://static.xintaowang.com/css/default/xintao/plus_disable.gif"/></a>';
 }
 ?>
 			    		</td>
@@ -283,7 +283,7 @@ $(function(){
 		function resetCronImg(){
 			//plus
 			if(parseInt($('#J_FreeCrons').text())==0){
-				$('#addForm a.cron-plus img').attr('src','http://www.xintaowang.com/css/default/xintao/plus_disable.gif');
+				$('#addForm a.cron-plus img').attr('src','http://static.xintaowang.com/css/default/xintao/plus_disable.gif');
 			}else{
 				$('#addForm a.cron-plus').each(function(){
 					var isDisable=false;
@@ -293,9 +293,9 @@ $(function(){
 						}
 					}
 					if(isDisable){
-						$(this).find('img').attr('src','http://www.xintaowang.com/css/default/xintao/plus_disable.gif');
+						$(this).find('img').attr('src','http://static.xintaowang.com/css/default/xintao/plus_disable.gif');
 					}else{
-						$(this).find('img').attr('src','http://www.xintaowang.com/css/default/xintao/plus.gif');
+						$(this).find('img').attr('src','http://static.xintaowang.com/css/default/xintao/plus.gif');
 					}
 				})
 			}
@@ -313,9 +313,9 @@ $(function(){
 						}	
 					}
 					if(isDisable){
-						$(this).find('img').attr('src','http://www.xintaowang.com/css/default/xintao/minus_disable.gif');
+						$(this).find('img').attr('src','http://static.xintaowang.com/css/default/xintao/minus_disable.gif');
 					}else{
-						$(this).find('img').attr('src','http://www.xintaowang.com/css/default/xintao/minus.gif');
+						$(this).find('img').attr('src','http://static.xintaowang.com/css/default/xintao/minus.gif');
 					}
 				})
 		}

@@ -31,11 +31,11 @@ var HtmlMode=['<form action="<?php echo URL('mgr/xintao/sitemap.keywordsUpload')
 </script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/xintao/sitemap.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin/jquery-ui-1.8.16.sortable.min.js"></script>
-<link type="text/css" rel="stylesheet" href="http://www.xintaowang.com/css/default/xintao/category.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="http://static.xintaowang.com/css/default/xintao/category.css" media="screen" />
 <style type="text/css">
 .form-box{height:380px;}
-.form-cids .cid-searchInput {margin-left:200px;float:left;background: url(http://www.xintaowang.com/css/default/xintao/taobao/T1kehZXkFiXXXXXXXX-290-24.png) no-repeat scroll 0 0 transparent;border: 0 none;color: #666;font-size: 12px;height: 22px;line-height: 24px;overflow: hidden;padding-left: 5px;width: 160px;}
-.form-cids .form-cids-search a {float:left;background: url(http://www.xintaowang.com/css/default/xintao/taobao/T13QJ6XotAXXXXXXXX-50-140.png) no-repeat scroll 0 0 transparent;color: white;display: block;height: 22px;padding-top: 2px;text-align: center;top: 0;width: 50px;text-decoration: none;cursor: pointer;}
+.form-cids .cid-searchInput {margin-left:200px;float:left;background: url(http://static.xintaowang.com/css/default/xintao/taobao/T1kehZXkFiXXXXXXXX-290-24.png) no-repeat scroll 0 0 transparent;border: 0 none;color: #666;font-size: 12px;height: 22px;line-height: 24px;overflow: hidden;padding-left: 5px;width: 160px;}
+.form-cids .form-cids-search a {float:left;background: url(http://static.xintaowang.com/css/default/xintao/taobao/T13QJ6XotAXXXXXXXX-50-140.png) no-repeat scroll 0 0 transparent;color: white;display: block;height: 22px;padding-top: 2px;text-align: center;top: 0;width: 50px;text-decoration: none;cursor: pointer;}
 #J_SiteMap_KeywordsForm li{margin-right:20px;margin-bottom:5px;float:left;}	
 </style>
 </head>

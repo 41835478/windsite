@@ -11,7 +11,7 @@
 <script><?php echo 'var XT_SIDS="'.XT_SIDS.'"';?></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/xintao/autoCron.js"></script>
 <style>
-.post-textarea, .post-textarea .inner, .post-focus, .post-focus .inner {background: url(http://www.xintaowang.com/css/default/bgimg/post_box_bg.png) no-repeat;}
+.post-textarea, .post-textarea .inner, .post-focus, .post-focus .inner {background: url(http://static.xintaowang.com/css/default/bgimg/post_box_bg.png) no-repeat;}
 .post-textarea, .post-focus {padding-left: 7px;height: 75px;}
 .post-textarea {background-position: 0 -32px;}
 .post-textarea .inner, .post-focus .inner {padding: 10px 7px 10px 3px;height: 55px;}
@@ -21,7 +21,7 @@ textarea {font-family: Arial, Geneva, sans-serif;overflow-x: hidden;overflow-y: 
 .key-tips {height: 30px;line-height: 30px;color: #999;}
 .key-tips span {font-size: 26px;font-family: "Constantia", Times, serif;}
 .key-tips.out140 {padding-left: 20px;background-position: -2px -532px;color: red;}
-.out140{background: url(http://www.xintaowang.com/css/default/bgimg/ico_bg.png) no-repeat;}
+.out140{background: url(http://static.xintaowang.com/css/default/bgimg/ico_bg.png) no-repeat;}
 </style>
 </head>
 <body class="main-body">

@@ -7,7 +7,7 @@
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
-<style>.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://www.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}</style>
+<style>.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://static.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}</style>
 </head>
 <body class="main-body">
 	<div class="path"><p>当前位置：推广管理<span>&gt;</span>商品统计</p></div>

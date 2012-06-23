@@ -8,8 +8,8 @@
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
 <style>
-.yes,.no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(http://www.xintaowang.com/css/default/xintao/check_green.gif) no-repeat;}
-.no{background:url(http://www.xintaowang.com/css/default/xintao/close_red.gif) no-repeat;}
+.yes,.no{display:block;width:13px;height:13px;text-indent:-9999px;overflow:hidden;margin:0 auto;background:url(http://static.xintaowang.com/css/default/xintao/check_green.gif) no-repeat;}
+.no{background:url(http://static.xintaowang.com/css/default/xintao/close_red.gif) no-repeat;}
 </style>
 </head>
 <body class="main-body">

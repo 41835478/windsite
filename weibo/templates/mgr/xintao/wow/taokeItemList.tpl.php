@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>商品管理 - 商品分享 - 推广管理</title>
-<link href="http://www.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
@@ -12,7 +12,7 @@ var XT_IS_WOW=true,XT_IS_WEIBO=<?php echo XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=
 </script>
 <script src="<?php echo W_BASE_URL;?>js/xintao/wowtaokeitem.js?v=20111216"></script> 
 <style>
-.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://www.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
+.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://static.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
 .mod-search {padding:0 0 15px; height:109px;}
 .search-area {padding:16px 0 0 10px; }
 .search-area .search-block { position:relative;height:42px; padding-left:5px; background-position:0 0; }
@@ -34,7 +34,7 @@ var XT_IS_WOW=true,XT_IS_WEIBO=<?php echo XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=
 .search-result p {font-size:13px;margin-left:50px;padding-top:12px;}
 .win-item .win-box{padding:0px;}.win-item .box{padding-left:0px;}
 .win-item select {vertical-align: middle;padding: 0px;margin: 0px;}
-.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://www.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
+.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://static.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;width:340px;}		
 </style>

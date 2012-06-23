@@ -28,8 +28,8 @@ $(function(){
 	var m='<?php echo $m?>';
 	if(m){
 		var id=m.replace('.','_').replace('/','_');
-		//$('body').css('background','url(http://www.xintaowang.com/css/admin/demo/'+m+'.png) no-repeat');
-		$('#demo_map').find('img').attr('src','http://www.xintaowang.com/css/admin/demo/'+id+'.png').end().show();
+		//$('body').css('background','url(http://static.xintaowang.com/css/admin/demo/'+m+'.png) no-repeat');
+		$('#demo_map').find('img').attr('src','http://static.xintaowang.com/css/admin/demo/'+id+'.png').end().show();
 	}
 });
 

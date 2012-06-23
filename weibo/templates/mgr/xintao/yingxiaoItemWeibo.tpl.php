@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>商品营销 - 推广统计 - 推广管理</title>
-<link href="http://www.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
@@ -12,7 +12,7 @@ var ISSELLER=<?php echo XT_IS_SELLER=='true'&&XT_FREE_DATELINE==''?'true':'false
 </script>
 <script src="<?php echo W_BASE_URL;?>js/xintao/useritem.js?v=20120501"></script> 
 <style>
-.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://www.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
+.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://static.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
 .mod-search {padding:0 0 15px; height:109px;}
 .search-area {padding:16px 0 0 10px; }
 .search-area .search-block { position:relative;height:42px; padding-left:5px; background-position:0 0; }
@@ -34,14 +34,14 @@ var ISSELLER=<?php echo XT_IS_SELLER=='true'&&XT_FREE_DATELINE==''?'true':'false
 .search-result p {font-size:13px;margin-left:50px;padding-top:12px;}
 .win-item .win-box{padding:0px;}.win-item .box{padding-left:0px;}
 .win-item select {vertical-align: middle;padding: 0px;margin: 0px;}
-.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://www.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
+.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://static.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;}		
 </style>
 <link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="main-body">
-	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
+	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
 	<div class="path"><p>当前位置：推广管理<span>&gt;</span>商品营销(卖家)</p></div>
     <div  class="main-cont" style="padding-left:10px;">
 		<div class="tab-box">
@@ -112,7 +112,7 @@ if (!empty ($list)) {
 							<h3 style="font-size:13px;">您已经添加了&nbsp;<strong style="color:red;font-size:18px;"><?php echo count($list)?></strong>&nbsp;个自动营销商品，最多&nbsp;<strong style="color:red;font-size:18px;">40</strong>&nbsp;个</h3>
 							<p>系统每天根据您添加的商品自动安排淘宝客发布商品营销微博</p>
 							</div>
-							<a <?php echo XT_SID!=''?'rel="e:openUserItem"':'href="javascript:alert(\'该功能仅对淘宝卖家开放！\');"'?> style="cursor: pointer;display: block;width: 98px;height: 38px;float: right;background: url(http://www.xintaowang.com/css/default/xintao/360/AddItemButton.png) no-repeat;_background: url(http://www.xintaowang.com/css/default/xintao/360/AddItemButton_ie6.png) no-repeat;"></a>
+							<a <?php echo XT_SID!=''?'rel="e:openUserItem"':'href="javascript:alert(\'该功能仅对淘宝卖家开放！\');"'?> style="cursor: pointer;display: block;width: 98px;height: 38px;float: right;background: url(http://static.xintaowang.com/css/default/xintao/360/AddItemButton.png) no-repeat;_background: url(http://static.xintaowang.com/css/default/xintao/360/AddItemButton_ie6.png) no-repeat;"></a>
 						</div>
 		                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
 		                    <colgroup>

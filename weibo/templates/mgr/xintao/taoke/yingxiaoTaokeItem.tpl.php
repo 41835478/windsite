@@ -3,13 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>商品管理 - 淘客推广 - 推广管理</title>
-<link href="http://www.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/xintao/taokeitem.js?v=20111216"></script> 
 <style>
-.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://www.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
+.search-area .search-block .s-btn, .btn-login, .btn-launch-event, .btn-ffirm, .select-user .click-btn, .search-host {background: url(http://static.xintaowang.com/css/default/bgimg/skin_btn.png) no-repeat;}
 .mod-search {padding:0 0 15px; height:109px;}
 .search-area {padding:16px 0 0 10px; }
 .search-area .search-block { position:relative;height:42px; padding-left:5px; background-position:0 0; }
@@ -31,7 +31,7 @@
 .search-result p {font-size:13px;margin-left:50px;padding-top:12px;}
 .win-item .win-box{padding:0px;}.win-item .box{padding-left:0px;}
 .win-item select {vertical-align: middle;padding: 0px;margin: 0px;}
-.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://www.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
+.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://static.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;}		
 </style>
@@ -55,7 +55,7 @@
 							<p>1.系统每天根据添加的淘客商品自动发布(免费版<strong style="color:red;font-size:18px;">2x2</strong>个,<a href="#" rel="e:openAppstore">淘客/卖家服务</a><strong style="color:red;font-size:18px;">10x4</strong>个)淘客商品营销微博<br>
 							2.<?php if(XT_IS_WEIBO=='true'&&XT_FREE_DATELINE==''){echo '当前营销速度（<strong style="color:#00FF00;font-size:18px;">快</strong>,每天<strong style="color:red;font-size:18px;">10x4</strong>条）';}else{echo '当前营销速度（<strong style="color:#FF0000;font-size:18px;">慢</strong>,每天<strong style="color:red;font-size:18px;">2x4</strong>条,<a href="#" rel="e:openAppstore">加速</a>）';}?></p>
 							</div>
-							<a rel="e:openTaokeItem" style="cursor: pointer;display: block;width: 98px;height: 38px;float: right;background: url(http://www.xintaowang.com/css/default/xintao/360/AddItemButton.png) no-repeat;_background: url(http://www.xintaowang.com/css/default/xintao/360/AddItemButton_ie6.png) no-repeat;"></a>
+							<a rel="e:openTaokeItem" style="cursor: pointer;display: block;width: 98px;height: 38px;float: right;background: url(http://static.xintaowang.com/css/default/xintao/360/AddItemButton.png) no-repeat;_background: url(http://static.xintaowang.com/css/default/xintao/360/AddItemButton_ie6.png) no-repeat;"></a>
 						</div>
 		                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
 		                    <colgroup>

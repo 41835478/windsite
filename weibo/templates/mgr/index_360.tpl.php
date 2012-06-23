@@ -20,25 +20,25 @@
 #header{background:none;height:95px;color:#D0EDFF;margin-bottom:5px;}#header a{color:#D0EDFF}
 #header ul{margin-left:0px;padding-left:5px;padding-top:25px;}
 #header li{padding-top:5px;background:none;width:74px;height:71px;text-align:center;}
-#header li:hover,#header li.hover{background:url(http://www.xintaowang.com/css/default/xintao/360/toolbar_hover.png) no-repeat;_background:none;_background-color:#F0F0F0;}
-#header li.pushed{background:url(http://www.xintaowang.com/css/default/xintao/360/toolbar_pushed.png) no-repeat;_background:none;_background-color:#F0F0F0;_color:red;}
+#header li:hover,#header li.hover{background:url(http://static.xintaowang.com/css/default/xintao/360/toolbar_hover.png) no-repeat;_background:none;_background-color:#F0F0F0;}
+#header li.pushed{background:url(http://static.xintaowang.com/css/default/xintao/360/toolbar_pushed.png) no-repeat;_background:none;_background-color:#F0F0F0;_color:red;}
 #header li a{background:none;padding:5px 0px;display:block;width:74px;height:71px;text-align:center;float:none;padding:0px;font-size:12px;line-height:17px;color:#D0EDFF;text-decoration: none;}
 #header li a:hover{text-decoration: none;}
 #header li:hover a,#header li.hover a,#header li.pushed a{_color:red;}
 #header li span{margin-left:16px;*margin-left:0px;display:block;width:42px;height:42px;}
-#header li span.ico_Examine{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Examine.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Examine_ie6.png) no-repeat;}
-#header li span.ico_Update{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Update.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Update_ie6.png) no-repeat;}
-#header li span.ico_Setting{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Setting.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Setting_ie6.png) no-repeat;}
-#header li span.ico_Yingxiao{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Yingxiao.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Yingxiao_ie6.png) no-repeat;}
-#header li span.ico_Top{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Top.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Top_ie6.png) no-repeat;}
-#header li span.ico_Taozhan{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Taozhan.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Taozhan_ie6.png) no-repeat;}
-#header li span.ico_Money{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Money.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Money_ie6.png) no-repeat;}
-#header li span.ico_Log{background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Log.png) no-repeat;_background:url(http://www.xintaowang.com/css/default/xintao/360/ico_Log_ie6.png) no-repeat;}		
-#ks-header{margin-top:5px;background: url(http://www.xintaowang.com/css/default/xintao/360/frame.jpg) no-repeat}
-#content-bottom{background: url(http://www.xintaowang.com/css/default/xintao/360/frame_footer.jpg) no-repeat;height:30px;}
+#header li span.ico_Examine{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Examine.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Examine_ie6.png) no-repeat;}
+#header li span.ico_Update{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Update.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Update_ie6.png) no-repeat;}
+#header li span.ico_Setting{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Setting.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Setting_ie6.png) no-repeat;}
+#header li span.ico_Yingxiao{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Yingxiao.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Yingxiao_ie6.png) no-repeat;}
+#header li span.ico_Top{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Top.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Top_ie6.png) no-repeat;}
+#header li span.ico_Taozhan{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Taozhan.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Taozhan_ie6.png) no-repeat;}
+#header li span.ico_Money{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Money.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Money_ie6.png) no-repeat;}
+#header li span.ico_Log{background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Log.png) no-repeat;_background:url(http://static.xintaowang.com/css/default/xintao/360/ico_Log_ie6.png) no-repeat;}		
+#ks-header{margin-top:5px;background: url(http://static.xintaowang.com/css/default/xintao/360/frame.jpg) no-repeat}
+#content-bottom{background: url(http://static.xintaowang.com/css/default/xintao/360/frame_footer.jpg) no-repeat;height:30px;}
 #ks-header, #ks-content{border: 1px solid #3F5462;}#ks-header{border-bottom-width:0px;}#ks-content{border-top-width:0px;}
 #side-menu ul {padding-left:4px;padding-right:4px;}#side-menu li a.a-menu{text-indent: 10px;}#side-menu li a.a-menu:hover{text-indent: 9px;}#side-menu .current a.a-menu, #side-menu .current a.a-menu:hover{text-indent: 10px;}
-.loading-indicator {font-size:11px;background-image:url('http://www.xintaowang.com/css/default/bgimg/loading.gif');background-repeat: no-repeat;background-position:top left;padding-left:20px;height:18px;text-align:left;}
+.loading-indicator {font-size:11px;background-image:url('http://static.xintaowang.com/css/default/bgimg/loading.gif');background-repeat: no-repeat;background-position:top left;padding-left:20px;height:18px;text-align:left;}
 #loading-mask{position:absolute;left:0;top:0;width:0px;height:0px;z-index:20000;background-color:white;display:none;}#loading{position:absolute;left:45%;top:40%;padding:2px;z-index:20001;height:auto;display:none;}#loading img {margin-bottom:5px;}#loading .loading-indicator{background:white;color:#555;font:bold 13px tahoma,arial,helvetica;padding:10px;margin:0;text-align:center;height:auto;}
 
 </style>

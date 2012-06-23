@@ -3,19 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>商品分享(卖家) - 推广管理</title>
-<link href="http://www.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
 <style>
-.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://www.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
+.loading{ margin:15px auto 20px; width:20px; height:20px; background:url(http://static.xintaowang.com/css/default/bgimg/loading.gif) no-repeat;}
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;width:340px;}		
 </style>
 <link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="main-body">
-	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，无法自动同步您的商品分享，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
+	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，无法自动同步您的商品分享，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
 	<div class="path"><p>当前位置：推广管理<span>&gt;</span>商品分享(卖家)</p></div>
     <div  class="main-cont" style="padding-left:10px;">
 		<h3 class="title">每天全自动更新最多1000个您的淘宝商品(<a href="#" rel="e:openAppstore">需订购卖家服务</a>)，同时投放至<a style="color:red;font-size:16px;font-weight:bold;" href="#"><?php echo count($sites);?></a>个微购淘客独立推广站点(需加入淘宝客推广)！</h3>

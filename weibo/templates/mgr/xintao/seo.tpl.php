@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>SEO设置</title>
-<link href="http://www.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/admin/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo W_BASE_URL;?>js/admin/admin_lib.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>

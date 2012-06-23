@@ -8,7 +8,7 @@
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
 </head>
 <body class="main-body">
-	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
+	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>
 	<div class="path"><p>当前位置：推广管理<span>&gt;</span>店铺营销</p></div>
     <div  class="main-cont">
         <div class="user-list">

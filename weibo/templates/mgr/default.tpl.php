@@ -6,7 +6,7 @@
 <link type="text/css" rel="stylesheet" href="<?php echo W_BASE_URL;?>css/admin/admin.css" media="screen" />
 <script src="<?php echo W_BASE_URL;?>js/jquery.min.js"></script>
 <script src="<?php echo W_BASE_URL;?>js/admin-all.js"></script>
-<style>.win-howtojoin{width:470px;}.win-howtojoin .win-box{padding:10px 10px 10px;}.btn-group .btn-general{*display:inline;}.win-domain{width:500px;}.tips-help{ display:inline-block; height:28px;width:22px;margin-left:-5px;background:url( http://www.xintaowang.com/css/default/bgimg/ico_bg.png ) no-repeat; background-position:3px -700px;}</style>
+<style>.win-howtojoin{width:470px;}.win-howtojoin .win-box{padding:10px 10px 10px;}.btn-group .btn-general{*display:inline;}.win-domain{width:500px;}.tips-help{ display:inline-block; height:28px;width:22px;margin-left:-5px;background:url( http://static.xintaowang.com/css/default/bgimg/ico_bg.png ) no-repeat; background-position:3px -700px;}</style>
 <script type="text/javascript">
 	/*$(function(){
 		$.ajax({
@@ -30,7 +30,7 @@ $daydiff = (strtotime(XT_APPSTORE_DATELINE)-strtotime(date("Y-m-d")))/60/60/24;
 }
 ?>
 <body class="main-body">
-	<?php if(!(XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=='')){ echo (XT_SID!=''?'<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>':'<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购淘客服务，无法得到微购所有推广功能，<a href="#" rel="e:openAppstore">立刻订购淘客服务？</a></div></div>'); }?>
+	<?php if(!(XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=='')){ echo (XT_SID!=''?'<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，淘宝客无法推广您的淘宝店铺，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>':'<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购淘客服务，无法得到微购所有推广功能，<a href="#" rel="e:openAppstore">立刻订购淘客服务？</a></div></div>'); }?>
 	<div class="path">
 			<p>当前位置：首页(
 		<?php 
@@ -61,7 +61,7 @@ $(function(){
 					json = eval('(' + json + ')');
 					if (json.state == '201') {
 						if($('#J_NoTaoke').length==0){
-							$('body').prepend('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://www.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://www.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您的淘宝店铺尚未加入淘宝客推广计划，淘客无法推广，<a href="#" rel="e:openHowToJoin">淘宝卖家如何加入淘客推广计划？</a></div></div>');
+							$('body').prepend('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您的淘宝店铺尚未加入淘宝客推广计划，淘客无法推广，<a href="#" rel="e:openHowToJoin">淘宝卖家如何加入淘客推广计划？</a></div></div>');
 						}
 					}
 				}

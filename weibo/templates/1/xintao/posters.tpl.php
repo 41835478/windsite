@@ -14,7 +14,7 @@ $htmlTitle = (empty($channel)?'导购画报':($channel['title'].' - 导购画报
 <?php F('web_page_seo',999,array(),array(),empty($channel)?'':($channel['title']));?>
 <?php TPL::plugin('include/css_link');?>
 <?php TPL::plugin('include/js_link');?>
-<link href="<?php echo W_BASE_URL;?>css/default/pub.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/css/default/pub.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="posters">
 	<div id="wrap">

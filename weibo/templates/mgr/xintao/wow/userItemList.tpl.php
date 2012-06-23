@@ -12,7 +12,7 @@
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;width:340px;}		
 </style>
-<link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="main-body">
 	<?php if(XT_SID!=''&&!(XT_IS_SELLER=='true'&&XT_FREE_DATELINE=='')){ echo ('<div id="J_NoTaoke" style="padding:10px;padding-left:30px;height:45px;background:url(http://static.xintaowang.com/css/default/xintao/360/Mainbanner_Danger.png) repeat-x;"><div style="padding:10px;padding-left:60px;height:20px;background:url(http://static.xintaowang.com/css/default/xintao/360/Error_L.png) no-repeat;color:#B11506;font-size:16px;font-weight:700;">您尚未订购卖家服务，无法自动同步您的商品分享，<a href="#" rel="e:openAppstore">立刻订购卖家服务？</a></div></div>'); }?>

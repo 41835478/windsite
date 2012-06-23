@@ -38,7 +38,7 @@ var XT_IS_WOW=true,XT_IS_WEIBO=<?php echo XT_IS_WEIBO=='true'&&XT_FREE_DATELINE=
 #recordList li{position:relative;}
 #recordList li a.item-title{display:block;overflow:hidden;height:20px;width:340px;}		
 </style>
-<link href="http://www.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
+<link href="http://static.xintaowang.com/assets/min/xintao.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="main-body">
 	<div class="path"><p>当前位置：推广管理<span>&gt;</span>商品分享</p></div>

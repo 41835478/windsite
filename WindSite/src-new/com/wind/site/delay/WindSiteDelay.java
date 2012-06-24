@@ -135,20 +135,22 @@ public class WindSiteDelay {
 	// 添加超时对象
 	public static void addPageQueue(String pageId, Date deploy, int days,
 			TimeUnit unit) {
-		Calendar next = Calendar.getInstance();
-		next.setTime(deploy);// 设置部署时间
-		next.add(Calendar.DATE, days);// 向后滑动一个间隔
-		next.add(Calendar.SECOND, new Random().nextInt(60 * 60 * 3));// 加入3小时的随机
-		Calendar now = Calendar.getInstance();
-		now.setTime(new Date());
-		Long time = (next.getTimeInMillis() - now.getTimeInMillis()) / 1000;
-		Date oldValue = cacheObjMap.put(pageId, next.getTime());// 设置下次发布时间
-		long nanoTime = TimeUnit.NANOSECONDS.convert(time, unit);
-		DelayItem<String> item = new DelayItem<String>(pageId, nanoTime);
-		if (null != oldValue) {
-			pageQueue.remove(item);
-		}
-		pageQueue.put(item);
+		// TODO 暂时关闭自动更新
+		// Calendar next = Calendar.getInstance();
+		// next.setTime(deploy);// 设置部署时间
+		// next.add(Calendar.DATE, days);// 向后滑动一个间隔
+		// next.add(Calendar.SECOND, new Random().nextInt(60 * 60 * 3));//
+		// 加入3小时的随机
+		// Calendar now = Calendar.getInstance();
+		// now.setTime(new Date());
+		// Long time = (next.getTimeInMillis() - now.getTimeInMillis()) / 1000;
+		// Date oldValue = cacheObjMap.put(pageId, next.getTime());// 设置下次发布时间
+		// long nanoTime = TimeUnit.NANOSECONDS.convert(time, unit);
+		// DelayItem<String> item = new DelayItem<String>(pageId, nanoTime);
+		// if (null != oldValue) {
+		// pageQueue.remove(item);
+		// }
+		// pageQueue.put(item);
 		// logger.info("userpage["
 		// + pageId
 		// + "] timeout["

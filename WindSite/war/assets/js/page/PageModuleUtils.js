@@ -1034,7 +1034,7 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopChannel : function(widget) {
-		if (typeof(APP) != 'undefined' && 1 == APP) {
+		if (typeof(VERSIONNO) != 'undefined' && 1.5 == VERSIONNO) {
 			widget
 					.find('.shop-custom')
 					.empty()

@@ -2,7 +2,7 @@
 	<div class="hd" <#if 'false'==isHd>style="display:none;"</#if>><h3><span>${title}</span></h3></div>
 	<div class="bd">
 		<div class="shop-custom">
-		<#if SITEIMPL.appType=='1'>
+		<#if !(SITEIMPL.versionNo>1.5)>
 		<div>您当前使用的是新淘网淘宝客分成版，无法使用淘宝内嵌推广模块，请删除此模块，或者升级为淘客返利版（月租型）或卖家版</div>
 		<#else>
 			<#if channel??&&'beauty'==channel>

@@ -29,7 +29,7 @@
 			<ul>
 				<#if data??&&data?size!=0>
 					<#list data as d>
-						<#if SITEIMPL.appType=='1'&&'channel'==d.t>
+						<#if !(SITEIMPL.versionNo>1.5)&&'channel'==d.t>
 						<#else>
 						<#if 'sys'==d.t&&d.v="pages"&&extra??&&extra?size!=0>
 						<li title="${d.title}" t="${d.t}" v="${d.v}" open="<#if 'S'==d.open>S<#else>B</#if>"><a id="J_HeaderPages" href="javascript:;" target="_blank"><em>${d.title}</em></a></li>

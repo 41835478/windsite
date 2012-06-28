@@ -26,7 +26,7 @@ lynx http://httpd.apache.org/download.cgi
 gzip -d httpd-NN.tar.gz
 tar xvf httpd-NN.tar
 cd httpd-NN
-./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so 
+./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so --with-included-apr
 #--with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre
 make
 make install
@@ -38,6 +38,7 @@ cd /opt/httpd-2.2.22/modules/proxy
 /usr/local/apache2/bin/apxs -c -i mod_proxy_http.c
 cd /opt/httpd-2.2.22/modules/metadata/
 /usr/local/apache2/bin/apxs -c -i -a mod_expires.c
+/usr/local/apache2/bin/apxs -c -i -a mod_headers.c
 cd /opt/httpd-2.2.22/modules/filters/
 /usr/local/apache2/bin/apxs -i -c -a mod_deflate.c
 #java
@@ -106,6 +107,18 @@ cd php-5.4.0
 
 /usr/bin/rsync -avzuP  root@175.41.19.18:/opt/ /mnt/ebs/opt
 
+ec2 instance to linux
+chmod og-r /opt/xintao-ap-tokyo.pem
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/discuz72 /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/discuzx15 /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/help /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hitem /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hposter /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
 导入：
 mysql -uroot -p --default-character-set=utf8 uchome
 rsync
@@ -118,7 +131,33 @@ UC_IP
 　　net.ipv4.tcp_syncookies = 1
 　　net.ipv4.tcp_tw_reuse = 1
 　　net.ipv4.tcp_tw_recycle = 1
+ulimit -a  显示当前所有的 limit 信息
+ ulimit -n 可以打开最大文件描述符的数量
+ ulimit -n 65536 限制最大可以使用 65536个文件描述符
+ /etc/security/limits.conf
+ * soft nofile 65536
+ * hard nofile 65536
+ 
+ # yum install ntp
+ # crontab -e
 
+加入一行：
+
+*/15 * * * * ntpdate 210.72.145.44
+
+备注： 210.72.145.44 为中国国家授时中心服务器地址。
+ 
+/etc/rc.d/rc.local
+# Start Apache 
+/usr/local/apache2/bin/apachectl start
+
+# Start MySQL Service
+/usr/local/mysql/bin/mysqld_safe &
+
+# Start Tomcat
+/usr/local/tomcat/bin/startup.sh
+ 
+ 
 1.详情页：返利显示
 2.帐号登录：滞后
 3.搜索直接宝贝链接

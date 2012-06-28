@@ -1,6 +1,7 @@
 package com.wind.site.util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.R;
 
 import com.google.gson.JsonObject;
 import com.wind.core.exception.SystemException;
@@ -15,6 +17,7 @@ import com.wind.core.service.IBaseService;
 import com.wind.site.env.EnvManager;
 import com.wind.site.model.Site;
 import com.wind.site.model.SiteImpl;
+import com.wind.site.model.W_UserSubscribe;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
 
@@ -45,6 +48,16 @@ public class WindSiteRestUtil {
 	 * 默认成功信息
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
+
+	public static Float getNativeUsb(IBaseService service, String user_id) {
+		Calendar calendar = Calendar.getInstance();
+		W_UserSubscribe usb = service.findByCriterion(W_UserSubscribe.class, R
+				.eq("user_id", user_id), R.gt("endDate", calendar.getTime()));
+		if (usb != null) {
+			return usb.getVersionNo();
+		}
+		return 1f;
+	}
 
 	public static String getUrl(ISiteService siteService,
 			Map<String, Object> result, String userId) {

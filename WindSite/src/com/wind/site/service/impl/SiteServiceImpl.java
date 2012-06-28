@@ -63,6 +63,7 @@ import com.wind.site.model.WeiboSysConfig;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
 import com.wind.site.util.TaobaoFetchUtil;
+import com.wind.site.util.WindSiteRestUtil;
 import com.wind.weibo.config.impl.WeiboConfigImpl;
 
 /**
@@ -821,6 +822,12 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				if (isFC) {
 					user.setAppType("1");// 如果订购了分成版，则设置为分成
 					tus.setVersionNo(1.5f);
+					Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
+							.getUser_id());
+					if (versionNo > 1.5f) {
+						user.setAppType("0");
+						tus.setVersionNo(versionNo);
+					}
 				} else {
 					user.setAppType("0");
 					tus.setVersionNo(1f);

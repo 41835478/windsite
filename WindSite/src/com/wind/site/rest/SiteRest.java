@@ -1681,8 +1681,8 @@ public class SiteRest {
 		if (EnvManager.getUser() != null) {
 			try {
 				// TODO 暂时不对不匹配版本进行校验
-				if (EnvManager.getUser().getApp().equals(
-						EnvManager.getUser().getAppType())) {//
+//				if (EnvManager.getUser().getApp().equals(
+//						EnvManager.getUser().getAppType())) {//
 					// 如果会员应用版本与登录版本一致，则进入管理后台，不一致则跳转至重定向页面重新登录
 					if (EnvManager.getUser().getUsb() != null) {// 如果版本号存在
 						Float versionNo = EnvManager.getUser().getUsb()
@@ -1729,10 +1729,10 @@ public class SiteRest {
 								+ WindSiteRestUtil.DOMAIN
 								+ "/router/site/redirect");
 					}
-				} else {
-					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
-							+ "/router/site/redirect");
-				}
+//				} else {
+//					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+//							+ "/router/site/redirect");
+//				}
 				return null;
 			} catch (IOException e) {
 				e.printStackTrace();

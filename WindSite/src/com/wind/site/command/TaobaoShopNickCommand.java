@@ -26,6 +26,7 @@ import com.wind.site.model.User;
 import com.wind.site.model.W_ShopFavorite;
 import com.wind.site.service.IAdminService;
 import com.wind.site.util.TaobaoFetchUtil;
+import com.wind.site.util.WindSiteRestUtil;
 
 /**
  * 同步店铺（根据USER_ID查找NICK）
@@ -89,6 +90,12 @@ public class TaobaoShopNickCommand {
 				if (isFC) {
 					user.setAppType("1");// 如果订购了分成版，则设置为分成
 					tus.setVersionNo(1.5f);
+					Float versionNo = WindSiteRestUtil.getNativeUsb(
+							adminService, user.getUser_id());
+					if (versionNo > 1.5f) {
+						user.setAppType("0");
+						tus.setVersionNo(versionNo);
+					}
 				} else {
 					user.setAppType("0");
 					tus.setVersionNo(-1f);

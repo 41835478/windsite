@@ -48,6 +48,7 @@ import com.wind.site.model.WidgetType;
 import com.wind.site.service.IAdminService;
 import com.wind.site.util.PageUtils;
 import com.wind.site.util.TaobaoFetchUtil;
+import com.wind.site.util.WindSiteRestUtil;
 
 /**
  * 管理功能业务实现类
@@ -91,6 +92,11 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 			Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
 			if (isFC) {
 				vn = 1.5f;
+				Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
+						.getUser_id());
+				if (versionNo > 1.5f) {
+					vn = versionNo;
+				}
 			}
 		}
 		if (vn == 0f) {
@@ -131,16 +137,18 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 	public Integer countValidPage() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", true);
-		return ((Long) this.findByHql("select count(t) from ADPageStatus t where isValid=1",
-				map).get(0)).intValue();
+		return ((Long) this.findByHql(
+				"select count(t) from ADPageStatus t where isValid=1", map)
+				.get(0)).intValue();
 	}
 
 	@Override
 	public Integer countValidSite() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", 1);
-		return ((Long) this.findByHql("select count(t) from ADBlogStatus t where isValid=1",
-				map).get(0)).intValue();
+		return ((Long) this.findByHql(
+				"select count(t) from ADBlogStatus t where isValid=1", map)
+				.get(0)).intValue();
 	}
 
 	@Override

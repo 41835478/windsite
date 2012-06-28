@@ -25,7 +25,7 @@ $(function(){
 <@xt.taoketemplate navselected='taoke' bdselected='site-versions'>
 <#assign version='starter' versionDesc='普及版'>
 <#if USER??>
-<#if USER.appType=='1'>
+<#if USER.usb??&&(USER.usb.versionNo==1.5)>
 <#assign version='standard' versionDesc='分成版(分成型)'>
 <#elseif USER.usb??&&(USER.usb.versionNo==2)>
 <#assign version='medium' versionDesc='返利版(月租型)'>

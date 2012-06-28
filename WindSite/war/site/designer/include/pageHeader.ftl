@@ -1,5 +1,5 @@
 <#if (versionNo??&&(versionNo>=2))&&isAd??&&!isAd><#else><script>$(function(){IndexAd();});</script></#if>
-<#if (versionNo??&&(versionNo>=2))&&www??&&www!=''&&user_id!=95242001&&user_id!=465792734>
+<#if (versionNo??&&(versionNo>=2))&&www??&&www!=''&&user_id!=95242001&&user_id!=465792734&&www!='www.wy66.com'&&www!='www.isloli.com'&&www!='www.iamloli.com'>
 <p class="login-info" id="login-info" style="width:500px;position:relative;">
 	<#if MEMBER??>
 		<#if  isAsyn??&&isAsyn&&MEMBER.commissionRate??&&''!=MEMBER.commissionRate><script>$(function(){PageModuleUtils.addFanliCommission(parseFloat(${MEMBER.commissionRate}/100));});</script></#if>

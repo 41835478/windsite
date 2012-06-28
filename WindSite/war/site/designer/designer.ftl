@@ -133,7 +133,7 @@
 			<div class="fllbJs">
 				<div class="ks-clear">
 					<h3 style="color: #FF0084;">您最多可以选择下列8个导航菜单</h3>
-					<#if USER.appType=='0'>
+					<#if USER.versionNo>1.5>
 					<dl class="fllbJsDl ks-clear" style="display:block;">
 						<dt>淘宝频道</dt>
 						<dd><ul><#list channels as c><li><input name="header-nav" type="checkbox" value="${c.value}" t="channel" v="${c.value}" title="${c.name}"/><label>${c.name}</label></li></#list></ul><div class="ks-clear"></div></dd>

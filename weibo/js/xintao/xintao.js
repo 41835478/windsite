@@ -1538,7 +1538,7 @@
 						}
 						self.lazyload({
 							failurelimit : 1,
-							placeholder : "http://www.xintaowang.com/css/default/xintao/lazy.gif",
+							placeholder : "http://static.xintaowang.com/css/default/xintao/lazy.gif",
 							effect : "fadeIn"
 						});
 					});
@@ -1978,7 +1978,7 @@ function lazyload(imgs, type) {
 			}
 			self.lazyload({
 				failurelimit : 1,
-				placeholder : "http://www.xintaowang.com/css/default/xintao/lazy.gif",
+				placeholder : "http://static.xintaowang.com/css/default/xintao/lazy.gif",
 				effect : "fadeIn"
 			});
 		}

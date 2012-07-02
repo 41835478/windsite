@@ -20,6 +20,7 @@ import com.wind.site.model.T_UserSubscribe;
 import com.wind.site.service.IAdminService;
 import com.wind.site.service.ICommandService;
 import com.wind.site.util.TaobaoFetchUtil;
+import com.wind.site.util.WindSiteRestUtil;
 
 /**
  * 定时事件（刷新所有广告计划）
@@ -106,7 +107,13 @@ public class AdsCommand {
 						} else if (vn > 1f) {// 如果是返利，卖家版
 							usb.setVersionNo(vn);
 						} else if (vn == 0f) {// 如果未订购月租型，则查询分成型
-							usb.setVersionNo(-1f);
+							Float versionNo = WindSiteRestUtil.getNativeUsb(
+									adminService, usb.getUser_id());
+							if (versionNo > 1.5f) {
+								usb.setVersionNo(versionNo);
+							} else {
+								usb.setVersionNo(-1f);
+							}
 						}
 						adminService.update(usb);
 						if (usb.getVersionNo() >= 3) {// 卖家版，校验广告计划是否无效

@@ -1181,7 +1181,7 @@ var PageModuleUtils = {
 				}).blur(function() {
 					$(this).removeClass('focus');
 				});
-		var TIPS = ['输入 宝贝 名称或网址', '输入 店铺 名称', '输入 宝贝 名称', '输入 画报 关键词']
+		var TIPS = ['输入 宝贝 名称或宝贝地址', '输入 店铺 名称', '输入 宝贝 名称', '输入 画报 关键词']
 				.join('');
 		$('.search-tab li', widget).click(function() {
 			var rel = $(this).attr('rel');
@@ -1192,7 +1192,7 @@ var PageModuleUtils = {
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
 					q.val('输入 宝贝 名称或网址');
 				}
-				q.unbind('focus').unbind('blur').focusText('输入 宝贝 名称或网址',
+				q.unbind('focus').unbind('blur').focusText('输入 宝贝 名称或宝贝地址',
 						'focus');
 			} else if ('shop' == rel) {// 店铺搜索
 				form.attr('action', '/shops?v=' + Math.random());

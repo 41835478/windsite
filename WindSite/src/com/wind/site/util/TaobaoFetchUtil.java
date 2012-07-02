@@ -803,9 +803,8 @@ public class TaobaoFetchUtil {
 			ItemsSearchRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					EnvManager.getAppKey("0"), EnvManager.getSecret("0"),
+					Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			ItemsSearchResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;

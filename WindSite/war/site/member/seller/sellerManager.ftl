@@ -30,7 +30,7 @@ $(function(){
 <@xt.sellertemplate navselected='seller' bdselected=''>
 <#if shop??>
 <table width=750px>
-<tr><td><@ws.info><span style="color: #F60;">重要公告:</span>&nbsp;&nbsp;<a target="_blank" href="http://home.xintaonet.com/space.php?uid=1&do=poll&pid=128"><strong style="color:red;font-weight:bold;font-size:16px;">2012-06-24：服务器再次搬迁公投！</strong></a></@ws.info><br/></td></tr>
+<tr><td><@ws.info><span style="color: #F60;">重要公告:</span>&nbsp;&nbsp;<a target="_blank" href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=46363"><strong style="color:red;font-weight:bold;font-size:16px;">2012-07-03:关于近期未开店淘客无法订购新淘网的问题!</strong></a></@ws.info><br/></td></tr>
 <tr><td class="xintao-seller-header" width=750px><strong class="nick">淘宝店铺公开信息<strong></td></tr>
 <tr><td>
 <table style="padding:15px;line-height:20px;">

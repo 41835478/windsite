@@ -81,7 +81,7 @@ var PageUtils = {
 				'</strong></h2>',
 				'<h3>请升级版本【<a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=10442" style="color:red;font-weight:bold;" target="_blank">升级帮助</a>】咨询QQ：153647646</h3><p><ul>',
 				lis.join(''),
-				'</ul></p><h3>提示：升级或订购后，需退出重新登录才可以生效</h3></div></div>']
+				'</ul></p><h3 style="color:red">提示：未开店会员请联系客服QQ：153647646协助订购</h3><h3>提示：升级或订购后，需退出重新登录才可以生效</h3></div></div>']
 		$('body').append(strs.join(''));
 		$('#J_VersionNoBox').dialog({
 					bgiframe : true,

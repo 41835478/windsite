@@ -134,11 +134,17 @@ http://www.jb51.net/article/19668.htm
 
 /src-uc/config.properties
 UC_IP
-编辑/etc/sysctl.conf文件，增加三行：
+编辑/etc/sysctl.conf文件，增加6行：
 　　引用
 　　net.ipv4.tcp_syncookies = 1
 　　net.ipv4.tcp_tw_reuse = 1
 　　net.ipv4.tcp_tw_recycle = 1
+
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 120
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_close_wait = 60
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_fin_wait = 120
+#使其生效
+sysctl –p
 ulimit -a  显示当前所有的 limit 信息
  ulimit -n 可以打开最大文件描述符的数量
  ulimit -n 65536 限制最大可以使用 65536个文件描述符
@@ -337,6 +343,7 @@ netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
 netstat -nat|grep 175.41.19.18:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 netstat -nat|grep 223.4.86.100:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 netstat -nat|grep 222.35.137.84:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+netstat -nat|grep 203.124.13.74:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 ps -ef | grep httpd | wc -l
 硬盘空间：
 df -lh

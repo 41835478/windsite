@@ -119,8 +119,16 @@ rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
+
+./bakmysql.sh
+
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/mnt/ebs/opt/mysqldata /opt
+
 导入：
+gzip sql.gz
 mysql -uroot -p --default-character-set=utf8 uchome
+mysql -uroot -p --default-character-set=utf8 uchome
+
 rsync
 http://www.jb51.net/article/19668.htm
 

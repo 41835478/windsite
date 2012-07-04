@@ -237,12 +237,15 @@ public class HuabaoRest {
 			com.taobao.api.domain.Huabao huabao = posterGetResp.getPoster();
 			if (huabao != null) {
 				T_Poster local = siteService.get(T_Poster.class, id);
-				if (local != null && local.getIsSuccess()) {
-					result.put("isSuccess", true);
-				} else {// 如果未抓取，则实时获取
-					xintaoHuabaoJob.posterParse(local);
-					result.put("isSuccess", true);
+				if (local != null) {
+					if (local.getIsSuccess()) {
+						result.put("isSuccess", true);
+					} else {// 如果未抓取，则实时获取
+						xintaoHuabaoJob.posterParse(local);
+						result.put("isSuccess", true);
+					}
 				}
+
 				result.put("channel", siteService.get(T_PosterChannel.class,
 						Long.valueOf(huabao.getChannelId())));
 				result.put("poster", huabao);// 画报

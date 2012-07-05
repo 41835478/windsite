@@ -12,10 +12,14 @@ iptables-save >/etc/sysconfig/iptables
 iptables -A INPUT -p icmp --icmp-type 8 -m length --length 403 -j ACCEPT
 iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 //单IP封
-
+如果你未开店。只能我们私底下帮你开通
+1.第一步：订购分成版
+2.第二步：支付宝转账费用至fxy060608@gmail.com
+3.第三步：帮你开通指定版本，然后你用分成版登录后台，系统会自动切换
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+
 #2012-07-05
 iptables -I INPUT -s 27.40.221.0/24 -j DROP
 iptables -I INPUT -s 207.46.204.232 -j DROP
@@ -23,6 +27,7 @@ iptables -I INPUT -s 157.55.17.148 -j DROP
 iptables -I INPUT -s 65.52.109.0/24 -j DROP
 iptables -I INPUT -s 65.52.110.0/24 -j DROP
 iptables -I INPUT -s 65.52.111.0/24 -j DROP
+iptables -I INPUT -s 58.215.160.60 -j DROP
 #2012-07-04
 iptables -I INPUT -s 207.46.13.0/24 -j DROP
 #2012-07-03

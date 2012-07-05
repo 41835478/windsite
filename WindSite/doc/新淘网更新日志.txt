@@ -113,6 +113,7 @@ rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/discuz72 /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/discuzx15 /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/uchome2 /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/help /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hitem /usr/local/apache2/htdocs
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/usr/local/apache2/htdocs/hposter /usr/local/apache2/htdocs

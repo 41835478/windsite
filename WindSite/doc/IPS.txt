@@ -28,6 +28,7 @@ iptables -I INPUT -s 65.52.109.0/24 -j DROP
 iptables -I INPUT -s 65.52.110.0/24 -j DROP
 iptables -I INPUT -s 65.52.111.0/24 -j DROP
 iptables -I INPUT -s 58.215.160.60 -j DROP
+iptables -I INPUT -s 61.187.202.100 -j DROP
 #2012-07-04
 iptables -I INPUT -s 207.46.13.0/24 -j DROP
 #2012-07-03

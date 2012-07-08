@@ -43,7 +43,7 @@ public class TaobaoDianpuCommand {
 	private FreeMarkerConfigurer fcg;
 
 	public void synDianpu() {
-		getCat();
+		//getCat();
 		getDianpu();
 		synTaobaoDianpu();
 		// 重新设置店铺分类
@@ -351,6 +351,7 @@ public class TaobaoDianpuCommand {
 		Parser parser;
 		try {
 			parser = new Parser("http://dianpu.tao123.com");
+			parser.setEncoding("gbk");
 			NodeList as1 = parser.extractAllNodesThatMatch(
 					new HasAttributeFilter("data-area", "sidebar"))
 					.elementAt(0).getChildren().extractAllNodesThatMatch(

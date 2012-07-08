@@ -597,7 +597,7 @@
 				<ref local="huabaoCronTrigger" />
 				<ref local="taobaoKeywordCronTrigger" />
 				<ref local="taobaoNicksCronTrigger" />
-				<ref local="taobaoDianPuCronTrigger" />
+				<!--<ref local="taobaoDianPuCronTrigger" />-->
 				<ref local="articleBizOrderCronTrigger" />
 				<ref local="spiderCommandCronTrigger" />
 				<ref local="yiqifaCronTrigger" />

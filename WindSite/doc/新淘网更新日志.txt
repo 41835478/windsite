@@ -1,3 +1,15 @@
+/usr/bin/rsync -avzuP  root@203.124.13.74:/opt/jdk-6u26-linux-x64.bin /opt
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/discuz72 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/discuzx15 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/uchome2 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/help /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hitem /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hposter /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
 #apache apr
 wget http://apache.etoak.com//apr/apr-1.4.6.tar.gz
 gzip -d apr-1.4.6.tar.gz
@@ -31,6 +43,26 @@ cd httpd-NN
 make
 make install
 
+ rpm -qa|grep yum|xargs rpm -e --nodeps
+ wget http://centos.ustc.edu.cn/centos/5/os/x86_64/CentOS/yum-metadata-parser-1.1.2-3.el5.centos.x86_64.rpm
+ wget http://mirrors.ustc.edu.cn/centos/5/os/x86_64/CentOS/yum-fastestmirror-1.1.16-21.el5.centos.noarch.rpm
+ wget http://mirrors.ustc.edu.cn/centos/5/os/x86_64/CentOS/yum-3.2.22-39.el5.centos.noarch.rpm
+ rpm -ivh *.rpm
+ wget http://docs.linuxtone.org/soft/lemp/CentOS-Base.repo
+ 
+ mv CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+ 
+ 
+
+yum -y install libxml2-devel
+yum -y install openssl-devel 
+yum -y install curl-devel
+yum -y install libjpeg-devel 
+yum -y install libpng-devel 
+yum -y install freetype-devel
+yum -y install gmp-devel  
+yum -y install bzip2-devel
+
 #http_proxy
 cd /opt/httpd-2.2.22/modules/proxy
 /usr/local/apache2/bin/apxs -c -i mod_proxy.c proxy_util.c
@@ -55,7 +87,7 @@ java -version
 wget http://labs.renren.com/apache-mirror/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.tar.gz
 gzip -d apache-tomcat-6.0.35.tar.gz
 tar xvf apache-tomcat-6.0.35.tar
-cd apache-tomcat-6.0.35
+ cp -r apache-tomcat-6.0.35 /usr/local/
 server.xml
 #mysql
 http://down1.tech.sina.com.cn/download/downContent/2005-04-06/13485.shtml
@@ -76,6 +108,17 @@ tar xvf mysql-5.1.62.tar
 --with-plugins=partition //分表功能，将一个大表分割成多个小表
 ./configure --prefix=/usr/local/mysql --datadir=/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
 二、新建用户和组 
+groupadd mysql
+useradd -g mysql -s /sbin/nologin mysql
+chown -R mysql:mysql /usr/local/mysql/
+cp  /opt/mysql-5.1.62/support-files/my-medium.cnf /etc/my.cnf
+/usr/local/mysql/bin/mysql_install_db --user=mysql
+chown -R mysql:mysql /usr/local/mysql/var/
+/usr/local/mysql/bin/mysqld_safe --user=mysql &
+cp /opt/mysql-5.1.62/support-files/mysql.server /etc/init.d/mysqld
+chmod 755 /etc/init.d/mysqld  
+chkconfig --add mysqld 
+service mysqld restart 
 #groupadd mysql //建MySQL组 
 #useradd -g mysql -s /sbin/nologin mysql //建MySQL用户属于MySQL组
 #chown -R mysql:mysql /usr/local/mysql/ 把MySQL目录的权限给MySQL用户和组
@@ -137,15 +180,15 @@ http://www.jb51.net/article/19668.htm
 UC_IP
 编辑/etc/sysctl.conf文件，增加6行：
 　　引用
-　　net.ipv4.tcp_syncookies = 1
-　　net.ipv4.tcp_tw_reuse = 1
-　　net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
 
 net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 120
 net.ipv4.netfilter.ip_conntrack_tcp_timeout_close_wait = 60
 net.ipv4.netfilter.ip_conntrack_tcp_timeout_fin_wait = 120
 #使其生效
-sysctl –p
+sysctl -p
 ulimit -a  显示当前所有的 limit 信息
  ulimit -n 可以打开最大文件描述符的数量
  ulimit -n 65536 限制最大可以使用 65536个文件描述符

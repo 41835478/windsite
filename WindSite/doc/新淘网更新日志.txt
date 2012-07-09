@@ -10,6 +10,7 @@
 /usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
 /usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
 /usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
+/usr/bin/rsync -avzuP  root@203.124.13.74:/opt/mysqldata /opt/
 #apache apr
 wget http://apache.etoak.com//apr/apr-1.4.6.tar.gz
 gzip -d apr-1.4.6.tar.gz
@@ -214,7 +215,21 @@ ulimit -a  显示当前所有的 limit 信息
 
 # Start Tomcat
 /usr/local/tomcat/bin/startup.sh
- 
+
+1. #vim /etc/modprobe.conf，在其中加入如下两行：
+
+
+alias net-pf-10 off
+ alias ipv6 off
+
+2. #vim /etc/sysconfig/network文件，确认其中含有如下行：
+
+
+NETWORKING_IPV6=no
+
+
+reboot
+
  
 1.详情页：返利显示
 2.帐号登录：滞后

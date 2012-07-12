@@ -12,16 +12,32 @@ iptables-save >/etc/sysconfig/iptables
 iptables -A INPUT -p icmp --icmp-type 8 -m length --length 403 -j ACCEPT
 iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 //单IP封
+1.从这里用淘宝帐号登录http://www.alimama.com/membersvc/member/login.htm
+2.我的推广---api工具--新淘网分成版---立即使用
+
 如果你未开店。只能我们私底下帮你开通
+普及版每月10元，每季度25元，半年40元，一年70元
+返利版每月15元，每季度35元，半年60元，一年100元
 1.第一步：订购分成版
 2.第二步：支付宝转账费用至fxy060608@gmail.com
 3.第三步：帮你开通指定版本，然后你用分成版登录后台，系统会自动切换
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+#2012-07-12
+iptables -I INPUT -s 61.55.185.116 -j DROP
+iptables -I INPUT -s 27.24.159.0/24 -j DROP
+#2012-07-11
+iptables -I INPUT -s 184.82.131.106 -j DROP
+iptables -I INPUT -s 183.38.246.183 -j DROP
+iptables -I INPUT -s 119.114.104.137 -j DROP
+iptables -I INPUT -s 117.66.240.111 -j DROP
+iptables -I INPUT -s 180.123.236.49 -j DROP
 #2012-07-10
 iptables -I INPUT -s 97.74.215.0/24 -j DROP
 iptables -I INPUT -s 27.40.222.0/24 -j DROP
+iptables -I INPUT -s 114.88.61.235 -j DROP
+iptables -I INPUT -s 219.138.132.29 -j DROP
 #2012-07-07
 iptables -I INPUT -s 119.188.67.0/24 -j DROP
 #2012-07-06

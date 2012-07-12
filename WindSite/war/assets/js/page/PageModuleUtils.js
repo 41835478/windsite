@@ -177,7 +177,7 @@ var PageModuleUtils = {
 
 		}
 		if (typeof(qq) != 'undefined' && qq != '') {
-			$.getScript('http://qzonestyle.gtimg.cn/qzone/openapi/qc.js',
+			$.getScript('http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js',
 					function() {
 						if (typeof(QC) != 'undefined') {
 							QC.init({

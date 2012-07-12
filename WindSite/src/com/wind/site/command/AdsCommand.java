@@ -129,6 +129,7 @@ public class AdsCommand {
 						}
 					} catch (Exception e) {// 屏蔽错误
 						e.printStackTrace();
+						continue;
 					}
 				}
 			}

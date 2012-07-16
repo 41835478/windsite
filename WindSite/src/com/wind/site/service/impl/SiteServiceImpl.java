@@ -727,8 +727,9 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				this.save(clazz);
 			}
 			if (StringUtils.isNotEmpty(site.getWww())) {// 如果版本号大于普及版以及已绑定顶级域名（即满足返利版要求）
-				if (EnvManager.getAppType().equals(user.getAppType()))// 如果当前登录应用与会员应用版本一致
-					user.settSession(tSession);// 存储当前SESSION
+				// if (EnvManager.getAppType().equals(user.getAppType()))//
+				// 如果当前登录应用与会员应用版本一致
+				user.settSession(tSession);// 存储当前SESSION
 			} else
 				user.settSession(null);
 		} else {
@@ -835,7 +836,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 					SystemException
 							.handleMessageException("当前淘宝帐号【"
 									+ user.getNick()
-									+ "】尚未订购新淘网月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a>，或分成版步骤：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)淘宝联盟--->淘宝客--->API接入--->新淘网分成版--->立即使用");
+									+ "】为无效用户，选择下列任一版本！<ul><li>1.月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li><li>2.分成版：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)<a href=\"http://www.alimama.com/membersvc/member/login.htm\" target=\"_blank\">淘宝联盟</a>--->淘宝客--->API接入--->新淘网分成版--->立即使用</li></ul>");
 				}
 			}
 			if (isRefresh) {// 如果之前是无效的，则刷新最新

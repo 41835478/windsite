@@ -43,6 +43,7 @@ public class WindSiteRestUtil {
 		UNVALIDS.add("一切杰杰有可能");
 		UNVALIDS.add("yydyl1989love");
 		UNVALIDS.add("tamir0");
+		UNVALIDS.add("e网情深资源坊");
 	}
 
 	/**

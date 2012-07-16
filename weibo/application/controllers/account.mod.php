@@ -167,8 +167,8 @@ class account_mod {
 		TPL :: assign('use_site_login', $use_site_login);
 
 		$loginCallBack = V('g:loginCallBack', '');
-		$sina_callback_url = $loginCallBack ? URL('account.sinaLogin', 'cb=login&type=sina&loginCallBack=' . urlencode($loginCallBack)) : URL('account.sinaLogin', 'cb=login&type=sina');
-		$site_callback_url = $loginCallBack ? URL('account.siteLogin', 'cb=login&type=site&loginCallBack=' . urlencode($loginCallBack)) : URL('account.siteLogin', 'cb=login&type=site');
+		$sina_callback_url = $loginCallBack ? URL('account.sinaLogin', 'cb=login&type=sina&loginCallBack=' . urlencode($loginCallBack),false,'0') : URL('account.sinaLogin', 'cb=login&type=sina',false,'0');
+		$site_callback_url = $loginCallBack ? URL('account.siteLogin', 'cb=login&type=site&loginCallBack=' . urlencode($loginCallBack),false,'0') : URL('account.siteLogin', 'cb=login&type=site',false,'0');
 		TPL :: assign('site_callback_url', $site_callback_url);
 		TPL :: assign('sina_callback_url', $sina_callback_url);
 
@@ -331,10 +331,11 @@ class account_mod {
 		///　登录后的跳转URL
 		$loginCallBack = strval($loginCallBack);
 		if (!empty ($loginCallBack)) {
+			$loginCallBack = urldecode($loginCallBack);
 			$callbackOpt .= '&loginCallBack=' . urlencode($loginCallBack);
 		}
 
-		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt);
+		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt,false,'0');
 
 		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
 		//&from=xweibo 取消特制的XWEIBO授权页面

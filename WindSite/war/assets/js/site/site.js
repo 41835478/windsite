@@ -1245,7 +1245,7 @@ function deleteInvalidItems(id) {
 	sender.load("GET", {}, function(response) {
 				if (response.isSuccess()) {
 					alert("删除成功");
-					document.location.href = "/router/member/sitemanager/groups";
+					document.location.href = document.location.href;
 				} else {
 					alert(response.msg);
 				}

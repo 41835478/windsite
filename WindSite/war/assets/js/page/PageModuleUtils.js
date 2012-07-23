@@ -93,6 +93,7 @@ var PageModuleUtils = {
 										&& $('#nav_third_login_sina .weibo_widget_connect_btn').length == 0) {
 									W.widget.connectButton({
 										id : "nav_third_login_sina",
+										type : '3,2',
 										callback : {
 											login : function(o) {
 												$
@@ -134,6 +135,7 @@ var PageModuleUtils = {
 										&& $('#third_login_sina .weibo_widget_connect_btn').length == 0) {
 									W.widget.connectButton({
 										id : "third_login_sina",
+										type : '3,2',
 										callback : {
 											login : function(o) {
 												$

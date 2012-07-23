@@ -25,8 +25,8 @@
 			<div name="shopCustom" class="box J_TBox ks-clear">
 				<div class="shop-custom cms-detail">
 					<ul class="cvl-line">
-						<li style="float:left;width:350px;overflow:hidden;"><h3><span style="float:left;">上一篇文章：</span><#if prevBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${prevBlog.blogid}.html" style="width:250px;overflow:hidden;">${prevBlog.subject}</a><#else>没有了</#if></h3></li>
-						<li style="float:left;width:350px;overflow:hidden;"><h3><span style="float:left;">下一篇文章：</span><#if nextBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${nextBlog.blogid}.html" style="width:250px;overflow:hidden;">${nextBlog.subject}</a><#else>没有了</#if></h3></li>
+						<li style="float:left;width:320px;overflow:hidden;"><h3><span style="float:left;">上一篇文章：</span><#if prevBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${prevBlog.blogid}.html" style="width:220px;overflow:hidden;">${prevBlog.subject}</a><#else>没有了</#if></h3></li>
+						<li style="float:left;width:320px;overflow:hidden;"><h3><span style="float:left;">下一篇文章：</span><#if nextBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${nextBlog.blogid}.html" style="width:220px;overflow:hidden;">${nextBlog.subject}</a><#else>没有了</#if></h3></li>
 					</ul>
 					<div class="bd ks-post" style="background:none;clear:both;word-break:break-all;">
 						<h1><#if clazz??><a href="${wwwDomain}/tblogs/${clazz.classid}.html">${clazz.classname}</a><#else><a href="${wwwDomain}/tblogs.html">购物资讯</a></#if>&nbsp;>>&nbsp;<span>${blog.subject}</span></h1>
@@ -43,8 +43,8 @@
 						</div>
 					</div>
 					<ul class="cvl-line">
-						<li style="float:left;width:350px;overflow:hidden;"><h3><span style="float:left;">上一篇文章：</span><#if prevBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${prevBlog.blogid}.html" style="width:250px;overflow:hidden;">${prevBlog.subject}</a><#else>没有了</#if></h3></li>
-						<li style="float:left;width:350px;overflow:hidden;"><h3><span style="float:left;">下一篇文章：</span><#if nextBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${nextBlog.blogid}.html" style="width:250px;overflow:hidden;">${nextBlog.subject}</a><#else>没有了</#if></h3></li>
+						<li style="float:left;width:320px;overflow:hidden;"><h3><span style="float:left;">上一篇文章：</span><#if prevBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${prevBlog.blogid}.html" style="width:220px;overflow:hidden;">${prevBlog.subject}</a><#else>没有了</#if></h3></li>
+						<li style="float:left;width:320px;overflow:hidden;"><h3><span style="float:left;">下一篇文章：</span><#if nextBlog??><a href="${wwwDomain}/tblogs/${blog.classid}/${nextBlog.blogid}.html" style="width:220px;overflow:hidden;">${nextBlog.subject}</a><#else>没有了</#if></h3></li>
 					</ul>
 					<div class="clear:both;"></div>
 					<#if clazz??&&wwwDomain??&&''!=wwwDomain>

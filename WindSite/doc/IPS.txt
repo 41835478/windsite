@@ -12,8 +12,9 @@ iptables-save >/etc/sysconfig/iptables
 iptables -A INPUT -p icmp --icmp-type 8 -m length --length 403 -j ACCEPT
 iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 //单IP封
-1.从这里用淘宝帐号登录http://www.alimama.com/membersvc/member/login.htm
+1.从这里【选择】用"淘宝帐号"登录http://www.alimama.com/membersvc/member/login.htm
 2.我的推广---api工具--新淘网分成版---立即使用
+
 
 如果你未开店。只能我们私底下帮你开通
 普及版:15元/月，35元/季，60元/半年，100元/年
@@ -24,6 +25,10 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+#2012-07-23
+iptables -I INPUT -s 218.15.160.132 -j DROP
+#2012-07-19
+iptables -I INPUT -s 111.13.8.150 -j DROP
 #2012-07-13
 iptables -I INPUT -s 183.60.100.0/24 -j DROP
 #2012-07-12

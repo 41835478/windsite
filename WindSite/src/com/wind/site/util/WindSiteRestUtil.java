@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.R;
 
+import weibo4j.util.WeiboConfig;
+
 import com.google.gson.JsonObject;
 import com.wind.core.exception.SystemException;
 import com.wind.core.service.IBaseService;
@@ -50,6 +52,13 @@ public class WindSiteRestUtil {
 	 * 默认成功信息
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
+
+	public static String getAuthorizationURLBySina(String client_id) {
+		return WeiboConfig.getValue("authorizeURL").trim() + "?client_id="
+				+ client_id.trim() + "&redirect_uri="
+				+ WeiboConfig.getValue("redirect_URI").trim()
+				+ "&response_type=code";
+	}
 
 	public static Float getNativeUsb(IBaseService service, String user_id) {
 		Calendar calendar = Calendar.getInstance();

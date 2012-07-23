@@ -85,7 +85,8 @@ public class TaobaoApiRest {
 			String name = names.nextElement();
 			map.put(name, request.getParameter(name));
 		}
-		map.put("app_key", EnvManager.getAppKey(EnvManager.getAppType()));
+		map.put("app_key", EnvManager.getAppKey(EnvManager.getUser()
+				.getAppType()));
 		String method = request.getParameter("method");
 		if (EnvManager.getAPI().containsKey(method)) {
 			if (EnvManager.getAPI().get(method) == 0) {
@@ -106,7 +107,7 @@ public class TaobaoApiRest {
 					.handleMessageException("暂未开放[" + method + "]的淘宝访问权");
 		}
 		map.put("sign", EncryptUtil.md5Signature(map, EnvManager
-				.getSecret(EnvManager.getAppType()), "sign"));// 设置签名
+				.getSecret(EnvManager.getUser().getAppType()), "sign"));// 设置签名
 		response.setContentType(request.getContentType());// 设置类型
 		fetch.fetch(EnvManager.getUrl(), map, response);
 	}

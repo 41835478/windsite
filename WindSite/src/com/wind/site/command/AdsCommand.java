@@ -101,7 +101,14 @@ public class AdsCommand {
 								Float pay = Float.valueOf(order
 										.getTotalPayFee());
 								if (pay > 0) {
-									usb.setVersionNo(1.6f);// 普及版（付费）
+									Float versionNo = WindSiteRestUtil
+											.getNativeUsb(adminService, usb
+													.getUser_id());
+									if (versionNo > 1.6f) {// 本地升级
+										usb.setVersionNo(versionNo);
+									} else {
+										usb.setVersionNo(1.6f);// 普及版（付费）
+									}
 								}
 							}
 						} else if (vn > 1f) {// 如果是返利，卖家版

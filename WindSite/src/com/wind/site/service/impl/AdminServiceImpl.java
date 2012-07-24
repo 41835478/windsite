@@ -79,7 +79,7 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 		}
 	}
 
-	public void synVersionNo(User user) {
+	public void synVersionNo(User user) {// 仅校验非淘宝服务月租用户是否订购分成版
 		List<ArticleUserSubscribe> subs = TaobaoFetchUtil.vasSubscribeGet(user
 				.getNick(), TaobaoFetchUtil.VAS_APPSTORE);
 		Float vn = TaobaoFetchUtil.convertVersionNo(subs);

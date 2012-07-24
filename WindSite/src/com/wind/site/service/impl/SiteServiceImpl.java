@@ -783,7 +783,14 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				if (order != null) {
 					Float pay = Float.valueOf(order.getTotalPayFee());
 					if (pay > 0) {
-						tus.setVersionNo(1.6f);// 普及版（付费）
+						Float versionNo = WindSiteRestUtil.getNativeUsb(this,
+								user.getUser_id());
+						if (versionNo > 1.6f) {// 本地升级
+							user.setAppType("0");
+							tus.setVersionNo(versionNo);
+						} else {
+							tus.setVersionNo(1.6f);// 普及版（付费）
+						}
 					}
 				}
 				if (tus.getVersionNo() == 1f) {// 如果仍是普及版（未付费用户），则查询是否订购分成版

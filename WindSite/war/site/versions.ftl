@@ -142,29 +142,29 @@ $(function(){
 			<tr>
 				<td class="features pay">按月付</td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong class="action">10元</strong></td>
 				<td><strong class="action">15元</strong></td>
+				<td><strong class="action">20元</strong></td>
 				<td><strong class="action">25元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按季度付</td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong class="action">25元</strong></td>
 				<td><strong class="action">35元</strong></td>
+				<td><strong class="action">45元</strong></td>
 				<td><strong class="action">65元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按半年付</td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong class="action">40元</strong></td>
 				<td><strong class="action">60元</strong></td>
+				<td><strong class="action">80元</strong></td>
 				<td><strong class="action">120元</strong></td>
 			</tr>
 			<tr class="odd">
 				<td class="features pay">按年付</td>
 				<td class="active"><strong>0</strong></td>
-				<td><strong class="action">70元</strong></td>
 				<td><strong class="action">100元</strong></td>
+				<td><strong class="action">130元</strong></td>
 				<td><strong class="action">200元</strong></td>
 			</tr>
 			<tr class="odd">

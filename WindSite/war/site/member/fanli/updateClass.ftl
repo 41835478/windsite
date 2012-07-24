@@ -11,8 +11,8 @@
 </#if>
 <div style="clear:both;"></div></div>
 <div class="shortcut-rows">
-<h4>系统文章分类</h4>
-<ul><li><input type="radio" name="radio-class"><a cid="584" href="http://home.xintaonet.com/space.php?uid=1&do=blog&classid=584&view=me" target="_blank">返利帮助中心</a></li></ul>
+<h4 style="height:100px;">系统文章分类</h4>
+<ul style="height:100px;"><li><input type="radio" name="radio-class"><a cid="584" href="http://home.xintaonet.com/space.php?uid=1&do=blog&classid=584&view=me" target="_blank">返利帮助中心</a></li></ul>
 <div style="clear:both;"></div>
 </div>
 </div>

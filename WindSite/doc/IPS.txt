@@ -27,6 +27,7 @@ chinaz工具的IP地址
 125.90.93.141
 #2012-07-25
 iptables -I INPUT -s 113.105.151.0/24 -j DROP
+iptables -I INPUT -s 27.158.65.109 -j DROP
 #2012-07-23
 iptables -I INPUT -s 218.15.160.132 -j DROP
 #2012-07-19

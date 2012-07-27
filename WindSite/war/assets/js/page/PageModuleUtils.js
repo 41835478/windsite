@@ -467,11 +467,11 @@ var PageModuleUtils = {
 		var layout = widget.parents('.layout:first');
 		var region = widget.parents('.J_TRegion:first');
 		if (layout.hasClass('grid-m')) {// 单栏
-			width = 950;
+			width = 956;
 			height = 30;
 			src = "http://www.taobao.com/go/app/tbk_app/chongzhi_950_30.php?pid="
 					+ PID
-					+ "&page=chongzhi_950_30.php&size_w=950&size_h=30&stru_phone=1&stru_game=1&stru_travel=1&size_cat=std";
+					+ "&page=chongzhi_950_30.php&size_w=956&size_h=30&stru_phone=1&stru_game=1&stru_travel=1&size_cat=std";
 		} else if (layout.hasClass('grid-s5m0') || layout.hasClass('grid-m0s5')) {// 两栏
 			if (region.hasClass('col-main')) {
 				width = 750;

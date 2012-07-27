@@ -10,6 +10,10 @@
 	padding: 5px 0 0;
 }
 
+.grid-m .col-main .main-wrap .box .shop-chongzhi .bd {
+	border-width: 0px;
+}
+
 /*回顶部*/
 .gotop {
 	bottom: 80px;
@@ -40,7 +44,9 @@
 .gotop .ii {
 	width: 210px;
 	height: 200px;
-	background: url(http://static.xintaonet.com/assets/min/stylesheets/images/gotop.png) no-repeat
+	background:
+		url(http://static.xintaonet.com/assets/min/stylesheets/images/gotop.png)
+		no-repeat
 }
 
 .gotop a:hover {
@@ -303,10 +309,10 @@ a {
 	width: 150px;
 	height: 70px;
 	background-color: #fff;
-	filter: alpha(opacity =    
+	filter: alpha(opacity =      
 		                                                         
 		                                                         
-		                                                                0);
+		                                                                  0);
 	opacity: 0;
 }
 
@@ -363,11 +369,11 @@ a {
 	-moz-border-radius-bottomright: 3px;
 	-webkit-border-top-right-radius: 3px;
 	-webkit-border-bottom-right-radius: 3px;
-	filter: progid :                                            
+	filter: progid :                                              
 		                                                        
 		                                   
 		                                   
-		       DXImageTransform.Microsoft.gradient (          
+		         DXImageTransform.Microsoft.gradient (            
 		
 		 
 		    
@@ -381,7 +387,7 @@ a {
 		  
 		       
 		                                                         
-		                              startColorStr =   
+		                                startColorStr =     
 		                             
 		 
 		   
@@ -389,7 +395,7 @@ a {
 		              
 		                            
 		                                                           
-		                              '#b2f2f2f2', EndColorStr =
+		                                '#b2f2f2f2', EndColorStr =  
 		              
 		                              
 		 
@@ -398,7 +404,7 @@ a {
 		             
 		                           
 		                                                           
-		                   '#b2f2f2f2' );
+		                     '#b2f2f2f2' );
 }
 
 #shop-search  form {
@@ -507,11 +513,11 @@ a {
 	-moz-border-radius-bottomleft: 3px;
 	-webkit-border-top-left-radius: 3px;
 	-webkit-border-bottom-left-radius: 3px;
-	filter: progid :                                          
+	filter: progid :                                            
 		                                                        
 		                                   
 		                                   
-		     DXImageTransform.Microsoft.gradient (        
+		       DXImageTransform.Microsoft.gradient (          
 		
 		 
 		    
@@ -525,7 +531,7 @@ a {
 		  
 		       
 		                                                         
-		                            startColorStr = 
+		                              startColorStr =   
 		                             
 		 
 		   
@@ -533,7 +539,8 @@ a {
 		              
 		                            
 		                                                           
-		                            '#ccf9f9f9', EndColorStr =             
+		                              '#ccf9f9f9', EndColorStr =
+		              
 		                              
 		 
 		   
@@ -541,7 +548,7 @@ a {
 		             
 		                           
 		                                                           
-		                 '#ccf9f9f9' );
+		                   '#ccf9f9f9' );
 }
 
 #shop-info .shop-info-simple a {
@@ -841,7 +848,8 @@ ul.pages li a {
 }
 
 .btn,.btn input,.btn a,.btn button,.btn span {
-	background-image: url(http://static.xintaonet.com/assets/images/bg-btn.png);
+	background-image:
+		url(http://static.xintaonet.com/assets/images/bg-btn.png);
 	background-repeat: repeat-x;
 	cursor: pointer;
 	font-family: Tahoma;

@@ -133,11 +133,19 @@ public class AdsCommand {
 								User user = adminService.findByCriterion(
 										User.class, R.eq("user_id", usb
 												.getUser_id()));
-								if (user.getExpired() == null) {
-									user.setExpired(new Date());
-									adminService.update(user);
+								if (versionNo > 1.5f) {
+									if (user.getExpired() != null) {
+										user.setExpired(null);
+										adminService.update(user);
+									}
+								} else {
+									if (user.getExpired() == null) {
+										user.setExpired(new Date());
+										adminService.update(user);
+									}
 								}
 							}
+
 						}
 						adminService.update(usb);
 						if (usb.getVersionNo() >= 3) {// 卖家版，校验广告计划是否无效

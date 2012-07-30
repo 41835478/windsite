@@ -103,18 +103,35 @@ public class TaobaoShopNickCommand {
 						user.setAppType("0");
 						tus.setVersionNo(versionNo);
 					}
+					Site site = adminService.findByCriterion(Site.class, R.eq(
+							"user_id", tus.getUser_id()));
+					if (StringUtils.isNotEmpty(site.getWww())) {
+						if (versionNo > 1.5f) {
+							if (user.getExpired() != null) {
+								user.setExpired(null);
+								adminService.update(user);
+							}
+						} else {
+							if (user.getExpired() == null) {
+								user.setExpired(new Date());
+								adminService.update(user);
+							}
+						}
+					}
+
 				} else {
 					user.setAppType("0");
 					tus.setVersionNo(-1f);
-				}
-				Site site = adminService.findByCriterion(Site.class, R.eq(
-						"user_id", tus.getUser_id()));
-				if (StringUtils.isNotEmpty(site.getWww())) {
-					if (user.getExpired() == null) {
-						user.setExpired(new Date());
-						adminService.update(user);
+					Site site = adminService.findByCriterion(Site.class, R.eq(
+							"user_id", tus.getUser_id()));
+					if (StringUtils.isNotEmpty(site.getWww())) {
+						if (user.getExpired() == null) {
+							user.setExpired(new Date());
+							adminService.update(user);
+						}
 					}
 				}
+
 			}
 			adminService.save(tus);// 保存版本号
 			adminService.update(user);// 保存用户版本

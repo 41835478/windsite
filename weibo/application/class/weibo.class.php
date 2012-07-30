@@ -114,6 +114,8 @@ class weibo {
 					'error_code' => '1040011',
 					'error' => $error['error']
 				);
+				//TODO 如果40302:unauthorized_client，清空当前站点自定义APP，已授权
+				F('account_proxy.clearApp');
 				break;
 			case '40312' :
 				$msg = array (

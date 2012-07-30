@@ -1,4 +1,27 @@
 <?php
+function clearApp() {
+	F('xintao.update_config_file', array (
+		'WB_AKEY' => '',
+		'WB_SKEY' => '',
+		'SYSTEM_SINA_UID' => '',
+		'SYSTEM_SINA_USERNICK' => '',
+		'WB_USER_OAUTH_TOKEN' => '',
+		'WB_USER_OAUTH_TOKEN' => ''
+	), XT_USER_ID);
+	//更新管理员关联新浪微博数据库
+	DS('mgr/adminCom.saveAdminByUserId', '', array (
+		'appKey' => '',
+		'appSecret' => '',
+		'sina_uid' => '',
+		'nickname' => '',
+		'access_token' => '',
+		'token_secret' => ''
+	), XT_USER_ID);
+	//清空站点会员的授权信息
+	DS('mgr/userCom.refreshUserTokens', '', XT_USER_ID);
+	//删除所有代理帐号
+	DS('accountProxy.delAccountByUserId', '', XT_USER_ID);
+}
 function clear($token = '', $secret = '', $USER_ID = '') {
 	if (!empty ($token) && !empty ($secret) && !empty ($USER_ID)) {
 		if ($token == WB_USER_OAUTH_TOKEN && $secret == WB_USER_OAUTH_TOKEN_SECRET) {

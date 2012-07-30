@@ -19,6 +19,11 @@
 	<#if (USER.usb.versionNo==1)>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客普及版（未付费），建议您升级更高版本</div>
 	<#elseif (USER.usb.versionNo==1.5)>
+	    <#if (USER.sites??)>
+	    	<#if USER.sites[0].www!=''>
+	    	   <div style="height:30px;line-height:14px;">紧急通知：您当前使用的为分成版，不提供域名绑定，【<strong style="color:red;">${USER.expiredDate?string("yyyy-MM-dd")}</strong>】前若未升级付费版本将自动取消绑定</div>
+	    	</#if>
+	    </#if>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客分成版(分成型)，您还可以选择订购月租型新淘网_普及版，返利版，卖家版[<a href="http://fuwu.taobao.com/service/service.htm?service_id=300" style="color:red;font-weight:bold;" target="_blank">版本升级帮助</a>]</div>
 	<#elseif (USER.usb.versionNo==1.6)>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客普及版（付费），您还可以升级为返利版或卖家版</div>

@@ -2,11 +2,13 @@ package com.wind.site.command;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.R;
 
 import com.taobao.api.domain.ArticleBizOrder;
@@ -15,8 +17,10 @@ import com.wind.site.env.EnvManager;
 import com.wind.site.model.ADBlogSystem;
 import com.wind.site.model.ADPageSystem;
 import com.wind.site.model.ADPlan;
+import com.wind.site.model.Site;
 import com.wind.site.model.SiteImpl;
 import com.wind.site.model.T_UserSubscribe;
+import com.wind.site.model.User;
 import com.wind.site.service.IAdminService;
 import com.wind.site.service.ICommandService;
 import com.wind.site.util.TaobaoFetchUtil;
@@ -39,6 +43,7 @@ public class AdsCommand {
 		try {
 			logger.info("IndexAds is starting........");
 			refreshVersionNo();
+			WindSiteRestUtil.checkWwwExpired(commandService);// 取消已过期的域名绑定
 			// 检查所有计划是否有效【根据卖家订购是否在有效期内】
 			List<String> nicks = (List<String>) adminService.executeNativeSql(
 					"select distinct nick from w_ad_plan where isValid=1",
@@ -120,6 +125,18 @@ public class AdsCommand {
 								usb.setVersionNo(versionNo);
 							} else {
 								usb.setVersionNo(-1f);
+							}
+							Site site = adminService.findByCriterion(
+									Site.class, R.eq("user_id", usb
+											.getUser_id()));
+							if (StringUtils.isNotEmpty(site.getWww())) {
+								User user = adminService.findByCriterion(
+										User.class, R.eq("user_id", usb
+												.getUser_id()));
+								if (user.getExpired() == null) {
+									user.setExpired(new Date());
+									adminService.update(user);
+								}
 							}
 						}
 						adminService.update(usb);

@@ -1680,59 +1680,64 @@ public class SiteRest {
 		}
 		if (EnvManager.getUser() != null) {
 			try {
+				if (EnvManager.getUser().getExpired() != null) {
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(EnvManager.getUser().getExpired());
+					calendar.add(Calendar.DATE, 7);
+					EnvManager.getUser().setExpiredDate(calendar.getTime());
+				}
 				// TODO 暂时不对不匹配版本进行校验
-//				if (EnvManager.getUser().getApp().equals(
-//						EnvManager.getUser().getAppType())) {//
-					// 如果会员应用版本与登录版本一致，则进入管理后台，不一致则跳转至重定向页面重新登录
-					if (EnvManager.getUser().getUsb() != null) {// 如果版本号存在
-						Float versionNo = EnvManager.getUser().getUsb()
-								.getVersionNo();
-						if (versionNo >= 2) {// 设置ThinkPhp Cookie
-							try {
-								// User user = EnvManager.getUser();
-								// Client e = new Client();
-								// //
-								// Cookie[userId+nick+pid+sid+versionNo+siteId+tSession+www]
-								// Cookie auth = new Cookie("XINTAO-ID", e
-								// .uc_authcode(user.getUser_id(),
-								// "ENCODE"));
-								// auth.setMaxAge(2400);
-								// auth.setDomain(".xintaonet.com");
-								// response.addCookie(auth);
-								// Cookie nick = new Cookie("XINTAO-NICK", e
-								// .uc_authcode(user.getNick(), "ENCODE"));
-								// nick.setMaxAge(2400);
-								// nick.setDomain(".xintaonet.com");
-								// response.addCookie(nick);
-								// Cookie tSession = new Cookie("XINTAO-TS",
-								// EnvManager.getTaobaoSession());
-								// tSession.setMaxAge(2400);
-								// tSession.setDomain(".xintaonet.com");
-								// response.addCookie(tSession);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
+				// if (EnvManager.getUser().getApp().equals(
+				// EnvManager.getUser().getAppType())) {//
+				// 如果会员应用版本与登录版本一致，则进入管理后台，不一致则跳转至重定向页面重新登录
+				if (EnvManager.getUser().getUsb() != null) {// 如果版本号存在
+					Float versionNo = EnvManager.getUser().getUsb()
+							.getVersionNo();
+					if (versionNo >= 2) {// 设置ThinkPhp Cookie
+						try {
+							// User user = EnvManager.getUser();
+							// Client e = new Client();
+							// //
+							// Cookie[userId+nick+pid+sid+versionNo+siteId+tSession+www]
+							// Cookie auth = new Cookie("XINTAO-ID", e
+							// .uc_authcode(user.getUser_id(),
+							// "ENCODE"));
+							// auth.setMaxAge(2400);
+							// auth.setDomain(".xintaonet.com");
+							// response.addCookie(auth);
+							// Cookie nick = new Cookie("XINTAO-NICK", e
+							// .uc_authcode(user.getNick(), "ENCODE"));
+							// nick.setMaxAge(2400);
+							// nick.setDomain(".xintaonet.com");
+							// response.addCookie(nick);
+							// Cookie tSession = new Cookie("XINTAO-TS",
+							// EnvManager.getTaobaoSession());
+							// tSession.setMaxAge(2400);
+							// tSession.setDomain(".xintaonet.com");
+							// response.addCookie(tSession);
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-						String sid = EnvManager.getUser().getSid();
-						if (versionNo > 2 && StringUtils.isNotEmpty(sid)
-								&& !"0".equals(sid)) {// 收费版（卖家）
-							response.sendRedirect("http://"
-									+ WindSiteRestUtil.DOMAIN
-									+ "/router/member/sellermanager");
-						} else {// 免费版（淘客）
-							response.sendRedirect("http://"
-									+ WindSiteRestUtil.DOMAIN
-									+ "/router/member/sitemanager");
-						}
-					} else {
+					}
+					String sid = EnvManager.getUser().getSid();
+					if (versionNo > 2 && StringUtils.isNotEmpty(sid)
+							&& !"0".equals(sid)) {// 收费版（卖家）
 						response.sendRedirect("http://"
 								+ WindSiteRestUtil.DOMAIN
-								+ "/router/site/redirect");
+								+ "/router/member/sellermanager");
+					} else {// 免费版（淘客）
+						response.sendRedirect("http://"
+								+ WindSiteRestUtil.DOMAIN
+								+ "/router/member/sitemanager");
 					}
-//				} else {
-//					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
-//							+ "/router/site/redirect");
-//				}
+				} else {
+					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+							+ "/router/site/redirect");
+				}
+				// } else {
+				// response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+				// + "/router/site/redirect");
+				// }
 				return null;
 			} catch (IOException e) {
 				e.printStackTrace();

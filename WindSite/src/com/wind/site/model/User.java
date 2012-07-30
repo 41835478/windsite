@@ -62,6 +62,10 @@ public class User extends TimestampModel {
 	 * 淘宝SESSION
 	 */
 	private String tSession;
+
+	private Date expired;
+	@Transient
+	private Date expiredDate;
 	/**
 	 * 是否是组件设计师
 	 */
@@ -729,6 +733,22 @@ public class User extends TimestampModel {
 
 	public String getApp() {
 		return app;
+	}
+
+	public void setExpired(Date expired) {
+		this.expired = expired;
+	}
+
+	public Date getExpired() {
+		return expired;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
 	}
 
 }

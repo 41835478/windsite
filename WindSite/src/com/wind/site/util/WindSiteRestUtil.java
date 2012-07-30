@@ -1,10 +1,17 @@
 package com.wind.site.util;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -511,5 +518,160 @@ public class WindSiteRestUtil {
 			}
 		}
 		return nick;
+	}
+
+	private static final Logger logger = Logger
+			.getLogger(WindSiteRestUtil.class.getName());
+
+	@SuppressWarnings("unchecked")
+	public static String unbind(String id, IBaseService adminService) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		adminService.executeNativeUpdateSql(
+				"delete from w_domain where user_id=" + id, params);// 删除域名申请
+		adminService.executeNativeUpdateSql(
+				"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
+		// 刷新该站点缓存
+		EnvManager.getSites().put(String.valueOf(id),
+				adminService.getSiteImplByUserId(String.valueOf(id)));
+		// 重新刷新绑定文件
+		List<Map<String, Object>> sites = (List<Map<String, Object>>) adminService
+				.findByHql(
+						"select new map(www as www,user_id as user_id) from Site where www!=''",
+						null);
+		logger.info(" wwws[" + sites.size() + "]");
+		try {
+			FileWriter fw = new FileWriter(EnvManager.getApachePath()
+					+ File.separator + "domain.txt", false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Map<String, Object> site : sites) {
+				if (null != site.get("www")) {
+					String user_id = String.valueOf(site.get("user_id"));
+					bw.write(site.get("www") + "					     http://shop"
+							+ user_id + ".xintaonet.com");
+					bw.newLine();
+				}
+			}
+			bw.flush();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(sites.size());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void checkWwwExpired(IBaseService service) {
+		List<String> result = (List<String>) service
+				.executeNativeSql(
+						"select w.user_id from w_site w,t_usersubscribe usb,w_user u where w.www != '' and w.user_id=usb.user_id and w.user_id=u.user_id and versionno<=1.5 and datediff(now(),u.expired)>7",
+						new HashMap<String, Object>());
+		for (String id : result) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			service.executeNativeUpdateSql(
+					"delete from w_domain where user_id=" + id, params);// 删除域名申请
+			service.executeNativeUpdateSql(
+					"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
+			// 刷新该站点缓存
+			EnvManager.getSites().put(String.valueOf(id),
+					service.getSiteImplByUserId(String.valueOf(id)));
+		}
+		List<Map<String, Object>> sites = (List<Map<String, Object>>) service
+				.findByHql(
+						"select new map(www as www,user_id as user_id) from Site where www!=''",
+						null);
+		logger.info(" wwws[" + sites.size() + "]");
+		try {
+			FileWriter fw = new FileWriter(EnvManager.getApachePath()
+					+ File.separator + "domain.txt", false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Map<String, Object> site : sites) {
+				if (null != site.get("www")) {
+					String user_id = String.valueOf(site.get("user_id"));
+					bw.write(site.get("www") + "					     http://shop"
+							+ user_id + ".xintaonet.com");
+					bw.newLine();
+				}
+			}
+			bw.flush();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void checkWWW(IBaseService service, Boolean isUpdate) {
+		List<String> result = (List<String>) service
+				.executeNativeSql(
+						"select w.www from w_site w,t_usersubscribe usb where w.www != '' and w.user_id=usb.user_id and versionno<=1.5",
+						new HashMap<String, Object>());
+
+		InetAddress myServer = null;
+		Integer count = 0;
+		for (String url : result) {
+			try {
+				myServer = InetAddress.getByName(url);
+
+				if ("199.119.138.50".equals(myServer.getHostAddress())) {// 仍指向
+				} else {// 已未指向
+					count++;
+					if (isUpdate) {
+						List<String> ids = (List<String>) service
+								.executeNativeSql(
+										"select w.user_id from w_site w where w.www=\""
+												+ url + "\"",
+										new HashMap<String, Object>());
+						if (ids != null && ids.size() == 1) {
+							String id = ids.get(0);
+							Map<String, Object> params = new HashMap<String, Object>();
+							service.executeNativeUpdateSql(
+									"delete from w_domain where user_id=" + id,
+									params);// 删除域名申请
+							service.executeNativeUpdateSql(
+									"update w_site set www=null  where user_id="
+											+ id, params);// 删除站点域名绑定
+							// 刷新该站点缓存
+							EnvManager.getSites().put(
+									String.valueOf(id),
+									service.getSiteImplByUserId(String
+											.valueOf(id)));
+						}
+					}
+				}
+				System.out.println(url + ":" + myServer.getHostAddress());
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+		}
+		logger.info(" unvalid www:" + count);
+		List<Map<String, Object>> sites = (List<Map<String, Object>>) service
+				.findByHql(
+						"select new map(www as www,user_id as user_id) from Site where www!=''",
+						null);
+		logger.info(" wwws[" + sites.size() + "]");
+		try {
+			FileWriter fw = new FileWriter(EnvManager.getApachePath()
+					+ File.separator + "domain.txt", false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Map<String, Object> site : sites) {
+				if (null != site.get("www")) {
+					String user_id = String.valueOf(site.get("user_id"));
+					bw.write(site.get("www") + "					     http://shop"
+							+ user_id + ".xintaonet.com");
+					bw.newLine();
+				}
+			}
+			bw.flush();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		WindSiteRestUtil.checkWWW(null, false);
 	}
 }

@@ -659,8 +659,9 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			IDeployZone deployZone, FreeMarkerConfigurer fcg,
 			WidgetCustomerMethod widgetCustomer, IPageService pageService,
 			ModuleMethod moduleMethod) {
+		Site site = user.getSites().get(0);
 		if ((user.getUsb() != null && user.getUsb().getVersionNo() >= 2)) {
-			Site site = user.getSites().get(0);
+			user.setExpired(null);
 			SiteCommission commission = this.get(SiteCommission.class, site
 					.getId());
 			if (commission == null) {
@@ -733,6 +734,15 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			} else
 				user.settSession(null);
 		} else {
+			if ((user.getUsb() != null && user.getUsb().getVersionNo() < 1.6)) {
+				if (StringUtils.isNotEmpty(site.getWww())) {// 如果版本号大于普及版以及已绑定顶级域名（即满足返利版要求）
+					if (user.getExpired() == null) {
+						user.setExpired(new Date());
+					}
+				}
+			} else {
+				user.setExpired(null);
+			}
 			user.settSession(null);
 		}
 	}

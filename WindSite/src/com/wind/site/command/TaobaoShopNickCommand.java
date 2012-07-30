@@ -1,6 +1,7 @@
 package com.wind.site.command;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -105,6 +106,14 @@ public class TaobaoShopNickCommand {
 				} else {
 					user.setAppType("0");
 					tus.setVersionNo(-1f);
+				}
+				Site site = adminService.findByCriterion(Site.class, R.eq(
+						"user_id", tus.getUser_id()));
+				if (StringUtils.isNotEmpty(site.getWww())) {
+					if (user.getExpired() == null) {
+						user.setExpired(new Date());
+						adminService.update(user);
+					}
 				}
 			}
 			adminService.save(tus);// 保存版本号

@@ -209,49 +209,24 @@ public class AdminRest {
 	@Autowired
 	private WeeklyMailCreateCommand mailCommand;
 
+	@RequestMapping(value = "/checkwww/{isUpdate}")
+	@ResponseBody
+	public String checkWWW(@PathVariable String isUpdate) {
+		WindSiteRestUtil.checkWWW(adminService, "true".equals(isUpdate) ? true
+				: false);
+		return WindSiteRestUtil.SUCCESS;
+	}
+
 	/**
 	 * 解除绑定
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/unbind/{id}")
 	@ResponseBody
 	public String unbindWWW(@PathVariable Long id) {
 		if (id > 0) {
-			Map<String, Object> params = new HashMap<String, Object>();
-			adminService.executeNativeUpdateSql(
-					"delete from w_domain where user_id=" + id, params);// 删除域名申请
-			adminService.executeNativeUpdateSql(
-					"update w_site set www=null  where user_id=" + id, params);// 删除站点域名绑定
-			// 刷新该站点缓存
-			EnvManager.getSites().put(String.valueOf(id),
-					adminService.getSiteImplByUserId(String.valueOf(id)));
-			// 重新刷新绑定文件
-			List<Map<String, Object>> sites = (List<Map<String, Object>>) adminService
-					.findByHql(
-							"select new map(www as www,user_id as user_id) from Site where www!=''",
-							null);
-			logger.info(" wwws[" + sites.size() + "]");
-			try {
-				FileWriter fw = new FileWriter(EnvManager.getApachePath()
-						+ File.separator + "domain.txt", false);
-				BufferedWriter bw = new BufferedWriter(fw);
-				for (Map<String, Object> site : sites) {
-					if (null != site.get("www")) {
-						String user_id = String.valueOf(site.get("user_id"));
-						bw.write(site.get("www") + "					     http://shop"
-								+ user_id + ".xintaonet.com");
-						bw.newLine();
-					}
-				}
-				bw.flush();
-				bw.close();
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return String.valueOf(sites.size());
+			return WindSiteRestUtil.unbind(String.valueOf(id), adminService);
 		}
 		return "";
 	}

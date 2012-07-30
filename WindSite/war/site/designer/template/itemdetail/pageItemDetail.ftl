@@ -165,10 +165,31 @@ $(function(){
 			$('#XT_ReviewsBox').show();
 		}
 	});
-	$('#XT_ItemDetail a[href*="item.taobao.com"]').each(function(){
-		var href = $(this).attr('href');
-		if(href.indexOf('id=')!=-1||href.indexOf('item_num_id=')!=-1){
-			$(this).attr('href','/gitem/'+href.split('id=')[1].split('&')[0]+'.html');
+	function parse_url(url) {
+		var pattern = /(\w+)=(\w+)/ig;
+		var parames = {};
+		url.replace(pattern, function(a, b, c) {
+					parames[b] = c;
+				});
+		return parames;
+	}
+	$('#XT_ItemDetail a').click(function(){
+		var _url = $(this).attr('href');
+		var regExp = /(.*\.?taobao.com(\/|$))|(.*\.?tmall.com(\/|$))/i;
+		if (_url.match(regExp)) {
+			var parames = parse_url(_url);
+			if (typeof(parames) == 'object') {
+				var iid = parames['id'];
+				if (iid == null || iid == "undefined") {
+					var iid = parames['item_num_id'];
+					if (iid == null || iid == "undefined") {
+						var iid = parames['default_item_id'];
+					}
+				}
+				if(iid){
+					$(this).attr('href','/gitem/'+iid+'.html');	   
+				}
+			}
 		}
 	});
 	try{

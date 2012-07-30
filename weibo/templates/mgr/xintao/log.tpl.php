@@ -11,6 +11,10 @@
 <body class="main-body">
 	<div class="path"><p>当前位置：更新日志</div>
     <div class="main-cont">
+        <h3 class="title">2012-7-30</h3>
+		<div class="box">
+		因新浪微博开放平台调整，目前未审核通过的APP无法调用原来的微博接口，所以以前设置了自己的APP，且通过新浪审核的用户，需要重新绑定自己的帐号(系统将自动识别未审核通过的APP，一旦发现，会自动清除设置以及帐号绑定)<br/>
+		</div>
     	<h3 class="title">2012-5-11</h3>
 		<div class="box">
 		微购升级服务器同时搬迁至海外，如果部分用户无法访问，请重启自己的路由器测试！已绑定独立域名且未使用cname(别名)指向www.xintaowang.com的站长，请尽快解除A记录解析，同时换成cname解析

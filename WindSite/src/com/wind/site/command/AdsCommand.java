@@ -124,7 +124,21 @@ public class AdsCommand {
 							if (versionNo > 1.5f) {
 								usb.setVersionNo(versionNo);
 							} else {
-								usb.setVersionNo(-1f);
+								User user = adminService.findByCriterion(
+										User.class, R.eq("user_id", usb
+												.getUser_id()));
+								if (user != null) {
+									Long pid = Long.valueOf(user.getPid()
+											.replaceAll("mm_", "").replaceAll(
+													"_0_0", ""));
+									Boolean isFC = TaobaoFetchUtil
+											.isTaobaokeToolRelation(pid);// 获取分成型
+									if (isFC) {
+										usb.setVersionNo(1.5f);
+									} else {
+										usb.setVersionNo(0f);
+									}
+								}
 							}
 							Site site = adminService.findByCriterion(
 									Site.class, R.eq("user_id", usb

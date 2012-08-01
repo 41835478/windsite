@@ -209,6 +209,12 @@ public class AdminRest {
 	@Autowired
 	private WeeklyMailCreateCommand mailCommand;
 
+	@RequestMapping(value = "/checkfencheng")
+	@ResponseBody
+	public String checkFenCheng() {
+		return WindSiteRestUtil.checkFenCheng(adminService);
+	}
+
 	@RequestMapping(value = "/checkwww/{isUpdate}")
 	@ResponseBody
 	public String checkWWW(@PathVariable String isUpdate) {

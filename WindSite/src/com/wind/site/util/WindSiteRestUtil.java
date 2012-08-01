@@ -23,9 +23,13 @@ import weibo4j.util.WeiboConfig;
 import com.google.gson.JsonObject;
 import com.wind.core.exception.SystemException;
 import com.wind.core.service.IBaseService;
+import com.wind.site.command.CommandExecutor;
+import com.wind.site.command.impl.UnvalidCommand;
 import com.wind.site.env.EnvManager;
 import com.wind.site.model.Site;
 import com.wind.site.model.SiteImpl;
+import com.wind.site.model.T_UserSubscribe;
+import com.wind.site.model.User;
 import com.wind.site.model.W_UserSubscribe;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
@@ -669,6 +673,30 @@ public class WindSiteRestUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static String checkFenCheng(IBaseService service) {
+		List<T_UserSubscribe> usbs = service.findAllByCriterion(
+				T_UserSubscribe.class, R.eq("versionNo", -1f));
+		if (usbs != null && usbs.size() > 0) {
+			for (T_UserSubscribe usb : usbs) {
+				User user = service.findByCriterion(User.class, R.eq("user_id",
+						usb.getUser_id()));
+				if (user != null) {
+					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
+							.replaceAll("_0_0", ""));
+					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+					if (isFC) {
+						usb.setVersionNo(1.5f);
+					} else {
+						usb.setVersionNo(0f);
+					}
+					service.update(usb);
+				}
+			}
+		}
+		CommandExecutor.getCommands().add(new UnvalidCommand());// 刷新无效
+		return String.valueOf(usbs.size());
 	}
 
 	public static void main(String[] args) {

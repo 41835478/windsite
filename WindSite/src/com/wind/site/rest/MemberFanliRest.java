@@ -648,8 +648,7 @@ public class MemberFanliRest {
 		req.setPageNo(page);
 		req.setPageSize(ReportsGetCommand.PAGE_SIZE);
 		TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-				EnvManager.getUser().getAppType(), req, EnvManager
-						.getTaobaoSession());
+				EnvManager.getAppType(), req, EnvManager.getTaobaoSession());
 		if (response != null) {
 			TaobaokeReport report = response.getTaobaokeReport();
 			if (report != null) {

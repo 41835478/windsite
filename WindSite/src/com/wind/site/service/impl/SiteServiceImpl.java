@@ -641,11 +641,11 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		user.setLast_visit(new Date());
 		user.setVisits(user.getVisits() + 1);
 		user.setApp(appType);
-		if (user.getUsb().getVersionNo() != 1.5) {// 如果不是返利，则设置月租
-			user.setAppType("0");
-		} else {// 返利
-			user.setAppType("1");
-		}
+		// if (user.getUsb().getVersionNo() != 1.5) {// 如果不是返利，则设置月租
+		// user.setAppType("0");
+		// } else {// 返利
+		// user.setAppType("1");
+		// }
 		EnvManager.setUser(user);// 注入当前用户
 		return user;
 	}

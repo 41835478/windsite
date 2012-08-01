@@ -203,7 +203,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		logger.info("adPageLimit[" + EnvManager.getADPageLimit()
 				+ "],adBlogLimit[" + EnvManager.getADBlogLimit() + "]");
 
-		String hql = "select new map(up.id as id,up.deployDate as deployDate,usb.versionNo as versionNo) from UserPage up,T_UserSubscribe usb where usb.user_id=up.user_id and up.status=:status";
+		String hql = "select new map(up.id as id,up.deployDate as deployDate,usb.versionNo as versionNo) from UserPage up,T_UserSubscribe usb where usb.user_id=up.user_id and up.status=:status and usb.versionNo>0";
 		Map<String, Object> _params = new HashMap<String, Object>();
 		_params.put("status", true);
 		List<Map<String, Object>> pages = (List<Map<String, Object>>) pageService
@@ -218,7 +218,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		}
 		new WindSiteDelay(fcg, pageService, moduleMethod, fetch);// 启动守护线程
 		if (!EnvManager.getZonePath().contains("Apache2.2")) {// 本地不启用主动通知，避免踢掉服务器主动通知，测试的话，可以注释掉该代码
-			//topCometStreamJob.topCometRefresh();// 主动通知
+			// topCometStreamJob.topCometRefresh();// 主动通知
 		}
 		initEnv();
 

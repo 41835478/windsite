@@ -209,6 +209,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		List<Map<String, Object>> pages = (List<Map<String, Object>>) pageService
 				.findByHql(hql, _params);
 		if (pages != null && pages.size() > 0) {
+			logger.info("userpages[" + pages.size() + "]");
 			for (Map<String, Object> page : pages) {
 				WindSiteDelay.addPageQueue(String.valueOf(page.get("id")),
 						(Date) page.get("deployDate"), WindSiteDelay

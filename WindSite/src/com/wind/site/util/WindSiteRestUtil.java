@@ -677,21 +677,28 @@ public class WindSiteRestUtil {
 
 	public static String checkFenCheng(IBaseService service) {
 		List<T_UserSubscribe> usbs = service.findAllByCriterion(
-				T_UserSubscribe.class, R.eq("versionNo", -1f));
+				T_UserSubscribe.class, R.lt("versionNo", 0f));
 		if (usbs != null && usbs.size() > 0) {
 			for (T_UserSubscribe usb : usbs) {
-				User user = service.findByCriterion(User.class, R.eq("user_id",
-						usb.getUser_id()));
-				if (user != null) {
-					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
-							.replaceAll("_0_0", ""));
-					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-					if (isFC) {
-						usb.setVersionNo(1.5f);
-					} else {
-						usb.setVersionNo(0f);
+				try {
+					User user = service.findByCriterion(User.class, R.eq(
+							"user_id", usb.getUser_id()));
+					if (user != null) {
+						if (StringUtils.isNotEmpty(user.getPid())) {
+							Long pid = Long.valueOf(user.getPid().replaceAll(
+									"mm_", "").replaceAll("_0_0", ""));
+							Boolean isFC = TaobaoFetchUtil
+									.isTaobaokeToolRelation(pid);// 获取分成型
+							if (isFC) {
+								usb.setVersionNo(1.5f);
+							} else {
+								usb.setVersionNo(0f);
+							}
+							service.update(usb);
+						}
 					}
-					service.update(usb);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}

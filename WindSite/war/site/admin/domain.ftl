@@ -23,6 +23,7 @@ $(function() {
 					}
 					auditDomain(did,"2",$("#auditRemark").val());
 					$('#auditRemark').val('');
+					$(this).dialog('close');
 				}
 			}
 	});

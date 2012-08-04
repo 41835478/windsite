@@ -79,8 +79,8 @@
 				<bean class="com.wind.site.freemarker.TemplateAbsolutePathLoader">
 					<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
 					<property name="htmlPath">
-						<value>E:\\project\\wind\\aws\\Apache2.2\\htdocs\\zone</value>
-						<!-- <value>/usr/local/apache2/htdocs/zone</value>-->
+						<!-- <value>E:\\project\\wind\\aws\\Apache2.2\\htdocs\\zone</value>-->
+						<value>/usr/local/apache2/htdocs/zone</value>
 					</property>
 				</bean>
 			</list>
@@ -111,8 +111,8 @@
 				</entry>
 				<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
 				<entry key="htmlPath">
-					<value>E:\\project\\wind\\aws\\Apache2.2</value>
-					<!-- <value>/usr/local/apache2/htdocs/zone</value>-->
+					<!-- <value>E:\\project\\wind\\aws\\Apache2.2</value>-->
+					<value>/usr/local/apache2/htdocs/zone</value>
 				</entry>
 			</map>
 		</property>

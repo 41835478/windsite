@@ -31,8 +31,8 @@
 		<property name="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</property>
 		<property name="hibernate.search.analyzer">org.apache.lucene.analysis.cjk.CJKAnalyzer</property>
 		<!-- 本地索引 -->
-		<property name="hibernate.search.default.indexBase">E:\\project\\wind\\aws\\lucene\\indexes</property>
+		<!-- <property name="hibernate.search.default.indexBase">E:\\project\\wind\\aws\\lucene\\indexes</property> -->
 		<!-- 服务器索引 -->
-		<!-- <property name="hibernate.search.default.indexBase">/usr/local/lucene/indexes</property> -->
+		<property name="hibernate.search.default.indexBase">/usr/local/lucene/indexes</property>
 	</session-factory>
 </hibernate-configuration>

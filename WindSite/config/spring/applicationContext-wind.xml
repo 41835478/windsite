@@ -25,7 +25,7 @@
 			<ref bean="moduleMethod" />
 		</property>
 		<property name="topCometStreamJob">
-			<ref bean="topCometStreamJob"/>
+			<ref bean="topCometStreamJob" />
 		</property>
 	</bean>
 
@@ -117,40 +117,40 @@
 	</bean>
 	<bean id="deployZone" class="com.wind.site.freemarker.impl.DefaultDeployZone">
 		<property name="designerService">
-			<ref bean="designerService"/>
+			<ref bean="designerService" />
 		</property>
 	</bean>
 	<bean id="ipTable" class="com.wind.core.iptable.IPTable">
 		<property name="isFilter" value="true"></property>
 	</bean>
 	<bean id="taobaoEnv" class="com.wind.site.env.TaobaoEnv">
-		<!--推广自定义输入串-->
-		<property name="items_outer_code" value="xintao001"/>
-		<property name="cats_outer_code" value="xintao002"/>
-		<property name="shops_outer_code" value="xintao003"/>
-		<property name="keywords_outer_code" value="xintao004"/>
-		<property name="malls_outer_code" value="xintao005"/>
-		<!--是否在审核中-->
+		<!--推广自定义输入串 -->
+		<property name="items_outer_code" value="xintao001" />
+		<property name="cats_outer_code" value="xintao002" />
+		<property name="shops_outer_code" value="xintao003" />
+		<property name="keywords_outer_code" value="xintao004" />
+		<property name="malls_outer_code" value="xintao005" />
+		<!--是否在审核中 -->
 		<property name="isAudit" value="false" />
-		<!--是否启用沙箱环境-->
+		<!--是否启用沙箱环境 -->
 		<property name="isSandbox" value="false" />
-		<!--APP KEY-->
-		<property name="appKey" value="12034285"/><!--已发布环境下-->
-		<!--SECRET-->
-		<property name="secret" value="2c18a03c14736c62a0b70804618f8c45"/><!--已发布环境下-->
-		<!--分成FC APP KEY-->
-		<property name="fcAppKey" value="12194773" /><!--发布环境下-->
-		<!--分成FC SECRET-->
-		<property name="fcSecret" value="7d5e8c29ef75dd1bd6b3c4fa6c835bab" /><!--发布环境下-->
-		<!--沙箱容器地址-->
+		<!--APP KEY -->
+		<property name="appKey" value="12034285" /><!--已发布环境下 -->
+		<!--SECRET -->
+		<property name="secret" value="2c18a03c14736c62a0b70804618f8c45" /><!--已发布环境下 -->
+		<!--分成FC APP KEY -->
+		<property name="fcAppKey" value="12194773" /><!--发布环境下 -->
+		<!--分成FC SECRET -->
+		<property name="fcSecret" value="7d5e8c29ef75dd1bd6b3c4fa6c835bab" /><!--发布环境下 -->
+		<!--沙箱容器地址 -->
 		<property name="sandboxContainer" value="http://open.taobao.com/isv/appTest.php" />
-		<!--REST沙箱地址-->
+		<!--REST沙箱地址 -->
 		<property name="sandboxUrl" value="http://gw.api.tbsandbox.com/router/rest" />
-		<!--正式容器地址-->
+		<!--正式容器地址 -->
 		<property name="taobaoContainer" value="http://container.open.taobao.com/container" />
-		<!--REST正式地址-->
+		<!--REST正式地址 -->
 		<property name="taobaoUrl" value="http://gw.api.taobao.com/router/rest" />
-		<!--目前支持的API集合-->
+		<!--目前支持的API集合 -->
 		<property name="API">
 			<map>
 				<!-- key:API名,value:0=无需登录,1=需要登录,2=私有字段需登录 -->
@@ -183,11 +183,12 @@
 			</list>
 		</property>
 	</bean>
-	<bean class="com.wind.site.env.EnvManager" init-method="init"  depends-on="gaClient">
-		<!--部署Apache地址,如果未配置,则发布静态资源至tomcat-->
-		<!--<property name="zonePath" value="/usr/local/apache2"></property>--><!--发布环境-->
-		<property name="zonePath" value="E:\\project\\wind\\aws\\Apache2.2"></property><!--本地环境-->
-		<property name="defaultPid" value="mm_13667242_0_0"/>
+	<bean class="com.wind.site.env.EnvManager" init-method="init"
+		depends-on="gaClient">
+		<!--部署Apache地址,如果未配置,则发布静态资源至tomcat -->
+		<property name="zonePath" value="/usr/local/apache2"></property><!--发布环境 -->
+		<!--<property name="zonePath" value="E:\\project\\wind\\aws\\Apache2.2"></property> --><!--本地环境 -->
+		<property name="defaultPid" value="mm_13667242_0_0" />
 		<property name="listener">
 			<ref bean="envListener" />
 		</property>
@@ -198,15 +199,15 @@
 			<ref bean="siteEnv" />
 		</property>
 	</bean>
-	<!--新淘网统计客户端环境配置-->
+	<!--新淘网统计客户端环境配置 -->
 	<bean id="gaClient" class="com.wind.site.util.XintaoAnalyticsClient">
-		<property name="username" value="fxy060608@gmail.com"/>
-		<property name="password" value="iloveyou1817"/>
-		<property name="tableId" value="ga:30907871"/>
-		<property name="applicaitonName" value="xt-ga"/>
-		<property name="startDate" value="2010-08-08"/>
+		<property name="username" value="fxy060608@gmail.com" />
+		<property name="password" value="iloveyou1817" />
+		<property name="tableId" value="ga:30907871" />
+		<property name="applicaitonName" value="xt-ga" />
+		<property name="startDate" value="2010-08-08" />
 	</bean>
-	<!--命令执行-->
+	<!--命令执行 -->
 	<bean class="com.wind.site.command.CommandExecutor" init-method="runCommand">
 		<property name="service">
 			<ref bean="commandService" />

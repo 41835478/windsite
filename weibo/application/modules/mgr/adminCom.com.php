@@ -40,7 +40,7 @@ class adminCom {
 	 */
 	function getAdminsByGroupAndAutoFans() {
 		$db = APP :: ADP('db');
-		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `nickname` is not null AND `nickname` !=\'\' AND `access_token` !=\'\' AND `group_id`>4 ORDER BY `id`';
+		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `sina_uid` is not null AND `sina_uid` !=\'\' AND `access_token` !=\'\' AND `group_id`>4 ORDER BY `id`';
 		return RST($db->query($sql));
 	}
 	/**
@@ -48,7 +48,7 @@ class adminCom {
 	 */
 	function getAdminsSinaUidByAutoFans(){
 		$db = APP :: ADP('db');
-		$sql = 'SELECT distinct(sina_uid) FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `nickname` is not null AND `nickname` !=\'\' AND `access_token` is not null AND `access_token` !=\'\' ORDER BY `id`';
+		$sql = 'SELECT distinct(sina_uid) FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `sina_uid` is not null AND `sina_uid` !=\'\' AND `access_token` is not null AND `access_token` !=\'\' ORDER BY `id`';
 		return RST($db->query($sql));
 	}
 	/**
@@ -56,7 +56,7 @@ class adminCom {
 	 */
 	function getAdminsByAutoFans(){
 		$db = APP :: ADP('db');
-		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `nickname` is not null AND `nickname` !=\'\' AND `access_token` is not null AND `access_token` !=\'\' ORDER BY `id`';
+		$sql = 'SELECT * FROM ' . $db->getPrefix() . T_ADMIN . ' WHERE `sina_uid` is not null AND `sina_uid` !=\'\' AND `access_token` is not null AND `access_token` !=\'\' ORDER BY `id`';
 		return RST($db->query($sql));
 	}
 	/**
@@ -64,7 +64,7 @@ class adminCom {
 	 */
 	function getAdminsByAutoCrons(){
 		$db = APP :: ADP('db');
-		$sql = 'SELECT admin.`user_id`,admin.`group_id`,admin.`appKey`,yx.crons FROM ' . $db->getPrefix() . T_ADMIN . ' admin,'.$db->getTable(T_XT_YINGXIAO).' yx WHERE admin.group_id!=0 AND admin.`nickname` !=\'\' AND admin.`access_token` !=\'\' AND admin.user_id=yx.user_id ORDER BY admin.`id`';
+		$sql = 'SELECT admin.`user_id`,admin.`group_id`,admin.`appKey`,yx.crons FROM ' . $db->getPrefix() . T_ADMIN . ' admin,'.$db->getTable(T_XT_YINGXIAO).' yx WHERE admin.group_id!=0 AND admin.`sina_uid` !=\'\' AND admin.`access_token` !=\'\' AND admin.user_id=yx.user_id ORDER BY admin.`id`';
 		return RST($db->query($sql));
 	}
 	/*

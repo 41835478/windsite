@@ -87,7 +87,7 @@ public class AutoDeployPageCommand {
 		logger.info("Brand updating.....");
 		updateMallBrand();// 更新同步品牌库
 		// 开始刷新最新的发布时间及超时任务
-		String hql = "select new map(up.id as id,up.deployDate as deployDate,up.nick as nick,usb.versionNo as versionNo) from UserPage up,T_UserSubscribe usb where usb.user_id=up.user_id and up.status=:status";
+		String hql = "select new map(up.id as id,up.deployDate as deployDate,up.nick as nick,usb.versionNo as versionNo) from UserPage up,T_UserSubscribe usb where usb.user_id=up.user_id and up.status=:status  and usb.versionNo>0";
 		Map<String, Object> _params = new HashMap<String, Object>();
 		_params.put("status", true);
 		List<Map<String, Object>> pages = (List<Map<String, Object>>) pageService
@@ -158,15 +158,16 @@ public class AutoDeployPageCommand {
 	 * @param usbs
 	 */
 	@SuppressWarnings("unchecked")
-	private void generateSiteMap(List<T_UserSubscribe> usbs) {
+	public void generateSiteMap(List<T_UserSubscribe> usbs) {
 		Set<ExtWebSiteMapUrl> set = null;
 		List<Channel> channels = EnvManager.getChannels();// 淘宝频道
 		// 查询所有购物日志
-		List<Map<String, Integer>> blogs = (List<Map<String, Integer>>) ucService
-				.findByHql(
-						new Page<Map<String, Integer>>(1, 200),
-						"select new map(blogid as id,classid as cid) from UCBlog b where b.friend=5 order by b.dateline desc",
-						new HashMap<String, Object>());
+		// List<Map<String, Integer>> blogs = (List<Map<String, Integer>>)
+		// ucService
+		// .findByHql(
+		// new Page<Map<String, Integer>>(1, 200),
+		// "select new map(blogid as id,classid as cid) from UCBlog b where b.friend=5 order by b.dateline desc",
+		// new HashMap<String, Object>());
 		List<ExtWebSiteMapUrl> pageUrls = new ArrayList<ExtWebSiteMapUrl>();
 		for (T_UserSubscribe usb : usbs) {
 			try {
@@ -256,16 +257,16 @@ public class AutoDeployPageCommand {
 							set.add(url);// 加入频道页,权重1.0,每周更新
 						}
 						// 购物日志页面
-						for (Map<String, Integer> map : blogs) {
-							Integer bid = map.get("id");
-							Integer cid = map.get("cid");
-							url = new ExtWebSiteMapUrl(
-									new WebSitemapUrl.Options(www + "/tblogs/"
-											+ cid + "/" + bid + ".html")
-											.lastMod(new Date()).priority(1.0)
-											.changeFreq(ChangeFreq.MONTHLY));
-							set.add(url);// 加入频道页,权重1.0,每周更新
-						}
+						// for (Map<String, Integer> map : blogs) {
+						// Integer bid = map.get("id");
+						// Integer cid = map.get("cid");
+						// url = new ExtWebSiteMapUrl(
+						// new WebSitemapUrl.Options(www + "/tblogs/"
+						// + cid + "/" + bid + ".html")
+						// .lastMod(new Date()).priority(1.0)
+						// .changeFreq(ChangeFreq.MONTHLY));
+						// set.add(url);// 加入频道页,权重1.0,每周更新
+						// }
 						// 我的日志页面
 						if (uidMap != null && uidMap.size() == 1) {
 							Integer uid = uidMap.get(0).get("uid");

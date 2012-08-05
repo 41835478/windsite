@@ -19,7 +19,7 @@ public class T_PosterPicture implements Serializable {
 	private Date created;// Date 否 2000-01-01 00:00:00 创建时间。
 	private Date modified;// Date 否 2000-01-01 00:00:00 修改时间。
 	private String url;// String 否 http://www.taobao.com/XXXXXX 图片地址。
-	@Column(length = 500)
+	@Column(length = 5000)
 	private String description;// String 否 说明 相关说明。
 
 	/**

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -25,10 +27,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.TaobaokeItem;
-import com.taobao.api.request.PosterPosterdetailGetRequest;
 import com.taobao.api.request.PosterPostersSearchRequest;
-import com.taobao.api.response.PosterPosterdetailGetResponse;
 import com.taobao.api.response.PosterPostersSearchResponse;
 import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
@@ -40,6 +41,7 @@ import com.wind.site.model.HuabaoTag;
 import com.wind.site.model.Huabaos;
 import com.wind.site.model.T_Poster;
 import com.wind.site.model.T_PosterChannel;
+import com.wind.site.model.T_PosterPicture;
 import com.wind.site.service.ISiteService;
 import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WindSiteRestUtil;
@@ -229,37 +231,40 @@ public class HuabaoRest {
 		if (StringUtils.isEmpty(pid)) {
 			result.put("pid", EnvManager.getDefaultPid());
 		}
-		PosterPosterdetailGetRequest posterGet = new PosterPosterdetailGetRequest();
-		posterGet.setPosterId(id);
-		PosterPosterdetailGetResponse posterGetResp = TaobaoFetchUtil
-				.posterdetailGet(posterGet);
-		if (posterGetResp != null) {// 远程获取画报及图片
-			com.taobao.api.domain.Huabao huabao = posterGetResp.getPoster();
-			if (huabao != null) {
-				T_Poster local = siteService.get(T_Poster.class, id);
-				if (local != null) {
-					if (local.getIsSuccess()) {
-						result.put("isSuccess", true);
-					} else {// 如果未抓取，则实时获取
-						xintaoHuabaoJob.posterParse(local);
-						result.put("isSuccess", true);
-					}
-				}
 
+		T_Poster local = siteService.get(T_Poster.class, id);
+		if (local != null) {
+			if (local.getIsSuccess()) {
+				result.put("isSuccess", true);
+			} else {// 如果未抓取，则实时获取
+				xintaoHuabaoJob.posterParse(local);
+				result.put("isSuccess", true);
+			}
+			List<T_PosterPicture> pics = siteService.findAllByCriterion(
+					T_PosterPicture.class, R.eq("poster_id", id));
+			if (pics != null && pics.size() > 0) {
+				List<HuabaoPicture> hPics = new ArrayList<HuabaoPicture>();
+				for (T_PosterPicture pic : pics) {
+					hPics.add(TaobaoFetchUtil.convertHuabaoPicture(pic));
+				}
+				result.put("pics", hPics);// 图片
+				com.taobao.api.domain.Huabao huabao = TaobaoFetchUtil
+						.convertHuabao(local);
 				result.put("channel", siteService.get(T_PosterChannel.class,
 						Long.valueOf(huabao.getChannelId())));
 				result.put("poster", huabao);// 画报
-				result.put("pics", posterGetResp.getPosterPics());// 图片
+
 				// 上一个
 				result.put("prev", siteService.getPrevHuabaos(id, Long
 						.valueOf(huabao.getChannelId())));
 				// 下一个
 				result.put("next", siteService.getNextHuabaos(id, Long
 						.valueOf(huabao.getChannelId())));
-			} else {
-				SystemException.handleMessageException("指定的画报不存在");
 			}
+		} else {
+			SystemException.handleMessageException("指定的画报不存在");
 		}
+
 		Object adsObject = result.get("ads");
 		if (adsObject != null) {
 			Map<String, List<Map<String, Object>>> ads = (Map<String, List<Map<String, Object>>>) adsObject;
@@ -270,6 +275,59 @@ public class HuabaoRest {
 		}
 		return new ModelAndView("site/huabao/posterDetail", result);
 	}
+
+	// @SuppressWarnings("unchecked")
+	// public ModelAndView detail(Long id, Map<String, Object> result,
+	// HttpServletRequest request) {
+	// String userId = request.getParameter("USER");
+	// String pid = WindSiteRestUtil.covertSysChannelPID(siteService, request,
+	// result, userId);
+	// if (StringUtils.isEmpty(pid)) {
+	// result.put("pid", EnvManager.getDefaultPid());
+	// }
+	// PosterPosterdetailGetRequest posterGet = new
+	// PosterPosterdetailGetRequest();
+	// posterGet.setPosterId(id);
+	// PosterPosterdetailGetResponse posterGetResp = TaobaoFetchUtil
+	// .posterdetailGet(posterGet);
+	// if (posterGetResp != null) {// 远程获取画报及图片
+	// com.taobao.api.domain.Huabao huabao = posterGetResp.getPoster();
+	// if (huabao != null) {
+	// T_Poster local = siteService.get(T_Poster.class, id);
+	// if (local != null) {
+	// if (local.getIsSuccess()) {
+	// result.put("isSuccess", true);
+	// } else {// 如果未抓取，则实时获取
+	// xintaoHuabaoJob.posterParse(local);
+	// result.put("isSuccess", true);
+	// }
+	// }
+	//
+	// result.put("channel", siteService.get(T_PosterChannel.class,
+	// Long.valueOf(huabao.getChannelId())));
+	// result.put("poster", huabao);// 画报
+	// result.put("pics", posterGetResp.getPosterPics());// 图片
+	// // 上一个
+	// result.put("prev", siteService.getPrevHuabaos(id, Long
+	// .valueOf(huabao.getChannelId())));
+	// // 下一个
+	// result.put("next", siteService.getNextHuabaos(id, Long
+	// .valueOf(huabao.getChannelId())));
+	// } else {
+	// SystemException.handleMessageException("指定的画报不存在");
+	// }
+	// }
+	// Object adsObject = result.get("ads");
+	// if (adsObject != null) {
+	// Map<String, List<Map<String, Object>>> ads = (Map<String,
+	// List<Map<String, Object>>>) adsObject;
+	// List<Map<String, Object>> br = ads.get(AD.HUABAO_TOP);
+	// if (br != null && br.size() > 0) {
+	// result.put("ad", br.get((int) (Math.random() * br.size())));// 随机获取广告位
+	// }
+	// }
+	// return new ModelAndView("site/huabao/posterDetail", result);
+	// }
 
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public ModelAndView huabaoDetail(@PathVariable Long id,

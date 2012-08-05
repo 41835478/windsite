@@ -346,6 +346,13 @@ public class AdminRest {
 		return WindSiteRestUtil.SUCCESS;
 	}
 
+	@RequestMapping(value = "/huabaopic", method = RequestMethod.GET)
+	@ResponseBody
+	public String xintaohuabaoPosterPicGet() {
+		xintaoHuabaoJob.posterGet(new Page<T_Poster>(1, 100));
+		return WindSiteRestUtil.SUCCESS;
+	}
+
 	@RequestMapping(value = "/onlinemembers", method = RequestMethod.GET)
 	public ModelAndView getOnlineMembers() {
 		return new ModelAndView("site/onlineMembers", "onlineMembers",

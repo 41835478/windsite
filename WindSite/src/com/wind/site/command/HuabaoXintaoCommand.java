@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,11 +38,13 @@ import com.taobao.api.response.HuabaoPostersGetResponse;
 import com.taobao.api.response.HuabaoSpecialpostersGetResponse;
 import com.wind.core.dao.Page;
 import com.wind.site.env.EnvManager;
+import com.wind.site.model.J_ImageData;
 import com.wind.site.model.J_PosterData;
 import com.wind.site.model.J_PosterImageData;
 import com.wind.site.model.J_PosterMarkerData;
 import com.wind.site.model.T_Poster;
 import com.wind.site.model.T_PosterChannel;
+import com.wind.site.model.T_PosterPicture;
 import com.wind.site.model.T_PosterTag;
 import com.wind.site.model.T_PosterTags;
 import com.wind.site.service.ITaobaoService;
@@ -68,19 +71,19 @@ public class HuabaoXintaoCommand {
 		logger.info("Huabaos is starting........");
 		List<T_PosterChannel> channels = taobaoService
 				.loadAll(T_PosterChannel.class);
-		try {
-			for (T_PosterChannel channel : channels) {
-				logger.info("channel[" + channel.getName() + "] staring....");
-				HuabaoPostersGetRequest request = new HuabaoPostersGetRequest();
-				request.setChannelId(channel.getId());
-				request.setPageSize(100L);
-				request.setPageNo(1L);
-				postersGet(request);// 同步更新频道内最新画报
-				logger.info("channel[" + channel.getName() + "] end....");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// try {
+		// for (T_PosterChannel channel : channels) {
+		// logger.info("channel[" + channel.getName() + "] staring....");
+		// HuabaoPostersGetRequest request = new HuabaoPostersGetRequest();
+		// request.setChannelId(channel.getId());
+		// request.setPageSize(100L);
+		// request.setPageNo(1L);
+		// postersGet(request);// 同步更新频道内最新画报
+		// logger.info("channel[" + channel.getName() + "] end....");
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 		logger.info("Huabaos is ended!");
 		logger.info("Huabao is starting");
 		try {
@@ -404,14 +407,75 @@ public class HuabaoXintaoCommand {
 	 * 
 	 * @param page
 	 */
-	private void posterGet(Page<T_Poster> page) {
+	public void posterGet(Page<T_Poster> page) {
 		List<T_Poster> posters = taobaoService.findAllByCriterionAndOrder(page,
-				T_Poster.class, Order.desc("id"), R.eq("isSuccess", false));
+				T_Poster.class, Order.desc("id"), R.isNull("isPic"));
 		if (posters != null && posters.size() > 0) {
 			for (T_Poster poster : posters) {
-				posterParse(poster);
+				posterPictureParse(poster);
 			}
 			posterGet(page);// 继续抓取，直到没有
+		}
+	}
+
+	public void posterPictureParse(T_Poster poster) {
+		try {
+			try {
+				parser = new Parser("http://huabao.taobao.com/man/d-"
+						+ poster.getId() + ".htm#poster-detail");
+			} catch (ParserException e) {
+				taobaoService.delete(T_Poster.class, poster.getId());// 说明不存在，删除
+			}
+			if (parser == null) {
+				return;
+			}
+			NodeList as1 = parser.extractAllNodesThatMatch(new TagNameFilter(
+					"script"));
+			if (as1 != null && as1.size() > 0) {
+				J_PosterImageData data = null;
+				for (int i = 0; i < as1.size(); i++) {
+					TagNode node = (TagNode) as1.elementAt(i);
+					String id = node.getAttribute("id");
+					if (id != null) {
+						if ("J_PosterImageData".equals(id)) {// ImageData
+							String script = node.toPlainTextString();
+							if (StringUtils.isNotEmpty(script)) {
+								try {
+									Gson gson = new Gson();
+									data = gson.fromJson(script,
+											new TypeToken<J_PosterImageData>() {
+											}.getType());
+
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+
+				}
+				if (data != null) {
+					List<J_ImageData> pics = data.getImageData();
+					if (pics != null && pics.size() > 0) {
+						List<T_PosterPicture> pp = new ArrayList<T_PosterPicture>();
+						for (J_ImageData d : pics) {
+							T_PosterPicture pic = new T_PosterPicture();
+							pic.setCreated(new Date());
+							pic.setDescription(d.getPicDesc());
+							pic.setId(d.getPicId());
+							pic.setModified(new Date());
+							pic.setPoster_id(poster.getId());
+							pic.setUrl(d.getPicSrc());
+							pp.add(pic);
+						}
+						taobaoService.addHuabaoPic(pp, poster);
+						logger.info("poster[" + poster.getId()
+								+ "] is completed");
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -536,6 +600,7 @@ public class HuabaoXintaoCommand {
 				+ File.separator;
 	}
 
+	@SuppressWarnings("unused")
 	private void postersGet(HuabaoPostersGetRequest request) {
 		try {
 			HuabaoPostersGetResponse response = TaobaoFetchUtil

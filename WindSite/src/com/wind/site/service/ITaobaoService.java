@@ -11,6 +11,8 @@ import com.wind.site.model.HuabaoData;
 import com.wind.site.model.HuabaoTag;
 import com.wind.site.model.Huabaos;
 import com.wind.site.model.T_ItemCat;
+import com.wind.site.model.T_Poster;
+import com.wind.site.model.T_PosterPicture;
 
 /**
  * 淘宝业务接口
@@ -19,6 +21,13 @@ import com.wind.site.model.T_ItemCat;
  * 
  */
 public interface ITaobaoService extends IBaseService {
+	/**
+	 * 保存画报图片集
+	 * 
+	 * @param pp
+	 * @param poster
+	 */
+	void addHuabaoPic(List<T_PosterPicture> pp, T_Poster poster);
 
 	/**
 	 * 新增画报

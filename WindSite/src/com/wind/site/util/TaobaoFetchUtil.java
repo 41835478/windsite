@@ -14,6 +14,8 @@ import com.taobao.api.TaobaoClient;
 import com.taobao.api.TaobaoResponse;
 import com.taobao.api.domain.ArticleBizOrder;
 import com.taobao.api.domain.ArticleUserSubscribe;
+import com.taobao.api.domain.Huabao;
+import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.Item;
 import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.ItemProp;
@@ -80,6 +82,8 @@ import com.taobao.api.response.VasOrderSearchResponse;
 import com.taobao.api.response.VasSubscribeGetResponse;
 import com.wind.core.exception.SystemException;
 import com.wind.site.env.EnvManager;
+import com.wind.site.model.T_Poster;
+import com.wind.site.model.T_PosterPicture;
 import com.wind.site.model.T_TaobaoItem;
 import com.wind.site.model.T_TaobaokeItem;
 
@@ -111,6 +115,32 @@ public class TaobaoFetchUtil {
 	public static final String TAOBAOREPORT_FIELDS = "app_key,outer_code,trade_id,pay_time,pay_price,num_iid,item_title,item_num,category_id,category_name,shop_title,commission_rate,commission,seller_nick";
 
 	public static final Integer TIMEOUT = 10000;
+
+	public static Huabao convertHuabao(T_Poster poster) {
+		Huabao huabao = new Huabao();
+		huabao.setChannelId(poster.getChannel_id());
+		huabao.setCoverPicUrl(poster.getCover_urls());
+		huabao.setCreateDate(poster.getCreated());
+		huabao.setHits(poster.getHits());
+		huabao.setId(poster.getId());
+		huabao.setModifiedDate(poster.getModified());
+		huabao.setTag(poster.getTags());
+		huabao.setTitle(poster.getTitle());
+		huabao.setTitleShort(poster.getTitle());
+		huabao.setWeight(Long.valueOf(poster.getWeight()));
+		return huabao;
+	}
+
+	public static HuabaoPicture convertHuabaoPicture(T_PosterPicture posterPic) {
+		HuabaoPicture pic = new HuabaoPicture();
+		pic.setCreateDate(posterPic.getCreated());
+		pic.setModifiedDate(posterPic.getModified());
+		pic.setPicId(String.valueOf(posterPic.getId()));
+		pic.setPicNote(posterPic.getDescription());
+		pic.setPicUrl(posterPic.getUrl());
+		pic.setPosterId(posterPic.getPoster_id());
+		return pic;
+	}
 
 	/**
 	 * 获取订购关系

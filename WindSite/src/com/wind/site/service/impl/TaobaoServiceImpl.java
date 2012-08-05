@@ -29,6 +29,8 @@ import com.wind.site.model.HuabaoTag;
 import com.wind.site.model.Huabaos;
 import com.wind.site.model.HuabaosTag;
 import com.wind.site.model.T_ItemCat;
+import com.wind.site.model.T_Poster;
+import com.wind.site.model.T_PosterPicture;
 import com.wind.site.service.ITaobaoService;
 
 /**
@@ -39,6 +41,13 @@ import com.wind.site.service.ITaobaoService;
  */
 public class TaobaoServiceImpl extends BaseServiceImpl implements
 		ITaobaoService {
+
+	@Override
+	public void addHuabaoPic(List<T_PosterPicture> pp, T_Poster poster) {
+		this.saveAll(pp);
+		poster.setIsPic(true);
+		this.update(poster);
+	}
 
 	@Override
 	public void addHuabao(Huabaos hbs, Set<HuabaoTag> tags, HuabaoData data) {

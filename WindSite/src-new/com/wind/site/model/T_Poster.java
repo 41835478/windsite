@@ -32,6 +32,7 @@ public class T_Poster implements Serializable {
 	private Long hits;// Number 否 100 画报的点击总数。
 	private Long channel_id;// String 否 123456 画报所属频道id。
 	private Boolean isSuccess;// 是否成功抓取
+	private Boolean isPic;// 是否已抓取图片
 
 	/**
 	 * @return the id
@@ -196,6 +197,14 @@ public class T_Poster implements Serializable {
 	 */
 	public void setIsSuccess(Boolean isSuccess) {
 		this.isSuccess = isSuccess;
+	}
+
+	public void setIsPic(Boolean isPic) {
+		this.isPic = isPic;
+	}
+
+	public Boolean getIsPic() {
+		return isPic;
 	}
 
 }

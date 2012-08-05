@@ -852,6 +852,31 @@ public class AdminRest {
 	}
 
 	/**
+	 * 发布高版本页面
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/sitemap/{user_id}")
+	@ResponseBody
+	public String sitemap(@PathVariable String user_id,
+			HttpServletRequest request) {
+		List<T_UserSubscribe> usbs = new ArrayList<T_UserSubscribe>();
+		if (user_id != null) {
+			usbs = adminService.findAllByCriterion(T_UserSubscribe.class, R.eq(
+					"user_id", user_id));
+		} else {
+			usbs = adminService.findAllByCriterion(T_UserSubscribe.class, R.gt(
+					"versionNo", 1.5f));
+		}
+
+		if (usbs != null && usbs.size() > 0)
+			autoDeployPageJob.generateSiteMap(usbs);
+
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	/**
 	 * 抓取所有的订单记录
 	 * 
 	 * @param request

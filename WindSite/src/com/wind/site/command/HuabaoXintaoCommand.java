@@ -87,7 +87,7 @@ public class HuabaoXintaoCommand {
 		logger.info("Huabaos is ended!");
 		logger.info("Huabao is starting");
 		try {
-			posterGet(new Page<T_Poster>(1, 100));
+			// posterGet(new Page<T_Poster>(1, 100));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

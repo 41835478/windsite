@@ -242,6 +242,9 @@ public class HuabaoRest {
 			}
 			List<T_PosterPicture> pics = siteService.findAllByCriterion(
 					T_PosterPicture.class, R.eq("poster_id", id));
+			if (pics == null || pics.size() == 0) {// 抓取
+				xintaoHuabaoJob.posterPictureParse(local);
+			}
 			if (pics != null && pics.size() > 0) {
 				List<HuabaoPicture> hPics = new ArrayList<HuabaoPicture>();
 				for (T_PosterPicture pic : pics) {
@@ -260,6 +263,8 @@ public class HuabaoRest {
 				// 下一个
 				result.put("next", siteService.getNextHuabaos(id, Long
 						.valueOf(huabao.getChannelId())));
+			} else {
+				SystemException.handleMessageException("指定的画报不存在");
 			}
 		} else {
 			SystemException.handleMessageException("指定的画报不存在");

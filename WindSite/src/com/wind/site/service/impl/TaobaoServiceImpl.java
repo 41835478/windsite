@@ -44,7 +44,12 @@ public class TaobaoServiceImpl extends BaseServiceImpl implements
 
 	@Override
 	public void addHuabaoPic(List<T_PosterPicture> pp, T_Poster poster) {
-		this.saveAll(pp);
+		for (T_PosterPicture p : pp) {
+			T_PosterPicture pic = this.get(T_PosterPicture.class, p.getId());
+			if (pic == null) {
+				this.save(p);
+			}
+		}
 		poster.setIsPic(true);
 		this.update(poster);
 	}

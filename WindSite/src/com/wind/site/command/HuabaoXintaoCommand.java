@@ -189,14 +189,15 @@ public class HuabaoXintaoCommand {
 			request.setType("RECOMMEND");
 			try {
 				HuabaoSpecialpostersGetResponse response = TaobaoFetchUtil
-						.specialPostersGet(request);
+						.specialPostersGet(taobaoService, request);
 				if (response != null) {
 					List<Poster> posters = response.getPosters();
 					if (posters != null && posters.size() > 0) {
 						params.put("posters", posters);
 					} else {
 						request.setType("HOT");
-						response = TaobaoFetchUtil.specialPostersGet(request);
+						response = TaobaoFetchUtil.specialPostersGet(
+								taobaoService, request);
 						if (response != null) {
 							posters = response.getPosters();
 							if (posters != null && posters.size() > 0) {
@@ -256,7 +257,7 @@ public class HuabaoXintaoCommand {
 			request.setType("RECOMMEND");
 			try {
 				HuabaoSpecialpostersGetResponse response = TaobaoFetchUtil
-						.specialPostersGet(request);
+						.specialPostersGet(taobaoService, request);
 				if (response != null) {
 					List<Poster> posters = response.getPosters();
 					if (posters != null && posters.size() > 0) {
@@ -356,7 +357,7 @@ public class HuabaoXintaoCommand {
 				request.setNumber(6L);
 				request.setType("RECOMMEND");
 				HuabaoSpecialpostersGetResponse response = TaobaoFetchUtil
-						.specialPostersGet(request);
+						.specialPostersGet(taobaoService, request);
 				if (response != null) {
 					List<Poster> posters = response.getPosters();
 					if (posters != null && posters.size() > 0) {

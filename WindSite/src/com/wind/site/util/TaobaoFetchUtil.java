@@ -2,6 +2,7 @@ package com.wind.site.util;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.Item;
 import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.ItemProp;
+import com.taobao.api.domain.Poster;
 import com.taobao.api.domain.PosterGoodsInfo;
 import com.taobao.api.domain.PropValue;
 import com.taobao.api.domain.Shop;
@@ -80,7 +82,9 @@ import com.taobao.api.response.TraderatesSearchResponse;
 import com.taobao.api.response.UserGetResponse;
 import com.taobao.api.response.VasOrderSearchResponse;
 import com.taobao.api.response.VasSubscribeGetResponse;
+import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
+import com.wind.core.service.IBaseService;
 import com.wind.site.env.EnvManager;
 import com.wind.site.model.T_Poster;
 import com.wind.site.model.T_PosterPicture;
@@ -126,7 +130,7 @@ public class TaobaoFetchUtil {
 		huabao.setModifiedDate(poster.getModified());
 		huabao.setTag(poster.getTags());
 		huabao.setTitle(poster.getTitle());
-		huabao.setTitleShort(poster.getTitle());
+		huabao.setTitleShort(poster.getShort_title());
 		huabao.setWeight(Long.valueOf(poster.getWeight()));
 		return huabao;
 	}
@@ -488,22 +492,61 @@ public class TaobaoFetchUtil {
 	 * @return
 	 */
 	public static HuabaoSpecialpostersGetResponse specialPostersGet(
-			HuabaoSpecialpostersGetRequest request) {
-		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-				EnvManager.getAppKey(null), EnvManager.getSecret(null),
-				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
-		try {
-			HuabaoSpecialpostersGetResponse response = client.execute(request);
-			if (response.isSuccess()) {
-				return response;
-			} else {
-				handleError(response);
+			IBaseService service, HuabaoSpecialpostersGetRequest request) {
+		String ids = request.getChannelIds();
+		String type = request.getType();
+		Long limit = request.getNumber();
+		String hql = "from T_Poster where channel_id in (" + ids
+				+ ") order by "
+				+ ("HOT".equals(type) ? " hits desc" : " id desc ");
+		List<T_Poster> posters = service.findByHql(new Page<T_Poster>(1, limit
+				.intValue()), hql, new HashMap<String, Object>());
+		List<Poster> ps = new ArrayList<Poster>();
+		if (posters != null && posters.size() > 0) {
+			Poster p = null;
+			for (T_Poster t : posters) {
+				p = new Poster();
+				p.setChannelId(String.valueOf(t.getChannel_id()));
+				p.setCoverUrls(t.getCover_urls());
+				p.setCreated(t.getCreated());
+				p.setHits(t.getHits());
+				p.setId(String.valueOf(t.getId()));
+				p.setModified(t.getModified());
+				p.setShortTitle(t.getShort_title());
+				p.setTags(t.getTags());
+				p.setTitle(t.getTitle());
+				p.setWeight(Long.valueOf(t.getWeight()));
+				ps.add(p);
 			}
-		} catch (ApiException e) {
-			SystemException.handleMessageException(e);
 		}
-		return null;
+		HuabaoSpecialpostersGetResponse response = new HuabaoSpecialpostersGetResponse();
+		response.setPosters(ps);
+		return response;
 	}
+
+	/**
+	 * 获取指定画报(热门，推荐，最新)
+	 * 
+	 * @param request
+	 * @return
+	 */
+	// public static HuabaoSpecialpostersGetResponse specialPostersGet(
+	// HuabaoSpecialpostersGetRequest request) {
+	// TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+	// EnvManager.getAppKey(null), EnvManager.getSecret(null),
+	// Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+	// try {
+	// HuabaoSpecialpostersGetResponse response = client.execute(request);
+	// if (response.isSuccess()) {
+	// return response;
+	// } else {
+	// handleError(response);
+	// }
+	// } catch (ApiException e) {
+	// SystemException.handleMessageException(e);
+	// }
+	// return null;
+	// }
 
 	/**
 	 * 获取指定画报详情

@@ -568,7 +568,7 @@ public class WindSiteRestUtil {
 	public static void checkWwwExpired(IBaseService service) {
 		List<String> result = (List<String>) service
 				.executeNativeSql(
-						"select w.user_id from w_site w,t_usersubscribe usb,w_user u where w.www != '' and w.user_id=usb.user_id and w.user_id=u.user_id and versionno<=1.5 and datediff(now(),u.expired)>7",
+						"select w.user_id from w_site w,t_usersubscribe usb,w_user u where w.www != '' and w.user_id=usb.user_id and w.user_id=u.user_id and usb.versionno<=1.5 and datediff(now(),u.expired)>7",
 						new HashMap<String, Object>());
 		for (String id : result) {
 			Map<String, Object> params = new HashMap<String, Object>();

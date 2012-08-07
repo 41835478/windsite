@@ -52,7 +52,7 @@
 								<#list pages as p>
 								<tr class="pm-tbl-tr-disable-sort   pm-tbl-tr-home J_TPage">
 									<td class="pm-tbl-spacer">&nbsp;</td>
-									<td align="center"><#if !p.isIndex&&p.status><input type="radio" name="index-set" value="${p.id}"></#if></td>
+									<td align="center"><#if !p.isIndex&&p.status&&1==2><input type="radio" name="index-set" value="${p.id}"></#if></td>
 									<td class="pm-tbl-title"><div class="quick-edit"><div class="quick-edit-shower"><#if p.isIndex><strong style="color:red">[首页]</strong><#if p.status><a href="http://${siteWWW}" target="_blank">${p.title}</a><#else>${p.title}</#if><#else><#if p.status><a href="http://${siteWWW}/pages/${p.pageid}.html" target="_blank">${p.title}</a><#else>${p.title}</#if></#if></div></div></td>
 									<td align="center"></td>
 									<td>&nbsp;</td>
@@ -64,7 +64,7 @@
 								</#list>
 								</#if>
 							</tbody>
-							<tfoot><tr><td colspan="9"><a href="javascript:;" style="color:#f60;" id="J_PageIndexSet">设置选中的页面为首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<#if pages??&&(pages?size>=USER.limit.pages)><#if (USER.usb.versionNo>1)>您的页面限额已用完，无法添加新页面<#else>订购淘客返利版或者卖家版即可<b>添加使用更多页面</b>，<a target="_blank" href="http://pay.taobao.com/mysub/subdeal/upgrade_order_sub_deal.htm?servId=22000691&appstore=myapp2upgrade">点击立即订购&gt;&gt;</a></#if><#else><a href="/router/member/page/templates" class="pm-add-trigger">添加新页面</a></#if></td></tr></tfoot>
+							<tfoot><tr><td colspan="9"><a href="javascript:;" style="color:#f60;display:none;" id="J_PageIndexSet">设置选中的页面为首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<#if pages??&&(pages?size>=USER.limit.pages)><#if (USER.usb.versionNo>1)>您的页面限额已用完，无法添加新页面<#else>订购淘客返利版或者卖家版即可<b>添加使用更多页面</b>，<a target="_blank" href="http://pay.taobao.com/mysub/subdeal/upgrade_order_sub_deal.htm?servId=22000691&appstore=myapp2upgrade">点击立即订购&gt;&gt;</a></#if><#else><a href="/router/member/page/templates" class="pm-add-trigger">添加新页面</a></#if></td></tr></tfoot>
 						</table>
 					</div>
 				</div>

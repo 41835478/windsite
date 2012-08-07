@@ -107,8 +107,8 @@ public class AdsCommand {
 										.getTotalPayFee());
 								if (pay > 0) {
 									Float versionNo = WindSiteRestUtil
-											.getNativeUsb(adminService, usb
-													.getUser_id());
+											.getNativeUsb(adminService,
+													usb.getUser_id());
 									if (versionNo > 1.6f) {// 本地升级
 										usb.setVersionNo(versionNo);
 									} else {
@@ -125,12 +125,12 @@ public class AdsCommand {
 								usb.setVersionNo(versionNo);
 							} else {
 								User user = adminService.findByCriterion(
-										User.class, R.eq("user_id", usb
-												.getUser_id()));
+										User.class,
+										R.eq("user_id", usb.getUser_id()));
 								if (user != null) {
 									Long pid = Long.valueOf(user.getPid()
-											.replaceAll("mm_", "").replaceAll(
-													"_0_0", ""));
+											.replaceAll("mm_", "")
+											.replaceAll("_0_0", ""));
 									Boolean isFC = TaobaoFetchUtil
 											.isTaobaokeToolRelation(pid);// 获取分成型
 									if (isFC) {
@@ -141,12 +141,13 @@ public class AdsCommand {
 								}
 							}
 							Site site = adminService.findByCriterion(
-									Site.class, R.eq("user_id", usb
-											.getUser_id()));
-							if (StringUtils.isNotEmpty(site.getWww())) {
+									Site.class,
+									R.eq("user_id", usb.getUser_id()));
+							if (site != null
+									&& StringUtils.isNotEmpty(site.getWww())) {
 								User user = adminService.findByCriterion(
-										User.class, R.eq("user_id", usb
-												.getUser_id()));
+										User.class,
+										R.eq("user_id", usb.getUser_id()));
 								if (versionNo > 1.5f) {
 									if (user.getExpired() != null) {
 										user.setExpired(null);
@@ -164,8 +165,8 @@ public class AdsCommand {
 						adminService.update(usb);
 						if (usb.getVersionNo() >= 3) {// 卖家版，校验广告计划是否无效
 							List<ADPlan> plans = adminService
-									.findAllByCriterion(ADPlan.class, R.eq(
-											"nick", usb.getNick()));
+									.findAllByCriterion(ADPlan.class,
+											R.eq("nick", usb.getNick()));
 							if (plans != null && plans.size() > 0) {
 								for (ADPlan plan : plans) {
 									plan.setIsValid(true);
@@ -215,8 +216,8 @@ public class AdsCommand {
 		logger.info("adPageLimit[" + EnvManager.getADPageLimit()
 				+ "],adBlogLimit[" + EnvManager.getADBlogLimit() + "]");
 		// 重置所有广告投放
-		List<ADPlan> plans = adminService.findAllByCriterion(ADPlan.class, R
-				.eq("isDefault", true), R.eq("isValid", true));
+		List<ADPlan> plans = adminService.findAllByCriterion(ADPlan.class,
+				R.eq("isDefault", true), R.eq("isValid", true));
 		if (plans != null && plans.size() > 0) {
 			Collections.shuffle(plans);// 随机广告计划
 			for (ADPlan plan : plans) {

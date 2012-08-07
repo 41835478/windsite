@@ -388,7 +388,7 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 					postersGet.setNumber(Long.valueOf(String.valueOf(params
 							.get("itemnum"))));// 显示数量
 					HuabaoSpecialpostersGetResponse postersResp = TaobaoFetchUtil
-							.specialPostersGet(postersGet);
+							.specialPostersGet(service, postersGet);
 					if (postersResp != null) {
 						List<Poster> posters = postersResp.getPosters();
 						params.put("data", posters);

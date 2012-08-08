@@ -7,9 +7,9 @@
 		<#else>
 			<#if channel??&&'beauty'==channel>
 			<#if layout=='1'>
-			<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="600px" width="100%" src="http://www.taobao.com/go/app/taoke/beautifychannelver.php?pid=${pid}" ></iframe>
+			<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="600px" width="160px" src="http://www.taobao.com/go/app/taoke/beautifychannelver.php?pid=${pid}" ></iframe>
 			<#else>
-			<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="150px" width="100%" src="http://www.taobao.com/go/app/taoke/beautifychannelhor.php?pid=${pid}" ></iframe>
+			<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="150px" width="760px" src="http://www.taobao.com/go/app/taoke/beautifychannelhor.php?pid=${pid}" ></iframe>
 			</#if>
 			<#else>
 			<iframe frameborder="0" width="100%" height="252" scrolling="no" src="http://pindao.huoban.taobao.com/tms/channel/tab.htm?pid=${pid}"></iframe>

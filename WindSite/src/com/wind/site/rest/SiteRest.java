@@ -2250,6 +2250,7 @@ public class SiteRest {
 	 * @param request
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public ModelAndView getProfile(@PathVariable String id,
 			HttpServletRequest request) {

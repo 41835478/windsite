@@ -65,6 +65,22 @@ public class WindSiteRestUtil {
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
 
+	public static void synSiteTitle(IBaseService service) {
+		List<Site> sites = service.loadAll(Site.class);
+		if (sites != null && sites.size() > 0) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			for (Site site : sites) {
+				params.put("title", site.getTitle());
+				params.put("site_id", site.getId());
+				service.executeNativeUpdateSql(
+						"update w_page set title=:title where site_id=:site_id and isIndex=1",
+						params);
+			}
+			sites.clear();
+			sites = null;
+		}
+	}
+
 	public static String getAuthorizationURLBySina(String client_id) {
 		return WeiboConfig.getValue("authorizeURL").trim() + "?client_id="
 				+ client_id.trim() + "&redirect_uri="
@@ -74,8 +90,8 @@ public class WindSiteRestUtil {
 
 	public static Float getNativeUsb(IBaseService service, String user_id) {
 		Calendar calendar = Calendar.getInstance();
-		W_UserSubscribe usb = service.findByCriterion(W_UserSubscribe.class, R
-				.eq("user_id", user_id), R.gt("endDate", calendar.getTime()));
+		W_UserSubscribe usb = service.findByCriterion(W_UserSubscribe.class,
+				R.eq("user_id", user_id), R.gt("endDate", calendar.getTime()));
 		if (usb != null) {
 			return usb.getVersionNo();
 		}
@@ -171,24 +187,20 @@ public class WindSiteRestUtil {
 					result.put("site_skin", siteImpl.getSite_skin());
 					result.put("site_theme", siteImpl.getSite_theme());
 					result.put("commissionRate", siteImpl.getCommissionRate());
-					result.put("adCommissionRate", siteImpl
-							.getAdCommissionRate());
+					result.put("adCommissionRate",
+							siteImpl.getAdCommissionRate());
 					result.put("appType", siteImpl.getAppType());
 					result.put("site_isLogin", siteImpl.getSite_isLogin());
 					result.put("site_ico", siteImpl.getSite_ico());
-					result.put("site_detialLayout", siteImpl
-							.getSite_detailLayout());
-					result.put("site_searchLayout", siteImpl
-							.getSite_searchLayout());
+					result.put("site_detialLayout",
+							siteImpl.getSite_detailLayout());
+					result.put("site_searchLayout",
+							siteImpl.getSite_searchLayout());
 					result.put("site_searchBox", siteImpl.getSite_searchBox());
 					result.put("isAd", siteImpl.getIsAd());
-					result
-							.put("site_searchView", siteImpl
-									.getSite_searchView());
+					result.put("site_searchView", siteImpl.getSite_searchView());
 					result.put("ads", siteImpl.getAds());
-					result
-							.put("yiqifa_username", siteImpl
-									.getYiqifa_username());
+					result.put("yiqifa_username", siteImpl.getYiqifa_username());
 					result.put("yiqifa_sid", siteImpl.getYiqifa_sid());
 					result.put("yiqifa_secret", siteImpl.getYiqifa_secret());
 
@@ -196,8 +208,8 @@ public class WindSiteRestUtil {
 					result.put("taobao_appkey", siteImpl.getTaobao_appkey());
 					result.put("qq_appkey", siteImpl.getQq_appkey());
 					result.put("sina_appsecret", siteImpl.getSina_appsecret());
-					result.put("taobao_appsecret", siteImpl
-							.getTaobao_appsecret());
+					result.put("taobao_appsecret",
+							siteImpl.getTaobao_appsecret());
 					result.put("qq_appsecret", siteImpl.getQq_appsecret());
 					result.put("uyan", siteImpl.getUyan());
 
@@ -229,9 +241,7 @@ public class WindSiteRestUtil {
 						result.put("domainName", site.getDomainName());
 						result.put("versionNo", EnvManager.getUser().getUsb()
 								.getVersionNo());
-						result
-								.put("appType", EnvManager.getUser()
-										.getAppType());
+						result.put("appType", EnvManager.getUser().getAppType());
 					} else {
 						SystemException
 								.handleException("该站点暂时没有权限访问该页面（需要您升级为分成版（绑定域名），淘客普及版（付费），返利版，卖家版）");
@@ -284,24 +294,20 @@ public class WindSiteRestUtil {
 					result.put("site_skin", siteImpl.getSite_skin());
 					result.put("site_theme", siteImpl.getSite_theme());
 					result.put("commissionRate", siteImpl.getCommissionRate());
-					result.put("adCommissionRate", siteImpl
-							.getAdCommissionRate());
+					result.put("adCommissionRate",
+							siteImpl.getAdCommissionRate());
 					result.put("appType", siteImpl.getAppType());
 					result.put("site_isLogin", siteImpl.getSite_isLogin());
 					result.put("site_ico", siteImpl.getSite_ico());
-					result.put("site_detialLayout", siteImpl
-							.getSite_detailLayout());
-					result.put("site_searchLayout", siteImpl
-							.getSite_searchLayout());
+					result.put("site_detialLayout",
+							siteImpl.getSite_detailLayout());
+					result.put("site_searchLayout",
+							siteImpl.getSite_searchLayout());
 					result.put("site_searchBox", siteImpl.getSite_searchBox());
 					result.put("isAd", siteImpl.getIsAd());
-					result
-							.put("site_searchView", siteImpl
-									.getSite_searchView());
+					result.put("site_searchView", siteImpl.getSite_searchView());
 					result.put("ads", siteImpl.getAds());
-					result
-							.put("yiqifa_username", siteImpl
-									.getYiqifa_username());
+					result.put("yiqifa_username", siteImpl.getYiqifa_username());
 					result.put("yiqifa_sid", siteImpl.getYiqifa_sid());
 					result.put("yiqifa_secret", siteImpl.getYiqifa_secret());
 
@@ -309,8 +315,8 @@ public class WindSiteRestUtil {
 					result.put("taobao_appkey", siteImpl.getTaobao_appkey());
 					result.put("qq_appkey", siteImpl.getQq_appkey());
 					result.put("sina_appsecret", siteImpl.getSina_appsecret());
-					result.put("taobao_appsecret", siteImpl
-							.getTaobao_appsecret());
+					result.put("taobao_appsecret",
+							siteImpl.getTaobao_appsecret());
 					result.put("qq_appsecret", siteImpl.getQq_appsecret());
 					result.put("uyan", siteImpl.getUyan());
 
@@ -397,12 +403,8 @@ public class WindSiteRestUtil {
 				result.put("appType", siteImpl.getAppType());
 				result.put("site_isLogin", siteImpl.getSite_isLogin());
 				result.put("site_ico", siteImpl.getSite_ico());
-				result
-						.put("site_detialLayout", siteImpl
-								.getSite_detailLayout());
-				result
-						.put("site_searchLayout", siteImpl
-								.getSite_searchLayout());
+				result.put("site_detialLayout", siteImpl.getSite_detailLayout());
+				result.put("site_searchLayout", siteImpl.getSite_searchLayout());
 				result.put("site_searchBox", siteImpl.getSite_searchBox());
 				result.put("isAd", siteImpl.getIsAd());
 				result.put("site_searchView", siteImpl.getSite_searchView());
@@ -498,9 +500,7 @@ public class WindSiteRestUtil {
 			impl.setQq_appkey(String.valueOf(result.get("qq_appkey")));
 		}
 		if (result.get("sina_appsecret") != null) {
-			impl
-					.setSina_appsecret(String.valueOf(result
-							.get("sina_appsecret")));
+			impl.setSina_appsecret(String.valueOf(result.get("sina_appsecret")));
 		}
 		if (result.get("taobao_appsecret") != null) {
 			impl.setTaobao_appsecret(String.valueOf(result
@@ -682,12 +682,13 @@ public class WindSiteRestUtil {
 		if (usbs != null && usbs.size() > 0) {
 			for (T_UserSubscribe usb : usbs) {
 				try {
-					User user = service.findByCriterion(User.class, R.eq(
-							"user_id", usb.getUser_id()));
+					User user = service.findByCriterion(User.class,
+							R.eq("user_id", usb.getUser_id()));
 					if (user != null) {
 						if (StringUtils.isNotEmpty(user.getPid())) {
-							Long pid = Long.valueOf(user.getPid().replaceAll(
-									"mm_", "").replaceAll("_0_0", ""));
+							Long pid = Long.valueOf(user.getPid()
+									.replaceAll("mm_", "")
+									.replaceAll("_0_0", ""));
 							Boolean isFC = TaobaoFetchUtil
 									.isTaobaokeToolRelation(pid);// 获取分成型
 							if (isFC) {

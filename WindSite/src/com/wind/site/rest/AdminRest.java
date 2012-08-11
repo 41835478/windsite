@@ -215,6 +215,13 @@ public class AdminRest {
 		return WindSiteRestUtil.checkFenCheng(adminService);
 	}
 
+	@RequestMapping(value = "/synSiteTitle")
+	@ResponseBody
+	public String synSiteTitle() {
+		WindSiteRestUtil.synSiteTitle(adminService);
+		return "";
+	}
+
 	@RequestMapping(value = "/checkwww/{isUpdate}")
 	@ResponseBody
 	public String checkWWW(@PathVariable String isUpdate) {
@@ -290,8 +297,8 @@ public class AdminRest {
 				// 生成文章模块异步命令
 				ShopBlogCommand command = new ShopBlogCommand();
 				command.setFcg(fcg);
-				command.setModule(pageService.get(PageModule.class, module
-						.getId()));
+				command.setModule(pageService.get(PageModule.class,
+						module.getId()));
 				command.setPageService(pageService);
 				command.setUcService(ucService);
 				CommandExecutor.getCommands().add(command);
@@ -356,8 +363,8 @@ public class AdminRest {
 	@RequestMapping(value = "/onlinemembers", method = RequestMethod.GET)
 	public ModelAndView getOnlineMembers() {
 		return new ModelAndView("site/onlineMembers", "onlineMembers",
-				adminService.findAllByCriterion(User.class, R.eq("isOnline",
-						true)));
+				adminService.findAllByCriterion(User.class,
+						R.eq("isOnline", true)));
 	}
 
 	/**
@@ -441,8 +448,8 @@ public class AdminRest {
 										.get("versionNo")))), TimeUnit.SECONDS);// 加入超时队列(加入3小时的随机)
 			}
 		}
-		return new ModelAndView("site/admin/delay", "delay", WindSiteDelay
-				.getCacheObjMap());
+		return new ModelAndView("site/admin/delay", "delay",
+				WindSiteDelay.getCacheObjMap());
 	}
 
 	/**
@@ -484,8 +491,8 @@ public class AdminRest {
 	 */
 	@RequestMapping(value = "/cache/delay")
 	public ModelAndView cacheDelay(HttpServletRequest request) {
-		return new ModelAndView("site/admin/delay", "delay", WindSiteDelay
-				.getCacheObjMap());
+		return new ModelAndView("site/admin/delay", "delay",
+				WindSiteDelay.getCacheObjMap());
 	}
 
 	/**
@@ -810,8 +817,8 @@ public class AdminRest {
 		List<T_UserSubscribe> usbs = adminService.findAllByCriterion(
 				T_UserSubscribe.class, R.lt("versionNo", 1f));
 		for (T_UserSubscribe usb : usbs) {
-			List<Site> sites = pageService.findAllByCriterion(Site.class, R.eq(
-					"status", 1), R.eq("user_id", usb.getUser_id()));
+			List<Site> sites = pageService.findAllByCriterion(Site.class,
+					R.eq("status", 1), R.eq("user_id", usb.getUser_id()));
 			if (sites != null && sites.size() > 0) {
 				for (Site site : sites) {
 					try {
@@ -870,11 +877,11 @@ public class AdminRest {
 			HttpServletRequest request) {
 		List<T_UserSubscribe> usbs = new ArrayList<T_UserSubscribe>();
 		if (user_id != null) {
-			usbs = adminService.findAllByCriterion(T_UserSubscribe.class, R.eq(
-					"user_id", user_id));
+			usbs = adminService.findAllByCriterion(T_UserSubscribe.class,
+					R.eq("user_id", user_id));
 		} else {
-			usbs = adminService.findAllByCriterion(T_UserSubscribe.class, R.gt(
-					"versionNo", 1.5f));
+			usbs = adminService.findAllByCriterion(T_UserSubscribe.class,
+					R.gt("versionNo", 1.5f));
 		}
 
 		if (usbs != null && usbs.size() > 0)
@@ -1117,8 +1124,8 @@ public class AdminRest {
 	@RequestMapping(value = "/robots/all")
 	@ResponseBody
 	public String robots() {
-		List<Site> sites = pageService.findAllByCriterion(Site.class, R.eq(
-				"status", 1));
+		List<Site> sites = pageService.findAllByCriterion(Site.class,
+				R.eq("status", 1));
 		if (sites != null && sites.size() > 0) {
 			for (Site site : sites) {
 				try {
@@ -1156,8 +1163,8 @@ public class AdminRest {
 	@RequestMapping(value = "/deploy/all")
 	@ResponseBody
 	public String deployAll() {
-		List<UserPage> pages = pageService.findAllByCriterion(UserPage.class, R
-				.eq("status", true));
+		List<UserPage> pages = pageService.findAllByCriterion(UserPage.class,
+				R.eq("status", true));
 		if (pages != null && pages.size() > 0) {
 			for (UserPage page : pages) {
 				try {
@@ -1296,8 +1303,8 @@ public class AdminRest {
 		if (shops != null && shops.size() > 0) {
 			for (T_TaobaokeShop shop : shops) {
 				try {
-					Shop tShop = TaobaoFetchUtil.getTaobaoShop("0", shop
-							.getNick());
+					Shop tShop = TaobaoFetchUtil.getTaobaoShop("0",
+							shop.getNick());
 					shop.setCid(tShop.getCid());
 					shop.setCid(tShop.getCid());
 					shop.setTitle(tShop.getTitle());
@@ -1329,10 +1336,10 @@ public class AdminRest {
 								.equals(((SystemException) e).getKey())
 								|| "isv.invalid-parameter:user-without-shop"
 										.equals(((SystemException) e).getKey())) {// 店铺不存在
-							adminService.deleteAll(W_ShopFavorite.class, R.eq(
-									"user_id", shop.getUserId()));
-							adminService.delete(T_TaobaokeShop.class, shop
-									.getUserId());
+							adminService.deleteAll(W_ShopFavorite.class,
+									R.eq("user_id", shop.getUserId()));
+							adminService.delete(T_TaobaokeShop.class,
+									shop.getUserId());
 							logger.info(shop.getNick() + "====不存在店铺");
 						}
 					}
@@ -1347,8 +1354,9 @@ public class AdminRest {
 
 	private void getTaobaokeShopCommission(Page<T_TaobaokeShop> page) {
 		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
-				T_TaobaokeShop.class, R.or(R.isNull("title"), R
-						.isNull("sellerCredit")), R.isNotNull("sid"));
+				T_TaobaokeShop.class,
+				R.or(R.isNull("title"), R.isNull("sellerCredit")),
+				R.isNotNull("sid"));
 		if (shops != null && shops.size() > 0) {
 			String sids = "";
 			Boolean isFirst = true;
@@ -1406,8 +1414,8 @@ public class AdminRest {
 
 	private void getTaobaokeShopCredit(Page<T_TaobaokeShop> page) {
 		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
-				T_TaobaokeShop.class, R.isNotNull("nick"), R
-						.isNull("sellerCredit"));
+				T_TaobaokeShop.class, R.isNotNull("nick"),
+				R.isNull("sellerCredit"));
 		if (shops != null && shops.size() > 0) {
 			for (T_TaobaokeShop shop : shops) {
 				com.taobao.api.domain.User user = TaobaoFetchUtil
@@ -1451,10 +1459,10 @@ public class AdminRest {
 							.equals(((SystemException) e).getKey())
 							|| "isv.invalid-parameter:user-without-shop"
 									.equals(((SystemException) e).getKey())) {// 店铺不存在
-						adminService.deleteAll(W_ShopFavorite.class, R.eq(
-								"user_id", shop.getUserId()));
-						adminService.delete(T_TaobaokeShop.class, shop
-								.getUserId());
+						adminService.deleteAll(W_ShopFavorite.class,
+								R.eq("user_id", shop.getUserId()));
+						adminService.delete(T_TaobaokeShop.class,
+								shop.getUserId());
 						logger.info(shop.getNick() + "====不存在店铺");
 					}
 					e.printStackTrace();
@@ -1498,8 +1506,10 @@ public class AdminRest {
 								"class", "nick"));
 				if (div != null && div.size() > 0) {
 					for (int i = 0; i < div.size(); i++) {
-						LinkTag nick = (LinkTag) (div.elementAt(i)
-								.getChildren().extractAllNodesThatMatch(
+						LinkTag nick = (LinkTag) (div
+								.elementAt(i)
+								.getChildren()
+								.extractAllNodesThatMatch(
 										new TagNameFilter("a"), true)
 								.elementAt(0));
 						String userId = nick.getAttribute("href").split(".htm")[0]
@@ -1573,9 +1583,7 @@ public class AdminRest {
 									.getDeliveryScore());
 						}
 						adminService.update(shop);
-						logger
-								.info("shop[" + shop.getUserId()
-										+ "]====updated");
+						logger.info("shop[" + shop.getUserId() + "]====updated");
 					} catch (Exception e) {
 						if (e instanceof SystemException) {
 							if ("isv.shop-service-error:SHOP_IS_NOT_EXIST"
@@ -1615,13 +1623,12 @@ public class AdminRest {
 				+ File.separator
 				+ "min"
 				+ File.separator
-				+ "stylesheets"
-				+ File.separator + "theme"));
+				+ "stylesheets" + File.separator + "theme"));
 		if (themes != null && themes.length > 0) {
 			for (String str : themes) {
 				str = str.replace(".css", "");
-				PageTheme theme = adminService.get(PageTheme.class, Long
-						.valueOf(str));
+				PageTheme theme = adminService.get(PageTheme.class,
+						Long.valueOf(str));
 				if (theme != null) {
 					theme.setIsValid(true);
 					adminService.update(theme);
@@ -1723,8 +1730,8 @@ public class AdminRest {
 	public ModelAndView addForumView(@PathVariable String type,
 			HttpServletRequest request) {
 		return new ModelAndView("site/admin/forum/addForum", "types",
-				adminService.findAllByCriterion(ForumType.class, R.eq("parent",
-						type)));
+				adminService.findAllByCriterion(ForumType.class,
+						R.eq("parent", type)));
 	}
 
 	@Autowired
@@ -1787,8 +1794,8 @@ public class AdminRest {
 		String url = request.getParameter("url");
 		String realUrl = request.getParameter("realUrl");
 		String type = request.getParameter("type");
-		Forum forum = adminService.findByCriterion(Forum.class, R.eq("title",
-				title), R.eq("type.id", type));
+		Forum forum = adminService.findByCriterion(Forum.class,
+				R.eq("title", title), R.eq("type.id", type));
 		if (forum == null) {
 			forum = new Forum();
 			forum.setTitle(title);
@@ -1917,8 +1924,8 @@ public class AdminRest {
 		String nick = request.getParameter("nick");
 		List<ADTaobaokeItem> items = new ArrayList<ADTaobaokeItem>();
 		if (StringUtils.isNotEmpty(nick)) {
-			items = adminService.findAllByCriterion(ADTaobaokeItem.class, R.eq(
-					"nick", nick));
+			items = adminService.findAllByCriterion(ADTaobaokeItem.class,
+					R.eq("nick", nick));
 		} else {
 			items = adminService.findAllByCriterion(ADTaobaokeItem.class);
 		}
@@ -2169,8 +2176,8 @@ public class AdminRest {
 	 */
 	@RequestMapping(value = "/type/get", method = RequestMethod.GET)
 	public ModelAndView getWidgetType(HttpServletRequest request) {
-		return new ModelAndView("site/admin/widgettype", "types", adminService
-				.getWidgetTypes());
+		return new ModelAndView("site/admin/widgettype", "types",
+				adminService.getWidgetTypes());
 	}
 
 	/**
@@ -2185,8 +2192,8 @@ public class AdminRest {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (id.equals("0")) {// 查询所有
 			String hql = "select w from Widget w order by w.sortOrder";
-			map.put("widgets", adminService.findByHql(hql,
-					new HashMap<String, Object>()));
+			map.put("widgets",
+					adminService.findByHql(hql, new HashMap<String, Object>()));
 		} else {
 			WidgetType type = adminService.get(WidgetType.class, id);
 			if (type == null) {
@@ -2233,8 +2240,8 @@ public class AdminRest {
 	@ResponseBody
 	public String createWidgetType(HttpServletRequest request) {
 		String name = request.getParameter("name");
-		WidgetType type = adminService.findByCriterion(WidgetType.class, R.eq(
-				"name", name));
+		WidgetType type = adminService.findByCriterion(WidgetType.class,
+				R.eq("name", name));
 		if (type != null) {
 			SystemException.handleMessageException("类别[" + name + "]名称冲突！");
 		}
@@ -2265,8 +2272,8 @@ public class AdminRest {
 			SystemException.handleMessageException("未找到类别[" + id + "]！");
 		}
 		String name = request.getParameter("name");
-		WidgetType nameType = adminService.findByCriterion(WidgetType.class, R
-				.eq("name", name));
+		WidgetType nameType = adminService.findByCriterion(WidgetType.class,
+				R.eq("name", name));
 		if (nameType != null) {
 			SystemException.handleMessageException("类别[" + name + "]名称冲突！");
 		}
@@ -2343,8 +2350,8 @@ public class AdminRest {
 	@ResponseBody
 	public String createWidget(HttpServletRequest request) {
 		String name = request.getParameter("name");
-		Widget widget = adminService.findByCriterion(Widget.class, R.eq("name",
-				name));
+		Widget widget = adminService.findByCriterion(Widget.class,
+				R.eq("name", name));
 		if (widget != null) {
 			SystemException.handleMessageException("组件[" + name + "]名称冲突！");
 		}
@@ -2405,8 +2412,8 @@ public class AdminRest {
 			SystemException.handleMessageException("未找到组件[" + id + "]！");
 		}
 		String name = request.getParameter("name");
-		Widget nameWidget = adminService.findByCriterion(Widget.class, R.eq(
-				"name", name));
+		Widget nameWidget = adminService.findByCriterion(Widget.class,
+				R.eq("name", name));
 		if (nameWidget != null) {
 			SystemException.handleMessageException("组件[" + name + "]名称冲突！");
 		}
@@ -2529,18 +2536,30 @@ public class AdminRest {
 
 	private void storeMap(Map<String, Object> result, Map<String, Object> params) {
 		String hql = "from WidgetAttribute where widget.id=:wid and dataType.id=:did ";
-		result.put("asa", adminService.findByHql(hql
-				+ "and type='a-s' order by sortOrder", params));
-		result.put("las", adminService.findByHql(hql
-				+ " and type='l-a-s' order by sortOrder", params));
-		result.put("lasp", adminService.findByHql(hql
-				+ " and type='l-a-s-p' order by sortOrder", params));
-		result.put("dai", adminService.findByHql(hql
-				+ "and type='d-a-i' order by sortOrder", params));
-		result.put("ldai", adminService.findByHql(hql
-				+ "and type='l-d-a-i' order by sortOrder", params));
-		result.put("ldaip", adminService.findByHql(hql
-				+ "and type='l-d-a-i-p' order by sortOrder", params));
+		result.put(
+				"asa",
+				adminService.findByHql(hql
+						+ "and type='a-s' order by sortOrder", params));
+		result.put(
+				"las",
+				adminService.findByHql(hql
+						+ " and type='l-a-s' order by sortOrder", params));
+		result.put(
+				"lasp",
+				adminService.findByHql(hql
+						+ " and type='l-a-s-p' order by sortOrder", params));
+		result.put(
+				"dai",
+				adminService.findByHql(hql
+						+ "and type='d-a-i' order by sortOrder", params));
+		result.put(
+				"ldai",
+				adminService.findByHql(hql
+						+ "and type='l-d-a-i' order by sortOrder", params));
+		result.put(
+				"ldaip",
+				adminService.findByHql(hql
+						+ "and type='l-d-a-i-p' order by sortOrder", params));
 	}
 
 	/**
@@ -2561,8 +2580,8 @@ public class AdminRest {
 
 	private void getItemProps(Page<T_ItemCat> page) {
 		List<T_ItemCat> cats = adminService.findAllByCriterion(page,
-				T_ItemCat.class, R.eq("isParent", false), R.eq("isSuccess",
-						false));
+				T_ItemCat.class, R.eq("isParent", false),
+				R.eq("isSuccess", false));
 		if (cats != null && cats.size() > 0) {
 			for (T_ItemCat cat : cats) {
 				adminService.getItemCatPropValues(cat);
@@ -2592,8 +2611,8 @@ public class AdminRest {
 
 	private void getItemCatPropValues(Page<T_ItemCat> page) {
 		List<T_ItemCat> cats = adminService.findAllByCriterion(page,
-				T_ItemCat.class, R.eq("isParent", false), R.eq("isSuccess",
-						false));
+				T_ItemCat.class, R.eq("isParent", false),
+				R.eq("isSuccess", false));
 		if (cats != null && cats.size() > 0) {
 			for (T_ItemCat cat : cats) {
 				adminService.getItemCatPropValues(cat);
@@ -2628,24 +2647,30 @@ public class AdminRest {
 					parser = new Parser(
 							"http://www.tmall.com/go/chn/mall/brandshop_"
 									+ cat.getName() + ".php");
-					NodeList as1 = parser.extractAllNodesThatMatch(
-							new HasAttributeFilter("class", "ul-new clearfix"))
-							.elementAt(0).getChildren()
+					NodeList as1 = parser
+							.extractAllNodesThatMatch(
+									new HasAttributeFilter("class",
+											"ul-new clearfix"))
+							.elementAt(0)
+							.getChildren()
 							.extractAllNodesThatMatch(new TagNameFilter("li"),
 									true);
 					if (as1 != null && as1.size() > 0) {
 						for (int i = 0; i < as1.size(); i++) {
 							Node li = as1.elementAt(i);
-							ImageTag img = (ImageTag) li.getChildren()
+							ImageTag img = (ImageTag) li
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("img"), true)
 									.elementAt(0);
 							String picPath = img.getImageURL();
-							LinkTag tag = (LinkTag) li.getChildren()
+							LinkTag tag = (LinkTag) li
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new HasAttributeFilter("class",
 													"title"), true)
-									.elementAt(0).getChildren()
+									.elementAt(0)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("a"))
 									.elementAt(0);
@@ -2667,14 +2692,15 @@ public class AdminRest {
 													new HasAttributeFilter(
 															"class",
 															"shopkeeper"))
-											.elementAt(0).getChildren()
+											.elementAt(0)
+											.getChildren()
 											.extractAllNodesThatMatch(
 													new TagNameFilter("a"),
 													true).elementAt(0);
 									String nick = tagNick.getLinkText();
 									brand = adminService.findByCriterion(
-											T_MallBrand.class, R.eq("nick",
-													nick));
+											T_MallBrand.class,
+											R.eq("nick", nick));
 									if (brand != null) {
 										brand.setTitle(title);
 										brand.setPicPath(picPath);
@@ -2719,15 +2745,17 @@ public class AdminRest {
 		Parser parser;
 		try {
 			parser = new Parser("http://brand.tmall.com/");
-			NodeList as1 = parser.extractAllNodesThatMatch(
-					new HasAttributeFilter("id", "J_brandNav")).elementAt(0)
-					.getChildren().extractAllNodesThatMatch(
-							new TagNameFilter("li"), true);
+			NodeList as1 = parser
+					.extractAllNodesThatMatch(
+							new HasAttributeFilter("id", "J_brandNav"))
+					.elementAt(0).getChildren()
+					.extractAllNodesThatMatch(new TagNameFilter("li"), true);
 			if (as1.size() > 0) {
 				for (int i = 1; i < as1.size(); i++) {
 					Node li = as1.elementAt(i);
 					if (li != null) {
-						LinkTag tag = (LinkTag) li.getChildren()
+						LinkTag tag = (LinkTag) li
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("a")).elementAt(0);
 						if (tag != null) {
@@ -2783,37 +2811,51 @@ public class AdminRest {
 					parser = new Parser(
 							"http://zx.taobao.com/template_list.htm?sort=1&site=1&p="
 									+ i);
-					NodeList dls = parser.extractAllNodesThatMatch(
-							new HasAttributeFilter("id", "J_img-zoom"))
-							.elementAt(0).getChildren()
+					NodeList dls = parser
+							.extractAllNodesThatMatch(
+									new HasAttributeFilter("id", "J_img-zoom"))
+							.elementAt(0)
+							.getChildren()
 							.extractAllNodesThatMatch(new TagNameFilter("dl"),
 									true);
 					for (int j = 0; j < dls.size(); j++) {
-						NodeList dts = dls.elementAt(j).getChildren()
+						NodeList dts = dls
+								.elementAt(j)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("dt"), true);
-						ImageTag img = (ImageTag) dts.elementAt(0)
-								.getChildren().extractAllNodesThatMatch(
+						ImageTag img = (ImageTag) dts
+								.elementAt(0)
+								.getChildren()
+								.extractAllNodesThatMatch(
 										new TagNameFilter("img"), true)
 								.elementAt(0);
 						String pic = img.getImageURL();
-						NodeList divs = dts.elementAt(1).getChildren()
+						NodeList divs = dts
+								.elementAt(1)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("div"), true);
-						LinkTag titleTag = (LinkTag) divs.elementAt(0)
-								.getChildren().extractAllNodesThatMatch(
+						LinkTag titleTag = (LinkTag) divs
+								.elementAt(0)
+								.getChildren()
+								.extractAllNodesThatMatch(
 										new TagNameFilter("a"), true)
 								.elementAt(0);
 						String title = titleTag.toPlainTextString();
 						String id = titleTag.getAttribute("href").split("id=")[1];
-						LinkTag designerTag = (LinkTag) divs.elementAt(1)
-								.getChildren().extractAllNodesThatMatch(
+						LinkTag designerTag = (LinkTag) divs
+								.elementAt(1)
+								.getChildren()
+								.extractAllNodesThatMatch(
 										new TagNameFilter("a"), true)
 								.elementAt(0);
 						String designer = designerTag.toPlainTextString();
 						String price = divs.elementAt(2).toPlainTextString()
 								.replace("模板价格：", "").replace("元", "").trim();
-						String tagsStr = divs.elementAt(4).getChildren()
+						String tagsStr = divs
+								.elementAt(4)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("span"), true)
 								.elementAt(0).toPlainTextString();
@@ -2888,29 +2930,38 @@ public class AdminRest {
 						parser = new Parser(
 								"http://zx.taobao.com/template_list.htm?sort=1&site=1&p="
 										+ i + "&industry=" + n);
-						NodeList dls = parser.extractAllNodesThatMatch(
-								new HasAttributeFilter("id", "J_img-zoom"))
-								.elementAt(0).getChildren()
+						NodeList dls = parser
+								.extractAllNodesThatMatch(
+										new HasAttributeFilter("id",
+												"J_img-zoom"))
+								.elementAt(0)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("dl"), true);
 						for (int j = 0; j < dls.size(); j++) {
-							NodeList dts = dls.elementAt(j).getChildren()
+							NodeList dts = dls
+									.elementAt(j)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("dt"), true);
-							NodeList divs = dts.elementAt(1).getChildren()
+							NodeList divs = dts
+									.elementAt(1)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("div"), true);
-							LinkTag titleTag = (LinkTag) divs.elementAt(0)
-									.getChildren().extractAllNodesThatMatch(
+							LinkTag titleTag = (LinkTag) divs
+									.elementAt(0)
+									.getChildren()
+									.extractAllNodesThatMatch(
 											new TagNameFilter("a"), true)
 									.elementAt(0);
 
 							String id = titleTag.getAttribute("href").split(
 									"id=")[1];
 							PageThemeIndustry industry = adminService
-									.findByCriterion(PageThemeIndustry.class, R
-											.eq("theme", Long.valueOf(id)), R
-											.eq("industry", Long.valueOf(n)));
+									.findByCriterion(PageThemeIndustry.class,
+											R.eq("theme", Long.valueOf(id)),
+											R.eq("industry", Long.valueOf(n)));
 							if (industry == null) {
 								industry = new PageThemeIndustry();
 								industry.setIndustry(Long.valueOf(n));
@@ -2949,28 +3000,37 @@ public class AdminRest {
 						parser = new Parser(
 								"http://zx.taobao.com/template_list.htm?sort=1&site=1&p="
 										+ i + "&theme=" + n);
-						NodeList dls = parser.extractAllNodesThatMatch(
-								new HasAttributeFilter("id", "J_img-zoom"))
-								.elementAt(0).getChildren()
+						NodeList dls = parser
+								.extractAllNodesThatMatch(
+										new HasAttributeFilter("id",
+												"J_img-zoom"))
+								.elementAt(0)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("dl"), true);
 						for (int j = 0; j < dls.size(); j++) {
-							NodeList dts = dls.elementAt(j).getChildren()
+							NodeList dts = dls
+									.elementAt(j)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("dt"), true);
-							NodeList divs = dts.elementAt(1).getChildren()
+							NodeList divs = dts
+									.elementAt(1)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("div"), true);
-							LinkTag titleTag = (LinkTag) divs.elementAt(0)
-									.getChildren().extractAllNodesThatMatch(
+							LinkTag titleTag = (LinkTag) divs
+									.elementAt(0)
+									.getChildren()
+									.extractAllNodesThatMatch(
 											new TagNameFilter("a"), true)
 									.elementAt(0);
 							String id = titleTag.getAttribute("href").split(
 									"id=")[1];
 							PageThemeSkin skin = adminService.findByCriterion(
-									PageThemeSkin.class, R.eq("theme", Long
-											.valueOf(id)), R.eq("skin", Long
-											.valueOf(n)));
+									PageThemeSkin.class,
+									R.eq("theme", Long.valueOf(id)),
+									R.eq("skin", Long.valueOf(n)));
 							if (skin == null) {
 								skin = new PageThemeSkin();
 								skin.setSkin(Long.valueOf(n));
@@ -3009,29 +3069,38 @@ public class AdminRest {
 						parser = new Parser(
 								"http://zx.taobao.com/template_list.htm?sort=1&site=1&p="
 										+ i + "&color=" + n);
-						NodeList dls = parser.extractAllNodesThatMatch(
-								new HasAttributeFilter("id", "J_img-zoom"))
-								.elementAt(0).getChildren()
+						NodeList dls = parser
+								.extractAllNodesThatMatch(
+										new HasAttributeFilter("id",
+												"J_img-zoom"))
+								.elementAt(0)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("dl"), true);
 						for (int j = 0; j < dls.size(); j++) {
-							NodeList dts = dls.elementAt(j).getChildren()
+							NodeList dts = dls
+									.elementAt(j)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("dt"), true);
-							NodeList divs = dts.elementAt(1).getChildren()
+							NodeList divs = dts
+									.elementAt(1)
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new TagNameFilter("div"), true);
-							LinkTag titleTag = (LinkTag) divs.elementAt(0)
-									.getChildren().extractAllNodesThatMatch(
+							LinkTag titleTag = (LinkTag) divs
+									.elementAt(0)
+									.getChildren()
+									.extractAllNodesThatMatch(
 											new TagNameFilter("a"), true)
 									.elementAt(0);
 
 							String id = titleTag.getAttribute("href").split(
 									"id=")[1];
 							PageThemeColor color = adminService
-									.findByCriterion(PageThemeColor.class, R
-											.eq("theme", Long.valueOf(id)), R
-											.eq("color", Long.valueOf(n)));
+									.findByCriterion(PageThemeColor.class,
+											R.eq("theme", Long.valueOf(id)),
+											R.eq("color", Long.valueOf(n)));
 							if (color == null) {
 								color = new PageThemeColor();
 								color.setColor(Long.valueOf(n));

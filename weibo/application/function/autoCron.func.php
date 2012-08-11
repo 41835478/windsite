@@ -42,6 +42,7 @@ function autoCron($index = -1) {
 		6,
 		7
 	))) { //店铺
+	    if(XT_USER_NICK=='jping2') exit('jping2 no shop');
 		//exit;
 		$isYXSelf = true;
 		if (XT_IS_SELLER == 'true') {

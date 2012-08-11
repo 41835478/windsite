@@ -1198,6 +1198,7 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void deployDetail(FreeMarkerConfigurer fcg, User user,
 			ModuleMethod moduleMethod) {
@@ -1266,6 +1267,7 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void deploySearch(FreeMarkerConfigurer fcg, User user,
 			ModuleMethod moduleMethod) {

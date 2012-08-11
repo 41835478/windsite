@@ -11,7 +11,7 @@
 <#if page.isIndex??&&page.isIndex>
 <!--#include virtual="/zone/${filePath}/${user.user_id}/metadata.html"-->
 </#if>
-<title><#if page.isIndex??&&page.isIndex>${site.title}<#else>${page.title}-${site.title}</#if></title>
+<title><#if page.isIndex??&&page.isIndex>${page.title}<#else>${page.title}-${site.title}</#if></title>
 <#if site_ico??&&''!=site_ico>
 <link rel="shortcut icon" type="image/ico" href="${site_ico}">
 </#if>

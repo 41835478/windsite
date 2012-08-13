@@ -84,7 +84,8 @@ class admin_mod extends action {
 				'星空下约定1314',
 				'kqysg',
 				'rain_qyx',
-				'绿袖子1955'
+				'绿袖子1955',
+				'jping2'
 			))) {
 			exit ('已退款用户，不予登录');
 		}

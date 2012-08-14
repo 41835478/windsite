@@ -1192,7 +1192,7 @@ var PageModuleUtils = {
 			if ('item' == rel) {// 商品搜索
 				form.attr('action', '/searchbox?v=' + Math.random());
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
-					q.val('输入 宝贝 名称或网址');
+					q.val('输入 宝贝 名称或宝贝地址');
 				}
 				q.unbind('focus').unbind('blur').focusText('输入 宝贝 名称或宝贝地址',
 						'focus');

@@ -112,14 +112,14 @@ public class ItemDetailCommand implements ICommand {
 		Item item = detail.getItem();
 		List<TradeRate> rates = new ArrayList<TradeRate>();
 		Long totalResults = 0L;
-		if (StringUtils.isNotEmpty(item.getNick())) {// 详情
-			TraderatesSearchResponse response = TaobaoFetchUtil
-					.traderatesSearch(item.getNumIid(), item.getNick(), 1L, 40L);
-			if (response != null) {
-				totalResults = response.getTotalResults();
-				rates = response.getTradeRates();
-			}
-		}
+//		if (StringUtils.isNotEmpty(item.getNick())) {// 详情
+//			TraderatesSearchResponse response = TaobaoFetchUtil
+//					.traderatesSearch(item.getNumIid(), item.getNick(), 1L, 40L);
+//			if (response != null) {
+//				totalResults = response.getTotalResults();
+//				rates = response.getTradeRates();
+//			}
+//		}
 		pageService.deployItemDetailAndComments(fcg, detail, totalResults,
 				rates);
 	}

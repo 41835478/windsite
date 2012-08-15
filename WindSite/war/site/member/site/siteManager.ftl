@@ -82,6 +82,7 @@ td.fl-num{text-align:center;width:80px;}th strong{color:red} fieldset .wTable td
         </div>
     </div>
 </td></tr></table>
+<iframe src="http://isvu.haodianpu.com/isvu.php?fid=appstore-10911&line_num=7" frameborder="0" height="105" width="750" scrolling="no" marginheight="0" marginwidth="0"  ></iframe>
 <#include "site/member/ads/weigou.ftl">
 <#if (USER.usb??&&USER.usb.versionNo>=2)>
 <fieldset><legend>返利记录</legend>

@@ -177,28 +177,28 @@ public class TaobaoFetchUtil {
 	 * @param request
 	 * @return
 	 */
-	public static TraderatesSearchResponse traderatesSearch(Long numIid,
-			String sellerNick, Long pageNo, Long pageSize) {
-		TraderatesSearchRequest request = new TraderatesSearchRequest();
-		request.setNumIid(numIid);
-		request.setSellerNick(sellerNick);
-		request.setPageNo(pageNo);
-		request.setPageSize(pageSize);
-		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-				EnvManager.getAppKey(null), EnvManager.getSecret(null),
-				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
-		try {
-			TraderatesSearchResponse response = client.execute(request);
-			if (response.isSuccess()) {
-				return response;
-			} else {
-				handleError(response);
-			}
-		} catch (ApiException e) {
-			SystemException.handleMessageException(e);
-		}
-		return null;
-	}
+	// public static TraderatesSearchResponse traderatesSearch(Long numIid,
+	// String sellerNick, Long pageNo, Long pageSize) {
+	// TraderatesSearchRequest request = new TraderatesSearchRequest();
+	// request.setNumIid(numIid);
+	// request.setSellerNick(sellerNick);
+	// request.setPageNo(pageNo);
+	// request.setPageSize(pageSize);
+	// TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+	// EnvManager.getAppKey(null), EnvManager.getSecret(null),
+	// Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+	// try {
+	// TraderatesSearchResponse response = client.execute(request);
+	// if (response.isSuccess()) {
+	// return response;
+	// } else {
+	// handleError(response);
+	// }
+	// } catch (ApiException e) {
+	// SystemException.handleMessageException(e);
+	// }
+	// return null;
+	// }
 
 	/**
 	 * 根据昵称，服务码获取订购关系

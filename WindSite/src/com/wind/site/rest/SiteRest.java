@@ -64,7 +64,6 @@ import com.taobao.api.response.ItemsSearchResponse;
 import com.taobao.api.response.TaobaokeItemsDetailGetResponse;
 import com.taobao.api.response.TaobaokeItemsGetResponse;
 import com.taobao.api.response.TaobaokeShopsGetResponse;
-import com.taobao.api.response.TraderatesSearchResponse;
 import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
 import com.wind.site.command.CommandExecutor;
@@ -1178,14 +1177,14 @@ public class SiteRest {
 		TaobaokeItemDetail item = itemList.get(0);// 单个商品
 		List<TradeRate> rates = new ArrayList<TradeRate>();
 		Long totalResults = 0L;
-		if (StringUtils.isNotEmpty(item.getItem().getNick())) {// 详情
-			TraderatesSearchResponse resp = TaobaoFetchUtil.traderatesSearch(
-					Long.valueOf(nid), item.getItem().getNick(), 1L, 40L);
-			if (resp != null) {
-				totalResults = resp.getTotalResults();
-				rates = resp.getTradeRates();
-			}
-		}
+//		if (StringUtils.isNotEmpty(item.getItem().getNick())) {// 详情
+//			TraderatesSearchResponse resp = TaobaoFetchUtil.traderatesSearch(
+//					Long.valueOf(nid), item.getItem().getNick(), 1L, 40L);
+//			if (resp != null) {
+//				totalResults = resp.getTotalResults();
+//				rates = resp.getTradeRates();
+//			}
+//		}
 		result.put("totalResults", totalResults);
 		result.put("rates", rates);
 		result.put("item", item.getItem());

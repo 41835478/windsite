@@ -397,9 +397,7 @@ public class TaobaoFetchUtil {
 		item.setCommission(Float.parseFloat(tItem.getCommission()));
 		item.setCommission_num(Integer.parseInt(tItem.getCommissionNum()));
 		item.setCommission_rate(Float.parseFloat(tItem.getCommissionRate()));
-		item
-				.setCommission_volume(Float.parseFloat(tItem
-						.getCommissionVolume()));
+		item.setCommission_volume(Float.parseFloat(tItem.getCommissionVolume()));
 		item.setNick(tItem.getNick());
 		item.setPic_url(tItem.getPicUrl());
 		item.setPrice(Float.parseFloat(tItem.getPrice()));
@@ -439,11 +437,11 @@ public class TaobaoFetchUtil {
 
 	public static void handleError(TaobaoResponse response) {
 		if (StringUtils.isEmpty(response.getSubCode())) {// 系统错误
-			SystemException.handleException(response.getErrorCode(), response
-					.getMsg());
+			SystemException.handleException(response.getErrorCode(),
+					response.getMsg());
 		} else {// 业务错误
-			SystemException.handleException(response.getSubCode(), response
-					.getSubMsg());
+			SystemException.handleException(response.getSubCode(),
+					response.getSubMsg());
 		}
 	}
 
@@ -499,8 +497,9 @@ public class TaobaoFetchUtil {
 		String hql = "from T_Poster where channel_id in (" + ids
 				+ ") order by "
 				+ ("HOT".equals(type) ? " hits desc" : " id desc ");
-		List<T_Poster> posters = service.findByHql(new Page<T_Poster>(1, limit
-				.intValue()), hql, new HashMap<String, Object>());
+		List<T_Poster> posters = service.findByHql(
+				new Page<T_Poster>(1, limit.intValue()), hql,
+				new HashMap<String, Object>());
 		List<Poster> ps = new ArrayList<Poster>();
 		if (posters != null && posters.size() > 0) {
 			Poster p = null;
@@ -749,8 +748,8 @@ public class TaobaoFetchUtil {
 	public static Item taobaoItemGet(String appType, Long numIid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ItemGetRequest request = new ItemGetRequest();
 			request.setFields("num_iid,title,nick,price,pic_url,location,num");
@@ -769,8 +768,8 @@ public class TaobaoFetchUtil {
 			String numIids, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeItemsConvertRequest request = new TaobaokeItemsConvertRequest();
 			request.setFields("num_iid,click_url,commission,price");
@@ -792,8 +791,8 @@ public class TaobaoFetchUtil {
 			String numIids, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeItemsConvertRequest request = new TaobaokeItemsConvertRequest();
 			request.setFields(TaobaoFetchUtil.TAOBAOKEITEM_FIELDS);
@@ -826,8 +825,8 @@ public class TaobaoFetchUtil {
 			TaobaokeItemsDetailGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeItemsDetailGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -851,8 +850,8 @@ public class TaobaoFetchUtil {
 			TaobaokeItemsGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeItemsGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -893,14 +892,14 @@ public class TaobaoFetchUtil {
 	public static User getTaobaoUser(String appType, String uid, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			UserGetRequest req = new UserGetRequest();
 			req.setFields(TAOBAOUSER_FIELDS);
 			req.setNick(nick);
-			UserGetResponse response = client.execute(req, EnvManager
-					.getTaobaoSession());
+			UserGetResponse response = client.execute(req,
+					EnvManager.getTaobaoSession());
 			if (response.isSuccess()) {
 				return response.getUser();
 			} else {
@@ -931,8 +930,8 @@ public class TaobaoFetchUtil {
 	public static Shop getTaobaoShop(String appType, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ShopGetRequest req = new ShopGetRequest();
 			req.setFields(TAOBAOSHOP_FIELDS);
@@ -975,8 +974,8 @@ public class TaobaoFetchUtil {
 	public static Shop getTaobaoShop(String appType, ShopGetRequest req) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ShopGetResponse response = client.execute(req);
 			if (response.isSuccess()) {
@@ -993,13 +992,14 @@ public class TaobaoFetchUtil {
 	public static User getTaobaoShopCredit(String appType, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			UserGetRequest req = new UserGetRequest();
 			req.setFields("seller_credit");
 			req.setNick(nick);
-			UserGetResponse response = client.execute(req, null);
+			UserGetResponse response = client.execute(req,
+					EnvManager.getTaobaoSession());
 			if (response.isSuccess()) {
 				return response.getUser();
 			} else {
@@ -1015,8 +1015,8 @@ public class TaobaoFetchUtil {
 			String nick, String sids) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeShopsConvertRequest request = new TaobaokeShopsConvertRequest();
 			request.setFields(TAOBAOKESHOP_FIELDS);
@@ -1039,8 +1039,8 @@ public class TaobaoFetchUtil {
 			ItemcatsGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ItemcatsGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -1058,8 +1058,8 @@ public class TaobaoFetchUtil {
 			ItempropvaluesGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ItempropvaluesGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -1077,8 +1077,8 @@ public class TaobaoFetchUtil {
 			ItempropsGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			ItempropsGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -1096,8 +1096,8 @@ public class TaobaoFetchUtil {
 			TaobaokeListurlGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			request.setOuterCode(EnvManager.getKeywordsOuterCode());
 			TaobaokeListurlGetResponse response = client.execute(request);
@@ -1117,8 +1117,8 @@ public class TaobaoFetchUtil {
 			TaobaokeCaturlGetRequest request) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType), EnvManager
-							.getSecret(appType), Constants.FORMAT_JSON,
+					EnvManager.getAppKey(appType),
+					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			TaobaokeCaturlGetResponse response = client.execute(request);
 			if (response.isSuccess()) {

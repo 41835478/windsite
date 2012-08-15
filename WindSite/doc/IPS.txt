@@ -1,3 +1,4 @@
+526089656
 yjjd2010,原来的http://www.xq0356.com
 
 
@@ -14,6 +15,7 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 //单IP封
 1.从这里【选择】用"淘宝帐号"登录http://www.alimama.com/membersvc/member/login.htm
 2.我的推广---api工具--新淘网分成版---立即使用
+
 以后请直接问问题，否则可能没时间及时回复
 
 如果未开店。只能线下开通,价格与线上价格一致

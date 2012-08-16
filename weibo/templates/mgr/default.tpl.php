@@ -41,7 +41,7 @@ $daydiff = (strtotime(XT_APPSTORE_DATELINE)-strtotime(date("Y-m-d")))/60/60/24;
 			}
 		?>),官方QQ群：<strong style="color:red;font-size:16px;">183216546</strong></p>
 	</div>
-	<div class="main-cont" style="padding-top:0px">
+	<div class="main-cont" style="padding-top:0px;clear:both;">
 		<?php TPL :: module('xintao/360',array('counts'=>$counts)); ?>
 		<?php TPL :: module('xintao/yingxiao/top10');?>
 		<h3 class="title">增值服务列表(提醒：订购增值服务后。需要<a href="<?php echo TB_CONTAINER;?>" target="_top">重新登录</a>管理员后台)</h3>

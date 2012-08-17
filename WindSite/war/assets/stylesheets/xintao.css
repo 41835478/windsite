@@ -12,7 +12,7 @@
 
 .grid-m .col-main .main-wrap .box .shop-chongzhi .bd {
 	border-width: 0px;
-	margin-left:-5px;
+	margin-left: -5px;
 }
 
 /*回顶部*/
@@ -310,10 +310,10 @@ a {
 	width: 150px;
 	height: 70px;
 	background-color: #fff;
-	filter: alpha(opacity =      
+	filter: alpha(opacity =       
 		                                                         
 		                                                         
-		                                                                  0);
+		                                                                   0);
 	opacity: 0;
 }
 
@@ -370,11 +370,11 @@ a {
 	-moz-border-radius-bottomright: 3px;
 	-webkit-border-top-right-radius: 3px;
 	-webkit-border-bottom-right-radius: 3px;
-	filter: progid :                                              
+	filter: progid:                                               
 		                                                        
 		                                   
 		                                   
-		         DXImageTransform.Microsoft.gradient (            
+		         DXImageTransform.Microsoft.gradient(             
 		
 		 
 		    
@@ -388,7 +388,7 @@ a {
 		  
 		       
 		                                                         
-		                                startColorStr =     
+		                                startColorStr=      
 		                             
 		 
 		   
@@ -396,7 +396,7 @@ a {
 		              
 		                            
 		                                                           
-		                                '#b2f2f2f2', EndColorStr =  
+		                                '#b2f2f2f2', EndColorStr=   
 		              
 		                              
 		 
@@ -514,11 +514,11 @@ a {
 	-moz-border-radius-bottomleft: 3px;
 	-webkit-border-top-left-radius: 3px;
 	-webkit-border-bottom-left-radius: 3px;
-	filter: progid :                                            
+	filter: progid:                                             
 		                                                        
 		                                   
 		                                   
-		       DXImageTransform.Microsoft.gradient (          
+		       DXImageTransform.Microsoft.gradient(           
 		
 		 
 		    
@@ -532,7 +532,7 @@ a {
 		  
 		       
 		                                                         
-		                              startColorStr =   
+		                              startColorStr=    
 		                             
 		 
 		   
@@ -540,7 +540,7 @@ a {
 		              
 		                            
 		                                                           
-		                              '#ccf9f9f9', EndColorStr =
+		                              '#ccf9f9f9', EndColorStr= 
 		              
 		                              
 		 
@@ -787,6 +787,11 @@ div.c-c {
 
 .grid-110 div.c-c {
 	top: 100px;
+}
+
+.shopComplexA .shop-list div.c-c {
+	text-aign: left;
+	overflow:hidden;
 }
 
 ul.pages {

@@ -27,6 +27,13 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+#2012-08-17
+iptables -I INPUT -s 157.55.18.22 -j DROP
+iptables -I INPUT -s 116.253.128.126 -j DROP
+iptables -I INPUT -s 171.107.25.132 -j DROP
+iptables -I INPUT -s 219.159.139.102 -j DROP
+iptables -I INPUT -s 180.137.234.199 -j DROP
+iptables -I INPUT -s 27.9.106.204 -j DROP
 #2012-08-02(阿里巴巴)
 iptables -I INPUT -s 121.0.19.248 -j DROP
 #2012-07-31

@@ -759,6 +759,7 @@ div.c-c {
 	border: 1px solid #CCC;
 	top: 150px;
 	left: 0px;
+	overflow:hidden;
 }
 
 .shop-tenorder div.c-c {
@@ -789,9 +790,9 @@ div.c-c {
 	top: 100px;
 }
 
-.shopComplexA .shop-list div.c-c {
-	text-aign: left;
-	overflow:hidden;
+.shop-complex-a .shop-list div.c-c {
+	left:-5px;
+	width:110px;
 }
 
 ul.pages {

@@ -92,30 +92,30 @@ function _synWowUserItemDetailsByIndex($i) {
 	}
 }
 function synWowDetail($nid, $seller) {
-	try {
-		$ret = F('top.traderatesSearch', -999, '商品分享评价', array (
-			'num_iid' => $nid,
-			'seller_nick' => $seller,
-			'page_no' => 1,
-			'page_size' => 20
-		), false);
-		$rst = $ret['rst'];
-		if (!empty ($rst) && isset ($rst['total_results']) && $rst['total_results'] > 0) {
-			$rates = $rst['trade_rates']['trade_rate'];
-			foreach ($rates as $rate) {
-				if (trim($rate['result']) == 'good') {
-					return array (
-						'nid' => $nid,
-						'archiveLogo' => '',
-						'archive' => $rate['nick'],
-						'weibo' => $rate['content'],
-						'share_nums' => $rst['total_results']
-					);
-				}
-			}
-		}
-	} catch (Exception $e) {
-	}
+//	try {
+//		$ret = F('top.traderatesSearch', -999, '商品分享评价', array (
+//			'num_iid' => $nid,
+//			'seller_nick' => $seller,
+//			'page_no' => 1,
+//			'page_size' => 20
+//		), false);
+//		$rst = $ret['rst'];
+//		if (!empty ($rst) && isset ($rst['total_results']) && $rst['total_results'] > 0) {
+//			$rates = $rst['trade_rates']['trade_rate'];
+//			foreach ($rates as $rate) {
+//				if (trim($rate['result']) == 'good') {
+//					return array (
+//						'nid' => $nid,
+//						'archiveLogo' => '',
+//						'archive' => $rate['nick'],
+//						'weibo' => $rate['content'],
+//						'share_nums' => $rst['total_results']
+//					);
+//				}
+//			}
+//		}
+//	} catch (Exception $e) {
+//	}
 	return array ();
 }
 function _synWowDetail($nid) {

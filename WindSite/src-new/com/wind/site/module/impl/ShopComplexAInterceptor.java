@@ -62,8 +62,8 @@ public class ShopComplexAInterceptor extends AbstractModuleInterceptor {
 					if (params.get("shopNick") != null) {
 						String shopNick = String
 								.valueOf(params.get("shopNick"));
-						Shop shop = TaobaoFetchUtil.getTaobaoShop(siteImpl
-								.getAppType(), shopNick);
+						Shop shop = TaobaoFetchUtil.getTaobaoShop(
+								siteImpl.getAppType(), shopNick);
 						if (shop == null) {
 							SystemException.handleMessageException("当前指定卖家["
 									+ shopNick + "]不存在");
@@ -117,24 +117,23 @@ public class ShopComplexAInterceptor extends AbstractModuleInterceptor {
 									List<TaobaokeItem> taokeItems = TaobaoFetchUtil
 											.itemsConvert(
 													siteImpl.getAppType(),
-													numiids, siteImpl.getNick());
+													numiids,
+													siteImpl.getNick(),
+													siteImpl.getPid());
 									if (StringUtils.isNotEmpty(sort)
 											&& taokeItems != null
 											&& taokeItems.size() > 0) {// 转换后排序
 										if ("volume:desc".equals(sort)) {
 											Collections
-													.sort(
-															taokeItems,
+													.sort(taokeItems,
 															new ItemVolumeDescComparator());
 										} else if ("price:asc".equals(sort)) {
 											Collections
-													.sort(
-															taokeItems,
+													.sort(taokeItems,
 															new ItemPriceAscComparator());
 										} else if ("price:desc".equals(sort)) {
 											Collections
-													.sort(
-															taokeItems,
+													.sort(taokeItems,
 															new ItemPriceDescComparator());
 										}
 									}
@@ -184,8 +183,8 @@ public class ShopComplexAInterceptor extends AbstractModuleInterceptor {
 						// 底部店铺
 						Long cid = 14L;
 						if (params.get("cid") != null) {
-							cid = Long.valueOf(String
-									.valueOf(params.get("cid")));// 所属分类
+							cid = Long
+									.valueOf(String.valueOf(params.get("cid")));// 所属分类
 						} else {
 							cid = shop.getCid();
 							if (cid == null) {
@@ -209,7 +208,8 @@ public class ShopComplexAInterceptor extends AbstractModuleInterceptor {
 								_params);
 						data.put("shops", shops);
 						if (params.get("picUrl") == null) {
-							params.put("picUrl",
+							params.put(
+									"picUrl",
 									"http://logo.taobao.com/shop-logo"
 											+ shop.getPicPath());
 						}

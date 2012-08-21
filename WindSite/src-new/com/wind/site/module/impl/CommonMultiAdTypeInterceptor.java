@@ -42,6 +42,7 @@ import com.wind.site.model.T_TaobaokeShop;
 import com.wind.site.model.YiqifaCategory;
 import com.wind.site.model.YiqifaMall;
 import com.wind.site.util.TaobaoFetchUtil;
+import com.wind.site.util.WindSiteRestUtil;
 
 public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 
@@ -60,7 +61,7 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 			@SuppressWarnings("unused")
 			Long mId = Long.valueOf(String.valueOf(params.get("MODULEID")));
 			Boolean isDesigner = (Boolean) params.get("isDesigner");
-			@SuppressWarnings( { "unused" })
+			@SuppressWarnings({ "unused" })
 			String page = String.valueOf(params.get("PAGEID"));
 			@SuppressWarnings("unused")
 			SiteImpl impl = (SiteImpl) params.get("SITEIMPL");
@@ -102,7 +103,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				request.setNick(String.valueOf(params.get("nick")));
 				request.setPageSize(Long.valueOf(itemnum));
 				TaobaokeItemsGetResponse response = TaobaoFetchUtil
-						.searchItems("0", request);
+						.searchItems("0", request,
+								String.valueOf(params.get("pid")));
 				if (response != null) {// 获取商品结果并转换为本次对象
 					List<T_TaobaokeItem> items = TaobaoFetchUtil
 							.covertItems(response.getTaobaokeItems());
@@ -119,10 +121,9 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 					}
 				}
 				try {
-					params
-							.put("moreUrl", "/search?q="
-									+ URLEncoder.encode(q, "utf-8") + "&cid="
-									+ cid + "&start_price=" + sprice
+					params.put("moreUrl",
+							"/search?q=" + URLEncoder.encode(q, "utf-8")
+									+ "&cid=" + cid + "&start_price=" + sprice
 									+ "&end_price=" + eprice);
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
@@ -176,7 +177,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 							}
 							List<TaobaokeItem> taokeItems = TaobaoFetchUtil
 									.itemsConvert(siteImpl.getAppType(),
-											numiids, siteImpl.getNick());
+											numiids, siteImpl.getNick(),
+											siteImpl.getPid());
 							if (StringUtils.isNotEmpty(sort)
 									&& taokeItems != null
 									&& taokeItems.size() > 0) {// 转换后排序
@@ -207,12 +209,15 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 								}
 							}
 							try {
-								params.put("moreUrl", "/search?q="
-										+ URLEncoder.encode(q, "utf-8")
-										+ "&nicks="
-										+ URLEncoder.encode(nick, "utf-8")
-										+ "&start_price=" + sprice
-										+ "&end_price=" + eprice);
+								params.put(
+										"moreUrl",
+										"/search?q="
+												+ URLEncoder.encode(q, "utf-8")
+												+ "&nicks="
+												+ URLEncoder.encode(nick,
+														"utf-8")
+												+ "&start_price=" + sprice
+												+ "&end_price=" + eprice);
 							} catch (UnsupportedEncodingException e) {
 								e.printStackTrace();
 							}
@@ -276,7 +281,6 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				}
 				shopGetRequest.setFields(TaobaoFetchUtil.TAOBAOKESHOP_FIELDS);
 				shopGetRequest.setNick(String.valueOf(params.get("nick")));
-
 				if (!"null".equals(ecommission) && !"null".equals(scommission)) {
 					try {
 						Integer s = Integer.valueOf(scommission);
@@ -295,7 +299,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				shopGetRequest.setPageNo(1L);
 				shopGetRequest.setPageSize(Long.valueOf(itemnum));
 				TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil
-						.shopsGet(siteImpl.getAppType(), shopGetRequest);
+						.shopsGet(siteImpl.getAppType(), shopGetRequest,
+								String.valueOf(params.get("pid")));
 				if (shopGetResponse != null) {
 					if (shopGetResponse.isSuccess()) {
 						Long total = shopGetResponse.getTotalResults();
@@ -348,8 +353,9 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 					String hql = "select s from T_TaobaokeShop s,W_ShopFavorite sf where sf.gid=:gid and s.userId=sf.user_id and s.isValid=:isValid and s.sid is not null order by s."
 							+ sort;
 					List<T_TaobaokeShop> shops = (List<T_TaobaokeShop>) service
-							.findByHql(new Page<T_TaobaokeShop>(1, Integer
-									.parseInt(itemnum)), hql, temp);// 查询指定店铺分组的店铺(排序)
+							.findByHql(
+									new Page<T_TaobaokeShop>(1, Integer
+											.parseInt(itemnum)), hql, temp);// 查询指定店铺分组的店铺(排序)
 					params.put("itemnum", Integer.parseInt(itemnum));
 					params.put("data", shops);
 				}
@@ -402,8 +408,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 			String countStr = String.valueOf(params.get("count"));// 显示数量
 			List<DianPu> shops = new ArrayList<DianPu>();
 			SimpleExpression isMallFilter = null, catFilter = null;
-			DianPuCategory root = service.get(DianPuCategory.class, Long
-					.valueOf(rootStr));// 根分类
+			DianPuCategory root = service.get(DianPuCategory.class,
+					Long.valueOf(rootStr));// 根分类
 			if (root == null) {
 				SystemException.handleMessageException("指定的淘店铺一级分类不存在");
 			}
@@ -421,8 +427,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 			String more = "/dianpu/";
 			if (StringUtils.isNotEmpty(catStr) && !"null".equals(catStr)) {// 如果指定二级分类
 				catFilter = R.eq("secCat", Long.valueOf(catStr));
-				DianPuCategory secCat = service.get(DianPuCategory.class, Long
-						.valueOf(catStr));
+				DianPuCategory secCat = service.get(DianPuCategory.class,
+						Long.valueOf(catStr));
 				if (secCat != null) {
 					more += root.getName() + "/" + secCat.getName() + ".html";
 				} else {
@@ -462,9 +468,9 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 					}
 				}
 				List<YiqifaMall> malls = service.findAllByCriterionAndOrder(
-						new Page<YiqifaMall>(1, count), YiqifaMall.class, Order
-								.desc("id"), R.eq("cid", Long.valueOf(cid)), R
-								.eq("isValid", true));
+						new Page<YiqifaMall>(1, count), YiqifaMall.class,
+						Order.desc("id"), R.eq("cid", Long.valueOf(cid)),
+						R.eq("isValid", true));
 				params.put("data", malls);
 				params.put("extra", extra);
 			} else if ("custom".equals(dataType)) {// 自定义挑选

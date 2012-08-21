@@ -58,7 +58,7 @@ public class ItemDetailCommand implements ICommand {
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			getRequest.setNumIids(numIid + "");
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(null, getRequest);
+					.getItemsDetail(null, getRequest, null);
 			if (getResponse == null) {
 				return;
 			}
@@ -74,8 +74,8 @@ public class ItemDetailCommand implements ICommand {
 			deployItemAndComments();
 			Item item = detail.getItem();
 			// 记录日志
-			ItemCacheLog log = pageService.get(ItemCacheLog.class, item
-					.getNumIid());
+			ItemCacheLog log = pageService.get(ItemCacheLog.class,
+					item.getNumIid());
 			if (log == null) {
 				log = new ItemCacheLog();
 				log.setDeploy(new Date());
@@ -112,14 +112,14 @@ public class ItemDetailCommand implements ICommand {
 		Item item = detail.getItem();
 		List<TradeRate> rates = new ArrayList<TradeRate>();
 		Long totalResults = 0L;
-//		if (StringUtils.isNotEmpty(item.getNick())) {// 详情
-//			TraderatesSearchResponse response = TaobaoFetchUtil
-//					.traderatesSearch(item.getNumIid(), item.getNick(), 1L, 40L);
-//			if (response != null) {
-//				totalResults = response.getTotalResults();
-//				rates = response.getTradeRates();
-//			}
-//		}
+		// if (StringUtils.isNotEmpty(item.getNick())) {// 详情
+		// TraderatesSearchResponse response = TaobaoFetchUtil
+		// .traderatesSearch(item.getNumIid(), item.getNick(), 1L, 40L);
+		// if (response != null) {
+		// totalResults = response.getTotalResults();
+		// rates = response.getTradeRates();
+		// }
+		// }
 		pageService.deployItemDetailAndComments(fcg, detail, totalResults,
 				rates);
 	}

@@ -38,13 +38,23 @@ public class ShopDetailCommand implements ICommand {
 
 	private String sellerNick;
 
+	private String pid;
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
 	private Long sid;
 
 	@Override
 	public void execute(ICommandService service) {
 		try {
 			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
-					"fxy060608", sid + "");
+					"fxy060608", sid + "", null);
 			if (tShops != null && tShops.size() == 1) {
 				TaobaokeShop tShop = tShops.get(0);
 				Shop shop = TaobaoFetchUtil.getTaobaoShop(null, sellerNick);
@@ -89,7 +99,7 @@ public class ShopDetailCommand implements ICommand {
 									numiids += i.getNumIid();
 								}
 								taokeItems = TaobaoFetchUtil.itemsConvert(null,
-										numiids, sellerNick);
+										numiids, sellerNick, pid);
 							}
 						}
 					}

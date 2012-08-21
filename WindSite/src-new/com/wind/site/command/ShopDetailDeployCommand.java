@@ -57,6 +57,7 @@ public class ShopDetailDeployCommand {
 					if (!CommandExecutor.getCachecommands().containsKey(key)) {// 如果不在队列中
 						ShopDetailCommand command = new ShopDetailCommand();
 						command.setSellerNick(log.getNick());
+						//command.setPid(log.get)
 						command.setSid(log.getId());
 						command.setFcg(fcg);
 						command.setPageService(pageService);

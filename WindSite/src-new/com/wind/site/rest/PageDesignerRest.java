@@ -151,9 +151,12 @@ public class PageDesignerRest {
 		String pageId = request.getParameter("page");
 		String isIndex = request.getParameter("isIndex");
 		Map<String, Object> result = new HashMap<String, Object>();
-		List<UserPage> indexPages = pageService.findAllByCriterion(
-				UserPage.class, R.eq("isIndex", true), R.eq("site_id",
-						EnvManager.getUser().getSites().get(0).getId()));
+		List<UserPage> indexPages = pageService
+				.findAllByCriterion(
+						UserPage.class,
+						R.eq("isIndex", true),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
+								.getId()));
 		if ("true".equals(isIndex)) {// 如果是创建首页
 			if (indexPages != null && indexPages.size() > 0) {
 				SystemException.handleMessageException("您已经创建了站点首页");
@@ -180,8 +183,8 @@ public class PageDesignerRest {
 			}
 		}
 		List<UserPage> pages = pageService.findAllByCriterion(
-				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class, R
-						.eq("user_id", EnvManager.getUser().getUser_id()));
+				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 
 		result.put("templates", pageService.findAllByCriterionAndOrder(
 				PageTemplate.class, Order.asc("sortOrder")));
@@ -462,9 +465,12 @@ public class PageDesignerRest {
 		if (StringUtils.isEmpty(layout) && StringUtils.isEmpty(template)) {
 			SystemException.handleMessageException("未指定页面模板或者布局");
 		}
-		List<UserPage> indexPages = pageService.findAllByCriterion(
-				UserPage.class, R.eq("isIndex", true), R.eq("site_id",
-						EnvManager.getUser().getSites().get(0).getId()));
+		List<UserPage> indexPages = pageService
+				.findAllByCriterion(
+						UserPage.class,
+						R.eq("isIndex", true),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
+								.getId()));
 		if ("true".equals(isIndex)) {// 如果创建的是首页
 			if (indexPages == null || indexPages.size() > 0) {
 				SystemException.handleMessageException("您已经创建站点首页");
@@ -539,9 +545,10 @@ public class PageDesignerRest {
 		if (StringUtils.isNotEmpty(pageId)) {
 			page = pageService.get(UserPage.class, pageId);
 		} else {
-			page = pageService.findByCriterion(UserPage.class, R.eq("site_id",
-					EnvManager.getUser().getSites().get(0).getId()), R.eq(
-					"isIndex", true));
+			page = pageService.findByCriterion(
+					UserPage.class,
+					R.eq("site_id", EnvManager.getUser().getSites().get(0)
+							.getId()), R.eq("isIndex", true));
 		}
 		if (page == null) {
 			SystemException.handleMessageException("页面不存在");
@@ -568,8 +575,8 @@ public class PageDesignerRest {
 				st.setUser_id(((UserPage) page).getUser_id());
 				if (pageTheme != null) {
 					T_UserSubscribe usb = pageService.get(
-							T_UserSubscribe.class, ((UserPage) page)
-									.getUser_id());// 查询当前会员的订购
+							T_UserSubscribe.class,
+							((UserPage) page).getUser_id());// 查询当前会员的订购
 					if (usb.getVersionNo() == 1) {
 						SystemException
 								.handleMessageException("您使用的是新淘网淘客普及版，无法使用个性化装修模板，请升级为返利版(月租型)，返利版(分成型)或者卖家版");
@@ -583,8 +590,8 @@ public class PageDesignerRest {
 			} else {
 				if (pageTheme != null) {
 					T_UserSubscribe usb = pageService.get(
-							T_UserSubscribe.class, ((UserPage) page)
-									.getUser_id());// 查询当前会员的订购
+							T_UserSubscribe.class,
+							((UserPage) page).getUser_id());// 查询当前会员的订购
 					if (usb.getVersionNo() == 1) {
 						SystemException
 								.handleMessageException("您使用的是新淘网淘客普及版，无法使用个性化装修模板，请升级为返利版(月租型)，返利版(分成型)或者卖家版");
@@ -653,17 +660,17 @@ public class PageDesignerRest {
 	public String indexSet(HttpServletRequest request,
 			HttpServletResponse response) {
 		String id = request.getParameter("page");
-		UserPage oldIndex = pageService.findByCriterion(UserPage.class, R.eq(
-				"user_id", EnvManager.getUser().getUser_id()), R.eq("isIndex",
-				true));
+		UserPage oldIndex = pageService.findByCriterion(UserPage.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.eq("isIndex", true));
 		if (oldIndex == null) {
 			pageService.indexNewSet(id);// 当首页为空时，设置新的
 		} else {// 切换
 			pageService.indexSet(id);
 		}
-		UserPage newIndex = pageService.findByCriterion(UserPage.class, R.eq(
-				"user_id", EnvManager.getUser().getUser_id()), R.eq("isIndex",
-				true));
+		UserPage newIndex = pageService.findByCriterion(UserPage.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.eq("isIndex", true));
 		if (newIndex == null) {
 			SystemException.handleMessageException("首页 设置失败");
 		}
@@ -718,8 +725,9 @@ public class PageDesignerRest {
 		if (StringUtils.isNotEmpty(id)) {
 			page = pageService.get(UserPage.class, id);
 		} else {
-			page = pageService.findByCriterion(UserPage.class, R.eq("user_id",
-					EnvManager.getUser().getUser_id()), R.eq("isIndex", true));
+			page = pageService.findByCriterion(UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id()),
+					R.eq("isIndex", true));
 		}
 		if (page == null) {
 			SystemException.handleMessageException("页面不存在");
@@ -729,25 +737,27 @@ public class PageDesignerRest {
 			SystemException.handleMessageException("您无权操作此页面");
 		}
 		if (page.getIsIndex()) {
-			SiteTheme theme = pageService.get(SiteTheme.class, page
-					.getSite_id());
+			SiteTheme theme = pageService.get(SiteTheme.class,
+					page.getSite_id());
 			if (theme != null && theme.getTheme() != null) {
-				PageTheme pt = pageService.get(PageTheme.class, theme
-						.getTheme());
+				PageTheme pt = pageService.get(PageTheme.class,
+						theme.getTheme());
 				result.put("theme", pt);
 			}
 			result.put("siteTheme", theme);
 		} else {
 			if (StringUtils.isNotEmpty(page.getCss())) {
-				PageTheme pt = pageService.get(PageTheme.class, Long
-						.valueOf(page.getCss()));
+				PageTheme pt = pageService.get(PageTheme.class,
+						Long.valueOf(page.getCss()));
 				result.put("theme", pt);
 			}
 		}
-		result.put("pages", pageService.findAllByCriterion(
-				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class, R
-						.eq("user_id", ((UserPage) page).getUser_id()), R.eq(
-						"site_id", EnvManager.getUser().getSites().get(0)
+		result.put("pages",
+				pageService.findAllByCriterion(
+						new com.wind.core.dao.Page<UserPage>(1, 10),
+						UserPage.class,
+						R.eq("user_id", ((UserPage) page).getUser_id()),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
 								.getId())));
 		result.put("mode", "user");
 		result.put("page", page);
@@ -770,8 +780,9 @@ public class PageDesignerRest {
 		if (StringUtils.isNotEmpty(id)) {
 			page = pageService.get(UserPage.class, id);
 		} else {
-			page = pageService.findByCriterion(UserPage.class, R.eq("user_id",
-					EnvManager.getUser().getUser_id()), R.eq("isIndex", true));
+			page = pageService.findByCriterion(UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id()),
+					R.eq("isIndex", true));
 		}
 		if (page == null) {
 			SystemException.handleMessageException("页面不存在");
@@ -780,24 +791,26 @@ public class PageDesignerRest {
 			SystemException.handleMessageException("您无权操作此页面");
 		}
 		if (page.getIsIndex()) {
-			SiteTheme theme = pageService.get(SiteTheme.class, page
-					.getSite_id());
+			SiteTheme theme = pageService.get(SiteTheme.class,
+					page.getSite_id());
 			if (theme != null && theme.getTheme() != null) {
-				PageTheme pt = pageService.get(PageTheme.class, theme
-						.getTheme());
+				PageTheme pt = pageService.get(PageTheme.class,
+						theme.getTheme());
 				result.put("theme", pt);
 			}
 		} else {
 			if (StringUtils.isNotEmpty(page.getCss())) {
-				PageTheme pt = pageService.get(PageTheme.class, Long
-						.valueOf(page.getCss()));
+				PageTheme pt = pageService.get(PageTheme.class,
+						Long.valueOf(page.getCss()));
 				result.put("theme", pt);
 			}
 		}
-		result.put("pages", pageService.findAllByCriterion(
-				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class, R
-						.eq("user_id", ((UserPage) page).getUser_id()), R.eq(
-						"site_id", EnvManager.getUser().getSites().get(0)
+		result.put("pages",
+				pageService.findAllByCriterion(
+						new com.wind.core.dao.Page<UserPage>(1, 10),
+						UserPage.class,
+						R.eq("user_id", ((UserPage) page).getUser_id()),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
 								.getId())));
 		result.put("mode", "user");
 		String pageNoStr = request.getParameter("pageNo");
@@ -860,8 +873,8 @@ public class PageDesignerRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Site site = EnvManager.getUser().getSites().get(0);
 		List<UserPage> indexPages = pageService.findAllByCriterion(
-				UserPage.class, R.eq("isIndex", true), R.eq("site_id", site
-						.getId()));
+				UserPage.class, R.eq("isIndex", true),
+				R.eq("site_id", site.getId()));
 		if (indexPages == null || indexPages.size() == 0) {// 如果不存在首页，则定向至想到页面
 			if (pageService.countPages(site.getId()) == 0) {
 				result.put("site", site);
@@ -887,10 +900,13 @@ public class PageDesignerRest {
 		}
 		com.wind.core.dao.Page<UserPage> daoPage = new com.wind.core.dao.Page<UserPage>(
 				pageNo, 15);
-		List<UserPage> pages = pageService.findAllByCriterion(daoPage,
-				UserPage.class, R.eq("user_id", EnvManager.getUser()
-						.getUser_id()), R.eq("site_id", EnvManager.getUser()
-						.getSites().get(0).getId()));
+		List<UserPage> pages = pageService
+				.findAllByCriterion(
+						daoPage,
+						UserPage.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
+								.getId()));
 		Map<String, Date> cache = WindSiteDelay.getCacheObjMap();
 		if (pages != null && pages.size() > 0 && cache != null
 				&& cache.size() > 0) {
@@ -938,12 +954,15 @@ public class PageDesignerRest {
 			if (page == null) {
 				page = pageService.createPageDetail(EnvManager.getUser());// 创建宝贝详情页
 			}
-			result.put("pages", pageService.findAllByCriterion(UserPage.class,
-					R.eq("user_id", EnvManager.getUser().getUser_id()), R.eq(
-							"site_id", EnvManager.getUser().getSites().get(0)
-									.getId())));
-			result.put("layout", pageService.findByCriterion(
-					PageDetailLayout.class, R.eq("site_id", site.getId())));
+			result.put("pages", pageService.findAllByCriterion(
+					UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id()),
+					R.eq("site_id", EnvManager.getUser().getSites().get(0)
+							.getId())));
+			result.put(
+					"layout",
+					pageService.findByCriterion(PageDetailLayout.class,
+							R.eq("site_id", site.getId())));
 			return new ModelAndView("site/designer/pageDetailManager", result);
 		} else {
 			SystemException.handleException("102", "您需要升级版本才可以设计宝贝详情页");
@@ -970,14 +989,17 @@ public class PageDesignerRest {
 			if (page == null) {
 				page = pageService.createPageSearch(EnvManager.getUser());// 创建搜索列表页
 			}
-			result.put("pages", pageService.findAllByCriterion(UserPage.class,
-					R.eq("user_id", EnvManager.getUser().getUser_id()), R.eq(
-							"site_id", EnvManager.getUser().getSites().get(0)
-									.getId())));
-			result.put("siteCommission", pageService.load(SiteCommission.class,
-					site.getId()));
-			result.put("layout", pageService.findByCriterion(
-					PageSearchLayout.class, R.eq("site_id", site.getId())));
+			result.put("pages", pageService.findAllByCriterion(
+					UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id()),
+					R.eq("site_id", EnvManager.getUser().getSites().get(0)
+							.getId())));
+			result.put("siteCommission",
+					pageService.load(SiteCommission.class, site.getId()));
+			result.put(
+					"layout",
+					pageService.findByCriterion(PageSearchLayout.class,
+							R.eq("site_id", site.getId())));
 			return new ModelAndView("site/designer/pageSearchManager", result);
 		} else {
 			SystemException.handleException("102", "您需要升级版本才可以设计搜索列表页");
@@ -1009,8 +1031,8 @@ public class PageDesignerRest {
 			Site site = EnvManager.getUser().getSites().get(0);
 			Layout layout = null;
 			if ("detail".equals(type)) {
-				layout = pageService.findByCriterion(PageDetailLayout.class, R
-						.eq("site_id", site.getId()));
+				layout = pageService.findByCriterion(PageDetailLayout.class,
+						R.eq("site_id", site.getId()));
 				if (layout == null) {
 					SystemException.handleMessageException("您尚未创建宝贝详情页设计");
 				}
@@ -1025,8 +1047,8 @@ public class PageDesignerRest {
 							EnvManager.getUser().getUser_id(), impl);
 				}
 			} else if ("search".equals(type)) {
-				layout = pageService.findByCriterion(PageSearchLayout.class, R
-						.eq("site_id", site.getId()));
+				layout = pageService.findByCriterion(PageSearchLayout.class,
+						R.eq("site_id", site.getId()));
 				if (layout == null) {
 					SystemException.handleMessageException("您尚未创建搜索列表页设计");
 				}
@@ -1109,9 +1131,13 @@ public class PageDesignerRest {
 		if (!page.getUser_id().equals(EnvManager.getUser().getUser_id())) {
 			SystemException.handleMessageException("您无权操作此页面");
 		}
-		result.put("pages", pageService.findAllByCriterion(UserPage.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id()), R.eq(
-				"site_id", EnvManager.getUser().getSites().get(0).getId())));
+		result.put(
+				"pages",
+				pageService.findAllByCriterion(
+						UserPage.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()),
+						R.eq("site_id", EnvManager.getUser().getSites().get(0)
+								.getId())));
 		result.put("mode", "user");
 		PageMeta meta = pageService.get(PageMeta.class, id);
 		PageModel model = PageUtils.convertPageModel(meta.getMetadata());
@@ -1158,12 +1184,10 @@ public class PageDesignerRest {
 					if (!EnvManager.getUser().getRole().equals("admin")) {// 如果非管理员
 						SystemException.handleMessageException("您无权访问此页面");
 					} else {// 如果是管理员
-						User user = pageService.findByCriterion(User.class, R
-								.eq("user_id", page.getUser_id()));
-						user
-								.setSites(pageService.findAllByCriterion(
-										Site.class, R.eq("user_id", page
-												.getUser_id())));// 手动设置站点
+						User user = pageService.findByCriterion(User.class,
+								R.eq("user_id", page.getUser_id()));
+						user.setSites(pageService.findAllByCriterion(
+								Site.class, R.eq("user_id", page.getUser_id())));// 手动设置站点
 						T_UserSubscribe tus = pageService.get(
 								T_UserSubscribe.class, user.getUser_id());
 						user.setUsb(tus);
@@ -1178,20 +1202,20 @@ public class PageDesignerRest {
 			}
 		} else {
 			List<UserPage> indexPages = pageService.findAllByCriterion(
-					UserPage.class, R.eq("isIndex", true), R.eq("site_id", site
-							.getId()));
+					UserPage.class, R.eq("isIndex", true),
+					R.eq("site_id", site.getId()));
 			if (indexPages != null && indexPages.size() > 0) {
 				if (indexPages.size() == 1) {
 					page = indexPages.get(0);
 				} else if (indexPages.size() > 1) {
 					for (int i = 1; i < indexPages.size(); i++) {// 删除所有多余的首页及相关布局，容器，模块
 						UserPage delPage = indexPages.get(i);
-						pageService.deleteAll(PageModule.class, R.eq("page",
-								delPage.getId()));
-						pageService.deleteAll(PageRegion.class, R.eq("page",
-								delPage.getId()));
-						pageService.deleteAll(PageLayout.class, R.eq("page",
-								delPage.getId()));
+						pageService.deleteAll(PageModule.class,
+								R.eq("page", delPage.getId()));
+						pageService.deleteAll(PageRegion.class,
+								R.eq("page", delPage.getId()));
+						pageService.deleteAll(PageLayout.class,
+								R.eq("page", delPage.getId()));
 						pageService.delete(UserPage.class, delPage.getId());
 					}
 				}
@@ -1222,8 +1246,8 @@ public class PageDesignerRest {
 		result.put("cats", EnvManager.getRootCats());// 跟分类
 		result.put("page", page);
 		result.put("pages", pageService.findAllByCriterion(
-				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class, R
-						.eq("user_id", page.getUser_id())));
+				new com.wind.core.dao.Page<UserPage>(1, 10), UserPage.class,
+				R.eq("user_id", page.getUser_id())));
 		result.put("mode", "user");// 用户
 		SiteTheme theme = pageService.get(SiteTheme.class, page.getSite_id());
 		result.put("theme", theme);
@@ -1260,8 +1284,8 @@ public class PageDesignerRest {
 			result.put("cats", EnvManager.getRootCats());// 跟分类
 			result.put("pages", pageService.findAllByCriterion(
 					new com.wind.core.dao.Page<UserPage>(1, 10),
-					UserPage.class, R.eq("user_id", EnvManager.getUser()
-							.getUser_id())));
+					UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id())));
 			result.put("mode", "detail");// 用户
 			result.put("theme", theme);
 			result.put("page", page);
@@ -1281,7 +1305,8 @@ public class PageDesignerRest {
 		getRequest.setSort("commissionNum_desc");
 		getRequest.setNick(EnvManager.getUser().getNick());
 		TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-				EnvManager.getUser().getAppType(), getRequest);
+				EnvManager.getUser().getAppType(), getRequest, EnvManager
+						.getUser().getPid());
 		if (getResponse != null) {// 查询女装下第一个商品
 			List<TaobaokeItem> items = getResponse.getTaobaokeItems();
 			if (items != null && items.size() == 1) {
@@ -1292,7 +1317,7 @@ public class PageDesignerRest {
 				getDetailRequest.setOuterCode(EnvManager.getItemsOuterCode());
 				TaobaokeItemsDetailGetResponse getDetailResponse = TaobaoFetchUtil
 						.getItemsDetail(EnvManager.getUser().getAppType(),
-								getDetailRequest);// 转换女装下第一个商品
+								getDetailRequest, EnvManager.getUser().getPid());// 转换女装下第一个商品
 				if (getDetailResponse == null) {
 					SystemException.handleMessageException("该商品已移除或者被卖家下架");
 				}
@@ -1336,8 +1361,8 @@ public class PageDesignerRest {
 			result.put("cats", EnvManager.getRootCats());// 跟分类
 			result.put("pages", pageService.findAllByCriterion(
 					new com.wind.core.dao.Page<UserPage>(1, 10),
-					UserPage.class, R.eq("user_id", EnvManager.getUser()
-							.getUser_id())));
+					UserPage.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id())));
 			result.put("mode", "search");// 用户
 			result.put("theme", theme);
 			result.put("page", page);
@@ -1447,8 +1472,8 @@ public class PageDesignerRest {
 			if (StringUtils.isEmpty(region)) {
 				SystemException.handleMessageException("未指定要添加模块的容器");
 			}
-			PageRegion pageRegion = pageService.get(PageRegion.class, Long
-					.valueOf(region));
+			PageRegion pageRegion = pageService.get(PageRegion.class,
+					Long.valueOf(region));
 			if (pageRegion == null) {
 				SystemException.handleMessageException("指定的容器不存在");
 			}
@@ -1627,20 +1652,21 @@ public class PageDesignerRest {
 		String content = "";
 		switch (t) {
 		case 0:// 自定义页面内容
-			content = PageUtils.createPageFtl(siteService, meta, request
-					.getParameter("user_id"), request.getParameter("nick"),
-					request.getParameter("pid"), true);
+			content = PageUtils.createPageFtl(siteService, meta,
+					request.getParameter("user_id"),
+					request.getParameter("nick"), request.getParameter("pid"),
+					true);
 			break;
 		case 1:// 详情页
 			content = PageUtils.createUserPageDetailFtl(siteService, meta,
-					request.getParameter("user_id"), request
-							.getParameter("nick"), request.getParameter("pid"),
+					request.getParameter("user_id"),
+					request.getParameter("nick"), request.getParameter("pid"),
 					true);
 			break;
 		case 2:// 搜索列表页
 			content = PageUtils.createUserPageSearchFtl(siteService, meta,
-					request.getParameter("user_id"), request
-							.getParameter("nick"), request.getParameter("pid"),
+					request.getParameter("user_id"),
+					request.getParameter("nick"), request.getParameter("pid"),
 					true);
 			break;
 		}
@@ -1690,8 +1716,8 @@ public class PageDesignerRest {
 			template = new Template("region_" + pageRegion.getId(),
 					new StringReader(PageUtils.createPageRegionContent(modules,
 							EnvManager.getUser().getNick(), EnvManager
-									.getUser().getPid(), true)), fcg
-							.getConfiguration());
+									.getUser().getPid(), true)),
+					fcg.getConfiguration());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "";
@@ -1723,11 +1749,13 @@ public class PageDesignerRest {
 			HttpServletResponse response) {
 		String cid = request.getParameter("cid");
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("groups", pageService.findAllByCriterion(ItemGroup.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id())));
+		result.put(
+				"groups",
+				pageService.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id())));
 		if (StringUtils.isNotEmpty(cid)) {// 获取指定分类信息
-			T_ItemCat cat = pageService.findByCriterion(T_ItemCat.class, R.eq(
-					"cid", cid));
+			T_ItemCat cat = pageService.findByCriterion(T_ItemCat.class,
+					R.eq("cid", cid));
 			if (cat != null) {
 				result.put("cat", cat);
 			}
@@ -1768,12 +1796,14 @@ public class PageDesignerRest {
 	public ModelAndView pageModuleCommonComplexA(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("itemGroups", pageService.findAllByCriterion(
-				ItemGroup.class, R.eq("user_id", EnvManager.getUser()
-						.getUser_id())));
-		result.put("shopGroups", pageService.findAllByCriterion(
-				ShopGroup.class, R.eq("user_id", EnvManager.getUser()
-						.getUser_id())));
+		result.put(
+				"itemGroups",
+				pageService.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id())));
+		result.put(
+				"shopGroups",
+				pageService.findAllByCriterion(ShopGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id())));
 		result.put("cats", EnvManager.getShopCats());
 		return new ModelAndView("assets/js/page/module/CommonComplexAConfig",
 				result);
@@ -1929,8 +1959,10 @@ public class PageDesignerRest {
 	public ModelAndView pageModuleConfigShopBrandByBid(@PathVariable Long id,
 			HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("brands", pageService.findAllByCriterionAndOrder(
-				T_MallBrand.class, Order.asc("sortOrder"), R.eq("cid", id)));
+		result.put(
+				"brands",
+				pageService.findAllByCriterionAndOrder(T_MallBrand.class,
+						Order.asc("sortOrder"), R.eq("cid", id)));
 		return new ModelAndView("assets/js/page/module/CommonBrandConfigExtra",
 				result);
 	}
@@ -1946,8 +1978,10 @@ public class PageDesignerRest {
 	public ModelAndView pageModuleConfigShopClass(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("classes", ucService.findAllByCriterion(UCClass.class, R.eq(
-				"uid", EnvManager.getUser().getUc_id())));
+		result.put(
+				"classes",
+				ucService.findAllByCriterion(UCClass.class,
+						R.eq("uid", EnvManager.getUser().getUc_id())));
 		return new ModelAndView("assets/js/page/module/ShopClassConfig", result);
 	}
 
@@ -1962,8 +1996,10 @@ public class PageDesignerRest {
 	public ModelAndView pageModuleConfigShopBlog(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("classes", ucService.findAllByCriterion(UCClass.class, R.eq(
-				"uid", EnvManager.getUser().getUc_id())));
+		result.put(
+				"classes",
+				ucService.findAllByCriterion(UCClass.class,
+						R.eq("uid", EnvManager.getUser().getUc_id())));
 		return new ModelAndView("assets/js/page/module/ShopBlogConfig", result);
 	}
 
@@ -1994,8 +2030,10 @@ public class PageDesignerRest {
 	public ModelAndView pageModuleConfigCommonShop(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("groups", pageService.findAllByCriterion(ShopGroup.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id())));
+		result.put(
+				"groups",
+				pageService.findAllByCriterion(ShopGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id())));
 		result.put("cats", EnvManager.getShopCats());
 		result.put("layout", request.getParameter("layout"));
 		result.put("module", request.getParameter("module"));
@@ -2033,15 +2071,17 @@ public class PageDesignerRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String module = request.getParameter("module");
 		if ("shopDianPu".equals(module)) {
-			result.put("dianpuCats", new Gson().toJson(EnvManager
-					.getDianpuCats(),
+			result.put("dianpuCats", new Gson().toJson(
+					EnvManager.getDianpuCats(),
 					new TypeToken<Map<String, List<DianPuCategory>>>() {
 					}.getType()));
 			return new ModelAndView("assets/js/page/module/CommonDianPuConfig",
 					result);
 		} else {
-			result.put("rootCats", pageService.findAllByCriterion(
-					DianPuCategory.class, R.isNull("parent")));
+			result.put(
+					"rootCats",
+					pageService.findAllByCriterion(DianPuCategory.class,
+							R.isNull("parent")));
 			result.put("dianpuCats", EnvManager.getDianpuCats());
 			return new ModelAndView(
 					"assets/js/page/module/CommonDianPuListConfig", result);
@@ -2220,8 +2260,8 @@ public class PageDesignerRest {
 	}
 
 	private void getCats(List<Map<String, List<T_ItemCat>>> cats, String cid) {
-		T_ItemCat cat = pageService.findByCriterion(T_ItemCat.class, R.eq(
-				"cid", cid));
+		T_ItemCat cat = pageService.findByCriterion(T_ItemCat.class,
+				R.eq("cid", cid));
 		if (cat != null) {
 			if (StringUtils.isNotEmpty(cat.getParentCid())
 					&& !"0".equals(cat.getParentCid())) {// 如果有父节点

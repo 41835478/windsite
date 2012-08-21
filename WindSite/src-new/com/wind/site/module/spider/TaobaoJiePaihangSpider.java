@@ -81,15 +81,18 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 						Map<String, Object> shop = null;
 						for (int j = 0; j < 10; j++) {
 							shop = new HashMap<String, Object>();
-							LinkTag a = (LinkTag) lis.elementAt(j)
-									.getChildren().extractAllNodesThatMatch(
+							LinkTag a = (LinkTag) lis
+									.elementAt(j)
+									.getChildren()
+									.extractAllNodesThatMatch(
 											new TagNameFilter("a"), true)
 									.elementAt(0);
 							String shopTitle = a.getAttribute("title");
 							String sid = a.getLink().split("=")[1];
 							String img = "", error = "";
 							if (j == 0) {
-								ImageTag tag = (ImageTag) a.getChildren()
+								ImageTag tag = (ImageTag) a
+										.getChildren()
 										.extractAllNodesThatMatch(
 												new TagNameFilter("img"), true)
 										.elementAt(0);
@@ -100,7 +103,7 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 							try {
 								List<TaobaokeShop> _shops = TaobaoFetchUtil
 										.convertTaobaoShop(null, "fxy060608",
-												sid);
+												sid, null);
 								if (_shops == null || _shops.size() == 0) {
 									continue;// 跳出继续下一个
 								}
@@ -117,7 +120,7 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 						if (shops.size() < 10) {
 							Map<String, Object> params = new HashMap<String, Object>();
 							params.put("cid", cids.get(i));
-							//TODO 需过滤已有店铺sid
+							// TODO 需过滤已有店铺sid
 							String hql = "from T_TaobaokeShop where sid is not null and cid=:cid order by sellerCredit*1 desc";
 							List<T_TaobaokeShop> _shops = service.findByHql(
 									new Page<T_TaobaokeShop>(1, 10 - shops
@@ -130,9 +133,8 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 									shop.put("picUrl",
 											"http://logo.taobao.com/shop-logo"
 													+ _shop.getPicPath());
-									shop
-											.put("errorUrl",
-													"http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png");
+									shop.put("errorUrl",
+											"http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png");
 									shops.add(shop);
 								}
 							}

@@ -211,8 +211,8 @@ public class HuabaoRest {
 		HuabaoTag tag = siteService.get(HuabaoTag.class, id);// 查找旧版本标签库
 		if (tag != null) {// 如果旧版标签存在
 			Page<T_Poster> page = new Page<T_Poster>(1, 24);
-			result.put("posters", siteService.searchPosterByTagsFilter(page,
-					tag.getName()));
+			result.put("posters",
+					siteService.searchPosterByTagsFilter(page, tag.getName()));
 			result.put("page", page);// 分页
 			result.put("tag", tag.getName());// 标签
 			return new ModelAndView("site/huabao/search", result);
@@ -253,16 +253,22 @@ public class HuabaoRest {
 				result.put("pics", hPics);// 图片
 				com.taobao.api.domain.Huabao huabao = TaobaoFetchUtil
 						.convertHuabao(local);
-				result.put("channel", siteService.get(T_PosterChannel.class,
-						Long.valueOf(huabao.getChannelId())));
+				result.put(
+						"channel",
+						siteService.get(T_PosterChannel.class,
+								Long.valueOf(huabao.getChannelId())));
 				result.put("poster", huabao);// 画报
 
 				// 上一个
-				result.put("prev", siteService.getPrevHuabaos(id, Long
-						.valueOf(huabao.getChannelId())));
+				result.put(
+						"prev",
+						siteService.getPrevHuabaos(id,
+								Long.valueOf(huabao.getChannelId())));
 				// 下一个
-				result.put("next", siteService.getNextHuabaos(id, Long
-						.valueOf(huabao.getChannelId())));
+				result.put(
+						"next",
+						siteService.getNextHuabaos(id,
+								Long.valueOf(huabao.getChannelId())));
 			} else {
 				SystemException.handleMessageException("指定的画报不存在");
 			}
@@ -409,9 +415,9 @@ public class HuabaoRest {
 		String userId = request.getParameter("USER");
 		Map<String, Object> result = new HashMap<String, Object>();
 		WindSiteRestUtil.covertPID(siteService, result, userId);
-		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(String
-				.valueOf(result.get("appType")), numiids, (String) result
-				.get("nick"));
+		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
+				String.valueOf(result.get("appType")), numiids,
+				(String) result.get("nick"), String.valueOf(result.get("pid")));
 		String[] numArray = numiids.split(",");
 		Integer rate = 0;
 		if (EnvManager.getMember() != null) {

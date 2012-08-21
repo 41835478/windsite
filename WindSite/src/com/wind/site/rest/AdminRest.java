@@ -617,7 +617,7 @@ public class AdminRest {
 		getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-				.getItemsDetail(null, getRequest);
+				.getItemsDetail(null, getRequest, null);
 		if (getResponse == null) {
 			SystemException.handleMessageException("该商品已移除或者被卖家下架");
 		}
@@ -1319,7 +1319,7 @@ public class AdminRest {
 					}
 					List<TaobaokeShop> tShops = TaobaoFetchUtil
 							.convertTaobaoShop(EnvManager.getAppType(),
-									"fxy060608", shop.getSid() + "");
+									"fxy060608", shop.getSid() + "", null);
 					if (tShops != null && tShops.size() == 1) {// 查询信用和佣金比率
 						shop.setTitle(tShops.get(0).getShopTitle());
 						shop.setCommissionRate(tShops.get(0)
@@ -1369,7 +1369,7 @@ public class AdminRest {
 				sids += shop.getSid();
 			}
 			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop("0",
-					"fxy060608", sids);
+					"fxy060608", sids, null);
 			if (tShops != null && tShops.size() > 0) {
 				for (TaobaokeShop shop : tShops) {
 					T_TaobaokeShop oShop = adminService.get(

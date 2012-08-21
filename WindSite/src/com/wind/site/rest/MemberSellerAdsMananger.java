@@ -49,9 +49,11 @@ public class MemberSellerAdsMananger {
 	public ModelAndView indexAdsManager(@PathVariable String view,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("plans", memberService.findAllByCriterion(ADPlan.class, R
-				.eq("createdBy", EnvManager.getUser().getUser_id()), R.eq(
-				"type", view)));
+		result.put(
+				"plans",
+				memberService.findAllByCriterion(ADPlan.class,
+						R.eq("createdBy", EnvManager.getUser().getUser_id()),
+						R.eq("type", view)));
 		return new ModelAndView(
 				"site/member/seller/ads/" + view + "AdsManager", result);
 	}
@@ -95,8 +97,9 @@ public class MemberSellerAdsMananger {
 		if (StringUtils.isEmpty(name)) {
 			SystemException.handleMessageException("广告计划名称不能为空");
 		}
-		ADPlan plan = memberService.findByCriterion(ADPlan.class, R.eq("name",
-				name), R.eq("createdBy", EnvManager.getUser().getUser_id()));
+		ADPlan plan = memberService.findByCriterion(ADPlan.class,
+				R.eq("name", name),
+				R.eq("createdBy", EnvManager.getUser().getUser_id()));
 		if (plan != null) {
 			SystemException.handleMessageException("广告计划名称【" + name + "】重复");
 		}
@@ -120,7 +123,7 @@ public class MemberSellerAdsMananger {
 		plan.setUsed(0);
 		memberService.addADPlan(plan, TaobaoFetchUtil.itemsConvert(EnvManager
 				.getUser().getAppType(), numIids, EnvManager.getUser()
-				.getNick()), tags);
+				.getNick(), EnvManager.getUser().getPid()), tags);
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -155,8 +158,8 @@ public class MemberSellerAdsMananger {
 			}
 		}
 		plan.setTags(tagsStr);
-		plan.setItems(memberService.findAllByCriterion(ADTaobaokeItem.class, R
-				.eq("planid", id)));
+		plan.setItems(memberService.findAllByCriterion(ADTaobaokeItem.class,
+				R.eq("planid", id)));
 		String tagsHql = "from ADPlanTag where createdBy=:userId order by nums desc";
 		Map<String, Object> tagsParams = new HashMap<String, Object>();
 		tagsParams.put("userId", EnvManager.getUser().getUser_id());
@@ -192,9 +195,9 @@ public class MemberSellerAdsMananger {
 			SystemException.handleMessageException("广告计划名称不能为空");
 		}
 		if (!name.equals(plan.getName())) {
-			ADPlan namePlan = memberService.findByCriterion(ADPlan.class, R.eq(
-					"name", name), R.eq("createdBy", EnvManager.getUser()
-					.getUser_id()));
+			ADPlan namePlan = memberService.findByCriterion(ADPlan.class,
+					R.eq("name", name),
+					R.eq("createdBy", EnvManager.getUser().getUser_id()));
 			if (namePlan != null) {
 				SystemException
 						.handleMessageException("广告计划名称【" + name + "】重复");
@@ -212,8 +215,8 @@ public class MemberSellerAdsMananger {
 			plan.setDescription(desc);
 		memberService.updateADPlan(plan, TaobaoFetchUtil.itemsConvert(
 				EnvManager.getUser().getAppType(), numIids, EnvManager
-						.getUser().getNick()), tags,
-				"true".equals(isDefault) ? true : false);
+						.getUser().getNick(), EnvManager.getUser().getPid()),
+				tags, "true".equals(isDefault) ? true : false);
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -227,8 +230,10 @@ public class MemberSellerAdsMananger {
 	public ModelAndView searchPlanItems(@PathVariable String id,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("items", memberService.findAllByCriterion(
-				ADTaobaokeItem.class, R.eq("planid", id)));
+		result.put(
+				"items",
+				memberService.findAllByCriterion(ADTaobaokeItem.class,
+						R.eq("planid", id)));
 		return new ModelAndView("site/member/seller/ads/planItems", result);
 	}
 
@@ -286,7 +291,8 @@ public class MemberSellerAdsMananger {
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
 						EnvManager.getUser().getAppType(), numiids, EnvManager
-								.getUser().getNick());
+								.getUser().getNick(), EnvManager.getUser()
+								.getPid());
 				result.put("items", taokeItems);
 			}
 		}
@@ -325,17 +331,20 @@ public class MemberSellerAdsMananger {
 			String hql = "select new map(t.title as name,t.nick as nick,t.user_id as userId,t.isIndex as isDefault,t.created as created) from UserPage t,ADPageSystem ad where ad.pk.aid=:aid and t.id=ad.pk.pid";
 			covertAdsUserTemplate(plan, ads,
 					(List<Map<String, Object>>) memberService.findByHql(page,
-							hql, params));// 
+							hql, params));//
 		} else if ("blog".equals(type)) {// 日志推广
 			String hql = "select new map(s.title as name,s.domainName as domainName,s.www as www,s.user_id as userId) from ADBlogSystem ad,Site s where ad.pk.aid=:aid and s.id=ad.pk.sid";
-			covertAdsBlog(plan, ads, (List<Map<String, Object>>) memberService
-					.findByHql(page, hql, params));// 
+			covertAdsBlog(plan, ads,
+					(List<Map<String, Object>>) memberService.findByHql(page,
+							hql, params));//
 		}
 		result.put("ads", ads);
 		result.put("plan", plan);
-		result.put("plans", memberService.findAllByCriterion(ADPlan.class, R
-				.eq("type", plan.getType()), R.eq("createdBy", plan
-				.getCreatedBy())));
+		result.put(
+				"plans",
+				memberService.findAllByCriterion(ADPlan.class,
+						R.eq("type", plan.getType()),
+						R.eq("createdBy", plan.getCreatedBy())));
 		result.put("isTaoke", isTaoke);
 		result.put("page", page);
 		return new ModelAndView("site/member/seller/ads/" + type + "PlanSites",

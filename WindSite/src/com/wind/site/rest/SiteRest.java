@@ -177,7 +177,7 @@ public class SiteRest {
 		WindSiteRestUtil.covertPID(siteService, result, userId);
 		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
 				String.valueOf(result.get("appType")), numIid + "",
-				(String) result.get("nick"));
+				(String) result.get("nick"), String.valueOf(result.get("pid")));
 		if (items != null && items.size() == 1) {
 			return "{\"co\":\"" + items.get(0).getCommission()
 					+ "\",\"price\":\"" + items.get(0).getPrice() + "\"}";
@@ -335,7 +335,8 @@ public class SiteRest {
 		result.put(
 				"desc",
 				TaobaoFetchUtil.itemDescription(id,
-						String.valueOf(result.get("nick"))));
+						String.valueOf(result.get("nick")),
+						String.valueOf(result.get("pid"))));
 		return new ModelAndView("site/template/description", result);
 	}
 
@@ -921,7 +922,8 @@ public class SiteRest {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
 			List<TaobaokeShop> taokeShops = TaobaoFetchUtil.convertTaobaoShop(
 					String.valueOf(result.get("appType")),
-					(String) result.get("nick"), sid);
+					(String) result.get("nick"), sid,
+					String.valueOf(result.get("pid")));
 			if (taokeShops == null || taokeShops.size() != 1) {
 				try {
 					response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -969,7 +971,8 @@ public class SiteRest {
 				shopGetRequest.setPageSize(Long.valueOf(10));
 				TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil
 						.shopsGet(String.valueOf(result.get("appType")),
-								shopGetRequest);
+								shopGetRequest,
+								String.valueOf(result.get("pid")));
 				if (shopGetResponse != null) {
 					if (shopGetResponse.isSuccess()) {
 						Long total = shopGetResponse.getTotalResults();
@@ -1045,7 +1048,7 @@ public class SiteRest {
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
 					versionNo > 1.5f ? null : "1", WindSiteRestUtil
 							.filterUnValidNick((String) result.get("nick")),
-					sid);
+					sid, String.valueOf(result.get("pid")));
 			if (shops == null || shops.size() != 1) {
 				SystemException.handleMessageException("该店铺不存在，或者未加入淘宝推广计划");
 			}
@@ -1084,7 +1087,8 @@ public class SiteRest {
 			e.printStackTrace();
 		}
 		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-				.getItemsDetail(versionNo > 1.5f ? null : "1", getRequest);
+				.getItemsDetail(versionNo > 1.5f ? null : "1", getRequest,
+						String.valueOf(result.get("pid")));
 		if (getResponse == null) {
 			SystemException.handleMessageException("该商品已移除或者被卖家下架");
 		}
@@ -1105,7 +1109,8 @@ public class SiteRest {
 				req.setNick((String) result.get("nick"));
 				req.setOuterCode(EnvManager.getKeywordsOuterCode());
 				String clickurl = TaobaoFetchUtil.getKeyWordUrl(
-						String.valueOf(result.get("appType")), req);
+						String.valueOf(result.get("appType")), req,
+						String.valueOf(result.get("pid")));
 				if (StringUtils.isEmpty(clickurl)) {
 					return redirect(result, response);
 				}
@@ -1120,7 +1125,8 @@ public class SiteRest {
 		if (StringUtils.isEmpty(detail.getClickUrl())) {// 如果推广链接为空,则通过convert再次获取
 			List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
 					String.valueOf(result.get("appType")), nid,
-					(String) result.get("nick"));
+					(String) result.get("nick"),
+					String.valueOf(result.get("pid")));
 			if (items != null && items.size() == 1) {
 				detail.setClickUrl(items.get(0).getClickUrl());
 			}
@@ -1149,7 +1155,7 @@ public class SiteRest {
 		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
 				.getItemsDetail(String.valueOf(result.get("appType")),
-						getRequest);
+						getRequest, String.valueOf(result.get("pid")));
 		if (getResponse == null) {
 			try {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -1487,7 +1493,8 @@ public class SiteRest {
 		shopGetRequest.setNick(String.valueOf(result.get("nick")));
 		Page<T_TaobaokeShop> page = new Page<T_TaobaokeShop>(pageNo, 15);
 		TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil.shopsGet(
-				String.valueOf(result.get("appType")), shopGetRequest);
+				String.valueOf(result.get("appType")), shopGetRequest,
+				String.valueOf(result.get("pid")));
 		if (shopGetResponse != null) {
 			if (shopGetResponse.isSuccess()) {
 				Long total = shopGetResponse.getTotalResults();
@@ -2326,7 +2333,7 @@ public class SiteRest {
 			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(null, getRequest);
+					.getItemsDetail(null, getRequest, null);
 			if (getResponse == null) {
 				SystemException.handleMessageException("该商品已移除或者被卖家下架");
 			}
@@ -2411,7 +2418,8 @@ public class SiteRest {
 			getRequest.setSort("commissionNum_desc");
 			getRequest.setNick(String.valueOf(result.get("nick")));
 			TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-					String.valueOf(result.get("appType")), getRequest);
+					String.valueOf(result.get("appType")), getRequest,
+					String.valueOf(result.get("pid")));
 			if (getResponse != null) {//
 				List<TaobaokeItem> items = getResponse.getTaobaokeItems();
 				if (items != null) {
@@ -2447,7 +2455,8 @@ public class SiteRest {
 							}
 							List<TaobaokeItem> taokeItems = TaobaoFetchUtil
 									.itemsConvert(String.valueOf(result
-											.get("appType")), numiids, nick);
+											.get("appType")), numiids, nick,
+											String.valueOf(result.get("pid")));
 							result.put("data", taokeItems);
 						}
 					}
@@ -2508,7 +2517,8 @@ public class SiteRest {
 		getRequest.setSort(sort);
 		getRequest.setNick(String.valueOf(result.get("nick")));
 		TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-				String.valueOf(result.get("appType")), getRequest);
+				String.valueOf(result.get("appType")), getRequest,
+				String.valueOf(result.get("pid")));
 		if (getResponse != null) {//
 			List<TaobaokeItem> items = getResponse.getTaobaokeItems();
 			if (items != null) {

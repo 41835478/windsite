@@ -65,6 +65,17 @@ public class WindSiteRestUtil {
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
 
+	public static Long getPid(String pid) {
+		Long PID = null;
+		if (StringUtils.isNotEmpty(pid)) {
+			PID = Long.valueOf(pid.replace("mm_", "").replace("_0_0", ""));
+		}
+		if (PID != null && PID > 0) {
+			return PID;
+		}
+		return null;
+	}
+
 	public static void synSiteTitle(IBaseService service) {
 		List<Site> sites = service.loadAll(Site.class);
 		if (sites != null && sites.size() > 0) {

@@ -214,8 +214,9 @@ public class TaobaoRest {
 		}
 		// List<ADTaobaokeItem> aditems = taobaoService.searchADItemsByFilter(
 		// new Page<ADTaobaokeItem>(pageNo, 5), cid, keyword);
-		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(String
-				.valueOf(result.get("appType")), req);
+		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(
+				String.valueOf(result.get("appType")), req,
+				String.valueOf(result.get("pid")));
 		if (resp.getTaobaokeItems() != null) {
 			result.put("items", resp.getTaobaokeItems());
 		} else {
@@ -254,12 +255,12 @@ public class TaobaoRest {
 		}
 		TaobaokeShopsGetRequest req = new TaobaokeShopsGetRequest();
 		req.setNick(nick);
+
 		String fields = request.getParameter("fields");
 		if (StringUtils.isNotEmpty(fields)) {
 			req.setFields(fields);
 		} else {
-			req
-					.setFields("user_id,shop_title,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count");
+			req.setFields("user_id,shop_title,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count");
 		}
 		String cid = request.getParameter("cid");
 		if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
@@ -325,8 +326,9 @@ public class TaobaoRest {
 			req.setPageSize(30L);
 		}
 		Page<TaobaokeShop> page = new Page<TaobaokeShop>(pageNo, 30);
-		TaobaokeShopsGetResponse resp = TaobaoFetchUtil.shopsGet(String
-				.valueOf(result.get("appType")), req);
+		TaobaokeShopsGetResponse resp = TaobaoFetchUtil.shopsGet(
+				String.valueOf(result.get("appType")), req,
+				String.valueOf(result.get("pid")));
 		if (resp != null) {
 			page.setTotalCount(resp.getTotalResults().intValue());
 			result.put("shops", resp.getTaobaokeShops());
@@ -347,23 +349,23 @@ public class TaobaoRest {
 	}
 
 	private String searchWords(HttpServletResponse response, String q,
-			String appType, String nick) {
+			String appType, String nick, String pid) {
 		if (StringUtils.isEmpty(q)) {
-			return searchCid(response, null, appType, nick);
+			return searchCid(response, null, appType, nick, pid);
 		}
 		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
 		req.setNick(nick);
 		req.setOuterCode(EnvManager.getKeywordsOuterCode());
 		req.setQ(q);
-		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req);
+		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req, pid);
 		if (StringUtils.isNotEmpty(clickUrl)) {
 			return clickUrl + "&taoke_type=1";
 		}
-		return searchCid(response, null, appType, nick);
+		return searchCid(response, null, appType, nick, pid);
 	}
 
 	private String searchCid(HttpServletResponse response, String cid,
-			String appType, String nick) {
+			String appType, String nick, String pid) {
 		if (StringUtils.isEmpty(cid)) {
 			cid = "16";
 		}
@@ -375,7 +377,7 @@ public class TaobaoRest {
 		}
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
-		String url = TaobaoFetchUtil.getItemCatUrl(appType, request);
+		String url = TaobaoFetchUtil.getItemCatUrl(appType, request, pid);
 		return url + "&taoke_type=1";
 	}
 
@@ -415,7 +417,7 @@ public class TaobaoRest {
 				getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 				getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 				TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-						.getItemsDetail(appType, getRequest);
+						.getItemsDetail(appType, getRequest, pid);
 				TaobaokeItemDetail item = null;
 				if (getResponse != null) {
 					List<TaobaokeItemDetail> itemList = getResponse
@@ -432,15 +434,10 @@ public class TaobaoRest {
 										if (www != null
 												&& StringUtils
 														.isNotEmpty((String) www)) {
-											response
-													.sendRedirect(WindSiteRestUtil
-															.getUrl(
-																	siteService,
-																	result,
-																	userId)
-															+ "titem/"
-															+ q
-															+ ".html");
+											response.sendRedirect(WindSiteRestUtil
+													.getUrl(siteService,
+															result, userId)
+													+ "titem/" + q + ".html");
 											return null;
 										}
 									}
@@ -453,13 +450,12 @@ public class TaobaoRest {
 						String is_mall = request.getParameter("is_mall");
 						if ("true".equals(is_mall)) {
 							try {
-								response
-										.sendRedirect("http://s.click.taobao.com/t_9?p="
-												+ pid
-												+ "&l="
-												+ URLEncoder.encode(
-														"http://detail.tmall.com/item.htm?id="
-																+ q, "UTF-8"));
+								response.sendRedirect("http://s.click.taobao.com/t_9?p="
+										+ pid
+										+ "&l="
+										+ URLEncoder.encode(
+												"http://detail.tmall.com/item.htm?id="
+														+ q, "UTF-8"));
 								return null;
 							} catch (IOException e) {
 							}
@@ -468,11 +464,11 @@ public class TaobaoRest {
 				}
 			}
 			if (StringUtils.isEmpty(clickUrl))
-				clickUrl = searchWords(response, q, appType, nick);
+				clickUrl = searchWords(response, q, appType, nick, pid);
 		} else {
 			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
-				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class, R
-						.eq("cid", cid));
+				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class,
+						R.eq("cid", cid));
 				if (cat == null) {
 					ItemcatsGetRequest getReq = new ItemcatsGetRequest();
 					getReq.setCids(cid);
@@ -488,7 +484,7 @@ public class TaobaoRest {
 			} else {
 				cid = null;
 			}
-			clickUrl = searchCid(response, cid, appType, nick);
+			clickUrl = searchCid(response, cid, appType, nick, pid);
 		}
 		result.put("q", q);
 		result.put("clickUrl", clickUrl);
@@ -552,7 +548,7 @@ public class TaobaoRest {
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
 					.getItemsDetail(String.valueOf(result.get("appType")),
-							getRequest);
+							getRequest, String.valueOf(result.get("pid")));
 			if (getResponse != null) {
 				List<TaobaokeItemDetail> itemList = getResponse
 						.getTaobaokeItemDetails();
@@ -561,8 +557,8 @@ public class TaobaoRest {
 				}
 			}
 			if (item == null) {
-				normal = TaobaoFetchUtil.taobaoItemGet(String.valueOf(result
-						.get("appType")), Long.valueOf(q));
+				normal = TaobaoFetchUtil.taobaoItemGet(
+						String.valueOf(result.get("appType")), Long.valueOf(q));
 			}
 		}
 		if (item != null) {
@@ -584,8 +580,7 @@ public class TaobaoRest {
 		if (StringUtils.isNotEmpty(fields)) {
 			req.setFields(fields);
 		} else {
-			req
-					.setFields("num_iid,post_fee,is_prepay,promoted_service,ww_status");// 只获取NUM_IID
+			req.setFields("num_iid,post_fee,is_prepay,promoted_service,ww_status");// 只获取NUM_IID
 		}
 		// 增加外部商品标识
 		// req.setOuterCode(EnvManager.getItemsOuterCode());
@@ -815,8 +810,8 @@ public class TaobaoRest {
 
 		}
 
-		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(String
-				.valueOf(result.get("appType")), req);
+		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(
+				String.valueOf(result.get("appType")), req);
 		Page<?> page = new Page(pageNo, 30);
 		if (resp.getTotalResults() > 0 && resp.getItemSearch() != null) {
 			page.setTotalCount(resp.getTotalResults().intValue());
@@ -837,7 +832,8 @@ public class TaobaoRest {
 				}
 				result.put("itemsMap", itemsMap);
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appType")), numiids, nick);
+						String.valueOf(result.get("appType")), numiids, nick,
+						String.valueOf(result.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
 				if (categories != null && categories.size() > 0) {
 					List<T_ItemCat> itemCats = EnvManager.getCats();
@@ -845,8 +841,8 @@ public class TaobaoRest {
 					while (itr.hasNext()) {
 						ItemCategory cat = itr.next();
 						List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils.find(
-								itemCats, T_ItemCat.class, "cid", cat
-										.getCategoryId(), null);// 查找类目
+								itemCats, T_ItemCat.class, "cid",
+								cat.getCategoryId(), null);// 查找类目
 						if (cs != null && cs.size() == 1) {
 							T_ItemCat c = cs.get(0);
 							if (c.getName().equals("其它")) {
@@ -892,9 +888,7 @@ public class TaobaoRest {
 				result.put("categories", categories);
 				result.put("items", taokeItems);
 				if (taokeItems != null)
-					result
-							.put("invalidCount", items.size()
-									- taokeItems.size());
+					result.put("invalidCount", items.size() - taokeItems.size());
 				else
 					result.put("invalidCount", 30);
 				result.put("totalResults", resp.getTotalResults());
@@ -1158,8 +1152,8 @@ public class TaobaoRest {
 
 		}
 		Map<String, Object> result = new HashMap<String, Object>();
-		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(String
-				.valueOf(result.get("appType")), req);
+		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(
+				String.valueOf(result.get("appType")), req);
 		Page<?> page = new Page(pageNo, 30);
 		if (resp.getTotalResults() > 0 && resp.getItemSearch() != null) {
 			page.setTotalCount(resp.getTotalResults().intValue());
@@ -1177,7 +1171,8 @@ public class TaobaoRest {
 					numiids += i.getNumIid();
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appType")), numiids, nick);
+						String.valueOf(result.get("appType")), numiids, nick,
+						String.valueOf(result.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
 				if (categories != null && categories.size() > 0) {
 					List<T_ItemCat> itemCats = EnvManager.getCats();
@@ -1185,8 +1180,8 @@ public class TaobaoRest {
 					while (itr.hasNext()) {
 						ItemCategory cat = itr.next();
 						List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils.find(
-								itemCats, T_ItemCat.class, "cid", cat
-										.getCategoryId(), null);// 查找类目
+								itemCats, T_ItemCat.class, "cid",
+								cat.getCategoryId(), null);// 查找类目
 						if (cs != null && cs.size() == 1) {
 							T_ItemCat c = cs.get(0);
 							if (c.getName().equals("其它")) {
@@ -1219,9 +1214,7 @@ public class TaobaoRest {
 				result.put("categories", categories);
 				result.put("items", taokeItems);
 				if (taokeItems != null)
-					result
-							.put("invalidCount", items.size()
-									- taokeItems.size());
+					result.put("invalidCount", items.size() - taokeItems.size());
 				else
 					result.put("invalidCount", 30);
 				result.put("totalResults", resp.getTotalResults());
@@ -1340,8 +1333,8 @@ public class TaobaoRest {
 	@RequestMapping(value = "/pid/convert", method = RequestMethod.GET)
 	@ResponseBody
 	public void synPid(HttpServletRequest req) {
-		List<User> users = taobaoService.findAllByCriterion(User.class, R
-				.isNull("pid"));
+		List<User> users = taobaoService.findAllByCriterion(User.class,
+				R.isNull("pid"));
 		if (users.size() > 0) {
 			logger.info("本次转换PID【" + users.size() + "】个");
 			for (User user : users) {
@@ -1350,18 +1343,16 @@ public class TaobaoRest {
 				request.setNick(user.getNick());
 				request.setOuterCode(EnvManager.getCatsOuterCode());
 				try {
-					String url = TaobaoFetchUtil.getItemCatUrl(user
-							.getAppType(), request);
+					String url = TaobaoFetchUtil.getItemCatUrl(
+							user.getAppType(), request, user.getPid());
 					String pid = StringUtils
 							.substringBetween(url, "?p=", "&u=");
 					if (StringUtils.isNotEmpty(pid)) {
 						user.setPid(pid);
 						logger.info("用户【" + user.getNick() + "】=PID【" + pid
 								+ "】");
-						user
-								.setSites(taobaoService.findAllByCriterion(
-										Site.class, R.eq("user_id", user
-												.getUser_id())));
+						user.setSites(taobaoService.findAllByCriterion(
+								Site.class, R.eq("user_id", user.getUser_id())));
 						taobaoService.update(user);
 					}
 				} catch (Exception e) {
@@ -1393,12 +1384,12 @@ public class TaobaoRest {
 	public void getCategoryUnSuccess(HttpServletRequest request,
 			HttpServletResponse response) {
 		List<T_ItemCat> icats = taobaoService.findAllByCriterion(
-				T_ItemCat.class, R.eq("isSuccess", false), R.eq("isParent",
-						true));
+				T_ItemCat.class, R.eq("isSuccess", false),
+				R.eq("isParent", true));
 		System.out.println("尚有[" + icats.size() + "]未同步成功");
 		if (icats != null && icats.size() > 0) {
-			getCategory(taobaoService.findAllByCriterion(T_ItemCat.class, R.eq(
-					"isSuccess", false), R.eq("isParent", true)));
+			getCategory(taobaoService.findAllByCriterion(T_ItemCat.class,
+					R.eq("isSuccess", false), R.eq("isParent", true)));
 		}
 	}
 
@@ -1452,7 +1443,7 @@ public class TaobaoRest {
 			req.setNick("fxy060608");
 			req.setOuterCode(EnvManager.getCatsOuterCode());
 			try {
-				String clickUrl = TaobaoFetchUtil.getItemCatUrl("0", req);
+				String clickUrl = TaobaoFetchUtil.getItemCatUrl("0", req, null);
 				if (StringUtils.isNotEmpty(clickUrl)) {
 					icat.setClickUrl(clickUrl.replaceAll("mm_13667242_0_0",
 							"{pid}"));
@@ -1483,10 +1474,11 @@ public class TaobaoRest {
 		Parser parser;
 		try {
 			parser = new Parser("http://www.daqi.com/paihang.html");
-			NodeList as1 = parser.extractAllNodesThatMatch(
-					new HasAttributeFilter("bordercolor", "#999999"))
-					.elementAt(0).getChildren().extractAllNodesThatMatch(
-							new TagNameFilter("a"), true);
+			NodeList as1 = parser
+					.extractAllNodesThatMatch(
+							new HasAttributeFilter("bordercolor", "#999999"))
+					.elementAt(0).getChildren()
+					.extractAllNodesThatMatch(new TagNameFilter("a"), true);
 			System.out.println("总分类:" + as1.size());
 			for (int i = 0; i < as1.size(); i++) {
 				ForumType type = new ForumType();
@@ -1501,10 +1493,11 @@ public class TaobaoRest {
 				taobaoService.save(type);// 保存一级分类
 				System.out.println(type.getTitle() + ":" + type.getUrl());
 				Parser parser2 = new Parser(type.getUrl());
-				NodeList as2 = parser2.extractAllNodesThatMatch(
-						new HasAttributeFilter("bordercolor", "#999999"))
-						.elementAt(0).getChildren().extractAllNodesThatMatch(
-								new TagNameFilter("a"), true);
+				NodeList as2 = parser2
+						.extractAllNodesThatMatch(
+								new HasAttributeFilter("bordercolor", "#999999"))
+						.elementAt(0).getChildren()
+						.extractAllNodesThatMatch(new TagNameFilter("a"), true);
 				System.out.println("二级分类:" + as2.size());
 				for (int j = 0; j < as2.size(); j++) {
 					LinkTag node2 = (LinkTag) as2.elementAt(j);
@@ -1544,8 +1537,8 @@ public class TaobaoRest {
 
 	private void convert(Page<Forum> page) {
 		List<Forum> forums = taobaoService.findAllByCriterion(page,
-				Forum.class, R.isNull("realUrl"), R.not(R.like("url",
-						"%bbs.voc.com.cn%")));
+				Forum.class, R.isNull("realUrl"),
+				R.not(R.like("url", "%bbs.voc.com.cn%")));
 		Parser parser = null;
 		for (Forum forum : forums) {
 			try {
@@ -1578,10 +1571,12 @@ public class TaobaoRest {
 			try {
 				parser = new Parser(type.getUrl().split(".html")[0] + i
 						+ ".html");
-				NodeList trs = parser.extractAllNodesThatMatch(
-						new HasAttributeFilter("width", "98%")).elementAt(0)
-						.getChildren().extractAllNodesThatMatch(
-								new TagNameFilter("tr"), true);
+				NodeList trs = parser
+						.extractAllNodesThatMatch(
+								new HasAttributeFilter("width", "98%"))
+						.elementAt(0)
+						.getChildren()
+						.extractAllNodesThatMatch(new TagNameFilter("tr"), true);
 				for (int h = 0; h < trs.size(); h++) {
 					Node node = trs.elementAt(h);
 					NodeList children = node.getChildren()
@@ -1606,9 +1601,10 @@ public class TaobaoRest {
 						site.setUrl(aS.getLink());
 						taobaoService.save(site);
 					}
-					Forum forum = taobaoService.findByCriterion(Forum.class, R
-							.eq("site.id", site.getId()), R.eq("title", aF
-							.getLinkText()), R.eq("type.id", type.getId()));
+					Forum forum = taobaoService.findByCriterion(Forum.class,
+							R.eq("site.id", site.getId()),
+							R.eq("title", aF.getLinkText()),
+							R.eq("type.id", type.getId()));
 					if (forum == null) {
 						forum = new Forum();
 						forum.setFavorite(0);
@@ -1640,10 +1636,11 @@ public class TaobaoRest {
 		Parser parser;
 		try {
 			parser = new Parser("http://site.baidu.com/list/155blog.htm");
-			NodeList as1 = parser.extractAllNodesThatMatch(
-					new HasAttributeFilter("bgcolor", "C5D5C5")).elementAt(0)
-					.getChildren().extractAllNodesThatMatch(
-							new TagNameFilter("table"), true);
+			NodeList as1 = parser
+					.extractAllNodesThatMatch(
+							new HasAttributeFilter("bgcolor", "C5D5C5"))
+					.elementAt(0).getChildren()
+					.extractAllNodesThatMatch(new TagNameFilter("table"), true);
 			System.out.println("总分类:" + as1.size());
 			Node zonghetable = as1.elementAt(0);
 			NodeList zonghe = zonghetable.getChildren()
@@ -1654,8 +1651,8 @@ public class TaobaoRest {
 			for (int i = 0; i < zonghe.size(); i++) {
 				LinkTag a = (LinkTag) zonghe.elementAt(i);
 				System.out.println(a.getLinkText() + "=" + a.getLink());
-				Forum forum = taobaoService.findByCriterion(Forum.class, R.eq(
-						"title", a.getLinkText()), R.eq("type.id", "31"));
+				Forum forum = taobaoService.findByCriterion(Forum.class,
+						R.eq("title", a.getLinkText()), R.eq("type.id", "31"));
 				if (forum == null) {
 					forum = new Forum();
 					forum.setFavorite(0);
@@ -1676,8 +1673,8 @@ public class TaobaoRest {
 			for (int i = 0; i < zhoubian.size(); i++) {
 				LinkTag a = (LinkTag) zhoubian.elementAt(i);
 				System.out.println(a.getLinkText() + "=" + a.getLink());
-				Forum forum = taobaoService.findByCriterion(Forum.class, R.eq(
-						"title", a.getLinkText()), R.eq("type.id", "32"));
+				Forum forum = taobaoService.findByCriterion(Forum.class,
+						R.eq("title", a.getLinkText()), R.eq("type.id", "32"));
 				if (forum == null) {
 					forum = new Forum();
 					forum.setFavorite(0);
@@ -1698,8 +1695,8 @@ public class TaobaoRest {
 			for (int i = 0; i < jingxuan.size(); i++) {
 				LinkTag a = (LinkTag) jingxuan.elementAt(i);
 				System.out.println(a.getLinkText() + "=" + a.getLink());
-				Forum forum = taobaoService.findByCriterion(Forum.class, R.eq(
-						"title", a.getLinkText()), R.eq("type.id", "33"));
+				Forum forum = taobaoService.findByCriterion(Forum.class,
+						R.eq("title", a.getLinkText()), R.eq("type.id", "33"));
 				if (forum == null) {
 					forum = new Forum();
 					forum.setFavorite(0);
@@ -1774,8 +1771,9 @@ public class TaobaoRest {
 			Node div = parser.extractAllNodesThatMatch(
 					new HasAttributeFilter("class", "show_down_div"))
 					.elementAt(0);
-			Node ul = div.getChildren().extractAllNodesThatMatch(
-					new TagNameFilter("ul")).elementAt(0);
+			Node ul = div.getChildren()
+					.extractAllNodesThatMatch(new TagNameFilter("ul"))
+					.elementAt(0);
 			NodeList li = ul.getChildren().extractAllNodesThatMatch(
 					new TagNameFilter("li"));
 			System.out.println("节点数量:" + li.size());
@@ -1818,8 +1816,8 @@ public class TaobaoRest {
 			for (HuabaoType hbType : types) {
 				String type = hbType.getName();
 				List<Huabaos> hbs = taobaoService.findAllByCriterion(
-						Huabaos.class, R.eq("type", hbType.getId()), R.eq(
-								"isSuccess", false));
+						Huabaos.class, R.eq("type", hbType.getId()),
+						R.eq("isSuccess", false));
 				if (hbs != null && hbs.size() > 0) {
 					for (Huabaos hb : hbs) {
 						parser = new Parser("http://huabao.taobao.com/" + type
@@ -1839,7 +1837,8 @@ public class TaobaoRest {
 							taobaoService.update(hbType);
 							continue;
 						}
-						Node Nodetags = content.getChildren()
+						Node Nodetags = content
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new HasAttributeFilter("id",
 												"poster-tags"), true)
@@ -1889,8 +1888,8 @@ public class TaobaoRest {
 								.replaceAll(
 										"\\\\r\\\\n\\\\r\\\\n-----\\\\u70B9\\\\u51FB\\\\u56FE\\\\u7247\\\\u4E0A\\\\u7684\\\\u5708\\\\u6846\\\\uFF0C\\\\u76F4\\\\u63A5\\\\u8D2D\\\\u4E70\\\\u6B64\\\\u5B9D\\\\u8D1D-------",
 										"").replaceAll("\\\\r\\\\n", "<br>")
-								.replaceAll("\\\\',", "',").replaceAll(
-										"\\\\',", "',");
+								.replaceAll("\\\\',", "',")
+								.replaceAll("\\\\',", "',");
 						System.out.println("result:" + result);
 						HuabaoData data = new Gson().fromJson(result,
 								HuabaoData.class);
@@ -1951,7 +1950,8 @@ public class TaobaoRest {
 				Node searchResultInner = parser.extractAllNodesThatMatch(
 						new HasAttributeFilter("id", "search-result-inner"))
 						.elementAt(0);
-				Node numsNode = searchResultInner.getChildren()
+				Node numsNode = searchResultInner
+						.getChildren()
 						.extractAllNodesThatMatch(
 								new HasAttributeFilter("class", "highlight"),
 								true).elementAt(0);
@@ -1981,7 +1981,8 @@ public class TaobaoRest {
 					if (lis.size() > 0) {
 						for (int j = 0; j < lis.size(); j++) {
 							Node li = lis.elementAt(j);
-							Node divBd = li.getChildren()
+							Node divBd = li
+									.getChildren()
 									.extractAllNodesThatMatch(
 											new HasAttributeFilter("class",
 													"bd"), true).elementAt(0);
@@ -1990,11 +1991,13 @@ public class TaobaoRest {
 											new TagNameFilter("dd"), true);
 							if (dds.size() == 2) {
 								Node dd1 = dds.elementAt(0);
-								LinkTag a = (LinkTag) dd1.getChildren()
+								LinkTag a = (LinkTag) dd1
+										.getChildren()
 										.extractAllNodesThatMatch(
 												new TagNameFilter("a"))
 										.elementAt(0);
-								Integer id = Integer.parseInt(a.getLink()
+								Integer id = Integer.parseInt(a
+										.getLink()
 										.replace(
 												"http://huabao.taobao.com/"
 														+ type + "/d-", "")
@@ -2003,7 +2006,8 @@ public class TaobaoRest {
 										Huabaos.class, id);
 								if (huabaos == null) {
 									huabaos = new Huabaos();
-									ImageTag image = (ImageTag) a.getChildren()
+									ImageTag image = (ImageTag) a
+											.getChildren()
 											.extractAllNodesThatMatch(
 													new TagNameFilter("img"))
 											.elementAt(0);
@@ -2116,12 +2120,14 @@ public class TaobaoRest {
 				String clickUrl = a.getLink();
 				String eventId = clickUrl.split("eventid=")[1];
 				String value = clickUrl.substring(
-						clickUrl.indexOf("channel/") + 8, clickUrl
-								.indexOf(".htm"));
+						clickUrl.indexOf("channel/") + 8,
+						clickUrl.indexOf(".htm"));
 				ImageTag bigImg = (ImageTag) content
 						.extractAllNodesThatMatch(
 								new HasAttributeFilter("id", "channel_body_"
-										+ eventId)).elementAt(0).getChildren()
+										+ eventId))
+						.elementAt(0)
+						.getChildren()
 						.extractAllNodesThatMatch(new TagNameFilter("img"),
 								true).elementAt(0);
 				String bigPic = bigImg.getImageURL();

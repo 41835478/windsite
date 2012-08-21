@@ -55,8 +55,8 @@ public class LinkRest {
 		// 频道
 		result.put("channels", EnvManager.getChannels());
 		// 我的设计页面
-//		result.put("mytemplates", memberService.findUserTemplates(EnvManager
-//				.getUser().getUser_id()));
+		// result.put("mytemplates", memberService.findUserTemplates(EnvManager
+		// .getUser().getUser_id()));
 		return new ModelAndView("site/member/fanli/createLinks", result);
 	}
 
@@ -79,8 +79,8 @@ public class LinkRest {
 		// 频道
 		result.put("channels", EnvManager.getChannels());
 		// 我的设计页面
-//		result.put("mytemplates", memberService.findUserTemplates(EnvManager
-//				.getUser().getUser_id()));
+		// result.put("mytemplates", memberService.findUserTemplates(EnvManager
+		// .getUser().getUser_id()));
 		return new ModelAndView("site/member/fanli/updateLinks", result);
 	}
 
@@ -96,8 +96,8 @@ public class LinkRest {
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<ItemGroup> groups = (List<ItemGroup>) memberService
-				.findAllByCriterion(ItemGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (groups.size() > 0) {
 			for (ItemGroup group : groups) {
 				group.setCount(memberService.countItemsByGid(group.getId()));
@@ -158,8 +158,8 @@ public class LinkRest {
 	@RequestMapping(value = "/shopgroupsdialog", method = RequestMethod.GET)
 	public ModelAndView getMyShopGroupForDialog(HttpServletRequest request) {
 		List<ShopGroup> list = (List<ShopGroup>) memberService
-				.findAllByCriterion(ShopGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ShopGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		for (ShopGroup group : list) {
 			group.setCount(memberService.countFavShops(group.getId()));
 		}
@@ -277,7 +277,8 @@ public class LinkRest {
 		shopGetRequest.setPageNo(Long.valueOf(pageNo));
 		Page<T_TaobaokeShop> page = new Page<T_TaobaokeShop>(pageNo, 10);
 		TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil.shopsGet(
-				String.valueOf(result.get("appType")), shopGetRequest);
+				String.valueOf(result.get("appType")), shopGetRequest,
+				EnvManager.getUser().getPid());
 		if (shopGetResponse != null) {
 			if (shopGetResponse.isSuccess()) {
 				Long total = shopGetResponse.getTotalResults();
@@ -372,11 +373,12 @@ public class LinkRest {
 			SystemException.handleMessageException("未提供转换商品的标识列表");
 		}
 		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppType(), nids, EnvManager.getUser().getNick());
+				.getUser().getAppType(), nids, EnvManager.getUser().getNick(),
+				EnvManager.getUser().getPid());
 		Map<String, Object> result = new HashMap<String, Object>();
 		// TODO 目前因权限问题无法根据商品标识查询非推广商品（需要高级权限来使用taobao.items.list.get）
 		// if (items != null && items.size() > 0) {
-		//			
+		//
 		// List<String> nidsList = Arrays.asList(nids.split(","));
 		// if (items.size() < nidsList.size()) {// 如果有部分商品未加入推广
 		// for (TaobaokeItem item : items) {
@@ -384,7 +386,7 @@ public class LinkRest {
 		// nidsList.remove(item.getNumIid());// 移除已匹配商品
 		// }
 		// }
-		//				
+		//
 		// }
 		// }
 		result.put("items", items);
@@ -451,7 +453,7 @@ public class LinkRest {
 				List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(
 						EnvManager.getUser().getAppType(), String
 								.valueOf(num_iid), EnvManager.getUser()
-								.getNick());
+								.getNick(), EnvManager.getUser().getPid());
 				if (items != null && items.size() == 1) {
 					result.put("item", items.get(0));
 				} else {
@@ -464,12 +466,12 @@ public class LinkRest {
 			if (StringUtils.isNotEmpty(sid)) {
 				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
 						EnvManager.getUser().getAppType(), EnvManager.getUser()
-								.getNick(), sid);
+								.getNick(), sid, EnvManager.getUser().getPid());
 				if (shops != null && shops.size() == 1) {
 					TaobaokeShop shop = shops.get(0);
 					T_TaobaokeShop oShop = memberService.get(
-							T_TaobaokeShop.class, R
-									.eq("sid", Long.valueOf(sid)));
+							T_TaobaokeShop.class,
+							R.eq("sid", Long.valueOf(sid)));
 					if (oShop != null) {
 						oShop.setCommissionRate(shop.getCommissionRate());
 						oShop.setTitle(shop.getShopTitle());
@@ -496,8 +498,8 @@ public class LinkRest {
 							.handleMessageException("当前推广组推广链接对应的推广组已被删除");
 				}
 				List<T_TaobaokeItem> items = memberService.findAllByCriterion(
-						T_TaobaokeItem.class, R.eq("gid", group.getId()), R.eq(
-								"isValid", true));
+						T_TaobaokeItem.class, R.eq("gid", group.getId()),
+						R.eq("isValid", true));
 				if (items.size() > 0) {
 					result.put("group", group);
 					result.put("items", items);
@@ -530,8 +532,8 @@ public class LinkRest {
 			HttpServletResponse response) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<ItemGroup> groups = (List<ItemGroup>) memberService
-				.findAllByCriterion(ItemGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (groups.size() > 0) {
 			for (ItemGroup group : groups) {
 				group.setCount(memberService.countItemsByGid(group.getId()));

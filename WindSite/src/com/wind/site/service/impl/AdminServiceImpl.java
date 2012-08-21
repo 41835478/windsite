@@ -69,7 +69,7 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
 			String url = TaobaoFetchUtil.getItemCatUrl(user.getAppType(),
-					request);
+					request, user.getPid());
 			String pid = url.split("pid=")[1].split("&")[0];
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

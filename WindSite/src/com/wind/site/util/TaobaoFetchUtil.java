@@ -702,12 +702,13 @@ public class TaobaoFetchUtil {
 	}
 
 	public static TaobaokeShopsGetResponse shopsGet(String appType,
-			TaobaokeShopsGetRequest request) {
+			TaobaokeShopsGetRequest request, String pid) {
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 				EnvManager.getAppKey(appType), EnvManager.getSecret(appType),
 				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 		try {
 			request.setOuterCode(EnvManager.getShopsOuterCode());
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeShopsGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;
@@ -720,7 +721,7 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static String itemDescription(String numIids, String nick) {
+	public static String itemDescription(String numIids, String nick, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(null), EnvManager.getSecret(null),
@@ -729,6 +730,7 @@ public class TaobaoFetchUtil {
 			request.setFields("desc");
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
 					.getUser().getNick());
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			request.setNumIids(numIids);
 			request.setOuterCode(EnvManager.getItemsOuterCode());// 自定义输入串
 			TaobaokeItemsDetailGetResponse response = client.execute(request);
@@ -765,7 +767,7 @@ public class TaobaoFetchUtil {
 	}
 
 	public static List<TaobaokeItem> huabaoItemConvert(String appType,
-			String numIids, String nick) {
+			String numIids, String nick, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
@@ -775,6 +777,7 @@ public class TaobaoFetchUtil {
 			request.setFields("num_iid,click_url,commission,price");
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
 					.getUser().getNick());
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			request.setNumIids(numIids);
 			request.setOuterCode(EnvManager.getItemsOuterCode());// 自定义输入串
 			TaobaokeItemsConvertResponse response = client.execute(request);
@@ -788,7 +791,7 @@ public class TaobaoFetchUtil {
 	}
 
 	public static List<TaobaokeItem> itemsConvert(String appType,
-			String numIids, String nick) {
+			String numIids, String nick, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
@@ -798,6 +801,7 @@ public class TaobaoFetchUtil {
 			request.setFields(TaobaoFetchUtil.TAOBAOKEITEM_FIELDS);
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
 					.getUser().getNick());
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			request.setNumIids(numIids);
 			request.setOuterCode(EnvManager.getItemsOuterCode());// 自定义输入串
 			TaobaokeItemsConvertResponse response = client.execute(request);
@@ -813,21 +817,23 @@ public class TaobaoFetchUtil {
 	}
 
 	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appType,
-			Long num_iid) {
+			Long num_iid, String pid) {
 		TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
 		request.setFields(TAOBAOKEITEMDETAIL_FIELDS);
 		request.setNumIids(String.valueOf(num_iid));
 		request.setNick(EnvManager.getUser().getNick());
-		return getItemsDetail(appType, request);
+		request.setPid(WindSiteRestUtil.getPid(EnvManager.getUser().getPid()));
+		return getItemsDetail(appType, request, pid);
 	}
 
 	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appType,
-			TaobaokeItemsDetailGetRequest request) {
+			TaobaokeItemsDetailGetRequest request, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeItemsDetailGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;
@@ -847,12 +853,15 @@ public class TaobaoFetchUtil {
 	 * @return
 	 */
 	public static TaobaokeItemsGetResponse searchItems(String appType,
-			TaobaokeItemsGetRequest request) {
+			TaobaokeItemsGetRequest request, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
+			Long PID = WindSiteRestUtil.getPid(pid);
+			if (PID != null)
+				request.setPid(String.valueOf(PID));
 			TaobaokeItemsGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;
@@ -1012,7 +1021,7 @@ public class TaobaoFetchUtil {
 	}
 
 	public static List<TaobaokeShop> convertTaobaoShop(String appType,
-			String nick, String sids) {
+			String nick, String sids, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
@@ -1023,6 +1032,7 @@ public class TaobaoFetchUtil {
 			request.setNick(nick);
 			request.setOuterCode(EnvManager.getShopsOuterCode());
 			request.setSids(sids);
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeShopsConvertResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response.getTaobaokeShops();
@@ -1093,13 +1103,14 @@ public class TaobaoFetchUtil {
 	}
 
 	public static String getKeyWordUrl(String appType,
-			TaobaokeListurlGetRequest request) {
+			TaobaokeListurlGetRequest request, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
 			request.setOuterCode(EnvManager.getKeywordsOuterCode());
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeListurlGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response.getTaobaokeItem().getKeywordClickUrl();
@@ -1114,12 +1125,13 @@ public class TaobaoFetchUtil {
 	}
 
 	public static String getItemCatUrl(String appType,
-			TaobaokeCaturlGetRequest request) {
+			TaobaokeCaturlGetRequest request, String pid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
+			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeCaturlGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response.getTaobaokeItem().getTaobaokeCatClickUrl();

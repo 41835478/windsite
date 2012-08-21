@@ -43,7 +43,7 @@ public class TaobaoDianpuCommand {
 	private FreeMarkerConfigurer fcg;
 
 	public void synDianpu() {
-		//getCat();
+		// getCat();
 		getDianpu();
 		synTaobaoDianpu();
 		// 重新设置店铺分类
@@ -52,8 +52,10 @@ public class TaobaoDianpuCommand {
 				DianPuCategory.class, R.isNull("parent"));// 查询所有父分类
 		if (dRoots != null && dRoots.size() > 0) {
 			for (DianPuCategory root : dRoots) {
-				dianpuCats.put(root.getName(), adminService.findAllByCriterion(
-						DianPuCategory.class, R.eq("parent", root.getId())));
+				dianpuCats.put(
+						root.getName(),
+						adminService.findAllByCriterion(DianPuCategory.class,
+								R.eq("parent", root.getId())));
 			}
 		}
 		EnvManager.setDianpuCats(dianpuCats);
@@ -97,9 +99,10 @@ public class TaobaoDianpuCommand {
 						count++;
 						for (DianPuCategory cat : cats) {
 							shops = adminService.findAllByCriterionAndOrder(
-									new Page<DianPu>(1, 5), DianPu.class, Order
-											.asc("id"), R.eq("secCat", cat
-											.getId()), R.isNotNull("sid"));// 查询子分类的店铺
+									new Page<DianPu>(1, 5), DianPu.class,
+									Order.asc("id"),
+									R.eq("secCat", cat.getId()),
+									R.isNotNull("sid"));// 查询子分类的店铺
 							cat.setShops(shops);
 						}
 						model.setRoot(root);
@@ -139,10 +142,8 @@ public class TaobaoDianpuCommand {
 				for (DianPuCategory root : dRoots) {
 					dpm = new DianPuModel();
 					dpm.setRoot(root);
-					dpm
-							.setCats(adminService.findAllByCriterion(
-									DianPuCategory.class, R.eq("parent", root
-											.getId())));// 设置子分类
+					dpm.setCats(adminService.findAllByCriterion(
+							DianPuCategory.class, R.eq("parent", root.getId())));// 设置子分类
 					dianpuCats.add(dpm);
 				}
 			}
@@ -173,16 +174,21 @@ public class TaobaoDianpuCommand {
 					parser = new Parser(dp.getUrl());
 					String nick = null;
 					if ("mall".equals(dp.getSellerCredit())) {// 商城
-						nick = parser.extractAllNodesThatMatch(
-								new HasAttributeFilter("class", "shop-title"))
-								.elementAt(0).getChildren()
+						nick = parser
+								.extractAllNodesThatMatch(
+										new HasAttributeFilter("class",
+												"shop-title"))
+								.elementAt(0)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("a"), true)
 								.elementAt(0).toPlainTextString();
 					} else {// 普通
-						nick = parser.extractAllNodesThatMatch(
-								new HasAttributeFilter("class", "hCard fn"))
-								.elementAt(0).toPlainTextString();
+						nick = parser
+								.extractAllNodesThatMatch(
+										new HasAttributeFilter("class",
+												"hCard fn")).elementAt(0)
+								.toPlainTextString();
 					}
 					if (StringUtils.isNotEmpty(nick)) {
 						Shop shop = null;
@@ -194,8 +200,8 @@ public class TaobaoDianpuCommand {
 						}
 						if (shop != null) {
 							List<TaobaokeShop> shops = TaobaoFetchUtil
-									.convertTaobaoShop("0", "fxy060608", String
-											.valueOf(shop.getSid()));
+									.convertTaobaoShop("0", "fxy060608",
+											String.valueOf(shop.getSid()), null);
 							dp.setNick(nick);
 							dp.setSid(shop.getSid());
 							dp.setCid(shop.getCid());
@@ -234,8 +240,9 @@ public class TaobaoDianpuCommand {
 			try {
 				parser = new Parser("http://dianpu.tao123.com/" + cat.getName()
 						+ "/");
-				NodeList paginator = parser.extractAllNodesThatMatch(
-						new HasAttributeFilter("class", "paginator"))
+				NodeList paginator = parser
+						.extractAllNodesThatMatch(
+								new HasAttributeFilter("class", "paginator"))
 						.elementAt(0).getChildren();
 				NodeList aList = paginator.extractAllNodesThatMatch(
 						new TagNameFilter("a"), true);
@@ -285,7 +292,8 @@ public class TaobaoDianpuCommand {
 							if (href != null) {
 								String link = href.getLink();
 
-								ImageTag image = (ImageTag) href.getChildren()
+								ImageTag image = (ImageTag) href
+										.getChildren()
 										.extractAllNodesThatMatch(
 												new TagNameFilter("img"), true)
 										.elementAt(0);
@@ -306,8 +314,8 @@ public class TaobaoDianpuCommand {
 											"class").replace("rank r", "");
 									String city = tag3.toPlainTextString();
 									DianPu dianpu = adminService
-											.findByCriterion(DianPu.class, R
-													.eq("url", link));
+											.findByCriterion(DianPu.class,
+													R.eq("url", link));
 									if (dianpu == null) {
 										dianpu = new DianPu();
 										dianpu.setUrl(link);
@@ -352,13 +360,16 @@ public class TaobaoDianpuCommand {
 		try {
 			parser = new Parser("http://dianpu.tao123.com");
 			parser.setEncoding("gbk");
-			NodeList as1 = parser.extractAllNodesThatMatch(
-					new HasAttributeFilter("data-area", "sidebar"))
-					.elementAt(0).getChildren().extractAllNodesThatMatch(
-							new TagNameFilter("li"), true);
+			NodeList as1 = parser
+					.extractAllNodesThatMatch(
+							new HasAttributeFilter("data-area", "sidebar"))
+					.elementAt(0).getChildren()
+					.extractAllNodesThatMatch(new TagNameFilter("li"), true);
 			if (as1 != null && as1.size() > 0) {
 				for (int i = 0; i < as1.size(); i++) {
-					NodeList as = as1.elementAt(i).getChildren()
+					NodeList as = as1
+							.elementAt(i)
+							.getChildren()
 							.extractAllNodesThatMatch(new TagNameFilter("a"),
 									true);
 					if (as != null && as.size() > 0) {

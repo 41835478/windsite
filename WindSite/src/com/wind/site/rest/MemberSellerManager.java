@@ -44,8 +44,8 @@ public class MemberSellerManager {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView manager(HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		T_TaobaokeShop shop = memberService.get(T_TaobaokeShop.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		T_TaobaokeShop shop = memberService.get(T_TaobaokeShop.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (shop == null) {
 			Shop nShop = TaobaoFetchUtil.getTaobaoShop(EnvManager.getUser()
 					.getAppType(), EnvManager.getUser().getNick());
@@ -68,7 +68,8 @@ public class MemberSellerManager {
 				}
 				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
 						EnvManager.getAppType(),
-						EnvManager.getUser().getNick(), nShop.getSid() + "");
+						EnvManager.getUser().getNick(), nShop.getSid() + "",
+						EnvManager.getUser().getPid());
 				if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 					shop.setCommissionRate(shops.get(0).getCommissionRate());
 					shop.setIsValid(true);
@@ -79,8 +80,8 @@ public class MemberSellerManager {
 				memberService.save(shop);
 				User user = memberService.get(User.class, EnvManager.getUser()
 						.getId());
-				user.setSites(memberService.findAllByCriterion(Site.class, R
-						.eq("user_id", user.getUser_id())));
+				user.setSites(memberService.findAllByCriterion(Site.class,
+						R.eq("user_id", user.getUser_id())));
 				user.setSid(shop.getSid() + "");
 				memberService.update(user);
 			}
@@ -98,8 +99,8 @@ public class MemberSellerManager {
 	@RequestMapping(value = "/shop/syn", method = RequestMethod.GET)
 	@ResponseBody
 	public String synShop(HttpServletRequest request) {
-		T_TaobaokeShop shop = memberService.get(T_TaobaokeShop.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		T_TaobaokeShop shop = memberService.get(T_TaobaokeShop.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		Shop nShop = TaobaoFetchUtil.getTaobaoShop(EnvManager.getUser()
 				.getAppType(), EnvManager.getUser().getNick());
 		if (nShop == null) {
@@ -121,7 +122,8 @@ public class MemberSellerManager {
 			}
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
 					EnvManager.getUser().getAppType(), EnvManager.getUser()
-							.getNick(), shop.getSid() + "");
+							.getNick(), shop.getSid() + "", EnvManager
+							.getUser().getPid());
 			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 				shop.setCommissionRate(shops.get(0).getCommissionRate());
 				shop.setIsValid(true);
@@ -143,7 +145,8 @@ public class MemberSellerManager {
 			}
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
 					EnvManager.getUser().getAppType(), EnvManager.getUser()
-							.getNick(), shop.getSid() + "");
+							.getNick(), shop.getSid() + "", EnvManager
+							.getUser().getPid());
 			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 				shop.setCommissionRate(shops.get(0).getCommissionRate());
 				shop.setIsValid(true);
@@ -153,8 +156,8 @@ public class MemberSellerManager {
 			memberService.update(shop);
 		}
 		User user = memberService.get(User.class, EnvManager.getUser().getId());
-		user.setSites(memberService.findAllByCriterion(Site.class, R.eq(
-				"user_id", user.getUser_id())));
+		user.setSites(memberService.findAllByCriterion(Site.class,
+				R.eq("user_id", user.getUser_id())));
 		user.setSid(shop.getSid() + "");
 		memberService.update(user);
 		return WindSiteRestUtil.SUCCESS;
@@ -206,8 +209,10 @@ public class MemberSellerManager {
 	public ModelAndView taokeManager(HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("cats", EnvManager.getRootCats());
-		result.put("shop", memberService.get(T_TaobaokeShop.class, Long
-				.valueOf(EnvManager.getUser().getUser_id())));
+		result.put(
+				"shop",
+				memberService.get(T_TaobaokeShop.class,
+						Long.valueOf(EnvManager.getUser().getUser_id())));
 		return new ModelAndView("site/member/seller/taokes", result);
 	}
 
@@ -251,10 +256,10 @@ public class MemberSellerManager {
 		result.put("taokes", memberService.findByHql(page, hql, params));
 		result.put("page", page);
 		if (EnvManager.getUser().getUc_id() != null) {
-			result.put("friendIds", ucService.getFriends(EnvManager.getUser()
-					.getUc_id()));// 好友列表
-			result.put("unFriendIds", ucService.getUnFriends(EnvManager
-					.getUser().getUc_id()));// 未通过验证的好友列表
+			result.put("friendIds",
+					ucService.getFriends(EnvManager.getUser().getUc_id()));// 好友列表
+			result.put("unFriendIds",
+					ucService.getUnFriends(EnvManager.getUser().getUc_id()));// 未通过验证的好友列表
 		} else {
 			result.put("friendIds", "");
 			result.put("unFriendIds", "");

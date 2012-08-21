@@ -140,8 +140,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	public Member validateFanliMember(String nick, String username,
 			String password, String siteId, String userId) {
 		Member member = null;
-		MemberInfo info = this.findByCriterion(MemberInfo.class, R.eq(
-				"username", username));
+		MemberInfo info = this.findByCriterion(MemberInfo.class,
+				R.eq("username", username));
 		if (info != null) {// 会员资料
 			if (password.equals(info.getPwd())) {
 				member = this.findByCriterion(Member.class, R.eq("info", info),
@@ -182,21 +182,21 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	public Member validateCookieFanliMember(String nick, String username,
 			String password, String siteId, String userId) {
 		Member member = null;
-		MemberInfo info = this.findByCriterion(MemberInfo.class, R.eq(
-				"username", username));
+		MemberInfo info = this.findByCriterion(MemberInfo.class,
+				R.eq("username", username));
 		if (info != null) {// 会员资料
 			// 密码对比
 			MessageDigest md5;
 			try {
 				md5 = MessageDigest.getInstance("MD5");
-				byte[] bytes = md5.digest(info.getPwd().toString().getBytes(
-						"UTF-8"));
+				byte[] bytes = md5.digest(info.getPwd().toString()
+						.getBytes("UTF-8"));
 				BASE64Encoder encode = new BASE64Encoder();
 				String pwd = URLEncoder.encode(encode.encode(bytes), "UTF-8");
 				if (password.equals(pwd)) {
-					member = this.findByCriterion(Member.class, R.eq("info",
-							info), R.eq("user_id", userId), R.eq("site_id",
-							siteId));
+					member = this.findByCriterion(Member.class,
+							R.eq("info", info), R.eq("user_id", userId),
+							R.eq("site_id", siteId));
 					if (member == null) {// 新增该会员为当前站点
 						member = new Member();
 						member.setInfo(info);// 设置基本信息
@@ -590,8 +590,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			user.setIsNew(true);
 		} else {
 			// 手动查询站点,并设置进当前用户
-			user.setSites(this.findAllByCriterion(Site.class, R.eq("user_id",
-					user_id)));
+			user.setSites(this.findAllByCriterion(Site.class,
+					R.eq("user_id", user_id)));
 			if (user.getSites().size() == 0) {// 处理应用内部不知何处将站点的用户标识设置为空的BUG
 				String hql = "select new map(site_id as site_id) from UserPage where user_id="
 						+ user.getUser_id();
@@ -599,8 +599,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 						new Page<Map<String, Object>>(1, 1), hql,
 						new HashMap<String, Object>());
 				if (map.size() > 0) {
-					Site site = this.get(Site.class, String.valueOf(map.get(0)
-							.get("site_id")));
+					Site site = this.get(Site.class,
+							String.valueOf(map.get(0).get("site_id")));
 					if (site != null) {
 						site.setUser_id(user_id);
 						List<Site> sites = new ArrayList<Site>();
@@ -662,8 +662,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		Site site = user.getSites().get(0);
 		if ((user.getUsb() != null && user.getUsb().getVersionNo() >= 2)) {
 			user.setExpired(null);
-			SiteCommission commission = this.get(SiteCommission.class, site
-					.getId());
+			SiteCommission commission = this.get(SiteCommission.class,
+					site.getId());
 			if (commission == null) {
 				// 新增返利
 				commission = new SiteCommission();
@@ -712,8 +712,9 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				CommandExecutor.getCommands().add(command);
 			}
 			List<FanliClass> clazzes = this.findAllByCriterion(
-					FanliClass.class, R.eq("type", 0), R.eq("site_id", site
-							.getId()), R.eq("user_id", user.getUser_id()));
+					FanliClass.class, R.eq("type", 0),
+					R.eq("site_id", site.getId()),
+					R.eq("user_id", user.getUser_id()));
 			if (clazzes.size() == 0) {
 				// 新增默认文章管理【帮助中心】
 				FanliClass clazz = new FanliClass();
@@ -816,8 +817,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 						if (null == user.getPid()) {
 							synPid(user);
 						}
-						Long pid = Long.valueOf(user.getPid().replaceAll("mm_",
-								"").replaceAll("_0_0", ""));
+						Long pid = Long.valueOf(user.getPid()
+								.replaceAll("mm_", "").replaceAll("_0_0", ""));
 						isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
 					} catch (Exception e) {
 						isFC = false;
@@ -834,20 +835,20 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				user.setAppType("0");
 				tus.setVersionNo(vn);
 			} else if (vn == 0f) {// 如果未订购月租型，则查询分成型
-				//第一步:先验证是否本地有订购
-				Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
-						.getUser_id());
+				// 第一步:先验证是否本地有订购
+				Float versionNo = WindSiteRestUtil.getNativeUsb(this,
+						user.getUser_id());
 				if (versionNo > 1.5f) {
 					user.setAppType("0");
 					tus.setVersionNo(versionNo);
-				}else{
+				} else {
 					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
 							.replaceAll("_0_0", ""));
 					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
 					if (isFC) {
 						user.setAppType("1");// 如果订购了分成版，则设置为分成
 						tus.setVersionNo(1.5f);
-					}else {
+					} else {
 						user.setAppType("0");
 						tus.setVersionNo(1f);
 						EnvManager.setUser(null);
@@ -869,8 +870,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	}
 
 	private void setAdPlanisValid(String nick) {
-		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class, R.eq("nick",
-				nick));
+		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class,
+				R.eq("nick", nick));
 		if (plans != null && plans.size() > 0) {
 			for (ADPlan plan : plans) {
 				plan.setIsValid(true);
@@ -882,12 +883,12 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	private void synShop(User user) {
 		if (StringUtils.isEmpty(user.getSid())) {
 			try {
-				Shop shop = TaobaoFetchUtil.getTaobaoShop(EnvManager
-						.getAppType(), user.getNick());
+				Shop shop = TaobaoFetchUtil.getTaobaoShop(
+						EnvManager.getAppType(), user.getNick());
 				if (shop != null) {
 					user.setSid(String.valueOf(shop.getSid()));
-					T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class, Long
-							.valueOf(user.getUser_id()));
+					T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class,
+							Long.valueOf(user.getUser_id()));
 					if (oShop == null) {// 店铺不存在则保存
 						oShop = new T_TaobaokeShop();
 						oShop.setUserId(Long.valueOf(user.getUser_id()));
@@ -904,7 +905,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 						}
 						List<TaobaokeShop> shops = TaobaoFetchUtil
 								.convertTaobaoShop(EnvManager.getAppType(),
-										user.getNick(), shop.getSid() + "");
+										user.getNick(), shop.getSid() + "",
+										user.getPid());
 						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 							oShop.setCommissionRate(shops.get(0)
 									.getCommissionRate());
@@ -928,7 +930,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 						}
 						List<TaobaokeShop> shops = TaobaoFetchUtil
 								.convertTaobaoShop(EnvManager.getAppType(),
-										user.getNick(), shop.getSid() + "");
+										user.getNick(), shop.getSid() + "",
+										user.getPid());
 						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 							oShop.setCommissionRate(shops.get(0)
 									.getCommissionRate());
@@ -952,8 +955,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	}
 
 	public void synLimit(User user) {
-		Limit limit = this.findByCriterion(Limit.class, R.eq("user_id", user
-				.getUser_id()));
+		Limit limit = this.findByCriterion(Limit.class,
+				R.eq("user_id", user.getUser_id()));
 		if (limit == null) {
 			limit = new Limit();
 			limit.setLayouts(2);
@@ -1070,7 +1073,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
 			String url = TaobaoFetchUtil.getItemCatUrl(user.getAppType(),
-					request);
+					request, user.getPid());
 			String pid = url.split("pid=")[1].split("&")[0];
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

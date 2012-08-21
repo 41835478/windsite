@@ -105,8 +105,8 @@ public class AutoDeployPageCommand {
 			}
 		}
 
-		generateSiteMap(pageService.findAllByCriterion(T_UserSubscribe.class, R
-				.gt("versionNo", 1.5f)));// 生成返利版站点地图
+		generateSiteMap(pageService.findAllByCriterion(T_UserSubscribe.class,
+				R.gt("versionNo", 1.5f)));// 生成返利版站点地图
 	}
 
 	private static NodeClassFilter LINK_FILTER = new NodeClassFilter(
@@ -137,7 +137,7 @@ public class AutoDeployPageCommand {
 				try {
 					List<TaobaokeShop> shops = TaobaoFetchUtil
 							.convertTaobaoShop("0", "fxy060608", brand.getSid()
-									.toString());
+									.toString(), null);
 					if (shops != null && shops.size() == 1) {
 						brand.setIsValid(true);
 					} else {
@@ -172,8 +172,8 @@ public class AutoDeployPageCommand {
 		for (T_UserSubscribe usb : usbs) {
 			try {
 				set = new HashSet<ExtWebSiteMapUrl>();
-				Site site = pageService.findByCriterion(Site.class, R.eq(
-						"user_id", usb.getUser_id()));
+				Site site = pageService.findByCriterion(Site.class,
+						R.eq("user_id", usb.getUser_id()));
 
 				if (site != null && site.getStatus() == 1
 						&& StringUtils.isNotEmpty(site.getWww())) {// 如果站点存在，并且已发布，并且绑定了顶级域名
@@ -190,20 +190,21 @@ public class AutoDeployPageCommand {
 							R.eq("status", true), R.eq("isIndex", false));// 所有子页面
 					String www = "http://" + site.getWww();
 					try {
-						wsg = WebSitemapGenerator.builder(
-								www,
-								new File(EnvManager.getUserPath("shop"
-										+ site.getUser_id()))).dateFormat(
-								dateFormat).autoValidate(true).gzip(true)
-								.build();
+						wsg = WebSitemapGenerator
+								.builder(
+										www,
+										new File(EnvManager.getUserPath("shop"
+												+ site.getUser_id())))
+								.dateFormat(dateFormat).autoValidate(true)
+								.gzip(true).build();
 						ExtWebSiteMapUrl url = new ExtWebSiteMapUrl(
-								new WebSitemapUrl.Options(www).lastMod(
-										new Date()).priority(1.0).changeFreq(
-										ChangeFreq.DAILY));
+								new WebSitemapUrl.Options(www)
+										.lastMod(new Date()).priority(1.0)
+										.changeFreq(ChangeFreq.DAILY));
 						ExtWebSiteMapUrl pageUrl = new ExtWebSiteMapUrl(
-								new WebSitemapUrl.Options(www).lastMod(
-										new Date()).priority(1.0).changeFreq(
-										ChangeFreq.DAILY));
+								new WebSitemapUrl.Options(www)
+										.lastMod(new Date()).priority(1.0)
+										.changeFreq(ChangeFreq.DAILY));
 						pageUrls.add(pageUrl);// 加入要抓取的页面
 						set.add(url);// 加入首页
 						// 自定义页面
@@ -213,19 +214,19 @@ public class AutoDeployPageCommand {
 										new WebSitemapUrl.Options(www
 												+ "/pages/"
 												+ page.getCreated().getTime()
-												+ ".html").lastMod(
-												page.getDeployDate()).priority(
-												1.0).changeFreq(
-												ChangeFreq.DAILY));
+												+ ".html")
+												.lastMod(page.getDeployDate())
+												.priority(1.0)
+												.changeFreq(ChangeFreq.DAILY));
 								set.add(url);// 加入自定义,权重1.0,每天更新
 								pageUrl = new ExtWebSiteMapUrl(
 										new WebSitemapUrl.Options(www
 												+ "/pages/"
 												+ page.getCreated().getTime()
-												+ ".html").lastMod(
-												page.getDeployDate()).priority(
-												0.9).changeFreq(
-												ChangeFreq.DAILY));
+												+ ".html")
+												.lastMod(page.getDeployDate())
+												.priority(0.9)
+												.changeFreq(ChangeFreq.DAILY));
 								pageUrls.add(pageUrl);// 加入要抓取的页面
 							}
 						}
@@ -233,8 +234,8 @@ public class AutoDeployPageCommand {
 						for (String huabao : huabaos) {
 							url = new ExtWebSiteMapUrl(
 									new WebSitemapUrl.Options(www + "/huabao/"
-											+ huabao + ".html").lastMod(
-											new Date()).priority(1.0)
+											+ huabao + ".html")
+											.lastMod(new Date()).priority(1.0)
 											.changeFreq(ChangeFreq.DAILY));
 							set.add(url);// 加入画报页,权重1.0,每天更新
 						}
@@ -243,8 +244,8 @@ public class AutoDeployPageCommand {
 							url = new ExtWebSiteMapUrl(
 									new WebSitemapUrl.Options(www + "/brand/"
 											+ i + ".html").lastMod(new Date())
-											.priority(1.0).changeFreq(
-													ChangeFreq.DAILY));
+											.priority(1.0)
+											.changeFreq(ChangeFreq.DAILY));
 							set.add(url);// 加入画报页,权重1.0,每天更新
 						}
 						// 淘宝频道
@@ -401,9 +402,9 @@ public class AutoDeployPageCommand {
 							try {
 								newUrl = new ExtWebSiteMapUrl(
 										new WebSitemapUrl.Options(link)
-												.lastMod(new Date()).priority(
-														1.0).changeFreq(
-														ChangeFreq.DAILY));
+												.lastMod(new Date())
+												.priority(1.0)
+												.changeFreq(ChangeFreq.DAILY));
 							} catch (MalformedURLException e) {
 								continue;
 							}

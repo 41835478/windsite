@@ -78,8 +78,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void synMyYiqifaMalls(Long userId, Set<MyYiqifaMall> malls) {
-		List<MyYiqifaMall> olds = this.findAllByCriterion(MyYiqifaMall.class, R
-				.eq("pk.user_id", userId));// 获取之前版本
+		List<MyYiqifaMall> olds = this.findAllByCriterion(MyYiqifaMall.class,
+				R.eq("pk.user_id", userId));// 获取之前版本
 		if (olds != null && olds.size() > 0) {
 			Collection<MyYiqifaMall> subs = CollectionUtils.subtract(olds,
 					malls);// 求差删除无效的
@@ -110,8 +110,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			String nick) {
 		for (SiteMapCategory cat : cats) {
 			if (cat.getId() != null) {// 更新分类
-				SiteMapCategory oCat = this.get(SiteMapCategory.class, cat
-						.getId());
+				SiteMapCategory oCat = this.get(SiteMapCategory.class,
+						cat.getId());
 				oCat.setSortOrder(cat.getSortOrder());
 				oCat.setTitle(cat.getTitle());
 				if (SiteMapCategory.CUSTOM.equals(oCat.getType())) {// 自定义
@@ -119,8 +119,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 					if (sites != null && sites.size() > 0) {
 						for (SiteMap site : sites) {
 							if (site.getId() != null) {// 更新
-								SiteMap oSite = this.get(SiteMap.class, site
-										.getId());
+								SiteMap oSite = this.get(SiteMap.class,
+										site.getId());
 								oSite.setDescription(site.getDescription());
 								oSite.setSortOrder(site.getSortOrder());
 								oSite.setTitle(site.getTitle());
@@ -209,8 +209,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 				if (StringUtils.isEmpty(tagStr)) {
 					continue;
 				}
-				tag = this.findByCriterion(ADPlanTag.class, R
-						.eq("name", tagStr));
+				tag = this.findByCriterion(ADPlanTag.class,
+						R.eq("name", tagStr));
 				if (tag == null) {// 新增标签
 					tag = new ADPlanTag();
 					tag.setName(tagStr);
@@ -251,10 +251,10 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			/**
 			 * 查找是否已有主推广计划，【指定类型，指定用户的主推广计划】
 			 */
-			List<ADPlan> defaultPlans = this.findAllByCriterion(ADPlan.class, R
-					.eq("type", plan.getType()), R.eq("isDefault", true), R.eq(
-					"createdBy", EnvManager.getUser().getUser_id()), R.not(R
-					.eq("id", plan.getId())));
+			List<ADPlan> defaultPlans = this.findAllByCriterion(ADPlan.class,
+					R.eq("type", plan.getType()), R.eq("isDefault", true),
+					R.eq("createdBy", EnvManager.getUser().getUser_id()),
+					R.not(R.eq("id", plan.getId())));
 			if (defaultPlans == null || defaultPlans.size() == 0) {// 如果尚未设置主推广计划，则处理该主推广广告计划
 				ADPlanCommand command = new ADPlanCommand();// 产生广告投放异步命令
 				command.setPlan(plan);
@@ -300,8 +300,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 				if (StringUtils.isEmpty(tagStr)) {
 					continue;
 				}
-				tag = this.findByCriterion(ADPlanTag.class, R
-						.eq("name", tagStr));
+				tag = this.findByCriterion(ADPlanTag.class,
+						R.eq("name", tagStr));
 				if (tag == null) {// 新增标签
 					tag = new ADPlanTag();
 					tag.setName(tagStr);
@@ -343,10 +343,10 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			/**
 			 * 查找是否已有主推广计划，【指定类型，指定用户的主推广计划】
 			 */
-			List<ADPlan> defaultPlans = this.findAllByCriterion(ADPlan.class, R
-					.eq("type", plan.getType()), R.eq("isDefault", true), R.eq(
-					"createdBy", EnvManager.getUser().getUser_id()), R.not(R
-					.eq("id", plan.getId())));
+			List<ADPlan> defaultPlans = this.findAllByCriterion(ADPlan.class,
+					R.eq("type", plan.getType()), R.eq("isDefault", true),
+					R.eq("createdBy", EnvManager.getUser().getUser_id()),
+					R.not(R.eq("id", plan.getId())));
 			if (!plan.getIsDefault()
 					&& (defaultPlans == null || defaultPlans.size() == 0)) {// 如果尚未设置主推广计划，则处理该主推广广告计划
 				// TODO 正常修改需要处理不产生异常事件
@@ -382,8 +382,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 					+ site.getDomainName() + "】");
 		}
 		domainName = domainName.toLowerCase();
-		List<Site> sites = this.findAllByCriterion(Site.class, R.eq(
-				"domainName", domainName));
+		List<Site> sites = this.findAllByCriterion(Site.class,
+				R.eq("domainName", domainName));
 		if (sites.size() > 0) {
 			SystemException.handleMessageException("自定义二级域名【" + domainName
 					+ "】重复,请重新输入");
@@ -482,11 +482,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 						+ site.getTitle()
 						+ "</a><p>"
 						+ (StringUtils.isNotEmpty(thread.getDescription()) ? thread
-								.getDescription()
-								: (StringUtils
-										.isNotEmpty(site.getDescription()) ? site
-										.getDescription()
-										: "")) + "</p>";
+								.getDescription() : (StringUtils
+								.isNotEmpty(site.getDescription()) ? site
+								.getDescription() : "")) + "</p>";
 			}
 			body_data.put("title", title);
 			body_data.put("description", description);
@@ -684,9 +682,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 
 	@Override
 	public void deleteMyFavoriteWidget(String cwid) {
-		FavoriteWidget fw = this.findByCriterion(FavoriteWidget.class, R.eq(
-				"widget.id", cwid), R.eq("user_id", EnvManager.getUser()
-				.getUser_id()));
+		FavoriteWidget fw = this.findByCriterion(FavoriteWidget.class,
+				R.eq("widget.id", cwid),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (fw != null) {
 			CustomeWidget cw = fw.getWidget();
 			Integer favorite = cw.getFavorite();
@@ -829,7 +827,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	public void addItem2ItemGroup(String numiids, String gid) {
 		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
 				.getUser().getAppType(), numiids, EnvManager.getUser()
-				.getNick());
+				.getNick(), EnvManager.getUser().getPid());
 		Integer count = this.countItemsByGid(gid);
 		if (items != null && items.size() > 0 && count < 30) {
 			Integer length = items.size();
@@ -839,8 +837,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			for (int j = 0; j < length; j++) {
 				TaobaokeItem i = items.get(j);
 				T_TaobaokeItem item = this.findByCriterion(
-						T_TaobaokeItem.class, R.eq("num_iid", i.getNumIid()), R
-								.eq("gid", gid));
+						T_TaobaokeItem.class, R.eq("num_iid", i.getNumIid()),
+						R.eq("gid", gid));
 				if (item == null) {// 新增
 					item = new T_TaobaokeItem();
 					TaobaoFetchUtil.convertItems(item, i);
@@ -861,11 +859,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		Shop shop = TaobaoFetchUtil.getTaobaoShop("0", nick);
 		if (shop != null) {
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop("0",
-					"fxy060608", String.valueOf(shop.getSid()));
+					"fxy060608", String.valueOf(shop.getSid()), null);
 			if (shops != null && shops.size() == 1) {
 				TaobaokeShop tShop = shops.get(0);
-				T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class, tShop
-						.getUserId());
+				T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class,
+						tShop.getUserId());
 				if (oShop != null) {// 更新
 					oShop.setCid(shop.getCid());
 					oShop.setTitle(shop.getTitle());
@@ -914,8 +912,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		String[] idArray = ids.split(",");
 		for (String id : idArray) {
 			if (StringUtils.isNotEmpty(id)) {
-				this.deleteAll(W_ShopFavorite.class, R.eq("user_id", Long
-						.valueOf(id)), R.eq("gid", gid));
+				this.deleteAll(W_ShopFavorite.class,
+						R.eq("user_id", Long.valueOf(id)), R.eq("gid", gid));
 			}
 		}
 	}
@@ -926,9 +924,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			for (String id : ids) {
 				if (StringUtils.isNotEmpty(id)) {
 					W_ShopFavorite sf = this.findByCriterion(
-							W_ShopFavorite.class, R
-									.eq("gid", Long.valueOf(gid)), R.eq(
-									"user_id", Long.valueOf(id)));
+							W_ShopFavorite.class,
+							R.eq("gid", Long.valueOf(gid)),
+							R.eq("user_id", Long.valueOf(id)));
 					if (sf == null) {
 						sf = new W_ShopFavorite();
 						sf.setGid(gid);
@@ -942,9 +940,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	@Override
 	public void setSiteIndex(String tid, FreeMarkerConfigurer fcg,
 			IDeployZone deployZone, WidgetCustomerMethod widgetCustomer) {
-		UserTemplate index = this.findByCriterion(UserTemplate.class, R.eq(
-				"user_id", EnvManager.getUser().getUser_id()), R
-				.isNull("parent"));
+		UserTemplate index = this.findByCriterion(UserTemplate.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.isNull("parent"));
 		if (index != null) {
 			UserTemplate current = this.get(UserTemplate.class, tid);
 			if (current != null) {// 准备替换
@@ -954,8 +952,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 				index.setIsDefault(false);
 				deployZone.deploy(fcg, EnvManager.getUser().getUser_id(),
 						current.getId(), widgetCustomer);// 部署新首页
-				deployZone.deploy(fcg, EnvManager.getUser().getUser_id(), index
-						.getId(), widgetCustomer);// 部署旧首页
+				deployZone.deploy(fcg, EnvManager.getUser().getUser_id(),
+						index.getId(), widgetCustomer);// 部署旧首页
 			}
 		}
 	}
@@ -977,8 +975,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 				SystemException.handleMessageException("您无权限上传该站点缩略图");
 			}
 		}
-		CoolSite coolSite = this.findByCriterion(CoolSite.class, R.eq(
-				"site.id", sid));
+		CoolSite coolSite = this.findByCriterion(CoolSite.class,
+				R.eq("site.id", sid));
 		if (coolSite != null) {
 			coolSite.setIsValid(false);
 			coolSite.setRemark(null);
@@ -1052,8 +1050,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			return;
 		}
 		List<TaobaokeItem> tItems = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppType(), num_iids.substring(0, num_iids
-				.length() - 1), null);
+				.getUser().getAppType(), num_iids.substring(0,
+				num_iids.length() - 1), null, null);
 		if (tItems == null) {
 			tItems = new ArrayList<TaobaokeItem>();
 		}
@@ -1071,8 +1069,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			item.setIsValid(isValid);
 			// 查询当前淘客是否已有此商品
 			T_TaobaokeItem oldItem = this.findByCriterion(T_TaobaokeItem.class,
-					R.eq("num_iid", item.getNum_iid()), R.eq("gid", item
-							.getGid()));
+					R.eq("num_iid", item.getNum_iid()),
+					R.eq("gid", item.getGid()));
 			if (oldItem != null) {// 如果存在,将当前商品最新信息同步至数据库
 				TaobaoFetchUtil.convertItems(oldItem, item);
 				oldItem.setIsValid(true);
@@ -1092,9 +1090,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		ItemGroup group = null;
 		if (id != null) {
 			if (StringUtils.isNotEmpty(name)) {
-				ItemGroup oldGroup = this.findByCriterion(ItemGroup.class, R
-						.eq("name", name), R.eq("user_id", EnvManager.getUser()
-						.getUser_id()));
+				ItemGroup oldGroup = this.findByCriterion(ItemGroup.class,
+						R.eq("name", name),
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 				if (oldGroup != null) {
 					SystemException.handleMessageException("重命名推广组[" + name
 							+ "]冲突，请重新命名");
@@ -1121,9 +1119,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		ShopGroup group = null;
 		if (id != null) {
 			if (StringUtils.isNotEmpty(name)) {
-				ShopGroup oldGroup = this.findByCriterion(ShopGroup.class, R
-						.eq("name", name), R.eq("user_id", EnvManager.getUser()
-						.getUser_id()));
+				ShopGroup oldGroup = this.findByCriterion(ShopGroup.class,
+						R.eq("name", name),
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 				if (oldGroup != null) {
 					SystemException.handleMessageException("重命名店铺分组[" + name
 							+ "]冲突，请重新命名");
@@ -1207,11 +1205,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			SystemException.handleMessageException("您无权删除[" + group.getName()
 					+ "]中的无效商品！");
 		}
-		this.deleteAll(T_TaobaokeItem.class, R.eq("gid", id), R.eq("isValid",
-				false));
+		this.deleteAll(T_TaobaokeItem.class, R.eq("gid", id),
+				R.eq("isValid", false));
 		// 修改检测状态及结果
-		ItemGroupDoctor doctor = this.findByCriterion(ItemGroupDoctor.class, R
-				.eq("group.id", id));
+		ItemGroupDoctor doctor = this.findByCriterion(ItemGroupDoctor.class,
+				R.eq("group.id", id));
 		if (doctor != null) {
 			doctor.setState(ItemGroupDoctor.STATE_SUCCESS);
 			doctor.setMsg("共有<span style='color:red;font-weight:bold;'>[" + 0
@@ -1303,7 +1301,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	}
 
 	/**
-	 *同步PID
+	 * 同步PID
 	 * 
 	 * @param user
 	 */
@@ -1317,7 +1315,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		request.setNick(user.getNick());
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
-			String url = TaobaoFetchUtil.getItemCatUrl("0", request);
+			String url = TaobaoFetchUtil.getItemCatUrl("0", request,
+					user.getPid());
 			String pid = StringUtils.substringBetween(url, "&p=", "&u=");
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);
@@ -1359,8 +1358,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		// }
 		user.setCity(tUser.getLocation() != null ? tUser.getLocation()
 				.getCity() : null);
-		user.setConsumer_protection("true"
-				.equals(tUser.getConsumerProtection()) ? true : false);
+		user.setConsumer_protection("true".equals(tUser.getConsumerProtection()) ? true
+				: false);
 		user.setHas_more_pic(tUser.getHasMorePic());
 		user.setItem_img_num(tUser.getItemImgNum().intValue());
 		user.setItem_img_size(tUser.getItemImgSize().intValue());
@@ -1373,13 +1372,13 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		user.setT_status(tUser.getStatus());
 		user.setT_type(tUser.getType());
 		user.setIsNew(EnvManager.getUser().getIsNew());
-		Limit limit = this.findByCriterion(Limit.class, R.eq("user_id", user
-				.getUser_id()));
+		Limit limit = this.findByCriterion(Limit.class,
+				R.eq("user_id", user.getUser_id()));
 		user.setLimit(limit);
-		T_UserSubscribe usb = this.findByCriterion(T_UserSubscribe.class, R.eq(
-				"user_id", user.getUser_id()));
-		user.setSites(this.findAllByCriterion(Site.class, R.eq("user_id", user
-				.getUser_id())));
+		T_UserSubscribe usb = this.findByCriterion(T_UserSubscribe.class,
+				R.eq("user_id", user.getUser_id()));
+		user.setSites(this.findAllByCriterion(Site.class,
+				R.eq("user_id", user.getUser_id())));
 		user.setUsb(usb);
 		EnvManager.setUser(user);
 

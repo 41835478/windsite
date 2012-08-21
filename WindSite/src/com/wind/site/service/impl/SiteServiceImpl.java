@@ -834,26 +834,28 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				user.setAppType("0");
 				tus.setVersionNo(vn);
 			} else if (vn == 0f) {// 如果未订购月租型，则查询分成型
-				Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
-						.replaceAll("_0_0", ""));
-				Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-				if (isFC) {
-					user.setAppType("1");// 如果订购了分成版，则设置为分成
-					tus.setVersionNo(1.5f);
-					Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
-							.getUser_id());
-					if (versionNo > 1.5f) {
-						user.setAppType("0");
-						tus.setVersionNo(versionNo);
-					}
-				} else {
+				//第一步:先验证是否本地有订购
+				Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
+						.getUser_id());
+				if (versionNo > 1.5f) {
 					user.setAppType("0");
-					tus.setVersionNo(1f);
-					EnvManager.setUser(null);
-					SystemException
-							.handleMessageException("当前淘宝帐号【"
-									+ user.getNick()
-									+ "】为无效用户，选择下列任一版本（咨询客服QQ：153647646）！<ul><li>1.月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li><li>2.分成版：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)<a href=\"http://www.alimama.com/membersvc/member/login.htm\" target=\"_blank\">淘宝联盟</a>--->淘宝客--->API接入--->新淘网分成版--->立即使用</li></ul>");
+					tus.setVersionNo(versionNo);
+				}else{
+					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
+							.replaceAll("_0_0", ""));
+					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+					if (isFC) {
+						user.setAppType("1");// 如果订购了分成版，则设置为分成
+						tus.setVersionNo(1.5f);
+					}else {
+						user.setAppType("0");
+						tus.setVersionNo(1f);
+						EnvManager.setUser(null);
+						SystemException
+								.handleMessageException("当前淘宝帐号【"
+										+ user.getNick()
+										+ "】为无效用户，选择下列任一版本（咨询客服QQ：153647646）！<ul><li>1.月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li><li>2.分成版：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)<a href=\"http://www.alimama.com/membersvc/member/login.htm\" target=\"_blank\">淘宝联盟</a>--->淘宝客--->API接入--->新淘网分成版--->立即使用</li></ul>");
+					}
 				}
 			}
 			if (isRefresh) {// 如果之前是无效的，则刷新最新

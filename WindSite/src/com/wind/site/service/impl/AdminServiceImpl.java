@@ -80,28 +80,30 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 	}
 
 	public void synVersionNo(User user) {// 仅校验非淘宝服务月租用户是否订购分成版
-		List<ArticleUserSubscribe> subs = TaobaoFetchUtil.vasSubscribeGet(user
-				.getNick(), TaobaoFetchUtil.VAS_APPSTORE);
+		List<ArticleUserSubscribe> subs = TaobaoFetchUtil.vasSubscribeGet(
+				user.getNick(), TaobaoFetchUtil.VAS_APPSTORE);
 		Float vn = TaobaoFetchUtil.convertVersionNo(subs);
 		if (vn == 0f) {// 如果未订购月租型，则查询分成型
-			if (null == user.getPid()) {
-				synPid(user);
-			}
-			Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
-					.replaceAll("_0_0", ""));
-			Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-			if (isFC) {
-				vn = 1.5f;
-				Float versionNo = WindSiteRestUtil.getNativeUsb(this, user
-						.getUser_id());
-				if (versionNo > 1.5f) {
-					vn = versionNo;
+			Float versionNo = WindSiteRestUtil.getNativeUsb(this,
+					user.getUser_id());
+			if (versionNo > 1.5f) {
+				vn = versionNo;
+			} else {
+				if (null == user.getPid()) {
+					synPid(user);
+				}
+				Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
+						.replaceAll("_0_0", ""));
+				Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+				if (isFC) {
+					vn = 1.5f;
 				}
 			}
+
 		}
 		if (vn == 0f) {
-			T_UserSubscribe tus = this.get(T_UserSubscribe.class, user
-					.getUser_id());
+			T_UserSubscribe tus = this.get(T_UserSubscribe.class,
+					user.getUser_id());
 			tus.setVersionNo(0f);
 			tus.setNick(user.getNick());
 			this.update(tus);
@@ -158,12 +160,12 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 		Map<String, String> result = new HashMap<String, String>();
 		if (wdhs.size() > 0) {
 			for (WeiboDomainHistory wdh : wdhs) {
-				T_UserSubscribe usb = this.get(T_UserSubscribe.class, wdh
-						.getUser_id());
+				T_UserSubscribe usb = this.get(T_UserSubscribe.class,
+						wdh.getUser_id());
 				if ((usb != null && usb.getVersionNo() >= 2)) {// 如果是订购用户并且版本是返利或卖家
 					String wDomain = wdh.getTdomain();
-					result.put(wDomain, "http://"
-							+ wDomain.replaceFirst("t.", "www."));
+					result.put(wDomain,
+							"http://" + wDomain.replaceFirst("t.", "www."));
 					result.put(wDomain.replaceFirst("t.", "x."), "http://"
 							+ wDomain.replaceFirst("t.", "www."));
 				}
@@ -246,8 +248,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 				String outCode = report.getOuter_code();
 				if (StringUtils.isNotEmpty(outCode)
 						&& outCode.startsWith("xtfl")) {
-					Member member = this.get(Member.class, Long.valueOf(outCode
-							.replace("xtfl", "")));
+					Member member = this.get(Member.class,
+							Long.valueOf(outCode.replace("xtfl", "")));
 					if (member != null) {
 						report.setNick(member.getInfo().getUsername());
 					}
@@ -265,8 +267,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 		if (result != null && result.size() > 0) {
 			for (Object[] obj : result) {
 				String username = String.valueOf(obj[0]);
-				MemberInfo info = this.findByCriterion(MemberInfo.class, R.eq(
-						"username", username));
+				MemberInfo info = this.findByCriterion(MemberInfo.class,
+						R.eq("username", username));
 				BigInteger id = (BigInteger) obj[7];
 				Member member = this.get(Member.class, id.longValue());
 				if (info != null) {
@@ -319,8 +321,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 
 	@Override
 	public void setAdPlanisValid(String nick) {
-		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class, R.eq("nick",
-				nick));
+		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class,
+				R.eq("nick", nick));
 		if (plans != null && plans.size() > 0) {
 			for (ADPlan plan : plans) {
 				if (!plan.getIsValid())
@@ -332,8 +334,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 
 	@Override
 	public void setAdPlanisInValid(String nick) {
-		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class, R.eq("nick",
-				nick));
+		List<ADPlan> plans = this.findAllByCriterion(ADPlan.class,
+				R.eq("nick", nick));
 		if (plans != null && plans.size() > 0) {
 			for (ADPlan plan : plans) {
 				plan.setIsValid(false);
@@ -342,8 +344,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 					if ("index".equals(plan.getType())) {
 						// 清空淘客投放的无效广告计划
 						List<ADPageSystem> adps = this.findAllByCriterion(
-								ADPageSystem.class, R
-										.eq("pk.aid", plan.getId()));
+								ADPageSystem.class,
+								R.eq("pk.aid", plan.getId()));
 						if (adps != null && adps.size() > 0) {
 							for (ADPageSystem aps : adps) {
 								ADPageStatus apsa = this.get(
@@ -359,8 +361,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 						}
 					} else if ("blog".equals(plan.getType())) {
 						List<ADBlogSystem> adps = this.findAllByCriterion(
-								ADBlogSystem.class, R
-										.eq("pk.aid", plan.getId()));
+								ADBlogSystem.class,
+								R.eq("pk.aid", plan.getId()));
 						if (adps != null && adps.size() > 0) {
 							for (ADBlogSystem aps : adps) {
 								ADBlogStatus apsa = this.get(
@@ -434,10 +436,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 			FileWriter fw = new FileWriter(EnvManager.getApachePath()
 					+ File.separator + "seconddomain.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw
-					.write(site.getDomainName() + ".xintaonet.com"
-							+ "					http://shop" + site.getUser_id()
-							+ ".xintaonet.com");
+			bw.write(site.getDomainName() + ".xintaonet.com"
+					+ "					http://shop" + site.getUser_id() + ".xintaonet.com");
 			bw.newLine();
 			bw.flush();
 			bw.close();
@@ -547,8 +547,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 				params.put("pid", pid);
 				User user = this.findByCriterion(User.class, R.eq("pid", pid));
 				if (user != null) {
-					user.setSites(this.findAllByCriterion(Site.class, R.eq(
-							"user_id", user.getUser_id())));
+					user.setSites(this.findAllByCriterion(Site.class,
+							R.eq("user_id", user.getUser_id())));
 					map.put("user_id", user.getUser_id());
 					map.put("nick", user.getNick());
 					map.put("uc_id", user.getUc_id());
@@ -576,8 +576,8 @@ public class AdminServiceImpl extends BaseServiceImpl implements IAdminService {
 	public Map<String, Object> getWeeklyMailByUserId(String userId) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		User user = this.findByCriterion(User.class, R.eq("user_id", userId));
-		user.setSites(this.findAllByCriterion(Site.class, R.eq("user_id", user
-				.getUser_id())));
+		user.setSites(this.findAllByCriterion(Site.class,
+				R.eq("user_id", user.getUser_id())));
 		user.setUsb(this.get(T_UserSubscribe.class, userId));
 		result.put("user", user);
 		return result;

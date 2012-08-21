@@ -49,8 +49,8 @@ public class TaobaoShopNickCommand {
 	public void synVersionNo(String nick) {
 		User user = adminService
 				.findByCriterion(User.class, R.eq("nick", nick));
-		user.setSites(adminService.findAllByCriterion(Site.class, R.eq(
-				"user_id", user.getUser_id())));
+		user.setSites(adminService.findAllByCriterion(Site.class,
+				R.eq("user_id", user.getUser_id())));
 		if (user != null) {// 如果尚未保存订购记录
 			T_UserSubscribe tus = new T_UserSubscribe();
 			tus.setUser_id(user.getUser_id());
@@ -91,43 +91,44 @@ public class TaobaoShopNickCommand {
 				user.setAppType("0");
 				tus.setVersionNo(vn);
 			} else if (vn == 0f) {// 如果未订购月租型，则查询分成型
-				Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
-						.replaceAll("_0_0", ""));
-				Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-				if (isFC) {
-					user.setAppType("1");// 如果订购了分成版，则设置为分成
-					tus.setVersionNo(1.5f);
-					Float versionNo = WindSiteRestUtil.getNativeUsb(
-							adminService, user.getUser_id());
-					if (versionNo > 1.5f) {
-						user.setAppType("0");
-						tus.setVersionNo(versionNo);
-					}
-					Site site = adminService.findByCriterion(Site.class, R.eq(
-							"user_id", tus.getUser_id()));
-					if (StringUtils.isNotEmpty(site.getWww())) {
-						if (versionNo > 1.5f) {
-							if (user.getExpired() != null) {
-								user.setExpired(null);
-								adminService.update(user);
+				Float versionNo = WindSiteRestUtil.getNativeUsb(adminService,
+						user.getUser_id());
+				if (versionNo > 1.5f) {
+					user.setAppType("0");
+					tus.setVersionNo(versionNo);
+				} else {
+					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
+							.replaceAll("_0_0", ""));
+					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+					if (isFC) {
+						user.setAppType("1");// 如果订购了分成版，则设置为分成
+						tus.setVersionNo(1.5f);
+						Site site = adminService.findByCriterion(Site.class,
+								R.eq("user_id", tus.getUser_id()));
+						if (StringUtils.isNotEmpty(site.getWww())) {
+							if (versionNo > 1.5f) {
+								if (user.getExpired() != null) {
+									user.setExpired(null);
+									adminService.update(user);
+								}
+							} else {
+								if (user.getExpired() == null) {
+									user.setExpired(new Date());
+									adminService.update(user);
+								}
 							}
-						} else {
+						}
+
+					} else {
+						user.setAppType("0");
+						tus.setVersionNo(-1f);
+						Site site = adminService.findByCriterion(Site.class,
+								R.eq("user_id", tus.getUser_id()));
+						if (StringUtils.isNotEmpty(site.getWww())) {
 							if (user.getExpired() == null) {
 								user.setExpired(new Date());
 								adminService.update(user);
 							}
-						}
-					}
-
-				} else {
-					user.setAppType("0");
-					tus.setVersionNo(-1f);
-					Site site = adminService.findByCriterion(Site.class, R.eq(
-							"user_id", tus.getUser_id()));
-					if (StringUtils.isNotEmpty(site.getWww())) {
-						if (user.getExpired() == null) {
-							user.setExpired(new Date());
-							adminService.update(user);
 						}
 					}
 				}
@@ -157,8 +158,8 @@ public class TaobaoShopNickCommand {
 	public void synNicks() {
 		// synVersion();
 		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(
-				new Page<T_TaobaokeShop>(1, 200), T_TaobaokeShop.class, R
-						.isNull("nick"));
+				new Page<T_TaobaokeShop>(1, 200), T_TaobaokeShop.class,
+				R.isNull("nick"));
 		ShopGetRequest request = new ShopGetRequest();
 		request.setFields("sid,cid,pic_path,shop_score");
 		if (shops != null && shops.size() > 0) {
@@ -182,8 +183,8 @@ public class TaobaoShopNickCommand {
 							break;
 						}
 						// 删除无法获取昵称的店铺
-						adminService.delete(T_TaobaokeShop.class, shop
-								.getUserId());
+						adminService.delete(T_TaobaokeShop.class,
+								shop.getUserId());
 					}
 				}
 				if (StringUtils.isNotEmpty(shop.getNick())
@@ -211,14 +212,14 @@ public class TaobaoShopNickCommand {
 									|| "isv.invalid-parameter:user-without-shop"
 											.equals(((SystemException) e)
 													.getKey())) {// 店铺不存在
-								adminService.deleteAll(W_ShopFavorite.class, R
-										.eq("user_id", shop.getUserId()));
+								adminService.deleteAll(W_ShopFavorite.class,
+										R.eq("user_id", shop.getUserId()));
 								logger.info(shop.getNick() + "====不存在店铺");
 							}
 						}
 						// 删除无法转换的店铺，避免重复调用降低API成功率
-						adminService.delete(T_TaobaokeShop.class, shop
-								.getUserId());
+						adminService.delete(T_TaobaokeShop.class,
+								shop.getUserId());
 					}
 				} else {
 					adminService.update(shop);

@@ -175,9 +175,9 @@ public class SiteRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
-		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(String
-				.valueOf(result.get("appType")), numIid + "", (String) result
-				.get("nick"));
+		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
+				String.valueOf(result.get("appType")), numIid + "",
+				(String) result.get("nick"));
 		if (items != null && items.size() == 1) {
 			return "{\"co\":\"" + items.get(0).getCommission()
 					+ "\",\"price\":\"" + items.get(0).getPrice() + "\"}";
@@ -293,8 +293,8 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
 		List<T_MallBrand> brands = siteService.findAllByCriterionAndOrder(
-				T_MallBrand.class, Order.asc("sortOrder"), R.eq("cid", id), R
-						.eq("isValid", true));
+				T_MallBrand.class, Order.asc("sortOrder"), R.eq("cid", id),
+				R.eq("isValid", true));
 		result.put("brands", brands);
 		result.put("cats", EnvManager.getBrandCats());
 		return new ModelAndView("site/brand", result);
@@ -311,11 +311,11 @@ public class SiteRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
-		Channel channel = siteService.findByCriterion(Channel.class, R.eq(
-				"value", value));
+		Channel channel = siteService.findByCriterion(Channel.class,
+				R.eq("value", value));
 		if (channel == null) {
-			channel = siteService.findByCriterion(Channel.class, R.eq("value",
-					"channelcode"));
+			channel = siteService.findByCriterion(Channel.class,
+					R.eq("value", "channelcode"));
 		}
 		result.put("channel", channel);
 		return new ModelAndView("site/channel", result);
@@ -332,8 +332,10 @@ public class SiteRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
-		result.put("desc", TaobaoFetchUtil.itemDescription(id, String
-				.valueOf(result.get("nick"))));
+		result.put(
+				"desc",
+				TaobaoFetchUtil.itemDescription(id,
+						String.valueOf(result.get("nick"))));
 		return new ModelAndView("site/template/description", result);
 	}
 
@@ -358,8 +360,8 @@ public class SiteRest {
 					String passwordCookie = null;
 					for (Cookie cookie : cookies) {
 						if ("SESSION_LOGIN_USERNAME".equals(cookie.getName())) {
-							usernameCookie = URLDecoder.decode(cookie
-									.getValue(), "UTF-8"); // 得到cookie的用户名
+							usernameCookie = URLDecoder.decode(
+									cookie.getValue(), "UTF-8"); // 得到cookie的用户名
 						}
 						if ("SESSION_LOGIN_PASSWORD".equals(cookie.getName())) {
 							passwordCookie = cookie.getValue(); // 得到cookie的密码
@@ -464,24 +466,22 @@ public class SiteRest {
 		result.put("lastSites", siteService.findByHql(new Page<Site>(1, 50),
 				"from Site where status=1 order by created desc",
 				new HashMap<String, Object>()));// 最新更新站点
-		result
-				.put(
-						"lastUsers",
-						siteService
-								.findByHql(
-										new Page<Site>(1, 20),
-										"select new map(user_id as user_id,nick as nick) from User order by created desc",
-										new HashMap<String, Object>()));// 最新加入的会员
+		result.put(
+				"lastUsers",
+				siteService
+						.findByHql(
+								new Page<Site>(1, 20),
+								"select new map(user_id as user_id,nick as nick) from User order by created desc",
+								new HashMap<String, Object>()));// 最新加入的会员
 		Map<String, Object> coolParams = new HashMap<String, Object>();
 		coolParams.put("isValid", true);
-		result
-				.put(
-						"coolSites",
-						siteService
-								.findByHql(
-										new Page<CoolSite>(1, 9),
-										"from CoolSite where isValid=:isValid order by updated desc,sortOrder",
-										coolParams));// 新建站点
+		result.put(
+				"coolSites",
+				siteService
+						.findByHql(
+								new Page<CoolSite>(1, 9),
+								"from CoolSite where isValid=:isValid order by updated desc,sortOrder",
+								coolParams));// 新建站点
 		return new ModelAndView("site/index", result);
 	}
 
@@ -522,16 +522,16 @@ public class SiteRest {
 	@RequestMapping(value = "/myshop/{uid}", method = RequestMethod.GET)
 	public void myshop(@PathVariable String uid, HttpServletRequest request,
 			HttpServletResponse response) {
-		User user = siteService.findByCriterion(User.class, R.eq("uc_id",
-				Integer.parseInt(uid)));
+		User user = siteService.findByCriterion(User.class,
+				R.eq("uc_id", Integer.parseInt(uid)));
 		if (user == null) {
 			String username = request.getParameter("username");
 			if (StringUtils.isNotEmpty(username))
 				try {
 					username = new String(username.getBytes("ISO-8859-1"),
 							"UTF-8");
-					user = siteService.findByCriterion(User.class, R.eq("nick",
-							username));
+					user = siteService.findByCriterion(User.class,
+							R.eq("nick", username));
 
 				} catch (UnsupportedEncodingException e) {
 				}
@@ -541,8 +541,8 @@ public class SiteRest {
 					.handleMessageException("该新淘网购物站点与新淘家园尚未绑定,绑定后才可以互相访问.");
 		}
 		try {
-			user.setSites(siteService.findAllByCriterion(Site.class, R.eq(
-					"user_id", user.getUser_id())));
+			user.setSites(siteService.findAllByCriterion(Site.class,
+					R.eq("user_id", user.getUser_id())));
 			Site site = user.getSites().get(0);
 			String url = StringUtils.isNotEmpty(site.getWww()) ? ("http://" + site
 					.getWww())
@@ -569,16 +569,16 @@ public class SiteRest {
 		String cid = request.getParameter("cid");
 		try {
 			if (StringUtils.isNotEmpty(words)) {
-				words = URLEncoder.encode(new String(words
-						.getBytes("ISO-8859-1"), "UTF-8"), "UTF-8");
+				words = URLEncoder.encode(
+						new String(words.getBytes("ISO-8859-1"), "UTF-8"),
+						"UTF-8");
 			}
 			if (StringUtils.isEmpty(cid)) {
 				cid = "";
 			}
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "search?q=" + words + "&cid=" + cid);
+					userId) + "search?q=" + words + "&cid=" + cid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -668,16 +668,17 @@ public class SiteRest {
 			}
 		}
 		Page<UCBlog> page = new Page<UCBlog>(pageNo, 15);
-		result.put("blogs", ucService.findByHql(page,
+		result.put("blogs", ucService.findByHql(
+				page,
 				"from UCBlog b where b.friend=5 and b.uid="
 						+ result.get("uc_id") + " order by b.dateline desc",
 				new HashMap<String, Object>()));
 		Object versionNo = result.get("versionNo");
 		if ((versionNo != null && (Float) versionNo >= 1.5)) {// 如果是高版本
 			result.put("classes", siteService.findAllByCriterionAndOrder(
-					FanliClass.class, Order.asc("sortOrder"), R.eq("user_id",
-							result.get("user_id")), R.eq("site_id", result
-							.get("sid"))));
+					FanliClass.class, Order.asc("sortOrder"),
+					R.eq("user_id", result.get("user_id")),
+					R.eq("site_id", result.get("sid"))));
 		}
 		result.put("page", page);
 		return new ModelAndView("site/blogList", result);
@@ -708,16 +709,16 @@ public class SiteRest {
 		}
 		Page<UCBlog> page = new Page<UCBlog>(pageNo, 15);
 		result.put("blogs", ucService.findByHql(page,
-				"from UCBlog b where b.classid=" + classid
-						+ " order by b.dateline desc",
+				"from UCBlog b where b.classid=" + classid + " and b.uid="
+						+ result.get("uc_id") + " order by b.dateline desc",
 				new HashMap<String, Object>()));
 		result.put("clazz", ucService.get(UCClass.class, classid));
 		Object versionNo = result.get("versionNo");
 		if ((versionNo != null && (Float) versionNo >= 1.5)) {// 如果是高版本
 			result.put("classes", siteService.findAllByCriterionAndOrder(
-					FanliClass.class, Order.asc("sortOrder"), R.eq("user_id",
-							result.get("user_id")), R.eq("site_id", result
-							.get("sid"))));
+					FanliClass.class, Order.asc("sortOrder"),
+					R.eq("user_id", result.get("user_id")),
+					R.eq("site_id", result.get("sid"))));
 		}
 		result.put("page", page);
 		return new ModelAndView("site/blogList", result);
@@ -744,7 +745,8 @@ public class SiteRest {
 		params.put("blogid", blogid);
 		List<Map<String, Object>> fields = (List<Map<String, Object>>) ucService
 				.findByHql(
-						"select new map(b.username as username,b.blogid as blogid,b.subject as subject,b.classid as classid,b.dateline as dateline,b.hot as hot,f.tag as tag,f.message as message,f.uid as uid) from UCBlog b,UCBlogField f where b.blogid=:blogid and f.blogid=:blogid",
+						"select new map(b.username as username,b.blogid as blogid,b.subject as subject,b.classid as classid,b.dateline as dateline,b.hot as hot,f.tag as tag,f.message as message,f.uid as uid) from UCBlog b,UCBlogField f where b.blogid=:blogid  and b.uid="
+								+ result.get("uc_id") + " and f.blogid=:blogid",
 						params);
 		if (fields == null || fields.size() == 0) {
 			SystemException.handleMessageException("未找到此日志");
@@ -769,9 +771,9 @@ public class SiteRest {
 		Object versionNo = result.get("versionNo");
 		if ((versionNo != null && (Float) versionNo >= 1.5)) {// 如果是高版本
 			result.put("classes", siteService.findAllByCriterionAndOrder(
-					FanliClass.class, Order.asc("sortOrder"), R.eq("user_id",
-							result.get("user_id")), R.eq("site_id", result
-							.get("sid"))));
+					FanliClass.class, Order.asc("sortOrder"),
+					R.eq("user_id", result.get("user_id")),
+					R.eq("site_id", result.get("sid"))));
 			Object adsObject = result.get("ads");
 			if (adsObject != null) {
 				Map<String, List<Map<String, Object>>> ads = (Map<String, List<Map<String, Object>>>) adsObject;
@@ -803,8 +805,7 @@ public class SiteRest {
 		try {
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "tblogs.html");
+					userId) + "tblogs.html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -827,8 +828,7 @@ public class SiteRest {
 		try {
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "tblogs/" + cid + ".html");
+					userId) + "tblogs/" + cid + ".html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -920,15 +920,13 @@ public class SiteRest {
 		try {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
 			List<TaobaokeShop> taokeShops = TaobaoFetchUtil.convertTaobaoShop(
-					String.valueOf(result.get("appType")), (String) result
-							.get("nick"), sid);
+					String.valueOf(result.get("appType")),
+					(String) result.get("nick"), sid);
 			if (taokeShops == null || taokeShops.size() != 1) {
 				try {
-					response
-							.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+					response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-							result, userId)
-							+ "error/shop404");
+							result, userId) + "error/shop404");
 				} catch (Exception e) {
 				}
 			}
@@ -1106,8 +1104,8 @@ public class SiteRest {
 				req.setQ(keyword);
 				req.setNick((String) result.get("nick"));
 				req.setOuterCode(EnvManager.getKeywordsOuterCode());
-				String clickurl = TaobaoFetchUtil.getKeyWordUrl(String
-						.valueOf(result.get("appType")), req);
+				String clickurl = TaobaoFetchUtil.getKeyWordUrl(
+						String.valueOf(result.get("appType")), req);
 				if (StringUtils.isEmpty(clickurl)) {
 					return redirect(result, response);
 				}
@@ -1120,9 +1118,9 @@ public class SiteRest {
 		}
 		TaobaokeItemDetail detail = itemList.get(0);
 		if (StringUtils.isEmpty(detail.getClickUrl())) {// 如果推广链接为空,则通过convert再次获取
-			List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(String
-					.valueOf(result.get("appType")), nid, (String) result
-					.get("nick"));
+			List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
+					String.valueOf(result.get("appType")), nid,
+					(String) result.get("nick"));
 			if (items != null && items.size() == 1) {
 				detail.setClickUrl(items.get(0).getClickUrl());
 			}
@@ -1156,8 +1154,7 @@ public class SiteRest {
 			try {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-						result, userId)
-						+ "error/item404");
+						result, userId) + "error/item404");
 			} catch (Exception e) {
 			}
 			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
@@ -1168,8 +1165,7 @@ public class SiteRest {
 			try {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-						result, userId)
-						+ "error/item404");
+						result, userId) + "error/item404");
 			} catch (Exception e) {
 			}
 			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
@@ -1177,14 +1173,14 @@ public class SiteRest {
 		TaobaokeItemDetail item = itemList.get(0);// 单个商品
 		List<TradeRate> rates = new ArrayList<TradeRate>();
 		Long totalResults = 0L;
-//		if (StringUtils.isNotEmpty(item.getItem().getNick())) {// 详情
-//			TraderatesSearchResponse resp = TaobaoFetchUtil.traderatesSearch(
-//					Long.valueOf(nid), item.getItem().getNick(), 1L, 40L);
-//			if (resp != null) {
-//				totalResults = resp.getTotalResults();
-//				rates = resp.getTradeRates();
-//			}
-//		}
+		// if (StringUtils.isNotEmpty(item.getItem().getNick())) {// 详情
+		// TraderatesSearchResponse resp = TaobaoFetchUtil.traderatesSearch(
+		// Long.valueOf(nid), item.getItem().getNick(), 1L, 40L);
+		// if (resp != null) {
+		// totalResults = resp.getTotalResults();
+		// rates = resp.getTradeRates();
+		// }
+		// }
 		result.put("totalResults", totalResults);
 		result.put("rates", rates);
 		result.put("item", item.getItem());
@@ -1312,13 +1308,11 @@ public class SiteRest {
 						+ "tblogs/"
 						+ blog.getClassid()
 						+ "/"
-						+ blogid
-						+ ".html");
+						+ blogid + ".html");
 			} else {
 				response.setStatus(301);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-						result, userId)
-						+ "tblogs.html");
+						result, userId) + "tblogs.html");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1342,8 +1336,7 @@ public class SiteRest {
 		try {
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "tblogs.html");
+					userId) + "tblogs.html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1366,8 +1359,7 @@ public class SiteRest {
 		try {
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "tblogs.html");
+					userId) + "tblogs.html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1389,7 +1381,9 @@ public class SiteRest {
 				response.setStatus(301);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 						result, userId)
-						+ "titem/" + item.getNum_iid() + ".html");
+						+ "titem/"
+						+ item.getNum_iid()
+						+ ".html");
 			} catch (IOException e) {
 				e.printStackTrace();
 				return null;
@@ -1416,8 +1410,7 @@ public class SiteRest {
 		try {
 			response.setStatus(301);
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "shops");
+					userId) + "shops");
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
@@ -1630,9 +1623,7 @@ public class SiteRest {
 					if (member.getCommissionRate() == null) {
 						commission = siteService.get(SiteCommission.class,
 								site_id);
-						member
-								.setCommissionRate(commission
-										.getCommissionRate());
+						member.setCommissionRate(commission.getCommissionRate());
 					}
 					if (member.getAdCommissionRate() == null) {
 						if (commission == null) {
@@ -1644,8 +1635,8 @@ public class SiteRest {
 					}
 					EnvManager.setMember(member);// 设置当前返利会员
 					return new ModelAndView(new RedirectView(
-							"router/fanlimember"), "USER", request
-							.getParameter("USER"));// 重定向到会员中心
+							"router/fanlimember"), "USER",
+							request.getParameter("USER"));// 重定向到会员中心
 				} else {
 					SystemException.handleMessageException("当前站点不支持会员登录");
 				}
@@ -1817,10 +1808,8 @@ public class SiteRest {
 					User wuser = siteService.get(User.class, user.getId());
 					if (user != null) {
 						wuser.setUc_id($uid);
-						user
-								.setSites(siteService.findAllByCriterion(
-										Site.class, R.eq("user_id", user
-												.getUser_id())));
+						user.setSites(siteService.findAllByCriterion(
+								Site.class, R.eq("user_id", user.getUser_id())));
 						siteService.update(wuser);// 更新
 					}
 				}
@@ -2005,8 +1994,7 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		try {
 			response.sendRedirect(WindSiteRestUtil.getUrl(siteService, result,
-					userId)
-					+ "tgroup/" + gid + ".html");
+					userId) + "tgroup/" + gid + ".html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -2032,8 +2020,8 @@ public class SiteRest {
 		}
 		List<User> users = new ArrayList<User>();
 		if ("USER".equals(type)) {
-			users = siteService.findAllByCriterion(User.class, R.like("nick",
-					keyword, MatchMode.ANYWHERE));
+			users = siteService.findAllByCriterion(User.class,
+					R.like("nick", keyword, MatchMode.ANYWHERE));
 		} else {
 			users = siteService.searchUserBySiteTitle(keyword);
 		}
@@ -2168,16 +2156,16 @@ public class SiteRest {
 		apiparamsMap.put("timestamp", new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss").format(new Date()));
 		try {
-			String sign = EncryptUtil.md5Signature(apiparamsMap, EnvManager
-					.getSecret(appType), "sign");
+			String sign = EncryptUtil.md5Signature(apiparamsMap,
+					EnvManager.getSecret(appType), "sign");
 			// 组装协议参数sign
 			apiparamsMap.put("sign", sign);
 			StringBuilder param = new StringBuilder();
 			for (Iterator<Map.Entry<String, CharSequence>> it = apiparamsMap
 					.entrySet().iterator(); it.hasNext();) {
 				Map.Entry<String, CharSequence> e = it.next();
-				param.append("&").append(e.getKey()).append("=").append(
-						e.getValue());
+				param.append("&").append(e.getKey()).append("=")
+						.append(e.getValue());
 			}
 			return param.toString().substring(1);
 		} catch (Exception e) {
@@ -2230,8 +2218,8 @@ public class SiteRest {
 				// 生成文章模块异步命令
 				ShopBlogCommand command = new ShopBlogCommand();
 				command.setFcg(fcg);
-				command.setModule(pageService.get(PageModule.class, module
-						.getId()));
+				command.setModule(pageService.get(PageModule.class,
+						module.getId()));
 				command.setPageService(pageService);
 				command.setUcService(ucService);
 				CommandExecutor.getCommands().add(command);
@@ -2255,12 +2243,13 @@ public class SiteRest {
 			HttpServletRequest request) {
 		User user = siteService
 				.findByCriterion(User.class, R.eq("user_id", id));
-		T_SpaceUser sUser = siteService.findByCriterion(T_SpaceUser.class, R
-				.eq("uid", id));
+		T_SpaceUser sUser = siteService.findByCriterion(T_SpaceUser.class,
+				R.eq("uid", id));
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (user.getSid() != null && !user.getSid().equals("0")) {
-			map.put("shop", siteService.get(T_TaobaokeShop.class, Long
-					.valueOf(user.getUser_id())));
+			map.put("shop",
+					siteService.get(T_TaobaokeShop.class,
+							Long.valueOf(user.getUser_id())));
 		}
 		map.put("user", user);
 		map.put("sUser", sUser);
@@ -2438,8 +2427,8 @@ public class SiteRest {
 				itemSearchRequest.setPageSize(20L);
 				itemSearchRequest.setFields("num_iid");
 				ItemsSearchResponse itemSearchResponse = TaobaoFetchUtil
-						.taobaoSearchItems(String
-								.valueOf(result.get("appType")),
+						.taobaoSearchItems(
+								String.valueOf(result.get("appType")),
 								itemSearchRequest);
 				if (itemSearchResponse != null) {
 					ItemSearch itemSearch = itemSearchResponse.getItemSearch();
@@ -2552,8 +2541,8 @@ public class SiteRest {
 	@RequestMapping(value = "/discuzerror")
 	public ModelAndView fanlierror(HttpServletRequest request,
 			HttpServletResponse response) {
-		return new ModelAndView("site/fanlierror", "site", request
-				.getParameter("site"));
+		return new ModelAndView("site/fanlierror", "site",
+				request.getParameter("site"));
 	}
 
 	/**

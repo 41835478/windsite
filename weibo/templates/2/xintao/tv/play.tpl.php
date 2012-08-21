@@ -10,23 +10,25 @@ if (!defined('IN_APPLICATION')) {
 <?php
 
 
-$site = F('escape',V('-:sysConfig/site_name'));
+$site = F('escape', V('-:sysConfig/site_name'));
 $catName = '首页';
 $catId = 1;
 $tvName = '未知视频';
 $fee = 0;
-if(in_array(V('g:vid'),array(485746))){
-	F('err404','当前视频已被删除');
+if (in_array(V('g:vid'), array (
+		485746
+	))) {
+	F('err404', '当前视频已被删除');
 }
 if (isset ($video) && !empty ($video)) {
 	if (!$isBoke) {
 		$cName = $video['tv_cont_cats'];
 		$catId = $video['tv_category_id'];
 		if (isset ($vData) && isset ($vData['data'])) {
-			if(isset ($vData['data']['tv_name']))
-			$tvName = $vData['data']['tv_name'];
-			if(isset ($vData['fee']))
-			$fee = $vData['fee'];
+			if (isset ($vData['data']['tv_name']))
+				$tvName = $vData['data']['tv_name'];
+			if (isset ($vData['fee']))
+				$fee = $vData['fee'];
 		} else {
 			$tvName = $video['tv_name'];
 		}
@@ -42,7 +44,7 @@ if (isset ($video) && !empty ($video)) {
 		echo '<meta name="title" content="' . $tvName . '-高清视频在线播放-' . $cName . '-' . $site . '">';
 		echo '<meta name="keywords" content="' . $video['tv_cont_cats'] . ',' . $tvName . ',' . $video['main_actor'] . ',' . $site . '">';
 		echo '<meta name="description" content="' . $site . $cName . '频道为您提供' . $tvName . '的最全，最新，最热的相关视频及评论">';
-		
+
 	} else {
 		$cName = $video['title'];
 		$catName = '播客';
@@ -52,7 +54,7 @@ if (isset ($video) && !empty ($video)) {
 		echo '<meta name="title" content="' . $cName . '-在线播放-播客频道-' . $site . '">';
 		echo '<meta name="keywords" content="' . $cName . ',' . $site . '">';
 		echo '<meta name="description" content="' . $site . '播客频道为您提供:' . $cName . '的最全，最新，最热的相关视频及评论">';
-		
+
 	}
 
 } else {
@@ -83,6 +85,7 @@ if (isset ($video) && !empty ($video)) {
 				<div class="fullVideo">
 					<div id="video" class="area">
 <?php
+
 
 $vid = $isBoke ? V('g:bid') : V('g:vid');
 if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
@@ -123,6 +126,16 @@ if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
 						<div id="dragDiv" style="width: 600px; height: 489px; ">
 							<div id="rRightDown"></div>
 							<div id="sohuplayer">
+								<?php
+
+
+		$agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+		$is_iphone = (strpos($agent, 'iphone')) ? true : false;
+		$is_ipad = (strpos($agent, 'ipad')) ? true : false;
+		if ($is_iphone || $is_ipad) {
+				echo '<video width="640" height="461" src="http://share.vrs.sohu.com/'.$vid.'/v.m3u8&api_key='.SOTV_CONSUMER_KEY.'" controls="controls" autoplay="autoplay"></video>';
+		} else {
+?>
 								<object width=600 height=489>
 								   <param name="movie"  value="http://share.vrs.sohu.com/<?php echo $vid;?>/v.swf&skinNum=2&topBar=0&showRecommend=0&autoplay=true&api_key=<?php echo SOTV_CONSUMER_KEY;?>"></param>
 								   <param name="allowFullScreen" value="true"></param>
@@ -139,6 +152,7 @@ if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
 								<?php
 
 
+		}
 	} else {
 		$isAd = true;
 		if (XT_IS_SELLER == 'true' && XT_TVAD_IS_SELLER == 'true') {
@@ -209,6 +223,7 @@ if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
     				</div>
     				<?php
 
+
 		if (XT_IS_SELLER == 'true') {
 			$shops = str_replace(array (
 				'[',
@@ -274,6 +289,7 @@ if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
 				<div class="extra">
 					<?php
 
+
 		if (XT_IS_SELLER == 'true') {
 			$shops = str_replace(array (
 				'[',
@@ -302,6 +318,7 @@ if (isset ($video) && !empty ($video) && isset ($vid) && !empty ($vid)) {
 						<h2><span>分类检索</span></h2>
 						<ul>
 							<?php
+
 
 		$sotvs = V('-:sotv');
 		foreach ($sotvs as $sotv) {

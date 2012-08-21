@@ -31,7 +31,7 @@ class APP {
 		APP :: _globalVar();
 		APP :: _initRouteVar();
 
-		APP :: _initCheckMobile();
+		//APP :: _initCheckMobile();
 		APP :: _aclCheck();
 		APP :: _initOther();
 		APP :: _initSkin();
@@ -226,7 +226,7 @@ class APP {
 	 */
 	function _initCheckMobile() {
 		if (!defined('ENTRY_SCRIPT_NAME') || ENTRY_SCRIPT_NAME != 'wap') {
-			if (APP :: getRequestRoute() == 'output'|| APP :: getRequestRoute() == 'go') {//TODO 推广链接
+			if (in_array(APP :: getRequestRoute(),array('output','go','poster','tv','xiaohua'))) {//TODO 推广链接
 				return true;
 			}
 

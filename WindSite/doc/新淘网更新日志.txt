@@ -437,11 +437,11 @@ awstats 帐号xintaonet
 #删除用户信息
 delete from w_user where user_id='';
 delete from w_site where user_id='';
-delete from w_page where user_id='';
-delete from w_page_layout where user_id='';
-delete from w_page_region where user_id='';
-delete from w_page_module where user_id='';
-delete from w_page_meta where user_id='';
+delete from w_page where user_id='771041906';
+delete from w_page_layout where user_id='771041906';
+delete from w_page_region where user_id='771041906';
+delete from w_page_module where user_id='771041906';
+delete from w_page_meta where user_id='771041906';
 delete from t_usercredit where user_id='';
 delete from T_UserSubscribe where user_id='';
 

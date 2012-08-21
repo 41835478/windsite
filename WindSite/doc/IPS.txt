@@ -1,3 +1,10 @@
+/etc/profile
+export PATH=$PATH:/usr/local/mysql/bin
+export JAVA_HOME=/usr/local/jdk1.6.0_26
+export PATH=$JAVA_HOME/bin:$PATH
+source /etc/profile
+java -version
+
 526089656
 yjjd2010,原来的http://www.xq0356.com
 
@@ -16,6 +23,7 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 1.从这里【选择】用"淘宝帐号"登录http://www.alimama.com/membersvc/member/login.htm
 2.我的推广---api工具--新淘网分成版---立即使用
 
+
 以后请直接问问题，否则可能没时间及时回复
 
 如果未开店。只能线下开通,价格与线上价格一致
@@ -27,6 +35,11 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+#2012-08-20(无觅)
+iptables -I INPUT -s 211.154.150.0/24 -j DROP
+iptables -I INPUT -s 211.154.149.0/24 -j DROP
+iptables -I INPUT -s 211.154.151.0/24 -j DROP
+
 #2012-08-17
 iptables -I INPUT -s 157.55.18.22 -j DROP
 iptables -I INPUT -s 116.253.128.126 -j DROP
@@ -307,9 +320,7 @@ iptables -I INPUT -s 207.241.237.236 -j DROP
 
 iptables -I INPUT -s 114.243.77.192 -j DROP
 iptables -I INPUT -s 123.126.68.0/24 -j DROP
-iptables -I INPUT -s 211.154.150.0/24 -j DROP
-iptables -I INPUT -s 211.154.149.0/24 -j DROP
-iptables -I INPUT -s 211.154.151.0/24 -j DROP
+
 iptables -I INPUT -s 72.84.93.0/24 -j DROP
 iptables -I INPUT -s 157.55.16.177 -j DROP
 iptables -I INPUT -s 207.241.237.223 -j DROP
@@ -407,9 +418,6 @@ iptables -I INPUT -s 121.206.100.70 -j DROP
 iptables -I INPUT -s 219.139.223.32 -j DROP
 //广东省深圳市 润迅通信集团
 iptables -I INPUT -s 221.173.226.21 -j DROP
-iptables -I INPUT -s 211.154.151.108 -j DROP
-iptables -I INPUT -s 211.154.151.111 -j DROP
-iptables -I INPUT -s 211.154.151.113 -j DROP
 iptables -I INPUT -s 221.238.193.37 -j DROP
 iptables -I INPUT -s 67.195.111.53 -j DROP
 iptables -I INPUT -s 91.205.96.19 -j DROP

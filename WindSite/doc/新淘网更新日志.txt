@@ -1,3 +1,17 @@
+/usr/bin/rsync -avzuP  root@199.119.138.50:/opt/httpd-2.2.22.tar /opt
+/usr/bin/rsync -avzuP  root@199.119.138.50:/opt/php-5.4.0.tar /opt
+/usr/bin/rsync -avzuP  root@199.119.138.50:/opt/mysql-5.1.62.tar /opt
+
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/iweibo /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/mysql /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/piwik /usr/local/apache2/htdocs
+rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21 /usr/local/apache2/htdocs
+
+
+
+sudo kill -9 `ps -ef|grep httpd|grep -v grep|awk '{print $2}'`
+
+
 /usr/bin/rsync -avzuP  root@203.124.13.74:/opt/jdk-6u26-linux-x64.bin /opt
 /usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs
 /usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
@@ -43,7 +57,7 @@ cd httpd-NN
 #--with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre
 make
 make install
-
+#redhat 切换yum
  rpm -qa|grep yum|xargs rpm -e --nodeps
  wget http://centos.ustc.edu.cn/centos/5/os/x86_64/CentOS/yum-metadata-parser-1.1.2-3.el5.centos.x86_64.rpm
  wget http://mirrors.ustc.edu.cn/centos/5/os/x86_64/CentOS/yum-fastestmirror-1.1.16-21.el5.centos.noarch.rpm
@@ -107,7 +121,7 @@ tar xvf mysql-5.1.62.tar
 --enable-assembler //汇编x86的普通操作符，可以提高性能 
 --with-plugins=innobase //数据库插件 
 --with-plugins=partition //分表功能，将一个大表分割成多个小表
-./configure --prefix=/usr/local/mysql --datadir=/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
+./configure --prefix=/usr/local/mysql --datadir=/user/local/mysql/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
 二、新建用户和组 
 groupadd mysql
 useradd -g mysql -s /sbin/nologin mysql

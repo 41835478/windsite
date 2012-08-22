@@ -286,7 +286,7 @@ var PageModuleUtils = {
 					var last = '元';
 					var c = $(this).attr('co');
 					if (c) {
-						var co = Math.round(parseFloat(c) * rate * 100)
+						var co = Math.floor(parseFloat(c) * rate * 100)
 								/ 100.00;
 						$(this).append('<div class="c-c" title="' + pre + co
 								+ last + '" style="">' + pre + co + last
@@ -296,7 +296,7 @@ var PageModuleUtils = {
 						pre = '返利比例:';
 						last = '%';
 						if (c) {
-							var co = Math.round(parseFloat(c) * rate * 100)
+							var co = Math.floor(parseFloat(c) * rate * 100)
 									/ 100.00;
 							$(this).append('<div class="c-c" title="' + pre
 									+ co + last + '" style="">' + pre + co
@@ -320,7 +320,7 @@ var PageModuleUtils = {
 							return;
 						}
 						if (c > 0) {
-							var co = Math.round(parseFloat(c) * rate * 100)
+							var co = Math.floor(parseFloat(c) * rate * 100)
 									/ 100.00;
 							self
 									.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
@@ -373,7 +373,7 @@ var PageModuleUtils = {
 		// return;
 		// }
 		// if (c > 0) {
-		// var co = Math.round(parseFloat(c) * rate * 100)
+		// var co = Math.floor(parseFloat(c) * rate * 100)
 		// / 100.00;
 		// self
 		// .prepend('<a class="commission-action clearfix" style="display:

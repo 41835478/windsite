@@ -790,9 +790,9 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $token_sec
 					$qqText = $text;
 				}
 				if (isset ($pic_url) && !empty ($pic_url)) {
-					$qqId = F('qq.add_pic', $qqText, '54.248.114.148', $pic_url);
+					$qqId = F('qq.add_pic', $qqText, '199.119.138.67', $pic_url);
 				} else {
-					$qqId = F('qq.add', $qqText, '54.248.114.148');
+					$qqId = F('qq.add', $qqText, '199.119.138.67');
 				}
 				echo 'QQ：(' . $qqId . ')';
 			}
@@ -899,9 +899,9 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $token_sec
 					$qqText = $text;
 				}
 				if (isset ($pic_url) && !empty ($pic_url)) {
-					$qqId = F('qq.add_pic', $qqText, '54.248.114.148', $pic_url);
+					$qqId = F('qq.add_pic', $qqText, '199.119.138.67', $pic_url);
 				} else {
-					$qqId = F('qq.add', $qqText, '54.248.114.148');
+					$qqId = F('qq.add', $qqText, '199.119.138.67');
 				}
 				echo 'QQ：(' . $qqId . ')';
 			}

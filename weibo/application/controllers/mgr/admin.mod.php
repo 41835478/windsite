@@ -228,7 +228,7 @@ class admin_mod extends action {
 			if ($rs['rst']['domain']) {
 				if ($rs['rst']['domain'] != 't' . $ret['userId'] . '.xintaowang.com') {
 					$ip = gethostbyname(trim($rs['rst']['domain']));
-					if ($ip == '54.248.114.148') {
+					if ($ip == '199.119.138.67') {
 						header("Location:http://" . $rs['rst']['domain'] . "/admin.php?m=mgr/admin.loginTB&" . $QUERY_STRING);
 						exit;
 					}

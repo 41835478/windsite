@@ -39,7 +39,7 @@ class xintao_mod extends action {
 		$domain = V('p:domain', '');
 		if (!empty ($domain)) {
 			$ip = gethostbyname(trim($domain));
-			if ($ip == '54.248.114.148') {
+			if ($ip == '199.119.138.67') {
 				exit ('{"state":"200"}');
 			}
 		}

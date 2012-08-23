@@ -16,6 +16,9 @@ class map_mod {
 	function map_mod() {
 		$this->weibo = APP :: N('weibo');
 	}
+	function clearApp(){
+		F('account_proxy.clearApp');
+	}
 	function test() {
 		Xpipe :: usePipe(false);
 		TPL :: display('xintao/yingxiaoTest');

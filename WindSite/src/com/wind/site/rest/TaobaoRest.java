@@ -1152,8 +1152,11 @@ public class TaobaoRest {
 
 		}
 		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> siteImpl = new HashMap<String, Object>();
+		WindSiteRestUtil.covertPID(taobaoService, result, EnvManager.getUser()
+				.getUser_id());
 		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(
-				String.valueOf(result.get("appType")), req);
+				String.valueOf(siteImpl.get("appType")), req);
 		Page<?> page = new Page(pageNo, 30);
 		if (resp.getTotalResults() > 0 && resp.getItemSearch() != null) {
 			page.setTotalCount(resp.getTotalResults().intValue());
@@ -1171,8 +1174,8 @@ public class TaobaoRest {
 					numiids += i.getNumIid();
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appType")), numiids, nick,
-						String.valueOf(result.get("pid")));
+						String.valueOf(siteImpl.get("appType")), numiids, nick,
+						String.valueOf(siteImpl.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
 				if (categories != null && categories.size() > 0) {
 					List<T_ItemCat> itemCats = EnvManager.getCats();

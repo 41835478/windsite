@@ -67,8 +67,12 @@ public class WindSiteRestUtil {
 
 	public static Long getPid(String pid) {
 		Long PID = null;
-		if (StringUtils.isNotEmpty(pid)) {
-			PID = Long.valueOf(pid.replace("mm_", "").replace("_0_0", ""));
+		if (StringUtils.isNotEmpty(pid) && !"null".equals(pid)) {
+			try {
+				PID = Long.valueOf(pid.replace("mm_", "").replace("_0_0", ""));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if (PID != null && PID > 0) {
 			return PID;

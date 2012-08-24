@@ -312,6 +312,78 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
+	public static Float convertVersionNo(List<ArticleUserSubscribe> subs,
+			com.wind.site.model.User user) {
+		Float versionNo = 0f;
+		if (subs != null && subs.size() > 0) {// 如果收费记录不为空
+			if (subs.size() == 1) {
+				ArticleUserSubscribe sub = subs.get(0);
+				String itemCode = sub.getItemCode();
+				Date deadLine = sub.getDeadline();
+				if (deadLine.after(new Date())) {// 如果有效期内
+					user.setEndDate(deadLine);
+					if (VAS_APPSTORE_6.equals(itemCode)) {// 卖家版(独立)
+						return 3f;// 卖家版
+					} else if (VAS_APPSTORE_5.equals(itemCode)) {// 返利版(独立)
+						return 2f;// 卖家版
+					} else if (VAS_APPSTORE_3.equals(itemCode)) {// 卖家版
+						return 3f;// 卖家版
+					} else if (VAS_APPSTORE_2.equals(itemCode)) {// 返利版
+						return 2f;// 返利版
+					} else if (VAS_APPSTORE_1.equals(itemCode)) {// 普及版收费
+						return 1f;
+					} else if (VAS_APPSTORE_4.equals(itemCode)) {// 普及版免费
+						return 1f;
+					}
+				}
+			} else {
+				for (ArticleUserSubscribe sub : subs) {// 查找是否有卖家版
+					String itemCode = sub.getItemCode();
+					Date deadLine = sub.getDeadline();
+					user.setEndDate(deadLine);
+					if (deadLine.after(new Date())) {// 如果有效期内
+						if (VAS_APPSTORE_3.equals(itemCode)
+								|| VAS_APPSTORE_6.equals(itemCode)) {// 卖家版
+							return 3f;// 卖家版
+						}
+					}
+				}
+				for (ArticleUserSubscribe sub : subs) {// 查找是否有返利版
+					String itemCode = sub.getItemCode();
+					Date deadLine = sub.getDeadline();
+					user.setEndDate(deadLine);
+					if (deadLine.after(new Date())) {// 如果有效期内
+						if (VAS_APPSTORE_2.equals(itemCode)
+								|| VAS_APPSTORE_5.equals(itemCode)) {// 返利版
+							return 2f;// 返利版
+						}
+					}
+				}
+				for (ArticleUserSubscribe sub : subs) {// 查找是否有普及版
+					String itemCode = sub.getItemCode();
+					Date deadLine = sub.getDeadline();
+					user.setEndDate(deadLine);
+					if (deadLine.after(new Date())) {// 如果有效期内
+						if (VAS_APPSTORE_1.equals(itemCode)) {// 普及版收费
+							return 1f;// 普及版收费
+						}
+					}
+				}
+				for (ArticleUserSubscribe sub : subs) {// 查找是否有普及版
+					String itemCode = sub.getItemCode();
+					Date deadLine = sub.getDeadline();
+					user.setEndDate(deadLine);
+					if (deadLine.after(new Date())) {// 如果有效期内
+						if (VAS_APPSTORE_4.equals(itemCode)) {// 普及版免费
+							return 1f;// 普及版免费
+						}
+					}
+				}
+			}
+		}
+		return versionNo;
+	}
+
 	public static Float convertVersionNo(List<ArticleUserSubscribe> subs) {
 		Float versionNo = 0f;
 		if (subs != null && subs.size() > 0) {// 如果收费记录不为空

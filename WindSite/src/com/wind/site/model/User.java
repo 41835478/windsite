@@ -58,6 +58,17 @@ public class User extends TimestampModel {
 	private T_UserSubscribe usb;
 	@Transient
 	private String app;
+	@Transient
+	private Date endDate;
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	/**
 	 * 淘宝SESSION
 	 */

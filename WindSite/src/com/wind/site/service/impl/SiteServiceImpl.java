@@ -767,7 +767,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			} else {// 月租型
 				List<ArticleUserSubscribe> subs = TaobaoFetchUtil
 						.vasSubscribeGet(nick, TaobaoFetchUtil.VAS_APPSTORE);
-				Float vn = TaobaoFetchUtil.convertVersionNo(subs);
+				Float vn = TaobaoFetchUtil.convertVersionNo(subs, user);
 				tus.setVersionNo(vn);
 				if (vn == 1f) {// 如果是普及版，则判断是否已付费
 					ArticleBizOrder order = TaobaoFetchUtil
@@ -785,7 +785,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			boolean isRefresh = (tus.getVersionNo() == 0f);
 			List<ArticleUserSubscribe> subs = TaobaoFetchUtil.vasSubscribeGet(
 					nick, TaobaoFetchUtil.VAS_APPSTORE);
-			Float vn = TaobaoFetchUtil.convertVersionNo(subs);
+			Float vn = TaobaoFetchUtil.convertVersionNo(subs, user);
 			if (vn == 1f) {// 如果是普及版，则判断是否已付费
 				ArticleBizOrder order = TaobaoFetchUtil
 						.vasOrderSearchLast(nick);
@@ -795,7 +795,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 					Float pay = Float.valueOf(order.getTotalPayFee());
 					if (pay > 0) {
 						Float versionNo = WindSiteRestUtil.getNativeUsb(this,
-								user.getUser_id());
+								user);
 						if (versionNo > 1.6f) {// 本地升级
 							user.setAppType("0");
 							tus.setVersionNo(versionNo);
@@ -836,8 +836,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				tus.setVersionNo(vn);
 			} else if (vn == 0f) {// 如果未订购月租型，则查询分成型
 				// 第一步:先验证是否本地有订购
-				Float versionNo = WindSiteRestUtil.getNativeUsb(this,
-						user.getUser_id());
+				Float versionNo = WindSiteRestUtil.getNativeUsb(this, user);
 				if (versionNo > 1.5f) {
 					user.setAppType("0");
 					tus.setVersionNo(versionNo);

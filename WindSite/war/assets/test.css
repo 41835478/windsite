@@ -1,1121 +1,3178 @@
-#container {
-	min-height: 800px
+.mls_share {
+	width: 100%;
+	height: 205px;
+	background: #F7F7F7;
+	margin-bottom: 15px;
+	overflow: hidden;
+	padding: 15px 0;
 }
 
-.tag-book {
-	width: 228px;
-	position: absolute;
-	background-color: #f7f7f7;
-	border: 1px solid #e5e5e5;
-	padding-bottom: 2px;
-	border-top: 0
+.mls_share ul {
+	height: 172px;
 }
 
-.tag-book .hd {
-	height: 5px;
-	background: url(../../images/ui/tag-book-bg2.jpg) no-repeat 0 0;
-	position: absolute;
-	width: 230px;
-	top: -5px;
-	left: -1px;
-	z-index: 3
-}
-
-.tag-book .bd {
-	height: 13px;
-	background: #fff url(../../images/ui/card-exit-bg.gif) repeat-x 0 bottom;
-	z-index: 3;
-	position: relative
-}
-
-.tag-book .bd .card-exit {
-	display: block;
-	height: 13px;
-	width: 14px;
-	margin-left: 101px;
-	background: url(../../images/ui/card-exit-bg2.gif) repeat-x 0 bottom
-}
-
-.tag-book .more-tag {
-	display: block;
-	height: 28px;
-	line-height: 28px;
-	color: #999;
-	cursor: pointer
-}
-
-.tag-book .tag-list {
-	padding: 4px 9px 10px 9px;
-	background: #fff url(../../images/ui/tag-list-bg2.gif) repeat-x;
-	z-index: 3;
-	position: relative
-}
-
-.tag-book .sub-tag {
-	overflow: hidden
-}
-
-.tag-book .sub-tag-list {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	width: 216px;
-	padding-left: 10px;
-	background-color: #f7f7f7;
-	-moz-border-radius: 0 0 3px 3px;
-	-webkit-border-radius: 0 0 3px 3px;
-	border-radius: 0 0 3px 3px
-}
-
-.tag-book .sub-tag-list ul {
-	background: url(../../images/ui/sub-tag.png) no-repeat bottom left;
-	padding-bottom: 10px;
-	margin-bottom: 5px
-}
-
-.tag-book .sub-tag-list li {
+.mls_share ul li {
+	width: 70px;
+	height: 70px;
 	float: left;
+	margin: 0 5px 15px 20px;
 	display: inline;
-	margin: 8px 8px 0 0;
-	white-space: nowrap
 }
 
-.tag-book .sub-tag-list li a {
+.mls_share ul li img {
+	width: 70px;
+	height: 70px;
+}
+
+.mls_share .mls_info {
+	padding: 0 20px;
+}
+
+.mls_share .mls_info dt {
+	width: 220px;
 	float: left;
-	display: block;
-	color: #666;
-	height: 20px;
-	line-height: 20px;
-	padding: 0 3px;
-	background: #fff;
-	border: 1px solid #e8e8e8;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px
+	text-align: right;
 }
 
-.tag-book .sub-tag-list li.focus a {
-	background: #ffefd1;
-	color: #666;
-	border: 1px solid #e8e8e8
-}
-
-.tag-book .sub-tag-list li.on a {
-	background: #5089b9;
-	color: #fff
-}
-
-.tag-book .sub-tag-list li a:hover {
-	text-decoration: none;
-	border: 1px solid #ccc
-}
-
-.tag-book .sub-tag-list li.focus a:hover {
-	border: 1px solid #ccc
-}
-
-.tag-book .sub-tag-list h3 {
-	height: 20px;
-	line-height: 20px;
-	font-size: 12px;
-	font-weight: 700;
-	color: #666;
-	clear: both
-}
-
-.goods-title {
-	height: 28px;
-	line-height: 28px;
-	padding: 0
-}
-
-.goods-title h2 {
-	color: #333;
-	font-size: 20px;
-	float: left;
-	font-weight: 400;
-	font-family: 'Microsoft YaHei', '黑体'
-}
-
-.goods-title h2 i {
-	margin: 0 10px
-}
-
-.goods-title a.gallery-title {
-	color: #0095bc
-}
-
-.goods-title a.gallery-title:hover {
-	text-decoration: none
-}
-
-span.tag-title {
-	font-weight: normal;
-	font-size: 14px
-}
-
-.hd-info {
+.mls_share .mls_info dd {
+	width: 32px;
+	height: 32px;
 	float: right;
-	padding-top: 5px
+	margin-top: 2px;
+	*margin-top: 1px;
 }
 
-.goods-block {
-	opacity: 0
-}
-
-.tag-book .cates-list {
-	line-height: 20px;
-	padding-bottom: 10px
-}
-
-.tag-book .cates-list h3 {
-	float: left
-}
-
-.tag-book .cates-list ul li {
-	float: left
-}
-
-.tag-book .cates-list ul li a {
-	color: #505050;
-	padding: 1px 8px;
-	margin: 0 2px
-}
-
-.tag-book .cates-list ul li.cur a {
-	color: #e26;
-	font-weight: bold
-}
-
-.tag-book .tag-list h3 {
-	float: left;
-	margin-top: 17px
-}
-
-.tag-book .tag-link li {
-	margin: 10px 3px 0 3px;
-	padding-left: 11px
-}
-
-.tag-book .tag-link li a {
-	padding: 0 10px 0 1px
-}
-
-.goods-wall {
-	margin-top: 10px
-}
-
-.nineGrid {
-	width: 204px;
-	padding: 15px 13px;
-	color: #999;
-	background-color: white;
-	position: absolute
-}
-
-.lastNineGrid {
-	margin-right: 0
-}
-
-.nineGrid h4 {
-	line-height: 16px;
-	height: 16px;
-	font-size: 16px
-}
-
-.nineGrid h4 a {
-	color: #666
-}
-
-.nineGrid h4 a:hover {
-	color: #5AD;
-	text-decoration: none
-}
-
-.nineGrid .bd {
-	margin-top: 13px
-}
-
-.nineGrid .bd img {
-	width: 62px;
-	height: 62px;
-	border: 1px solid #dedede;
-	float: left;
-	margin: 0 2px 4px 2px
-}
-
-.nineGrid .ft {
-	padding-top: 10px
-}
-
-.box-shadow {
-	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-	-moz-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-	-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px
-}
-
-.scene {
-	position: relative;
-	background-color: #fff;
-	padding: 10px;
-	height: auto;
-	-moz-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
-	-webkit-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
-	box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
-	margin-bottom: 15px
-}
-
-.scene .scene_img {
-	width: 150px;
-	height: 100px;
-	float: left
-}
-
-.scene .scene_text {
+.single_line {
+	height: 3px;
+	border-top: 1px solid #ddd;
 	overflow: hidden;
-	float: left;
-	width: 680px;
-	margin-left: 10px;
-	line-height: 23px
 }
 
-.scene .scene_tag {
-	overflow: hidden;
-	float: left;
-	width: 780px;
-	margin-left: 6px
-}
-
-.scene .scene_tag li {
-	float: left;
-	display: inline;
-	margin: 8px 4px 0 4px;
-	white-space: nowrap
-}
-
-.scene .scene_tag li a {
-	float: left;
-	display: block;
-	color: #666;
-	height: 20px;
-	line-height: 20px;
-	padding: 0 3px;
-	background: #fff;
-	border: 1px solid #e8e8e8;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px
-}
-
-.scene .scene_tag li.focus a {
-	background: #ffefd1;
-	color: #666;
-	border: 1px solid #e8e8e8
-}
-
-.scene .scene_tag li.on a {
-	background: #5089b9;
-	color: #fff
-}
-
-.scene .scene_tag li a:hover {
-	text-decoration: none;
-	border: 1px solid #ccc
-}
-
-.scene .scene_tag li.focus a:hover {
-	border: 1px solid #ccc
-}
-
-.scene-scroll {
-	height: 100px
-}
-
-.scene-scroll .scrollable {
-	position: absolute;
-	left: 12px;
-	_left: 0;
-	overflow: hidden;
-	width: 935px;
-	height: 100px
-}
-
-.scene-scroll .scrollable .items {
-	width: 20000em;
-	position: absolute
-}
-
-.scene-scroll .scrollable .items div {
-	float: left;
-	width: auto
-}
-
-.scene-scroll .scrollable .items div a {
-	float: left;
-	color: #333;
-	position: relative;
-	display: block;
-	margin-right: 8px;
-	_margin-right: 4px
-}
-
-.scene-scroll .scrollable .items div a.last {
-	margin-right: 0
-}
-
-.scene-scroll .scrollable .items div a span {
-	color: #000;
-	line-height: 28px;
-	text-align: right;
-	z-index: 2
-}
-
-.scene-scroll .scrollable .items div a span,.scene-scroll .scrollable .items div i
-	{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	display: block;
+.singleGoods {
 	width: 100%;
-	height: 28px
-}
-
-.scene-scroll .scrollable .items div i {
-	background-color: #fff;
-	opacity: .8;
-	filter: alpha(opacity = 80);
-	z-index: 1
-}
-
-.scene .browse {
-	background: url(../../images/ui/scene-button.png) no-repeat;
-	_background: url(../../images/ui/scene-btns-png8.png) no-repeat;
-	display: block;
-	height: 24px;
-	line-height: 24px;
-	border: 0;
-	cursor: pointer;
-	text-decoration: none
-}
-
-.scene .next {
-	background-position: -34px 0;
-	position: absolute;
-	top: 40px;
-	right: -10px;
-	width: 50px;
-	color: #fff;
-	overflow: hidden;
-	height: 24px;
-	display: block
-}
-
-.scene .next span {
-	height: 22px;
-	line-height: 22px
-}
-
-.scene .next.disabled {
-	padding: 0;
-	width: 50px
-}
-
-.scene .prev {
-	position: absolute;
-	background-position: 0 -26px;
-	top: 40px;
-	left: -12px;
-	_left: -24px;
-	width: 23px;
-	overflow: hidden;
-	height: 24px;
-	display: block
-}
-
-.scene .back {
-	position: absolute;
-	background-position: 0 -52px;
-	top: 40px;
-	left: -12px;
-	width: 21px
-}
-
-.scene a.show-pic {
-	color: #333;
-	position: absolute;
-	display: block;
-	left: 12px
-}
-
-.scene a.show-pic span {
-	color: #000;
-	line-height: 28px;
-	text-align: right;
-	z-index: 2
-}
-
-.scene a.show-pic i {
-	background-color: #fff;
-	opacity: .8;
-	filter: alpha(opacity = 80);
-	z-index: 1
-}
-
-.scene a.show-pic span,.scene a.show-pic i {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	display: block;
-	width: 100%;
-	height: 28px
-}
-
-.scene .tag-content {
-	position: absolute;
-	left: 180px;
-	width: 650px;
-	border: 0;
-	height: 80px;
-	background: 0
-}
-
-.emphasize-tag {
-	color: #e09e50;
-	margin: 0 5px
-}
-
-.tag-tile {
-	margin-left: 4px
-}
-
-.scene-common {
-	margin-top: 15px
-}
-
-.scene-common dt {
 	float: left;
-	line-height: 24px;
-	margin-top: 5px
+	padding-bottom: 12px;
 }
 
-.scene-common dd {
+.code_pic {
 	float: left;
-	margin: 5px 5px 0 0
-}
-
-.scene-common dd a {
-	display: block;
-	color: #505050;
-	float: left;
-	padding: 0 15px;
-	height: 24px;
-	line-height: 24px;
-	background-color: #f5f5f5
-}
-
-.sort {
-	color: #dedede;
-	line-height: 20px;
-	height: 20px;
-	padding-top: 7px
-}
-
-.sort span {
-	color: #999
-}
-
-.sort a {
-	padding: 0 6px;
-	color: #5AD;
-	text-decoration: none
-}
-
-.sort .on {
-	color: #E63
-}
-
-.cag-nav-wrap {
-	height: 36px;
-	position: relative
-}
-
-.cag-nav-wrap .category-nav {
-	position: absolute;
-	width: 100%;
-	z-index: 9
-}
-
-.gallery-nav {
-	background-color: #fff;
-	border-top: 3px solid #dedede;
-	margin-bottom: 16px;
-	width: 960px
-}
-
-.gallery-nav a,.gallery-detail a {
-	color: #333;
-	line-height: 2.0
-}
-
-.gallery-detail a.l-h {
-	line-height: 16px
-}
-
-.nav-block {
-	width: 640px;
-	float: left
-}
-
-.nav-block .nav-item {
-	float: left;
-	width: 215px;
-	border-right: 1px dotted #ddd;
-	border-bottom: 1px dotted #ddd;
-	padding: 10px 10px 10px 90px;
-	zoom: 1
-}
-
-.nav-block .last-line {
-	border-bottom: 0
-}
-
-.nav-block .last-line {
-	border-bottom: 0
-}
-
-.gallery-logo,.gallery-brands .title li a {
-	background-image: url(../../images/ui/sceneNav.png);
-	background-repeat: no-repeat
-}
-
-.gallery-logo {
-	display: inline;
-	width: 80px;
-	height: 80px;
-	overflow: hidden;
-	float: left;
-	margin-left: -80px;
-	margin-right: 6px;
-	_margin-left: -40px
-}
-
-.gallery-logo-beauty {
-	background-position: 0 0
-}
-
-.gallery-logo-baby {
-	background-position: 0 -100px
-}
-
-.gallery-logo-health {
-	background-position: 0 -200px
-}
-
-.gallery-logo-life {
-	background-position: 0 -300px
-}
-
-.gallery-logo-travel {
-	background-position: 0 -400px
-}
-
-.gallery-logo-pet {
-	background-position: 0 -500px
-}
-
-.nav-block h3 {
-	font-size: 14px;
-	font-weight: bolder;
-	color: #000;
-	margin-left: 10px
-}
-
-.nav-block ul.scene-tags li {
-	white-space: nowrap
-}
-
-.nav-block ul.scene-tags a {
-	margin: 0 4px 0 6px
-}
-
-.nav-block ul.scene-tags a.on {
-	color: #E63
-}
-
-.nav-block ul.scene-tags {
-	height: 50px;
+	max-width: 450px;
+	border: 0px;
 	overflow: hidden
 }
 
-.nav-block ul.scene-tags li {
+.report_pic {
 	float: left;
-	color: #999
+	border: 0px;
+	overflow: hidden
 }
 
-.forum-daren {
-	float: left;
-	width: 290px;
-	_width: 275px;
-	padding: 15px
+#xiu {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/home/xiu_logo.png) 0 0
+		no-repeat transparent;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://stc-tx.meiliworks.com/css/images/home/xiu_logo.png',
+		sizingMethod='scale' );
+	_background-image: none;
+	height: 74px;
+	width: 74px;
+	border: 0px;
+	display: none;
+	z-index: 100;
+	position: absolute
 }
 
-.forum-ing h3 {
+.code_pic a {
+	max-width: 450px
+}
+
+.original_pic_ioc {
+	cursor: pointer;
+	position: absolute;
+	top: 4px;
+	left: 5px;
+	filter: alpha(opacity = 90);
+	opacity: 0.9;
+	z-index: 0;
+	width: 93px;
+	height: 28px;
+}
+
+.singleGoods .goodsdetail {
+	width: 215px;
+	float: left;
+	font-size: 14px;
+	line-height: 25px;
+	margin-left: 15px;
+}
+
+.singleGoods .goodsdetail .p12 {
+	height: 28px;
+	line-height: 28px;
+	padding: 5px 0;
+}
+
+.singleGoods .goodsdetail .looklink {
+	font-size: 16px;
+}
+
+.singleGoods .goodsdetail .arrow_look {
+	width: 161px;
+	height: 34px;
+	line-height: 35px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/arrowbg.gif")
+		no-repeat;
+	padding-left: 10px;
+	font-size: 14px;
+	float: left;
+}
+
+.singleGoods .goodsdetail .goods_icon {
+	height: 30px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/catalog/category.png)
+		no-repeat;
+	float: left;
+	margin-left: 5px;
+	overflow: hidden;
+	padding-left: 25px;
+}
+
+.singleGoods .goodsdetail .cgoods {
+	background-position: 0 -20px;
+	padding-left: 20px;
+}
+
+.singleGoods .goodsdetail .cdress {
+	background-position: 0 -71px;
+}
+
+.singleGoods .goodsdetail .cshoes {
+	background-position: 0 -119px;
+}
+
+.singleGoods .goodsdetail .cbag {
+	background-position: 0 -171px;
+}
+
+.singleGoods .goodsdetail .caccess {
+	background-position: 0 -222px;
+	padding-left: 20px;
+}
+
+.singleGoods .goodsdetail .cbeauty {
+	background-position: 0 -279px;
+	padding-left: 21px;
+}
+
+.singleGoods .goodsdetail .cjiaju {
+	background-position: 0 -336px;
+}
+
+.singleGoods .goodsdetail.singleGoods .goodsdetail.notlikeit {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/likebg.gif")
+		no-repeat 0 0;
+	padding: 0 0 1px 18px;
+}
+
+.likeit {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/likebg.gif")
+		no-repeat 0 -24px;
+	padding: 0 0 0 16px;
+}
+
+.singleGoods .goodsdetail b {
+	padding-right: 3px
+}
+
+.singleGoods .shelf {
+	width: 360px;
+	border: 1px solid #ddd;
+	padding: 4px;
+}
+
+.singleGoods .shelf dl {
+	width: 278px;
+	border: 1px dashed #ddd;
+	line-height: 20px;
+	padding: 15px 40px;
+	overflow: hidden;
+}
+
+.singleGoods .shelf dl dt {
+	width: 40px;
+	height: 35px;
+	background: url("http://stc-tx.meiliworks.com/css/images/goods/ku.gif")
+		no-repeat 10px 4px;
+	float: left;
+}
+
+.singleGoods .shelf dl dd {
+	width: 180px;
+	float: left;
 	font-size: 12px;
-	font-weight: bold
+	padding-left: 10px;
+	text-align: center;
 }
 
-.forum-ing ul {
-	clear: both;
+.singleGoods .share {
+	height: 22px;
+	line-height: 22px;
+	text-align: right;
+}
+
+.singleGoods .share b {
+	padding-right: 4px;
+}
+
+.goodsdetail .shelf_msg {
+	background: #FFFFCC;
+	border: 1px solid #FFE680;
+	width: 170px;
+	padding: 4px 8px
+}
+
+.goodsdetail .shelf_msg a:hover {
+	color: #666666
+}
+
+.shelf_box {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/goods/shelf_box_bg0.png")
+		no-repeat center center;
+	height: 79px;
+	padding: 50px 34px 20px 150px
+}
+
+.shelf_content .sub_btn {
+	padding: 14px 0 80px 150px
+}
+
+.shelf_content .homeBtn,.shelf_content .homeBtn_r {
+	float: left;
+	width: 61px;
+	color: #fff;
+	height: 28px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/shelf_box_btn0.png)
+		no-repeat 0px 0px;
+	line-height: 28px;
+	text-align: center;
+	overflow: hidden;
+	padding-left: 0px
+}
+
+.shelf_content .homeBtn_r {
+	margin-left: 50px;
+	background-position: 0px -28px;
+	color: #f69;
+}
+
+.twitter_top {
+	width: 660px;
+	background: #f7f7f7;
+	line-height: 18px;
+	margin-bottom: 14px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.twitter_top a {
+	color: #f69;
+}
+
+.twitter_top dt {
+	width: 32px;
+	height: 32px;
+	float: left;
+}
+
+.twitter_top dt img {
+	width: 32px;
+	height: 32px;
+}
+
+.twitter_top dd {
+	width: 620px;
+	float: left;
+	font-size: 14px;
+	padding-left: 8px;
+}
+
+.twitter_top dd span {
+	font-size: 12px;
+	padding-left: 4px;
+}
+
+.t_sina {
+	width: 440px;
+	float: left;
+	margin-top: 10px;
+}
+
+.t_tag {
+	height: 22px;
+	line-height: 22px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+
+.t_tag a {
+	padding: 0 5px;
+	position: static;
+}
+
+.tao_buy {
+	overflow: hidden;
+	width: 180px;
+}
+
+.btn_more {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/share/btn_more.png)
+		no-repeat 0 0;
+	width: 173px;
+	height: 44px;
+	line-height: 44px;
+	color: #ffffff;
+	text-align: center;
+	display: inline-block;
+	*display: inline;
 	*zoom: 1
 }
 
-.forum-ing ul li {
-	margin-top: 11px;
-	*margin-top: 9px;
-	padding-left: 30px;
-	clear: both;
-	*zoom: 1;
-	overflow: hidden
+a.btn_more:hover {
+	color: #ffffff;
 }
 
-.forum-ing ul li .a-img {
+.mb10 {
+	margin-bottom: 10px
+}
+
+.singleGoods .twitter_pic {
+	position: relative
+}
+
+.share_photo {
+	max-width: 450px;
 	float: left;
-	margin: 0 8px 0 -30px;
+}
+
+.share_photo_r {
+	width: 215px;
+	float: left;
+	margin-left: 15px;
 	display: inline
 }
 
-.forum-ing ul li .a-forum {
-	display: block;
-	line-height: 1.2;
-	white-space: nowrap;
-	margin-bottom: 2px;
-	width: 240px;
-	*width: 230px
+.in_brand {
+	width: 676px;
+	border: 1px solid #E8E8E8;
+	padding: 8px 0
 }
 
-.forum-ing ul li span {
-	display: block;
-	color: #999;
-	white-space: nowrap
+.in_brand .search_bg {
+	width: 141px;
+	height: 90px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/search/search_bg.png)
+		no-repeat;
+	margin: 0 8px;
+	text-align: center;
+	display: inline
 }
 
-.forum-ing ul li span a {
-	line-height: 1.2;
-	color: #999;
-	display: inline-block;
-	max-width: 155px
-}
-
-.forum-ing ul li span i {
-	margin: 0 5px
-}
-
-.gallery-nav .forum-ing ul {
-	padding-top: 0
-}
-
-.gallery-detail {
-	background-color: #fff;
-	margin-bottom: 10px
-}
-
-.gallery-detail .forum-daren {
-	width: 280px
-}
-
-.gallery-detail .gallery-need {
-	float: left;
-	padding: 10px
-}
-
-.gallery-detail .gallery-side {
-	float: left;
-	width: 138px
-}
-
-.gallery-detail .forum-daren,.gallery-detail .gallery-need,.gallery-detail .gallery-side
-	{
-	margin: 4px 0 5px 0
-}
-
-.gallery-detail .forum-daren {
-	border-left: 1px dotted #ddd;
-	border-right: 1px dotted #ddd;
-	padding-bottom: 5px;
-	padding-top: 10px
-}
-
-.forum-ing h3,.gallery-detail .gallery-need h3,.gallery-detail .gallery-topic h3
-	{
-	padding-bottom: 8px;
-	border-bottom: 1px dotted #ddd
-}
-
-.gallery-detail .gallery-side {
-	padding: 10px 10px 0 20px
-}
-
-.gallery-need {
-	width: 450px
-}
-
-.gallery-need .needs-wrap {
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	height: 228px
-}
-
-.gallery-need .needs-panel {
-	position: absolute;
-	left: 0
-}
-
-.gallery-need .title h3 {
-	font-size: 12px;
-	border-bottom: 0;
-	padding-bottom: 8px
-}
-
-.gallery-need .sub-title h3 {
-	border: 0;
-	font-weight: bolder;
-	padding: 12px 0
-}
-
-.gallery-need .needs-common,.gallery-need .needs-other {
-	float: left
-}
-
-.gallery-need .needs-common {
-	padding-left: 6px
-}
-
-.gallery-need ul.scene-tag {
-	float: left;
-	padding-right: 10px;
-	width: 103px;
-	overflow: hidden
-}
-
-.gallery-need ul.scene-tag li {
-	width: 100px;
-	border-top: 1px dotted #ddd;
-	line-height: 35px;
-	white-space: nowrap;
-	word-wrap: normal;
-	word-break: normal;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	overflow: hidden
-}
-
-.gallery-need ul.scene-tag li a {
-	font-size: 12px;
-	color: #666
-}
-
-.gallery-need ul.scene-tag li a.on {
-	color: #E63
-}
-
-.needs-page {
-	background-color: #fafafa;
-	width: 440px;
+.search_bg .s_brand {
+	line-height: 30px;
+	font-size: 28px;
+	font-weight: bold;
 	margin-top: 10px
 }
 
-.needs-page li {
-	float: left;
-	border: 2px solid #fafafa
+.in_brand ul li {
+	width: 90px;
+	height: 90px;
+	margin: 0 5px;
+	overflow: hidden;
+	display: inline
 }
 
-.needs-page li a {
-	display: block;
-	width: 36px;
-	height: 30px;
-	float: left;
+.in_brand ul li img {
+	width: 90px;
+	height: 90px
+}
+
+.in_brand .s_content {
+	width: 516px;
+	height: 90px
+}
+
+.in_brand .s_content .f_title {
+	line-height: 15px;
+	font-size: 12px
+}
+
+.in_brand .s_content .f_depict {
+	line-height: 15px;
+	overflow: hidden;
+	padding-right: 5px
+}
+
+.more {
+	height: 70px;
+	line-height: 70px;
+	padding: 14px 0;
+}
+
+.more samp {
+	padding-left: 160px;
+}
+
+.more .s_item {
+	padding-left: 240px;
+}
+
+.more .hua {
+	width: 120px;
+	height: 68px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/page/pagecnt1.gif)
+		no-repeat -128px 0;
+}
+
+.goweibo {
+	width: 78px;
+	height: 22px;
+	line-height: 22px;
+	background: #F69;
+	border-radius: 4px;
+	color: #FFF;
+	display: inline-block;
+	margin: 20px 0 0 0;
 	text-align: center;
-	line-height: 30px;
-	border-bottom: 2px solid #fafafa;
-	cursor: pointer
 }
 
-.needs-page li a.current,.needs-page li a:hover {
-	background-color: #fff;
-	border-bottom: 2px solid #e26;
-	font-weight: bolder
+.goweibo:hover {
+	color: #FFF;
 }
 
-.needs-page li a:hover {
-	text-decoration: none
+.h_poster_ns {
+	width: 226px;
+	height: 272px;
+	*height: 276px;
+	overflow: hidden;
+	background-color: #f1f1f1
 }
 
-.gallery-topic .more {
-	float: right;
-	margin-top: -30px
+.hp_top_n,.hp_b_n {
+	padding: 10px;
 }
 
-.gallery-topic ul {
-	padding: 5px 0;
-	border-bottom: 1px dotted #ddd
+.hp_top_n {
+	height: 202px;
+	*height: 204px;
+	overflow: hidden;
 }
 
-.gallery-topic ul li {
-	white-space: nowrap
+.hp_top_ns {
+	padding: 13px 13px 0;
+	height: 200px;
+	overflow: hidden;
 }
 
-.gallery-topic a {
-	color: #666;
-	line-height: 2.3;
+.hp_top_n img {
+	width: 200px;
+	height: 200px;
+}
+
+.hp_top_ns img {
+	width: 90px;
+	padding: 0px 0px 10px 4px;
+	margin-right: 6px
+}
+
+.hp_b_n {
+	height: 32px;
+	background: #f1f1f1
+}
+
+.hp_b_ns {
+	padding: 8px 90px 8px 10px;
+	text-align: right;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/group/more_button.gif)
+		no-repeat 150px center
+}
+
+.hp_b_n .facetableSetxy {
+	height: 12px;
+	width: 12px
+}
+
+.mr0 {
+	margin-right: 0px
+}
+
+.guess {
+	overflow: hidden;
+}
+
+.guess li {
+	width: 90px;
+	float: left;
+	margin: 0 5px 10px 5px;
+	display: inline;
+	overflow: hidden;
+}
+
+.guess li img {
+	width: 90px;
+	height: 90px;
+	float: left;
+}
+
+.guess li span {
+	width: 90px;
+	height: 16px;
+	float: left;
+	font-size: 14px;
+	padding-top: 12px;
+	text-align: center;
+}
+
+.btn_price_go {
+	height: 44px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/share/price_bg.png)
+		no-repeat 0 0;
+	cursor: pointer;
 	display: block;
-	width: 136px
 }
 
-.gallery-topic a.more {
-	width: 26px;
+.f20b {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.pricetag {
+	width: 78px;
+	height: 32px;
+	line-height: 32px;
+	margin: 4px 7px 6px 6px;
+}
+
+.shelf_bg {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/share/shelf_bg.png)
+		no-repeat;
+	height: 44px;
+	line-height: 42px;
+	width: 173px;
+}
+
+.top {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 14px;
+	width: 948px;
+	padding: 2px 0
+}
+
+.top .top_con {
+	background:
+		url("http://i.meilishuo.net/css/images/welcome/wlc_top1.png")
+		no-repeat 18px 7px;
+	height: 36px;
+	padding: 7px 0;
+}
+
+.top .top_con a {
+	float: left;
+	text-indent: -999em;
+	height: 36px;
+	margin-left: 2px;
+	width: 135px
+}
+
+.top .top_con a:hover {
+	background:
+		url("http://i.meilishuo.net/css/images/welcome/wlc_top1.png")
+		no-repeat 18px 44px
+}
+
+.top .top_con .hot,.top .top_con .jiaju {
+	width: 127px
+}
+
+.top .top_con .hot:hover {
+	background-position: 0 -44px;
+	margin-left: 18px;
+	display: inline;
+	width: 109px
+}
+
+.top .top_con .dress:hover {
+	background-position: -113px -44px
+}
+
+.top .top_con .shoes:hover {
+	background-position: -250px -44px
+}
+
+.top .top_con .bag:hover {
+	background-position: -387px -44px
+}
+
+.top .top_con .access:hover {
+	background-position: -524px -44px
+}
+
+.top .top_con .beauty:hover {
+	background-position: -661px -44px
+}
+
+.top .top_con .jiaju:hover {
+	background-position: -798px -44px
+}
+
+.other_rec {
+	width: 100%;
+	border-bottom: 1px dashed #ddd;
+	padding: 14px 0;
+	overflow: hidden;
+}
+
+.other_rec dt {
+	float: left;
+	padding-right: 10px;
+}
+
+.other_rec dd .nickn {
+	font-size: 14px;
+	margin-right: 10px;
+}
+
+.other_rec dd {
+	width: 70%;
+	float: left;
+	line-height: 20px;
+}
+
+.mm_recommend {
+	
+}
+
+.mm_recommend .p_face {
+	width: 128px;
+	height: 128px;
+	margin: 0 auto;
+}
+
+.mm_recommend .p_face img {
+	width: 128px;
+	height: 128px;
+	_display: block;
+}
+
+.mm_recommend .p_nickname {
+	height: 26px;
+	color: #666;
+	line-height: 26px;
+	overflow: hidden;
+	margin: 5px 0;
+	text-align: center;
+}
+
+.mm_recommend .p_nickname b {
+	background: #f7f7f7;
+	height: 25px;
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.mm_recommend .p_nickname span {
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: 22px;
+}
+
+.mm_recommend .p_nickname .picon {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	margin-left: 5px;
+	padding: 8px 10px;
+	text-indent: -999em;
+}
+
+.mm_recommend .p_nickname .picon:hover {
+	text-decoration: none;
+}
+
+.mm_recommend .p_flower {
+	padding: 5px 0 0;
+	float: left;
+}
+
+.mm_recommend .current_recommender {
+	width: 200px;
+	border: 0px;
+	margin-top: 0px;
+}
+
+.mm_recommend .current_recommender .findfs-followbutton {
+	top: 10px;
+}
+
+.mm_recommend .follow {
+	cursor: pointer;
+	float: left;
+	width: 101px;
+	margin-left: 3px;
+	display: inline
+}
+
+.mm_recommend .message {
+	cursor: pointer;
+	float: left;
+	padding: 9px 0px 0 25px;;
+	display: inline;
+	color: #f69;
+}
+
+.mm_recommend .weibo-url {
+	text-align: center;
+	padding-top: 10px;
+	margin: 10px 18px 0;
+	border-top: 1px dashed #ccc
+}
+
+.mm_recommend .weibo-url a {
+	color: #f69;
+	padding: 2px 0 2px 20px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/header/h_sou.png")
+		no-repeat scroll 0 -57px transparent;
+}
+
+#changeFace {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/change_face.png) 0
+		0 no-repeat transparent;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://stc-tx.meiliworks.com/css/images/person/change_face.png',
+		sizingMethod='scale' );
+	_background-image: none;
+	height: 30px;
+	width: 128px;
+	border: 0px;
+	display: none;
+	z-index: 2000;
+	position: absolute;
+	top: 98px;
+	cursor: pointer;
+}
+
+.gomls {
+	border-top: 1px dashed #ccc;
+	font-size: 14px;
+	margin: 10px 0 0;
+	padding-top: 10px;
+	text-align: center;
+}
+
+.gomls a {
+	margin-left: 33px;
+}
+
+.gomls em {
+	background: url(http://stc-tx.meiliworks.com/css/images/home/icon1.png)
+		no-repeat 0 -159px;
+	padding: 3px 0 0 22px;
+}
+
+.person_info,.mm_recommend {
+	overflow: hidden;
+}
+
+.dr_brand {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/activity/welfare/welfare.png)
+		no-repeat -955px 0;
+	height: 15px;
+	margin-left: 2px;
+	padding: 5px 10px;
+	width: 15px;
+}
+
+.rz_brand {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/activity/welfare/welfare.png)
+		no-repeat -748px -1px;
+	height: 39px;
+	margin-bottom: 10px;
+	width: 200px;
+}
+
+.p_speclial {
+	padding: 5px 0;
 	text-align: center
 }
 
-.gallery-brands {
-	margin-top: 10px
-}
-
-.gallery-brands .title {
-	margin-bottom: 10px
-}
-
-.gallery-brands .title ul {
-	float: right;
-	margin-top: -10px
-}
-
-.gallery-brands .title li {
-	float: left;
-	margin-right: 6px;
-	width: 7px;
-	height: 7px
-}
-
-.gallery-brands .title li a {
-	display: block;
-	width: 7px;
-	height: 7px;
-	float: left;
-	background-position: -13px -600px;
-	text-indent: -20px;
-	overflow: hidden
-}
-
-.gallery-brands .title li a.current {
-	background-position: 0 -600px
-}
-
-.gallery-brands .title li a:hover {
-	text-decoration: none
-}
-
-.brands-panel li {
-	display: none;
-	margin-left: 5px
-}
-
-.brands-panel li.current {
-	display: block
-}
-
-.brands-panel a {
-	display: block;
-	position: relative;
-	width: 130px;
-	height: 43px;
-	overflow: hidden
-}
-
-.brands-panel a img {
-	position: absolute;
-	bottom: 0
-}
-
-.daren {
-	margin-top: 5px
-}
-
-.daren h3 {
-	font-size: 12px;
-	font-weight: bold;
-	padding-top: 8px;
-	border-top: 1px dotted #ddd
-}
-
-.daren-show {
-	height: 50px;
+.userP_statistic {
+	width: 200px;
 	overflow: hidden;
-	width: 280px;
-	padding-top: 5px;
-	position: relative
 }
 
-.daren-mask {
-	height: 50px;
-	width: 60px;
-	position: absolute;
-	right: 0;
-	top: 5px;
-	z-index: 99;
-	background: url(../../images/ui/daren-newmask.png) no-repeat 0 0;
-	_background: 0;
-	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/ui/daren-mask.png',
-		sizingMethod='crop' )
-}
-
-.daren-show ul {
-	width: 1200px;
-	clear: both;
-	*zoom: 1
-}
-
-.daren-show ul li {
-	width: 180px;
+.userP_statistic li {
+	width: 65px;
+	height: 40px;
+	border-right: 1px solid #ccc;
 	float: left;
-	margin-right: 10px;
-	background: white;
-	padding-left: 0;
-	background: #fafafa
+	text-align: center;
 }
 
-.daren-show ul li .a-img {
+.userP_statistic span {
+	width: 65px;
+	height: 20px;
 	float: left;
-	margin-right: 8px
+	line-height: 20px;
 }
 
-.daren-show ul li .daren-info {
-	float: left;
-	background: #fafafa
+.userP_statistic span .p_f {
+	color: #666;
 }
 
-.daren-show ul li .daren-info .ofh {
-	max-width: 90px;
-	color: #81c8ec;
+.userP_statistic span .p_nums {
+	color: #f69;
+}
+
+.userP_statistic span .p_h {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/likebg.gif")
+		no-repeat 25px -25px;
+}
+
+.userP_statistic.big .p_nums {
+	font-size: 20px;
 	font-weight: bold
 }
 
-.daren-show ul li span {
-	display: block;
-	color: #999;
-	white-space: nowrap
+.beaty-declaration {
+	width: 381px;
+	height: 266px;
+	display: none;
+	padding: 7px;
+	position: absolute;
+	z-index: 1000000
 }
 
-.gallery-pop-nav {
-	margin-bottom: 20px
+.beaty-declaration .content {
+	width: 361px;
+	height: 230px;
+	background-color: #FFF;
+	padding: 0 10px;
+	position: absolute;
+	top: 43px
 }
 
-.pop-tags {
-	background-color: #fff;
-	height: 184px;
-	overflow: hidden
-}
-
-.pop-tags .item {
-	float: left;
-	border-right: 1px dotted #ddd;
-	margin: 12px 0 8px 0;
-	padding: 0 15px;
-	width: 208px
-}
-
-.pop-tags .item h3 {
-	line-height: 22px;
+.beaty-declaration-title {
+	width: 141px;
+	height: 19px;
+	line-height: 19px;
+	color: #666;
+	display: inline;
+	font-weight: bold;
 	font-size: 14px;
-	padding-bottom: 6px
+	float: left;
+	margin: 18px auto 8px 10px
 }
 
-.pop-tags .item h3.hidden {
+.beaty-declaration-textlimit {
+	color: #666;
+	float: right;
+	_margin-right: 10px;
 	display: none
 }
 
-.pop-tags .item-con {
-	height: 42px;
-	overflow: hidden;
-	border-top: 1px dotted #ddd;
-	padding: 10px 0
-}
-
-.pop-tags .even {
-	padding-bottom: 15px;
-	padding-top: 12px
-}
-
-.pop-tags .odd {
-	padding-top: 15px;
-	padding-bottom: 5px
-}
-
-.pop-tags .item-con .tag-first-img {
+.beaty-declaration-text {
+	width: 333px;
+	height: 85px;
+	lin-height: 22px;
+	margin-left: 0px;
 	float: left;
-	width: 40px;
-	height: 40px;
-	overflow: hidden
+	border: 1px solid #CCC;
+	font-size: 16px;
+	color: #666
 }
 
-.pop-tags .item-con .tag-first-img img {
-	width: 40px
-}
-
-.pop-tags .item-con ul {
-	float: left;
-	width: 168px;
-	height: 42px;
-	overflow: hidden
-}
-
-.pop-tags .item-con ul li {
-	float: left;
-	margin: 2px 2px
-}
-
-.pop-tags .item-con ul li a {
-	display: block;
-	padding: 2px 4px;
-	float: left;
+.beaty-declaration-explain {
+	width: 66px;
+	height: 16px;
 	color: #666;
-	white-space: nowrap;
-	height: 14px;
-	vertical-align: top;
-	_overflow: hidden
+	font-size: 12px;
+	float: left;
+	margin-top: 19px
 }
 
-.pop-tags .item-con ul li.h a {
-	color: #e63
+.beaty-declaration .checkbox {
+	width: 300px;
+	color: #666;
+	float: left;
+	font-size: 12px;
+	margin: 8px 0px 0px 6px;
+	display: inline
 }
 
-.pop-tags .item-con ul li.cur a {
-	background-color: #e36;
+.beaty-button {
+	width: 97px;
+	height: 28px;
+	border: none;
+	cursor: pointer;
+	float: left;
+}
+
+.beaty-confirm {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/button.gif) 0 -28px
+		no-repeat;
+	margin-left: 70px
+}
+
+.beaty-cancel {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/button.gif) -97px
+		-28px no-repeat;
+	margin-left: 12px;
+}
+
+.w330 {
+	width: 330px;
+}
+
+.brandCon {
+	width: 720px;
+	float: left;
+	padding-bottom: 15px;
+}
+
+.brand_new {
+	width: 180px;
+	background: #F7F7F7;
+	margin-top: 14px;
+	padding: 18px 23px 14px;
+	overflow: hidden
+}
+
+.comm,.comm_outbox {
+	font-size: 12px;
+	font-weight: normal;
+	padding: 8px 0;
+}
+
+.comm span,.comm_outbox span {
+	padding-right: 3px;
+}
+
+.comm a,.comm_outbox a {
+	color: #666;
+	font-size: 12px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.comm_outbox img {
+	height: 10px;
+	margin: 0 2px;
+	width: 10px
+}
+
+.comm_outbox a:hover {
+	color: #FF6699;
+}
+
+.brand_new .goods_pic {
+	width: 180px;
+	text-align: center;
+	display: block;
+}
+
+.brand_new .goods_con {
+	width: 180px;
+}
+
+.brand_new .author_wrapper {
+	width: 180px;
+	overflow: hidden
+}
+
+.brand_new .author_wrapper dt {
+	width: 32px;
+	height: 32px;
+	float: left;
+	padding: 0 5px 3px 0
+}
+
+.brand_new .author_wrapper dt img {
+	width: 32px;
+	height: 32px;
+}
+
+.brand_new .author_wrapper dd {
+	width: 140px;
+	float: left;
+	line-height: 16px;
+	color: #999;
+}
+
+.brand_new .author_wrapper dd a {
+	color: #FF679A;
+}
+
+.brand_new .tuijian {
+	color: #666;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 18px;
+	padding-top: 2px;
+}
+
+.brand_new .tuijian a {
+	color: #f69;
+}
+
+#single .brand_new {
+	margin: 0 0 14px;
+}
+
+#wall .pager {
+	margin: 20px auto;
+	text-align: center;
+}
+
+.nums {
+	color: #FF679A;
+	font-size: 14px;
+	margin: 0 2px;
+}
+
+.ads_f {
+	line-height: 18px;
+}
+
+.goods_con .pop_w {
+	width: 158px;
+	height: 48px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/twitter/popbg.gif)
+		no-repeat 0 0;
+	position: absolute;
+	right: 22px;
+	top: -50px;
+	padding: 5px 10px;
+}
+
+.pop_w .remind {
+	line-height: 20px;
+}
+
+.pop_w .remind a {
+	font-weight: bold;
+	text-decoration: underline
+}
+
+.comm .red {
+	color: #f69;
+}
+
+.pop_w .remind .close {
+	width: 11px;
+	height: 11px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/twitter/popbg.gif)
+		no-repeat 0 -59px
+}
+
+.snap_poster {
+	width: 226px;
+}
+
+.hp_pic {
+	margin: 0 auto;
+	position: relative;
+	width: 200px;
+	background-color: #fff
+}
+
+.pl_btn {
+	background: url(http://stc-tx.meiliworks.com/css/images/home/hp_ico.gif)
+		no-repeat;
+}
+
+.hp_pic .hp_price {
+	height: 18px;
+	background: #fff;
+	line-height: 18px;
+	padding: 0 5px;
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+	opacity: 0.8;
+	filter: alpha(opacity =   80);
+}
+
+.hp_cmt {
+	width: 200px;
+	overflow: hidden;
+	border-top: 1px solid #FFF;
+	padding: 0px 13px
+}
+
+.hp_cmt .c_f,.hp_cmt .c_f img,.hp_s_c .hp_face,.hp_s_c .hp_face img {
+	width: 20px;
+	height: 20px;
+}
+
+.hp_cmt .c_r {
+	width: 165px;
+}
+
+.hp_cmt .c_r .comm_box {
+	border: 1px solid #ddd;
+	overflow: hidden;
+	padding: 4px;
+	width: 154px;
+	height: 22px;
+}
+
+.discussing {
+	width: 100%;
+	height: 30px;
+	line-height: 20px;
+	padding-top: 5px;
+}
+
+.discussing .single_face {
+	width: 16px;
+	height: 16px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/editor/4rd/icon.gif)
+		no-repeat 0 0;
+	float: left;
+	margin: 2px 3px 0 0;
+	_display: inline;
+}
+
+.pl_btn {
+	width: 52px;
+	height: 23px;
+	background-position: 0 0;
+	float: left;
+	text-align: center;
+}
+
+.discussing small {
+	font-size: 8px;
+}
+
+.discussing span {
+	padding-right: 2px;
+}
+
+.discussing .toggle_smileys {
+	background-position: 2px 3px;
+}
+
+.discussing .forward {
+	float: left;
+	position: relative;
+	top: 1px;
+	*top: -1px;
+}
+
+.discussing label {
+	float: left;
+	padding: 0 5px 0 3px;
+}
+
+.hp_share,.hp_s_c {
+	line-height: 18px;
+	width: 100%;
+}
+
+.hp_s_c,.hp_cmt {
+	background-color: #F9F9F9
+}
+
+.hp_share dd {
+	margin-left: 37px;
+}
+
+.com_link img,.from_who img,.hp_xin img {
+	width: 10px;
+	height: 10px;
+	margin: 0 2px;
+}
+
+.from_who {
+	background: #f7f7f7
+		url(http://stc-tx.meiliworks.com/css/images/group/forword.gif)
+		no-repeat 5px 3px;
+	border: 1px dashed #ddd;
+	line-height: 18px;
+	margin-top: 5px;
+	padding: 3px 5px 3px 28px;
+}
+
+.hp_s_c li {
+	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #FFF;
+	overflow: hidden;
+	padding: 8px 13px;
+	width: 200px;
+}
+
+.hp_s_c li p {
+	margin-left: 37px;
+	margin-top: -2px
+}
+
+.group_logo {
+	background: url(http://stc-tx.meiliworks.com/css/images/home/jiao.gif)
+		no-repeat;
+	height: 44px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 44px;
+}
+
+.group_name {
+	background: #fff
+		url(http://stc-tx.meiliworks.com/css/images/home/jiao.gif) no-repeat
+		left;
+	height: 44px;
+	left: 0;
+	line-height: 44px;
+	position: absolute;
+	top: 0;
+	width: 200px;
+	opacity: 0.8;
+	filter: alpha(opacity =   80);
+}
+
+.phone {
+	height: 18px;
+	line-height: 18px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/activity/snapshot/phone.gif)
+		no-repeat right 0;
+	padding-right: 15px;
+	*margin-top: -25px
+}
+
+.w33 {
+	width: 33px;
+}
+
+.like_merge {
+	height: 28px;
+	line-height: 28px;
+	left: -6px;
+	top: -6px;
+	width: 215px;
+}
+
+.plm_bg {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/home/like_merge2.png)
+		no-repeat;
+	color: #f69;
+	font-weight: bold;
+	height: 28px;
+	margin-right: 7px;
+	padding-left: 6px;
+}
+
+.plm_bgr {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/home/like_merge2.png)
+		no-repeat -82px 0;
+	height: 28px;
+	width: 3px;
+	right: -3px;
+}
+
+.lm_love,.lm_comm,.lm_shouji {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/home/like_merge2.png)
+		no-repeat;
+	height: 12px;
+}
+
+.lm_love {
+	background-position: 1px -30px;
+	*background-position: 1px -29px;
+	padding: 0 4px;
+}
+
+.lm_comm {
+	background-position: -16px -29px;
+	padding: 0 4px 0 5px;
+}
+
+.lm_shouji {
+	background-position: -32px -30px;
+	padding: 0 4px 0 5px;
+}
+
+.h_poster {
+	width: 226px;
+}
+
+.hp_top {
+	padding: 13px 13px 0;
+}
+
+.hp_b {
+	background: #F9F9F9;
+	padding: 10px 13px;
+	border-bottom: 1px solid #DDD
+}
+
+.h_poster2 {
+	width: 226px;
+	margin-right: 14px;
+	*margin-right: 12px
+}
+
+.mr0 {
+	margin-right: 0px
+}
+
+.comm_title {
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	padding: 10px 5px 0;
+}
+
+.goods_comm {
+	width: 100%;
+	padding-bottom: 10px;
+}
+
+.goods_comm .comm_con {
+	width: 100%;
+	padding: 10px 0;
+}
+
+.goods_comm .comm_con .c_face {
+	width: 64px;
+	height: 64px;
+	float: left;
+	padding-right: 10px
+}
+
+.goods_comm .comm_con .c_face img {
+	width: 64px;
+	height: 64px;
+}
+
+.goods_comm .comm_con .comm_info {
+	width: 605px;
+	float: left;
+}
+
+.goods_comm .comm_con .comm_info p {
+	line-height: 21px;
+}
+
+.goods_comm .comm_con .comm_info p samp {
+	font-size: 14px;
+	padding-right: 10px;
+}
+
+.goods_comm .comm_con .comm_info p b {
+	padding-right: 4px;
+}
+
+.goods_comm .comm_con .comm_info p span {
+	float: right;
+}
+
+.goods_comm .comm_con .comm_info .pl a {
+	color: #f69;
+}
+
+.comments {
+	background: #F7F7F7;
+	border: 1px solid #ddd;
+	padding: 10px;
+	position: relative;
+	top: 5px;
+}
+
+.comments .icon {
+	width: 11px;
+	height: 11px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/share/goodsicon.gif")
+		no-repeat -89px -66px;
+	float: left;
+	position: absolute;
+	top: -11px;
+	_top: -10px;
+}
+
+.comments .i1 {
+	right: 60px;
+}
+
+.comments .i2 {
+	right: 186px;
+}
+
+.comments .reply_box {
+	width: 100%;
+	overflow: hidden;
+}
+
+.comments .reply_box .pl_area {
+	width: 97%;
+	height: 28px;
+	border: 1px solid #ddd;
+	color: #666;
+	font-size: 12px;
+	overflow: hidden;
+	padding: 5px;
+}
+
+.comments .single_face {
+	width: 16px;
+	height: 16px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/editor/4rd/icon.gif)
+		no-repeat 0 0;
+	float: left;
+	margin-right: 5px;
+}
+
+.comments .pl_btn,.comments .pl_btn:hover {
+	width: 61px;
+	height: 25px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/search/s_btn.gif")
+		no-repeat;
+	color: #fff;
+	float: left;
+	line-height: 25px;
+	text-align: center;
+}
+
+.comments .forwarding {
+	width: 100%;
+	height: 30px;
+	line-height: 20px;
+}
+
+.comments .forwarding span {
+	padding-right: 2px;
+}
+
+.comments .forwarding .toggle_smileys {
+	background-position: 2px 3px;
+}
+
+.comments .forwarding .forward {
+	float: left;
+	position: relative;
+	top: 3px;
+	*top: 1px;
+}
+
+.comments .forwarding label {
+	float: left;
+	padding: 3px 5px 0 3px;
+}
+
+.comments .pl_list {
+	width: 100%;
+}
+
+.comments .pl_list .list_info {
+	width: 100%;
+	padding: 6px 0;
+	border-bottom: 1px dashed #ddd;
+	line-height: 18px;
+	overflow: hidden;
+}
+
+.comments .pl_list .img_face img,.comments .pl_list li .img_face {
+	width: 32px;
+	height: 32px;
+	float: left;
+}
+
+.comments .pl_list .list_info p {
+	margin-left: 40px;
+}
+
+.comments .pl_list .list_info .tj {
+	padding-right: 45px;
+}
+
+.comments .pl_list .list_info .tj a {
+	color: #f69
+}
+
+.comments .pl_list .list_info .tj span {
+	padding-left: 10px;
+}
+
+.cgray {
+	color: #ccc;
+}
+
+.comments .note-list .more {
+	padding-top: 8px;
+	text-align: right;
+}
+
+#pageNav1 {
+	width: 100%;
+	margin-top: 10px;
+	text-align: right;
+	font-family: tahoma;
+}
+
+#pageNav1 a {
+	display: inline-block;
+	line-height: 18px;
+	margin: 0 1px;
+	padding: 0 3px;
+	background-color: #fff;
+	border: 1px solid #999;
+}
+
+#pageNav1 a:hover {
+	background: #999;
 	color: #fff
 }
 
-.pop-tags .last {
-	border-right: 0
+#pageNav1 .currentpage {
+	color: #000;
+	border: none;
+	background: #f7f7f7;
 }
 
-.pop-tags .pop-bulletin {
-	margin-top: 10px;
-	border-right: 0
+.spinner {
+	text-align: center
 }
 
-.pop-bulletin ul li {
+.p_heart {
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0
+}
+
+.like_it,.notlike_it {
+	width: 90px;
+	height: 36px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/twitter/like_it.gif)
+		no-repeat;
+	padding-left: 92px;
+	float: left
+}
+
+.like_it {
+	background-position: 0 -37px;
+}
+
+.notlike_it {
+	background-position: 0 -1px
+}
+
+.p_heart .nums {
+	font-size: 28px;
+	font-weight: bold;
+	line-height: 36px
+}
+
+.tui_heart {
+	height: 45px;
+	padding: 5px 0;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tui_heart span {
+	display: block;
+}
+
+.s_collect,.tui_like {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/home/like_merge2.png)
+		no-repeat;
+	height: 45px;
+	cursor: pointer;
+	float: left;
+	padding-left: 0;
+}
+
+.s_collect {
+	background-position: 0 -51px;
+	width: 85px;
+}
+
+.tui_like {
+	background-position: 0 -98px;
+	width: 60px;
+}
+
+.brandList {
+	
+}
+
+.bl_list .mm_like,.bl_list .mm_dapei,.bl_list .mm_topic,.bl_list .mm_design,.bl_list .mm_look,.bl_list .mm_go
+	{
+	width: 100%;
+	overflow: hidden;
+}
+
+.bl_list .brand_img {
 	width: 200px;
-	line-height: 22px
+	height: 78px;
+	overflow: hidden
 }
 
-.pop-bulletin ul li a {
-	color: #333
+.bl_list .mm_like li {
+	width: 32px;
+	height: 32px;
+	float: left;
+	margin: 6px 4px;
+	_display: inline
 }
 
-.pop-bulletin .hot {
-	margin-top: 6px;
-	display: block
+.bl_list .mm_like li img {
+	width: 32px;
+	height: 32px;
+}
+
+.bl_list .mm_dapei li {
+	width: 90px;
+	float: left;
+	_display: inline;
+	margin: 10px 5px 0;
+	overflow: hidden;
+}
+
+.bl_list .mm_dapei li img {
+	width: 90px;
+	height: 90px;
+	float: left;
+}
+
+.bl_list .mm_dapei li .sn1 {
+	width: 90px;
+	height: 18px;
+	float: left;
+	padding-top: 8px;
+	text-align: center;
+}
+
+.bl_list .mm_dapei li .sn2 {
+	width: 90px;
+	height: 35px;
+	line-height: 16px;
+	float: left;
+	padding-top: 8px;
+	text-align: center;
+}
+
+.bl_list .mm_topic li {
+	height: 30px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/default/sidebardashed.jpg)
+		repeat-x bottom;
+	line-height: 29px;
+	margin: 0 8px;
+}
+
+.zara_search {
+	height: 30px;
+	padding: 10px 0 0;
+}
+
+.zara_search .search_text {
+	width: 135px;
+	height: 18px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	color: #ccc;
+	float: left;
+	line-height: 18px;
+	padding: 1px 3px;
+}
+
+.zara_search .submit {
+	width: 50px;
+	height: 22px;
+	background: #FF679A
+		url(http://stc-tx.meiliworks.com/css/images/topic/inter.gif) no-repeat;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+	float: right;
+	*line-height: 22px;
+	text-align: center;
+}
+
+.bl_list .mm_design li {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 8px;
+	white-space: nowrap
+}
+
+.bl_list .mm_design li a {
+	color: #f69;
+}
+
+.bl_list h5 {
+	width: 100%;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px 0 0 8px;
+}
+
+.bl_list .pedigree {
+	line-height: 22px;
+}
+
+.bl_list .pedigree a {
+	padding-left: 8px;
+}
+
+.bl_list .mm_look li {
+	float: left;
+	line-height: 22px;
+	padding-left: 8px;
+	height: 22px;
+	white-space: nowrap;
+}
+
+.bl_list .mm_look li .red {
+	color: #f69;
+}
+
+.rec_nav {
+	width: 200px;
+}
+
+.tjsort span {
+	padding: 0 8px;
+}
+
+.rejian,.style_nav {
+	border-bottom: 1px dashed #ddd;
+	overflow: hidden;
+	padding-bottom: 10px;
+	width: 200px;
+}
+
+.rejian li {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/label_bg_gray_l.gif)
+		no-repeat 0 0;
+	cursor: pointer;
+	display: inline;
+	float: left;
+	height: 22px;
+	margin: 10px 2px 0;
+	padding-left: 9px;
+}
+
+.rejian li a {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/label_bg_gray_r.gif)
+		no-repeat right;
+	display: inline;
+	float: left;
+	height: 22px;
+	padding-right: 9px;
+	white-space: nowrap;
+}
+
+.rejian li.active {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/rjico2.gif)
+		no-repeat 0 -69px;
+}
+
+.rejian li.active a {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/rjico1.gif)
+		no-repeat right;
+	color: #fff;
+}
+
+.style_nav li {
+	display: inline;
+	float: left;
+	margin: 10px 0px 0px 0px
+}
+
+.style_nav li a {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/g_button.png)
+		no-repeat center -40px;
+	float: left;
+	height: 40px;
+	width: 190px;
+	white-space: nowrap;
+}
+
+.style_nav li .s_bg {
+	cursor: pointer;
+	line-height: 40px
+}
+
+.style_nav li a.active {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/g_button.png)
+		no-repeat center top;
+	color: #fff;
+}
+
+.style_nav li a.active .s_bg {
+	
+}
+
+.attr_all li {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/label_bg_gray_l.gif)
+		no-repeat 0 0;
+	cursor: pointer;
+	display: inline;
+	float: left;
+	height: 22px;
+	margin: 10px 2px 0;
+	padding-left: 9px;
+}
+
+.attr_all li a {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/label_bg_gray_r_2.gif)
+		no-repeat right;
+	display: inline;
+	float: left;
+	height: 22px;
+	line-height: 22px;
+	padding-right: 9px;
+	white-space: nowrap;
+}
+
+.goods_ad {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/g_f_bnr2.gif)
+		no-repeat;
+	display: inline-block;
+	width: 708px;
+}
+
+.select_price {
+	background: none;
+	border: none;
+	color: #666;
+}
+
+.brandTop {
+	zoom: 1;
+}
+
+.brandTop .bt_l {
+	width: 200px;
+	float: left;
+}
+
+.brandTop .bt_l .bt_lt {
+	width: 195px;
+	height: 142px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/brand_pic1.gif)
+		no-repeat
+}
+
+.brandTop .bt_l .bt_lt2 {
+	width: 196px;
+	height: 100px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/brand_pic2.gif)
+		no-repeat
+}
+
+.brandTop .bt_l h1 {
+	color: #4f4f4f;
+	font-size: 32px;
+	line-height: 32px;
+	padding: 12px 0 5px;
+	text-align: center;
+}
+
+.brandTop .bt_l p {
+	height: 20px;
+	padding-left: 60px
+}
+
+.brandTop .bt_l .fol {
+	width: 82px;
+	height: 19px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/attr_notfollow.gif)
+		no-repeat;
+	cursor: pointer;
+	display: block;
+}
+
+.brandTop .bt_l .not_fol {
+	width: 61px;
+	height: 19px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/attr_follow.gif)
+		no-repeat;
+	cursor: pointer;
+	display: block;
+}
+
+.brandTop .bt_l .bt_lb {
+	color: #666;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 18px;
+}
+
+.brandTop .bt_l .bt_lb span {
+	float: left;
+	padding: 3px 0 0 5px;
+}
+
+.brandTop .bt_l .bt_lb a {
+	background-color: #F0F0F0;
+	color: #666;
+	float: left;
+	margin: 3px;
+	padding: 0 2px;
+}
+
+.brandTop .bt_l .bt_lb a:hover {
+	color: #f69;
+	text-decoration: none;
+}
+
+.brandTop .bt_r {
+	width: 710px;
+	float: left;
+	padding-left: 18px;
+}
+
+.brandTop .bt_r .br_label {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 20px;
+	padding: 5px 0 2px;
+}
+
+.brandTop .bt_r p {
+	line-height: 18px;
+}
+
+.brandTop .bt_r2 {
+	width: 692px;
+	zoom: 1;
+	background: url(http://stc-tx.meiliworks.com/css/images/goods/tiao.gif)
+		no-repeat center;
+	min-height: 82px;
+	_height: 82px;
+	float: left;
+	_display: inline;
+	padding: 20px 0 0 20px
+}
+
+.brandTop .bt_r2 p,.brandTop .bt_r3 p {
+	color: #666;
+	line-height: 18px;
+}
+
+.brandTop .bt_r3 {
+	width: 692px;
+	float: left;
+	_display: inline;
+	margin-top: 5px;
+	padding: 20px 0 0 20px
+}
+
+.shortcut {
+	width: 228px;
+	height: 184px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/show_bg1.jpg")
+		no-repeat;
+	position: relative;
+	margin-top: 15px
+}
+
+.shortcut .show_button {
+	width: 174px;
+	height: 42px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/twitter/show1.jpg")
+		no-repeat;
+	position: absolute;
+	top: 79px;
+	left: 23px
+}
+
+.shortcut .show_tips {
+	width: 174px;
+	height: 34px;
+	position: absolute;
+	bottom: 18px;
+	left: 25px;
+}
+
+.shortcut .show_word {
+	height: 17px;
+	line-height: 17px;
+	color: #fff;
+}
+
+.bt_re_l {
+	width: 200px;
+	float: left;
+}
+
+.bt_re_l .bt_re_fg,.bt_re_l .bt_re_gx,.bt_re_l .bt_re_om,.bt_re_l .bt_re_qt,.bt_re_l .bt_re_rx,.bt_re_l .bt_re_tm,.bt_re_l .bt_re_hx
+	{
+	width: 158px;
+	height: 78px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/g_title1.png)
+		no-repeat;
+	margin: 6px 0px 2px 18px
+}
+
+.bt_re_l .bt_re_fg {
+	background-position: 0x 0px
+}
+
+.bt_re_l .bt_re_gx {
+	background-position: -160px 0px
+}
+
+.bt_re_l .bt_re_om {
+	background-position: -320px 0px
+}
+
+.bt_re_l .bt_re_qt {
+	background-position: -480px 0px
+}
+
+.bt_re_l .bt_re_rx {
+	background-position: -640px 0px
+}
+
+.bt_re_l .bt_re_tm {
+	background-position: -800px 0px
+}
+
+.bt_re_l .bt_re_hx {
+	background-position: -962px 0px
+}
+
+.bt_re_r2 {
+	width: 692px;
+	float: left;
+	padding: 26px 0px;
+	font-size: 21px;
+	font-family: "Microsoft Yahei", "微软雅黑", "黑体"
+}
+
+.f26 {
+	font-size: 26px
+}
+
+.bt_re_b {
+	width: 50px;
+	height: 18px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/goods/bt_re_e.gif)
+		no-repeat;
+	position: absolute;
+	margin-top: 13px;
+	margin-left: 80px
+}
+
+.f_magazine {
+	height: 64px;
+	overflow: hidden;
+}
+
+.fm_bg {
+	background: #f7f7f7
+		url(http://stc-tx.meiliworks.com/css/images/goods/fmico.gif) no-repeat
+		top right;
+}
+
+.fm_bg2 {
+	background: #f7f7f7
+		url(http://stc-tx.meiliworks.com/css/images/goods/fmico2.png)
+		no-repeat top right;
+}
+
+.f_m_l {
+	width: 200px;
+}
+
+.f_m_l dd {
+	float: left;
+	height: 22px;
+	margin: 0 0 10px 8px;
+	overflow: hidden;
+	width: 125px;
+}
+
+.SKU {
+	width: 100%;
+	overflow: hidden;
+}
+
+.SKU li,.SKU li a {
+	width: 100%;
+	height: 60px;
+	float: left;
+}
+
+.SKU li a:hover,.f_m_r2 a:hover {
+	background: #fff;
+	opacity: 0.4;
+	filter: alpha(opacity =   40)
+}
+
+.SKU li img {
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin: 0 3px;
+	_display: inline;
+}
+
+.f_m_r2 {
+	width: 570px;
+}
+
+.f_m_r2 a {
+	height: 90px;
+	width: 100%;
+}
+
+.f_m_r2 img {
+	margin-left: 5px;
+}
+
+.f_m_count {
+	cursor: pointer;
+	right: 16px;
+	top: 30px;
+	width: 65px;
+}
+
+.gc_title {
+	overflow: hidden;
+	padding: 10px 13px 0;
+}
+
+.g_db_bg {
+	width: 200px;
+	height: 204px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/pg_bg1.png)
+		no-repeat bottom;
+	padding: 0 13px;
+}
+
+.imgBox {
+	background: #FFECEF;
+	margin-top: 8px;
+	overflow: hidden;
+	padding: 8px 13px;
+	width: 200px;
+}
+
+.mygroup .creategroup li {
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	overflow: hidden;
+	float: left;
+}
+
+.mygroup .creategroup li a {
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	padding: 3px 0;
+}
+
+.mygroup .creategroup li a:hover {
+	background: #F1F1F1;
+}
+
+.mygroup .creategroup li img {
+	width: 28px;
+	height: 28px;
+	margin-right: 8px;
+}
+
+.mygroup .h5 {
+	width: 100%;
+	height: 16px;
+	float: left;
+	line-height: 16px;
+	overflow: hidden;
+	padding-top: 6px;
+	word-wrap: break-word;
+}
+
+.g_more {
+	width: 14px;
+	height: 14px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/group/more_button.gif)
+		no-repeat;
+	margin: 6px 0 0 5px;
+}
+
+.pg_pic_b,.pg_pic_s,.pg_pic {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/pg_bg0.gif);
+	overflow: hidden
+}
+
+.pg_pic_b,.pg_pic_b img {
+	width: 200px;
+	height: 200px
+}
+
+.pg_pic_s,.pg_pic_s img {
+	width: 64px;
+	height: 64px
+}
+
+.pg_pic_s {
+	margin: 4px 4px 0px 0px
+}
+
+.big_pic {
+	width: 200px;
+	height: 200px;
+	margin-top: 4px;
+}
+
+.mr14 {
+	margin-right: 14px;
+	*margin-right: 12px
+}
+
+.pg_pic {
+	overflow: hidden;
+	height: 268px;
+	width: 200px;
+	margin-bottom: 36px
+}
+
+.mt_p4 {
+	margin-right: 2px;
+	padding: 0 4px;
+}
+
+.box_inset {
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	box-shadow: 0 1px #fff inset, 0 1px 0px rgba(255, 255, 255, 1.0);
+	-webkit-box-shadow: 0 1px #fff inset, 0 1px 0px rgba(255, 255, 255, 1.0);
+}
+
+.f20 {
+	width: 100%;
+	padding-bottom: 10px;
+	font-size: 20px;
+	float: left;
+}
+
+.groupBox {
+	width: 226px;
+	float: left;
+}
+
+.groupCorner2 {
+	width: 16px;
+	height: 16px;
+	background: url("http://stc-tx.meiliworks.com/css/images/group/ico.gif")
+		no-repeat;
+	display: block;
+	float: left;
+	position: absolute;
+	right: -3px;
+	bottom: -4px;
+}
+
+.groupBox .groupbg {
+	width: 100%;
+}
+
+.groupbg .g_pic {
+	padding-bottom: 8px;
+	float: left;
+}
+
+.groupbg .g_info {
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+	padding-top: 5px;
+	line-height: 15px;
+}
+
+.editor_info {
+	width: 130px;
+	padding-left: 6px;
+	float: left;
+}
+
+.e_i_f {
+	height: 14px;
+	overflow: hidden;
+}
+
+.g_pb {
+	padding-bottom: 20px;
+}
+
+#home-group .g_join,#home-group .g_exit {
+	width: 64px;
+	height: 20px;
+	float: left;
+	*line-height: 20px;
+	line-height: 19px;
+	overflow: hidden;
+	text-align: center;
+	font-size: 12px;
+	font-weight: normal
+}
+
+#home-group .g_join {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/p_follow3.gif)
+		no-repeat;
+	color: #fff
+}
+
+#home-group .g_exit {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/dialog/header_float.gif)
+		no-repeat;
+}
+
+#home-group .editor_info {
+	width: 100%;
+	float: left;
+}
+
+#home-group .groupbg .g_pic {
+	position: relative;
+	height: 200px;
+	width: 200px;
+	overflow: hidden
+}
+
+#home-group .groupbg .g_pic img {
+	position: absolute;
+}
+
+#home-group .groupbg .g_pic img.new {
+	left: 200px;
+	top: 0px
+}
+
+#home-group .groupbg .g_pic img.old {
+	left: 0px;
+	top: 0px
+}
+
+.redButton,.noneButton {
+	width: 64px;
+	height: 20px;
+	*line-height: 20px;
+	line-height: 19px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: normal
+}
+
+.redButton {
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/person/p_follow3.gif)
+		no-repeat;
+	color: #fff;
+	text-align: center;
+}
+
+.data_content {
+	width: 440px;
+	padding: 15px 14px;
+	overflow: hidden;
+	display: none
+}
+
+.data_content .invite_pic {
+	width: 116px;
+}
+
+.invite_face {
+	width: 112px;
+	height: 98px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/home/face_smile.gif")
+		no-repeat bottom
+}
+
+.invite_pic .invite_rim {
+	width: 116px;
+	height: 60px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/home/red_rim.gif")
+		no-repeat -1px -1px;
+}
+
+.invite_rim div {
+	padding: 5px 0 0 8px
+}
+
+.data_content .choices {
+	width: 290px;
+	padding: 5px 0px;
+}
+
+.right_btn,.wrong_btn {
+	width: 65px;
+	height: 16px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/home/round_icon.gif")
+		no-repeat;
+	padding: 3px 0 3px 28px;
+}
+
+.right_btn {
+	background-position: -3px -2px
+}
+
+.wrong_btn {
+	background-position: -3px -27px;
+	line-height: 16px
+}
+
+#birthyear,#constellation,#provinceid,#cityid {
+	width: 85px;
+	height: 23px;
+	line-height: 23px;
+	border: 1px solid #9B9B9B;
+	color: #666;
+	text-align: left;
+	margin: 0 6px 15px 6px
+}
+
+.choices select {
+	float: left;
+}
+
+.choices .career {
+	width: 270px;
+	padding-left: 6px
+}
+
+.choices .in_form {
+	margin-left: 30px
+}
+
+.choices .school {
+	padding: 14px 0 0 6px
+}
+
+.choices .text_form {
+	width: 124px;
+	height: 15px;
+	line-height: 15px;
+	border: 1px solid #ccc;
+	color: #999;
+	padding: 3px;
+	margin-right: 6px
+}
+
+.choices .sub_btn {
+	width: 100%;
+	padding: 14px 0 0 5px
+}
+
+.choices .sub_btn .homeBtn {
+	width: 69px
+}
+
+.homeBtn {
+	height: 24px;
+	background: url(http://stc-tx.meiliworks.com/css/images/home/icon1.png)
+		no-repeat 0 -68px;
+	float: left;
+	line-height: 24px;
+	text-align: center;
+	padding-left: 8px;
+	overflow: hidden;
+}
+
+.homeBtn .btn_r {
+	width: 5px;
+	height: 24px;
+	background: url(http://stc-tx.meiliworks.com/css/images/home/icon1.png)
+		no-repeat -95px -68px;
+}
+
+.choices .sub_btn span a,.choices .sub_btn span a:hover {
+	color: #fff
+}
+
+.choices .sub_btn .later {
+	padding-left: 10px;
+	color: #f69;
+	line-height: 24px;
+	cursor: pointer;
+}
+
+.data_content .suc_pop {
+	padding: 0 85px
+}
+
+.suc_pop .invite_rim {
+	width: 276px;
+	height: 61px;
+	line-height: 55px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/home/red_rim.gif")
+		no-repeat -1px -61px;
+	margin: 0 auto
+}
+
+.group_news_con {
+	padding: 15px 14px;
+	overflow: hidden;
+	display: none
+}
+
+.group_news_con_top {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/group/group_news.png")
+		no-repeat;
+	height: 97px;
+	padding: 12px 120px 0px 140px
+}
+
+.group_news_con_g {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/group/group_news_bg.gif")
+		no-repeat right top #f7f7f7;
+	height: 130px;
+	padding: 14px;
+	overflow: hidden
+}
+
+.group_news_page {
+	margin: 10px 0
+}
+
+.n_g_p_btn:hover {
+	color: #f69
+}
+
+.group_news_page .pagePrev,.group_news_page .pageNext {
+	width: 50px;
+	height: 22px;
+	font-size: 14px;
+	font-weight: normal;
+	display: inline-block;
+	line-height: 22px;
+	margin: 0 1px;
+	min-width: 12px;
+	padding: 0 4px;
+	text-align: center;
+	white-space: nowrap;
+	background-color: #ffe1ea;
+	color: #ff6799;
+	border: 1px solid #fcc8d9
+}
+
+.n_g_img {
+	height: 128px;
+	width: 128px;
+	background: #ddd
+}
+
+.n_g_box {
+	margin: 4px 14px 0px 14px;
+	height: 128px;
+	width: 380px
+}
+
+.n_g_bbtn {
+	height: 28px;
+	width: 64px;
+	background: #FF6699;
+	margin: 40px 0px;
+	color: #fff;
+	padding: 14px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px
+}
+
+.n_g_bbtn a {
+	color: #fff
+}
+
+.n_g_bbtn a:hover {
+	color: #fff
+}
+
+.n_g_box_con {
+	
+}
+
+.n_g_box_con_left {
+	width: 162px;
+	border-right: 1px solid #ccc;
+	padding-right: 14px
+}
+
+.n_g_box_con_right {
+	padding-left: 14px
+}
+
+.n_g_box_con_right span {
+	padding-top: 9px
+}
+
+.n_g_box_con_right .avatar32 {
+	margin: 0px 10px
+}
+
+.n_g_fb {
+	font-weight: bold
+}
+
+.n_g_text {
+	margin-right: 2px;
+	*line-height: 18px
+}
+
+.n_g_btn {
+	color: #fff;
+	min-width: 42px;
+	*width: 42px;
+	font-weight: bold;
+	height: 18px;
+	line-height: 17px;
+	margin-left: 1px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/group/top_btn2.gif)
+		no-repeat right bottom;
+	overflow: hidden;
+	text-align: center;
+}
+
+#pageNav {
+	margin: 30px auto 10px;
+	text-align: center
+}
+
+#main .bgcnt {
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/page/pagecnt1.gif")
+		no-repeat right top;
+	display: inline-block;
+	*display: inline;
+	padding: 35px 120px 20px 100px;
+	zoom: 1;
+	position: relative
+}
+
+#pageNav a {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 14px;
+	height: 22px;
+	line-height: 22px;
+	margin: 0 1px;
+	min-width: 12px;
+	padding: 0 4px;
+	text-align: center;
+	white-space: nowrap;
+	background-color: #ffe1ea;
+	color: #ff6799;
+	border: 1px solid #fcc8d9
+}
+
+#pageNav .currentpage {
+	color: #000;
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+
+#pageNav .pagePrev,#pageNav .pageNext {
+	width: 50px;
+	height: 22px;
+	font-size: 14px;
+	font-weight: normal
+}
+
+.pageNextico {
+	height: 58px;
+	width: 55px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.search_sub_tab {
+	height: 24px;
+	line-height: 22px;
+	background: url(http://stc-tx.meiliworks.com/css/images/findfs/line.gif)
+		repeat-x left bottom;
+	display: block;
+}
+
+.search_sub_tab li {
+	height: 22px;
+	line-height: 23px;
+	padding: 0 16px;
+	float: left;
+	margin-left: 15px;
+	text-align: center
+}
+
+.search_sub_tab .current {
+	line-height: 20px;
+	border: 1px solid #E8E8E8;
+	border-bottom: 1px solid #fff;
+	background-color: #fff;
+	overflow: hidden
+}
+
+.in_brand {
+	width: 676px;
+	border: 1px solid #E8E8E8;
+	padding: 8px 0
+}
+
+.in_brand .search_bg {
+	width: 141px;
+	height: 90px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/search/search_bg.png)
+		no-repeat;
+	margin: 0 8px;
+	text-align: center;
+	display: inline
+}
+
+.search_bg .s_brand {
+	line-height: 30px;
+	font-size: 28px;
+	font-weight: bold;
+	margin-top: 10px
+}
+
+.in_brand ul li {
+	width: 90px;
+	height: 90px;
+	margin: 0 5px;
+	overflow: hidden;
+	display: inline
+}
+
+.in_brand ul li img {
+	width: 90px;
+	height: 90px
+}
+
+.in_brand .s_content {
+	width: 516px;
+	height: 90px
+}
+
+.in_brand .s_content .f_title {
+	line-height: 15px;
+	font-size: 12px
+}
+
+.in_brand .s_content .f_depict {
+	line-height: 15px;
+	overflow: hidden;
+	padding-right: 5px
+}
+
+.in_brand .remmend_p {
+	padding: 13px 0;
+	margin: 0 19px;
+	display: inline
+}
+
+.in_brand .remmend_p .user_info {
+	padding-left: 6px
+}
+
+.remmend_p .user_info div {
+	margin-bottom: 7px
+}
+
+.result_header {
+	width: 100%;
+	line-height: 20px;
+	padding-top: 8px;
+	_overflow: hidden
+}
+
+.result_header .sortby a {
+	padding: 0 5px
+}
+
+.defaultUser {
+	width: 100%;
+	float: left;
+}
+
+.defaultUser .defaultUserBg {
+	width: 204px;
+	height: 69px;
+	padding: 6px;
+	margin: 0 3px 0 4px;
+	_display: inline;
+	background-color: #f7f7f7;
+	border: 1px solid #E2E2E2;
+}
+
+.defaultUser .search_user_info {
+	width: 130px;
+	padding-left: 8px;
+}
+
+.search_user_info .s_username {
+	line-height: 16px
+}
+
+.search_user_info .user_fans {
+	width: 100%;
+	line-height: 16px;
+	padding-top: 5px;
+}
+
+.result_content {
+	
+}
+
+.result_content .pic_content {
+	width: 100%
+}
+
+.pic_content li {
+	width: 120px;
+	height: 140px;
+	padding: 10px 8px;
+	overflow: hidden
+}
+
+.pic_content li span {
+	width: 100%;
+	line-height: 14px;
+	padding-top: 5px;
+}
+
+.pic_content li span a {
+	padding-left: 5px
+}
+
+.twitter_avatar_image {
+	float: left;
+	margin-top: 20px
+}
+
+.search_nickname {
+	width: 407px;
+	float: left;
+	margin-top: 20px;
+	display: inline;
+	margin-left: 15px
+}
+
+.search_content {
+	width: 407px;
+	float: left
+}
+
+.search_about_me {
+	width: 407px;
+	display: inline;
+	float: left;
+	margin-top: 10px;
+	margin-left: 15px
+}
+
+.search_label ul {
+	float: left;
+	margin-top: 10px
+}
+
+.search_label ul li,.search_nickname ul li {
+	list-style-type: none;
+	float: left;
+	padding-left: 15px;
+	_margin-top: 2px
+}
+
+.search_label ul li a,.search_nickname ul li a {
+	color: #f69;
+	float: left;
+	white-space: nowrap;
+}
+
+.findfs-topic-follower {
+	width: 124px;
+	height: 23px;
+	line-height: 23px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/follow_back.png") 0 0
+		no-repeat;
+	background: #eaeaea;
+	color: #666666;
+	margin-top: 5px;
+	text-align: center;
+	float: right
+}
+
+.findfs-topic-follower a {
+	font-size: 12px
+}
+
+.findfs-followbutton {
+	width: 79px;
+	height: 24px;
+	background:
+		url("http://stc-tx.meiliworks.com/css/images/followButton.gif") 0 0
+		no-repeat;
+	margin-top: 5px;
+	float: right
+}
+
+.search_follow {
+	width: 100px;
+	float: right;
+	margin-top: 20px;
+	display: inline
+}
+
+.sibar_search_user {
+	width: 200px;
+	margin-left: 20px;
+	margin-top: 175px;
+	_margin-top: 180px
+}
+
+.user_list {
+	width: 100%;
+	padding-bottom: 10px;
+	float: left
+}
+
+.s_rightbar {
+	
+}
+
+.s_rightbar .dash_line {
+	border-bottom: 1px solid #E4E4E4;
+}
+
+.s_rightbar ul {
+	width: 200px;
+	overflow: hidden;
+}
+
+.s_rightbar ul li {
+	width: 198px;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 2px;
+	margin-bottom: 5px;
+	overflow: hidden
+}
+
+.s_rightbar ul .li {
+	height: 20px;
+	line-height: 20px;
+	background-color: #f0f0f0
+}
+
+.s_rightbar ul .li .clear_item {
+	width: 8px;
+	height: 8px;
+	line-height: 20px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/search/s_close.gif)
+		no-repeat;
+	display: block;
+	margin: 7px 5px 0 0
+}
+
+.test_rightbar {
+	width: 100%
+}
+
+.test_rightbar ul {
+	width: 100%
+}
+
+.test_rightbar ul li {
+	width: 218px;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 5px;
+	overflow: hidden;
+	padding-left: 2px
+}
+
+.test_rightbar h2 a {
+	font-size: 12px;
+	font-weight: normal
+}
+
+.heart_pic {
+	width: 16px;
+	height: 15px;
+	background:
+		url(http://stc-tx.meiliworks.com/css/images/twitter/ILikeit.gif)
+		no-repeat center;
+	padding-left: 15px;
+}
+
+.search_ad {
+	width: 708px;
+	height: 90px;
+	margin: 10px auto 0;
+	overflow: hidden;
+}
+
+.search_ad iframe {
+	width: 708px;
+	height: 90px;
+	overflow: hidden;
+}
+
+.searchTopBox {
+	padding: 4px 0px;
+	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	margin-top: 14px
+}
+
+#content_fluid .searchTopBox {
+	margin: 14px 7px 0px 7px
+}
+
+.searchTop {
+	padding: 12px 0px;
+	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.searchTop .search_box {
+	border: 1px solid #DDD;
+	overflow: hidden;
+	background: #fff;
+	height: 24px
+}
+
+.searchTop .search_box input {
+	line-height: 16px;
+	border: 0px
+}
+
+.searchTop .search_box .searchTexarea {
+	width: 200px;
+	height: 16px;
+	padding: 4px
+}
+
+.searchTop .search_box .searchBtn {
+	width: 16px;
+	height: 16px;
+	margin: 4px;
+	padding: 0px;
+	float: left;
+	background: url(http://stc-tx.meiliworks.com/css/images/header/sou1.png)
+		no-repeat -164px -4px
+}
+
+.searchTop .search_tab li {
+	margin-left: 13px;
+	padding-right: 13px;
+	float: left
+}
+
+.searchTop .search_tab a:hover {
+	text-decoration: none
+}
+
+.br1d {
+	border-right: 1px solid #DDD
+}
+
+.searchTop .search_tab li span,.searchTop .search_num span {
+	margin-right: 13px
+}
+
+.searchTop .search_num,.searchTop .search_tab {
+	line-height: 28px
+}
+
+.no_result {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 15px;
+	margin-top: 14px;
+	border: 1px solid #ffe67f;
+	background: #ffffcb;
+	font-size: 14px
+}
+
+#content_fluid .no_result {
+	margin: 14px 7px 0px 7px
+}
+
+.no_result .keyword,.result_header .keyword {
+	color: #f69;
+	font-weight: bold
+}
+
+#content_fluid .grid_3 {
+	margin: 0px 7px;
+	width: 226px
 }

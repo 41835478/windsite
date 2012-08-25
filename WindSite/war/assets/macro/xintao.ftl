@@ -16,6 +16,10 @@
 </ul>
 </div>
 <#if USER??&&USER.usb??>
+	<#assign ENDDATE="">
+	<#if USER.endDate??>
+	<#assign ENDDATE=",到期日<span style=\"color:red\">["+USER.endDate?string("yyyy-MM-dd")+"]</span>.">
+	</#if>
 	<#if (USER.usb.versionNo==1)>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客普及版（未付费），建议您升级更高版本</div>
 	<#elseif (USER.usb.versionNo==1.5)>
@@ -26,11 +30,11 @@
 	    </#if>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客分成版(分成型)，您还可以选择订购月租型新淘网_普及版，返利版，卖家版[<a href="http://fuwu.taobao.com/service/service.htm?service_id=300" style="color:red;font-weight:bold;" target="_blank">版本升级帮助</a>]</div>
 	<#elseif (USER.usb.versionNo==1.6)>
-		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客普及版（付费），您还可以升级为返利版或卖家版</div>
+		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客普及版（付费）${ENDDATE}，您还可以升级为返利版或卖家版</div>
 	<#elseif USER.usb.versionNo==2>
-		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客返利版，如果您是淘宝卖家，您还可以选择升级新淘网_卖家版[<a href="http://fuwu.taobao.com/service/service.htm?service_id=300" style="color:red;font-weight:bold;" target="_blank">版本升级帮助</a>]</div>
+		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_淘客返利版${ENDDATE}，如果您是淘宝卖家，您还可以选择升级新淘网_卖家版[<a href="http://fuwu.taobao.com/service/service.htm?service_id=300" style="color:red;font-weight:bold;" target="_blank">版本升级帮助</a>]</div>
 	<#elseif (USER.usb.versionNo==3)>
-		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_卖家版</div>	
+		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_卖家版${ENDDATE}</div>	
 	</#if>
 </#if>
 </#macro>

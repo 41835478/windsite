@@ -116,7 +116,8 @@ public class WindSiteRestUtil {
 	public static Float getNativeUsb(IBaseService service, User user) {
 		Calendar calendar = Calendar.getInstance();
 		W_UserSubscribe usb = service.findByCriterion(W_UserSubscribe.class,
-				R.eq("user_id", user), R.gt("endDate", calendar.getTime()));
+				R.eq("user_id", user.getUser_id()),
+				R.gt("endDate", calendar.getTime()));
 		if (usb != null) {
 			user.setEndDate(usb.getEndDate());
 			return usb.getVersionNo();

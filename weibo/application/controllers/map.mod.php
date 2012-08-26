@@ -16,7 +16,7 @@ class map_mod {
 	function map_mod() {
 		$this->weibo = APP :: N('weibo');
 	}
-	function clearApp(){
+	function clearApp() {
 		F('account_proxy.clearApp');
 	}
 	function test() {

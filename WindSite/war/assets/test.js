@@ -1,2179 +1,6839 @@
-
-(function(a) {
-	a.xt = a.xt || {
-		version : "v1.0.0"
-	};
-	a.extend(a.xt, {
-		util : {
-			isIE6 : function() {
-				return a.browser.msie && "6.0" == a.browser.version ? !0 : !1
-			},
-			isIOS : function() {
-				return /\((iPhone|iPad|iPod)/i.test(navigator.userAgent)
-			},
-			trim : function(a) {
-				return a.replace(/(^\s*)|(\s*$)/g, "")
-			},
-			lTrim : function(a) {
-				return a.replace(/(^\s*)/g, "")
-			},
-			rTrim : function(a) {
-				return a.replace(/(\s*$)/g, "")
-			},
-			getStrLength : function(b) {
-				var b = a.xt.util.trim(b), c = 0, b = b.replace(
-						/[^\x00-\xff]/g, "**").length;
-				return c = parseInt(b / 2) == b / 2 ? b / 2 : parseInt(b / 2)
-						+ 0.5
-			},
-			substring4ChAndEn : function(b, c) {
-				for (var d = a.xt.util.htmlToTxt(b.substring(0, 2 * c)); a.xt.util
-						.getStrLength(d) > c;)
-					d = d.substring(0, d.length - 1);
-				return d
-			},
-			htmlToTxt : function(a) {
-				return a = a.replace(/\<|\>|\"|\'|\&/g, function(a) {
-							switch (a) {
-								case "<" :
-									return "\uff1c";
-								case ">" :
-									return "\uff1e";
-								case '"' :
-									return "\uff3c";
-								case "'" :
-									return "\uff07";
-								case "&" :
-									return "\uff06"
-							}
-						})
-			},
-			ellipse : function(b, c) {
-				var d = 2 * a.xt.util.getStrLength(b) > c;
-				return b && d ? b.replace(RegExp("([\\s\\S]{" + c
-								+ "})[\\s\\S]*"), "$1\u2026") : b
-			},
-			isEmpty : function(b) {
-				return "" == a.xt.util.trim(b) ? !1 : !0
-			},
-			isEmail : function(a) {
-				return /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
-						.test(a)
-			},
-			isNick : function(a) {
-				return /^[a-zA-Z\d\u4e00-\u9fa5_-]*$/.test(a)
-			},
-			nickMin : function(b) {
-				return 4 > 2 * a.xt.util.getStrLength(b) ? !1 : !0
-			},
-			nickMax : function(b) {
-				return 30 < 2 * a.xt.util.getStrLength(b) ? !1 : !0
-			},
-			tooShort : function(a, c) {
-				return a.length < c ? !1 : !0
-			},
-			noLink : function(a) {
-				return null == a
-						.match(/(http[s]?:\/\/)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9]+)+/)
-						? !0
-						: !1
-			},
-			getPosition : function(b) {
-				var c = b.offset().top, d = b.offset().left, e = c
-						+ b.outerHeight(), f = d + b.outerWidth(), g = d
-						+ b.outerWidth() / 2, h = c + b.outerHeight() / 2;
-				/iPad/i.test(navigator.userAgent)
-						&& (c -= a(window).scrollTop(), e -= a(window)
-								.scrollTop(), h -= a(window).scrollTop());
-				return {
-					leftTop : function() {
-						return {
-							x : d,
-							y : c
-						}
-					},
-					leftMid : function() {
-						return {
-							x : d,
-							y : h
-						}
-					},
-					leftBottom : function() {
-						return {
-							x : d,
-							y : e
-						}
-					},
-					topMid : function() {
-						return {
-							x : g,
-							y : c
-						}
-					},
-					rightTop : function() {
-						return {
-							x : f,
-							y : c
-						}
-					},
-					rightMid : function() {
-						return {
-							x : f,
-							y : h
-						}
-					},
-					rightBottom : function() {
-						return {
-							x : f,
-							y : e
-						}
-					},
-					MidBottom : function() {
-						return {
-							x : g,
-							y : e
-						}
-					},
-					middle : function() {
-						return {
-							x : g,
-							y : h
-						}
-					}
-				}
-			},
-			getDomain : function(a) {
-				var c = "null", a = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/
-						.exec(a);
-				"undefined" != typeof a && null != a && (c = a[0]);
-				return c
-			},
-			validSite : function(b) {
-				var c = a.xt.util.getDomain(b);
-				if (-1 != b.indexOf("tmall.com")) {
-					var d = !0, e;
-					e = "detail.tmall.com" == c && -1 != b.indexOf("item.htm?");
-					bool4 = "detail.tmall.com" == c
-							&& -1 != b.indexOf("spu_detail.htm?");
-					switch (d) {
-						case e :
-							return "tmall3";
-						case bool4 :
-							return "tmall4";
-						default :
-							return !1
-					}
-				} else if (-1 != b.indexOf("taobao.com"))
-					switch (d = !0, b = ("item.taobao.com" == c
-							|| "item.beta.taobao.com" == c || "item.lp.taobao.com" == c)
-							&& -1 != b.indexOf("item.htm?"), d) {
-						case b :
-							return "taobao";
-						default :
-							return !1
-					}
-				else {
-					if (-1 != b.indexOf("item.buy.qq.com"))
-						return "item.buy.qq.com" == c ? "qqbuy" : !1;
-					if (-1 != b.indexOf("vancl.com"))
-						switch (b = "item.vancl.com" == c
-								&& -1 == b.indexOf("ch_vt"), c = "item.vt.vancl.com" == c, !0) {
-							case b :
-								return "vancl";
-							case c :
-								return "vancl";
-							default :
-								return !1
-						}
-					else
-						return -1 != b.indexOf("item.mbaobao.com")
-								? "item.mbaobao.com" == c ? "mbaobao" : !1
-								: !1
-				}
-			},
-			openWin : function(a) {
-				var c = a.substr(a.lastIndexOf("snsType=") + 8, 1);
-				4 == c || 5 == c
-						? (c = 820 < document.body.clientWidth
-								? (document.body.clientWidth - 820) / 2
-								: 0, window
-								.open(
-										a,
-										"connect_window",
-										"height=700, width=820, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top=190,left="
-												+ c
-												+ ", location=no, status=no"))
-						: 8 == c
-								? (c = (document.body.clientWidth - 580) / 2, window
-										.open(
-												a,
-												"connect_window",
-												"height=620, width=580, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top=190,left="
-														+ c
-														+ ", location=no, status=no"))
-								: 9 == c
-										? (c = 900 < document.body.clientWidth
-												? (document.body.clientWidth - 900)
-														/ 2
-												: 0, window
-												.open(
-														a,
-														"connect_window",
-														"height=550, width=900, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top=190,left="
-																+ c
-																+ ", location=no, status=no"))
-										: (c = (document.body.clientWidth - 580)
-												/ 2, window
-												.open(
-														a,
-														"connect_window",
-														"height=420, width=580, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top=190,left="
-																+ c
-																+ ", location=no, status=no"))
-			}
-		},
-		msg : {}
-	});
-	a.fn.extend({
-		returntop : function() {
-			if (this[0]) {
-				var b = this.click(function() {
-							a("html, body").animate({
-										scrollTop : 0
-									}, 120)
-						}), c = null;
-				a(window).bind("scroll", function() {
-					var d = a(document).scrollTop(), e = a(window).height();
-					0 < d ? b.fadeIn() : b.fadeOut();
-					a.xt.util.isIE6()
-							&& (b.hide(), clearTimeout(c), c = setTimeout(
-									function() {
-										b.show();
-										clearTimeout(c)
-									}, 1E3), b.css("top", d + e - 125))
-				})
-			}
-		},
-		resizeImage : function(b, c) {
-			this.each(function() {
-						var d = a(this)[0], e = d.width, f = d.height;
-						if (!(e <= b && f <= c))
-							if (e <= b && f > c)
-								d.width = e * c / f, d.height = c;
-							else if (e > b && f <= c)
-								d.width = b, d.height = f * b / e;
-							else if (d.width = b, d.height = f * b / e, f * b
-									/ e > c)
-								d.width = e * c / f, d.height = c
-					})
-		},
-		textareaAutoHeight : function() {
-			var b = this, c = b.height();
-			b.bind("keyup input propertychange focus", function() {
-						0 > c && (c = b.height());
-						(a.browser.mozilla || a.browser.safari) && b.height(c);
-						var d = b[0].scrollHeight, e = d < c ? c : d, e = e < 1.5
-								* c ? c : d;
-						b.height(e)
-					})
-		},
-		disableBtn : function(a) {
-			this[0].disabled = "disabled";
-			this.removeClass(a).addClass("disabled")
-		},
-		enableBtn : function(a) {
-			this[0].disabled = "";
-			this.removeClass("disabled").addClass(a)
-		},
-		dropDown : function(b) {
-			var c = {
-				event : "mouseover",
-				classNm : ".dropdown",
-				timer : null,
-				fadeSpeed : 100,
-				duration : 500,
-				offsetX : 82,
-				offsetY : 8,
-				isLocation : !1
-			};
-			b && a.extend(c, b);
-			var d = a(c.classNm);
-			this.each(function() {
-						$this = a(this);
-						$this.hover(function() {
-									clearTimeout(c.timer);
-									if (c.isLocation) {
-										var b = a.xt.util.getPosition($this)
-												.rightBottom();
-										d.css({
-													left : b.x - c.offsetX
-															+ "px",
-													top : b.y + c.offsetY
-															+ "px"
-												})
-									}
-									d.fadeIn(c.fadeSpeed)
-								}, function() {
-									c.timer = setTimeout(function() {
-												d.fadeOut(c.fadeSpeed)
-											}, c.duration)
-								});
-						d.hover(function() {
-									clearTimeout(c.timer);
-									d.show()
-								}, function() {
-									c.timer = setTimeout(function() {
-												d.fadeOut(c.fadeSpeed)
-											}, c.duration)
-								})
-					})
+jQuery.fn.extend({
+	_load : jQuery.fn.load,
+	load : function(url, params, callback) {
+		if (typeof url != 'string')
+			return this._load(url);
+		var off = url.indexOf(" ");
+		if (off >= 0) {
+			var selector = url.slice(off, url.length);
+			url = url.slice(0, off);
 		}
-	})
-})(jQuery);
-(function(a) {
-	a.xt.judgement = {
-		identityCallback : function() {
-		},
-		repeatIdentityClk : function() {
-		},
-		identityOper : function(b, c, d) {
-			a.ajax({
-				url : XTER.path
-						+ ("0" == d ? "/goods/favor" : "/goods/identity"),
-				type : "post",
-				dataType : "json",
-				data : {
-					goodId : c,
-					identify : "1" == d ? "1" : "0"
-				},
-				success : function(c) {
-					switch (c.code) {
-						case 100 :
-							a.xt.judgement.identityCallback(b, d);
-							break;
-						case 101 :
-							a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-error";
-							a.xt.tip.show(b, c.msg);
-							break;
-						case 103 :
-							a.xt.judgement.repeatIdentityClk(b, c.desirable)
-					}
-				}
-			})
-		},
-		cmtSubmitOkClk : function() {
-		},
-		cmtSubmitErrorClk : function() {
-		},
-		cmtSubmit : function(b, c, d) {
-			var e = a.xt.util.trim(d.find("textarea[name='commentContent']")
-					.val()), f = d.find("input[name='commentType']").val();
-			c.find(".error-row");
-			$this = d;
-			"" != e ? 256 > a.xt.util.getStrLength(e) ? a.ajax({
-				url : XTER.path + "/goods/comment",
-				type : "post",
-				dataType : "json",
-				data : {
-					goodId : b,
-					commentContent : e,
-					commentType : f
-				},
-				success : function(b) {
-					switch (b.code) {
-						case 100 :
-							a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-ok";
-							a.xt.tip
-									.show($this,
-											"\u8bc4\u8bba\u53d1\u8868\u6210\u529f\uff01");
-							a.xt.judgement.cmtSubmitOkClk();
-							break;
-						case 101 :
-							a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-error", a.xt.tip
-									.show($this, b.msg), a.xt.judgement
-									.cmtSubmitErrorClk()
-					}
-				}
-			})
-					: (a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-general", a.xt.tip
-							.show(
-									$this,
-									">_< \u8bc4\u8bba\u5185\u5bb9\u4e0d\u80fd\u8d85\u8fc7256\u4e2a\u6c49\u5b57\uff01"))
-					: (a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-general", a.xt.tip
-							.show($this,
-									">_< \u8bc4\u8bba\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a\uff01"))
-		},
-		commentAndAddTagsSubmitOkClk : function() {
-		},
-		commentAndAddTagsSubmitErrorClk : function() {
-		},
-		commentAndAddTagsSubmit : function(b, c) {
-			$this = c;
-			a.ajax({
-				url : XTER.path + "/goods/commentMore",
-				type : "post",
-				dataType : "json",
-				data : b,
-				success : function(b) {
-					switch (b.code) {
-						case 100 :
-							a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-ok";
-							a.xt.tip
-									.show($this,
-											"\u8bc4\u8bba\u53d1\u8868\u6210\u529f\uff01");
-							a.xt.judgement.commentAndAddTagsSubmitOkClk();
-							break;
-						case 101 :
-							a.xt.tip.conf.tipClass = "xt-tipmodal xt-tipmodal-error", a.xt.tip
-									.show($this, b.msg), a.xt.judgement
-									.commentAndAddTagsSubmitErrorClk()
-					}
-				}
-			})
-		}
-	};
-	a.xt.dialog = {
-		isLogin : function() {
-			return "" == XTER.userId ? (a.xt.dialog.login(), !1) : !0
-		},
-		login : function() {
-			if (a("#loginDialog")[0])
-				a("#loginDialog").data("overlay").load();
-			else {
-				var b;
-				b = '<div id="loginDialog" class="g-dialog"><div class="dialog-content"><div class="hd"><h3>\u767b\u5f55</h3></div><div class="bd clearfix"><div class="bd-l">'
-						+ ('<form id="J_LoginDForm" action="' + XTER.path + '/emailLogin" method="POST">');
-				b = b
-						+ '<div class="error-row"><p class="error"></p></div><div class="form-row"><label>Email\uff1a</label><input type="text" class="base-input" name="email" id="email" value="" placeholder="" /></div><div class="form-row"><label>\u5bc6\u7801\uff1a</label><input type="password" class="base-input" name="password" id="password" value="" /></div><div class="form-row"><label>&nbsp;</label><input type="checkbox" class="check" name="remember" value="1" checked="checked" /><span>\u4e24\u5468\u5185\u81ea\u52a8\u767b\u5f55</span></div><div class="form-row act-row clearfix"><label>&nbsp;</label><input type="submit" class="bbl-btn login-submit" value="\u767b\u5f55" />'
-						+ ('<a class="ml10 l30" href="' + XTER.path + '/resetpwd">\u5fd8\u8bb0\u5bc6\u7801\uff1f</a></div>');
-				b = b
-						+ '</form></div><div class="bd-r"><p>\u4f60\u4e5f\u53ef\u4ee5\u4f7f\u7528\u8fd9\u4e9b\u5e10\u53f7\u767b\u5f55</p><div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">'
-						+ ('<li><a class="l-tao" href="' + XTER.path + '/snsLogin?snsType=8&backType=1">\u6dd8\u5b9d\u5e10\u53f7\u767b\u5f55</a></li>');
-				b += '<li><a class="l-sina" href="'
-						+ XTER.path
-						+ '/snsLogin?snsType=3&backType=1">\u65b0\u6d6a\u5fae\u535a\u767b\u5f55</a></li>';
-				b += '<li><a class="l-qq" href="'
-						+ XTER.path
-						+ '/snsLogin?snsType=4&backType=1">QQ\u5e10\u53f7\u767b\u5f55</a></li>';
-				b = b
-						+ '</ul><ul class="fl outlogin-s share-link">'
-						+ ('<li><a class="s-alipay" href="' + XTER.path + '/snsLogin?snsType=9&backType=1">\u652f\u4ed8\u5b9d</a></li>');
-				b += '<li><a class="s-tencent" href="'
-						+ XTER.path
-						+ '/snsLogin?snsType=5&backType=1">\u817e\u8baf\u5fae\u535a</a></li>';
-				b += '<li><a class="s-douban" href="'
-						+ XTER.path
-						+ '/snsLogin?snsType=6&backType=1">\u8c46\u74e3</a></li>';
-				b += '<li><a class="s-renren" href="'
-						+ XTER.path
-						+ '/snsLogin?snsType=7&backType=1">\u4eba\u4eba\u7f51</a></li>';
-				a("body")
-						.append(b
-								+ '</ul></div></div></div><a class="close" href="javascript:;"></a></div></div>');
-				a("#loginDialog").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						});
-				a("#J_LoginDForm").submit(function() {
-					$this = a(this);
-					a.post($this.attr("action"), $this.serializeArray(),
-							function(b) {
-								100 == b.code
-										? (a("#loginDialog").overlay().close(), window.location
-												.reload())
-										: 101 == b.code
-												&& (a("#loginDialog")
-														.find(".error-row")
-														.fadeIn(), a("#loginDialog")
-														.find(".error")
-														.html(b.message), a("#loginDialog input[name=password]")
-														.val(""))
-							});
-					return !1
-				});
-				a(".snslogin a").unbind("click").click(function() {
-							var b = a(this).attr("href");
-							a.xt.util.openWin(b);
-							return !1
-						});
-				a("#loginDialog").overlay().getClosers().bind("click",
-						function() {
-							a("#J_LoginDForm")[0].reset();
-							a("#loginDialog").find(".error-row").hide()
-						})
-			}
-		},
-		reg : function() {
-			if (a("#setDialog")[0])
-				a("#setDialog").data("overlay").load();
-			else {
-				var b;
-				a("body")
-						.append('<div id="setDialog" class="g-dialog"><div class="hd"><h3>\u6b22\u8fce</h3><a class="close" href="javascript:;">X</a></div><div class="bd"><div class="set-box"><div class="title-info clearfix"><div class="face"><img src="../img/face.jpg" width="50" height="50" alt="" /></div><div class="info"><span class="name">Hi\uff0c\u6b22\u8fce\u6765\u5230\u901b.com~</span><p>\u5feb\u901f\u8bbe\u7f6e\u4e00\u4e2a\u90ae\u7bb1\u5e10\u53f7\uff0c\u65b9\u4fbf\u4ee5\u540e\u76f4\u63a5\u767b\u5f55\u548c\u627e\u56de\u5bc6\u7801</p></div></div><form class="set-form" action=""><div class="form-row"><label>\u6635\u79f0\uff1a</label><input type="text" class="base-input" name="nick" id="nick" value="" /></div><div class="form-row"><label>\u90ae\u7bb1\uff1a</label><input type="text" class="base-input" name="email" id="email" value="" placeholder="\u7528\u4e8e\u767b\u5f55\u548c\u627e\u56de\u5bc6\u7801" /></div><div class="form-row"><label>&nbsp;</label><input type="submit" class="bbl-btn reg-submit" value="\u5b8c\u6210" /></div><div class="form-row"><label>&nbsp;</label><input type="checkbox" class="check" name="remember" value="1" checked="checked" /><span>\u6211\u5df2\u9605\u8bfb\u5e76\u540c\u610f<a href="#">\u300a\u4f7f\u7528\u534f\u8bae\u300b</a></span></div></form></div></div></div>');
-				a("#setDialog").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						})
-			}
-		},
-		lkCommentSubmitOkClk : function() {
-		},
-		lkComment : function(b) {
-			var c = a("#J_HiddenProductId").val();
-			if (a("#cmtDialog")[0])
-				a("#cmtDialog").find("textarea").val(""), a("#cmtDialog")
-						.fadeIn();
-			else {
-				var d;
-				a("body")
-						.append('<div id="cmtDialog" class="c-dialog"><p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>\u559c\u6b22\u4e86~</p><div id="cmt-form"><div class="error-row error-like"><p class="error"></p></div><div><textarea class="cmt-txa" name="commentContent" placeholder="\u8bf4\u8bf4\u559c\u6b22\u7684\u7406\u7531\u5427~"></textarea><input type="hidden" name="commentType" value="0"/></div><div class="cmt-act tar"><input type="submit" id="J_LkCommentSubmit" class="pub" value="\u53d1\u5e03"/></div></div>');
-				a(".cmt-txa").focus(function() {
-							var b = a("#cmtDialog").offset().top;
-							a("#cmtDialog").css({
-										top : b - 50 + "px",
-										height : 104
-									});
-							a(this).height(50);
-							a(".cmt-txa").unbind("focus")
-						})
-			}
-			d = a.xt.util.getPosition(b).topMid();
-			var e = a("#cmtDialog").outerWidth(), f = a("#cmtDialog")
-					.outerHeight();
-			a("#cmtDialog").css({
-						left : d.x - e / 2 + "px",
-						top : d.y - f - 12 + "px"
-					}).fadeIn();
-			var g = "true";
-			a("#J_LkCommentSubmit").unbind("click").click(function(d) {
-				d.preventDefault();
-				if ("false" == g)
-					return !1;
-				g = "false";
-				a("#J_HiddenProductId")[0] || (c = b.attr("data-proid"));
-				a.xt.judgement.cmtSubmitOkClk = function() {
-					a("#cmtDialog").fadeOut();
-					a.xt.dialog.lkCommentSubmitOkClk(a.xt.util
-							.trim(a("#cmtDialog")
-									.find("textarea[name='commentContent']")
-									.val()))
-				};
-				a.xt.judgement.cmtSubmit(c, a("#cmtDialog"), a("#cmt-form"),
-						"like");
-				g = "true"
-			});
-			a(".cmtclose").unbind("click").click(function() {
-						a("#cmtDialog").fadeOut()
-					})
-		},
-		commentSubmitOkClk : function() {
-		},
-		comment : function(b) {
-			var c = b.attr("data-type"), d = a("#J_HiddenProductId").val();
-			if (a("#commentDialog")[0])
-				a("#commentDialog").data("overlay").load(), a("#commentDialog")
-						.find("textarea").text("");
-			else {
-				a("body")
-						.append('<div id="commentDialog" class="g-dialog"><div class="dialog-content"><div class="hd"><h3>\u6dfb\u52a0\u8bc4\u8bba</h3></div><div class="bd clearfix"><div id="comment-form"><div class="error-row error-worth"><p class="error worth-error"></p></div><div class="form-row">'
-								+ ('<textarea class="b-textarea cmt-txa" name="commentContent" placeholder="\u8bf4\u8bf4\u4f60\u7684\u7406\u7531\u5427~"></textarea><input type="hidden" name="commentType" value="'
-										+ c + '"/></div>')
-								+ '<div class="clearfix"><input type="submit" class="bbl-btn pub" id="J_WorthCommentSubmit" value="\u53d1\u5e03"/></div></div></div><a class="close" href="javascript:;"></a></div></div>');
-				a("#commentDialog").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						});
-				var e = "true";
-				a("#J_WorthCommentSubmit").click(function() {
-					if ("false" == e)
-						return !1;
-					e = "false";
-					a("#J_HiddenProductId")[0] || (d = b.attr("data-proid"));
-					a.xt.judgement.cmtSubmitOkClk = function() {
-						a("#commentDialog").overlay().close();
-						a.xt.dialog
-								.commentSubmitOkClk(a.xt.util
-										.trim(a("#commentDialog")
-												.find("textarea[name='commentContent']")
-												.val()))
-					};
-					a.xt.judgement.cmtSubmit(d, a("#commentDialog"),
-							a("#comment-form"), "worth");
-					e = "true"
-				})
-			}
-		},
-		commentAndAddTagsSubmitOkClk : function() {
-		},
-		commentAndAddTags : function(b, c, d, e, f, g, h, j) {
-			var p = function(c, d, j) {
-				var h = {}, p = {
-					identify : "",
-					bought : ""
-				}, q = "\u8bc4\u8bba", m = "\u6211\u89c9\u5f97\u8fd9\u4e2a\u5b9d\u8d1d\uff1a", d = "1" == d
-						? ""
-						: '<input type="checkbox" id="J_Bought" name="bought"/>', k = '<a href="javascript:void(0);" class="radioclick worth-radioclick-off mr10" name="worth" data-type="1"><span>\u503c\u5f97</span></a><a href="javascript:void(0);" class="radioclick worth-radioclick-off mr10" name="worth" data-type="0"><span>\u4e0d\u503c\u5f97</span></a>', u = "\u8bf4\u8bf4\u4f60\u7684\u7406\u7531\u5427~";
-				jQuery.trim(c).length
-						&& (m = "\u6211\u8ba4\u4e3a\u5b83\uff1a", k = "1" == c
-								? '<span class="ml10 mr10 fl worth" style="color:#090">\u503c\u5f97</span>'
-								: '<span class="ml10 mr10 fl worth" style="color:#F60">\u4e0d\u503c\u5f97</span>');
-				0 == b.data("type")
-						? (q = "\u559c\u6b22\u4e86\uff5e", h.like = 1, u = "\u8bf4\u8bf4\u559c\u6b22\u7684\u7406\u7531\u5457\uff5e")
-						: 1 == b.data("type") || 2 == b.data("type")
-								? (q = "\u9274\u5b9a", k = 1 == b.data("type")
-										? '<span class="ml10 mr10 fl worth" style="color:#090">\u503c\u5f97</span>'
-										: '<span class="ml10 mr10 fl worth" style="color:#F60">\u4e0d\u503c\u5f97</span>', h.identify = 1 == b
-										.data("type") ? 1 : 0)
-								: 3 == b.data("type")
-										&& (q = "\u8bc4\u8bba", u = "");
-				c = "";
-				if (j[0])
-					for (var v = 0; v < j.length; v++)
-						c += "<li>" + j[v] + "</li>";
-				j = '<div id="commentDialog" class="g-dialog" style="z-index: 9999; top: 363.5px; left: 643px; position: fixed; display: block; "><div class="dialog-content"><div class="hd"><h3>'
-						+ q
-						+ '</h3></div><div class="bd clearfix"><div id="comment-form"><div class="error-row error-worth"><p class="error worth-error"></p></div><div class="commentText-row"><div class="commentText-hd clearfix"><h4 class="fl">'
-						+ m
-						+ "</h4>"
-						+ k
-						+ '<span class="bought fl">'
-						+ d
-						+ '<label for="J_Bought">\u6211\u4e70\u8fc7</label></span></div><div class="commentText-bd"><textarea class="b-textarea cmt-txa" name="commentContent" id="J_CommentContent" placeholder="'
-						+ u
-						+ '"></textarea></div></div><div class="commentTags-row"><h4>\u5b9d\u8d1d\u6807\u7b7e<span>\uff08\u591a\u4e2a\u6807\u7b7e\u7528\u4e2d\u6587\u6216\u82f1\u6587\u9017\u53f7\u9694\u5f00\uff09</span>\uff1a</h4><input class="b-input" type="input" name="commentTags" id="J_CommentTags"/></div><div class="usedTags-row"><h4>\u5e38\u7528\u6807\u7b7e\uff1a</h4><ul class="clearfix">'
-						+ c
-						+ '</ul></div><div class="clearfix pt10"><input type="submit" class="bbl-btn pub" id="J_WorthCommentSubmit" value="\u786e\u5b9a"><div class="share-comment"><span class="gc">\u540c\u6b65\u5206\u4eab\uff1a</span><ul id="J_UserSns"></ul><span><a href="'
-						+ XTER.path
-						+ '/account/sns" target="_blank">\u8bbe\u7f6e</a></span></div></div></div></div><a class="close" href="javascript:;"></a></div></div>';
-				a("body").append(j);
-				a("#commentDialog").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !0,
-							load : !0,
-							onClose : function() {
-								a("#commentDialog,#exposeMask").remove()
-							}
-						});
-				var w = {
-					type_3 : '<li class="share-switch ss-sina-btnclick-on btnclick" data-status="on" data-snsid="3" data-webname="ss-sina"></li>',
-					type_5 : '<li class="share-switch ss-tencent-btnclick-on btnclick" data-status="on" data-snsid="5" data-webname="ss-tencent"></li>'
-				}, x = a("#J_UserSns");
-				a.ajax({
-					url : XTER.path + "/account/getUserSns.html",
-					type : "post",
-					dataType : "json",
-					success : function(b) {
-						if (100 == b.code) {
-							for (var c = "", b = b.userSns, d = 0; d < b.length; d++)
-								w["type_" + b[d]] && (c += w["type_" + b[d]]);
-							x.append(c);
-							a(".btnclick").bind("click", function() {
-								var b = a(this), c = b.attr("data-webname")
-										+ "-btnclick-on", d = b
-										.attr("data-webname")
-										+ "-btnclick-off";
-								"on" == b.data("status") ? b.removeClass(c)
-										.addClass(d).data("status", "off") : b
-										.removeClass(d).addClass(c).data(
-												"status", "on")
-							})
-						}
-					}
-				});
-				a(".usedTags-row li").click(function() {
-					var b = a("#J_CommentTags").val().replace(/^[\uff0c\,]+/,
-							"").replace(/[\uff0c\,]+$/, ""), c = "," + b + ",", d = a(this);
-					if (d.hasClass("selected")) {
-						b = "," + d.text() + ",";
-						for (c = c.replace(b, ","); 0 <= c.indexOf(b);)
-							c = c.replace(b, ",");
-						c = c.replace(/^[\uff0c\,]+/, "").replace(
-								/[\uff0c\,]+$/, "");
-						a("#J_CommentTags").val(c);
-						d.removeClass("selected")
-					} else
-						c = b.length ? b + "," + d.text() : d.text(), 64 >= a.xt.util
-								.getStrLength(a.xt.util.htmlToTxt(c))
-								? (a("#J_CommentTags").val(c), d
-										.addClass("selected"))
-								: (a.xt.tip.conf.tipClass = "tipmodal tipmodal-general", a.xt.tip
-										.show(
-												d,
-												">_< \u6807\u7b7e\u5185\u5bb9\u4e0d\u80fd\u8d85\u8fc764\u4e2a\u6c49\u5b57\uff01"))
-				});
-				a("#J_CommentTags").keyup(function() {
-					if (64 >= a.xt.util.getStrLength(a.xt.util
-							.htmlToTxt(this.value))) {
-						var b = a(this);
-						this.value = this.value.replace(/\uff0c/g, ",");
-						var c = this.value.replace(/^[\uff0c\,]+/, "").replace(
-								/[\uff0c\,]+$/, "");
-						a(".usedTags-row li").each(function() {
-							0 <= ("," + c + ",").indexOf("," + b.text() + ",")
-									? b.hasClass("selected")
-											|| b.addClass("selected")
-									: b.hasClass("selected")
-											&& b.removeClass("selected")
-						})
-					} else
-						this.value = a.xt.util.substring4ChAndEn(this.value,
-								64)
-				});
-				a("#J_CommentContent").keyup(function() {
-					if (1E3 < a.xt.util.getStrLength(a.xt.util
-							.htmlToTxt(this.value)))
-						this.value = a.xt.util.substring4ChAndEn(this.value,
-								1E3)
-				});
-				a(".radioclick").click(function() {
-					var b = a(this), c = b.attr("name") + "-radioclick-on", d = b
-							.attr("name")
-							+ "-radioclick-off";
-					b.hasClass(c) ? b.removeClass(c).addClass(d) : (a("." + c)
-							.removeClass(c).addClass(d), b.removeClass(d)
-							.addClass(c))
-				});
-				var t = "true";
-				a("#J_WorthCommentSubmit").click(function() {
-					var c = a(this);
-					if ("false" == t)
-						return !1;
-					t = "false";
-					var d = a("#J_CommentContent").val(), j = a("#J_CommentTags")
-							.val();
-					if ("" != d) {
-						if (1E3 < a.xt.util.getStrLength(d))
-							return a.xt.tip.conf.tipClass = "tipmodal tipmodal-general", a.xt.tip
-									.show(
-											c,
-											">_< \u8bc4\u8bba\u5185\u5bb9\u4e0d\u80fd\u8d85\u8fc71000\u4e2a\u6c49\u5b57\uff01"), t = "true", !1
-					} else
-						return a.xt.tip.conf.tipClass = "tipmodal tipmodal-general", a.xt.tip
-								.show(c,
-										">_< \u8bc4\u8bba\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a\uff01"), t = "true", !1;
-					if (64 < a.xt.util.getStrLength(j))
-						return a.xt.tip.conf.tipClass = "tipmodal tipmodal-general", a.xt.tip
-								.show(
-										c,
-										">_< \u6807\u7b7e\u5185\u5bb9\u4e0d\u80fd\u8d85\u8fc764\u4e2a\u6c49\u5b57\uff01"), t = "true", !1;
-					if (0 < a("#J_Bought:checked").length)
-						h.bought = 1, p.bought = "1";
-					if (0 < a(".worth-radioclick-on").length)
-						h.identify = parseInt(a(".worth-radioclick-on").eq(0)
-										.attr("data-type"), 10), p.identify = a(".worth-radioclick-on")
-								.eq(0).attr("data-type");
-					c = {
-						productId : b.attr("data-proid"),
-						commentContent : d,
-						tagNames : a("#J_CommentTags").val(),
-						snsSiteIds : "",
-						productImgUrl : f,
-						commentContent4Sns : ""
-					};
-					a.extend(c, h);
-					if (0 < a("#J_UserSns li").length)
-						for (j = 0; j < a("#J_UserSns li").length; j++)
-							if ("on" == a("#J_UserSns li").eq(j).data("status")) {
-								var k = a("#J_UserSns li").eq(j).data("snsid");
-								c.snsSiteIds += 0 < c.snsSiteIds.length ? ","
-										+ k : k
-							}
-					j = {
-						"0" : "\u559c\u6b22\u8fd9\u4e2a\u5b9d\u8d1d\uff0c",
-						1 : "\u8fd9\u5b9d\u8d1d\u503c\uff0c\u63a8\u8350\uff1a",
-						2 : "\u8fd9\u5b9d\u8d1d\u4e0d\u503c\uff1a",
-						3 : "\u8bc4\u8bba\u4e86\u300a$\u300b:"
-					};
-					k = 135
-							- a.xt.util.getStrLength(j[b.data("type")] + e
-									+ g);
-					c.commentContent4Sns = a.xt.util.getStrLength(d) > k
-							? 0 <= j[b.data("type")].indexOf("$") ? j[b
-									.data("type")].replace("$", e)
-									+ a.xt.util.substring4ChAndEn(d, k)
-									+ "..." + g : j[b.data("type")]
-									+ a.xt.util.substring4ChAndEn(d, k)
-									+ "..." + e + g
-							: 0 <= j[b.data("type")].indexOf("$") ? j[b
-									.data("type")].replace("$", e)
-									+ d + "\u3002" + g : j[b.data("type")] + d
-									+ "\u3002" + e + g;
-					a.xt.judgement.commentAndAddTagsSubmitOkClk = function() {
-						a("#commentDialog").overlay().close();
-						a.xt.dialog.commentAndAddTagsSubmitOkClk(d, p)
-					};
-					a.xt.judgement.commentAndAddTagsSubmitErrorClk = function() {
-						a("#commentDialog").overlay().close()
-					};
-					a.xt.judgement.commentAndAddTagsSubmit(c, a(this))
-				})
-			};
-			"fromNonDetail" == j ? a.ajax({
-				url : XTER.path + "/baobei/getUserIdentifyAndBuyAndTag.html",
-				type : "post",
-				dataType : "json",
-				data : {
-					productId : b.attr("data-proid")
-				},
-				success : function(a) {
-					if (100 == a.code) {
-						var b = [];
-						if (a.tagList[0])
-							for (var c = 0; c < a.tagList.length; c++)
-								b[b.length] = a.tagList[c].tagKeyword;
-						p(a.identify, a.bought, b)
-					}
-				}
-			})
-					: p(c, d, h)
-		}
-	}
-})(jQuery);
-(function(a) {
-	a.xt.goods = {
-		conf : {
-			distance : 400,
-			timeout : null,
-			timeoutLength : 2E3,
-			timeoutLengthMax : 32E3,
-			page : 1,
-			container : ".goods-block",
-			colArray : [],
-			containerW : 960,
-			columns : 4,
-			columnWidthInner : 210,
-			columnMargin : 13,
-			columnPadding : 20,
-			columnWidthOuter : 243,
-			ajaxUrl : XTER.path + "/xihuan/book",
-			ajaxData : {
-				spage : null,
-				bpage : null,
-				cateId : null,
-				tagId : null,
-				userId : null,
-				pubTime : null
-			},
-			isAjaxLoad : "true"
-		},
-		init : function() {
-			var b = a.xt.goods, c = a.xt.goods.conf;
-			c.columnWidthOuter = c.columnWidthInner + c.columnMargin
-					+ c.columnPadding;
-			if (0 == c.colArray.length)
-				for (var d = 0; d < c.columns; d++)
-					c.colArray[d] = 0;
-			d = a(".goods-wall").find(".goods");
-			0 < d.length && "true" == c.isAjaxLoad ? b.flowGoods(d) : b
-					.ajaxLoad();
-			a(window).bind("scroll", b.lazyLoad);
-			d.live("mouseover mouseout", function(b) {
-				var c = a(this);
-				"mouseover" == b.type ? (c.css({
-							color : "#666",
-							"box-shadow" : "0 1px 5px rgba(35,25,25,0.5)",
-							"-moz-box-shadow" : "0 1px 5px rgba(35,25,25,0.5)",
-							"-webkit-box-shadow" : "0 1px 5px rgba(35,25,25,0.5)"
-						}), c.find(".ilike-m")[0]
-						? c.find(".ilike-m").show()
-						: c.find(".ilike-del")[0]
-								&& c.find(".ilike-del").show())
-						: (c.css({
-							color : "#999",
-							"box-shadow" : "0 1px 3px rgba(34,25,25,0.2)",
-							"-moz-box-shadow" : "0 1px 3px rgba(34,25,25,0.2)",
-							"-webkit-box-shadow" : "0 1px 3px rgba(34,25,25,0.2)"
-						}), c.find(".ilike-m")[0]
-								? c.find(".ilike-m").hide()
-								: c.find(".ilike-del")[0]
-										&& c.find(".ilike-del").hide())
-			})
-		},
-		isLoading : !1,
-		lazyLoad : function() {
-			var b = a.xt.goods, c = a.xt.goods.conf, d = a(document)
-					.height()
-					- a(window).scrollTop() - a(window).height();
-			if (!b.isLoading && d < c.distance)
-				b.isLoading = !0, b.ajaxLoad()
-		},
-		setTimeout : function() {
-			var b = a.xt.goods, c = a.xt.goods.conf;
-			c.timeout = setTimeout(function() {
-						b.ajaxLoad()
-					}, c.timeoutLength)
-		},
-		resetTimeout : function() {
-			var b = a.xt.goods, c = a.xt.goods.conf;
-			if (3E3 < c.timeoutLength)
-				c.timeoutLength = 3E3, window.clearTimeout(c.timeout), b
-						.setTimeout()
-		},
-		ajaxLoad : function() {
-			var b = a.xt.goods, c = a.xt.goods.conf;
-			a.xt.goods.conf.ajaxData.spage = c.page;
-			a(".goods-loading").show();
-			if ("false" == c.isAjaxLoad) {
-				var d = a("#J_GoodsShow"), e, f = 20 * (c.page - 1), g = 20
-						* c.page, f = d.find(".goods").slice(f, g);
-				d.find(".goods").slice(g, goodsPage.sumGoodsNum).each(
-						function() {
-							a(this)[0].style.display = "none"
-						});
-				f.each(function() {
-					var b = a(this)[0], d = jQuery.inArray(Math.min.apply(Math,
-									c.colArray), c.colArray), f = c.colArray[d];
-					b.style.top = f + "px";
-					b.style.left = d * c.columnWidthOuter + "px";
-					b.style.display = "block";
-					1 < c.page
-							&& (e = a(this).find("img"), e.attr("src", e
-											.attr("data-src")));
-					c.colArray[d] = f + b.offsetHeight + c.columnMargin
-				}).animate({
-							opacity : "1"
-						}, 500);
-				a(".goods-wall")[0].style.height = Math.max.apply(Math,
-						c.colArray)
-						+ "px";
-				c.page += 1;
-				b.isLoading = !1;
-				if (6 == c.page || 20 > f.length
-						|| 20 >= d.find(".goods").length)
-					b.fill(), a(".goods-loading").remove(), a(".page-box")
-							.show(), a(window).unbind("scroll", b.lazyLoad)
-			} else
-				a.post(c.ajaxUrl, c.ajaxData, function(d) {
-					var e = a("<div>" + d + "</div>").find(".goods"), f = a("<div>"
-							+ d + "</div>").find(".J_HiddenSpage:last").val(), g = a("<div>"
-							+ d + "</div>").find(".J_HiddenIsEnd:last").val(), d = a("<div>"
-							+ d + "</div>").find(".J_HiddenLastPubTime:last")
-							.val();
-					a.xt.goods.conf.ajaxData.pubTime = d;
-					b.flowGoods(e);
-					c.page += 1;
-					b.isLoading = !1;
-					if (6 == c.page || "true" == g || "5" == f)
-						b.fill(), a(".goods-loading").remove(), a(".page-box")
-								.show(), a(window).unbind("scroll", b.lazyLoad)
-				})
-		},
-		flowGoods : function(b) {
-			var c = a.xt.goods, d = a.xt.goods.conf;
-			a(".goods-wall").append('<div class="goods-block"></div>');
-			b.each(function() {
-						var b = a(this)[0], c = jQuery.inArray(Math.min.apply(
-										Math, d.colArray), d.colArray), g = d.colArray[c];
-						b.style.top = g + "px";
-						b.style.left = c * d.columnWidthOuter + "px";
-						a(d.container + ":last").append(b);
-						d.colArray[c] = g + b.offsetHeight + d.columnMargin
-					});
-			a(".goods-wall")[0].style.height = Math.max.apply(Math, d.colArray)
-					+ "px";
-			c.showGoods()
-		},
-		showGoods : function() {
-			var b = a.xt.goods.conf;
-			2 < b.page ? a(b.container + ":last").animate({
-						opacity : "1"
-					}, 500) : a(b.container + ":last").css("opacity", "1")
-		},
-		fill : function() {
-			for (var b = a.xt.goods.conf, c = Math.max.apply(Math,
-					b.colArray), d = jQuery.inArray(c, b.colArray), e = 0; e < b.columns; e++)
-				e != d
-						&& a(b.container + ":last")
-								.append('<div class="goods-fill" style="top:'
-										+ b.colArray[e] + "px;left:" + e
-										* b.columnWidthOuter + "px;height:"
-										+ (c - b.colArray[e] - b.columnMargin)
-										+ 'px"></div>')
-		}
-	}
-})(jQuery);
-(function(a) {
-	function b(b, f) {
-		var g = this, h = b.find(":input")
-				.not(":button, :image, :reset, :submit");
-		a.each(c, function() {
-					var b = this, c = b[0], e = b[1], o = b[2];
-					if (h.filter(a(c))) {
-						var l = a(c);
-						l.data("vali", 0);
-						"info" == o ? l.bind(f.infoEvent, function() {
-									d.effects(l, e, o)
-								}) : l.bind(f.valiEvent, function() {
-									b[3].call(g, l, l.val())
-											? "error" == o
-													? (l.data("vali", 1), d
-															.effects(l, "OK",
-																	"correct"))
-													: "empty" == o
-															&& (l.data("vali",
-																	1), "" == l
-																	.val()
-																	? d
-																			.effects(
-																					l,
-																					"",
-																					"empty")
-																	: d
-																			.effects(
-																					l,
-																					"OK",
-																					"correct"))
-											: (l.data("vali", 0), d.effects(l,
-													e, o))
-								})
-					}
-				});
-		a("input[name=email]")[0]
-				&& a("input[name=email]").bind("blur", function() {
-					var b = a(this);
-					1 == b.data("vali")
-							&& 11 != b.data("vali")
-							&& (b.data("vali", 0), d.effects(b, "", "ajax"), a
-									.ajax({
-										type : "post",
-										url : XTER.path + "/checkEmailExist",
-										dataType : "json",
-										data : "email=" + b.val(),
-										success : function(a) {
-											0 == a.code
-													? (b.data("vali", 11), d
-															.effects(b, "OK",
-																	"correct"))
-													: 1 == a.code
-															? (b
-																	.data(
-																			"vali",
-																			0), d
-																	.effects(
-																			b,
-																			"\u6b64Email\u5df2\u88ab\u6ce8\u518c",
-																			"error"))
-															: (b
-																	.data(
-																			"vali",
-																			0), d
-																	.effects(
-																			b,
-																			"\u7cfb\u7edf\u51fa\u9519\u4e86\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\u2026",
-																			"error"))
-										}
-									}))
-				});
-		a("input[name=nickname]")[0]
-				&& a("input[name=nickname]").bind("blur", function() {
-					var b = a(this);
-					if (1 == b.data("vali") && 11 != b.data("vali")) {
-						if (b.val() == XTER.nick)
-							return !1;
-						b.data("vali", 0);
-						d.effects(b, "", "ajax");
-						a.ajax({
-							type : "post",
-							url : XTER.path + "/checkEmailExist",
-							dataType : "json",
-							data : "nickname=" + b.val(),
-							success : function(a) {
-								0 == a.code
-										? (b.data("vali", 11), d.effects(b,
-												"OK", "correct"))
-										: 2 == a.code
-												? (b.data("vali", 0), d
-														.effects(
-																b,
-																"\u6b64\u6635\u79f0\u5df2\u88ab\u6ce8\u518c",
-																"error"))
-												: (b.data("vali", 0), d
-														.effects(
-																b,
-																"\u7cfb\u7edf\u51fa\u9519\u4e86\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\u2026",
-																"error"))
-							}
-						})
-					}
-				});
-		a("input.check")[0] && a("input.check").click(function() {
-			!1 == a(this)[0].checked
-					? (a("input[type=submit]")[0].disabled = "disabled", a("input[type=submit]")
-							.removeClass("bbl-btn").addClass("disabled"))
-					: (a("input[type=submit]")[0].disabled = "", a("input[type=submit]")
-							.removeClass("disabled").addClass("bbl-btn"))
-		});
-		b.submit(function() {
-					var b = !0;
-					h.each(function() {
-								0 == a(this).data("vali") && (b = !1)
-							});
-					b || h.trigger("blur");
-					a("input.check")[0] && !1 == a("input.check")[0].checked
-							&& (b = !1);
-					return b
-				})
-	}
-	a.xt.validator = {
-		conf : {
-			infoEvent : "focus",
-			valiEvent : "blur",
-			speed : 100
-		},
-		message : {},
-		fn : function(b, d, g, h) {
-			a.isFunction(d) && (h = d, d = "");
-			c.push([b, d, g, h])
-		},
-		effects : function(b, c, d) {
-			if (!b.next("span")[0]) {
-				b.after('<span class="tip"></span>');
-				var h = a.xt.util.getPosition(b).rightTop();
-				b.next("span").css({
-							left : h.x + 10 + "px",
-							top : h.y + "px"
-						})
-			}
-			switch (d) {
-				case "info" :
-					b.next(".tip").removeClass().addClass("tip").html(c)
-							.fadeIn();
-					break;
-				case "require" :
-					b.next(".tip").removeClass().addClass("tip error").html(c)
-							.fadeIn();
-					b.unbind("focus");
-					break;
-				case "empty" :
-					"" == c ? b.next(".tip").hide() : b.next(".tip")
-							.removeClass().addClass("tip error").html(c)
-							.fadeIn();
-					break;
-				case "error" :
-					b.next(".tip").removeClass().addClass("tip error").html(c)
-							.fadeIn();
-					b.unbind("focus");
-					break;
-				case "ajax" :
-					b.next(".tip").removeClass().addClass("tip ajaxvali")
-							.html("").fadeIn();
-					b.unbind("focus");
-					break;
-				case "correct" :
-					b.next(".tip").removeClass().addClass("tip correct")
-							.html("").fadeIn(), b.unbind("focus")
-			}
-		}
-	};
-	var c = [], d = a.xt.validator;
-	d.fn("input[name=email]",
-			"\u8bf7\u8f93\u5165\u4f60\u7684\u5e38\u7528Email", "info");
-	d.fn("input[name=email]", "Email\u683c\u5f0f\u4e0d\u6b63\u786e", "error",
-			function(b, c) {
-				return a.xt.util.isEmail(c)
-			});
-	d.fn("input[name=email]", "\u8bf7\u586b\u5199Email", "require", function(b,
-					c) {
-				return a.xt.util.isEmpty(c)
-			});
-	d
-			.fn(
-					"input[name=nickname]",
-					"4-30\u4e2a\u5b57\u7b26\uff0c\u652f\u6301\u4e2d\u82f1\u6587\u3001\u6570\u5b57\u3001\u201c_\u201d\u548c\u51cf\u53f7",
-					"info");
-	d
-			.fn(
-					"input[name=nickname]",
-					"\u4ec5\u652f\u6301\u4e2d\u82f1\u6587\u3001\u6570\u5b57\u3001\u201c_\u201d\u548c\u51cf\u53f7",
-					"error", function(b, c) {
-						return a.xt.util.isNick(c)
-					});
-	d.fn("input[name=nickname]",
-			"\u6700\u957f\u4e0d\u80fd\u8d85\u8fc730\u4e2a\u5b57\u7b26",
-			"require", function(b, c) {
-				return a.xt.util.nickMax(c)
-			});
-	d.fn("input[name=nickname]",
-			"\u8bf7\u8f93\u5165\u81f3\u5c114\u4e2a\u5b57\u7b26", "require",
-			function(b, c) {
-				return a.xt.util.nickMin(c)
-			});
-	d.fn("input[name=nickname]", "\u8bf7\u586b\u5199\u6635\u79f0", "require",
-			function(b, c) {
-				return a.xt.util.isEmpty(c)
-			});
-	d
-			.fn(
-					"input[name=password]",
-					"6-16\u4e2a\u534a\u89d2\u5b57\u7b26\uff0c\u652f\u6301\u5b57\u6bcd\u3001\u6570\u5b57\u3001\u7b26\u53f7\uff0c\u533a\u5206\u5927\u5c0f\u5199",
-					"info");
-	d.fn("input[name=password]",
-			"\u5bc6\u7801\u4e2d\u4e0d\u80fd\u5305\u542b\u7a7a\u683c", "error",
-			function(a, b) {
-				return /^\S+$/.test(b)
-			});
-	d.fn("input[name=password]",
-			"\u5bc6\u7801\u592a\u957f\u4e86\uff0c\u6700\u591a16\u4f4d",
-			"require", function(a, b) {
-				return 16 < b.length ? !1 : !0
-			});
-	d.fn("input[name=password]",
-			"\u5bc6\u7801\u592a\u77ed\u4e86\uff0c\u6700\u5c116\u4f4d",
-			"require", function(b, c) {
-				return a.xt.util.tooShort(c, 6)
-			});
-	d.fn("input[name=password]", "\u8bf7\u8f93\u5165\u5bc6\u7801", "require",
-			function(a, b) {
-				return 0 == b.length ? !1 : !0
-			});
-	d.fn("input[name=password2]",
-			"\u8bf7\u91cd\u590d\u8f93\u5165\u4e00\u6b21\u5bc6\u7801", "info");
-	d
-			.fn(
-					"input[name=password2]",
-					"\u4e24\u6b21\u8f93\u5165\u7684\u5bc6\u7801\u4e0d\u4e00\u81f4\uff0c\u8bf7\u91cd\u65b0\u8f93\u5165",
-					"error", function(b, c) {
-						return c == a("#password").val()
-					});
-	d.fn("input[name=password2]",
-			"\u8bf7\u91cd\u590d\u8f93\u5165\u4e00\u6b21\u5bc6\u7801",
-			"require", function(b, c) {
-				return a.xt.util.isEmpty(c)
-			});
-	d.fn("input[name=blog]", "\u5982\uff1ahttp://blog.xt.com/xt", "info");
-	d.fn("input[name=blog]",
-			"\u8bf7\u586b\u5199\u6b63\u786e\u7684\u7f51\u7ad9\u5730\u5740",
-			"empty", function(a, b) {
-				return "" == b
-						? !0
-						: RegExp("^http:\\/\\/([\\w-]+(\\.[\\w-]+)+(\\/[\\w-   .\\/\\?%@&+=\\u4e00-\\u9fa5]*)?)?$")
-								.test(b)
-			});
-	d.fn("textarea[name=intro]", "\u6700\u957f70\u4e2a\u5b57", "info");
-	d.fn("textarea[name=intro]",
-			"\u6700\u957f\u4e0d\u80fd\u8d85\u8fc770\u4e2a\u5b57", "empty",
-			function(b, c) {
-				return 70 < a.xt.util.getStrLength(c) ? !1 : !0
-			});
-	a.fn.validator = function(c) {
-		var d = this.data("validator");
-		d && (d.destroy(), this.removeData("validator"));
-		c = a.extend(!0, {}, a.xt.validator.conf, c);
-		if (this.is("form"))
-			return this.each(function() {
-						var g = a(this);
-						d = new b(g, c);
-						g.data("validator", d)
-					});
-		d = new b(this.eq(0).closest("form"), c);
-		return this.data("validator", d)
-	}
-})(jQuery);
-(function(a) {
-	a.fn.textSlider = function(b) {
-		b = a.extend({
-					speed : "normal",
-					step : 1,
-					timer : 1E3
-				}, b || {});
-		return this.each(function() {
-					a.fn.textSlider.scllor(a(this), b)
-				})
-	};
-	a.fn.textSlider.scllor = function(b, c) {
-		var d = b.find("ul:eq(0)"), e = d.children(), f = a(e[0]).height(), g = 0
-				- c.step * f;
-		7 < e.length && window.setInterval(function() {
-					d.animate({
-								marginTop : g
-							}, c.speed, function() {
-								for (i = 0; i < c.step; i++)
-									d.find("li:first").removeClass("fade"), d
-											.find("li:first").appendTo(d);
-								d.css({
-											marginTop : 0
-										});
-								d.find("li:first").addClass("fade")
-							})
-				}, c.timer)
-	}
-})(jQuery);
-(function(a) {
-	a.xt.tip = {
-		conf : {
-			timer : null,
-			timerLength : 3E3,
-			tipClass : ""
-		},
-		show : function(b, c) {
-			clearTimeout(a.xt.tip.conf.timer);
-			var d = a.xt.util.getPosition(b).topMid();
-			a(".tipbox")[0] || a("body").append('<div class="tipbox"></div>');
-			a(".tipbox").attr("class", "tipbox " + a.xt.tip.conf.tipClass);
-			a(".tipbox").html(c);
-			var e = a(".tipbox").outerWidth(), f = a(".tipbox").outerHeight();
-			a(".tipbox").css({
-						left : d.x - e / 2 + "px",
-						top : d.y - f - 10 + "px"
-					}).fadeIn();
-			a.xt.tip.conf.timer = setTimeout(function() {
-						a(".tipbox").fadeOut()
-					}, a.xt.tip.conf.timerLength)
-		}
-	}
-})(jQuery);
-(function(a) {
-	a.cookie = function(a, c, d) {
-		if ("undefined" != typeof c) {
-			d = d || {};
-			if (null === c)
-				c = "", d.expires = -1;
-			var e = "";
-			if (d.expires
-					&& ("number" == typeof d.expires || d.expires.toUTCString))
-				"number" == typeof d.expires ? (e = new Date, e.setTime(e
-						.getTime()
-						+ 864E5 * d.expires)) : e = d.expires, e = "; expires="
-						+ e.toUTCString();
-			var f = d.path ? "; path=" + d.path : "", g = d.domain
-					? "; domain=" + d.domain
-					: "", d = d.secure ? "; secure" : "";
-			document.cookie = [a, "=", encodeURIComponent(c), e, f, g, d]
-					.join("")
-		} else {
-			c = null;
-			if (document.cookie && "" != document.cookie) {
-				d = document.cookie.split(";");
-				for (e = 0; e < d.length; e++)
-					if (f = jQuery.trim(d[e]), f.substring(0, a.length + 1) == a
-							+ "=") {
-						c = decodeURIComponent(f.substring(a.length + 1));
-						break
-					}
-			}
-			return c
-		}
-	}
-})(jQuery);
-(function(a) {
-	a.fn.lazyload = function(b) {
-		var c = {
-			threshold : 0,
-			failure_limit : 0,
-			event : "scroll",
-			effect : "show",
-			container : window,
-			data_attribute : "original",
-			skip_invisible : !0,
-			appear : null,
-			load : null
+		callback = callback || function() {
 		};
-		if (b) {
-			if (void 0 !== b.failurelimit)
-				b.failure_limit = b.failurelimit, delete b.failurelimit;
-			if (void 0 !== b.effectspeed)
-				b.effect_speed = b.effectspeed, delete b.effectspeed;
-			a.extend(c, b)
-		}
-		var d = this;
-		0 == c.event.indexOf("scroll")
-				&& a(c.container).bind(c.event, function() {
-					var b = 0;
-					d.each(function() {
-								$this = a(this);
-								if ((!c.skip_invisible || $this.is(":visible"))
-										&& !a.abovethetop(this, c)
-										&& !a.leftofbegin(this, c))
-									if (!a.belowthefold(this, c)
-											&& !a.rightoffold(this, c))
-										$this.trigger("appear");
-									else if (++b > c.failure_limit)
-										return !1
-							})
-				});
-		this.each(function() {
-			var b = this, f = a(b);
-			b.loaded = !1;
-			f.one("appear", function() {
-				this.loaded
-						|| (c.appear && c.appear.call(b, d.length, c), a("<img />")
-								.bind("load", function() {
-									f.hide().attr("src",
-											f.data(c.data_attribute))[c.effect](c.effect_speed);
-									b.loaded = !0;
-									var g = a.grep(d, function(a) {
-												return !a.loaded
-											});
-									d = a(g);
-									c.load && c.load.call(b, d.length, c)
-								}).attr("src", f.data(c.data_attribute)))
-			});
-			0 != c.event.indexOf("scroll") && f.bind(c.event, function() {
-						b.loaded || f.trigger("appear")
-					})
-		});
-		a(window).bind("resize", function() {
-					a(c.container).trigger(c.event)
-				});
-		a(c.container).trigger(c.event);
-		return this
-	};
-	a.belowthefold = function(b, c) {
-		return (void 0 === c.container || c.container === window ? a(window)
-				.height()
-				+ a(window).scrollTop() : a(c.container).offset().top
-				+ a(c.container).height()) <= a(b).offset().top - c.threshold
-	};
-	a.rightoffold = function(b, c) {
-		return (void 0 === c.container || c.container === window ? a(window)
-				.width()
-				+ a(window).scrollLeft() : a(c.container).offset().left
-				+ a(c.container).width()) <= a(b).offset().left - c.threshold
-	};
-	a.abovethetop = function(b, c) {
-		return (void 0 === c.container || c.container === window ? a(window)
-				.scrollTop() : a(c.container).offset().top) >= a(b).offset().top
-				+ c.threshold + a(b).height()
-	};
-	a.leftofbegin = function(b, c) {
-		return (void 0 === c.container || c.container === window ? a(window)
-				.scrollLeft() : a(c.container).offset().left) >= a(b).offset().left
-				+ c.threshold + a(b).width()
-	};
-	a.inviewport = function(b, c) {
-		return !a.rightofscreen(b, c) && !a.leftofscreen(b, c)
-				&& !a.belowthefold(b, c) && !a.abovethetop(b, c)
-	};
-	a.extend(a.expr[":"], {
-				"below-the-fold" : function(b) {
-					return a.belowthefold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"above-the-top" : function(b) {
-					return !a.belowthefold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"right-of-screen" : function(b) {
-					return a.rightoffold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"left-of-screen" : function(b) {
-					return !a.rightoffold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"in-viewport" : function(b) {
-					return !a.inviewport(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"above-the-fold" : function(b) {
-					return !a.belowthefold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"right-of-fold" : function(b) {
-					return a.rightoffold(b, {
-								threshold : 0,
-								container : window
-							})
-				},
-				"left-of-fold" : function(b) {
-					return !a.rightoffold(b, {
-								threshold : 0,
-								container : window
-							})
-				}
-			})
-})(jQuery);
-(function(a) {
-	function b(b, d) {
-		var e = b.find("ul:eq(0)"), f = e.children(), g = a(f[0]).outerWidth(), h = d.step
-				* g, j = function() {
-			e.animate({
-						opacity : 1
-					}, d.timer, function() {
-						e.find("li:eq(6)").css("opacity", 0.5);
-						e.animate({
-									marginLeft : -1 * h
-								}, d.speed, function() {
-									e.find("li:eq(6)").css("opacity", 1);
-									e.find("li:first").appendTo(e);
-									e.css({
-												marginLeft : 0
-											})
-								});
-						r()
-					})
-		}, p = function() {
-			e.animate({
-						opacity : 1
-					}, d.timer, function() {
-						e.animate({
-									marginLeft : h
-								}, d.speed, function() {
-									e.find("li:last").hide().prependTo(e)
-											.fadeIn();
-									e.css({
-												marginLeft : 0
-											})
-								});
-						r()
-					})
-		}, r = function() {
-			"left" == d.direction ? j() : p()
-		};
-		f.length > d.length && r();
-		e.hover(function() {
-					e.stop()
-				}, r)
-	}
-	a.fn.feedSlider = function(c) {
-		c = a.extend({
-					speed : "normal",
-					step : 1,
-					length : 7,
-					timer : 3E3,
-					direction : "left"
-				}, c || {});
-		return this.each(function() {
-					new b(a(this), c)
-				})
-	}
-})(jQuery);
-(function(a) {
-	function b(b, d) {
-		var e = b.find(".items:eq(0)"), f = e.find(".item").length, g = 0, h = null, j = a(d.navis), p = function(
-				a) {
-			e.stop();
-			var b = g + 1 == f ? 0 : g + 1;
-			a + 1 && (g = a);
-			e.animate({
-						left : a + 1 ? -(d.width * a) : -(d.width * b)
-					}, d.speed, function() {
-						-1 == a && (g = b, n(g))
-					})
-		}, r = function(a) {
-			"left" == d.direction && p(a)
-		}, o = function() {
-			l();
-			h = setTimeout(function() {
-						r(-1);
-						o()
-					}, d.timer)
-		}, l = function() {
-			null != h && clearTimeout(h)
-		}, n = function(b) {
-			a("." + d.naviClass).removeClass(d.naviClass);
-			j.eq(b).addClass(d.naviClass)
-		};
-		j.each(function(b) {
-					a(this).hover(function() {
-								n(b);
-								l();
-								r(b)
-							}, o)
-				});
-		b.hover(l, o);
-		var s = {
-			playlol : r,
-			autoPlay : o,
-			stopAuto : l,
-			changeClass : n
-		};
-		null != d.startHandle ? d.startHandle(s) : o()
-	}
-	a.fn.scrollImg = function(c) {
-		c = a.extend({
-					speed : 500,
-					timer : 3E3,
-					direction : "left",
-					navis : ".navi li",
-					naviClass : "active",
-					eventName : "hover",
-					width : this.width(),
-					startHandle : null
-				}, c || {});
-		return this.each(function() {
-					new b(a(this), c)
-				})
-	}
-})(jQuery);
-(function(a) {
-	a.fn.addPic = function(b) {
-		b = a.extend({
-					handler : function() {
+		var type = "GET";
+		if (params)
+			if (jQuery.isFunction(params)) {
+				callback = params;
+				params = null;
+			} else if (typeof params == 'object') {
+				params = jQuery.param(params);
+				type = "POST";
+			}
+		var self = this;
+		jQuery.ajax({
+					url : url,
+					type : type,
+					dataType : "html",
+					data : params,
+					complete : function(res, status) {
+						if (status == "success" || status == "notmodified")
+							self.html(selector ? jQuery("<div/>")
+									.append(res.responseText.replace(
+											/<script(.|\s)*?\/script>/g, ""))
+									.find(selector) : res.responseText);
+						self.each(callback, [res.responseText, status, res]);
 					}
-				}, b || {});
-		if (a("#J_AddPicD")[0])
-			a(".ap-input").val(""), a(".text-tip").html("");
-		else {
-			var c;
-			a("body")
-					.append('<div id="J_AddPicD" class="g-dialog ap-dialog"><div class="content"><p class="pb5">\u5c06\u56fe\u7247\u7f51\u5740\u7c98\u8d34\u5230\u4e0b\u9762\u7684\u6846\u4e2d\uff1a</p><form class="ap-form" name="addPic" action=""><div class="clearfix"><input class="base-input ap-input" name="photos" value="" placeholder="http://" /><input type="submit" class="sbl-btn src-sub" value="\u6dfb\u52a0" /></div><div class="text-tip"></div></form><a class="close" href="javascript:;"></a></div></div>');
-			a(".ap-dialog .close").click(function() {
-						a("#J_AddPicD").fadeOut("fast")
-					});
-			a("#J_AddPicD .ap-form").submit(function() {
-				a(this);
-				"" == a.xt.util.trim(a("#J_AddPicD .ap-input").val())
-						? a(".text-tip")
-								.html('<span class="errc">\u56fe\u7247\u7f51\u5740\u4e0d\u80fd\u4e3a\u7a7a~</span>')
-								.show()
-						: (b.handler(), a("#J_AddPicD").fadeOut("fast"));
-				return !1
-			})
-		}
-		c = a.xt.util.getPosition(this).topMid();
-		var d = a("#J_AddPicD").outerWidth(), e = a("#J_AddPicD").outerHeight();
-		a("#J_AddPicD").css({
-					left : c.x - d / 2 + "px",
-					top : c.y - e - 10 + "px"
-				}).fadeIn("fast")
-	};
-	a.xt.ugc = {
-		pubJson : {},
-		getCmt : function(b) {
-			var c = a.xt.util
-					.trim(a(b + " textarea[name=proComment]").val());
-			return 1E3 < a.xt.util.getStrLength(c)
-					? (a(b + " .goods-act")
-							.find(".errc")
-							.show()
-							.html("\u8bc4\u8bba\u6570\u4e0d\u80fd\u8d85\u8fc71000\u5b57"), !1)
-					: "" == c ? "none" : c
-		},
-		getTags : function(b) {
-			for (var c = a.xt.util.trim(a(b + " input[name=tags]").val()), d = c
-					.replace(/&/g, "ï¼†").replace(/\//g, "ï¼").replace(/#/g,
-							"ï¼ƒ").replace(/\ï¼Œ/g, ",").split(","), e = [], f = 0, g = d.length; f < g; f++)
-				"" != d[f] && e.push({
-							tagKeyword : d[f]
-						});
-			if (-1 != a.inArray("\u7cbe\u54c1", d))
-				return a(b + " .goods-act")
-						.find(".errc")
-						.show()
-						.html("\u6807\u7b7e\u4e2d\u4e0d\u80fd\u5305\u542b\u201c\u7cbe\u54c1\u201d"), !1;
-			return 200 < a.xt.util.getStrLength(c)
-					? (a(b + " .goods-act")
-							.find(".errc")
-							.show()
-							.html("\u6807\u7b7e\u4e0d\u80fd\u8d85\u8fc7200\u5b57"), !1)
-					: e
-		},
-		pubSuccess : function() {
-			if (a("#J_PubSuccessD")[0])
-				a("#J_PubSuccessD").data("overlay").load();
-			else {
-				var b;
-				b = '<div id="J_PubSuccessD" class="g-dialog"><div class="dialog-content"><div class="bd clearfix"><p class="success-text"><span class="correct">\u5b9d\u8d1d\u53d1\u5e03\u6210\u529f\uff01</span></p>'
-						+ ('<p class="clearfix"><a class="bbl-btn goCheck" href="'
-								+ XTER.path + "/u/share/" + XTER.userId + '">\u524d\u5f80\u67e5\u770b\u5b9d\u8d1d</a>');
-				a("body")
-						.append(b
-								+ '<a class="bgr-btn closeD ml10" href="javascript:;">\u5173\u95ed</a></p></div></div></div>');
-				a("#J_PubSuccessD").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						})
-			}
-			a("#J_PubSuccessD .closeD").click(function() {
-						a("#J_PubSuccessD").overlay().close()
-					})
-		},
-		goodsExist : function(b) {
-			a.xt.ugc.pubJson = {
-				proId : b.proId,
-				productVoId : b.productVoId,
-				productName : "",
-				productMerchant : "",
-				url : "",
-				price : "",
-				salesVolume : "",
-				proComment : "",
-				tags : null,
-				photos : [],
-				favor : "false",
-				typeVO : b.typeVO,
-				statusVO : b.statusVO
+				});
+		return this;
+	},
+	serialize : function() {
+		return jQuery.param(this.serializeArray());
+	},
+	serializeArray : function() {
+		return this.map(function() {
+			return jQuery.nodeName(this, "form") ? jQuery
+					.makeArray(this.elements) : this;
+		}).filter(function() {
+			return this.name
+					&& !this.disabled
+					&& (this.checked || /select|textarea/i.test(this.nodeName) || /text|hidden|password/i
+							.test(this.type));
+		}).map(function(i, elem) {
+			var val = jQuery(this).val();
+			return val == null ? null : val.constructor == Array ? jQuery.map(
+					val, function(val, i) {
+						return {
+							name : elem.name,
+							value : val
+						};
+					}) : {
+				name : elem.name,
+				value : val
 			};
-			var c = 0 < b.pictures.length
-					? b.pictures[0].src
-					: "http://static.xt.com/images/user/photo/avatar-80.png";
-			if (a("#J_GoodsExistD")[0])
-				a("#J_GoodsExistD").data("overlay").load();
-			else {
-				var d;
-				d = '<div id="J_GoodsExistD" class="g-dialog ugc-dialog"><div class="dialog-content"><div class="hd"><h3>\u901b\u901b\u4e0a\u5df2\u7ecf\u6709\u8fd9\u4e2a\u5b9d\u8d1d\u5566</h3></div><div class="bd clearfix">'
-						+ ('<form id="J_GoodsExistForm" action="'
-								+ XTER.path + '/ugc/api/upateProduct" method="POST">');
-				d = d + '<div class="clearfix"><div class="goods-avatar">'
-						+ ('<img src="' + c + '" alt="" />')
-						+ '</div><div class="goods-info">'
-						+ ('<p class="goodsNm">' + b.productName + "</p>");
-				a("body")
-						.append(d
-								+ '<p class="pb5">\u8bc4\u8bba\u4e00\u4e0b\uff1a</p><p><textarea class="base-txa" name="proComment" placeholder="\u559c\u6b22\u5b83\u4ec0\u4e48\u5462\uff1f"></textarea></p><p class="pt10 pb5">\u5b9d\u8d1d\u6807\u7b7e\uff1a</p><p><input type="text" class="base-input" name="tags" value="" /></p><p class="pt5 gc">\u591a\u4e2a\u6807\u7b7e\u7528\u4e2d\u6587\u6216\u82f1\u6587\u9017\u53f7\u9694\u5f00</p></div></div><div class="goods-act"><div class="clearfix"><a class="bbl-btn" id="J_GoodsSave" href="javascript:;">\u786e\u5b9a</a><label class="fl mt15 ml15 gc6"><input type="checkbox" name="tomyfav" /> \u52a0\u5165\u6211\u559c\u6b22\u7684\u5b9d\u8d1d</label></div><div class="errc mt10"></div></div></form></div><a class="close" href="javascript:;"></a></div></div>');
-				a("#J_GoodsExistD").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						});
-				a("#J_GoodsSave").unbind().bind("click", function() {
-					$this = a(this);
-					if ($this.hasClass("disabled"))
-						return !1;
-					var b = a.xt.ugc.getCmt("#J_GoodsExistD");
-					if ("none" == b)
-						b = "";
-					else if (!b)
-						return !1;
-					var c = a.xt.ugc.getTags("#J_GoodsExistD");
-					if (!c)
-						return !1;
-					a.xt.ugc.pubJson.proComment = b;
-					a.xt.ugc.pubJson.tags = c;
-					a.xt.ugc.pubJson.favor = a("#J_GoodsExistForm input[name=tomyfav]")[0].checked
-							? "true"
-							: "false";
-					a.ajax({
-						url : a("#J_GoodsExistForm").attr("action"),
-						type : "post",
-						dataType : "json",
-						data : {
-							data : JSON.stringify(a.xt.ugc.pubJson)
-						},
-						beforeSend : function() {
-							$this.disableBtn("bbl-btn");
-							a(".goods-act")
-									.find(".errc")
-									.show()
-									.html('<p class="ajaxvali pl20">\u4fdd\u5b58\u4e2d...</p>')
-						},
-						success : function(b) {
-							100 == b.code
-									? (a("#J_GoodsExistD").overlay().close(), a("#J_GoodsExistD")
-											.empty().remove(), -1 != window.location.href
-											.indexOf("u/share")
-											? (a.xt.tip.conf.tipClass = "tipmodal tipmodal-ok", a.xt.tip
-													.show($this,
-															"\u5b9d\u8d1d\u53d1\u5e03\u6210\u529f\uff01"), window.location.href = window.location.href)
-											: a.xt.ugc.pubSuccess())
-									: 101 == b.code
-											? (a("#J_GoodsExistD")
-													.find(".errc").show(), a("#J_GoodsExistD")
-													.find(".errc")
-													.html("\u51fa\u9519\u4e86\uff0c\u8bf7\u91cd\u8bd5\u2026"), $this
-													.enableBtn("bbl-btn"))
-											: 102 == b.code
-													&& (a(".text-tip")
-															.html('<span class="errc">\u8f93\u5165\u7684\u6807\u7b7e\u6216\u8bc4\u8bba\u8fc7\u957f</span>')
-															.show(), $this
-															.enableBtn("bbl-btn"))
-						}
-					});
-					return !1
-				});
-				a("#J_GoodsExistForm").submit(function() {
-							return !1
-						});
-				a("#J_GoodsExistD").overlay().getClosers().bind("click",
-						function() {
-							a("#J_GoodsExistD").empty().remove()
-						})
-			}
-		},
-		goodspub : function(b) {
-			a.xt.ugc.pubJson = {
-				proId : b.proId,
-				productVoId : b.productVoId,
-				productName : b.productName,
-				productMerchant : b.productMerchant,
-				url : b.url,
-				price : b.price,
-				salesVolume : b.salesVolume,
-				proComment : "",
-				tags : null,
-				photos : [],
-				favor : "false",
-				typeVO : b.typeVO,
-				statusVO : b.statusVO,
-				likeNum : b.likeNum,
-				collectionNumber : b.collectionNumber,
-				commentNumber : b.commentNumber
-			};
-			if (a("#J_GoodsPubD")[0])
-				a("#J_GoodsPubD").data("overlay").load();
-			else {
-				var c;
-				c = '<div id="J_GoodsPubD" class="g-dialog ugc-dialog"><div class="dialog-content"><div class="hd"><h3>\u55ef~ \u5c31\u662f\u5b83\u5427</h3></div><div class="bd clearfix">'
-						+ ('<form id="J_GoodsPubForm" action="' + XTER.path + '/ugc/api/saveProduct" method="POST">');
-				c = c
-						+ '<div class="form-row"><label>\u5b9d\u8d1d\u540d\u79f0\uff1a</label>'
-						+ ('<span class="goodsNm">' + b.productName + "</span>");
-				a("body")
-						.append(c
-								+ '</div><div class="form-row"><label>\u8bc4\u8bba\u4e00\u4e0b\uff1a</label><textarea class="base-txa" name="proComment" placeholder="\u559c\u6b22\u5b83\u4ec0\u4e48\u5462\uff1f"></textarea></div><div class="form-row"><label>\u5b9d\u8d1d\u6807\u7b7e\uff1a</label><div class="inlineblock"><input type="text" class="base-input" name="tags" value="" /><p class="pt5 gc">\u591a\u4e2a\u6807\u7b7e\u7528\u4e2d\u6587\u6216\u82f1\u6587\u9017\u53f7\u9694\u5f00</p></div></div><div class="form-row clearfix"><label>\u5b9d\u8d1d\u56fe\u7247\uff1a</label><div class="goods-gallery"><div class="gallery-bd"><div class="items"></div></div><div class="gallery-ft clearfix"><span class="status">\u5df2\u9009 <em>0</em> \u5f20</span><span class="errc"></span><div class="gallery-pagin"><a href="javascript:;" class="sgr-btn prev">\u4e0a\u9875</a><span class="num-box"><em class="curP">1</em>/<em class="totalP"></em></span><a href="javascript:;" class="sgr-btn next">\u4e0b\u9875</a></div></div></div></div><div class="goods-act"><div class="clearfix"><a class="bbl-btn" id="J_GoodsPub" href="javascript:;">\u53d1\u5e03</a><label class="fl mt15 ml15 gc6"><input type="checkbox" name="tomyfav" /> \u52a0\u5165\u6211\u559c\u6b22\u7684\u5b9d\u8d1d</label></div><div class="errc mt10"></div></div></form></div><a class="close" href="javascript:;"></a></div></div>');
-				a("#J_GoodsPubD").overlay({
-							top : "center",
-							mask : {
-								color : "#000",
-								loadSpeed : 200,
-								opacity : 0.3
-							},
-							closeOnClick : !1,
-							load : !0
-						});
-				c = b.photos;
-				var d = "";
-				if (0 < c.length) {
-					d += "<ul>";
-					if ("item.buy.qq.com" == a.xt.util.getDomain(b.url))
-						d += '<li><a href="javascript:;"><img src="' + c[0]
-								+ '" alt="" /></a><i></i></li>';
-					else
-						for (var b = 0, e = c.length; b < e; b++)
-							d += '<li><a href="javascript:;"><img src="' + c[b]
-									+ '" alt="" /></a><i></i></li>', 0 == (b + 1)
-									% 8
-									&& b != c.length - 1 && (d += "</ul><ul>");
-					a("#J_GoodsPubD .items").append(d + "</ul>");
-					a("#J_GoodsPubD .gallery-bd").scrollable({
-								vertical : !0
-							});
-					a("#J_GoodsPubD .prev").click(function() {
-								var b = parseInt(a(".curP").text());
-								parseInt(a(".totalP").text());
-								1 < b && a(".curP").text(b - 1)
-							});
-					a("#J_GoodsPubD .next").click(function() {
-						var b = parseInt(a(".curP").text()), c = parseInt(a(".totalP")
-								.text());
-						b < c && a(".curP").text(b + 1)
-					});
-					a("#J_GoodsPubD .totalP").text(a("#J_GoodsPubD ul").length)
-				}
-				a("#J_GoodsPubD li a, #J_GoodsPubD li i").die().live("click",
-						function(b) {
-							b.preventDefault();
-							a("#J_GoodsPubD .gallery-ft").find(".status")
-									.show();
-							a("#J_GoodsPubD .gallery-ft").find(".errc").hide();
-							a(this).parent("li").hasClass("selected")
-									? a(this).parent("li")
-											.removeClass("selected")
-									: a(this).parent("li").addClass("selected");
-							a("#J_GoodsPubD .status em")
-									.text(a("#J_GoodsPubD li.selected").length)
-						});
-				a("#J_GoodsPub").unbind().bind("click", function() {
-					$this = a(this);
-					if ($this.hasClass("disabled"))
-						return !1;
-					var b = [];
-					a("#J_GoodsPubD li.selected").each(function() {
-								b.push(a(this).find("img").attr("src"))
-							});
-					var c = a.xt.ugc.getCmt("#J_GoodsPubD");
-					if ("none" == c)
-						c = "";
-					else if (!c)
-						return !1;
-					var d = a.xt.ugc.getTags("#J_GoodsPubD");
-					if (!d)
-						return !1;
-					a.xt.ugc.pubJson.proComment = c;
-					a.xt.ugc.pubJson.tags = d;
-					a.xt.ugc.pubJson.photos = b;
-					a.xt.ugc.pubJson.favor = a("#J_GoodsPubForm input[name=tomyfav]")[0].checked
-							? "true"
-							: "false";
-					if (0 == b.length)
-						return a("#J_GoodsPubD .gallery-ft").find(".status")
-								.hide(), a("#J_GoodsPubD .gallery-ft")
-								.find(".errc").show(), a("#J_GoodsPubD .gallery-ft")
-								.find(".errc")
-								.html("\u81f3\u5c11\u8981\u9009\u4e00\u5f20\u54e6"), !1;
-					a.ajax({
-						url : a("#J_GoodsPubForm").attr("action"),
-						type : "post",
-						dataType : "json",
-						data : {
-							data : JSON.stringify(a.xt.ugc.pubJson)
-						},
-						beforeSend : function() {
-							$this.disableBtn("bbl-btn");
-							a(".goods-act")
-									.find(".errc")
-									.show()
-									.html('<p class="ajaxvali pl20">\u53d1\u5e03\u4e2d...</p>')
-						},
-						success : function(b) {
-							100 == b.code
-									? (a("#J_GoodsPubD").overlay().close(), a("#J_GoodsPubD")
-											.empty().remove(), -1 != window.location.href
-											.indexOf("u/share")
-											? (a.xt.tip.conf.tipClass = "tipmodal tipmodal-ok", a.xt.tip
-													.show($this,
-															"\u5b9d\u8d1d\u53d1\u5e03\u6210\u529f\uff01"), window.location.href = window.location.href)
-											: a.xt.ugc.pubSuccess())
-									: 101 == b.code
-											? (a("#J_GoodsPubD .goods-act")
-													.find(".errc").show(), a("#J_GoodsPubD .goods-act")
-													.find(".errc")
-													.html("\u51fa\u9519\u4e86\uff0c\u8bf7\u91cd\u8bd5\u2026"), $this
-													.enableBtn("bbl-btn"))
-											: 102 == b.code
-													&& (a(".text-tip")
-															.html('<span class="errc">\u8f93\u5165\u7684\u6807\u7b7e\u6216\u8bc4\u8bba\u8fc7\u957f</span>')
-															.show(), $this
-															.enableBtn("bbl-btn"))
-						}
-					});
-					return !1
-				});
-				a("#J_GoodsPubForm").submit(function() {
-							return !1
-						});
-				a("#J_GoodsPubD").overlay().getClosers().bind("click",
-						function() {
-							a("#J_GoodsPubD").empty().remove()
-						})
-			}
-		}
-	};
-	a("a[rel=shareGoods]")[0] && a("a[rel=shareGoods]").click(function() {
-		if (!a.xt.dialog.isLogin())
-			return !1;
-		if ("true" == XTER.isBlack)
-			return alert("\u60a8\u7684\u5206\u4eab\u529f\u80fd\u5df2\u88ab\u7981\u7528"), !1;
-		var b = a(this);
-		if (a("#J_ShareGoodsD")[0])
-			a(".sg-input").val(""), a(".text-tip").html("");
-		else {
-			var c;
-			c = '<div id="J_ShareGoodsD" class="g-dialog sg-dialog"><div class="content"><p class="title">\u5c06\u5b9d\u8d1d\u7f51\u5740\u7c98\u8d34\u5230\u4e0b\u9762\u6846\u4e2d\uff1a</p>'
-					+ ('<form class="sg-form" name="shareGoods" action="'
-							+ XTER.path + '/ugc/api/findProduct">');
-			a("body")
-					.append(c
-							+ '<div class="clearfix"><input class="base-input sg-input" name="url" value="" placeholder="http://" autocomplete="off" /><input type="submit" id="J_GoodsUrlSubmit" class="bbl-btn url-sub" value="\u786e\u5b9a" /></div><div class="text-tip"></div></form><div class="sg-source"><p class="pt10 pb5">\u5df2\u652f\u6301\u7f51\u7ad9\uff08<a href="http://xt.com/contact" target="_blank">\u5546\u5bb6\u7533\u8bf7\u52a0\u5165</a>\uff09\uff1a</p><div class="source-list clearfix"><a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">\u6dd8\u5b9d\u7f51</a><a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">\u5929\u732b\u5546\u57ce</a><a class="icon-source icon-paipai" href="http://buy.qq.com/" target="_blank">QQ\u7f51\u8d2d</a><a class="icon-source icon-mbaobao" href="http://www.mbaobao.com/" target="_blank">\u9ea6\u5305\u5305</a><a class="icon-source icon-vancl" href="http://www.vancl.com/" target="_blank">\u51e1\u5ba2\u8bda\u54c1</a></div></div><div class="tipbox-up"><em>\u25c6</em><span>\u25c6</span></div><a class="close" href="javascript:;"></a></div></div>');
-			a(".sg-dialog .close").click(function() {
-						a("#J_ShareGoodsD").fadeOut("fast")
-					});
-			a(".sg-form").submit(function() {
-				var b = a(this), c = a.xt.util.trim(a(".sg-input").val());
-				"" == c
-						? a(".text-tip")
-								.html('<span class="errc">\u5b9d\u8d1d\u7f51\u5740\u4e0d\u80fd\u4e3a\u7a7a~</span>')
-								.show()
-						: a.xt.util.validSite(c)
-								? (a(".text-tip")
-										.html('<span class="gc6">\u5b9d\u8d1d\u4fe1\u606f\u6293\u53d6\u4e2d\u2026</span>')
-										.show(), a("#J_GoodsUrlSubmit")
-										.disableBtn("bbl-btn"), a.post(b
-												.attr("action"), b
-												.serializeArray(), function(b) {
-											100 == b.code
-													? (a("#J_ShareGoodsD")
-															.hide(), a.xt.ugc
-															.goodspub(b.product))
-													: 105 == b.code
-															? (a("#J_ShareGoodsD")
-																	.hide(), a.xt.ugc
-																	.goodsExist(b.product))
-															: 101 == b.code
-																	|| 106 == b.code
-																	? a(".text-tip")
-																			.html('<span class="errc">\u5b9d\u8d1d\u4fe1\u606f\u6293\u53d6\u5931\u8d25\uff0c\u8bf7\u91cd\u8bd5\u2026</span>')
-																			.show()
-																	: 107 == b.code
-																			? a(".text-tip")
-																					.html('<span class="errc">\u6682\u65f6\u8fd8\u4e0d\u652f\u6301\u8fd9\u4e2a\u5b9d\u8d1d\u2026</span>')
-																					.show()
-																			: 108 == b.code
-																					? a(".text-tip")
-																							.html('<span class="errc">\u4f60\u5df2\u7ecf\u5206\u4eab\u8fc7\u8fd9\u4e2a\u5b9d\u8d1d\u5566\u2026</span>')
-																							.show()
-																					: 110 == b.code
-																							&& a(".text-tip")
-																									.html('<span class="errc">\u5bf9\u4e0d\u8d77\uff0c\u4e0d\u652f\u6301\u6b64\u5546\u54c1</span>')
-																									.show();
-											a("#J_GoodsUrlSubmit")
-													.enableBtn("bbl-btn")
-										}))
-								: a(".text-tip")
-										.html('<span class="errc">\u6682\u65f6\u8fd8\u4e0d\u652f\u6301\u8fd9\u4e2a\u7f51\u7ad9\u5462~</span>')
-										.show();
-				return !1
-			})
-		}
-		b.parent().hasClass("pos-r") ? a(".m-nav .pos-r")
-				.append(a("#J_ShareGoodsD")) : a("body")
-				.append(a("#J_ShareGoodsD"));
-		c = a.xt.util.getPosition(b).leftBottom();
-		var d = a("#J_ShareGoodsD").outerWidth();
-		a("#J_ShareGoodsD").outerHeight();
-		var e = b.outerWidth(), f = c.x, g = e / 2 - 8;
-		960 < c.x + d && (f = c.x - (d - e), g = d - e / 2 - 8);
-		a("#J_ShareGoodsD .tipbox-up").css({
-					left : g + "px"
-				});
-		b.parent().hasClass("pos-r") ? a("#J_ShareGoodsD").css({
-					left : "auto",
-					right : "55px",
-					top : "41px"
-				}).fadeIn("fast") : a("#J_ShareGoodsD").css({
-					right : "auto",
-					left : f + "px",
-					top : c.y + 10 + "px"
-				}).fadeIn("fast");
-		a(".sg-input").focus()
-	})
-})(jQuery);
-$(function() {
-	var a = null, b = function(a) {
-		0 == a && $("a[rel=signIn]").removeClass("checked");
-		1 == a && $("a[rel=signIn]").addClass("checked")
-	}, c = function(c, e) {
-		c
-				.after('<div id="checkin_intro">\u4eca\u5929\u5df2\u7b7e\u5230<br/>\u79ef\u5206\uff1a<b>'
-						+ e.userScore
-						+ "</b><br/>\u8fde\u7eed\u7b7e\u5230\uff1a<b>"
-						+ e.userCheckinDays
-						+ '</b>\u5929<br/><img src="http://static.xt.com/images/ui/duihuan.png" alt="\u8fd1\u671f\u5f00\u653e" title="\u8fd1\u671f\u5f00\u653e"/><p>\u7b7e\u5230\uff1a10\u79ef\u5206/\u5929<br/>\u8fde\u7b7e7\u5929\uff1a\u9001100<br/>\u8fde\u7b7e15\u5929\uff1a\u9001300<br/>\u8fde\u7b7e22\u5929\uff1a\u90011000</p></div>');
-		$("#checkin_intro").hover(function() {
-					null != a && clearTimeout(a)
-				}, function() {
-					a = setTimeout(function() {
-								$("#checkin_intro").remove()
-							}, 500)
-				});
-		b(1)
-	};
-(function() {
-		if (1 >= XTER.userId.length)
-			return "Not login";
-		$.ajax({
-			url : XTER.path + "/user_score",
-			type : "post",
-			dataType : "json",
-			success : function(a) {
-				if (100 == a.code) {
-					var c = new Date(a.modifyTime), f = c.getUTCDate() + 1;
-					Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), f, 1, 0, 0) < a.currentTime
-							? b(0)
-							: b(1)
-				} else
-					101 != a.code && 300 == a.code && b(0)
-			}
-		})
-	})();
-	$("a[rel=signIn]").click(function() {
-		if (!$.xt.dialog.isLogin() || $("a[rel=signIn]").hasClass("checked"))
-			return !1;
-		var a = $(this);
-		$.ajax({
-			url : XTER.path + "/user_checkin",
-			type : "post",
-			dataType : "json",
-			success : function(b) {
-				100 == b.code
-						? c(a, b)
-						: 101 == b.code
-								? ($.xt.tip.conf.tipClass = "tipmodal tipmodal-error3", $.xt.tip
-										.show(a,
-												">_< \u7b7e\u5230\u5931\u8d25\uff01"))
-								: 103 == b.code ? c(a, b) : 300 == b.code
-										&& $.xt.dialog.login()
-			}
-		})
-	});
-	$("a[rel=signIn]").hover(function() {
-		$("a[rel=signIn]").hasClass("checked") && ($this = $(this), $.ajax({
-			url : XTER.path + "/user_score",
-			type : "post",
-			dataType : "json",
-			success : function(a) {
-				100 == a.code
-						? c($this, a)
-						: 101 == a.code
-								? ($.xt.tip.conf.tipClass = "tipmodal tipmodal-error3", $.xt.tip
-										.show($this,
-												">_<\u79ef\u5206\u83b7\u53d6\u5931\u8d25"))
-								: 300 == a.code && $.xt.dialog.login()
-			}
-		}))
-	}, function() {
-		$("#checkin_intro")[0] && (a = setTimeout(function() {
-					$("#checkin_intro").remove()
-				}, 500))
-	})
+		}).get();
+	}
 });
-$(function() {
-			$(window).bind("scroll", function() {
-				var a = $(document).scrollTop();
-				83 < a ? $(".m-nav").addClass("fixed") : $(".m-nav")
-						.removeClass("fixed");
-				$.xt.util.isIE6()
-						&& (83 < a ? $(".m-nav").css("top", a) : $(".m-nav")
-								.css("top", "83px"))
-			});
-			$(".login-dropdown a").unbind("click").click(function() {
-						var a = $(this).attr("href");
-						$.xt.util.openWin(a);
-						return !1
-					});
-			$(".regLogin").dropDown({
-						classNm : ".login-dropdown"
-					});
-			$(".gohome").dropDown({
-						classNm : ".set-dropdown"
-					});
-			$("#returnTop").returntop()
+jQuery.each("ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend"
+				.split(","), function(i, o) {
+			jQuery.fn[o] = function(f) {
+				return this.bind(o, f);
+			};
 		});
-		
+function now() {
+}
+var jsc = now();
+jQuery.extend({
+	get : function(url, data, callback, type) {
+		if (jQuery.isFunction(data)) {
+			callback = data;
+			data = null;
+		}
+		return jQuery.ajax({
+					type : "GET",
+					url : url,
+					data : data,
+					success : callback,
+					dataType : type
+				});
+	},
+	getScript : function(url, callback) {
+		return jQuery.get(url, null, callback, "script");
+	},
+	getJSON : function(url, data, callback) {
+		return jQuery.get(url, data, callback, "json");
+	},
+	post : function(url, data, callback, type) {
+		if (jQuery.isFunction(data)) {
+			callback = data;
+			data = {};
+		}
+		return jQuery.ajax({
+					type : "POST",
+					url : url,
+					data : data,
+					success : callback,
+					dataType : type
+				});
+	},
+	ajaxSetup : function(settings) {
+		jQuery.extend(jQuery.ajaxSettings, settings);
+	},
+	ajaxSettings : {
+		url : location.href,
+		global : true,
+		type : "GET",
+		timeout : 0,
+		contentType : "application/x-www-form-urlencoded",
+		processData : true,
+		async : true,
+		data : null,
+		username : null,
+		password : null,
+		accepts : {
+			xml : "application/xml, text/xml",
+			html : "text/html",
+			script : "text/javascript, application/javascript",
+			json : "application/json, text/javascript",
+			text : "text/plain",
+			_default : "*/*"
+		}
+	},
+	lastModified : {},
+	ajax : function(s) {
+		s = jQuery.extend(true, s, jQuery.extend(true, {}, jQuery.ajaxSettings,
+						s));
+		var jsonp, jsre = /=\?(&|$)/g, status, data, type = s.type
+				.toUpperCase();
+		if (s.data && s.processData && typeof s.data != "string")
+			s.data = jQuery.param(s.data);
+		if (s.dataType == "jsonp") {
+			if (type == "GET") {
+				if (!s.url.match(jsre))
+					s.url += (s.url.match(/\?/) ? "&" : "?")
+							+ (s.jsonp || "callback") + "=?";
+			} else if (!s.data || !s.data.match(jsre))
+				s.data = (s.data ? s.data + "&" : "") + (s.jsonp || "callback")
+						+ "=?";
+			s.dataType = "json";
+		}
+		if (s.dataType == "json"
+				&& (s.data && s.data.match(jsre) || s.url.match(jsre))) {
+			jsonp = "jsonp" + jsc++;
+			if (s.data)
+				s.data = (s.data + "").replace(jsre, "=" + jsonp + "$1");
+			s.url = s.url.replace(jsre, "=" + jsonp + "$1");
+			s.dataType = "script";
+			window[jsonp] = function(tmp) {
+				data = tmp;
+				success();
+				complete();
+				window[jsonp] = undefined;
+				try {
+					delete window[jsonp];
+				} catch (e) {
+				}
+				if (head)
+					head.removeChild(script);
+			};
+		}
+		if (s.dataType == "script" && s.cache == null)
+			s.cache = false;
+		if (s.cache === false && type == "GET") {
+			var ts = now();
+			var ret = s.url.replace(/(\?|&)_=.*?(&|$)/, "$1_=" + ts + "$2");
+			s.url = ret
+					+ ((ret == s.url) ? (s.url.match(/\?/) ? "&" : "?") + "_="
+							+ ts : "");
+		}
+		if (s.data && type == "GET") {
+			s.url += (s.url.match(/\?/) ? "&" : "?") + s.data;
+			s.data = null;
+		}
+		if (s.global && !jQuery.active++)
+			jQuery.event.trigger("ajaxStart");
+		var parts = /^(\w+:)?\/\/([^\/?#]+)/.exec(s.url);
+		if (s.dataType == "script"
+				&& type == "GET"
+				&& parts
+				&& (parts[1] && parts[1] != location.protocol || parts[2] != location.host)) {
+			var head = document.getElementsByTagName("head")[0];
+			var script = document.createElement("script");
+			script.src = s.url;
+			if (s.scriptCharset)
+				script.charset = s.scriptCharset;
+			if (!jsonp) {
+				var done = false;
+				script.onload = script.onreadystatechange = function() {
+					if (!done
+							&& (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+						done = true;
+						success();
+						complete();
+						head.removeChild(script);
+					}
+				};
+			}
+			head.appendChild(script);
+			return undefined;
+		}
+		var requestDone = false;
+		var xhr = window.ActiveXObject
+				? new ActiveXObject("Microsoft.XMLHTTP")
+				: new XMLHttpRequest();
+		if (s.username)
+			xhr.open(type, s.url, s.async, s.username, s.password);
+		else
+			xhr.open(type, s.url, s.async);
+		try {
+			if (s.data)
+				xhr.setRequestHeader("Content-Type", s.contentType);
+			if (s.ifModified)
+				xhr.setRequestHeader("If-Modified-Since",
+						jQuery.lastModified[s.url]
+								|| "Thu, 01 Jan 1970 00:00:00 GMT");
+			xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+			xhr.setRequestHeader("Accept", s.dataType && s.accepts[s.dataType]
+							? s.accepts[s.dataType] + ", */*"
+							: s.accepts._default);
+		} catch (e) {
+		}
+		if (s.beforeSend && s.beforeSend(xhr, s) === false) {
+			s.global && jQuery.active--;
+			xhr.abort();
+			return false;
+		}
+		if (s.global)
+			jQuery.event.trigger("ajaxSend", [xhr, s]);
+		var onreadystatechange = function(isTimeout) {
+			if (!requestDone && xhr
+					&& (xhr.readyState == 4 || isTimeout == "timeout")) {
+				requestDone = true;
+				if (ival) {
+					clearInterval(ival);
+					ival = null;
+				}
+				status = isTimeout == "timeout" ? "timeout" : !jQuery
+						.httpSuccess(xhr) ? "error" : s.ifModified
+						&& jQuery.httpNotModified(xhr, s.url)
+						? "notmodified"
+						: "success";
+				if (status == "success") {
+					try {
+						data = jQuery.httpData(xhr, s.dataType, s);
+					} catch (e) {
+						status = "parsererror";
+					}
+				}
+				if (status == "success") {
+					var modRes;
+					try {
+						modRes = xhr.getResponseHeader("Last-Modified");
+					} catch (e) {
+					}
+					if (s.ifModified && modRes)
+						jQuery.lastModified[s.url] = modRes;
+					if (!jsonp)
+						success();
+				} else
+					jQuery.handleError(s, xhr, status);
+				complete();
+				if (s.async)
+					xhr = null;
+			}
+		};
+		if (s.async) {
+			var ival = setInterval(onreadystatechange, 13);
+			if (s.timeout > 0)
+				setTimeout(function() {
+							if (xhr) {
+								xhr.abort();
+								if (!requestDone)
+									onreadystatechange("timeout");
+							}
+						}, s.timeout);
+		}
+		try {
+			xhr.send(s.data);
+		} catch (e) {
+			jQuery.handleError(s, xhr, null, e);
+		}
+		if (!s.async)
+			onreadystatechange();
+		function success() {
+			if (s.success)
+				s.success(data, status);
+			if (s.global)
+				jQuery.event.trigger("ajaxSuccess", [xhr, s]);
+		}
+		function complete() {
+			if (s.complete)
+				s.complete(xhr, status);
+			if (s.global)
+				jQuery.event.trigger("ajaxComplete", [xhr, s]);
+			if (s.global && !--jQuery.active)
+				jQuery.event.trigger("ajaxStop");
+		}
+		return xhr;
+	},
+	handleError : function(s, xhr, status, e) {
+		if (s.error)
+			s.error(xhr, status, e);
+		if (s.global)
+			jQuery.event.trigger("ajaxError", [xhr, s, e]);
+	},
+	active : 0,
+	httpSuccess : function(xhr) {
+		try {
+			return !xhr.status && location.protocol == "file:"
+					|| (xhr.status >= 200 && xhr.status < 300)
+					|| xhr.status == 304 || xhr.status == 1223
+					|| jQuery.browser.safari && xhr.status == undefined;
+		} catch (e) {
+		}
+		return false;
+	},
+	httpNotModified : function(xhr, url) {
+		try {
+			var xhrRes = xhr.getResponseHeader("Last-Modified");
+			return xhr.status == 304 || xhrRes == jQuery.lastModified[url]
+					|| jQuery.browser.safari && xhr.status == undefined;
+		} catch (e) {
+		}
+		return false;
+	},
+	httpData : function(xhr, type, s) {
+		var ct = xhr.getResponseHeader("content-type"), xml = type == "xml"
+				|| !type && ct && ct.indexOf("xml") >= 0, data = xml
+				? xhr.responseXML
+				: xhr.responseText;
+		if (xml && data.documentElement.tagName == "parsererror")
+			throw "parsererror";
+		if (s && s.dataFilter)
+			data = s.dataFilter(data, type);
+		if (type == "script")
+			jQuery.globalEval(data);
+		if (type == "json")
+			data = eval("(" + data + ")");
+		return data;
+	},
+	param : function(a) {
+		var s = [];
+		function add(key, value) {
+			s[s.length] = encodeURIComponent(key) + '='
+					+ encodeURIComponent(value);
+		};
+		if (a.constructor == Array || a.jquery)
+			jQuery.each(a, function() {
+						add(this.name, this.value);
+					});
+		else
+			for (var j in a)
+				if (a[j] && a[j].constructor == Array)
+					jQuery.each(a[j], function() {
+								add(j, this);
+							});
+				else
+					add(j, jQuery.isFunction(a[j]) ? a[j]() : a[j]);
+		return s.join("&").replace(/%20/g, "+");
+	}
+});
+jQuery.fn.textlimit = function(counter_el, thelimit, speed) {
+	var charDelSpeed = speed || 15;
+	var toggleCharDel = speed != -1;
+	var toggleTrim = true;
+	var that = this[0];
+	updateCounter();
+	function updateCounter() {
+		jQuery(counter_el).text(thelimit
+				- parseInt(GetStringLength(that.value)));
+	};
+	this.keypress(function(e) {
+				if (GetStringLength(this.value) >= thelimit
+						&& e.charCode != '0')
+					e.preventDefault()
+			}).keyup(function(e) {
+		updateCounter();
+		if (GetStringLength(this.value) >= thelimit && toggleTrim) {
+			if (toggleCharDel) {
+				that.value = that.value.substr(0, thelimit * 2 + 100);
+				var init = setInterval(function() {
+							if (GetStringLength(that.value) <= thelimit) {
+								init = clearInterval(init);
+								updateCounter()
+							} else {
+								that.value = that.value.substring(0,
+										that.value.length - 1);
+								jQuery(counter_el).text('trimming...  '
+										+ (thelimit - that.value.length));
+							};
+						}, charDelSpeed);
+			} else
+				this.value = that.value.substr(0, thelimit);
+		}
+	}).focus(function() {
+				updateCounter();
+			});
+};
+/*
+ * jQuery corner plugin: simple corner rounding Examples and documentation at:
+ * http://jquery.malsup.com/corner/ version 2.03 (05-DEC-2009) Dual licensed
+ * under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ */
+;
+(function($) {
+	var ua = navigator.userAgent;
+	var moz = $.browser.mozilla && /gecko/i.test(ua);
+	var webkit = $.browser.safari && /Safari\/[5-9]/.test(ua);
+	var expr = $.browser.msie && (function() {
+		var div = document.createElement('div');
+		try {
+			div.style.setExpression('width', '0+0');
+			div.style.removeExpression('width');
+		} catch (e) {
+			return false;
+		}
+		return true;
+	})();
+	function sz(el, p) {
+		return parseInt($.css(el, p)) || 0;
+	};
+	function hex2(s) {
+		var s = parseInt(s).toString(16);
+		return (s.length < 2) ? '0' + s : s;
+	};
+	function gpc(node) {
+		for (; node && node.nodeName.toLowerCase() != 'html'; node = node.parentNode) {
+			var v = $.css(node, 'backgroundColor');
+			if (v == 'rgba(0, 0, 0, 0)')
+				continue;
+			if (v.indexOf('rgb') >= 0) {
+				var rgb = v.match(/\d+/g);
+				return '#' + hex2(rgb[0]) + hex2(rgb[1]) + hex2(rgb[2]);
+			}
+			if (v && v != 'transparent')
+				return v;
+		}
+		return '#ffffff';
+	};
+	function getWidth(fx, i, width) {
+		switch (fx) {
+			case 'round' :
+				return Math.round(width * (1 - Math.cos(Math.asin(i / width))));
+			case 'cool' :
+				return Math.round(width * (1 + Math.cos(Math.asin(i / width))));
+			case 'sharp' :
+				return Math.round(width * (1 - Math.cos(Math.acos(i / width))));
+			case 'bite' :
+				return Math.round(width
+						* (Math.cos(Math.asin((width - i - 1) / width))));
+			case 'slide' :
+				return Math.round(width * (Math.atan2(i, width / i)));
+			case 'jut' :
+				return Math.round(width * (Math.atan2(width, (width - i - 1))));
+			case 'curl' :
+				return Math.round(width * (Math.atan(i)));
+			case 'tear' :
+				return Math.round(width * (Math.cos(i)));
+			case 'wicked' :
+				return Math.round(width * (Math.tan(i)));
+			case 'long' :
+				return Math.round(width * (Math.sqrt(i)));
+			case 'sculpt' :
+				return Math.round(width * (Math.log((width - i - 1), width)));
+			case 'dog' :
+				return (i & 1) ? (i + 1) : width;
+			case 'dog2' :
+				return (i & 2) ? (i + 1) : width;
+			case 'dog3' :
+				return (i & 3) ? (i + 1) : width;
+			case 'fray' :
+				return (i % 2) * width;
+			case 'notch' :
+				return width;
+			case 'bevel' :
+				return i + 1;
+		}
+	};
+	$.fn.corner = function(options) {
+		if (this.length == 0) {
+			if (!$.isReady && this.selector) {
+				var s = this.selector, c = this.context;
+				$(function() {
+							$(s, c).corner(options);
+						});
+			}
+			return this;
+		}
+		return this.each(function(index) {
+			var $this = $(this);
+			var o = [options || '',
+					$this.attr($.fn.corner.defaults.metaAttr) || ''].join(' ')
+					.toLowerCase();
+			var keep = /keep/.test(o);
+			var cc = ((o.match(/cc:(#[0-9a-f]+)/) || [])[1]);
+			var sc = ((o.match(/sc:(#[0-9a-f]+)/) || [])[1]);
+			var width = parseInt((o.match(/(\d+)px/) || [])[1]) || 10;
+			var re = /round|bevel|notch|bite|cool|sharp|slide|jut|curl|tear|fray|wicked|sculpt|long|dog3|dog2|dog/;
+			var fx = ((o.match(re) || ['round'])[0]);
+			var edges = {
+				T : 0,
+				B : 1
+			};
+			var opts = {
+				TL : /top|tl|left/.test(o),
+				TR : /top|tr|right/.test(o),
+				BL : /bottom|bl|left/.test(o),
+				BR : /bottom|br|right/.test(o)
+			};
+			if (!opts.TL && !opts.TR && !opts.BL && !opts.BR)
+				opts = {
+					TL : 1,
+					TR : 1,
+					BL : 1,
+					BR : 1
+				};
+			if ($.fn.corner.defaults.useNative && fx == 'round'
+					&& (moz || webkit) && !cc && !sc) {
+				if (opts.TL)
+					$this.css(moz
+									? '-moz-border-radius-topleft'
+									: '-webkit-border-top-left-radius', width
+									+ 'px');
+				if (opts.TR)
+					$this.css(moz
+									? '-moz-border-radius-topright'
+									: '-webkit-border-top-right-radius', width
+									+ 'px');
+				if (opts.BL)
+					$this.css(moz
+									? '-moz-border-radius-bottomleft'
+									: '-webkit-border-bottom-left-radius',
+							width + 'px');
+				if (opts.BR)
+					$this.css(moz
+									? '-moz-border-radius-bottomright'
+									: '-webkit-border-bottom-right-radius',
+							width + 'px');
+				return;
+			}
+			var strip = document.createElement('div');
+			strip.style.overflow = 'hidden';
+			strip.style.height = '1px';
+			strip.style.backgroundColor = sc || 'transparent';
+			strip.style.borderStyle = 'solid';
+			var pad = {
+				T : parseInt($.css(this, 'paddingTop')) || 0,
+				R : parseInt($.css(this, 'paddingRight')) || 0,
+				B : parseInt($.css(this, 'paddingBottom')) || 0,
+				L : parseInt($.css(this, 'paddingLeft')) || 0
+			};
+			if (typeof this.style.zoom != undefined)
+				this.style.zoom = 1;
+			if (!keep)
+				this.style.border = 'none';
+			strip.style.borderColor = cc || gpc(this.parentNode);
+			var cssHeight = $.curCSS(this, 'height');
+			for (var j in edges) {
+				var bot = edges[j];
+				if ((bot && (opts.BL || opts.BR))
+						|| (!bot && (opts.TL || opts.TR))) {
+					strip.style.borderStyle = 'none '
+							+ (opts[j + 'R'] ? 'solid' : 'none') + ' none '
+							+ (opts[j + 'L'] ? 'solid' : 'none');
+					var d = document.createElement('div');
+					$(d).addClass('jquery-corner');
+					var ds = d.style;
+					bot ? this.appendChild(d) : this.insertBefore(d,
+							this.firstChild);
+					if (bot && cssHeight != 'auto') {
+						if ($.css(this, 'position') == 'static')
+							this.style.position = 'relative';
+						ds.position = 'absolute';
+						ds.bottom = ds.left = ds.padding = ds.margin = '0';
+						if (expr)
+							ds.setExpression('width',
+									'this.parentNode.offsetWidth');
+						else
+							ds.width = '100%';
+					} else if (!bot && $.browser.msie) {
+						if ($.css(this, 'position') == 'static')
+							this.style.position = 'relative';
+						ds.position = 'absolute';
+						ds.top = ds.left = ds.right = ds.padding = ds.margin = '0';
+						if (expr) {
+							var bw = sz(this, 'borderLeftWidth')
+									+ sz(this, 'borderRightWidth');
+							ds.setExpression('width',
+									'this.parentNode.offsetWidth - ' + bw
+											+ '+ "px"');
+						} else
+							ds.width = '100%';
+					} else {
+						ds.position = 'relative';
+						ds.margin = !bot
+								? '-' + pad.T + 'px -' + pad.R + 'px '
+										+ (pad.T - width) + 'px -' + pad.L
+										+ 'px'
+								: (pad.B - width) + 'px -' + pad.R + 'px -'
+										+ pad.B + 'px -' + pad.L + 'px';
+					}
+					for (var i = 0; i < width; i++) {
+						var w = Math.max(0, getWidth(fx, i, width));
+						var e = strip.cloneNode(false);
+						e.style.borderWidth = '0 ' + (opts[j + 'R'] ? w : 0)
+								+ 'px 0 ' + (opts[j + 'L'] ? w : 0) + 'px';
+						bot ? d.appendChild(e) : d
+								.insertBefore(e, d.firstChild);
+					}
+				}
+			}
+		});
+	};
+	$.fn.uncorner = function() {
+		if (moz || webkit)
+			this.css(moz ? '-moz-border-radius' : '-webkit-border-radius', 0);
+		$('div.jquery-corner', this).remove();
+		return this;
+	};
+	$.fn.corner.defaults = {
+		useNative : true,
+		metaAttr : 'data-corner'
+	};
+})(jQuery);;
+(function($) {
+	$.fn.extend({
+				autocomplete : function(urlOrData, options) {
+					var isUrl = typeof urlOrData == "string";
+					options = $.extend({}, $.Autocompleter.defaults, {
+								url : isUrl ? urlOrData : null,
+								data : isUrl ? null : urlOrData,
+								delay : isUrl
+										? $.Autocompleter.defaults.delay
+										: 10,
+								max : options && !options.scroll ? 10 : 150
+							}, options);
+					options.highlight = options.highlight || function(value) {
+						return value;
+					};
+					options.formatMatch = options.formatMatch
+							|| options.formatItem;
+					return this.each(function() {
+								new $.Autocompleter(this, options);
+							});
+				},
+				result : function(handler) {
+					return this.bind("result", handler);
+				},
+				search : function(handler) {
+					return this.trigger("search", [handler]);
+				},
+				flushCache : function() {
+					return this.trigger("flushCache");
+				},
+				setOptions : function(options) {
+					return this.trigger("setOptions", [options]);
+				},
+				unautocomplete : function() {
+					return this.trigger("unautocomplete");
+				}
+			});
+	$.Autocompleter = function(input, options) {
+		var KEY = {
+			UP : 38,
+			DOWN : 40,
+			DEL : 46,
+			TAB : 9,
+			RETURN : 13,
+			ESC : 27,
+			COMMA : 188,
+			PAGEUP : 33,
+			PAGEDOWN : 34,
+			BACKSPACE : 8
+		};
+		var $input = $(input).attr("autocomplete", "off")
+				.addClass(options.inputClass);
+		var timeout;
+		var previousValue = "";
+		var cache = $.Autocompleter.Cache(options);
+		var hasFocus = 0;
+		var lastKeyPressCode;
+		var config = {
+			mouseDownOnSelect : false
+		};
+		var select = $.Autocompleter.Select(options, input, selectCurrent,
+				config);
+		var blockSubmit;
+		$.browser.opera
+				&& $(input.form).bind("submit.autocomplete", function() {
+							if (blockSubmit) {
+								blockSubmit = false;
+								return false;
+							}
+						});
+		$input.bind(
+				($.browser.opera ? "keypress" : "keydown") + ".autocomplete",
+				function(event) {
+					hasFocus = 1;
+					lastKeyPressCode = event.keyCode;
+					switch (event.keyCode) {
+						case KEY.UP :
+							event.preventDefault();
+							if (select.visible()) {
+								select.prev();
+								return false;
+							} else {
+								onChange(0, true);
+							}
+							break;
+						case KEY.DOWN :
+							event.preventDefault();
+							if (select.visible()) {
+								select.next();
+							} else {
+								onChange(0, true);
+							}
+							break;
+						case KEY.PAGEUP :
+							event.preventDefault();
+							if (select.visible()) {
+								select.pageUp();
+							} else {
+								onChange(0, true);
+							}
+							break;
+						case KEY.PAGEDOWN :
+							event.preventDefault();
+							if (select.visible()) {
+								select.pageDown();
+							} else {
+								onChange(0, true);
+							}
+							break;
+						case options.multiple
+								&& $.trim(options.multipleSeparator) == ","
+								&& KEY.COMMA :
+						case KEY.TAB :
+						case KEY.RETURN :
+							if (selectCurrent()) {
+								event.preventDefault();
+								blockSubmit = true;
+								return false;
+							}
+							break;
+						case KEY.ESC :
+							select.hide();
+							break;
+						default :
+							clearTimeout(timeout);
+							timeout = setTimeout(onChange, options.delay);
+							break;
+					}
+				}).focus(function() {
+					hasFocus++;
+				}).blur(function() {
+					hasFocus = 0;
+					if (!config.mouseDownOnSelect) {
+						hideResults();
+					}
+				}).click(function() {
+					if (hasFocus++ > 1 && !select.visible()) {
+						onChange(0, true);
+					}
+				}).bind("search", function() {
+			var fn = (arguments.length > 1) ? arguments[1] : null;
+			function findValueCallback(q, data) {
+				var result;
+				if (data && data.length) {
+					for (var i = 0; i < data.length; i++) {
+						if (data[i].result.toLowerCase() == q.toLowerCase()) {
+							result = data[i];
+							break;
+						}
+					}
+				}
+				if (typeof fn == "function")
+					fn(result);
+				else
+					$input.trigger("result", result
+									&& [result.data, result.value]);
+			}
+			$.each(trimWords($input.val()), function(i, value) {
+						request(value, findValueCallback, findValueCallback);
+					});
+		}).bind("flushCache", function() {
+					cache.flush();
+				}).bind("setOptions", function() {
+					$.extend(options, arguments[1]);
+					if ("data" in arguments[1])
+						cache.populate();
+				}).bind("unautocomplete", function() {
+					select.unbind();
+					$input.unbind();
+					$(input.form).unbind(".autocomplete");
+				}).bind("input", function() {
+					onChange(0, true);
+				});
+		function fixString(word, newValue) {
+			var index = word.lastIndexOf('@');
+			if (index >= 0) {
+				newValue = word.substring(0, index) + newValue;
+			}
+			return newValue;
+		}
+		function selectCurrent() {
+			var selected = select.selected();
+			if (!selected)
+				return false;
+			var v = '@' + selected.result;
+			previousValue = v;
+			if (options.multiple) {
+				var words = trimWords($input.val(), false);
+				if (words.length > 1) {
+					var seperator = options.multipleSeparator.length;
+					var cursorAt = getCursortPosition(input);
+					if (document.all) {
+						var enterCount = $(input).val().split('\n').length - 1;
+						if (enterCount > 0) {
+							cursorAt -= enterCount;
+						}
+					}
+					var wordAt, progress = 0;
+					$.each(words, function(i, word) {
+								progress += word.length;
+								if (cursorAt <= progress) {
+									wordAt = i;
+									return false;
+								}
+								progress += seperator;
+							});
+					var cursorAtInWord = cursorAt
+							- words.slice(0, wordAt)
+									.join(options.multipleSeparator).length - 1;
+					var atAtInWord = words[wordAt].substring(0, cursorAtInWord)
+							.lastIndexOf('@');
+					words[wordAt] = words[wordAt].substring(0, atAtInWord) + v;
+					v = words.join(options.multipleSeparator);
+				} else {
+					var cursorAt = $(input).selection().start;
+					var atAt = $input.val().substring(0, cursorAt)
+							.lastIndexOf('@');
+					v = $input.val().substring(0, atAt) + v;
+				}
+				v += options.multipleSeparator;
+			}
+			$input.val(v);
+			hideResultsNow();
+			$input.trigger("result", [selected.data, selected.value]);
+			return true;
+		}
+		function onChange(crap, skipPrevCheck) {
+			if (lastKeyPressCode == KEY.DEL) {
+				select.hide();
+				return;
+			}
+			var v = $(input).val();
+			var cursorPos = getCursortPosition(input);
+			var separatorPos = v.substring(0, cursorPos)
+					.lastIndexOf(options.multipleSeparator);
+			if (v.substring(separatorPos, cursorPos).indexOf('@') < 0) {
+				select.hide();
+				return;
+			}
+			var currentValue = $input.val();
+			if (!skipPrevCheck && currentValue == previousValue)
+				return;
+			previousValue = currentValue;
+			currentValue = lastWord(currentValue);
+			if (currentValue.length >= options.minChars) {
+				$input.addClass(options.loadingClass);
+				if (!options.matchCase)
+					currentValue = currentValue.toLowerCase();
+				request(currentValue, receiveData, hideResultsNow);
+			} else {
+				stopLoading();
+				select.hide();
+			}
+		};
+		function trimWords(value, withAtSymbol) {
+			if (withAtSymbol == null)
+				withAtSymbol = true;
+			if (!value)
+				return [""];
+			if (!options.multiple)
+				return [$.trim(value)];
+			var arr = (withAtSymbol) ? value.split(/\s|\x40/) : value
+					.split(options.multipleSeparator);
+			return $.map(arr, function(word) {
+						return $.trim(value).length ? word : null;
+					});
+		}
+		function lastWord(value) {
+			if (!options.multiple)
+				return value;
+			var words = trimWords(value, false);
+			if (words.length == 1)
+				return words[0];
+			var cursorAt = $(input).selection().start;
+			if (cursorAt == value.length) {
+				words = trimWords(value, false)
+			} else {
+				words = trimWords(value.replace(value.substring(cursorAt), ""),
+						false);
+			}
+			return words[words.length - 1];
+		}
+		function autoFill(q, sValue) {
+			if (options.autoFill
+					&& (lastWord($input.val()).toLowerCase() == q.toLowerCase())
+					&& lastKeyPressCode != KEY.BACKSPACE) {
+				$input.val($input.val()
+						+ sValue.substring(lastWord(previousValue).length));
+				$(input).selection(previousValue.length,
+						previousValue.length + sValue.length);
+			}
+		};
+		function hideResults() {
+			clearTimeout(timeout);
+			timeout = setTimeout(hideResultsNow, 200);
+		};
+		function hideResultsNow() {
+			var wasVisible = select.visible();
+			select.hide();
+			clearTimeout(timeout);
+			stopLoading();
+			if (options.mustMatch) {
+				$input.search(function(result) {
+							if (!result) {
+								if (options.multiple) {
+									var words = trimWords($input.val()).slice(
+											0, -1);
+									$input.val(words
+											.join(options.multipleSeparator)
+											+ (words.length
+													? options.multipleSeparator
+													: ""));
+								} else {
+									$input.val("");
+									$input.trigger("result", null);
+								}
+							}
+						});
+			}
+		};
+		function receiveData(q, data) {
+			if (data && data.length && hasFocus) {
+				stopLoading();
+				select.display(data, q);
+				autoFill(q, data[0].value);
+				select.show();
+			} else {
+				hideResultsNow();
+			}
+		};
+		function request(term, success, failure) {
+			var atIndex = term.lastIndexOf('@');
+			if (atIndex < 0 || term.length == atIndex + 1) {
+				return;
+			} else {
+				term = term.substring(atIndex + 1);
+			}
+			if (!options.matchCase)
+				term = term.toLowerCase();
+			var data = cache.load(term);
+			if (data && data.length) {
+				success(term, data);
+			} else if ((typeof options.url == "string")
+					&& (options.url.length > 0)) {
+				var extraParams = {
+					timestamp : +new Date()
+				};
+				$.each(options.extraParams, function(key, param) {
+							extraParams[key] = typeof param == "function"
+									? param()
+									: param;
+						});
+				$.ajax({
+							mode : "abort",
+							port : "autocomplete" + input.name,
+							dataType : options.dataType,
+							url : options.url,
+							data : $.extend({
+										q : term,
+										limit : options.max
+									}, extraParams),
+							success : function(data) {
+								var parsed = options.parse
+										&& options.parse(data) || parse(data);
+								cache.add(term, parsed);
+								success(term, parsed);
+							}
+						});
+			} else {
+				select.emptyList();
+				failure(term);
+			}
+		};
+		function parse(data) {
+			var parsed = [];
+			var rows = data.split("\n");
+			for (var i = 0; i < rows.length; i++) {
+				var row = $.trim(rows[i]);
+				if (row) {
+					row = row.split("|");
+					parsed[parsed.length] = {
+						data : row,
+						value : row[0],
+						result : options.formatResult
+								&& options.formatResult(row, row[0]) || row[0]
+					};
+				}
+			}
+			return parsed;
+		};
+		function stopLoading() {
+			$input.removeClass(options.loadingClass);
+		};
+	};
+	$.Autocompleter.defaults = {
+		inputClass : "ac_input",
+		resultsClass : "ac_results",
+		loadingClass : "ac_loading",
+		minChars : 1,
+		delay : 400,
+		matchCase : false,
+		matchSubset : true,
+		matchContains : false,
+		cacheLength : 10,
+		max : 100,
+		mustMatch : false,
+		extraParams : {},
+		selectFirst : true,
+		formatItem : function(row) {
+			return row[0];
+		},
+		formatMatch : null,
+		autoFill : false,
+		width : 0,
+		multiple : false,
+		multipleSeparator : ", ",
+		highlight : function(value, term) {
+			return value
+					.replace(
+							new RegExp(
+									"(?![^&;]+;)(?!<[^<>]*)("
+											+ term
+													.replace(
+															/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi,
+															"\\$1")
+											+ ")(?![^<>]*>)(?![^&;]+;)", "gi"),
+							"<strong>$1</strong>");
+		},
+		scroll : true,
+		scrollHeight : 180
+	};
+	$.Autocompleter.Cache = function(options) {
+		var data = {};
+		var length = 0;
+		function matchSubset(s, sub) {
+			if (!options.matchCase)
+				s = s.toLowerCase();
+			var i = s.indexOf(sub);
+			if (options.matchContains == "word") {
+				i = s.toLowerCase().search("\\b" + sub.toLowerCase());
+			}
+			if (i == -1)
+				return false;
+			return i == 0 || options.matchContains;
+		};
+		function add(q, value) {
+			if (length > options.cacheLength) {
+				flush();
+			}
+			if (!data[q]) {
+				length++;
+			}
+			data[q] = value;
+		}
+		function populate() {
+			if (!options.data)
+				return false;
+			var stMatchSets = {}, nullData = 0;
+			if (!options.url)
+				options.cacheLength = 1;
+			stMatchSets[""] = [];
+			for (var i = 0, ol = options.data.length; i < ol; i++) {
+				var rawValue = options.data[i];
+				rawValue = (typeof rawValue == "string")
+						? [rawValue]
+						: rawValue;
+				var value = options.formatMatch(rawValue, i + 1,
+						options.data.length);
+				if (value === false)
+					continue;
+				var firstChar = value.charAt(0).toLowerCase();
+				if (!stMatchSets[firstChar])
+					stMatchSets[firstChar] = [];
+				var row = {
+					value : value,
+					data : rawValue,
+					result : options.formatResult
+							&& options.formatResult(rawValue) || value
+				};
+				stMatchSets[firstChar].push(row);
+				if (nullData++ < options.max) {
+					stMatchSets[""].push(row);
+				}
+			};
+			$.each(stMatchSets, function(i, value) {
+						options.cacheLength++;
+						add(i, value);
+					});
+		}
+		setTimeout(populate, 25);
+		function flush() {
+			data = {};
+			length = 0;
+		}
+		return {
+			flush : flush,
+			add : add,
+			populate : populate,
+			load : function(q) {
+				if (!options.cacheLength || !length)
+					return null;
+				if (!options.url && options.matchContains) {
+					var csub = [];
+					for (var k in data) {
+						if (k.length > 0) {
+							var c = data[k];
+							$.each(c, function(i, x) {
+										if (matchSubset(x.value, q)) {
+											csub.push(x);
+										}
+									});
+						}
+					}
+					return csub;
+				} else if (data[q]) {
+					return data[q];
+				} else if (options.matchSubset) {
+					for (var i = q.length - 1; i >= options.minChars; i--) {
+						var c = data[q.substr(0, i)];
+						if (c) {
+							var csub = [];
+							$.each(c, function(i, x) {
+										if (matchSubset(x.value, q)) {
+											csub[csub.length] = x;
+										}
+									});
+							return csub;
+						}
+					}
+				}
+				return null;
+			}
+		};
+	};
+	$.Autocompleter.Select = function(options, input, select, config) {
+		var CLASSES = {
+			ACTIVE : "ac_over"
+		};
+		var listItems, active = -1, data, term = "", needsInit = true, element, list;
+		function init() {
+			if (!needsInit)
+				return;
+			element = $("<div/>").hide().addClass(options.resultsClass).css(
+					"position", "absolute").appendTo(document.body);
+			list = $("<ul/>").appendTo(element).mouseover(function(event) {
+				if (target(event).nodeName
+						&& target(event).nodeName.toUpperCase() == 'LI') {
+					active = $("li", list).removeClass(CLASSES.ACTIVE)
+							.index(target(event));
+					$(target(event)).addClass(CLASSES.ACTIVE);
+				}
+			}).click(function(event) {
+						$(target(event)).addClass(CLASSES.ACTIVE);
+						select();
+						input.focus();
+						return false;
+					}).mousedown(function() {
+						config.mouseDownOnSelect = true;
+					}).mouseup(function() {
+						config.mouseDownOnSelect = false;
+					});
+			if (options.width > 0)
+				element.css("width", options.width);
+			needsInit = false;
+		}
+		function target(event) {
+			var element = event.target;
+			while (element && element.tagName != "LI")
+				element = element.parentNode;
+			if (!element)
+				return [];
+			return element;
+		}
+		function moveSelect(step) {
+			listItems.slice(active, active + 1).removeClass(CLASSES.ACTIVE);
+			movePosition(step);
+			var activeItem = listItems.slice(active, active + 1)
+					.addClass(CLASSES.ACTIVE);
+			if (options.scroll) {
+				var offset = 0;
+				listItems.slice(0, active).each(function() {
+							offset += this.offsetHeight;
+						});
+				if ((offset + activeItem[0].offsetHeight - list.scrollTop()) > list[0].clientHeight) {
+					list.scrollTop(offset + activeItem[0].offsetHeight
+							- list.innerHeight());
+				} else if (offset < list.scrollTop()) {
+					list.scrollTop(offset);
+				}
+			}
+		};
+		function movePosition(step) {
+			active += step;
+			if (active < 0) {
+				active = listItems.size() - 1;
+			} else if (active >= listItems.size()) {
+				active = 0;
+			}
+		}
+		function limitNumberOfItems(available) {
+			return options.max && options.max < available
+					? options.max
+					: available;
+		}
+		function fillList() {
+			list.empty();
+			var max = limitNumberOfItems(data.length);
+			for (var i = 0; i < max; i++) {
+				if (!data[i])
+					continue;
+				var formatted = options.formatItem(data[i].data, i + 1, max,
+						data[i].value, term);
+				if (formatted === false)
+					continue;
+				var li = $("<li/>").html(options.highlight(formatted, term))
+						.addClass(i % 2 == 0 ? "ac_even" : "ac_odd")
+						.appendTo(list)[0];
+				$.data(li, "ac_data", data[i]);
+			}
+			listItems = list.find("li");
+			if (options.selectFirst) {
+				listItems.slice(0, 1).addClass(CLASSES.ACTIVE);
+				active = 0;
+			}
+			if ($.fn.bgiframe)
+				list.bgiframe();
+		}
+		function getTaCurOffset($ta) {
+			var taElement = $ta.get(0);
+			var sContent = $ta.val();
+			var oPosition = $ta.offset();
+			var bGTE = jQuery.browser.mozilla || jQuery.browser.msie;
+			var lineHeight = $ta.css('line-height').replace(/[^0-9]/g, '');
+			lineHeight = parseFloat(lineHeight);
+			var charsPerLine = taElement.cols;
+			var charWidth = parseFloat($ta.innerWidth() / charsPerLine);
+			var utfCharWidth = parseInt($ta.css('font-size').replace(/[^0-9]/g,
+					''));
+			var iLines = 1;
+			var sWord = '';
+			var oSelection = $ta.selection();
+			var aLetters = sContent.split("");
+			var aLines = [];
+			for (var w = 0; w < aLetters.length; w++) {
+				if (aLetters[w] == "\n") {
+					aLines.push(w);
+					sWord = '';
+				} else {
+					sWord += aLetters[w].toString();
+				}
+			}
+			var getWidth = function(str) {
+				var smallCount = 0;
+				var letters = str.split('');
+				for (var i = 0; i < letters.length; i++) {
+					if (letters[i].charCodeAt() < 128) {
+						smallCount++;
+					};
+				}
+				return (str.length - smallCount) * utfCharWidth + smallCount
+						* charWidth;
+			}
+			var iLine = 0;
+			for (; iLine < aLines.length; iLine++) {
+				if (oSelection.end < aLines[iLine]) {
+					iLine--;
+					break;
+				}
+			}
+			if (iLine < 0) {
+				iLine = 0;
+			}
+			if (iLine > 0) {
+				var start = aLines[iLine - 1] + 1;
+				var str = sContent.substring(start, oSelection.end);
+				var x = getWidth(str);
+			} else {
+				var x = getWidth(sContent.substring(0, oSelection.end));
+			}
+			var y = (iLine + 1) * lineHeight - taElement.scrollTop;
+			var div = Math.floor(x / $ta.width());
+			if (div > 0) {
+				x = x % $ta.width();
+				y += lineHeight * div;
+			}
+			return {
+				x : oPosition.left + x,
+				y : oPosition.top + y
+			};
+		}
+		return {
+			display : function(d, q) {
+				init();
+				data = d;
+				term = q;
+				fillList();
+			},
+			next : function() {
+				moveSelect(1);
+			},
+			prev : function() {
+				moveSelect(-1);
+			},
+			pageUp : function() {
+				if (active != 0 && active - 8 < 0) {
+					moveSelect(-active);
+				} else {
+					moveSelect(-8);
+				}
+			},
+			pageDown : function() {
+				if (active != listItems.size() - 1
+						&& active + 8 > listItems.size()) {
+					moveSelect(listItems.size() - 1 - active);
+				} else {
+					moveSelect(8);
+				}
+			},
+			hide : function() {
+				element && element.hide();
+				listItems && listItems.removeClass(CLASSES.ACTIVE);
+				active = -1;
+			},
+			visible : function() {
+				return element && element.is(":visible");
+			},
+			current : function() {
+				return this.visible()
+						&& (listItems.filter("." + CLASSES.ACTIVE)[0] || options.selectFirst
+								&& listItems[0]);
+			},
+			show : function() {
+				var offset = getTaCurOffset($(input));
+				element.css({
+					width : typeof options.width == "string"
+							|| options.width > 0 ? options.width : $(input)
+							.width(),
+					top : offset.y + 6,
+					left : offset.x
+				}).show();
+				if (options.scroll) {
+					list.scrollTop(0);
+					list.css({
+								maxHeight : options.scrollHeight,
+								overflow : 'auto'
+							});
+					if ($.browser.msie
+							&& typeof document.body.style.maxHeight === "undefined") {
+						var listHeight = 0;
+						listItems.each(function() {
+									listHeight += this.offsetHeight;
+								});
+						var scrollbarsVisible = listHeight > options.scrollHeight;
+						list.css('height', scrollbarsVisible
+										? options.scrollHeight
+										: listHeight);
+						if (!scrollbarsVisible) {
+							listItems.width(list.width()
+									- parseInt(listItems.css("padding-left"))
+									- parseInt(listItems.css("padding-right")));
+						}
+					}
+				}
+			},
+			selected : function() {
+				var selected = listItems
+						&& listItems.filter("." + CLASSES.ACTIVE)
+								.removeClass(CLASSES.ACTIVE);
+				return selected && selected.length
+						&& $.data(selected[0], "ac_data");
+			},
+			emptyList : function() {
+				list && list.empty();
+			},
+			unbind : function() {
+				element && element.remove();
+			}
+		};
+	};
+	$.fn.selection = function(start, end) {
+		if (start !== undefined) {
+			return this.each(function() {
+						if (this.createTextRange) {
+							var selRange = this.createTextRange();
+							if (end === undefined || start == end) {
+								selRange.move("character", start);
+								selRange.select();
+							} else {
+								selRange.collapse(true);
+								selRange.moveStart("character", start);
+								selRange.moveEnd("character", end);
+								selRange.select();
+							}
+						} else if (this.setSelectionRange) {
+							this.setSelectionRange(start, end);
+						} else if (this.selectionStart) {
+							this.selectionStart = start;
+							this.selectionEnd = end;
+						}
+					});
+		}
+		var field = this[0];
+		if (field.createTextRange) {
+			var range = document.selection.createRange(), orig = field.value, teststring = "<->", textLength = range.text.length;
+			range.text = teststring;
+			var caretAt = field.value.indexOf(teststring);
+			field.value = orig;
+			this.selection(caretAt, caretAt + textLength);
+			return {
+				start : caretAt,
+				end : caretAt + textLength
+			}
+		} else if (field.selectionStart !== undefined) {
+			return {
+				start : field.selectionStart,
+				end : field.selectionEnd
+			}
+		}
+	};
+})(jQuery);;
+(function($) {
+	if ($.browser.msie && document.namespaces["v"] == null) {
+		document.namespaces.add("v", "urn:schemas-microsoft-com:vml",
+				"#default#VML");
+	}
+	$.fn.cornerz = function(options) {
+		function canvasCorner(t, l, r, bw, bc, bg) {
+			var sa, ea, cw, sx, sy, x, y, p = 1.57, css = "position:absolute;";
+			if (t) {
+				sa = -p;
+				sy = r;
+				y = 0;
+				css += "top:-" + bw + "px;";
+			} else {
+				sa = p;
+				sy = 0;
+				y = r;
+				css += "bottom:-" + bw + "px;";
+			}
+			if (l) {
+				ea = p * 2;
+				sx = r;
+				x = 0;
+				css += "left:-" + bw + "px;";
+			} else {
+				ea = 0;
+				sx = 0;
+				x = r;
+				css += "right:-" + bw + "px;";
+			}
+			var canvas = $("<canvas width=" + r + "px height=" + r
+					+ "px style='" + css + "' ></canvas>");
+			var ctx = canvas[0].getContext('2d');
+			ctx.beginPath();
+			ctx.lineWidth = bw * 2;
+			ctx.arc(sx, sy, r, sa, ea, !(t ^ l));
+			ctx.strokeStyle = bc;
+			ctx.stroke();
+			ctx.lineWidth = 0;
+			ctx.lineTo(x, y);
+			ctx.fillStyle = bg;
+			ctx.fill();
+			return canvas;
+		};
+		function canvasCorners(corners, r, bw, bc, bg) {
+			var hh = $("<div style='display: inherit' />");
+			$.each(corners.split(" "), function() {
+						hh.append(canvasCorner(this[0] == "t", this[1] == "l",
+								r, bw, bc, bg));
+					});
+			return hh;
+		};
+		function vmlCurve(r, b, c, m, ml, mt, right_fix) {
+			var l = m - ml - right_fix;
+			var t = m - mt;
+			return "<v:arc filled='False' strokeweight='" + b
+					+ "px' strokecolor='" + c
+					+ "' startangle='0' endangle='361' style=' top:" + t
+					+ "px;left: " + l + "px;width:" + r + "px; height:" + r
+					+ "px' />";
+		}
+		function vmlCorners(corners, r, bw, bc, bg, w) {
+			var h = "<div style='text-align:left; '>";
+			$.each($.trim(corners).split(" "), function() {
+				var css, ml = 1, mt = 1, right_fix = 0;
+				if (this.charAt(0) == "t") {
+					css = "top:-" + bw + "px;";
+				} else {
+					css = "bottom:-" + bw + "px;";
+					mt = r + 1;
+				}
+				if (this.charAt(1) == "l")
+					css += "left:-" + bw + "px;";
+				else {
+					css += "right:-" + (bw) + "px; ";
+					ml = r;
+					right_fix = 1;
+				}
+				h += "<div style='" + css
+						+ "; position: absolute; overflow:hidden; width:" + r
+						+ "px; height: " + r + "px;'>";
+				h += "<v:group  style='width:1000px;height:1000px;position:absolute;' coordsize='1000,1000' >";
+				h += vmlCurve(r * 3, r + bw, bg, -r / 2, ml, mt, right_fix);
+				if (bw > 0)
+					h += vmlCurve(r * 2 - bw, bw, bc, Math.floor(bw / 2 + 0.5),
+							ml, mt, right_fix);
+				h += "</v:group>";
+				h += "</div>";
+			});
+			h += "</div>";
+			return h;
+		};
+		var settings = {
+			corners : "tl tr bl br",
+			radius : 10,
+			background : "white",
+			borderWidth : 0,
+			fixIE : true
+		};
+		$.extend(settings, options || {});
+		var incrementProperty = function(elem, prop, x) {
+			var y = parseInt(elem.css(prop), 10) || 0;
+			elem.css(prop, x + y);
+		};
+		return this.each(function() {
+					var $$ = $(this);
+					var r = settings.radius * 1.0;
+					var bw = (settings.borderWidth
+							|| parseInt($$.css("borderTopWidth"), 10) || 0)
+							* 1.0;
+					var bg = settings.background;
+					var bc = settings.borderColor;
+					bc = bc || (bw > 0 ? $$.css("borderTopColor") : bg);
+					var cs = settings.corners;
+					if ($.browser.msie) {
+						h = vmlCorners(cs, r, bw, bc, bg, $(this).width());
+						this.insertAdjacentHTML('beforeEnd', h);
+					} else
+						$$.append(canvasCorners(cs, r, bw, bc, bg));
+					if (this.style.position != "absolute")
+						this.style.position = "relative";
+					this.style.zoom = 1;
+					if ($.browser.msie && settings.fixIE) {
+						var ow = $$.outerWidth();
+						var oh = $$.outerHeight();
+						if (ow % 2 == 1) {
+							incrementProperty($$, "padding-right", 1);
+							incrementProperty($$, "margin-right", 1);
+						}
+						if (oh % 2 == 1) {
+							incrementProperty($$, "padding-bottom", 1);
+							incrementProperty($$, "margin-bottom", 1);
+						}
+					}
+				});
+	};
+})(jQuery);
+var alertDiv = {
+	id : 'alertdiv',
+	author : '',
+	stid : '',
+	type : '',
+	alertinfo : function(show, txt) {
+		$('#' + alertDiv.id).appendTo('body');
+		$('#' + alertDiv.id).toCenter().show();
+		$("#twitter_publish_forward").val(txt).focus();
+		var textObj = document.getElementById("twitter_publish_forward");
+		setCursor(textObj, 0, 0);
+		showShadow();
+	},
+	closeDiv : function() {
+		$('#' + alertDiv.id).hide();
+		hideShadow();
+	}
+}
+var pageChangeObj = {
+	listMin : null,
+	listMax : null,
+	_linePage : null,
+	_currtPage : 1,
+	_maxContent : 0,
+	_prePage : '<img src="/css/icons100402/fnew.jpg" />',
+	_prePageDe : '<img src="/css/icons100402/flnew.jpg" />',
+	_nextPage : '<img src="/css/icons100402/flast.jpg" />',
+	_headerPrePage : '<img src="/css/icons100402/hhNew.gif" />',
+	_headerPrePageDe : '',
+	_headerNextPage : '<img src="/css/icons100402/hlast.gif" />',
+	_serverDataUrl : server_url + 'twitter/ajax_showTwitterPageData',
+	getSkipAction : function(local) {
+		var id = '#pageSkipNum' + local;
+		var num = $(id).val();
+		num = parseInt(num);
+		var page = 1;
+		var pageMaxNum = Math.ceil(pageChangeObj._maxContent
+				/ pageChangeObj._linePage);
+		if (pageMaxNum > 200) {
+			pageMaxNum = 200;
+		}
+		if (isNaN(num)) {
+			return false;
+		} else if (num > pageMaxNum) {
+			page = pageMaxNum;
+		} else if (num < 1) {
+			page = 1;
+		} else {
+			page = num;
+		}
+		pageChangeObj.pageAction(page);
+		return true;
+	},
+	getPageData : function() {
+		$.getJSON(pageChangeObj._serverDataUrl, {
+					twitterType : twitterListObj.lType,
+					uid : twitterListObj.uid,
+					tid : twitterListObj.topicId,
+					listType : twitterListObj.listType
+				}, function(data) {
+					pageChangeObj._maxContent = data[0];
+					pageChangeObj._linePage = data[1];
+					if (pageChangeObj._maxContent > pageChangeObj._linePage) {
+						pageChangeObj.createPageList(0);
+					} else {
+						$("#twitter_show_list_header_pageNum").hide();
+						$("#twitter_show_list_foot_pageNum").hide();
+					}
+				});
+	},
+	pageAction : function(currtPage) {
+		var pageMaxNum = Math.ceil(pageChangeObj._maxContent
+				/ pageChangeObj._linePage);
+		if (currtPage <= 1) {
+			var note = '正在加载最新页内容请等待...';
+		} else if (currtPage >= pageMaxNum) {
+			var note = '正在加载最早页内容请等待...';
+		} else {
+			var note = '正在加载第 ' + currtPage + '页...';
+		}
+		$("#twitter_prompt_num")
+				.attr(
+						'style',
+						'  display: block; width: 100%; height: 30px; line-height: 30px; background: #FFF0F4; color: #f69; font-size: 14px; padding: 0; text-align: center; ')
+				.html(note);
+		twitterListObj.getTwitterList(currtPage);
+		pageChangeObj.createPageList(currtPage);
+	},
+	createPageList : function(currtPage) {
+		$("#zupage").val(currtPage);
+		var pageMaxNum = Math.ceil(pageChangeObj._maxContent
+				/ pageChangeObj._linePage);
+		if (pageMaxNum > 200) {
+			pageMaxNum = 200;
+		}
+		if (currtPage <= 1) {
+			currtPage = 1;
+		}
+		pageChangeObj._currtPage = currtPage;
+		var nextNum = currtPage - 1;
+		var perNum = currtPage + 1;
+		var pageStr = '<span class="page_num">' + currtPage + '/' + pageMaxNum
+				+ '</span>';
+		var hlast = '', hnew = '', fnew = '', flast = '';
+		if (currtPage == 1) {
+			hnew = this._headerPrePageDe;
+			hlast = "<a onClick='javascript:pageChangeObj.pageAction(" + perNum
+					+ ");' href='javascript:;'>" + this._headerNextPage
+					+ "</a>";
+			fnew = this._prePageDe;
+			flast = "<a onClick='javascript:pageChangeObj.pageAction(" + perNum
+					+ ");' href='javascript:;'>" + this._nextPage + "</a>";
+		} else if (currtPage == pageMaxNum) {
+			hnew = "<a onClick='javascript:pageChangeObj.pageAction(" + nextNum
+					+ ");' href='javascript:;'>" + this._headerPrePage + "</a>";
+			hlast = ' ';
+			fnew = "<a onClick='javascript:pageChangeObj.pageAction(" + nextNum
+					+ ");' href='javascript:;'>" + this._prePage + "</a>";
+			flast = '';
+		} else {
+			hnew = "<a onClick='javascript:pageChangeObj.pageAction(" + nextNum
+					+ ");' href='javascript:;'>" + this._headerPrePage + "</a>";
+			hlast = "<a onClick='javascript:pageChangeObj.pageAction(" + perNum
+					+ ");' href='javascript:;'>" + this._headerNextPage
+					+ "</a>";
+			fnew = "<a onClick='javascript:pageChangeObj.pageAction(" + nextNum
+					+ ");' href='javascript:;'>" + this._prePage + "</a>";
+			flast = "<a onClick='javascript:pageChangeObj.pageAction(" + perNum
+					+ ");' href='javascript:;'>" + this._nextPage + "</a>";
+		}
+		var hlist = pageStr + hnew + hlast;
+		var flist = ''
+				+ '<div class="right" id="jumpdiv"><div style="width:92px;float:left;">跳转至: <input id="pageSkipNum1" class="pageSkipNum" type="text" maxlength="5" /></div><div id="pageSkip" onClick="pageChangeObj.getSkipAction(1);"></div></div>'
+				+ "<div class='left top' >" + fnew + pageStr + flast + '</div>'
+				+ '<div style="clear:both"></div>';
+		if (pageChangeObj._maxContent > pageChangeObj._linePage) {
+			$('#twitter_show_list_header_pageNum').html(hlist);
+			$('#twitter_show_list_foot_pageNum').html(flist);
+		}
+	}
+}
+var twitterObj = {
+	idPrefix : 't',
+	twitter_url : server_url + '/twitter/ajax_newTwitter/',
+	maxLength : 140,
+	pictureID : 0,
+	goodsID : 0,
+	twitter_type : 2,
+	alterHtml : '',
+	optionNum : 0,
+	currentPage : null,
+	removeCallBackType : 'ajax',
+	withGoods : false,
+	isReport : false,
+	lastTwitter : null,
+	intervalTime : 10,
+	alerting : false,
+	hasEntityPic : false,
+	currentTab : 'goods',
+	isLomo : false,
+	lomoType : '',
+	contentPrefix : '',
+	twitterTip : '美丽心得，搭配街拍，时尚八卦，都来说说......',
+	goodsTip : '说说你对这件宝贝的评价或者感觉吧。',
+	reportTip : '说说你对这件宝贝的评价或者感觉吧。',
+	urlTip : '在此直接粘贴宝贝的链接地址。',
+	$blackShop : '',
+	callbacks : {},
+	bind : function(name, cbk) {
+		if (typeof twitterObj.callbacks[name] == 'undefined') {
+			twitterObj.callbacks[name] = [];
+		}
+		twitterObj.callbacks[name].push(cbk);
+	},
+	send : function() {
+		faceTableObj.hide_tables();
+		if (twitterObj.currentTab == 'goods'
+				&& $('#twitter_publish_editor').css('display') == 'none') {
+			twitterObj.submitURL(1);
+			return false;
+		}
+		var text = $("#twitter_publish_editor").val();
+		if (twitterObj.isReport) {
+			var picSrc = $('#twitter_report_goods_pic img').attr('src');
+			if (picSrc == null || picSrc == '') {
+				twitterObj.withGoods = false;
+			}
+		}
+		if (twitterObj.withGoods) {
+			twitterObj.createGoodsEdit();
+			return;
+		}
+		var textLength = GetStringLength(text);
+		if (textLength > 0 && textLength < 141) {
+			var picType = 0;
+			var keywords = '';
+			if (twitterObj.pictureID > 0) {
+				picType = $('#hiddenPictype').val();
+				keywords = $('#tedit_pic .keywords').val();
+			}
+			if (twitterObj.isReport) {
+				picType = 2;
+				if (twitterObj.pictureID == 0 && twitterObj.goodsID == 0) {
+					var url = $('#twitter_report_goods_pic a').attr('href');
+					if (url != null) {
+						text += ' ' + url;
+					}
+				}
+			}
+			if (twitterObj.checkSpam() === false) {
+				return false;
+			}
+			$(".inputBoxSharedButton").attr('onClick', '');
+			if (twitterObj.contentPrefix != ''
+					&& text.indexOf(twitterObj.contentPrefix) < 0) {
+				text = twitterObj.contentPrefix + text;
+			}
+			$('#twitter_tools_button_up_wait').html('<img src="'
+					+ pictureBaseUrl
+					+ 'css/images/twitter/loading17.gif" /> 请等待, 发布中...');
+			$.get(twitterObj.twitter_url, {
+						tContent : text,
+						pid : twitterObj.pictureID,
+						goodsID : twitterObj.goodsID,
+						ptype : picType,
+						type : twitterObj.twitter_type,
+						suid : 0,
+						stid : 0,
+						tag : keywords,
+						isReport : twitterObj.isReport,
+						isLomo : twitterObj.isLomo,
+						lomoType : twitterObj.lomoType
+					}, function(mesg) {
+						$.setCookie('MEILISHUO_SAVE_TEXT', '', {
+									duration : -1,
+									path : '/',
+									domain : DEFAULT_COOKIEDOMAIN
+								});
+						$('#twitter_tools_button_up_wait').html('').hide();
+						if (mesg == 1) {
+							showForbiddenWindow();
+							return false;
+						}
+						var url = location.href;
+						if (twitterObj.currentPage == 'hotTopic') {
+							location.href = location.href;
+							return;
+						}
+						var absNum = document.getElementById("absNum");
+						var sendNum = document.getElementById("sendNum");
+						twitterObj.number(absNum, sendNum, 20, 30, 1);
+						$("#twitter_publish_editor").val('');
+						$("#twitter_tools_textlimit")
+								.text(twitterObj.maxLength);
+						if (url.indexOf('atme') != -1
+								|| url.indexOf('dajia') != -1) {
+							$success = $('#publish_success');
+							$success.css({
+										'top' : '007px'
+									}).show();
+							var func = function() {
+								$success.hide();
+							}
+							setTimeout(func, 1500);
+							return false;
+						}
+						var checkCurrentPage = $("#twitter_show_list");
+						if (typeof(checkCurrentPage) == 'undefined') {
+							if (typeof twitterObj.callbacks.send != 'undefined') {
+								var len = twitterObj.callbacks.send.length;
+								for (var i = 0; i < len; i++) {
+									if (typeof twitterObj.callbacks.send[i] == 'function') {
+										twitterObj.callbacks.send[i]();
+									}
+								}
+							}
+						} else {
+							twitterListObj.getTwitterList(0);
+						}
+						twitterNewPicObj.main(0);
+						if (twitterObj.pictureID > 0) {
+							twitterObj.closePicEdit();
+						}
+						twitterObj.pictureID = 0;
+						if (twitterObj.isReport) {
+							twitterObj.changeTab('goods');
+						}
+						$(".inputBoxSharedButton").attr('onClick',
+								'javascript:return twitterObj.send();');
+					});
+		} else if (textLength >= 141) {
+			this.showAlert('发送内容不能超过140个字');
+		} else {
+			this.showAlert('发送内容不能为空。');
+		}
+	},
+	number : function(node, aim, minnum, maxnum, type) {
+		if (aim == null) {
+			return;
+		}
+		var num = parseInt(aim.innerHTML, 10);
+		aim.style.zoom = 1;
+		node.style.display = "inline-block";
+		node.innerHTML = num;
+		var fontSize = minnum;
+		var opacity = 1;
+		var pos = getElementPos("sendNum");
+		node.style.left = pos.x - 11 + "px";
+		node.style.top = pos.y + "px";
+		var step = function() {
+			fontSize += 1;
+			opacity -= 0.09;
+			node.style.fontSize = fontSize + "px";
+			node.style.opacity = opacity;
+			aim.style.opacity = opacity;
+			node.style.filter = "Alpha(opacity=" + opacity * 100 + ")";
+			aim.style.filter = "Alpha(opacity=" + opacity * 100 + ")";
+			node.style.zoom = 1;
+			if (fontSize < maxnum) {
+				setTimeout(step, 45);
+			} else {
+				if (type == 1) {
+					num += 1;
+				} else {
+					num -= 1;
+				}
+				node.innerHTML = num;
+				aim.innerHTML = num;
+				setTimeout(step2, 40);
+			}
+		};
+		setTimeout(step, 10);
+		var step2 = function() {
+			fontSize -= 1;
+			opacity += 0.09;
+			node.style.fontSize = fontSize + "px";
+			node.style.opacity = opacity;
+			aim.style.opacity = opacity;
+			node.style.filter = "Alpha(opacity=" + opacity * 100 + ")";
+			aim.style.filter = "Alpha(opacity=" + opacity * 100 + ")";
+			if (fontSize > minnum) {
+				setTimeout(step2, 45);
+			} else {
+				node.style.display = "none";
+			}
+		};
+	},
+	objBind : function() {
+		twitterNewPicObj.main(0);
+		var editor = $("#twitter_publish_editor");
+		if (editor.length > 0)
+			editor.textlimit("#twitter_tools_textlimit", twitterObj.maxLength,
+					10);
+		editor.keyup(function(e) {
+					if (e.ctrlKey && e.keyCode == "13") {
+						twitterObj.send();
+					}
+				});
+		var editorTip = $('#twitter_publish_editor_tip');
+		editor.focus(function() {
+					editorTip.hide();
+				}).blur(function() {
+					if (editor.val() == '') {
+						editorTip.show();
+					}
+				});
+		editorTip.text(twitterObj.twitterTip).click(function() {
+					editor.focus();
+				});
+		if (editor.val() != '') {
+			editorTip.hide();
+		}
+		$('#editor_tab_twitter').click(function() {
+					twitterObj.changeTab('twitter');
+				});
+		$('#editor_tab_goods').click(function() {
+					$('#lomo-pop').hide();
+					twitterObj.changeTab('goods');
+				});
+		$('#editor_tab_report').click(function() {
+					$('#lomo-pop').hide();
+					twitterObj.changeTab('report');
+				});
+		$("#twitter_editor_submit").hover(function() {
+					$(this).removeClass().addClass("button2");
+				}, function() {
+					$(this).removeClass().addClass("button1");
+				});
+		$("#twitter_editor_button").click(function() {
+					twitterObj.send();
+				});
+		$('#twitter_editor .inputUrl').focus(function() {
+					$(this).val('').removeClass('inputTip');
+				}).keydown(function(e) {
+					if (e.keyCode == 13) {
+						twitterObj.submitURL(1);
+					}
+				}).val(twitterObj.urlTip);
+		$('#paste_entity .inputUrl').focus(function() {
+					$(this).val("").removeClass('inputTip');
+				}).keydown(function(e) {
+					if (e.keyCode == 13) {
+						twitterObj.submitURL(2);
+					}
+				});
+		$("#publisher_topic").click(function() {
+					if (typeof(topicObj) != "undefined") {
+						topicObj.inputTopic();
+					}
+				});
+		var tempText = $.readCookie('MEILISHUO_SAVE_TEXT');
+		if (tempText != null && tempText != '' && editor.val() == '') {
+			$('#twitter_publish_editor_tip').hide();
+			editor.val(tempText.replace('+', ' '));
+		}
+		editor.autocomplete('twitter/ajax_autoComplete', {
+					width : 150,
+					multiple : true,
+					matchContains : true,
+					multipleSeparator : ' '
+				});
+		bindRange(editor.get(0));
+		var saveFunc = function() {
+			$.setCookie('MEILISHUO_SAVE_TEXT', editor.val(), {
+						duration : 0,
+						path : '/',
+						domain : DEFAULT_COOKIEDOMAIN
+					});
+		};
+		editor.change(saveFunc).keyup(saveFunc).keydown(saveFunc);
+		$('#twitter_tools_topic').click(function() {
+					if (editor.css('display') != 'none') {
+						$('#twitter_publish_editor_tip').hide();
+						editor.val('#输入话题标题# ' + editor.val()).focus();
+						setCursor(editor.get(0), 1, 7);
+					}
+				});
+		$('#twitter_tools_goods_alter .submitUrl').click(function() {
+					twitterObj.submitURL(1);
+				});
+		$('#paste_entity .tab_url .next').click(function() {
+					twitterObj.submitURL(2);
+				});
+		lianjieWindow = $.dialog({
+					title : '添加宝贝的购买链接',
+					content : $('#paste_entity').show(),
+					closeHandle : function() {
+						$('#paste_entity_dialog').hide();
+					}
+				}).attr('id', 'paste_entity_dialog');
+		$.dialog({
+					title : '添加宝贝的购买链接',
+					content : $('#tedit_entity').show(),
+					closeHandle : function() {
+						$('#tedit_entity_dialog').hide();
+						$('#tedit_entity .goods_details').empty();
+					}
+				}).attr('id', 'tedit_entity_dialog');
+		$('#tedit_pic .del').click(function() {
+					twitterObj.withGoods = false;
+					$('#tedit_pic .buy_goods_title').hide();
+					$('#tedit_pic .select_goods').show();
+				});
+		$('#upload_entity_btn').mousemove(function(e) {
+					var o = $(this);
+					var offset = o.offset();
+					var $uploader = o.children('span');
+					var l = e.pageX - offset.left - 25;
+					var t = e.pageY - offset.top - 5;
+					if (l < 0 || t < 0 || l > o.width() || t > o.height()) {
+						l = 0;
+						t = 0;
+					}
+					$uploader.css({
+								left : l,
+								top : t,
+								"position" : "absolute"
+							});
+				});
+		$('#pop_goods_url_submit').click(function() {
+					twitterObj.submitURL(3);
+				});
+		$('#pop_goods_url_input').keydown(function(e) {
+					if (e.keyCode == 13) {
+						$('#pop_goods_url_submit').click();
+					}
+				});
+		$("#close_black").live("click", function() {
+					$blackShop.hide();
+					hideShadow();
+					twitterObj.changeTab('twitter');
+					lianjieWindow.hide();
+				});
+	},
+	main : function() {
+		try {
+			twitterListObj.getTwitterList(pageChangeObj._currtPage);
+			twitterObj.objBind();
+		} catch (e) {
+			alert(e);
+		}
+	},
+	changeTab : function(type, skipCurrent) {
+		var o = $('#editor_tab_' + type);
+		if (skipCurrent == null && o.hasClass('current')) {
+			return false;
+		}
+		twitterObj.currentTab = type;
+		$('#twitter_editor_boxtop .current').removeClass('current');
+		o.addClass('current');
+		this.goodsID = 0;
+		this.pictureID = 0;
+		this.isReport = false;
+		this.withGoods = false;
+		this.alerting = false;
+		faceTableObj.hide_tables();
+		$('#twitter_alert_dialog').hide();
+		$('#pop_goods_url').hide();
+		$('#tedit_entity .goods_details, #tedit_goods').empty();
+		$('#tedit_pic .upload_pic').removeAttr('src');
+		twitterNewPicObj.main(0);
+		var elementList = ['#tedit_pic', '#tedit_goods', '#twitter_report',
+				'#twitter_report_guide', '#twitter_publish_editor',
+				'#twitter_publish_editor_tip',
+				'.twitter_tools_all_button .button',
+				'#twitter_tools_button_up_wait', '.text_wrapper .inputUrl',
+				'#twitter_report>div', '#twitter_editor_boxBottom'];
+		$(elementList.join(',')).css('display', '');
+		$('#twitter_editor .editor_tab').css('border-width', '');
+		if ($('#twitter_publish_editor').val() != '') {
+			$('#twitter_publish_editor_tip').hide();
+		}
+		if (type == 'twitter') {
+			$('#twitter_editor').removeClass()
+					.addClass('twitter_editor_twitter');
+			$('#twitter_publish_editor_tip').text(twitterObj.twitterTip);
+		} else if (type == 'goods') {
+			$('#twitter_editor').removeClass().addClass('twitter_editor_goods');
+			$('#twitter_editor .inputUrl').addClass('inputTip')
+					.val(twitterObj.urlTip);
+			$('#twitter_publish_editor_tip').text(twitterObj.goodsTip);
+		} else if (type == 'report') {
+			this.isReport = true;
+			this.hasEntityPic = false;
+			$('#twitter_report_goods_pic, #twitter_report_upload_pic, #twitter_report_desc')
+					.empty();
+			$('#twitter_editor').removeClass()
+					.addClass('twitter_editor_report');
+			$('#twitter_publish_editor_tip').text(twitterObj.reportTip);
+		}
+	},
+	showPopGoodsUrl : function() {
+		if ($('#pop_goods_url').css('display') == 'none') {
+			var off = $('#twitter_tools_goods_url_bottom').offset();
+			$('#pop_goods_url').appendTo('body').css({
+						"left" : off.left - 60,
+						"top" : off.top + 15
+					}).show();
+			$('#pop_goods_url_input').val('').focus();
+		} else {
+			$('#pop_goods_url').hide();
+		}
+	},
+	entityChangeTab : function(type) {
+		$('#paste_entity .c_tab .c_tab_btn_current').attr('class', 'c_tab_btn');
+		$('#entity_' + type + '_tab_btn').addClass('c_tab_btn_current');
+		$('#paste_entity .tab_url, #paste_entity .tab_select').hide();
+		var o = $('#paste_entity .tab_' + type);
+		o.toCenter().show();
+		if (type == 'url') {
+			o.find('.error_hint').hide();
+		} else if (type == 'select') {
+			if (o.html() == '') {
+				this.loadMyGoods(0);
+			}
+		}
+	},
+	loadMyGoods : function(page) {
+		$('#paste_entity .tab_select')
+				.html('<div style="margin: 10px;">加载中...</div>').load(
+						'/goods/ajax_addAreadyHasGoods', {
+							"page" : page
+						});
+	},
+	selectMyGoods : function(obj) {
+		var o = $(obj);
+		var tid = o.attr('tid');
+		var gid = o.attr('gid');
+		var pid = o.attr('pid');
+		this.goodsID = gid;
+		this.withGoods = true;
+		if (this.pictureID == 0) {
+			this.pictureID = pid;
+		}
+		var url = o.attr('goods_url');
+		$('#paste_entity .inputUrl').val(url);
+		twitterObj.submitURL(2);
+		$('#paste_entity_dialog').hide();
+	},
+	submitURL : function(type) {
+		var $inputUrl = null;
+		switch (type) {
+			case 1 :
+				$inputUrl = $('.text_wrapper .inputUrl');
+				break;
+			case 2 :
+				$inputUrl = $('#paste_entity_dialog .inputUrl');
+				break;
+			case 3 :
+				$inputUrl = $('#pop_goods_url_input');
+		}
+		var url = $inputUrl.val().trim();
+		var s = $.isUrl(url);
+		if (!s && url.substring(0, 4) != 'http') {
+			if ($.isUrl('http://' + url)) {
+				url = 'http://' + url;
+				$inputUrl.val(url);
+				s = true;
+			}
+		}
+		if (s) {
+			if (type == 1) {
+				this.loadGoods(1);
+			} else if (type == 3) {
+				if (twitterObj.pictureID == 0) {
+					twitterObj.changeTab('goods');
+					$('.text_wrapper .inputUrl').val($('#pop_goods_url_input')
+							.val());
+					this.loadGoods(1);
+				} else {
+					var picID = twitterObj.pictureID;
+					var picUrl = $('#tedit_pic_img .upload_pic').attr('src');
+					var filterPicUrl = $('#tedit_pic_img .upload_picFilter')
+							.attr('src');
+					twitterObj.changeTab('report');
+					twitterObj.showPicEdit(picUrl, filterPicUrl);
+					twitterObj.pictureID = picID;
+					twitterObj.hasEntityPic = true;
+				}
+			}
+			this.showGoodsEdit(url);
+		} else {
+			var errText = '宝贝链接有错误，请提交正确的链接。';
+			if (type == 1) {
+				twitterObj.showAlert(errText);
+			} else if (type == 2) {
+				$('#paste_entity .error_hint').text(errText).fadeIn('fast');
+			}
+			$inputUrl.focus();
+		}
+	},
+	showGoodsEdit : function(url) {
+		$.get(server_url + '/twitter/ajax_vaileGoods/', {
+					gurl : url
+				}, function(backstr) {
+					if (backstr == 1) {
+						showForbiddenWindow();
+						twitterObj.closeGoodsEdit();
+						return false;
+					}
+					if (backstr == 2) {
+						$blackShop = $.dialog({
+							title : '<span style="margin-left: 5px;">封店提示</span>',
+							content : $('#black_shop').show(),
+							closeHandle : function() {
+								$(this).closest('.dialog').hide();
+								hideShadow();
+							}
+						});
+						var ua = navigator.userAgent.toLowerCase();
+						var isIE6 = ua.indexOf("msie 6") > -1;
+						var fixed = 'fixed';
+						if (isIE6) {
+							fixed = '';
+						}
+						$blackShop.toCenter(fixed).show();
+						showShadow();
+						return false;
+					}
+					if (twitterObj.isReport) {
+						$('#paste_entity_dialog').hide();
+						$('#twitter_report_desc').html(backstr);
+						$('#twitter_report_guide_url').hide();
+						var imgSrc = $('#goods_img').attr('src');
+						var $link;
+						if (imgSrc != null) {
+							var title = $('#tedit_goods_desc_url a').text();
+							var $link = $('<a href="' + url
+									+ '" target="_blank" title="' + title
+									+ '"></a>');
+							$link.append('<img src="' + imgSrc + '"/>');
+						} else {
+							$link = $('<a href="' + url + '" target="_blank">'
+									+ url + '</a>');
+							$('#goods_vote_alert').hide();
+						}
+						$('#twitter_report_goods_pic').empty().append($link)
+								.show();
+						$('#twitter_report .close').show();
+						twitterObj.withGoods = true;
+					} else {
+						var $editor = $('#twitter_publish_editor');
+						$editor.show();
+						if ($editor.val() == '') {
+							$('#twitter_publish_editor_tip').show();
+						}
+						$('#twitter_tools_expression, #twitter_tools_topic, #twitter_editor_boxBottom')
+								.show();
+						$('#twitter_editor .editor_tab').css('border-width',
+								'0 0 1px 0');
+						$('.text_wrapper .inputUrl, #pop_goods_url').hide();
+						$('#tedit_goods').html(backstr).show();
+						twitterNewPicObj.divLoctainKey = '#update_images';
+						twitterNewPicObj.main('goods');
+						twitterObj.withGoods = true;
+					}
+					$('.commendTagShowClass').click(function() {
+						var tmpStr = $('#cold_goods_form_tag').val();
+						if (tmpStr.indexOf($(this).html()) == -1) {
+							tmpStr += " " + $(this).html();
+							$('#cold_goods_form_tag').val(trim(tmpStr));
+							$(this).addClass('tag_selected');
+						} else {
+							var replaceStr = tmpStr.replace($(this).html(), "");
+							$('#cold_goods_form_tag').val(trim(replaceStr));
+							$(this).removeClass('tag_selected');
+						}
+					});
+				});
+	},
+	closeGoodsEdit : function() {
+		twitterObj.withGoods = false;
+		if (this.isReport) {
+			this.changeTab('report', true);
+		} else {
+			this.changeTab('goods', true);
+		}
+	},
+	createGoodsEdit : function() {
+		var gTitle = $("#cold_goods_form_title").val();
+		var gPrice = $("#cold_goods_form_price").val();
+		var catalog_name = trim($('#tedit_goods_desc_goods_class').val());
+		if (gTitle.length < 1) {
+			$('#cold_goods_form_title_err').show();
+			$('#cold_goods_form_title').focus();
+			return false;
+		}
+		var gUrl = $('#tedit_goods_desc_url a').attr('href');
+		var gPicUrl = $("#goods_img").attr('src');
+		var tagStr = $('#cold_goods_form_tag').val();
+		var gPicID = twitterObj.pictureID;
+		if (gPicID == 0 && typeof(gPicUrl) == 'undefined') {
+			$('#tedit_goods_images').css('background-color', '#FF0033');
+			$('#cold_goods_form_tag_err').show().html('给你的宝贝上传一张图片吧。');
+			return false;
+		}
+		var gNote = $("#twitter_publish_editor").val();
+		if (gNote.length < 1) {
+			gNote = '';
+			this.showAlert('发送内容不能为空。');
+			return false;
+		}
+		if (twitterObj.checkSpam() === false) {
+			return false;
+		}
+		if (gPicUrl == null || gPicUrl == '') {
+			gPicUrl = 0;
+		}
+		var picUrls = $('#picUrls').val();
+		var gSouceType = 1;
+		var option = Array();
+		if (this.optionNum > 0) {
+			for (var i = 1; i <= this.optionNum; i++) {
+				var key = '#viewO_' + i;
+				var v = $(key).val();
+				if (v != '') {
+					option.push(v);
+				}
+			}
+		}
+		if (twitterObj.contentPrefix != ''
+				&& gNote.indexOf(twitterObj.contentPrefix) < 0) {
+			gNote = twitterObj.contentPrefix + gNote;
+		}
+		var picType = 0;
+		if (twitterObj.isReport) {
+			picType = 2;
+		}
+		var url = server_url + 'goods/ajax_createGoods';
+		this.loadGoods(2);
+		var goodsData = {
+			'gPrice' : gPrice,
+			'gTitle' : gTitle,
+			'gUrl' : gUrl,
+			'gPicUrl' : gPicUrl,
+			'gPicID' : gPicID,
+			'gNote' : gNote,
+			'gSouceType' : gSouceType,
+			'catalog_name' : catalog_name,
+			'option[]' : option,
+			'tag' : tagStr,
+			'isReport' : twitterObj.isReport,
+			'goodsID' : this.goodsID,
+			'hasEntityPic' : this.hasEntityPic,
+			'ptype' : picType,
+			'picUrls' : picUrls
+		}
+		$.post(url, goodsData, function(backstr) {
+			$.setCookie('MEILISHUO_SAVE_TEXT', '', {
+						duration : -1,
+						path : '/',
+						domain : DEFAULT_COOKIEDOMAIN
+					});
+			$("#twitter_publish_editor").val('');
+			var url = location.href;
+			if (url.indexOf('atme') != -1 || url.indexOf('dajia') != -1) {
+				twitterObj.closeGoodsEdit();
+				$success = $('#publish_success');
+				if (twitterObj.isReport) {
+					$success.css({
+								'top' : '007px'
+							}).show();
+				} else {
+					$success.css({
+								'top' : '-5px'
+							}).show();
+				}
+				var func = function() {
+					$success.hide();
+				}
+				setTimeout(func, 1500);
+				return false;
+			}
+			if (url.indexOf('discount') != -1) {
+				$('#tedit_goods_images_commission').css('visibility', 'hidden');
+				var obj = eval('(' + backstr + ')');
+				var empty = $('#jiangjin').val();
+				if (empty == 1) {
+					$.dialog({
+								title : '美丽提示',
+								content : $('#pop_share_finish').show(),
+								closeHandle : function() {
+									location.href = location.href;
+								}
+							}).toCenter().show().shadow();
+				} else if (empty == 0) {
+					location.href = location.href;
+				}
+				return;
+			}
+			var pageUrl = "";
+			pageUrl = window.location;
+			pageUrl = pageUrl.toString();
+			pageUrl = pageUrl.split("=");
+			if (pageUrl.length > 1 && pageUrl[1] == "desiretree") {
+				window.location.href = server_url + "desiretree/dtreeReport";
+			} else {
+				var url = location.href;
+				var sharpIndex = url.indexOf('#');
+				if (sharpIndex > 0) {
+					url = url.substr(0, sharpIndex);
+				}
+				location.href = url;
+			}
+		});
+	},
+	showPicEdit : function(url, filterUrl) {
+		if (this.isReport) {
+			$('#tedit_pic_type .twitter_pic_type_checked')
+					.removeClass('twitter_pic_type_checked');
+			$('#tedit_pic_type span[val="2"]')
+					.addClass('twitter_pic_type_checked').show();
+			$('#twitter_report_guide_pic, #twitter_tools_button_up_wait')
+					.hide();
+			$('#twitter_report_upload_pic').append('<img src="' + filterUrl
+					+ '"/>').show();
+			$('#twitter_report .close').show();
+		} else {
+			$('#twitter_editor_boxmid').addClass('gray');
+			$('#twitter_tools_publisher_upImages, #twitter_tools_button_up_wait')
+					.hide();
+			var editor = $('#tedit_pic');
+			$('#tedit_pic_type .twitter_pic_type_checked')
+					.removeClass('twitter_pic_type_checked');
+			$('#tedit_pic_type .twitter_pic_type').show();
+			$('#tedit_pic_type .twitter_pic_type[val="2"]').hide();
+			initPicTypeCheckbox(editor);
+			editor.find('.upload_pic').attr('src', filterUrl);
+			editor.find('.hint').hide();
+			editor.find('.keywords').val('');
+			editor.show();
+			editor.find('.upload_pic').hover(function() {
+						editor.find('.upload_pic').addClass('upload_pic_Hover');
+					}, function() {
+						editor.find('.upload_pic')
+								.removeClass('upload_pic_Hover');
+					});
+			editor.find('.upload_picFilter').hover(function() {
+						editor.find('.upload_picFilter')
+								.addClass('upload_pic_Hover');
+					}, function() {
+						editor.find('.upload_picFilter')
+								.removeClass('upload_pic_Hover');
+					});
+			$('#twitter_publish_editor').show();
+		}
+	},
+	showHaibaoAppPic : function(picID, picUrl, tooSmall, tooBig, notJpg) {
+		if (typeof picID == "undefined") {
+			alert('请上传一张小于2M的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		}
+		if (tooSmall == '2' || tooSmall == 2) {
+			alert('请上传一张至少大小为240x125的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		} else if (tooSmall == '3' || tooSmall == 3) {
+			alert('请上传一张至少大小为244x344的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		} else if (tooSmall == '1' || tooSmall == 1) {
+			alert('请上传一张至少大小为280x395的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		} else if (tooSmall == '4' || tooSmall == 4) {
+			alert('请上传一张至少大小为280x394的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		} else if (tooBig == '1' || tooBig == 1) {
+			alert('请上传一张小于２M的图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		} else if (notJpg == '1' || notJpg == 1) {
+			alert('请上传JPG图片！');
+			$('.upload_pho .pho-loading').hide();
+			return false;
+		}
+		var container = $('.myEditor');
+		container.html('');
+		$('.uploaded').show();
+		var wanna = 0;
+		if (location.href.indexOf('lauder') > -1) {
+			var selectType = parseInt($('.el_step3').attr('stype')) + 1;
+			$('.el_describe').show().addClass('el_describe' + selectType);
+			$('.el_bottom1').show();
+			var lauder_urls = {
+				'1' : 'http://meilishuo.com/u/EBW-I2?frm=esteelauder03',
+				'2' : 'http://meilishuo.com/u/EBXUB_?frm=esteelauder04',
+				'3' : 'http://meilishuo.com/u/EBW5qx?frm=esteelauder02'
+			}
+			$('.el_describe a').attr('href', lauder_urls[selectType]);
+		} else if (location.href.indexOf('bobbi') > -1) {
+			$('.bobbi_describe').show();
+			$('.publisher_image_title').addClass('bobbi_reupload')
+					.removeClass('publisher_image_title');
+			$('.bobbi_brush').show();
+		} else if (location.href.indexOf('lorealparis') > -1) {
+			$('#loreal_sub2').hide();
+			$('.publisher_image_title').addClass('loreal_reup')
+					.removeClass('publisher_image_title');
+			$('.loreal_pre').hide();
+			$('#loreal_sub2').show();
+			$('.loreal_iam').show();
+		} else if (location.href.indexOf('sharetuan') > -1) {
+			$('.publisher_image_title').addClass('stuan_reup')
+					.removeClass('publisher_image_title');
+			$('#stuan_sub2').show();
+			$('.stuan_describe').show();
+		}
+		if (location.href.indexOf('lancome2') > -1) {
+			var $img = $('<img class="myImage" id="pid-' + picID + '" />'), w, h;
+			$img.css('bottom', '0');
+			$('.image-editor-slider').parent().show();
+			$img.attr('src', picUrl).load(function() {
+						w = this.width;
+						h = this.height;
+						$('.myEditor').haibaoImage();
+						if (h < 395)
+							$img.css('top', 'auto');
+						if (w == 240)
+							$('.image-editor-slider').parent().hide();
+					});
+			$('.myEditor').append($img);
+		} else {
+			$('.myEditor').append('<img class="myImage" id="pid-' + picID
+					+ '" src="' + picUrl + '" />');
+			setTimeout(function() {
+						$('.myEditor').haibaoImage();
+					}, 1000);
+		}
+		container.children('div').show();
+		$('.publisher_image_title').addClass('re-upload')
+				.removeClass('publisher_image_title');
+		if (location.href.indexOf('lauder') > -1) {
+			$('.re-upload').css({
+						'top' : '358px',
+						'background' : 'none',
+						'z-index' : '502'
+					});
+		}
+		$('#publisher_file').css('height', '30px');
+		$('.upload_pho .pho-loading, .tips').hide();
+		$('.myImage').css({
+					'width' : 'auto',
+					'height' : 'auto',
+					'display' : 'inline'
+				});
+	},
+	showPicLomoPopup : function(pid, filename, url, filterUrl, picPath) {
+		$('#lomo-alert').remove();
+		var alertWindow = $('<div id="lomo-alert" class="lomo-alert"></div>');
+		alertWindow.hide().appendTo('body');
+		alertWindow
+				.append('<div class="lomo-desc"><span class="desc">选你喜欢的滤镜效果优化照片</span>&nbsp;<span class="loading"></span><span class="close"></span></div>')
+				.append('<img src="'
+						+ url
+						+ '" class="upload_pic" /><div class="lomo-preview"></div>');
+		alertWindow
+				.children('.lomo-preview')
+				.append('<span class="img-wrap"><img alt="原始图片" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/normal.jpg?t=2" type="normal" oldUrl="'
+						+ url
+						+ '" class="lomo-preview-pic" /><span>原始图片</span></span>')
+				.append('<span class="img-wrap"><img alt="Vintage" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/vintage.jpg?t=2" type="vintage" class="lomo-preview-pic" /><span>复古风</span></span>')
+				.append('<span class="img-wrap"><img alt="Lomo" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/lomo.jpg?t=2" type="lomo" class="lomo-preview-pic" /><span>LOMO</span></span>')
+				.append('<span class="img-wrap"><img alt="Hefe" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/hefe.jpg?t=2" type="hefe" class="lomo-preview-pic" /><span>典雅</span></span>')
+				.append('<div class="clear-fix"></div><span class="img-wrap"><img alt="Film" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/film.jpg?t=2" type="film" class="lomo-preview-pic" /><span>胶片</span></span>')
+				.append('<span class="img-wrap"><img alt="Hsat" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/hsat.jpg?t=2" type="hsat" class="lomo-preview-pic" /><span>饱和</span></span>')
+				.append('<span class="img-wrap"><img alt="Warm" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/warm.jpg?t=2" type="warm" class="lomo-preview-pic" /><span>暖色</span></span>')
+				.append('<span class="img-wrap"><img alt="B&W" src="'
+						+ pictureBaseUrl
+						+ 'css/images/lomo/preview/BW.jpg?t=2" type="bw" class="lomo-preview-pic" /><span>黑白</span></span>')
+				.append('<div class="lomo-confirm"><input type="button" value="确  定" class="submit_alert_chose_yes c" /></div>');
+		$('.lomo-preview-pic').click(function() {
+			if ($(this).attr('type') == 'normal') {
+				$('.upload_pic').attr('src', $(this).attr('oldUrl'));
+				twitterObj.isLomo = false;
+				twitterObj.lomoType = '';
+			} else {
+				var fliterNewUrl = filterUrl + '?filter_type='
+						+ $(this).attr('type') + '&src=' + picPath;
+				$('.upload_pic').attr('src', fliterNewUrl);
+				$('.lomo-desc .loading').html('请等待，滤镜图片加载中...').show();
+				$('.upload_pic').bind('load', picLoaded);
+				twitterObj.isLomo = true;
+				twitterObj.lomoType = $(this).attr('type');
+			}
+		});
+		$('#twitter_tools_button_up_wait').html('').hide();
+		$('#lomo-alert .close').click(function() {
+					alertWindow.hide();
+				});
+		$('#lomo-alert .lomo-confirm input').click(function() {
+					twitterObj.pictureID = pid;
+					twitterObj.hasEntityPic = true;
+					var imgSrc = $('.upload_pic').attr('src');
+					if (!imgSrc)
+						imgSrc = url;
+					twitterObj.showPicEdit(url, imgSrc);
+					$("#twitter_publish_editor").focus();
+					$('#lomo-alert .close').click();
+				});
+		if (this.isReport) {
+			var curElement = $('#upload_entity_btn')
+			var postions = curElement.offset();
+			var top = postions.top + 120;
+			var left = postions.left - 8;
+		} else {
+			var curElement = $('#twitter_tools_publisher_upImages');
+			var postions = curElement.offset();
+			var top = postions.top + 10;
+			var left = postions.left - 35;
+		}
+		alertWindow.find('.upload_pic').attr('src', url);
+		alertWindow.show().css('left', left + 'px').css('top', top + 'px');
+	},
+	showEntityPicEdit : function(imgSrc) {
+		$('#twitter_report, #twitter_tools_publisher_upImages, #twitter_tools_button_up_wait')
+				.hide();
+		$('#tedit_pic_type .twitter_pic_type').hide();
+		$('#tedit_pic_type .twitter_pic_type_checked')
+				.removeClass('twitter_pic_type_checked');
+		$('#tedit_pic_type span[val="2"]').addClass('twitter_pic_type_checked')
+				.show();
+		$('#tedit_pic .hint').hide();
+		if (imgSrc != null && imgSrc != '') {
+			$('#tedit_pic .upload_pic').attr('src', imgSrc);
+		}
+		if (this.hasEntityPic) {
+			$('#tedit_pic .pic_uploader').hide();
+		} else {
+			$('#tedit_pic .pic_uploader').show();
+		}
+		$('#tedit_pic').show();
+	},
+	closePicEdit : function() {
+		this.pictureID = 0;
+		faceTableObj.hide_tables();
+		twitterNewPicObj.main(0);
+		if (this.isReport) {
+			this.changeTab('report', true);
+		} else {
+			this.changeTab('twitter', true);
+		}
+	},
+	showPasteEntity : function(tabName) {
+		$('#paste_entity_dialog').show();
+		twitterObj.entityChangeTab(tabName);
+		$('#paste_entity .inputUrl').addClass('inputTip')
+				.val(twitterObj.urlTip);
+	},
+	changePicToReport : function() {
+		var pid = twitterObj.pictureID;
+		var url = $('#tedit_pic .upload_pic').attr('src');
+		twitterObj.changeTab('report');
+		twitterObj.pictureID = pid;
+		twitterObj.hasEntityPic = true;
+		twitterObj.showEntityPicEdit(url);
+	},
+	loadGoods : function(type) {
+		var url = location.href;
+		if (url.indexOf('discount') != -1) {
+			var img = '<img src="/css/icons/loadingAnimation.gif" style="height:13px;width:140px;margin-top:20px;"/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传中...请稍等';
+			$('#tedit_goods_images_commission').html(img);
+			return false;
+		}
+		var img = '<img style="margin-top:5px;" src="/css/icons/loadingAnimation.gif" />';
+		if (type == 2) {
+			$('#tedit_goods').html(img);
+		} else {
+			$('#tedit_goods').show().html(img);
+		}
+	},
+	showOption : function() {
+		var opStr = '';
+		var maxNum = 4;
+		for (var i = 1; i < maxNum; i++) {
+			opStr += this.createOption(i, maxNum);
+			this.optionNum++;
+		}
+		$('#tedit_goods_option').show().html(opStr);
+		$('#goods_vote_alert span')
+				.html('<a href="javascript:;" onclick="javascript:twitterObj.closeOption();">点击收起</a>');
+		return false;
+	},
+	closeOption : function() {
+		this.optionNum = 0;
+		$('#tedit_goods_option').hide().html('');
+		$('#goods_vote_alert span')
+				.html('<a href="javascript:;;" onclick="javascript:twitterObj.showOption();">发起投票</a>');
+	},
+	createOption : function(key, mnum) {
+		var title = '选项 ' + key + ':';
+		var id = 'viewO_' + key;
+		var v = '';
+		var htmlOption = '<li class="option">';
+		htmlOption += '<label class="optionT" for="' + id + '">' + title
+				+ '</label>';
+		htmlOption += '<input class="optionV" id="' + id + '" value="' + v
+				+ '"/>';
+		htmlOption += '</li>';
+		return htmlOption;
+	},
+	startAutoComplete : function() {
+	},
+	checkSpam : function() {
+		var text = $("#twitter_publish_editor").val();
+		if (twitterObj.lastTwitter != null) {
+			if (new Date().getTime() - twitterObj.lastTwitter.time < twitterObj.intervalTime
+					* 1000) {
+				twitterObj.showAlert('说话太快了，先歇一下吧~');
+				return false;
+			}
+			if (twitterObj.lastTwitter.text == text) {
+				twitterObj.showAlert('请不要连续发表重复的内容~');
+				return false;
+			}
+		}
+		twitterObj.lastTwitter = {
+			"time" : new Date().getTime(),
+			"text" : text
+		};
+		return true;
+	},
+	showAlert : function(txt, time, flash) {
+		if (twitterObj.alerting) {
+			return false;
+		}
+		twitterObj.alerting = true;
+		if (time == null) {
+			time = 3;
+		}
+		if (flash == null) {
+			flash = 0;
+		}
+		var alertObj = $('#twitter_alert_dialog');
+		alertObj.find('span').text(txt);
+		alertObj.show();
+		var offset = $('#twitter_editor_submit').offset();
+		alertObj.css({
+			left : offset.left - alertObj.width()
+					+ $('#twitter_editor_submit').width() - 30,
+			top : offset.top - 40
+		}).appendTo('body');
+		if ($.browser.msie && $.browser.version == "6.0") {
+			alertObj.show();
+		} else {
+			alertObj.css('opacity', 0).show().animate({
+						opacity : 1.0
+					}, 300);
+		}
+		var callBack = function() {
+			setTimeout(function() {
+						if (twitterObj.alerting) {
+							$('#twitter_alert_dialog').hide();
+							twitterObj.alerting = false;
+						}
+					}, time * 1000);
+		};
+		var flashFunc = function() {
+			if (flash > 0) {
+				alertObj.animate({
+							opacity : 0
+						}, 300, function() {
+							alertObj.animate({
+										opacity : 1
+									}, 300, function() {
+										flash--;
+										flashFunc();
+									});
+						});
+			} else {
+				callBack();
+			}
+		};
+		flashFunc();
+	},
+	getNickname1 : function(tid) {
+		return $('#t_nickname' + tid).text();
+	},
+	getNickname2 : function(tid) {
+		return $('#attr_uid_' + tid).text();
+	},
+	getContent2 : function(tid) {
+		if (tid > 0) {
+			$contentObj = $('#tuijian_' + tid);
+		}
+		$contentObj = $contentObj.clone();
+		$contentObj.find('.facetableSetxy').each(function() {
+					var o = $(this);
+					o.after('[' + o.attr('title') + ']');
+				});
+		return $contentObj.text().replace(/\s/g, '');
+	},
+	getContent1 : function(tid, $contentObj) {
+		if (tid > 0) {
+			$contentObj = $('#ask_note_top' + tid);
+		}
+		$contentObj = $contentObj.clone();
+		$contentObj.find('.facetableSetxy').each(function() {
+					var o = $(this);
+					o.after('[' + o.attr('title') + ']');
+				});
+		return $contentObj.text().replace(/\s/g, '');
+	},
+	getNickname : function(tid) {
+		return $('#t' + tid + ' .content .t_nickname .t_nickname_a').text();
+	},
+	getContent : function(tid, $contentObj) {
+		if (tid > 0) {
+			$contentObj = $('#t' + tid + ' .content .t_usecontent');
+		}
+		$contentObj = $contentObj.clone();
+		$contentObj.find('.facetableSetxy').each(function() {
+					var o = $(this);
+					o.after('[' + o.attr('title') + ']');
+				});
+		return $contentObj.text();
+	},
+	getImageSrc : function(tid) {
+		var $link = $('#t' + tid + ' .original_pic_ioc a');
+		if ($link.length > 0) {
+			return $link.attr('href');
+		}
+		$link = $('#t' + tid + ' .quote_picture');
+		if ($link.length > 0) {
+			return $link.attr('original');
+		}
+		return false;
+	},
+	getImageLink : function(tid) {
+		var $link = $('#t_' + tid + ' a img');
+		if ($link.length > 0) {
+			return $link.attr('src');
+		}
+		return false;
+	},
+	getGoodsTitle : function(tid) {
+		var $title = $('#t' + tid + ' .goods_title');
+		if ($title.length > 0) {
+			return $title.text().replace(/\s/g, '');
+		}
+		$title = $('#t' + tid + ' .quote_goods_title');
+		if ($title.length > 0) {
+			return $title.text().replace(/\s/g, '');
+		}
+		return false;
+	},
+	getShareContent : function(tid) {
+		var c = twitterObj.getGoodsTitle(tid);
+		if (c != false) {
+			return c;
+		} else {
+			return twitterObj.getContent(tid);
+		}
+	},
+	getPicName : function(tid) {
+		var $t = $('#t_' + tid + ' a img');
+		if ($t.length > 0) {
+			return $t.attr('title');
+		}
+		return false;
+	},
+	getPreviousTid : function(tid) {
+		var $t = $('#t_' + tid).prev('div').attr('id').replace('t_', '');
+		if ($t.length > 0) {
+			return $t;
+		}
+		return false;
+	},
+	getNextTid : function(tid) {
+		var $t = $('#t_' + tid).next('div').attr('id');
+		if (typeof($t) != 'undefined') {
+			return $t.replace('t_', '');
+		}
+		return false;
+	},
+	showGoods : function(tid) {
+		var t = twitterObj.getPicName(tid);
+		var picLink = twitterObj.getImageLink(tid);
+		var num = twitterObj.getNextTid(tid);
+		$blackShop = $.dialog({
+			title : '宝贝推荐语:',
+			content : 'Hello Kitty萌物志'
+					+ '<a href="javascript:void(0);" onclick="javascript:twitterObj.getNextTid('
+					+ num + ')";><img src="' + picLink
+					+ '" width="120px" /></a>' + '宝贝名:' + t,
+			width : '400px',
+			closeHandle : function() {
+				$(this).closest('.dialog').hide();
+			}
+		});
+		var ua = navigator.userAgent.toLowerCase();
+		var isIE6 = ua.indexOf("msie 6") > -1;
+		var fixed = 'fixed';
+		if (isIE6) {
+			fixed = '';
+		}
+		$blackShop.toCenter(fixed).show();
+	}
+}
+function check_the_box(id) {
+	var isPromt = $('#savemfcstate').attr("checked");
+	if (isPromt == true) {
+		$.get(server_url + 'users/ajax_set_is_promt/', {
+					'id' : id
+				});
+	} else {
+		return false;
+	}
+}
+function show_confirm_del(tid) {
+	$('.confirm_bg_box').remove();
+	var iWidth = document.documentElement.clientWidth;
+	var iHeight = document.documentElement.clientHeight;
+	var bgObj = $('<div class="confirm_bg_box"></div>');
+	bgObj.width(iWidth).height(Math.max(document.body.clientHeight, iHeight))
+			.appendTo('body');
+	var H = screen.height;
+	var yScroll;
+	if (self.pageYOffset) {
+		yScroll = self.pageYOffset;
+	} else if (document.documentElement && document.documentElement.scrollTop) {
+		yScroll = document.documentElement.scrollTop;
+	} else if (document.body) {
+		yScroll = document.body.scrollTop;
+	} else {
+		yScroll = '';
+	}
+	var oShow = document.getElementById('submit_apply_innnertest_alert');
+	oShow.style.display = 'block';
+	oShow.style.top = (H / 2 - 90 - 185 + yScroll) + "px";
+	oShow.style.left = ($(window).width() / 2) - 500 + "px";
+}
+function show_confirm() {
+	$('.confirm_bg_box').remove();
+	$('#submit_apply_innnertest_alert').hide();
+	var iWidth = document.documentElement.clientWidth;
+	var iHeight = document.documentElement.clientHeight;
+	var bgObj = document.createElement("div");
+	bgObj.setAttribute("class", 'confirm_bg_box');
+	bgObj.style.width = iWidth + "px";
+	bgObj.style.height = Math.max(document.body.clientHeight, iHeight) + "px";
+	document.body.appendChild(bgObj);
+	var H = screen.height;
+	var yScroll;
+	if (self.pageYOffset) {
+		yScroll = self.pageYOffset;
+	} else if (document.documentElement && document.documentElement.scrollTop) {
+		yScroll = document.documentElement.scrollTop;
+	} else if (document.body) {
+		yScroll = document.body.scrollTop;
+	} else {
+		yScroll = '';
+	}
+	var oShow = document.getElementById('submit_apply_innnertest_delf');
+	oShow.style.display = 'block';
+	oShow.style.top = (H / 2 - 90 - 185 + yScroll) + "px"
+	oShow.style.left = ($(window).width() / 2) - 500 + "px";
+	window
+			.setTimeout(
+					"hide_confirm('submit_apply_innnertest_alert','submit_apply_innnertest_delf')",
+					2000);
+}
+function hide_alert(tid) {
+	$('#' + tid).hide();
+	$('.confirm_bg_box').remove();
+}
+function hide_confirm(tid, ctid) {
+	$('#' + tid).hide();
+	$('#' + ctid).hide();
+	$(".confirm_bg_box").remove();
+}
+function show_confirm_delete(tid, shareDelType) {
+	$('#show_choose_del_ok').unbind('click').removeAttr('onClick').click(
+			function() {
+				twitterListObj.remove(tid, shareDelType);
+				if ($('#wall').length > 0 && $('#content_fluid').length > 0
+						&& twitterObj.currentPage != 'act')
+					$("#wall").masonry('reload');
+			});
+	show_confirm_del('submit_apply_innnertest_alert');
+}
+function hideTheDiv(tid) {
+	$('#email' + tid).attr(
+			'onClick',
+			"show_share_bar(" + tid + ',' + nickname + ',' + replyConnent
+					+ ");");
+	$('#share_with_friends').remove();
+	$('#email' + tid).html('我要分享');
+	$('#share_with_friends').hide();
+}
+function initPicTypeCheckbox(boxContainer) {
+	var c = $(boxContainer);
+	if (c.attr('inited') == 'true') {
+		return;
+	}
+	c.attr('inited', 'true');
+	var chks = c.find('.twitter_pic_type');
+	chks.each(function() {
+				$(this).click(function() {
+							tmpStr = $('.keywords').val();
+							if (tmpStr.indexOf($(this).html()) == -1) {
+								tmpStr += " " + $(this).html();
+								$('.keywords').val(trim(tmpStr));
+								$(this).addClass('twitter_pic_type_checked');
+								if ($('#hiddenPictype').val() == 0) {
+									$('#hiddenPictype')
+											.val($(this).attr('val'));
+								}
+							} else {
+								var replaceStr = tmpStr.replace($(this).html(),
+										"");
+								$('.keywords').val(trim(replaceStr));
+								$(this).removeClass('twitter_pic_type_checked');
+								if ($('#hiddenPictype').val() == $(this)
+										.attr('val')) {
+									$('#hiddenPictype').val('0');
+								}
+							}
+						});
+			});
+}
+function show_vote_face_bd() {
+	$('#txt_bought').css('color', '#c12058');
+	$('#txt_like').css('color', '#666666');
+	$('#vote_face_like').hide();
+	$('#vote_face_bd').show();
+}
+function show_vote_face_like() {
+	$('#txt_like').css('color', '#c12058');
+	$('#txt_bought').css('color', '#666666');
+	$('#vote_face_bd').hide();
+	$('#vote_face_like').show();
+}
+function closeLomoPop() {
+	$('#lomo-pop').hide();
+	$.setCookie('MEILISHUO_CLOSE_POP', true, {
+				duration : 31536000,
+				path : '/',
+				domain : DEFAULT_COOKIEDOMAIN
+			});
+}
+function picLoaded() {
+	$('.lomo-desc .loading').html('').hide();
+	$('.upload_pic').show();;
+}
+var faceTableObj = {
+	txtBoxDivId : "",
+	txtBoxId : 0,
+	showFaceIco : function(tid) {
+		if (tid == 0) {
+			faceTableObj.txtBoxDivId = "twitter_publish_editor";
+			if ($('#' + faceTableObj.txtBoxDivId).css('display') == 'none') {
+				return false;
+			}
+			var pos = $('#twitter_tools_expression').offset();
+			$('#twitter_tools_faces_table').toggle();
+			$('.twitter_tools_faces_table_div').css({
+						"top" : (pos.top + 16),
+						"left" : (pos.left - 78)
+					});
+			$('#ad_click_area').hide();
+		} else if (tid == -1) {
+			faceTableObj.txtBoxDivId = "twitter_publish_editor";
+			var pos = $('#' + faceTableObj.txtBoxDivId).position();
+			$('#twitter_tools_faces_table').toggle();
+			$('.twitter_tools_faces_table_div').css({
+						"top" : (pos.top + 314),
+						"left" : pos.left
+					});
+			$('#ad_click_area').hide();
+		} else if (tid == -2) {
+			faceTableObj.txtBoxDivId = "hide_comments1";
+			var pos = $('#' + faceTableObj.txtBoxDivId).position();
+			$('#twitter_tools_faces_table').toggle();
+			$('.twitter_tools_faces_table_div').css({
+						"top" : (pos.top + 25),
+						"left" : (pos.left - 100)
+					});
+		} else if (tid == -3) {
+			faceTableObj.txtBoxDivId = "commentgoods";
+			var pos = $('#' + faceTableObj.txtBoxDivId).position();
+			$('#twitter_tools_faces_table').toggle();
+			$('.twitter_tools_faces_table_div').css({
+						"top" : (pos.top + 25),
+						"left" : (pos.left - 100)
+					});
+		} else {
+			faceTableObj.txtBoxDivId = 't_note' + tid + ' .answer_text';
+			if ($('#' + faceTableObj.txtBoxDivId).length === 0) {
+				faceTableObj.txtBoxDivId = 't_note' + tid
+						+ '~.hp_cmt .answer_text';
+			}
+			var pos = $('#t_note' + tid).parents().find('.single_face')
+					.offset();
+			pos.top = pos.top;
+			$('#twitter_tools_faces_table').toggle();
+			$('.twitter_tools_faces_table_div').css({
+						"top" : (pos.top + $(".single_face").height() + 10),
+						"left" : (pos.left - 85)
+					});
+		}
+		txtBoxId = tid;
+	},
+	hide_tables : function() {
+		if (typeof(txtBoxId) == "undefined" || txtBoxId == 0) {
+			$('#twitter_tools_faces_table').hide();
+			$('#ad_click_area').show();
+		} else {
+			$('#twitter_tools_faces_table').hide();
+		}
+		faceTableObj.txtBoxDivId = "";
+	},
+	voice_face_emotion : function(id) {
+		var word = '';
+		switch (id) {
+			case '1' :
+				word = '[笑]';
+				break;
+			case '2' :
+				word = '[晕死]';
+				break;
+			case '3' :
+				word = '[泪汪汪]';
+				break;
+			case '4' :
+				word = '[害羞]';
+				break;
+			case '5' :
+				word = '[问号]';
+				break;
+			case '6' :
+				word = '[流泪]';
+				break;
+			case '7' :
+				word = '[得意]';
+				break;
+			case '8' :
+				word = '[抓狂]';
+				break;
+			case '9' :
+				word = '[酷]';
+				break;
+			case '10' :
+				word = '[怒]';
+				break;
+			case '11' :
+				word = '[坏笑]';
+				break;
+			case '12' :
+				word = '[心碎]';
+				break;
+			case '13' :
+				word = '[猪头]';
+				break;
+			case '14' :
+				word = '[猥琐]';
+				break;
+			case '15' :
+				word = '[囧]';
+				break;
+			case '16' :
+				word = '[转眼珠]';
+				break;
+			case '17' :
+				word = '[刚巴德]';
+				break;
+			case '18' :
+				word = '[长草]';
+				break;
+			case '19' :
+				word = '[财迷]';
+				break;
+			case '20' :
+				word = '[星星眼]';
+				break;
+			case '21' :
+				word = '[白菜]';
+				break;
+			case '22' :
+				word = '[鄙视]';
+				break;
+			case '23' :
+				word = '[飞吻]';
+				break;
+			case '24' :
+				word = '[色色]';
+				break;
+			case '25' :
+				word = '[调皮]';
+				break;
+			case '26' :
+				word = '[拒绝]';
+				break;
+			case '27' :
+				word = '[骷髅]';
+				break;
+			case '28' :
+				word = '[泪]';
+				break;
+			case '29' :
+				word = '[汗]';
+				break;
+			case '30' :
+				word = '[么么]';
+				break;
+			case '31' :
+				word = '[如花]';
+				break;
+			case '32' :
+				word = '[思考]';
+				break;
+			default :
+				word = '';
+				break;
+		}
+		var currentIndex = getCursortPosition($('#' + faceTableObj.txtBoxDivId));
+		var a = faceTableObj.txtBoxDivId;
+		var t = a.substring(0, a.indexOf("~.hp"));
+		var editor_html = $('#' + faceTableObj.txtBoxDivId).val();
+		var $editor_select = '';
+		if (typeof editor_html == 'undefined') {
+			$editor_select = $('#' + t).parent().find('.answer_text');
+			editor_html = $editor_select.val();
+		}
+		var exEditorHtml = editor_html.substring(0, currentIndex);
+		var nxEditorHtml = editor_html.substring(currentIndex,
+				editor_html.length);
+		var html = exEditorHtml + word + nxEditorHtml;
+		currentIndex = currentIndex + word.length;
+		if ($editor_select == '') {
+			$('#' + faceTableObj.txtBoxDivId).val(html).attr('range',
+					currentIndex);
+		} else {
+			$editor_select.val(html).attr('range', currentIndex);
+		}
+		if (faceTableObj.txtBoxDivId == 'twitter_publish_editor') {
+			$('#twitter_publish_editor_tip').hide();
+		}
+	}
+}
+var dataObj = {
+	timeS : function() {
+		var myDate = new Date();
+		return myDate.getTime();
+	}
+}
+var pageAutoObj = {
+	actionKey : 0,
+	autoType : 1,
+	actionAuto : function() {
+		if (pageAutoObj.autoType == 1) {
+			this.stopAuto();
+		} else {
+			this.startAuto();
+		}
+	},
+	listRefrash : function() {
+		twitterListObj.lType = 'supergoods';
+		this.refrash(1);
+		$("#twitter_show_goods_list").attr('class',
+				'twitter_show_goods_list_on');
+		$("#twitter_show_picture").attr('class', 'twitter_show_picture_off');
+		pageChangeObj.getPageData();
+	},
+	picPrefrash : function() {
+		twitterListObj.lType = 'supergoodsPic';
+		this.refrash(1);
+		$("#twitter_show_goods_list").attr('class',
+				'twitter_show_goods_list_off');
+		$("#twitter_show_picture").attr('class', 'twitter_show_picture_on');
+		pageChangeObj.getPageData();
+	},
+	refrash : function(v) {
+		pageAutoObj.actionKey = 1;
+		$("#twitter_show_Refresh")
+				.html('<img src="/css/icons/link_wait.gif" alt="正在加载内容..."/>正在刷新');
+		$("#twitter_show_list").html('').css('style', '');
+		twitterListObj.getTwitterList(0);
+		pageAutoObj.actionKey = 0;
+		if (pageAutoObj.autoType == 2) {
+			this.startAuto();
+		}
+		twitterListObj.resetTop();
+	},
+	stopAuto : function() {
+		if (pageAutoObj.autoType == 2) {
+			return false;
+		}
+		pageAutoObj.showStopAlter(5);
+		$("#twitter_show_auto_switch")
+				.html('<img src="/css/icons/start.jpg" alt="开始自动刷新" />自动刷新')
+				.attr('title', '开始自动刷新');
+		pageAutoObj.autoType = 2;
+		window.clearInterval(timerObj.timeOff);
+		timerObj.timeOff = 0;
+	},
+	startAuto : function() {
+		if (pageAutoObj.autoType == 1) {
+			return false;
+		}
+		pageAutoObj.actionKey = 0;
+		pageAutoObj.showStopAlter(0);
+		$("#twitter_show_auto_switch")
+				.html('<img src="/css/icons/stop.jpg" alt="停止自动刷新" />停止刷新')
+				.attr('title', '停止自动刷新');
+		pageAutoObj.autoType = 1;
+		twitterListObj.getTwitterList(0);
+	},
+	showStopAlter : function(v) {
+		var txt = '';
+		if (v > 1) {
+			txt = '内容自动加载功能已中止...';
+		} else {
+			txt = '内容自动加载功能已开启...';
+		}
+		$("#twitter_show_page_prompt").html(txt).show();
+		window.setTimeout(function() {
+					$("#twitter_show_page_prompt").hide('slow');
+				}, 2000);
+	},
+	hideAutoFoots : function() {
+		$("#twitter_show_loading").hide('slow');
+	},
+	showAutoFoots : function() {
+		$("#twitter_show_loading").show().corner('bottom');
+	}
+}
+var twitterListObj = {
+	lType : 'friend',
+	listType : '',
+	lastTwitterID : null,
+	twitterDataObj : null,
+	topicId : 0,
+	nickName : null,
+	noJump : 0,
+	uid : '',
+	goodShowType : 'list',
+	twitter_url : server_url + 'twitter/ajax_getFriendTwitter/',
+	twitter_url_fresh : server_url
+			+ 'twitter/ajax_getFriendTwitter?frm=homefresh',
+	twitter_anyUrl : server_url + 'twitter/ajax_getTwitter/',
+	twitter_topicUrl : server_url + 'topic/ajax_getTopicTwitter/',
+	twitter_personUrl : server_url + 'person/ajax_getPersonTwitter/',
+	twitter_removeUrl : server_url + 'twitter/ajax_removeTwitter/',
+	twitter_supergoodsUrl : server_url + 'goods/ajax_getSuperGoods/',
+	twitter_removeNewUrl : server_url + '/twitter/ajax_removeTwitterHaibao/',
+	twitter_supergoodsPicUrl : server_url + 'goods/ajax_getPicSuperGoods/',
+	twitter_personSummUrl : server_url + 'person/ajax_getPersonSummTwitter/',
+	twitter_lastId : 0,
+	showUserGuide : false,
+	getPageHtml : function(url, currtPageNum) {
+		var c = dataObj.timeS();
+		if (twitterListObj.lType == 'any') {
+			if (currtPageNum == 0) {
+				twitterListObj.twitter_lastId = 0;
+			}
+			$.get(url, {
+						lid : twitterListObj.twitter_lastId,
+						pv : pageAutoObj.actionKey,
+						why : c
+					}, function(jsonFormat) {
+						var json = eval("(" + jsonFormat + ")");
+						if (json.location == 'dajia') {
+							location.href = server_url + "dajia/main/focus";
+							return false;
+						}
+						$("#twitter_show_Refresh").html('').hide();
+						if (currtPageNum == 0) {
+							$("#twitter_show_list").html(json.html);
+						} else {
+							var key = '#t' + twitterListObj.twitter_lastId;
+							var s = $(key).attr('href');
+							$(key).after(json.html);
+						}
+						twitterListObj.twitter_lastId = vh[0];
+					});
+		} else {
+			$.get(url, {
+						page : currtPageNum,
+						tagListType : twitterListObj.listType,
+						why : c,
+						lType : twitterListObj.lType
+					}, function(jsonFormat) {
+						var json = eval("(" + jsonFormat + ")");
+						if (json.location == 'dajia'
+								&& twitterListObj.noJump != 1) {
+							location.href = server_url + "dajia/main/focus";
+							return false;
+						}
+						if (json.location == 'all'
+								&& twitterListObj.noJump != 1) {
+							location.href = server_url + "home/all?frm=click";
+							return false;
+						}
+						if (currtPageNum <= 1) {
+							$("#twitter_show_list").html(json.html);
+							$("#twitter_show_list_2").hide();
+							$("#twitter_show_list_3").hide();
+						} else {
+							$("#twitter_show_list").html(json.html);
+							$("#twitter_show_list_2").html('').hide();
+							$("#twitter_show_list_3").html('').hide();
+						}
+						twitterPrompt.refreshPrompt();
+						$("#twitter_show_Refresh").html('').hide();
+						if (twitterListObj.showUserGuide) {
+							go_to_step(1);
+							twitterListObj.showUserGuide = false;
+						}
+						$('.twitter_avatar').find('img:not(.js_processed)')
+								.addClass('js_processed').floatUserInfo();
+					});
+			this.resetTop();
+		}
+		return true;
+	},
+	remove : function(tid, shareDelType) {
+		var id = '#del' + tid;
+		var act_id = $('#act_twitter_' + tid).text();
+		var haibaoObj = $('.t_' + tid);
+		if (typeof(haibaoObj) != 'undefined') {
+			haibaoObj.remove();
+		}
+		$(id).removeAttr('onClick');
+		var url = '';
+		if (twitterObj.currentPage == 'wbapp'
+				|| twitterObj.currentPage == 'inneov'
+				|| twitterObj.currentPage == 'lancome'
+				|| twitterObj.currentPage == 'lancome2'
+				|| twitterObj.currentPage == 'lauder'
+				|| twitterObj.currentPage == 'bobbi'
+				|| twitterObj.currentPage == 'sharetuan') {
+			url = twitterListObj.twitter_removeNewUrl;
+		} else {
+			url = twitterListObj.twitter_removeUrl;
+		}
+		if (act_id != "") {
+			data = {
+				tid : tid,
+				act_id : act_id
+			};
+		} else if (twitterObj.currentPage == 'wbapp'
+				|| twitterObj.currentPage == 'inneov'
+				|| twitterObj.currentPage == 'lauder'
+				|| twitterObj.currentPage == 'lancome'
+				|| twitterObj.currentPage == 'lancome2'
+				|| twitterObj.currentPage == 'bobbi'
+				|| twitterObj.currentPage == 'sharetuan') {
+			data = {
+				tid : tid,
+				currentpage : twitterObj.currentPage
+			};
+		} else {
+			data = {
+				tid : tid
+			};
+		}
+		$.get(url, data, function(mesg) {
+			if (mesg == "dtree") {
+				alert("许愿树的宝贝不能删除！");
+				return false;
+			}
+			show_confirm();
+			$('#submit_apply_innnertest_alert_' + tid).hide();
+			switch (twitterObj.removeCallBackType) {
+				case 'ajax' :
+					pageChangeObj.getPageData();
+					break;
+				case 'refresh' :
+					location.href = location.href;
+					break;
+			}
+			if (twitterObj.currentPage == 'twitter') {
+				window
+						.setTimeout(
+								"twitterListObj.getTwitterList( pageChangeObj._currtPage )",
+								2000);
+			} else if (document.location.href.indexOf('/share/') != -1) {
+				(shareDelType == 0) && (location.href = server_url + 'home');
+			} else {
+				$('#t' + tid).remove();
+				if (twitterObj.currentPage != 'wbapp'
+						&& twitterObj.currentPage != 'minisite'
+						&& twitterObj.currentPage != 'act'
+						&& $('#content_fluid').length > 0) {
+					$("#wall").masonry('reload');
+				}
+			}
+			var absNum = document.getElementById("absNum");
+			var sendNum = document.getElementById("sendNum");
+			twitterObj.number(absNum, sendNum, 20, 30, 0);
+		});
+	},
+	getTwitterList : function(pageNum, frm) {
+		twitterPrompt.has_twitter = false;
+		if (twitterListObj.lType == 'twitter' || twitterListObj.lType == 'all') {
+			if (typeof(frm) == 'undefined') {
+				twitterListObj.getPageHtml(twitterListObj.twitter_url, pageNum);
+			} else {
+				twitterListObj.getPageHtml(twitterListObj.twitter_url_fresh,
+						pageNum);
+			}
+		} else if (twitterListObj.lType == 'topic') {
+			var urlArr = twitterListObj.twitter_topicUrl.split("/");
+			if (urlArr[urlArr.length - 1] == "") {
+				var newUrl = this.twitter_topicUrl + twitterListObj.topicId
+						+ '/';
+			}
+			twitterListObj.getPageHtml(newUrl, pageNum);
+		} else if (twitterListObj.lType == 'person') {
+			twitterListObj.getPageHtml(twitterListObj.twitter_personUrl
+							+ twitterListObj.uid, pageNum);
+		} else if (twitterListObj.lType == 'personSumm') {
+			twitterListObj.getPageHtml(twitterListObj.twitter_personSummUrl
+							+ twitterListObj.uid, pageNum);
+		} else if (twitterListObj.lType == 'supergoods') {
+			twitterListObj.getPageHtml(twitterListObj.twitter_supergoodsUrl,
+					pageNum);
+		} else if (twitterListObj.lType == 'supergoodsPic') {
+			twitterListObj.getPageHtml(twitterListObj.twitter_supergoodsPicUrl,
+					pageNum);
+		} else {
+			twitterListObj.getPageHtml(twitterListObj.twitter_anyUrl, pageNum);
+		}
+	},
+	resetTop : function() {
+		if (document.body.scrollTop) {
+			document.body.scrollTop = 0;
+		} else {
+			document.documentElement.scrollTop = 0;
+		}
+		return false;
+	}
+}
+var twitterNewPicObj = {
+	picURL : '',
+	picFilename : '',
+	divLoctainKey : '#twitter_tools_publisher_upImages',
+	divLoctainWait : '#twitter_tools_button_up_wait',
+	picFileEmNameKey : '#publisher_file',
+	picLoding : '<span id="publisher_image_loading">请等待图片上传中...</span>',
+	picOk : '<span id="publisher_perch"  style="width:120px;"><em id="publisher_perch_name"></em><a id="publisher_perch_delete" title="删除" onClick="twitterNewPicObj.movePic();" ><img src="/css/images/move_001.gif" /></a></span><span id="publisher_perch_dox" style="display: none;"></span>',
+	sentPic : function(obj) {
+		twitterNewPicObj.picFilename = $(obj).val();
+		if (twitterNewPicObj.validata(obj)) {
+			$(obj).closest('form').submit();
+			$(twitterNewPicObj.divLoctainWait).html('<img src="'
+					+ pictureBaseUrl
+					+ 'css/images/twitter/loading17.gif" /> 请等待, 图片上传中...');
+		}
+	},
+	main : function(type) {
+		$(twitterNewPicObj.divLoctainWait).html(" ");
+		var uploadStr = '';
+		if (type == 'goods') {
+			uploadStr = '上传图片';
+		}
+		var picUpload = '<span id="publisher_image_title">'
+				+ uploadStr
+				+ '<form id="publisher_image_form" target="upfiler_picture_iframe" action="http://'
+				+ Meilishuo.config.domain.upload
+				+ '/pictures/ajax_savePic/" enctype="multipart/form-data" method="post"><input id="publisher_file" name="attach[]" size="1" type="file"  onChange="twitterNewPicObj.sentPic(this);"/><input id="imgType" name="imgType" type="hidden" value="2"/></form></span>';
+		if ($.browser.msie) {
+			picUpload = '<span id="publisher_image_title">'
+					+ uploadStr
+					+ '<form id="publisher_image_form" target="upfiler_picture_iframe" action="http://'
+					+ Meilishuo.config.domain.upload
+					+ '/pictures/ajax_savePic/" enctype="multipart/form-data" method="post"><input id="publisher_file" hideFocus="true" name="attach[]" size="1" type="file" onChange="twitterNewPicObj.sentPic(this);"/><input id="imgType" name="imgType" type="hidden" value="2" style="cursor: pointer; overflow: hidden; float: left; width: 98px; height: 30px; "/></form></span>';
+		}
+		$(twitterNewPicObj.divLoctainKey).html(picUpload);
+		$('#upload_entity_btn').html(picUpload);
+		if (type == 'goods') {
+			$('#imgType').val(4);
+		} else {
+			$('#imgType').val(1);
+		}
+	},
+	validata : function(obj) {
+		if (!/\.(gif|jpg|png|jpeg|bmp)$/i.test(twitterNewPicObj.picFilename)) {
+			$(twitterNewPicObj.picFileEmNameKey).val('');
+			alert('请上传标准图片文件,支持gif,jpg,png,jpeg.');
+			return false;
+		}
+		return true;
+	},
+	movePic : function() {
+		$(twitterNewPicObj.divLoctainKey).html(twitterNewPicObj.picUpload);
+		$.get(server_url + '/twitter/ajax_movePicture/', {
+					picid : twitterObj.pictureID
+				});
+		var txt = $("#twitter_publish_editor").val();
+		txt = txt.replace('分享图片', '');
+		$("#twitter_publish_editor").val(txt).focus();
+	},
+	addImgGoodsSuccess : function(id, url) {
+		twitterObj.pictureID = id;
+		var img = '<img src="' + url + '" />';
+		$('#tedit_goods_images').html(img);
+		$(twitterNewPicObj.divLoctainWait).hide();
+	},
+	addImgSuccess : function(id, fname, url, filterUrl) {
+		twitterObj.pictureID = id;
+		twitterObj.hasEntityPic = true;
+		twitterObj.showPicEdit(url, filterUrl);
+		$("#twitter_publish_editor").focus();
+	}
+}
+var twitterPrompt = {
+	twitter_lastTime : 0,
+	has_twitter : false,
+	newTwitter : server_url + '/twitter/ajax_getNewTwitter',
+	TwitterTime : server_url + '/server/ajax_getServerTime',
+	tempshow : function() {
+		alert(twitterPrompt.twitter_lastTime);
+	},
+	getNewTwitter : function() {
+		if (twitterPrompt.has_twitter) {
+			return false;
+		}
+		var twitter_id = 0;
+		var twitterList = $
+				.makeArray($('#twitter_show_list .twitter_Feed:first')
+						.attr('id'));
+		$.each(twitterList, function(n, value) {
+					if (n == 0) {
+						twitter_id = value.substring(1);
+					}
+				});
+		var pageNum = $('#twitter_show_list_foot_pageNum .page_num').html();
+		var url = location.href;
+		url = url.split('/');
+		var length = url.length;
+		var flag = 0;
+		for (var i = 0; i < length; i++) {
+			if (url[i] == 'home' || url[i] == 'welcome' || length == 4) {
+				flag = 1;
+				break;
+			}
+		}
+		if (pageNum != null && pageNum != undefined && pageNum != ''
+				&& flag == 1) {
+			pageNum = (pageNum.toString().split("/"))[0];
+			if (pageNum == 1) {
+				var twitterNum = $('#twitter_show_list .twitter_Feed').size();
+				$('#twitter_latest_id').val(twitterNum);
+			}
+			twitterNum = $('#twitter_latest_id').val();
+			$.getJSON(twitterPrompt.newTwitter, {
+						"twitter_id" : twitter_id,
+						"pageNum" : pageNum,
+						"twitterNum" : twitterNum
+					}, function(bakNum) {
+						if (bakNum.num > 0) {
+							twitterPrompt.has_twitter = true;
+							var promtStr = '<a href="javascript:void(0);">有更新，点击查看哦</a>';
+							document.getElementById('twitter_prompt_num').innerHTML = promtStr;
+							$('#twitter_prompt_num').unbind('click').click(
+									function() {
+										if ($('.twitter-list-tabs .twitter_tab1')
+												.hasClass('current_tab')) {
+											location.href = server_url
+													+ 'home/all?frm=homerefresh';
+											return false;
+										}
+										var frm = true;
+										twitterListObj.getTwitterList(0, frm);
+										pageChangeObj.getPageData();
+									}).show();
+						} else {
+							$('#twitter_prompt_num').hide();
+						}
+					});
+		}
+	},
+	refreshPrompt : function() {
+		$('#twitter_prompt_num').html('');
+		$('#twitter_prompt_num').attr('style', 'display:none;');
+	}
+}
+var twitterNoteObj = {
+	noteNew_url : server_url + '/twitter/ajax_newNoteTwitter/',
+	noteList_url : server_url + '/note/ajax_showNote/',
+	liveTwitterObj : null,
+	showNoteDiv : function(tid, uid, disnum, repnum, type) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.is_actived == 2) {
+			location.href = server_url + 'users/activate_message';
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		if (type == undefined || type == null) {
+			type = 4;
+		}
+		if (this.liveTwitterObj != null) {
+			this.liveTwitterObj.appendStop = true;
+		}
+		clearInterval(timerObj.timeOff);
+		var $note = $('<div id="t_note'
+				+ tid
+				+ '" class="twitter_note_list" >'
+				+ '<div class="arrow_top"></div>'
+				+ '<div class="twitter_note_list_t"></div>'
+				+ '<div class="twitter_note_list_c">'
+				+ '<div class="twitter_note_edit">'
+				+ '<div class="twitter_tools_faces_table_reply" onclick="faceTableObj.showFaceIco('
+				+ tid
+				+ ')"><img src="/css/images/face/reply_face.gif" class="single_face"></div>'
+				+ '<textarea class="answer_text"></textarea>'
+				+ '<input class="answer_button" type="button" onclick="twitterNoteObj.createNote('
+				+ uid + ',' + tid + ', 0, ' + disnum + ', ' + repnum + ','
+				+ type + ');" value="回 复" />'
+				+ '<span class="note_limit">140</span>' + '</div>'
+				+ '<div class="note_list"></div>' + '</div>'
+				+ '<div class="twitter_note_list_b"></div>'
+				+ '<div style="clear:both;"></div>' + '</div>');
+		var $twitter = $('#' + twitterObj.idPrefix + tid).append($note);
+		var $noteInput = $note.find('.answer_text');
+		$noteInput.focus().textlimit($note.find('.note_limit'), 140, 10);
+		bindRange($noteInput.get(0));
+		if (twitterListObj.lType != 'twitterPage' && type != 24) {
+			$note.find('.note_list').load(twitterNoteObj.noteList_url, {
+						twid : tid,
+						'disnum' : disnum,
+						'repnum' : repnum,
+						'type' : type
+					});
+		}
+		var replyBtn = $twitter.find('.reply_button').removeAttr('onclick')
+				.unbind('click');
+		setTimeout(function() {
+					replyBtn.bind('click', function() {
+								twitterNoteObj.hide_reply_note(tid, uid,
+										disnum, repnum, type);
+								return false;
+							});
+				}, 100);
+	},
+	replyInEditbox : function(nickname, tid) {
+		var reply = "回复@" + nickname + " : " + "";
+		var $noteInput = $('#t_note' + tid + ' .answer_text');
+		$noteInput.val(reply);
+		var length = reply.length;
+		setCursor($noteInput.get(0), reply.length, reply.length);
+		return false;
+	},
+	hide_reply_note : function(tid, uid, disnum, repnum, type) {
+		if (this.liveTwitterObj != null) {
+			this.liveTwitterObj.appendStop = false;
+		}
+		faceTableObj.hide_tables();
+		$('#t_note' + tid).remove();
+		$('#' + twitterObj.idPrefix + tid + ' .reply_button')
+				.removeAttr('onclick').unbind('click').click(function() {
+							twitterNoteObj.showNoteDiv(tid, uid, disnum,
+									repnum, type);
+							return false;
+						});
+	},
+	noteAtsingle : function(uid, tid, id, showIndex, type) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		} else {
+			var $note = $("#" + id);
+			faceTableObj.hide_tables();
+			var $noteInput = $note.find('.answer_text');
+			$noteInput.attr("disabled", "disabled");
+			var txt = $noteInput.val();
+			var txtLength = GetStringLength(txt);
+			if (txtLength <= 0) {
+				alert('留言不能为空.');
+				$noteInput.attr("disabled", "");
+				return false;
+			} else if (txtLength > 140) {
+				alert('留言不能超过140个字符.');
+				$noteInput.attr("disabled", "");
+				return false;
+			}
+			$noteInput.val('');
+			var callback = function(mesg) {
+				if (mesg == 1) {
+					showForbiddenWindow();
+					return false;
+				}
+				window.location.reload();
+				return;
+			}
+			$.ajax({
+						async : false,
+						type : "GET",
+						url : twitterNoteObj.noteNew_url,
+						data : {
+							suid : uid,
+							stid : tid,
+							type : type,
+							tContent : txt,
+							pid : 0,
+							showIndex : showIndex
+						},
+						success : callback
+					});
+		}
+	},
+	checkReply : function(disnum, repnum, tid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		var $note = $("#t_note" + tid);
+		if ($note.attr('replying') == 'true') {
+			return false;
+		}
+		var $noteInput = $note.parent().find('.answer_text');
+		faceTableObj.hide_tables();
+		$noteInput.attr("disabled", "disabled");
+		var txt = $noteInput.val();
+		var txtLength = GetStringLength(txt);
+		if (txtLength <= 0) {
+			alert('留言不能为空.');
+			$noteInput.attr("disabled", "");
+			return false;
+		} else if (txtLength > 140) {
+			alert('留言不能超过140个字符.');
+			$noteInput.attr("disabled", "");
+			return false;
+		}
+		return true;
+	},
+	createNote : function(uid, tid, showIndex, disnum, repnum, type) {
+		if (!twitterNoteObj.checkReply(disnum, repnum, tid)) {
+			return false;
+		}
+		if (disnum == null) {
+			disnum = 0;
+		}
+		if (repnum == null) {
+			repnum = 0;
+		}
+		var $note = $("#t_note" + tid);
+		var $noteInput = $note.find('.answer_text');
+		var txt = $noteInput.val();
+		if (this.liveTwitterObj != null) {
+			this.liveTwitterObj.appendStop = false;
+		}
+		var callback = function(mesg) {
+			$noteInput.val('');
+			if (mesg == 1) {
+				showForbiddenWindow();
+				return false;
+			}
+			if (twitterListObj.lType == 'twitterPage' || type == 24) {
+				window.location.reload();
+				return;
+			}
+			$note.attr('replying', 'false');
+			if (type < 20) {
+				var replyNumStr = $('#t' + tid + ' .reply_num').text();
+				var replyNum = 0;
+				if ($.trim(replyNumStr) != '') {
+					replyNum = parseInt(replyNumStr.substring(1,
+							replyNumStr.length - 1));
+				}
+				$('#t' + tid + ' .reply_num').text('(' + (replyNum + 1) + ')');
+			}
+			if (type != 24) {
+				$note.find('.note_list').load(twitterNoteObj.noteList_url, {
+							'twid' : tid,
+							'disnum' : disnum,
+							'repnum' : repnum,
+							'type' : type
+						});
+			}
+			$noteInput.attr("disabled", "");
+			systemCron();
+		};
+		$note.attr('replying', 'true');
+		$.ajax({
+					async : false,
+					type : "GET",
+					url : twitterNoteObj.noteNew_url,
+					data : {
+						suid : uid,
+						stid : tid,
+						type : type,
+						tContent : txt,
+						pid : 0,
+						showIndex : showIndex
+					},
+					success : callback
+				});
+	}
+}
+var messgarray = new Array();
+var twitterToolsObj = {
+	collectUrl : server_url + 'collect/ajax_createCollect/',
+	cancelcollectUrl : server_url + 'collect/ajax_cancelCollect',
+	forwardUrl : server_url + 'twitter/ajax_newForwardTwitter/',
+	likeUrl : server_url + 'twitter/ajax_voteTwitter/',
+	getEmailUrl : server_url + 'emailfriends/ajax_getFriendsEmail/',
+	sendEmailUrl : server_url + 'emailfriends/ajax_sendFriendsEmail/',
+	userFaceUrl : server_url + 'twitter/ajax_outFace/',
+	userTxtUrl : server_url + 'askPage/ajax_outT/',
+	updatePicTypeUrl : server_url + 'twitter/ajax_updatePicType',
+	showT : 0,
+	attrIndex : 0,
+	faceT : 0,
+	faceC : 0,
+	twitterId : 0,
+	show_mf : 0,
+	txtBoxDivId : '',
+	makFDivId : 'make_friends_with_HQ',
+	show_promt_makefds : function(tid) {
+		if (typeof(tid) == 'undefined') {
+			txtBoxDivId = 'self_user_info_head';
+		} else if (tid == 'submit_apply_innnertest_collect') {
+			txtBoxDivId = 'twitter_avater_' + twitterId;
+		} else {
+			txtBoxDivId = 'twitter_avater_' + tid;
+		}
+		var pos = $('#' + txtBoxDivId).position();
+		$('#make_friends_with_HQ').show();
+		$('.make_friend_with_HQ_table').css({
+					"top" : (pos.top + 84) + "px",
+					"left" : (pos.left + 100) + "px"
+				});
+	},
+	hide_alert_collect_suc : function(tid) {
+		$('#' + tid).hide();
+		$('.confirm_bg_box').remove();
+		if (messgarray.type == 1) {
+			$("#make_friends_with_HQ_fv").html("<img src='"
+					+ messgarray.destinAvator
+					+ "' style='width:64px;height:64px;'/>");
+			$("#make_friends_with_HQ_font_1").html('亲爱的'
+					+ messgarray.sourceNickname + '：');
+			$("#make_friends_with_HQ_font_2")
+					.html('你已经收藏、喜欢了三次以上<a href="{/$BASE_URL/}person/u/'
+							+ messgarray.destinUid + '">'
+							+ messgarray.destinNickname
+							+ '</a>分享的宝贝。我们猜她与你兴趣相投。');
+			$("#make_friends_with_HQ_font_3")
+					.html('建议你关注<a href="{/$BASE_URL/}person/u/'
+							+ messgarray.destinUid + '">'
+							+ messgarray.destinNickname
+							+ '</a>，就能在首页第一时间看到她分享更新，不再错过她分享的好宝贝和美图。');
+			$('#make_friends_with_HQ_button')
+					.attr(
+							'onClick',
+							'friendsObj.addFromUr(\''
+									+ messgarray.destinUid
+									+ '\');check_the_box(1);twitterToolsObj.close_make_friends();');
+			twitterToolsObj.show_promt_makefds(tid);
+		}
+	},
+	close_make_friends : function() {
+		$('#make_friends_with_HQ').hide();
+	},
+	skipPage : function(url) {
+		window.location = server_url + url;
+	},
+	collectTwitter : function(tid, num, uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		}
+		num = num + 1;
+		twitterId = tid;
+		$.get(twitterToolsObj.collectUrl, {
+					twitterid : tid
+				}, function(mesg) {
+					mesg = eval('(' + mesg + ')');
+					messgarray.type = mesg.type;
+					messgarray.sourceNickname = mesg.sourceNickname;
+					messgarray.destinUid = mesg.destinUid;
+					messgarray.destinNickname = mesg.destinNickname;
+					messgarray.destinAvator = mesg.destinAvator;
+					messgarray.sum = mesg.sum;
+					$('#t' + tid + ' .collect_button_wrapper, .st' + tid
+							+ ' .collect_button_wrapper')
+							.html('<a href="javascript:void(0);" onclick="return twitterToolsObj.dropcollectTwitter('
+									+ tid
+									+ ','
+									+ num
+									+ ');">'
+									+ '<span>'
+									+ '<img src="http://www.meilishuo.com/css/images/twitter_tools/I_loveit.gif">'
+									+ '</span>'
+									+ '<span>我喜欢('
+									+ num
+									+ ')</span>' + '</a>');
+					$('#submit_apply_innertest_gobackhp_f .interest_promt a')
+							.attr(
+									'href',
+									'/person/u/' + current_user_id
+											+ '/twitter/list/#personNavBar')
+							.html('我喜欢的发言');
+					show_alert('submit_apply_innnertest_like', 'confirm_bg_box');
+					var textId = "submit_apply_innnertest_like_txt";
+					var txt = '[小红心]';
+					$("#" + textId).val(txt).focus();
+					setCursor($("#" + textId).get(0), 0, 0);
+					alertDiv.author = uid;
+					alertDiv.stid = tid;
+					alertDiv.type = 3;
+					alertDiv.auid = uid;
+				});
+	},
+	dropcollectTwitter : function(tid, cnum, uid) {
+		cnum = cnum - 1;
+		if (cnum > 0) {
+			var boxtxt = '我喜欢(' + cnum + ')';
+		} else {
+			var boxtxt = '我喜欢';
+		}
+		$('#t' + tid + ' .collect_button_wrapper, .st' + tid
+				+ ' .collect_button_wrapper')
+				.html('<a href="javascript:void(0);" onclick="return twitterToolsObj.collectTwitter('
+						+ tid
+						+ ','
+						+ cnum
+						+ ','
+						+ uid
+						+ ');return false;">'
+						+ '<span>'
+						+ '<img src="http://www.meilishuo.com/css/images/twitter_tools/I_like.gif">'
+						+ '</span>' + '<span>' + boxtxt + '</span>' + '</a>');
+		$.get(twitterToolsObj.cancelcollectUrl, {
+					twitterid : tid
+				}, function(mesg) {
+					show_alert('submit_apply_innnertest_collectdel',
+							'confirm_bg_box');
+				});
+	},
+	remove : function(tid) {
+		$('#t' + tid).remove();
+	},
+	forwardTwitter : function(authorUid, tid, sUid, stid, type) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.is_actived == 2) {
+			location.href = server_url + 'users/activate_message';
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		try {
+			var showtxt = "";
+			if (type == 29) {
+				var txt = ' //@' + twitterObj.getNickname1(tid) + ' ：'
+						+ twitterObj.getContent1(tid);
+				type = 28;
+			} else if (type == 30) {
+				var txt = ' //@' + twitterObj.getNickname(tid) + ' ：'
+						+ twitterObj.getContent(tid);
+				type = 28;
+			} else if (type == 31) {
+				var txt = ' //@' + twitterObj.getNickname2(tid) + ' ：'
+						+ twitterObj.getContent2(tid);
+				type = 7;
+			} else {
+				var txt = ' //@' + twitterObj.getNickname(tid) + ' ：'
+						+ twitterObj.getContent(tid);
+			}
+			if (sUid < 1 || type == 7) {
+				alertDiv.author = authorUid;
+				alertDiv.stid = tid;
+			} else {
+				alertDiv.author = sUid;
+				alertDiv.stid = stid;
+			}
+			alertDiv.partuid = '';
+			alertDiv.auid = authorUid;
+			alertDiv.type = type;
+			alertDiv.alertinfo(showtxt, txt);
+		} catch (err) {
+			var mesg = 'mesg:' + err.message + '.';
+			mesg += "\n File:" + err.fileName + ".";
+			mesg += "\n Line:" + err.lineNumber + ".";
+			mesg += "\n Stack:" + err.stack + ".";
+			mesg += "\n Name:" + err.name + ".";
+		}
+		return false;
+	},
+	sentForward : function(tt) {
+		var content = $("#twitter_publish_forward").val();
+		var isShowSuccess = true;
+		if (tt != null) {
+			content = $("#" + tt).val();
+		}
+		if (typeof(content) == 'undefined') {
+			content = '[小红心]';
+			isShowSuccess = false;
+		}
+		var log_Url = twitterToolsObj.forwardUrl;
+		if (alertDiv.author == "from_me_tt") {
+			log_Url += "?from=like";
+		}
+		if (alertDiv.stid < GOODS_T_DEPART) {
+			$.get(log_Url, {
+						suid : alertDiv.author,
+						auid : alertDiv.auid,
+						stid : alertDiv.stid,
+						fws : content,
+						type : alertDiv.type
+					}, function(mesg) {
+						if (alertDiv.type == 28) {
+							window.setTimeout(function() {
+										location.href = location.href;
+									}, 500);
+						}
+						if (twitterListObj.lType == 'any'
+								|| twitterListObj.lType == 'topic'
+								|| twitterListObj.lType == 'atme') {
+						} else {
+							var ua = navigator.userAgent.toLowerCase();
+							var isIE6 = ua.indexOf("msie 6") > -1;
+							var fixed = 'fixed'
+							if (isIE6) {
+								fixed = '';
+							}
+							var successWindow = $.dialog({
+										title : '美丽提示',
+										content : $('#forwardsuccess').show(),
+										closeHandle : function() {
+											$(this).closest('.dialog').hide();
+										}
+									});
+							if (isShowSuccess) {
+								successWindow.toCenter(fixed).show();
+								setTimeout(function() {
+											successWindow.hide();
+										}, 1500);
+							}
+							if ($("#zupage").val() > 1) {
+								return false;
+							}
+							pageChangeObj.createPageList(1);
+						}
+					});
+		} else {
+			var comment = $('#' + tt).val().trim();
+			gid = $('#yiggg').val();
+			var callback = function(backstr) {
+				var ua = navigator.userAgent.toLowerCase();
+				var isIE6 = ua.indexOf("msie 6") > -1;
+				var fixed = 'fixed'
+				if (isIE6) {
+					fixed = '';
+				}
+				var successWindow = $.dialog({
+							title : '美丽提示',
+							content : $('#forwardsuccess').show(),
+							closeHandle : function() {
+								$(this).closest('.dialog').hide();
+							}
+						});
+				if (isShowSuccess) {
+					successWindow.toCenter(fixed).show();
+					setTimeout(function() {
+								successWindow.hide();
+							}, 1500);
+				}
+			}
+			var url = server_url + "twitter/ajax_comment";
+			$.post(url, {
+						'comment' : comment,
+						'gid' : gid
+					}, callback);
+		}
+		alertDiv.closeDiv();
+		return false;
+	},
+	likeIt : function(tid, ty, page, gid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		}
+		$("#yiggg").val(gid);
+		if (typeof(page) == 'undefined') {
+			var page = '';
+		}
+		if (ty == 1) {
+			$("#submit_apply_innnertest_like_set").attr("checked", true);
+			$('#submit_apply_innertest_gobackhp_f .interest_promt a').attr(
+					'href', '/person/u/' + current_user_id + '/collect')
+					.html('我喜欢的宝贝');
+		}
+		if (ty == 4) {
+			twitterToolsObj.showT = '#show_' + tid;
+			var key = '#z_' + tid;
+			$(key).removeAttr('onClick');
+			$.getJSON(twitterToolsObj.likeUrl, {
+						tvd : tid,
+						tvy : ty,
+						gid : gid
+					}, function(json) {
+						var top = $(key).offset().top;
+						var left = $(key).offset().left;
+						var p = 'top:' + top + 'px;left:' + left + 'px;';
+						var style = 'position:absolute;' + p + 'z-index:200;';
+						if ($.browser.msie) {
+							style += 'filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=60,finishOpacity=100);';
+						} else {
+							style += 'opacity: 0.6;';
+						}
+						$(twitterToolsObj.showT).attr('style', style)
+								.height('50px').width('60px').html(json['str'])
+								.show('slow');
+						var c = window.setTimeout(function() {
+									twitterToolsObj.setNum(key, tid, ty,
+											json['num'], json['type'], 0, page,
+											gid, "");
+								}, 1000);
+					});
+		} else {
+			try {
+				if (ty == 29) {
+					var txt = ' //@' + twitterObj.getNickname1(tid) + ' ：'
+							+ twitterObj.getContent1(tid);
+					ty = 28;
+				} else if (ty == 30) {
+					var txt = ' //@' + twitterObj.getNickname(tid) + ' ：'
+							+ twitterObj.getContent(tid);
+					ty = 28;
+				} else {
+					var tmp_name = twitterObj.getNickname(tid);
+					if (tmp_name != '') {
+						var txt = '[小红心]';
+					} else {
+						var txt = '[小红心]';
+						twitterObj.attrIndex = 1;
+					}
+				}
+				alertDiv.author = "from_me_tt";
+				alertDiv.stid = tid;
+				alertDiv.partuid = '';
+				alertDiv.auid = "from_me_tt";
+				alertDiv.type = 10000;
+			} catch (err) {
+				var mesg = 'mesg:' + err.message + '.';
+				mesg += "\n File:" + err.fileName + ".";
+				mesg += "\n Line:" + err.lineNumber + ".";
+				mesg += "\n Stack:" + err.stack + ".";
+				mesg += "\n Name:" + err.name + ".";
+			}
+			twitterToolsObj.showT = '#show_' + ty + '_' + tid;
+			$.getJSON(twitterToolsObj.likeUrl, {
+						tvd : tid,
+						tvy : ty,
+						gid : gid
+					}, function(json) {
+						var c = window.setTimeout(function() {
+							twitterToolsObj.setNum(key, tid, ty, json['num'],
+									json['type'], json['a_id'], page, gid, txt);
+						}, 100);
+					});
+		}
+	},
+	addLikeComment : function(tid, uid) {
+		twitterToolsObj.isAddComment = true;
+		show_alert('submit_apply_innnertest_like', 'confirm_bg_box');
+		var textId = "#submit_apply_innnertest_like_txt";
+		var txt = '';
+		$(textId).val(txt).focus();
+		setCursor($(textId).get(0), 0, 0);
+		alertDiv.author = uid;
+		alertDiv.stid = tid;
+		alertDiv.type = 3;
+		alertDiv.auid = uid;
+	},
+	moveLikeIt : function(tid, box, nlclass, lclass) {
+		var callback = function(json) {
+			var $likeId = $('.l' + box);
+			var likeArray = new Array();
+			if ($likeId.length > 0) {
+				likeArray.push($likeId);
+			} else {
+				$likeId = $('#l' + box);
+				if ($likeId.length > 0)
+					likeArray.push($likeId);
+			}
+			$likeId = $('#l' + box + 'l');
+			if ($likeId.length > 0) {
+				likeArray.push($likeId);
+			}
+			for (var i = 0; i < likeArray.length; i++) {
+				likeArray[i].removeClass(lclass).addClass(nlclass);
+				var $nums = likeArray[i].find('.nums');
+				var likenum = $nums.html().trim();
+				if (likenum == '') {
+					likenum = 0;
+				} else {
+					likenum = parseInt(likenum);
+				}
+				likenum -= 1;
+				if (likenum == 0) {
+					$nums.html('');
+				} else {
+					$nums.html(likenum);
+				}
+			}
+			$(".pop_face").remove();
+			$(".pop_heart").remove();
+			$(".pop_heartd").remove();
+			twitterToolsObj.likeInProcess = false;
+		};
+		$.getJSON(twitterToolsObj.likeUrl, {
+					tvd : tid,
+					tvy : 1
+				}, callback);
+	},
+	isAddComment : false,
+	likeInProcess : false,
+	bookLikeIt : function(tid, gid, uid, box, nlclass, lclass, $this) {
+		if (twitterToolsObj.likeInProcess && uid > 0) {
+			return false;
+		}
+		twitterToolsObj.likeInProcess = true;
+		twitterToolsObj.isAddComment = false;
+		if (current_user_id == 0 || current_user_id == '') {
+			twitterToolsObj.likeInProcess = false;
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.is_actived == 2) {
+			location.href = server_url + 'users/activate_message';
+			return false;
+		}
+		var callback = function(json) {
+		};
+		if ($this.attr('class').indexOf('notlikeit') >= 0
+				|| $this.attr('class').indexOf('notlike_it') >= 0
+				|| $this.attr('class').indexOf('notloveit') >= 0) {
+			var this_father = $this.closest('.pop_comm');
+			if (!this_father.html()) {
+				this_father = $this.closest('.comm');
+			}
+			if (jQuery.browser.msie) {
+				this_father
+						.html('<div class="pop_face"></div><a href="javascript:void(0)" '
+								+ 'onclick="twitterToolsObj.addLikeComment('
+								+ tid
+								+ ','
+								+ uid
+								+ ');" class="pop_heart c ured cursor">'
+								+ '<em class="ured left f12 l22 cursor" >给个评论吧~</em><em class="pop_qin left"></em></a>'
+								+ this_father.html());
+			} else {
+				this_father
+						.html('<div class="pop_face"></div><div class="pop_heart c ured">'
+								+ '<a class="left f12" href="javascript:void(0)" onclick="twitterToolsObj.addLikeComment('
+								+ tid
+								+ ','
+								+ uid
+								+ ');">'
+								+ '给个评论吧~</a><em class="pop_qin left"></em></div>'
+								+ this_father.html());
+			}
+			var pop_face = this_father.find(".pop_face");
+			var pop_heart = this_father.find(".pop_heart");
+			var position = this_father.position();
+			pop_face.css({
+						'position' : 'absolute',
+						'top' : position.top - pop_face.height() * 0.8 + 'px',
+						'left' : position.left + 'px',
+						"z-index" : "9999"
+					});
+			pop_heart.css({
+						'position' : 'absolute',
+						'top' : position.top - pop_face.height() * 1.5
+								- pop_heart.height() + 'px',
+						'left' : position.left + pop_face.width() / 4 + 'px',
+						"z-index" : "9999"
+					});
+			pop_face.fadeIn(200, function() {
+						if (jQuery.browser.msie)
+							pop_face.get(0).style.removeAttribute('filter');
+						pop_heart.fadeIn(function() {
+									if (jQuery.browser.msie)
+										pop_heart.get(0).style
+												.removeAttribute('filter');
+								});
+					});
+			var dpTime = setTimeout(function() {
+						pop_face.remove();
+						pop_heart.remove();
+						twitterToolsObj.likeInProcess = false;
+					}, 3000);
+			pop_heart.unbind('mouseenter').unbind('mouseleave').bind(
+					'mouseenter', function(dpTime) {
+						clearTimeout(dpTime);
+					}).bind('mouseleave', function(pop_face, pop_heart) {
+						$(this).remove();
+						$(this).siblings('.pop_face').remove();
+						twitterToolsObj.likeInProcess = false;
+					});
+			$.getJSON(twitterToolsObj.likeUrl, {
+						tvd : tid,
+						tvy : 1
+					}, callback);
+			var $likeId = $('.l' + box);
+			var likeArray = new Array();
+			if ($likeId.length > 0) {
+				likeArray.push($likeId);
+			} else {
+				$likeId = $('#l' + box);
+				if ($likeId.length > 0)
+					likeArray.push($likeId);
+			}
+			$likeId = $('#l' + box + 'l');
+			if ($likeId.length > 0) {
+				likeArray.push($likeId);
+			}
+			for (var i = 0; i < likeArray.length; i++) {
+				likeArray[i].removeClass(nlclass).addClass(lclass);
+				var $nums = likeArray[i].find('.nums');
+				var likenum = $nums.html().trim();
+				if (likenum == '') {
+					likenum = 0;
+				} else {
+					likenum = parseInt(likenum);
+				}
+				likenum += 1;
+				$nums.html(likenum);
+			}
+			setTimeout(function() {
+						alertDiv.author = uid;
+						alertDiv.stid = tid;
+						alertDiv.type = 3;
+						alertDiv.auid = uid;
+						if (twitterToolsObj.isAddComment == false)
+							twitterToolsObj.sentForward(tid);
+					}, 5000);
+		} else {
+			var this_father = $this.closest('.comm');
+			if (!this_father.html()) {
+				this_father = $this.closest('.pop_comm');
+			}
+			if (jQuery.browser.msie) {
+				this_father
+						.html('<div class="pop_face"></div><a href="javascript:void(0)" onclick="twitterToolsObj.moveLikeIt('
+								+ tid
+								+ ','
+								+ box
+								+ ',\''
+								+ nlclass
+								+ '\',\''
+								+ lclass
+								+ '\');" class="pop_heartd c cursor"><em class="pop_qin pop_qind left"></em><em class="red pop_liked f12">喜欢过了</em></br><em class="pop_det left f12 cursor" >删除</em></a>'
+								+ this_father.html());
+			} else {
+				this_father
+						.html('<div class="pop_face"></div><div class="pop_heartd c"><em class="pop_qin pop_qind left"></em><em class="red pop_liked f12">喜欢过了</em></br><a class="pop_det left f12" href="javascript:void(0)" onclick="twitterToolsObj.moveLikeIt('
+								+ tid
+								+ ','
+								+ box
+								+ ',\''
+								+ nlclass
+								+ '\',\''
+								+ lclass
+								+ '\');">删除</a></div>'
+								+ this_father.html());
+			}
+			var $pop_face = this_father.find('.pop_face');
+			var $pop_heartd = this_father.find('.pop_heartd');
+			var position = this_father.position();
+			$pop_face.css({
+						'position' : 'absolute',
+						'top' : position.top - $pop_face.height() * 0.8 + 'px',
+						'left' : position.left + 'px'
+					});
+			$pop_heartd.css({
+						'position' : 'absolute',
+						'top' : position.top - $pop_face.height() * 1.5
+								- $pop_heartd.height() + 'px',
+						'left' : position.left + $pop_face.width() / 4 + 'px'
+					});
+			$pop_face.fadeIn(200, function() {
+						if (jQuery.browser.msie)
+							$pop_face.get(0).style.removeAttribute('filter');
+						$pop_heartd.fadeIn(function() {
+									if (jQuery.browser.msie)
+										$pop_heartd.get(0).style
+												.removeAttribute('filter');
+								});
+					});
+			setTimeout(function() {
+						$pop_face.remove();
+						$pop_heartd.remove();
+						twitterToolsObj.likeInProcess = false;
+					}, 2000);
+		}
+	},
+	likePopup : function(cur) {
+		$('#like-popup').remove();
+		var position = cur.offset();
+		cur
+				.parents('.goods_con')
+				.prepend('<div id="like-popup" class="pop_w"><div class="remind"><a class="close cursor r" onclick="javascript:$(\'#like-popup\').remove();"></a>马上<a class="red" href="javascript:void(0);" onclick="twitterToolsObj.bookLikeIt(0, 0, 0, 0);return false;">登录</a>或<a class="red" href="'
+						+ server_url
+						+ 'users/register/aa74158f1933b65e23e61bf99d8157f5">注册</a></div><div class="remind">让美丽说永远记住你的喜好</div></div>');
+		$('#like-popup').css({
+			'position' : 'absolute',
+			'top' : position.top - $('#like-popup').height() - cur.height()
+					/ 1.5 + 'px',
+			'left' : position.left - cur.width() / 1.5 + 'px'
+		});
+	},
+	setNum : function(key, tid, ty, num, cy, a_id, page, gid, txt) {
+		$('#show_' + tid).hide('slow');
+		if (num > 0) {
+			var strNum = '(' + num + ') ';
+		} else {
+			var strNum = ' ';
+		}
+		var textId = "";
+		if (ty == 1) {
+			textId = "submit_apply_innnertest_like_txt";
+		}
+		if (a_id == current_user_id && tid <= GOODS_T_DEPART && !txt) {
+			var txt = '  //@' + twitterObj.getNickname(tid) + ' ：'
+					+ twitterObj.getContent(tid);
+		}
+		if (tid >= GOODS_T_DEPART) {
+			var txt = '这个宝贝不错，推荐给大家！';
+		}
+		if (ty == 4) {
+			var str = '支持' + strNum;
+			$(key).html(str).attr(
+					'onClick',
+					'twitterToolsObj.likeIt(' + tid + ',' + ty + ',' + '"",'
+							+ '""' + ');');
+			this.changeFace(tid, ty, "", 0);
+			this.changeTxt(tid, num);
+			var icons = '#z_icons_' + tid;
+			if (cy == 2) {
+				var file = 'zh.gif';
+			} else {
+				var file = 'zh1.gif';
+			}
+			var t = $(icons).attr('src');
+			var h = $(icons).html();
+			$(icons).attr('src', '/css/icons/' + file);
+		} else {
+			$("#" + textId).val(txt).focus();
+			if (ty == 1) {
+				if (twitterObj.attrIndex == 1) {
+					if (cy == 2) {
+						$('.st' + tid + ' .click_wanttobuy')
+								.html('<img src="http://www.meilishuo.com/css/images/twitter_tools/I_loveit.gif" style="position: relative; top: 1px; right: 2px;"/>我喜欢'
+										+ strNum);
+						show_alert('submit_apply_innnertest_like',
+								'confirm_bg_box');
+					} else {
+						$('.st' + tid + ' .click_wanttobuy')
+								.html('<img src="http://www.meilishuo.com/css/images/twitter_tools/I_like.gif" style="position: relative; top: 1px; right: 2px;"/>我喜欢'
+										+ strNum);
+						show_alert('submit_apply_innnertest_like_del',
+								'confirm_bg_box');
+					}
+				} else {
+					if (cy == 2) {
+						$('.st' + tid + ' .click_wanttobuy')
+								.html('<span><img src="http://www.meilishuo.com/css/images/twitter_tools/I_loveit.gif"/></span><span style="margin-left:4px;">我喜欢'
+										+ strNum + '</span>');
+						show_alert('submit_apply_innnertest_like',
+								'confirm_bg_box');
+					} else {
+						$('.st' + tid + ' .click_wanttobuy')
+								.html('<span><img src="http://www.meilishuo.com/css/images/twitter_tools/I_like.gif"/></span><span style="margin-left:4px;">我喜欢'
+										+ strNum + '</span>');
+						show_alert('submit_apply_innnertest_like_del',
+								'confirm_bg_box');
+					}
+				}
+			}
+		}
+	},
+	changeFace : function(tid, ty, page, gid) {
+		if (ty == 4) {
+			twitterToolsObj.faceT = '#vote_face_' + tid;
+		} else {
+			twitterToolsObj.faceT = '#t' + tid + ' .interest_list';
+		}
+		$.get(twitterToolsObj.userFaceUrl, {
+					tvd : tid,
+					type : ty,
+					'page' : page,
+					gid : gid
+				}, function(back) {
+					if (back.length > 0) {
+						$(twitterToolsObj.faceT).show().html(back);
+					} else {
+						$(twitterToolsObj.faceT).hide();
+					}
+				});
+	},
+	changeTxt_like : function(tid, num) {
+		var vote_like = '#vote_like' + tid;
+		$get(server_url + 'askPage/ajax_outTlike/', {
+					tvd : tid
+				}, function(back) {
+					$(vote_like).html(back);
+				});
+	},
+	changeTxt : function(tid, num) {
+		twitterToolsObj.faceC = '#txt_' + tid;
+		if (num > 0) {
+			var StringTxt = "他们支持这个回答";
+			$.get(twitterToolsObj.userTxtUrl, {
+						tvd : StringTxt
+					}, function(back) {
+						if (back.length > 0) {
+							$(twitterToolsObj.faceC).show().html(back);
+						} else {
+							$(twitterToolsObj.faceC).hide();
+						}
+					});
+		} else {
+			var StringTxt = "";
+			$.get(twitterToolsObj.userTxtUrl, {
+						tvd : StringTxt
+					}, function(back) {
+						if (back.length > 0) {
+							$(twitterToolsObj.faceC).show().html(back);
+						} else {
+							$(twitterToolsObj.faceC).hide();
+						}
+					});
+		}
+	},
+	showEditType : function(tid, sender, tagsStr, picType) {
+		sender = $(sender);
+		var goodsTag = sender.closest('.goodsTag');
+		var editPanel = goodsTag.find('.edit_panel');
+		if (editPanel.length == 0) {
+			editPanel = $("<div class='edit_panel'>"
+					+ "<div class='arrow'></div>"
+					+ "<span class='title'>请选择要修改的图片类别：</span>"
+					+ "<span class='twitter_pic_type' val='1'>我的装扮</span><span class='twitter_pic_type' val='2'>汇报宝贝</span><span class='twitter_pic_type' val='3'>街拍</span><span class='twitter_pic_type' val='0'>其他</span>"
+					+ "<span class='title'>图片关键词：</span>"
+					+ "<input type='text' class='keywords' maxlength='50' /><input type='button' class='edit_btn' />"
+					+ "</div>").hide();
+			initPicTypeCheckbox(editPanel);
+			var picTypeObj = editPanel.find('.twitter_pic_type[val="' + picType
+					+ '"]');
+			if (picTypeObj.length > 0) {
+				picTypeObj.addClass('twitter_pic_type_checked');
+			}
+			var marginLeft = sender.position().left + 15;
+			if (marginLeft > 280) {
+				var eMarginLeft = marginLeft - 305 + 30;
+				editPanel.css('margin-left', eMarginLeft);
+				marginLeft = 280;
+			}
+			editPanel.find('.arrow').css('margin-left', marginLeft);
+			editPanel.find('.keywords').val(tagsStr);
+			editPanel.find('.edit_btn').click(function() {
+						twitterToolsObj.editTypeClick(tid, editPanel)
+					});
+			goodsTag.append(editPanel);
+		}
+		if (editPanel.css('display') == 'none') {
+			editPanel.show();
+		} else {
+			editPanel.hide();
+		}
+	},
+	editTypeClick : function(tid, editPanel) {
+		var picTypeObj = editPanel.find('.twitter_pic_type_checked');
+		if (picTypeObj.length != 1) {
+			alert('请选择一个分类');
+			return false;
+		}
+		var picType = picTypeObj.attr('val');
+		var keywords = editPanel.find('.keywords').val();
+		editPanel.closest('.goodsTag').load(this.updatePicTypeUrl, {
+					tid : tid,
+					ptype : picType,
+					tag : keywords
+				});
+		editPanel.remove();
+	},
+	shareToWeiboPoster : function(tid, content, src) {
+		var reply = '[爱你]我刚在@美丽说 发现了【' + content
+				+ '】你们感觉怎么样！链接是>> http://meilishuo.com/p/' + tid
+				+ '?frm=shareweibo';
+		var imgsrc = src;
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var f = 'http://v.t.sina.com.cn/share/share.php?', u = '', p = [
+					'url=', e(u), '&title=', e(reply),
+					'&ralateUid=1718455577&appkey=463778370'].join('');
+			if (imgsrc !== false) {
+				p += '&pic=' + imgsrc;
+			}
+			function a() {
+				if (!window
+						.open(
+								[f, p].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	shareToWeibo : function(tid, gid) {
+		$('body')
+				.append('<img width="0" height="0" src="/share/shareweibo_btn" />');
+		var reply = this.getWeiboString(tid, gid);
+		var imgsrc = twitterObj.getImageSrc(tid);
+		var url = gid > 0
+				? 'http://wap.meilishuo.com/group/' + gid
+				: 'http://wap.meilishuo.com/p/' + tid;
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var f = 'http://v.t.sina.com.cn/share/share.php?', u = '', p = [
+					'url=' + e(url + '?frm=huiliu_shareweibo'), e(u),
+					'&title=', e(reply),
+					'&ralateUid=1718455577&appkey=463778370'].join('');
+			if (imgsrc !== false) {
+				p += '&pic=' + e(imgsrc);
+			}
+			function a() {
+				if (!window
+						.open(
+								[f, p].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	shareToRenren : function(tid, group_id) {
+		var reply = this.getWeiboString(tid, group_id);
+		var group_name = $(".to_group_name").val();
+		var twittertitle = group_name
+				? ">>分享自美丽说杂志《" + group_name + "》+加关注"
+				: '';
+		$('body')
+				.append('<img width="0" height="0" src="/share/sharerenren_btn" />');
+		if (tid == 0) {
+			var url = twitterToolsObj.url;
+		} else {
+			var imgsrc = twitterObj.getImageSrc(tid);
+			var url = 'http://wap.meilishuo.com/share/' + tid
+					+ '?frm=huiliu_sharerenren';
+		}
+		javascript : void((function(s, d, e) {
+			var f = 'http://www.connect.renren.com/sharer.do?', p = ['url=',
+					e(url), '&title=', e(twittertitle), '&content=', e(reply)]
+					.join('');
+			if (imgsrc !== false) {
+				p += '&pic=' + e(imgsrc);
+			}
+			var to_url = [f, p].join('');
+			function a() {
+				if (!window
+						.open(
+								to_url,
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	shareToWangyi : function(tid) {
+		var reply = '[心][心][心]我觉得这件很好看！大家说我要不要买呢？：'
+				+ '- http://meilishuo.com/p/' + tid + '?frm=share&personuid='
+				+ current_user_id;
+		var imgsrc = twitterObj.getImageSrc(tid);
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var p = [], ustr = [];
+			p[0] = 'link=http://www.meilishuo.com/';
+			p[1] = 'source=' + encodeURIComponent('美丽说');
+			p[2] = 'info=' + reply;
+			p[3] = 'images=' + imgsrc;
+			p[4] = 'togImg=true';
+			var f = 'http://t.163.com/article/user/checkLogin.do?';
+			f += p.join("&");
+			function a() {
+				if (!window
+						.open(
+								[f, p].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	shareToQQ : function(tid, group_id) {
+		var reply = this.getWeiboString(tid, group_id);
+		var imgsrc = twitterObj.getImageSrc(tid);
+		$('body')
+				.append('<img width="0" height="0" src="/share/sharetq_btn" />');
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var f = 'http://v.t.qq.com/share/share.php?', u = 'http://wap.meilishuo.com/p/'
+					+ tid + '?frm=huiliu_sharetqq', p = ['url=', e(u),
+					'&title=', e(reply),
+					'&appkey=95fd1cb5bf304d259fdaec43297d8b33'].join('');
+			if (imgsrc !== false) {
+				p += '&pic=' + imgsrc;
+			}
+			function a() {
+				if (!window
+						.open(
+								[f, p].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	getWeiboString : function(tid, group_id) {
+		var goods_title = ($('.goods_title').length > 1) ? $('#t' + tid)
+				.find('.goods_title').text().trim() : $(".goods_title").text()
+				.trim();
+		if ($('.goods_title').length == 0 && $('.quote_goods_title').length > 0)
+			goods_title = $('#t' + tid).find('.quote_goods_title').text()
+					.trim();
+		var content = twitterObj.getContent2(tid).trim();
+		var goods_id = $(".goods_id").val();
+		var group_name = $(".to_group_name").val();
+		if (typeof group_name == 'undefined') {
+			group_name = $(".from_group_name").val();
+			if (typeof group_name != 'undefined')
+				group_name = group_name.trim();
+			group_id = $(".from_group_id").val();
+		} else {
+			group_name = group_name.trim();
+		}
+		if (goods_id == 0) {
+			if (content == '')
+				content = '分享一张美图';
+			if (typeof group_id == 'undefined'
+					|| typeof group_name == 'undefined') {
+				var reply = "【美图】" + content;
+			} else if (group_id > 0) {
+				var reply = "【美图】" + content + "—来自杂志 #" + group_name + "#>>";
+			} else {
+				var reply = "【美图】" + content;
+			}
+		} else if (group_id > 0) {
+			var reply = '推荐【' + goods_title + '】－来自杂志 #' + group_name + '#>>';
+		} else {
+			goods_title = goods_title ? '【' + goods_title + '】' : '';
+			var reply = '推荐' + goods_title + '－来自 >>';
+		}
+		return reply;
+	},
+	shareToQzone : function(tid, group_id) {
+		var reply = this.getWeiboString(tid, group_id);
+		var group_name = $(".to_group_name").val();
+		var twittertitle = group_name
+				? ">>分享自美丽说杂志《" + group_name + "》+加关注"
+				: ' ';
+		var url = 'http://wap.meilishuo.com/p/' + tid
+				+ '?frm=huiliu_shareqzone';
+		reply += url;
+		var imgsrc = twitterObj.getImageSrc(tid);
+		$('body')
+				.append('<img width="0" height="0" src="/share/shareqzone_btn" />');
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var f = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
+			var s = {
+				url : url,
+				desc : reply,
+				summary : '美丽说杂志是爱美丽们的时尚聚集地，无论你是哪种女孩儿，无论你有什么小癖好，在美丽说杂志，你都能正确归队。和你的喜好尽情的拥抱吧，和姐妹们痛快的分享吧~',
+				title : twittertitle,
+				site : '美丽说',
+				pics : imgsrc
+			};
+			var p = [];
+			for (var i in s) {
+				p.push(i + '=' + e(s[i] || ''));
+			}
+			function a() {
+				if (!window
+						.open(
+								[f, p.join('&')].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p.join('&')].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+	},
+	showSharePanel : function(tid, sender) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+		} else {
+			var p = $('#share_with_friends' + tid);
+			var offset = $(sender).offset();
+			if (p.length > 0) {
+				p.css({
+							'left' : offset.left - 10,
+							'top' : offset.top + 13
+						}).show();
+				p.hover(function() {
+							p.show();
+						}, function() {
+							p.hide();
+						})
+			} else {
+				p.appendTo('body').css({
+							'left' : offset.left - 10,
+							'top' : offset.top + 13
+						}).show();
+				p.hover(function() {
+							p.show();
+						}, function() {
+							p.hide();
+						})
+			}
+		}
+	},
+	shareWeibo : function(tid, uid) {
+		if (uid == current_user_id) {
+			reply = '见证我的美丽时刻，怎能没有你们！！我参加了美丽说竞选街拍女王比赛，这是我的参赛街拍，去美丽说点击“喜欢”投我一票吧! http://www.meilishuo.com/share/'
+					+ tid + '用新浪微博可以直接登录哦！哪怕你帮忙转发一条微博，也是对我莫大的鼓励和支持！！';
+		} else {
+			reply = '见证她的美丽时刻，怎能没有你们！！我的朋友参加了美丽说竞选街拍女王比赛，这是她的参赛街拍，去美丽说点击“喜欢”投她一票吧!http://www.meilishuo.com/share/'
+					+ tid + '用新浪微博可以直接登录哦！哪怕你帮忙转发一条微博，也是对我莫大的鼓励和支持！！';
+		}
+		var imgsrc = twitterObj.getImageSrc(tid);
+		javascript : void((function(s, d, e) {
+			try {
+			} catch (e) {
+			}
+			var f = 'http://v.t.sina.com.cn/share/share.php?', u = '', p = [
+					'url=', e(u), '&title=', e(reply), '&appkey=463778370']
+					.join('');
+			if (imgsrc !== false) {
+				p += '&pic=' + imgsrc;
+			}
+			function a() {
+				if (!window
+						.open(
+								[f, p].join(''),
+								'mb',
+								[
+										'toolbar=0,status=0,resizable=1,width=620,height=450,left=',
+										(s.width - 620) / 2, ',top=',
+										(s.height - 450) / 2].join(''))) {
+					u.href = [f, p].join('');
+				}
+			};
+			if (/Firefox/.test(navigator.userAgent)) {
+				setTimeout(a, 0);
+			} else {
+				a();
+			}
+		})(screen, document, encodeURIComponent));
+		$.get(server_url + 'share/ajax_shareToWeibo/' + tid);
+	},
+	hideSharePanel : function(tid) {
+		var p = $('#share_with_friends' + tid);
+		p.hide();
+	}
+};
+$(function() {
+			$('.ex_mutualfollow').mouseover(function() {
+						$(this).text('取消关注');
+					}).mouseout(function() {
+						$(this).text('互相关注');
+					});
+			$('span.new_notfollow').mouseover(function() {
+						$(this).text('取消关注');
+					}).mouseout(function() {
+						$(this).text('已关注');
+					});
+		});
+var friendsObj = {
+	addUrl : server_url + 'twitter/ajax_addFollower',
+	moveUrl : server_url + 'twitter/ajax_moveFollower',
+	showUrl : server_url + 'twitter/ajax_showFollower',
+	addRecommUrl : server_url + 'twitter/ajax_addRecommFollower',
+	recommenderUrl : server_url + 'sideBar/ajax_getRecommender',
+	page : '',
+	isNew : 0,
+	getFriendList : function() {
+		$("#sidebar").load(friendsObj.showUrl);
+	},
+	addFsFollower : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$.get(friendsObj.addUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+					$('#f' + uid + ' .findfs-followbutton')
+							.removeClass('findfs-followbutton')
+							.addClass('findfs-topic-follower')
+							.removeAttr('onclick')
+							.unbind('click')
+							.html('已关注，<a href="javascript:;" onclick="return friendsObj.removeFsFollower('
+									+ uid + ');">取消</a>');
+				});
+	},
+	removeFsFollower : function(uid) {
+		$.get(friendsObj.moveUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+					$('#f' + uid + ' .findfs-topic-follower')
+							.removeClass('findfs-topic-follower')
+							.addClass('findfs-followbutton').html('')
+							.removeAttr('onclick').unbind('click').click(
+									function() {
+										return friendsObj.addFsFollower(uid);
+									});
+				});
+	},
+	addFsFollower1 : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$.get(friendsObj.addUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+					$('#f' + uid + ' .findfs-followbutton')
+							.removeClass('findfs-followbutton')
+							.addClass('findfs-topic-follower')
+							.removeAttr('onclick')
+							.unbind('click')
+							.html('已关注，<a href="javascript:;" onclick="return friendsObj.removeFsFollower1('
+									+ uid + ');">取消</a>');
+				});
+	},
+	removeFsFollower1 : function(uid) {
+		$.get(friendsObj.moveUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+					$('#f' + uid + ' .findfs-topic-follower')
+							.removeClass('findfs-topic-follower')
+							.html('')
+							.addClass('findfs-followbutton')
+							.css('background', 'none')
+							.removeAttr('onclick')
+							.unbind('click')
+							.html('<a href="javascript:;" onclick="return friendsObj.addFsFollower1('
+									+ uid + ');">+关注她</a>');
+				});
+	},
+	addFollowerPerson : function(uid, e) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		if (location.href.indexOf('/person/') != -1)
+			recommendPerson();
+		$('#f' + uid + ' .follow span').unbind('click');
+		$('#f' + uid + ' .p-fdesc').hide();
+		if (e == 'wlcgoods' || e == 'bottom') {
+			$('#f' + uid).unbind('click').removeClass('red')
+					.removeClass('i_plus').addClass('gray').html('已关注');
+		}
+		var url = friendsObj.addUrl;
+		if ($('#popwindowfollow' + uid).length > 0) {
+			url = url + "?frm=m_follow";
+		} else if (e == 'bottom') {
+			url = url + "?frm=p_follow";
+		}
+		$.get(url, {
+					fuid : uid
+				});
+		window.setTimeout(function(mesg) {
+					if (!friendsObj.isNew) {
+						$('#f' + uid + ' .follow span').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.removeFromUrNew(uid);
+										}).removeClass('new_follow')
+								.addClass('new_notfollow').html('已关注')
+								.mouseover(function() {
+											$(this).text('取消关注');
+										}).mouseout(function() {
+											$(this).text('已关注');
+										});
+					} else if (e == 'daren') {
+						$('#f' + uid + ' .follow span').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.removeFromUrNew(uid,
+													'daren');
+										}).removeClass('new_follow')
+								.addClass('new_notfollow').html('已关注')
+								.mouseover(function() {
+											$(this).text('取消关注');
+										}).mouseout(function() {
+											$(this).text('已关注');
+										});
+					} else if (e == 'bottom') {
+						$('.btm-flw .new_follow').attr('onclick', '').bind(
+								'click', function() {
+									friendsObj.removeFromUrNew(uid, 'bottom');
+								}).removeClass('new_follow')
+								.addClass('new_notfollow').html('已关注')
+								.mouseover(function() {
+											$(this).text('取消关注');
+										}).mouseout(function() {
+											$(this).text('已关注');
+										});
+					}
+					if (friendsObj.isNew) {
+						$('#f' + uid + ' .follow span.ex_follow').attr(
+								'onclick', '').bind('click', function() {
+									friendsObj.removeFromUrNew(uid);
+								}).removeClass('ex_follow')
+								.addClass('ex_notfollow').html('已关注')
+								.mouseover(function() {
+											$(this).text('取消关注');
+										}).mouseout(function() {
+											$(this).text('已关注');
+										});
+					}
+					if (e == 'popup') {
+						$('.header_follow .new_follow').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.removeFromUrNew(uid,
+													'popup');
+										}).removeClass('new_follow')
+								.addClass('new_notfollow').html('已关注');
+						return false;
+					}
+					if (e != 'bottom') {
+						$('.btm-flw').hide();
+					}
+				}, 1000);
+		return false;
+	},
+	removeFromUrNew : function(uid, e) {
+		if ($('.person_r').length > 0)
+			$('.person_r').remove();
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$('#f' + uid + ' .follow span').unbind('click');
+		$.ajax({
+					type : "GET",
+					url : friendsObj.moveUrl,
+					data : {
+						fuid : uid
+					}
+				});
+		window.setTimeout(function(mesg) {
+					if (!friendsObj.isNew) {
+						$('#f' + uid + ' .follow span').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.addFollowerPerson(uid,
+													$(this));
+										}).removeClass('new_notfollow')
+								.addClass('new_follow').html('＋加关注')
+								.unbind('mouseover').unbind('mouseout');
+					} else if (e == 'daren') {
+						$('#f' + uid + ' .follow span').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.addFollowerPerson(uid,
+													'daren');
+										}).removeClass('new_notfollow')
+								.addClass('new_follow').html('＋加关注')
+								.unbind('mouseover').unbind('mouseout');
+					} else if (e == 'bottom') {
+						$('.btm-flw .new_notfollow')
+								.attr('onclick', '')
+								.bind('click', function() {
+									friendsObj.addFollowerPerson(uid, 'bottom');
+								}).removeClass('new_notfollow')
+								.addClass('new_follow').html('＋加关注')
+								.unbind('mouseover').unbind('mouseout');
+					}
+					if (e == 'popup') {
+						$('.header_follow .new_notfollow').attr('onclick', '')
+								.bind('click', function() {
+											friendsObj.addFollowerPerson(uid,
+													'popup');
+										}).removeClass('new_notfollow')
+								.addClass('new_follow').html('＋加关注')
+								.unbind('mouseover').unbind('mouseout');
+						return false;
+					}
+					if (friendsObj.isNew) {
+						$('#f' + uid + ' .follow span.ex_notfollow').attr(
+								'onclick', '').bind('click', function() {
+									friendsObj.addFollowerPerson(uid, $(this));
+								}).removeClass('ex_notfollow')
+								.addClass('ex_follow').html('＋加关注')
+								.unbind('mouseover').unbind('mouseout');
+					}
+				}, 1000);
+		return false;
+	},
+	removeFromUr : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$.ajax({
+					async : false,
+					type : "GET",
+					url : friendsObj.moveUrl,
+					data : {
+						fuid : uid
+					},
+					success : function(mesg) {
+						window.location.reload();
+					}
+				});
+	},
+	addFromUr : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$.get(friendsObj.addUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+					friendsObj.getFriendList();
+					if ($('#self_user_follower_b').html() != null) {
+						$('#self_user_follower_b')
+								.html('已关注<a href="javascript:;" onclick="return friendsObj.removeFromUr('
+										+ uid + ');">取消</a>');
+					}
+					if ($('#doyen_follow_status_' + uid).html() != null
+							&& $('#doyen_unfollow_status_' + uid).html() != null) {
+						$('#doyen_follow_status_' + uid).attr("class", "left");
+						$('#doyen_follow_status_' + uid).hide();
+						$('#doyen_unfollow_status_' + uid).show();
+					}
+				});
+	},
+	daka : function() {
+		$.get(server_url + '/home/ajax_daka', {}, function() {
+					$('#daka').removeClass('daka').unbind('click')
+							.removeAttr('onclick').addClass('dakafinish')
+							.html('&nbsp;&nbsp;&nbsp;已签到');
+					twitterListObj.getTwitterList(1);
+				});
+	},
+	addFollower : function(uid, type) {
+		this.addFromUr(uid);
+		var fun = 'return friendsObj.removeFollower(' + uid + ',"' + type
+				+ '");';
+		var divKey = '#user_action_' + uid;
+		if (type == 'me') {
+			$(divKey).attr('class', 'new_notfollow mt10');
+			$(divKey).removeAttr('onclick').html('已关注');
+			if ($.browser.msie) {
+				$(divKey).attr('onclick', fun);
+			} else {
+				$(divKey).attr('onClick', fun);
+			}
+			if (this.page == 'user_id') {
+				var each = '.each_' + uid;
+				$(each).show();
+			}
+		} else {
+			$(divKey).attr('class', 'new_notfollow mt10');
+			$(divKey).removeAttr('onclick').html('已关注');
+		}
+	},
+	removeFollower : function(uid, type, page) {
+		this.removeFromUr(uid);
+		if (this.page == 'follower_id') {
+			window.location = window.location.href;
+			return false;
+		} else {
+			var divKey = '#user_action_' + uid;
+			$(divKey).attr('class', 'new_follow mt10');
+			$(divKey).html('+加关注');
+			var fun = 'return friendsObj.addFollower(' + uid + ',"' + type
+					+ '");';
+			if ($.browser.msie) {
+				$(divKey).attr('onclick', fun);
+			} else {
+				$(divKey).attr('onClick', fun);
+			}
+			var each = '.each_' + uid;
+			$(each).hide();
+		}
+	},
+	Feedback_add_meiliUr : function(uid) {
+		$.get(friendsObj.addUrl, {
+					fuid : uid
+				}, function(mesg) {
+					friendsObj.getFriendList();
+				});
+		$('#feedback_right_add_friend').hide();
+		$('#feedback_right_have_add_friend').show();
+	},
+	main : function() {
+		$(".follow_user_action_lock").hover(function() {
+					$(this).css('background-color', '#CCCCCC');
+				}, function() {
+					$(this).css('background-color', '')
+				});
+		$(".follow_user_action_fire").hover(function() {
+					$(this).css('background-color', '#CCCCCC');
+				}, function() {
+					$(this).css('background-color', '')
+				});
+	},
+	getRecommenders : function() {
+		$.post(friendsObj.recommenderUrl, function(html) {
+					$('#recommenders_box').html('');
+					$('#recommenders_box').html(html).show();
+				});
+	},
+	isLoginOrNot : function() {
+		showLoginWin();
+		return false;
+	},
+	addFollowPersonUnion : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$('.folo' + uid).click(function() {
+			var styleNumber = $(this).attr('followsty');
+			switch (styleNumber) {
+				case '1' :
+					$(this).find('.new_follow').addClass('new_notfollow')
+							.removeClass('new_follow').html('已关注').attr(
+									"onclick", '').unbind('click').bind(
+									'click', function() {
+										friendsObj.removeFollowPersonUnion(uid);
+									}).mouseover(function() {
+										$(this).text('取消关注');
+									}).mouseout(function() {
+										$(this).text('已关注');
+									});
+					break;
+				case '2' :
+					break;
+				default :
+			};
+		});
+		$.get(friendsObj.addUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+				});
+		return false;
+	},
+	removeFollowPersonUnion : function(uid) {
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		$('.folo' + uid).click(function() {
+			var styleNumber = $(this).attr('followsty');
+			switch (styleNumber) {
+				case '1' :
+					$(this).find('.new_notfollow').addClass('new_follow')
+							.removeClass('new_notfollow').html('＋加关注').attr(
+									"onclick", '').unbind('click').bind(
+									'click', function() {
+										friendsObj.addFollowPersonUnion(uid);
+									}).unbind('mouseover').unbind('mouseout');
+					break;
+				case '2' :
+					break;
+				default :
+			};
+		});
+		$.get(friendsObj.moveUrl, {
+					fuid : uid
+				}, function(mesg) {
+					if (mesg == 1) {
+						showForbiddenWindow();
+						return false;
+					}
+				});
+		return false;
+	}
+};
+var topicObj = {
+	inputTopic : function() {
+		var tempStr = $('#twitter_publish_editor').val();
+		$('#twitter_publish_editor').val(tempStr + " #在此处插入你的话题# ").focus();
+	}
+};
+var topicTools = {
+	addTools : server_url + '/topic/ajax_createCollectMap/',
+	moveTools : server_url + '/topic/ajax_moveCollectMap/',
+	addCollect : function(topicId) {
+		$.get(topicTools.addTools, {
+					collectTid : topicId
+				}, function(back) {
+					$("#twitter_topic_botton").html(back);
+					var st = '<a class="fol" onclick="return topicTools.moreCollect('
+							+ topicId + '); return false;"></a>';
+					$(".sub_title").html(st);
+				});
+	},
+	moreCollect : function(topicId) {
+		$.get(topicTools.moveTools, {
+					collectTid : topicId
+				}, function(back) {
+					$("#twitter_topic_botton").html(back);
+					var st = '<a class="not_fol" onclick="return topicTools.addCollect('
+							+ topicId + '); return false;"></a>';
+					$(".sub_title").html(st);
+				});
+	}
+}
+function changeUserOnlineStatus() {
+	var url = server_url + 'users/ajax_changeOnlineStatus';
+	var retValue = "";
+	var online_status = $("#online_status").val();
+	var data = {
+		'online_status' : online_status
+	};
+	var callback = function(r) {
+		retValue = trim(r);
+		window.location.reload();
+	};
+	$.ajax({
+				async : false,
+				type : "POST",
+				url : url,
+				data : data,
+				success : callback
+			});
+	return retValue;
+}
+function cancleNewGuide() {
+	$("#new_guide_header").attr('style', "display:none;");
+	$("#new_guide").attr('style', "display:none;");
+	$("#new_guide_footer").attr('style', "display:none;");
+}
+function showFirstLetter() {
+	$("#twitter_publish_editor").attr(
+			"value",
+			"#新人报道# Hey，girls，我已经进驻到美丽说了。"
+					+ "以后我会在这里和大家来分享我的时尚心得、美丽经验和购物经历，请大家多多关照哦");
+}
+var item_number = 5;
+$(document).ready(function() {
+	$("#add_voteitem").click(function() {
+		$("#forward_submit_hint").attr("style", "display:none;");
+		if (item_number < 10) {
+			item_number++;
+			var viewpoint_num = "viewpoint_" + item_number;
+			var viewpoint_num_v = "viewpoint_" + item_number + "_v";
+			var viewpoint_title = "观点" + item_number;
+			var viewpoint_content = "";
+			var viewpoint_html = "<tr id=\""
+					+ viewpoint_num
+					+ "\" class=\"viewpoint_tr\"><td class=\"viewpoint_td1\" align=left>"
+					+ viewpoint_title + "</td>"
+					+ "<td class=\"viewpoint_td2\"><input id=\""
+					+ viewpoint_num_v + "\" value=\"" + viewpoint_content
+					+ "\"</input><p class=\"left\">编辑输入投票选项</p></td></tr>";
+			$("#viewpoint").append(viewpoint_html);
+			$("#remove_voteitem").attr("style", "");
+		} else {
+			alert("最多只能发表10种观点哦！");
+		}
+	});
+	$("#remove_voteitem").click(function() {
+				$("#forward_submit_hint").attr("style", "display:none;");
+				var viewpoint_num = "#viewpoint_" + item_number;
+				if (item_number >= 1) {
+					$(viewpoint_num).remove();
+					item_number--;
+					if (item_number == 0) {
+						$("#remove_voteitem").attr("style", "display:none;");
+					}
+				}
+			});
+	$("#fold_items").click(function() {
+		$("#forward_submit_hint").attr("style", "display:none;");
+		var fold_button = $("#fold_button").val();
+		if (fold_button == 1) {
+			$("#viewpoint").attr("style", "display:none;");
+			$("#add_voteitem_butt").attr("style", "display:none;");
+			$("#fold_items")
+					.html("展开<input type=\"hidden\" id=\"fold_button\" value=\"0\" />");
+		} else if (fold_button == 0) {
+			$("#viewpoint").attr("style", "");
+			$("#add_voteitem_butt").attr("style", "");
+			$("#fold_items")
+					.html("取消收起<input type=\"hidden\" id=\"fold_button\" value=\"1\" />");
+		}
+	});
+});
+function submitGoods() {
+	var gTitle = $("#gTitle").val();
+	var gUrl = $("#gUrl").val().replace(/(^\s*)|(\s*$)/g, "");
+	if (gUrl.length == 0) {
+		$("#forward_submit_hint").attr("style", "");
+		$("#forward_submit_hint").html("请输入宝贝地址");
+		$("#forward_submit_hint").show();
+		return false;
+	}
+	var gPicUrl = $("#gPicUrl").val();
+	var gPicID = twitterObj.pictureID;
+	var gNote = $("#gNote").val();
+	var gSouceType = $("#gSouceType").val();
+	var url = server_url + 'goods/ajax_createGoods';
+	var option = Array();
+	var fold_button = $("#fold_button").val();
+	if (fold_button == 1) {
+		for (i = 1; i <= item_number; i++) {
+			if ($("#viewpoint_" + i + "_v").val() != "") {
+				option.push($("#viewpoint_" + i + "_v").val());
+			}
+		}
+	} else {
+		option.push("");
+	}
+	var data = {
+		'gTitle' : gTitle,
+		'gUrl' : gUrl,
+		'gPicUrl' : gPicUrl,
+		'catalog_name' : catalog_name,
+		'gPicID' : gPicID,
+		'gNote' : gNote,
+		'gSouceType' : gSouceType,
+		'option[]' : option
+	};
+	var callback = function(r) {
+		if (r == "1" || r == "0") {
+			$("#forward_submit_hint").attr("style", "");
+			$("#forward_submit_hint").html("已成功转贴给关注你的人！");
+			$("#forward_submit_hint").show(6000, function() {
+						if ($("#showSlipper") == undefined) {
+							window.location.href = server_url + "twitter";
+						} else {
+							setTimeout("$('#showSlipperForm').hide();", 2000);
+							setTimeout("$(''#showSlipper').show();", 2000);
+							meilishuoClipper.stopCliper();
+						}
+					});
+			return true;
+		} else if (r == "-1") {
+			$("#forward_submit_hint").attr("style", "");
+			$("#forward_submit_hint")
+					.html("<font color='red'>你已经提交过该宝贝！</font>");
+			return false;
+		} else {
+			$("#forward_submit_hint").attr("style", "");
+			$("#forward_submit_hint").html("提交失败，请重试");
+			$("#forward_submit_hint").show();
+			return false;
+		}
+	};
+	$.post(url, data, callback);
+}
+$("#gUrl").blur(function() {
+	var gUrl = $("#gUrl").val();
+	if (gUrl.length < 1) {
+		return false;
+	}
+	var url = server_url + 'server/ajax_curlGoods';
+	var data = {
+		'gUrl' : gUrl
+	};
+	$("#publisher_image_loading1").show();
+	$("#twitter_tools_publisher_upImages").hide();
+	var callback = function(r) {
+		if (r != "0") {
+			goodsData = r.split("@_SPLIT_@");
+			$("#gTitle").val(goodsData[0]);
+			$("#publisher_image_loading1").hide();
+			$("#twitter_tools_publisher_upImages").html("<img src=\""
+					+ goodsData[1] + "\" style=\"width:300px;\"></img>"
+					+ " <input type=\"hidden\" id=\"gPicUrl\" value=\""
+					+ goodsData[1] + "\"></input>");
+			$("#twitter_tools_publisher_upImages").show();
+		} else {
+			$("#twitter_tools_publisher_upImages").show();
+			$("#publisher_image_loading1").hide("fast");
+		}
+	};
+	$.post(url, data, callback);
+});
+(function($) {
+	$.jPoll = {
+		defaults : {
+			ajaxOpts : {
+				url : "poll.php"
+			},
+			futID : 2571,
+			groupIDs : [266, 265, 264],
+			locationID : 00,
+			groupViewpoints : ["感觉价格偏贵", "不太好看", "很漂亮"],
+			pollHeading : "选出你宝贵的一票吧",
+			viewPointsNum : [1, 1, 1],
+			pollHint : "投我一票吧",
+			rowClass : "out",
+			errors : true
+		}
+	};
+	$.fn.extend({
+		jPoll : function(config) {
+			config = $.extend({}, $.jPoll.defaults, config);
+			var total = 0;
+			for (var i = 0; i < config.viewPointsNum.length; i++) {
+				total += parseInt(config.viewPointsNum[i]);
+			}
+			var ratecolor = new Array("#FD85DF", "#E2FEA7", "#FB7B99",
+					"#FBE096", "#F7CA98", "#BDE676", "#9EB5F0", "#AEE7F8",
+					"#E6F63B", "#E58652");
+			$("<div>").text("　" + config.pollHeading).appendTo($(this));
+			$("<div>").attr("id", "pollBox" + config.locationID)
+					.addClass("pollBox").appendTo($(this));
+			for (var i = 0; i < config.groupIDs.length; i++) {
+				if (total == 0) {
+					var rate = 0 + "%";
+				} else {
+					var rate = Math.round(parseInt(config.viewPointsNum[i])
+							/ total * 100)
+							+ "%";
+				}
+				var groupid = config.groupIDs[i];
+				var htmlStr = "<div onclick=\"return vote(" + config.futID
+						+ "," + groupid + ",'" + config.ajaxOpts.url + "'"
+						+ "," + config.locationID + ");" + "\" class='out' "
+						+ "id = 'r_" + config.locationID + "_" + i + "'";
+				htmlStr += "onMouseOut=\" this.className='out';\" onMouseOver=\"return changClass( this ,'over' );\">";
+				htmlStr += "<label >" + config.groupViewpoints[i] + "</label>";
+				htmlStr += "<div class='resultBox'><div class='r"
+						+ config.locationID
+						+ "' id='r_"
+						+ config.locationID
+						+ "_"
+						+ i
+						+ "' style='float:left;height:10px;width:"
+						+ Math.round(parseInt(config.viewPointsNum[i]) / total
+								* 200) + "px;display:block; background-color:"
+						+ ratecolor[i] + "'>"
+						+ "</div></div><div class='resultRate'><p>"
+						+ config.viewPointsNum[i] + "(" + rate
+						+ ")</p></div></div>";
+				$("#pollBox" + config.locationID).append(htmlStr);
+			}
+			return this;
+		}
+	});
+})(jQuery);
+function changClass(objStr, className) {
+	$(objStr).attr('class', className);
+}
+function vote(fut_id, option_id, url, lcation_id) {
+	var serverUrl = url;
+	var data = {
+		'option_id' : option_id,
+		'fut_id' : fut_id
+	};
+	var callback = function(r) {
+		if (r == 0) {
+			alert("没成功，再试一次");
+		} else if (r == -1) {
+			alert("投过票了，去看看其它宝贝吧！");
+		} else if (r == -2) {
+			alert("登录了吗，只有登录才能投票啊");
+		} else {
+			showResults(fut_id, eval(r), lcation_id);
+		}
+	};
+	$.post(serverUrl, data, callback);
+}
+var ratecolor = new Array("#FD85DF", "#E2FEA7", "#FB7B99", "#FBE096",
+		"#F7CA98", "#BDE676", "#9EB5F0", "#AEE7F8", "#E6F63B", "#E58652");
+function showResults(fut_id, results, lcation_id) {
+	var total = 0;
+	for (var i = 0; i < results.length; i++) {
+		total += parseInt(results[i].option_num);
+	}
+	$("div#pollContainer" + lcation_id).find("h2")
+			.text("已经有" + total + "人发表观点");
+	$("div#pollBox" + lcation_id).slideUp("slow");
+	$("<div>").attr("id", "results" + lcation_id).addClass("results").css({
+				display : "none"
+			}).appendTo("div#pollContainer" + lcation_id);
+	for (var i = 0; i < results.length; i++) {
+		var rate = Math.round(results[i].option_num / total * 100) + "%";
+		$("<div>").addClass("out").attr("id", "row_" + lcation_id + "_" + i)
+				.appendTo("#results" + lcation_id);
+		$("<label>").text(results[i].option_title).appendTo("#row_"
+				+ lcation_id + "_" + i);
+		$("<div>").addClass("resultBox").appendTo("#row_" + lcation_id + "_"
+				+ i);
+		$("<div>").attr("title", rate).attr("id",
+				"result_" + lcation_id + "_" + i).attr(
+				"style",
+				"float:left;height:10px;width:0px;background-color:"
+						+ ratecolor[i]).addClass("result" + lcation_id).css({
+					display : "none"
+				})
+				.appendTo($("#row_" + lcation_id + "_" + i).children(":last"));
+		$("<div>").addClass("resultRate").appendTo("#row_" + lcation_id + "_"
+				+ i);
+		$("<p>").text(results[i].option_num + "(" + rate + ")")
+				.appendTo($("div#row_" + lcation_id + "_" + i)
+						.children(":last"));
+	}
+	$("div#results" + lcation_id).slideDown("slow", function() {
+		$(".result" + lcation_id).each(function(j) {
+					$(this).animate({
+								width : Math.round(results[j].option_num
+										/ total * 200)
+							}, "slow");
+				});
+	});
+}
+function getOptions(fut_tid) {
+	var serverUrl = "goods/ajax_getOptions";
+	var data = {
+		'fut_tid' : fut_tid
+	};
+	var retValue = '';
+	var callback = function(r) {
+		if (r != 0) {
+			retValue = eval(r);
+		}
+	};
+	$.ajax({
+				async : false,
+				type : "POST",
+				url : serverUrl,
+				data : data,
+				dataType : 'json',
+				success : callback
+			});
+	return retValue;
+}
+var goodsPrompt = {
+	lastID : 0,
+	newGoods : server_url + 'goods/ajax_getNewGoods',
+	interval : null,
+	getNewGoods : function() {
+		if (goodsPrompt.lastID == 0) {
+			return false;
+		}
+		$.get(goodsPrompt.newGoods + '/' + goodsPrompt.lastID, null, function(
+				bakNum) {
+			if (bakNum > 0) {
+				var promtStr = "<a href='javascript:void(0);' onClick='window.location.reload();'>有新宝贝，点击刷新</a>";
+				$('#goods_refesh_new').html(promtStr).show();
+				goodsPrompt.stopInterval();
+			} else {
+				$('#goods_refesh_new').hide();
+			}
+		});
+	},
+	startInterval : function() {
+		goodsPrompt.interval = setInterval(goodsPrompt.getNewGoods, 10000);
+	},
+	stopInterval : function() {
+		if (goodsPrompt.interval != null) {
+			clearInterval(goodsPrompt.interval);
+		}
+	}
+}
+function openiGG() {
+	return true;
+	var isIE = (document.all && window.ActiveXObject) ? true : false;
+	alert(isIE);
+	if (isIE === false) {
+		return false;
+	}
+	try {
+		if (isIE) {
+			igg = new ActiveXObject("Shopping.Untity.1");
+			igg.ShowBar('false');
+		}
+	} catch (e) {
+		alert(e);
+	}
+}
+function setInvite(userId) {
+	var isIE = (document.all && window.ActiveXObject) ? true : false;
+	if (isIE === false) {
+	}
+	var url = server_url + 'invite/ajax_setInvite';
+	var data = {
+		"inviteUserId" : userId
+	};
+	var callback = function(r) {
+		try {
+			if (trim(r) == '0') {
+				alert("邀请失败");
+			} else if (trim(r) == '2') {
+				alert('该用户已经有人邀请了，请稍后再试~~');
+			} else if (trim(r) == '1') {
+				alert('邀请成功');
+				openiGG();
+			} else if (trim(r) == '3') {
+				alert('您邀请的人已经在和您一起逛街了，请不要重复邀请');
+			}
+		} catch (e) {
+			alert(e);
+		}
+	}
+	$.post(url, data, callback);
+	return true;
+}
+function setUnAccept() {
+	var url = server_url + 'invite/ajax_setUnAcceptInvite';
+	var data = {};
+	var callback = function(r) {
+		if (trim(r) == "1") {
+			alert('呵呵，你拒绝了人家，人家好失望阿。');
+		} else {
+			alert('系统故障，请联系管理员');
+		}
+	};
+	$.post(url, data, callback);
+	return true;
+}
+function setAccept() {
+	var url = server_url + 'invite/ajax_setAcceptInvite';
+	var data = {};
+	var callback = function(r) {
+		if (trim(r) == "1") {
+			alert('恭喜你，你可以在逛逛里和别人一起逛街了');
+			openiGG();
+		} else {
+		}
+	};
+	$.post(url, data, callback);
+	return true;
+}
+var checkWindowOut = 0;
+function checkHaveInvite() {
+	var url = server_url + 'invite/ajax_ifHaveInvite';
+	var data = {};
+	var callback = function(r) {
+		try {
+			var cArr = r.split('@_SPLIT_@');
+			var cFlag = cArr[0];
+			if (trim(cFlag) == '1') {
+				if (checkWindowOut == 0) {
+					checkWindowOut = 1;
+					if (!confirm(cArr[1])) {
+						setUnAccept();
+					} else {
+						setAccept();
+					}
+				}
+			}
+			checkWindowOut = 0;
+		} catch (e) {
+		}
+	};
+	$.post(url, data, callback);
+	return true;
+}
+function getUserNickName(userId) {
+	var url = server_url + 'users/ajax_getUserNickname';
+	var data = {
+		"userId" : userId
+	};
+	var nickname = "";
+	var callback = function(r) {
+		try {
+			nickname = trim(r);
+		} catch (e) {
+			alert(e);
+		}
+	}
+	$.ajax({
+				async : false,
+				type : "POST",
+				url : url,
+				data : data,
+				success : callback
+			});
+	return nickname;
+}
+function showSendPmsgBox(sendToNickName) {
+	if (current_user_id == 0 || current_user_id == '') {
+		showLoginWin();
+		return false;
+	}
+	if (sendToNickName == undefined) {
+		sendToNickName = "";
+	}
+	$('#pmsg_text').val('');
+	$('#checkcode_apply').val('');
+	$('.error').html('');
+	var msgWin = $('#popup_div_window');
+	if (msgWin.length > 0) {
+		$('#pmsg_sendto').val(sendToNickName);
+		msgWin.toCenter().show().shadow();
+		var tipBox = $('.send_pmsg_box_msgBox');
+		tipBox.hide();
+		tipBox.html('');
+		changeCheckCode();
+	} else {
+		var url = "/msg/ajax_sendPMsgBox/" + encode(sendToNickName);
+		var data = {};
+		var callback = function(r) {
+			$('body').append(r);
+			$('#popup_div_window').toCenter().show().shadow();
+		}
+		$.get(url, data, callback);
+	}
+	msgWin.die().live("keydown", function(event) {
+				if (event.keyCode == 13) {
+					submitPmsg();
+				}
+			});
+}
+function showDeletePmsgButton(message_id) {
+	var id = message_id;
+	$("#" + id).show();
+}
+function bidnDeletePmsgButton(message_id) {
+	var id = message_id;
+	$("#" + id).hide();
+}
+function Get_delete_dlg(userid) {
+	var url = server_url + 'msg/ajax_Delete_msg_by_uid';
+	var onclick_data = confirm(" 确认删除此对话?");
+	var data = {
+		'userid' : userid
+	};
+	var callback = function(r) {
+		errorMsg = "删除成功";
+		$(".send_pmsg_box_msgBox").html(errorMsg);
+		setTimeout("window.location.reload();", 500);
+	};
+	if (onclick_data)
+		$.post(url, data, callback);
+}
+function Get_delete_msg(message_id) {
+	var url = server_url + 'msg/ajax_Delete_msg_by_mid';
+	var onclick_data = confirm(" 确认删除此私信?");
+	var data = {
+		'message_id' : message_id
+	};
+	var callback = function(r) {
+		errorMsg = "删除成功";
+		$(".send_pmsg_box_msgBox").html(errorMsg);
+		setTimeout("window.location.reload();", 500);
+	};
+	if (onclick_data)
+		$.post(url, data, callback);
+}
+function get_delete_msg_new(message_id) {
+	var url = server_url + 'msg/ajax_Delete_msg_by_mid_new';
+	var onclick_data = confirm(" 确认删除此私信?");
+	var data = {
+		'message_id' : message_id
+	};
+	var callback = function(r) {
+		errorMsg = "删除成功";
+		$(".send_pmsg_box_msgBox").html(errorMsg);
+		setTimeout("window.location.reload();", 500);
+	};
+	if (onclick_data)
+		$.post(url, data, callback);
+}
+function pMsg_clearDefaultStr() {
+	var pmsg_sendto = $('#pmsg_sendto').val();
+	if (pmsg_sendto == '请输入用户的昵称') {
+		$('#pmsg_sendto').val('');
+	}
+}
+function submitPmsg() {
+	var tipBox = $('.send_pmsg_box_msgBox');
+	var pmsg_sendto = $('#pmsg_sendto').val().trim();
+	var pmsg_text = $('#pmsg_text').val().trim();
+	var pmsg_receive_type = 0;
+	var errorMsg = "";
+	var checkcode = $("#checkcode_apply").val().trim();
+	var checkCodeEquals = verifyCheckCode(checkcode);
+	if (checkCodeEquals == "0") {
+		errorMsg = "您输入的验证码不正确！";
+	}
+	if (pmsg_sendto.length == 0 || pmsg_sendto == '请输入用户的昵称') {
+		errorMsg = "没有指定私信发送人";
+	} else if (pmsg_text.length == 0) {
+		errorMsg = "私信内容不能为空";
+	} else if (pmsg_text.length > 200) {
+		errorMsg = "私信内容不能超过200个字";
+	}
+	if (pmsg_sendto.length > 0 && pmsg_sendto != '请输入用户的昵称' && errorMsg != '') {
+		var checkNickNameStatus = checkIfNickExist(pmsg_sendto);
+		if (checkNickNameStatus == 0) {
+			errorMsg = "用户\"" + pmsg_sendto + "\"不存在";
+		}
+	}
+	if (errorMsg != "") {
+		tipBox.html(errorMsg).css("color", "red");
+		tipBox.show();
+		changeCheckCode();
+		return false;
+	} else {
+		tipBox.html('发送中...').css("color", "green");
+		var url = server_url + 'msg/ajax_submitPmsg';
+		var data = {
+			'pmsg_sendto' : pmsg_sendto,
+			'pmsg_text' : pmsg_text,
+			'pmsg_receive_type' : pmsg_receive_type,
+			'checkcode' : checkcode
+		};
+		var callback = function(r) {
+			r = trim(r);
+			switch (r) {
+				case '5' :
+					errorMsg = '用户昵称不存在';
+					break;
+				case '2' :
+					errorMsg = '你只能给美丽客服精灵发送私信';
+					break;
+				case '3' :
+					errorMsg = '不允许发送站外链接!';
+					break;
+				case '6' :
+					errorMsg = '你所发内容包含非法字符';
+					break;
+				case '4' :
+					errorMsg = '只有互相关注的好友才能发送私信！';
+					break;
+				default :
+					errorMsg = '发送私信成功';
+			}
+			tipBox.html(errorMsg);
+			tipBox.css("background", "url('')");
+			tipBox.css("color", "green");
+			tipBox.show();
+			if (errorMsg != '发送私信成功') {
+				tipBox.css("color", "red");
+				changeCheckCode();
+			} else {
+				setTimeout(function() {
+							$('#popup_div_window').hide().shadow({
+										'show' : false
+									});
+						}, 1500);
+				changeCheckCode();
+				document.location.reload();
+			}
+		};
+		$.post(url, data, callback);
+	}
+}
+function hidediv() {
+	$('.submit_apply_innnertest_alert_twitter_top').hide();
+	$('#grey_div').remove();
+}
+function showOriginalPic_ico(id) {
+	var $t = $('#t' + id);
+	if ($t.length == 0) {
+		$t = $('#ask_source_tex');
+	}
+	var $btn = $t.find('.original_pic_ioc');
+	if (twitterListObj.lType == 'twitterPage') {
+		var $pic = $t.find('.code_pic');
+	} else {
+		var $pic = $t.find('.code_pic img');
+	}
+	position = $pic.offset();
+	l = position.left + $pic.width() - $btn.width() - 5;
+	t = position.top + 5;
+	$btn.css({
+				'left' : l + 'px',
+				'top' : t + 'px'
+			}).show();
+}
+function hiddenOriginalPic_ico(id) {
+	var $t = $('#t' + id);
+	if ($t.length == 0) {
+		$t = $('#ask_source_tex');
+	}
+	$t.find('.original_pic_ioc').hide();
+}
+function pic() {
+	var p = document.getElementsByTagName("img");
+	for (var i = 0; i < p.length; i++) {
+		pp = p[i];
+		var pw = pp.width;
+		var ph = pp.height;
+		if (pw > 310 || ph > 310) {
+			if (1 > (pw / ph)) {
+				pp.style.width = "auto";
+				pp.style.height = "310px";
+			}
+			if (1 < (pw / ph)) {
+				pp.style.width = "310px";
+				pp.style.height = "auto";
+			}
+		}
+	}
+}
+function viewOriginal(href) {
+	artDialog({
+		title : '图片查看',
+		content : "<div style='width:300px;height:300px;background:url(../css/images/indicator_medium.gif) no-repeat 0 0;'></div>"
+	});
+	var img = new Image();
+	img.onload = function() {
+		$('.ui_dialog_wrap').hide();
+		artDialog({
+					title : '图片查看',
+					fixed : false,
+					content : "<a href='" + href
+							+ "' target='_blank'><img src='" + href
+							+ "' /></a>"
+				});
+	};
+	img.src = href;
+}
+var homeSideBar = {
+	nextDaren : function() {
+		$.get(server_url + 'sideBar/ajax_getRecommendUser?frm=homeNext',
+				function(daren) {
+					var daren = eval("(" + daren + ")");
+					if (daren.follow) {
+						$('#home-daren .dr_b')
+								.attr('id', 'f' + daren.user_id)
+								.find('.follow')
+								.html('<span class="cursor new_notfollow">取消关注</span>')
+								.find('span').unbind('click').bind('click',
+										function() {
+											friendsObj.removeFromUrNew(
+													daren.user_id, 'daren');
+										});
+					} else {
+						$('#home-daren .dr_b')
+								.attr('id', 'f' + daren.user_id)
+								.find('.follow')
+								.html('<span class="new_follow cursor">关注她</span>')
+								.find('span').unbind('click').bind('click',
+										function() {
+											friendsObj.addFollowerPerson(
+													daren.user_id, 'daren');
+										});
+					}
+					$('#home-daren').find('.float_bg h4 a')
+							.html(daren.nickname).attr(
+									'href',
+									server_url + 'person/profile/'
+											+ daren.user_id).end()
+							.find('.float_bg p').html(daren.description).end()
+							.find('#daren-pic-a').attr(
+									'href',
+									server_url + 'person/profile/'
+											+ daren.user_id)
+							.append('<img class="new" src="' + daren.imglink
+									+ '" />').children('img').animate({
+										"left" : "-=180px"
+									}, 500);
+					setTimeout(
+							"$('#daren-pic-a').find('.old').remove().end().find('.new').attr('class', 'old')",
+							490);
+				});
+	},
+	nextGroup : function() {
+		$.get(server_url + 'sideBar/ajax_getRecommendGroup?frm=homeNext',
+				function(group) {
+					var group = eval("(" + group + ")");
+					if (group.follow) {
+						$('#home-group .dr_b')
+								.attr('id', 'f' + group.group_id)
+								.find('.follow')
+								.html('<a class="c f14 g_exit red" href="javascript:void(0);">已关注</a>')
+								.find('a').unbind('click').bind('click',
+										Group.quit).mouseover(function() {
+											$(this).html('取消关注').mouseout(
+													function() {
+														$(this).html('已关注');
+													});
+										});
+					} else {
+						$('#home-group .dr_b')
+								.attr('id', 'f' + group.user_id)
+								.find('.follow')
+								.html('<a class="c f14 g_join red" href="javascript:void(0);">+加关注</a>')
+								.find('a').unbind('click').bind('click',
+										Group.follow);
+					}
+					$('#home-group')
+							.find('.groupbg h3 a')
+							.html(group.name)
+							.attr('href',
+									server_url + 'group/' + group.group_id)
+							.end()
+							.find('.groupbg .e_i_f')
+							.html('编辑: ' + group.nickname + '等'
+									+ group.admin_num + '人')
+							.end()
+							.find('.groupbg .second')
+							.html(group.count_member + '人关注')
+							.end()
+							.find('.g_pic')
+							.attr('href',
+									server_url + 'group/' + group.group_id)
+							.append('<img class="new"  style="width: 200px; height: 200px;" src="'
+									+ group.imgurl + '" />').children('img')
+							.animate({
+										"left" : "-=200px"
+									}, 500);
+					setTimeout(
+							"$('.g_pic').find('.old').remove().end().find('.new').attr('class', 'old')",
+							490);
+					Group.group_id = group.group_id;
+					Group.is_follow = group.follow;
+					Group.is_member = group.is_member;
+				});
+	}
+}
+var recommend = {
+	follow : function() {
+		var uids = "";
+		$(".wf_one input[type='checkbox']").each(function() {
+					if ($(this).attr('checked') == true) {
+						uids += ":" + this.value;
+					}
+				});
+		recommend.close();
+		var url = server_url + "twitter/ajax_addFollower?frm=weibofollow";
+		var data = {
+			fuid : uids
+		}
+		var callback = function(mesg) {
+			if (mesg == 1) {
+				showForbiddenWindow();
+				return false;
+			}
+			$.setCookie('weibofriends', '1', {
+						duration : 0,
+						path : '/',
+						domain : DEFAULT_COOKIEDOMAIN
+					});
+		}
+		$.get(url, data, callback);
+	},
+	close : function() {
+		$('#recommend').slideUp('slow');
+	},
+	checkAll : function() {
+		var status = $('#checked').attr('checked');
+		$(".wf_one input[type='checkbox']").each(function() {
+					if (status == true) {
+						this.checked = true;
+					} else {
+						this.checked = false;
+					}
+				});
+	}
+}
+$(document).ready(function() {
+	if (current_user_id == 0) {
+		var c = $.readCookie('MEILISHUO_OFFSITE_CLICK');
+		$("#title_twitter_sig_goods a, #code_pic_b_a a, #where_come_from a")
+				.each(function() {
+					if (c != null && parseInt(c) >= 5) {
+						$(this).attr('href', 'javascript:;');
+					}
+					$(this).click(function() {
+								var count = $
+										.readCookie('MEILISHUO_OFFSITE_CLICK');
+								var setCount = null;
+								if (count == null) {
+									setCount = 1;
+								} else if (count < 5) {
+									setCount = parseInt(count) + 1;
+								}
+								if (setCount != null) {
+									$.setCookie('MEILISHUO_OFFSITE_CLICK',
+											setCount, {
+												duration : 3600,
+												path : '/',
+												domain : DEFAULT_COOKIEDOMAIN
+											});
+									return true;
+								} else {
+									$.md({
+												modal : "#xs",
+												url : "/msg/ajax_popLoginBox/"
+											});
+									return false;
+								}
+							});
+				});
+	}
+	twitterListObj.lType = 'twitterPage';
+	twitterObj.idPrefix = 'notePageView';
+	var replyTxt = $('#reply .reply_box .answer_text');
+	if (replyTxt.length > 0) {
+		replyTxt.textlimit("#reply .reply_box .note_limit",
+				twitterObj.maxLength, 10);
+		bindRange(replyTxt.get(0));
+	}
+	var func = function() {
+		$('#show_comments').hide();
+		$('#hide_comments').show().focus();
+	}
+	$('#show_comments').focus(func).click(func);
+});
+function hideDiv(jqueryObj) {
+	$(jqueryObj).closest('.dialog').hide().shadow({
+				'show' : false
+			});
+}
+function comments() {
+	$('#hide_comments').show().focus();
+}
+function key_down() {
+	var $input = $('#hide_comments');
+	if ($input.val() == "写下你对宝贝的评语，把宝贝推荐给朋友") {
+		$input.val('');
+		$input.css('color', 'black')
+	}
+	if ($input.val() != "写下你对宝贝的评语，把宝贝推荐给朋友" && $input.val() != "") {
+		$input.css('color', 'black');
+	}
+	return true;
+}
+function xiu(obj) {
+	var $obj = $(obj);
+	var position = $obj.position();
+	var width = $obj.width();
+	$('#xiu').css({
+				top : position.top - 20,
+				left : position.left + width - 60
+			}).show();
+}
+var shelfWindow = $.dialog({
+			title : '该宝贝已经下架',
+			width : '460px',
+			content : $('#shelf').show(),
+			closeHandle : function() {
+				$(this).closest('.dialog').hide().shadow({
+							'show' : false
+						});
+			}
+		});
+function shelf() {
+	shelfWindow.toCenter("fixed").show();
+}
+function unshelf() {
+	shelfWindow.hide();
+}
+function do_comment(gid, cont, id) {
+	var comment = $('#' + id).val().trim();
+	if (comment == "") {
+		alert("评论不能为空！");
+		return false;
+	}
+	if (comment == "写下你对宝贝的评语，把宝贝推荐给朋友") {
+		alert("请输入评论内容！");
+		return false;
+	}
+	if (!WidthCheck(comment, 140)) {
+		alert('评论不能超过140个字！');
+		return false;
+	}
+	var callback = function(backstr) {
+		var obj = eval('(' + backstr + ')');
+		if (obj.success == 1 && cont == 1) {
+			$.dialog({
+						title : '美丽提示',
+						content : $('#comment_success').show(),
+						closeHandle : function() {
+							location.href = location.href;
+						}
+					}).toCenter().show().shadow({
+						'show' : true
+					});
+		} else if (obj.success == 2) {
+			$.dialog({
+						title : '美丽提示',
+						content : $('#comment_success1').show(),
+						closeHandle : function() {
+							location.href = location.href;
+						}
+					}).toCenter().show().shadow({
+						'show' : true
+					});
+		} else {
+			setTimeout("window.location.reload();", 100);
+		}
+	}
+	var url = server_url + "twitter/ajax_comment";
+	$.post(url, {
+				'comment' : comment,
+				'gid' : gid
+			}, callback);
+}
+function dispatch_taoke(taoke) {
+	alert(taoke['satellite_url'])
+}
+var twitterItemNote = {
+	tid : 0,
+	getNoteListUrl : server_url + 'item/ajax_note/',
+	showTwitterNote : function(tid) {
+		faceTableObj.hide_tables();
+		twitterItemNote.tid = tid;
+		if (current_user_id == 0 || current_user_id == '') {
+			showLoginWin();
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		var curComments = $('#t_note' + tid);
+		if (!curComments.hasClass('none')) {
+			$('#t_note' + tid + ' .pl_list').remove();
+			twitterItemNote.getNoteList(0);
+			curComments.toggleClass('none');
+			return false;
+		}
+		curComments.toggleClass('none');
+		twitterItemNote.getNoteList(0);
+		twitterItemNote.textLimit();
+	},
+	getNoteList : function(page) {
+		var data = {
+			tid : twitterItemNote.tid,
+			page : page
+		};
+		if ($.readCookie('MEILISHUO_BOB_LANDING'))
+			data.pagesize = 5;
+		var callback = function(noteList) {
+			if (noteList == false) {
+				$('.spinner').hide();
+				return false;
+			}
+			var json = eval("(" + noteList + ")");
+			$('#t_note' + twitterItemNote.tid + ' .note-list').html(json.h);
+			$('.spinner').hide();
+			$('#r' + twitterItemNote.tid).text(json.t);
+			$('.namecard:not(.js_processed)').addClass('js_processed')
+					.floatUserInfo();
+		};
+		$.get(twitterItemNote.getNoteListUrl, data, callback);
+		return false;
+	},
+	replyButtonClick : function(uid, tid, thisobj) {
+		if (Meilishuo.config.is_actived == 2) {
+			location.href = server_url + 'users/activate_message';
+			return false;
+		} else if (Meilishuo.config.shup == 5) {
+			showShupWin();
+			return false;
+		}
+		var CommentBoxHeight = 0;
+		var curComments = $('#t_note' + tid);
+		var forward = $('#forward-' + tid).attr('checked');
+		var showIndex = 1;
+		var type = 4;
+		forward ? showIndex = 1 : showIndex = 0;
+		if (!twitterNoteObj.checkReply(0, 0, tid)) {
+			return false;
+		}
+		var $noteInput = curComments.parent().find('.answer_text');
+		var txt = $noteInput.val();
+		curComments.find('.hint').html('回复成功').show().fadeOut(2000);
+		$noteInput.attr("disabled", "");
+		var childBox = $('#child' + tid);
+		var callback = function(mesg) {
+			if (tips[mesg]) {
+				alert(tips[mesg]);
+				return false;
+			}
+			if (mesg == 1) {
+				showForbiddenWindow();
+				return false;
+			}
+			if (typeof(thisobj) == 'object') {
+				var CommentsBox = $('#t_comment' + tid);
+				CommentsBox
+						.html('<li id="child'
+								+ tid
+								+ '" ><a class="avatar32 left trans07" href="/person/u/'
+								+ Meilishuo.current_user.id
+								+ '" target="_blank"><img src="'
+								+ Meilishuo.current_user.avatar
+								+ '"/></a><p><a class="fb" href="/person/u/'
+								+ Meilishuo.current_user.id
+								+ '" target="_blank">'
+								+ Meilishuo.current_user.nickname
+								+ '</a> <span class="gray">' + txt
+								+ '</span></p></li>' + CommentsBox.html());
+			}
+			if (typeof(thisobj) != 'object') {
+				var h = '<li class="list_info"><a class="img_face" href="/person/u/'
+						+ Meilishuo.current_user.id
+						+ '" target="_blank"><img src="'
+						+ Meilishuo.current_user.avatar
+						+ '"/></a><p><span class="cgray r">1分钟前</span><span class="red"><a href="/person/u/'
+						+ Meilishuo.current_user.id
+						+ '" target="_blank">'
+						+ Meilishuo.current_user.nickname
+						+ '</a></span></p><p class="tj">'
+						+ txt
+						+ ' <span class="red"><a onclick="twitterNoteObj.replyInEditbox(\''
+						+ Meilishuo.current_user.nickname
+						+ '\', '
+						+ twitterItemNote.tid
+						+ ');return false;" href="javascript:;">回复</a></span></p></li>';
+				location.href.indexOf('/share/') > -1
+						? $('.pl_list').append(h)
+						: $('.pl_list').prepend(h);
+				var $num = $('#r' + twitterItemNote.tid);
+				$num.text(parseInt($num.text()) + 1);
+			}
+			$noteInput.val('');
+			if ($("#wall").size() > 0 && $('#content_fluid').length > 0) {
+				$("#wall").masonry('reload');
+			}
+		};
+		$.ajax({
+					async : true,
+					type : "GET",
+					url : twitterNoteObj.noteNew_url,
+					data : {
+						suid : uid,
+						stid : tid,
+						type : type,
+						tContent : txt,
+						pid : 0,
+						showIndex : showIndex
+					},
+					success : callback
+				});
+	},
+	textLimit : function() {
+		var $noteInput = $('#t_note' + twitterItemNote.tid + ' .answer_text');
+		var $noteLimit = $('#t_note' + twitterItemNote.tid + ' .note_limit');
+		$noteInput.autoTextarea({
+					"maxHeight" : 220,
+					"miniHeight" : 28
+				});
+		twitterObj.idPrefix = 't_note';
+	}
+}
+function showFollowStatus(uid) {
+	$('#f' + uid + ' .follow span').attr('onclick', '').unbind('click').bind(
+			'click', function() {
+				friendsObj.removeFromUrNew(uid, 'daren');
+			}).removeClass('new_follow')
+			.addClass('ex_notfollow f14 new_notfollow').html('已关注').mouseover(
+					function() {
+						$(this).text('取消关注');
+					}).mouseout(function() {
+						$(this).text('已关注');
+					});
+	$('.p-fdesc').hide();
+}
+function showUnfollowStatus(uid) {
+	$('#f' + uid + ' .follow span').attr('onclick', '').bind('click',
+			function() {
+				friendsObj.addFollowerPerson(uid, $(this));
+			}).removeClass('ex_notfollow').addClass('ex_follow f14')
+			.html('＋加关注').unbind('mouseover').unbind('mouseout');
+	$('.p-fdesc').show();
+	$('.p-fdesc').hide();
+}
+function showSpamDel(tid, twitter_uid, obj) {
+	var html = '<div id="spam_pop" style="padding:30px 100px;"><div class="f14">是否确认删除推，删除后的推将不能恢复？</div>'
+			+ '<div class="checkBox" style="margin-top:20px;"><input class="delAllTwitter" id="checkedBox" type="checkbox"></input><span>同时删除用户的所有推</span>'
+			+ '<a target="_blank" class="red" href="http://work.meiliworks.com/twitter/getTwitterList?twitter_author_uid='
+			+ twitter_uid
+			+ '" style="margin-left:5px;">查看该用户的所有推>></a></div>'
+			+ '<div class="checkBox mt10"><input class="closureUser" id="checkedBox" type="checkbox"></input><span>同时封禁该用户一周</span></div>'
+			+ '<div class="checkBox mt10"><input class="deleteUser" id="checkedBox" type="checkbox"></input><span>同时删除该用户</span></div>'
+			+ '<div style="margin-top:30px;"><span class="cursor confirm c" style="border-radius:4px;background-color:#FF6699;color:#FFFFFF;width:60px;height:25px;line-height:25px;float:left;margin-left:100px;">确定</span><span class="cancel cursor" style="float:left;margin-left:20px;line-height:25px;">取消</span></div><div class="clear"></div></div>';
+	function hideSpam() {
+		$spamDel.hide();
+		hideShadow();
+	}
+	var $spamDel = null;
+	if ($spamDel == null) {
+		$spamDel = $.dialog({
+					title : '删除封禁管理',
+					width : '500px',
+					content : $(html).show(),
+					closeHandle : function() {
+						hideSpam();
+					}
+				});
+	}
+	var isIE6 = $.browser.msie && $.browser.version == '6.0';
+	var fixed = isIE6 ? '' : 'fixed';
+	$spamDel.toCenter(fixed).show();
+	showShadow();
+	$spamDel.find('.cancel').click(function() {
+				hideSpam();
+			});
+	$spamDel.find('.confirm').click(function() {
+				var url = '/twitter/ajax_removeTwitterSpam', data = {
+					'tid' : tid,
+					'is_spamadmin' : 1
+				}, callback = function() {
+					if (obj) {
+						$(obj).parent().parent().hide();
+						hideSpam();
+					} else {
+						location.href = location.href;
+					}
+				};
+				if ($spamDel.find('.delAllTwitter').attr("checked"))
+					data['clear_up'] = 1;
+				if ($spamDel.find('.closureUser').attr("checked"))
+					data['ban_a_week'] = 1;
+				if ($spamDel.find('.deleteUser').attr("checked"))
+					data['delete_user'] = 1;
+				$.get(url, data, callback);
+			});
+}
+function showPolDel(tid, obj) {
+	var $delDia = null;
+	var h = '<div class="f14" style="padding:30px 0 15px;height:22px;line-height:24px;margin-left:120px;"><span class="left"><img src="/css/images/confirm.gif"></span>'
+			+ '<span class="left" style="margin-left:10px;">确认删除?</span></div>'
+			+ '<div style="height:25px;line-height:25px;" class="c f14">'
+			+ '<span class="submit_alert_chose_yes white left cursor f14" style="width:64px;margin-left:110px;">确定</span>'
+			+ '<span class="left cursor submit_alert_chose_no white" style="margin-left:10px;width:64px;">取消</span></div>';
+	var fixed = ($.browser.msie && $.browser.version == '6.0') ? '' : 'fixed';
+	if ($delDia == null) {
+		$delDia = $.dialog({
+					'title' : '提示',
+					'content' : $(h),
+					'width' : '350px',
+					'closeHandle' : function() {
+						$(this).closest('.dialog').hide();
+						hideShadow();
+					}
+				});
+	}
+	$delDia.toCenter(fixed).show();
+	showShadow();
+	$delDia.find('.submit_alert_chose_yes').click(function() {
+				var callback = function() {
+					if (obj) {
+						$(obj).parent().parent().hide();
+						$delDia.hide();
+						hideShadow();
+					} else {
+						location.href = location.href;
+					}
+				};
+				$.get('/twitter/ajax_removeTwitterSpam', {
+							'tid' : tid,
+							'is_spamadmin' : 1
+						}, callback);
+			});
+	$delDia.find('.submit_alert_chose_no').click(function() {
+				$delDia.hide();
+				hideShadow();
+			});
+}

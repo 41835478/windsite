@@ -18,8 +18,15 @@ class map_mod {
 	}
 
 	function oauthCallback() {
-		if (!empty (V('g:code')) && !empty (V('g:state')))
-			header('Location:' . V('g:state') . '&code=' . V('g:code'));
+		$code = V('g:code','');
+		$state = V('g:state','');
+		print_r($code);
+		echo ',';
+		print_r($state);
+		if (!empty ($code) && !empty ($state)) {
+			header('Location:' . $state . '&code=' . $code);
+		}
+		exit;
 	}
 	function getOAthor2() {
 		$weibo = APP :: N('weibo');

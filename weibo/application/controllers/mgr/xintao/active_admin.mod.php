@@ -7,6 +7,7 @@ require_once 'OpenSDK/163/Weibo.php';
 OpenSDK_Tencent_Weibo :: init(WB_QQ_AKEY, WB_QQ_SKEY);
 OpenSDK_Sohu_Weibo :: init(WB_SOHU_AKEY, WB_SOHU_SKEY);
 OpenSDK_163_Weibo :: init(WB_WY_AKEY, WB_WY_SKEY);
+include_once (P_CLASS . '/saetv2.ex.class.php');
 class active_admin_mod {
 	function active_admin_mod() {
 		//		$rs = "";
@@ -158,87 +159,89 @@ class active_admin_mod {
 	 * 绑定新浪微博
 	 */
 	function bindSina() {
-		$callback = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback?forcelogin=true');
-		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', 'http://www.xintaowang.com/map.oauthCallback',$callback);
+		$callback = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback&forcelogin=true');
+		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL, $callback);
 		header('Location:' . $oauthUrl);
 	}
 
 	// 绑定新浪微博回调（更新Admin以及更新配置）
 	function bindSinaCallback() {
-		$oauth_verifier = V('r:oauth_verifier', '');
-		//非法访问，或者 Oauth 返回错误
-		if (empty ($oauth_verifier)) {
-			//APP::tips(); TODO
-			die('oauth_verifier error!');
+		$o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
+		$code = V('r:code', '');
+		$token = array ();
+		if (!empty ($code)) {
+			$keys = array ();
+			$keys['code'] = $code;
+			$keys['redirect_uri'] = WB_CALLBACK_URL;
+			try {
+				$token = $o->getAccessToken('code', $keys);
+			} catch (OAuthException $e) {
+			}
 		}
 
-		$last_key = DS('xweibo/xwb.getAccessToken', '', $oauth_verifier);
-		$token = $last_key['oauth_token'];
-		$secret = $last_key['oauth_token_secret'];
-		$uid = $last_key['user_id'];
-
-		//USER::setOAuthKey($last_key, true);
-		DS('xweibo/xwb.setToken', '', 3, $token, $secret);
-		$uInfo = DR('xweibo/xwb.verifyCredentials');
 		$isTimer = SYSTEM_SINA_UID == '' ? true : false;
-		//更新配置文件
-		F('xintao.update_config_file', array (
-			'SYSTEM_SINA_UID' => $uid,
-			'SYSTEM_SINA_USERNICK' => $uInfo['rst']['screen_name'],
-			'WB_USER_OAUTH_TOKEN' => $token,
-			'WB_USER_OAUTH_TOKEN_SECRET' => $secret
-		), XT_USER_ID);
-		//更新管理员关联新浪微博数据库
-		DS('mgr/adminCom.saveAdminByUserId', '', array (
-			'sina_uid' => $uid,
-			'nickname' => $uInfo['rst']['screen_name'],
-			'access_token' => $token,
-			'token_secret' => $secret
-		), XT_USER_ID);
-		//更新当前管理员SESSION
-		USER :: setOAuthKey($last_key, true);
-		$uInfo = $uInfo['rst'];
-		USER :: uid($uInfo['id']);
-		USER :: set('sina_uid', $uInfo['id']);
-		USER :: set('screen_name', $uInfo['screen_name']);
-		USER :: set('description', $uInfo['description']);
-		USER :: set('user_max_notice_time', APP_LOCAL_TIMESTAMP);
-		//是否需要初始化用户组（如强制关注，首次登陆关注，首页用户推荐）
-		if (XT_IS_WEIBO == 'true') { //如果开通了微博系统，免费版不初始化
-			$ret = DR('mgr/userRecommendCom.getUserById', '', 3);
-			if (!$ret['rst']) {
-				DR('mgr/userRecommendCom.addUser', '', $data = array (
-					'group_id' => 3,
-					'uid' => $uInfo['id'],
-					'nickname' => $uInfo['screen_name'],
-					'remark' => $uInfo['screen_name']
-				));
+
+		if (!empty ($token)) {
+			$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $token['access_token']);
+			$user_message = $c->show_user_by_id($token['uid']); //根据ID获取用户等基本信息
+			F('xintao.update_config_file', array (
+				'SYSTEM_SINA_UID' => $token['uid'],
+				'SYSTEM_SINA_USERNICK' => $user_message['screen_name'],
+				'V2_ACCESS_TOKEN' => $token['access_token']
+			), XT_USER_ID);
+			//更新管理员关联新浪微博数据库
+			DS('mgr/adminCom.saveAdminByUserId', '', array (
+				'sina_uid' => $token['uid'],
+				'nickname' => $user_message['screen_name'],
+				'v2_access_token' => $token['access_token']
+			), XT_USER_ID);
+
+			//更新当前管理员SESSION
+			//		USER :: setOAuthKey($last_key, true);
+
+			USER :: uid($token['uid']);
+			USER :: set('sina_uid', $token['uid']);
+			USER :: set('screen_name', $user_message['screen_name']);
+			USER :: set('description', $user_message['description']);
+			USER :: set('user_max_notice_time', APP_LOCAL_TIMESTAMP);
+
+			//是否需要初始化用户组（如强制关注，首次登陆关注，首页用户推荐）
+			if (XT_IS_WEIBO == 'true') { //如果开通了微博系统，免费版不初始化
+				$ret = DR('mgr/userRecommendCom.getUserById', '', 3);
+				if (!$ret['rst']) {
+					DR('mgr/userRecommendCom.addUser', '', $data = array (
+						'group_id' => 3,
+						'uid' => $token['uid'],
+						'nickname' => $user_message['screen_name'],
+						'remark' => $user_message['screen_name']
+					));
+				}
+				$ret = DR('mgr/userRecommendCom.getUserById', '', 83);
+				if (!$ret['rst']) {
+					DR('mgr/userRecommendCom.addUser', '', $data = array (
+						'group_id' => 83,
+						'uid' => $token['uid'],
+						'nickname' => $user_message['screen_name'],
+						'remark' => $user_message['screen_name']
+					));
+				}
+				$ret = DR('mgr/userRecommendCom.getUserById', '', 84);
+				if (!$ret['rst']) {
+					DR('mgr/userRecommendCom.addUser', '', $data = array (
+						'group_id' => 84,
+						'uid' => $token['uid'],
+						'nickname' => $user_message['screen_name'],
+						'remark' => $user_message['screen_name']
+					));
+				}
 			}
-			$ret = DR('mgr/userRecommendCom.getUserById', '', 83);
-			if (!$ret['rst']) {
-				DR('mgr/userRecommendCom.addUser', '', $data = array (
-					'group_id' => 83,
-					'uid' => $uInfo['id'],
-					'nickname' => $uInfo['screen_name'],
-					'remark' => $uInfo['screen_name']
-				));
+			DS('xintao/userShop.setNickName', '', $user_message['screen_name'], XT_USER_ID);
+			DS('xintao/userItem.setNickName', '', $user_message['screen_name'], XT_USER_ID);
+			if ($isTimer) {
+				F('http_get_contents', 'http://www.xintaonet.com/router/site/adsite/timer?user_id=' . XT_USER_ID . '&group_id=6');
 			}
-			$ret = DR('mgr/userRecommendCom.getUserById', '', 84);
-			if (!$ret['rst']) {
-				DR('mgr/userRecommendCom.addUser', '', $data = array (
-					'group_id' => 84,
-					'uid' => $uInfo['id'],
-					'nickname' => $uInfo['screen_name'],
-					'remark' => $uInfo['screen_name']
-				));
-			}
+			echo '<html><head><script type="text/javascript">window.opener && window.opener.authoritySuccess();</script></head><body>success!</body></html>';
 		}
-		DS('xintao/userShop.setNickName', '', $uInfo['screen_name'], XT_USER_ID);
-		DS('xintao/userItem.setNickName', '', $uInfo['screen_name'], XT_USER_ID);
-		if ($isTimer) {
-			F('http_get_contents', 'http://www.xintaonet.com/router/site/adsite/timer?user_id=' . XT_USER_ID . '&group_id=6');
-		}
-		echo '<html><head><script type="text/javascript">window.opener && window.opener.authoritySuccess();</script></head><body>success!</body></html>';
 		exit;
 	}
 

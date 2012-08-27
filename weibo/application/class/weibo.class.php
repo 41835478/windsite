@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @file			weibo.class.php
  * @CopyRight		(C)1996-2099 SINA Inc.
@@ -21,7 +22,21 @@ class weibo {
 	var $storage;
 	var $format = 'json';
 	var $logType = 'api';
+	
+	/**
+		 * 用于OAuth1.0 access token 更换至 OAuth2.0 access token
+		 *
+		 * @return array
+		 */
+	function getOAuth2() {
+		$url = "https://api.weibo.com/oauth2/get_oauth2_token";
 
+		$params = array ();
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
+		return $response;
+	}
 	/**
 	 * 构造函数
 	 *

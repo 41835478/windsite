@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @file			xwb.com.php
  * @CopyRight		(C)1996-2099 SINA Inc.
@@ -16,7 +17,7 @@ if (XWB_PARENT_RELATIONSHIP) {
 } else {
 	include_once P_CLASS . '/weiboSina.class.php';
 }
-include_once ('../v2/saetv2.ex.class.php');
+include_once (P_CLASS . '/saetv2.ex.class.php');
 
 class xwb extends xwbParentClass {
 
@@ -1136,7 +1137,7 @@ class xwb extends xwbParentClass {
 		//		}
 		//		$token = $token['rst'];
 		//		USER::setOAuthKey($token, false);
-		
+
 		$o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
 		return RST($o->getAuthorizeURL($callbackUrl));
 		//return RST($this->getAuthorizeURL($token, true, $callbackUrl, $lang));

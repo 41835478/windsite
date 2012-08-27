@@ -167,8 +167,8 @@ class account_mod {
 		TPL :: assign('use_site_login', $use_site_login);
 
 		$loginCallBack = V('g:loginCallBack', '');
-		$sina_callback_url = $loginCallBack ? URL('account.sinaLogin', 'cb=login&type=sina&loginCallBack=' . urlencode($loginCallBack),false,'0') : URL('account.sinaLogin', 'cb=login&type=sina',false,'0');
-		$site_callback_url = $loginCallBack ? URL('account.siteLogin', 'cb=login&type=site&loginCallBack=' . urlencode($loginCallBack),false,'0') : URL('account.siteLogin', 'cb=login&type=site',false,'0');
+		$sina_callback_url = $loginCallBack ? URL('account.sinaLogin', 'cb=login&type=sina&loginCallBack=' . urlencode($loginCallBack), false, '0') : URL('account.sinaLogin', 'cb=login&type=sina', false, '0');
+		$site_callback_url = $loginCallBack ? URL('account.siteLogin', 'cb=login&type=site&loginCallBack=' . urlencode($loginCallBack), false, '0') : URL('account.siteLogin', 'cb=login&type=site', false, '0');
 		TPL :: assign('site_callback_url', $site_callback_url);
 		TPL :: assign('sina_callback_url', $sina_callback_url);
 
@@ -335,7 +335,7 @@ class account_mod {
 			$callbackOpt .= '&loginCallBack=' . urlencode($loginCallBack);
 		}
 
-		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt,false,'0');
+		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt, false, '0');
 
 		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
 		//&from=xweibo 取消特制的XWEIBO授权页面
@@ -419,6 +419,10 @@ class account_mod {
 
 	/// 从 Oauth 登录回来后 分别对各需求进行处理
 	function oauthCallback() {
+		if (V('g:cb', 'login') == 'admin') { //后台绑定
+			header('Location:' . W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback?code='.V('g:code')));
+			return;
+		}
 		$oauth_verifier = V('r:oauth_verifier', '');
 		//非法访问，或者 Oauth 返回错误
 		if (empty ($oauth_verifier)) {
@@ -599,7 +603,7 @@ class account_mod {
 		//检查当前帐号是否为管理员 
 		if ($rs = $this->_chkIsAdminAcc($uInfo['id'])) {
 			//TODO 更新管理员的粉丝数
-			
+
 			USER :: set('isAdminAccount', $rs);
 		}
 

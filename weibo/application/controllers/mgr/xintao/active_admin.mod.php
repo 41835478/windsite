@@ -160,7 +160,7 @@ class active_admin_mod {
 	function bindSina() {
 		$oauthCbUrl = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback');
 		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
-		$oauthUrl .= '&forcelogin=true';
+		$oauthUrl .= '&forcelogin=true&cb=admin';
 		header('Location:' . $oauthUrl);
 	}
 

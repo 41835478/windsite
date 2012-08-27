@@ -85,9 +85,8 @@ public class PageUtils {
 		command.setItems(ads);
 		command.setModuleId(mId);
 		command.setPage(page);
-		command
-				.setWww(StringUtils.isEmpty(www) ? (domainName + ".xintaonet.com")
-						: www);
+		command.setWww(StringUtils.isEmpty(www) ? (domainName + ".xintaonet.com")
+				: www);
 		CommandExecutor.getCommands().add(command);
 	}
 
@@ -683,14 +682,15 @@ public class PageUtils {
 		if (StringUtils.isEmpty(userId)) {
 			userId = page.getUser_id();
 		}
-		User user = pageService.findByCriterion(User.class, R.eq("user_id",
-				userId));
-		user.setSites(pageService.findAllByCriterion(Site.class, R.eq(
-				"user_id", user.getUser_id())));
+		User user = pageService.findByCriterion(User.class,
+				R.eq("user_id", userId));
+		user.setSites(pageService.findAllByCriterion(Site.class,
+				R.eq("user_id", user.getUser_id())));
 		// 订购
-		T_UserSubscribe usb = pageService.get(T_UserSubscribe.class, user
-				.getUser_id());
+		T_UserSubscribe usb = pageService.get(T_UserSubscribe.class,
+				user.getUser_id());
 		user.setUsb(usb);
+		result.put("P_SITEIMPL", pageService.getSiteImplByUserId(userId));
 		result.put("user", user);// 设置用户参数
 		// 站点
 		if (user.getSites().size() == 0) {
@@ -710,8 +710,8 @@ public class PageUtils {
 				if (st != null) {// 如果已配置主题
 					if ((usb != null && usb.getVersionNo() > 1)
 							&& st.getTheme() != null) {// 高级版本可使用个性化模板主题
-						PageTheme pt = pageService.get(PageTheme.class, st
-								.getTheme());
+						PageTheme pt = pageService.get(PageTheme.class,
+								st.getTheme());
 						if (pt != null) {
 							theme = String.valueOf(st.getTheme());
 							skin = StringUtils.isNotEmpty(st.getSkin()) ? st
@@ -730,8 +730,8 @@ public class PageUtils {
 			}
 		} else {// 此路径为模板装修市场预览（指定了主题）
 			try {
-				PageTheme pt = pageService.get(PageTheme.class, Long
-						.valueOf(theme));
+				PageTheme pt = pageService.get(PageTheme.class,
+						Long.valueOf(theme));
 				if (pt != null && pt.getIsValid()
 						&& StringUtils.isNotEmpty(pt.getSkin())) {
 					skin = pt.getSkin();
@@ -743,20 +743,20 @@ public class PageUtils {
 		result.put("theme", theme);// 设置主题参数
 		result.put("skin", skin);// 设置皮肤参数
 		result.put("pid", user.getPid());// 设置PID
-		result.put("dateVersion", DateUtils
-				.format(new Date(), "yyyyMMddHHmmss"));// 资源版本号
+		result.put("dateVersion",
+				DateUtils.format(new Date(), "yyyyMMddHHmmss"));// 资源版本号
 		PageMeta meta = pageService.get(PageMeta.class, page.getId());
-		result.put("content", PageUtils.createPageFtl(pageService, meta, user
-				.getUser_id(), user.getNick(), user.getPid(), isDesigner));// 页面布局及模块
+		result.put("content", PageUtils.createPageFtl(pageService, meta,
+				user.getUser_id(), user.getNick(), user.getPid(), isDesigner));// 页面布局及模块
 		result.put("isDesigner", isDesigner);
 		WindSiteRestUtil.covertPID(pageService, result, user.getUser_id());// 转换生成更多的参数
 		try {
 			Template temp = fcg.getConfiguration().getTemplate(
 					"site/designer/page.ftl");// 生成除具体模块的其他内容
 			Template template = new Template("template_" + page.getId(),
-					new StringReader(FreeMarkerTemplateUtils
-							.processTemplateIntoString(temp, result)), fcg
-							.getConfiguration());
+					new StringReader(
+							FreeMarkerTemplateUtils.processTemplateIntoString(
+									temp, result)), fcg.getConfiguration());
 
 			return template;
 		} catch (Exception e) {

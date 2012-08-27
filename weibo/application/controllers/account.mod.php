@@ -390,8 +390,8 @@ class account_mod {
 			$inData['max_notice_time'] = $maxTime;
 			$inData['followers_count'] = $uInfo['followers_count'];
 			$token = USER :: getOAuthKey(TRUE);
-			$inData['access_token'] = $token['oauth_token'];
-			$inData['token_secret'] = $token['oauth_token_secret'];
+			$inData['v2_access_token'] = $token['oauth_token'];
+			$inData['v2_refresh_token'] = $token['refresh_token'];
 
 			// 本地关系,初始化用户首页List
 			if (XWB_PARENT_RELATIONSHIP) {
@@ -408,8 +408,8 @@ class account_mod {
 			$inData['followers_count'] = $uInfo['followers_count'];
 			$inData['nickname'] = $uInfo['screen_name'];
 			$token = USER :: getOAuthKey(TRUE);
-			$inData['access_token'] = $token['oauth_token'];
-			$inData['token_secret'] = $token['oauth_token_secret'];
+			$inData['v2_access_token'] = $token['oauth_token'];
+			$inData['v2_refresh_token'] = $token['refresh_token'];
 
 			DR('mgr/userCom.insertUser', FALSE, $inData, $sina_uid);
 		}
@@ -436,8 +436,7 @@ class account_mod {
 		$site_uid = USER :: get('site_uid');
 		$callbackOpt = V('g:cb', 'login');
 
-		$last_key = DS('xweibo/xwb.getAccessToken', '', $oauth_verifier);
-		$uInfo = $this->_setSinaLoginSession($last_key);
+		$uInfo = $this->_setSinaLoginSession($token);
 
 		//--------------------------------------------------------
 		switch ($callbackOpt) {
@@ -453,12 +452,12 @@ class account_mod {
 				$inData['sina_uid'] = $uInfo['id'];
 				$inData['nickname'] = $uInfo['screen_name'];
 				$inData['uid'] = $site_uid;
-				$inData['access_token'] = $last_key['oauth_token'];
-				$inData['token_secret'] = $last_key['oauth_token_secret'];
+				$inData['v2_refresh_token'] = $token['refresh_token'];
+				$inData['v2_access_token'] = $token['access_token'];
 
 				$user = $this->getBindInfo($uInfo['id'], 'sina_uid');
 				if (!empty ($user) && is_array($user)) {
-					if (empty ($user['access_token']) || empty ($user['token_secret']) || empty ($user['uid'])) {
+					if (empty ($user['v2_access_token']) || empty ($user['v2_refresh_token']) || empty ($user['uid'])) {
 						$r = DR('mgr/userCom.insertUser', '', $inData, $uInfo['id']);
 
 						///同步插件的绑定数据
@@ -500,7 +499,7 @@ class account_mod {
 				if (USER :: uid() === SYSTEM_SINA_UID) {
 					$token = USER :: get('XWB_OAUTH_CONFIRM');
 					// 如果站长token发生变化，则修改user_config.php的token
-					if ($token['oauth_token'] != WB_USER_OAUTH_TOKEN || $token['oauth_token_secret'] != WB_USER_OAUTH_TOKEN_SECRET) {
+					if ($token['access_token'] != V2_ACCESS_TOKEN) {
 						if (XWB_SERVER_ENV_TYPE === 'sae') {
 							$storage = new SaeStorage();
 							$content = $storage->read(CONFIG_DOMAIN, md5(CONFIG_DOMAIN));
@@ -512,13 +511,13 @@ class account_mod {
 						} else {
 							// 修改user_config.php和绑定信息
 							F('xintao.update_config_file', array (
-								'WB_USER_OAUTH_TOKEN' => $token['oauth_token'],
-								'WB_USER_OAUTH_TOKEN_SECRET' => $token['user_oauth_token_secret']
+								'V2_ACCESS_TOKEN' => $token['access_token'],
+								'V2_REFRESH_TOKEN' => $token['refresh_token']
 							), XT_USER_ID);
 							//更新管理员关联新浪微博数据库
 							DS('mgr/adminCom.saveAdminByUserId', '', array (
-								'access_token' => $token['oauth_token'],
-								'token_secret' => $token['user_oauth_token_secret']
+								'v2_access_token' => $token['access_token'],
+								'v2_refresh_token' => $token['refresh_token']
 							), XT_USER_ID);
 						}
 					}
@@ -566,7 +565,8 @@ class account_mod {
 	function _setSinaLoginSession($token, $user = null) {
 		USER :: setOAuthKey($token, true);
 		DS('xweibo/xwb.setToken');
-		$uInfo = DR('xweibo/xwb.verifyCredentials');
+		$uInfo = DR('xweibo/xwb.getUserShow','',$token['uid']);
+		
 		/// 用户取消之前的授权
 		/*
 		if ($uInfo['errno'] == '1040008') {

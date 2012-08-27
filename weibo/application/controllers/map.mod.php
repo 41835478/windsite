@@ -135,8 +135,26 @@ class map_mod {
 		F('account_proxy.clearApp');
 	}
 	function test() {
-		Xpipe :: usePipe(false);
-		TPL :: display('xintao/yingxiaoTest');
+		$wb_list = DR('xweibo/weiboCopy.getList', '', array('disabled' => '0'), 10);
+		foreach ($wb_list as $wb) {
+			$wb_ids[] = $wb['id'];
+		}
+		print_r($wb_ids);
+		//$list = DR('xweibo/xwb.getPublicTimeline', '', 1);
+		if ($wb_ids) {
+			if (USER::isUserLogin()) {
+				$list = DR('xweibo/xwb.getStatusesBatchShow', '', implode(',', $wb_ids));
+			} else {
+				$list = DR('xweibo/xwb.getStatusesBatchShow', '', implode(',', $wb_ids), true, false);
+			}
+		} else {
+			$list['rst'] = array();
+			$list['errno'] = '';
+			$list['err'] = '';
+		}
+		print_r($list);
+//		Xpipe :: usePipe(false);
+//		TPL :: display('xintao/yingxiaoTest');
 	}
 	function rebuildConfig() {
 		$userId = V('g:userId');

@@ -35,10 +35,10 @@ class weibo_pls {
 		} else {
 			$oauth = false;
 		}
-		
 		/// 调用获取当前用户所关注用户的最新微博信息api
 		$list = DR('xweibo/xwb.getUserTimeline', '', $userinfo['id'], null, $userinfo['screen_name'], null, null, $count, $page, $filter_type, $oauth);
 		$list = $list['rst'];
+		
 
 		/// 如果是先审核后发，获取待审核微博
 		if ($userinfo['id'] == USER::uid()) {

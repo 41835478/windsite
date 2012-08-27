@@ -475,7 +475,7 @@ class weibo {
 	function getPublicTimeline($base_app = '0', $oauth = true, $count = 20) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->public_timeline(1, $count, $base_app);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -490,7 +490,7 @@ class weibo {
 	function getHomeTimeline($count = null, $page = null, $since_id = null, $max_id = null, $base_app = '0') {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->public_timeline($page, $count, $since_id, $max_id, $base_app);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -508,7 +508,7 @@ class weibo {
 	function getFriendsTimeline($count = null, $page = null, $since_id = null, $max_id = null, $base_app = '0', $feature = 0) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->friends_timeline($page, $count, $since_id, $max_id, $base_app);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -524,14 +524,23 @@ class weibo {
 	 * @param bool $oauth 是否使用oauth方式访问api
 	 * @return array
 	 */
-	function getUserTimeline($id = null, $user_id = null, $name = null, $since_id = null, $max_id = null, $count = null, $page = null, $feature = 0, $oauth = true, $base_app = '0') {
+	function getUserTimeline($id = null, $user_id = null, $name = null, $since_id = null, $max_id = null, $count = 20, $page = 1, $feature = 0, $oauth = true, $base_app = '0') {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
+		if (intval($count) == 0) {
+			$count = 20;
+		}
+		if (intval($page) == 0) {
+			$page = 1;
+		}
 		if ($id) {
 			$response = $c->user_timeline_by_id($id, $page, $count, $since_id, $max_id, $feature, 0, $base_app);
 		} else {
 			$response = $c->user_timeline_by_name($name, $page, $count, $since_id, $max_id, $feature, 0, $base_app);
 		}
-		return $response;
+		if (isset ($response['statuses'])) {
+			return RST($response['statuses']);
+		}
+		return RST($response);
 	}
 
 	/**
@@ -546,7 +555,7 @@ class weibo {
 	function getMentions($count = null, $page = null, $since_id = null, $max_id = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->mentions($page, $count, $since_id, $max_id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -561,7 +570,7 @@ class weibo {
 	function getCommentsTimeline($count = null, $page = null, $since_id = null, $max_id = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->comments_timeline($page, $count, $since_id, $max_id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -576,8 +585,8 @@ class weibo {
 	function getCommentsByMe($count = null, $page = null, $since_id = null, $max_id = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->comments_by_me($page, $count, $since_id, $max_id);
-		return $response;
-		
+		return RST($response);
+
 	}
 
 	/**
@@ -592,7 +601,7 @@ class weibo {
 	function getCommentsToMe($count = null, $page = null, $since_id = null, $max_id = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->comments_to_me($page, $count, $since_id, $max_id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -605,8 +614,8 @@ class weibo {
 	 */
 	function getComments($id, $count = null, $page = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->get_comments_by_sid($id,$page, $count);
-		return $response;
+		$response = $c->get_comments_by_sid($id, $page, $count);
+		return RST($response);
 	}
 
 	/**
@@ -618,7 +627,7 @@ class weibo {
 	function getCounts($ids, $oauth = true) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->getCount($ids);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -630,9 +639,9 @@ class weibo {
 	 */
 	function getUnread($with_new_status = null, $since_id = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->getUnread(USER::uid());
-		return $response;
-		
+		$response = $c->getUnread(USER :: uid());
+		return RST($response);
+
 	}
 
 	//访问接口
@@ -646,7 +655,7 @@ class weibo {
 	function getStatuseShow($id) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->show_status($id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -659,7 +668,10 @@ class weibo {
 	function getStatusesBatchShow($ids, $del_ctrl = true, $oauth = true) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->show_batch($ids);
-		return $response;
+		if (isset ($response['statuses'])) {
+			return RST($response['statuses']);
+		}
+		return RST($response);
 	}
 
 	/**
@@ -671,7 +683,7 @@ class weibo {
 	function update($status) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->update($status);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -685,9 +697,9 @@ class weibo {
 	 */
 	function upload($status, $pic, $lat = null, $long = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->upload($status,$pic,$lat,$long);
-		return $response;
-		
+		$response = $c->upload($status, $pic, $lat, $long);
+		return RST($response);
+
 	}
 
 	/**
@@ -697,7 +709,7 @@ class weibo {
 	 * @return array
 	 */
 	function uploadPic($pic) {
-		exit('该功能已被新浪废弃!');
+		exit ('该功能已被新浪废弃!');
 	}
 
 	/**
@@ -710,8 +722,8 @@ class weibo {
 	 */
 	function uploadUrlText($status, $picid = null, $picurl = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->upload_url_text($status,$picurl);
-		return $response;
+		$response = $c->upload_url_text($status, $picurl);
+		return RST($response);
 	}
 
 	/**
@@ -723,7 +735,7 @@ class weibo {
 	function destroy($id) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->destroy($id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -736,8 +748,8 @@ class weibo {
 	 */
 	function repost($id, $status = null, $is_comment = 0) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->repost($id,$status,$is_comment);
-		return $response;
+		$response = $c->repost($id, $status, $is_comment);
+		return RST($response);
 	}
 
 	/**
@@ -750,8 +762,8 @@ class weibo {
 	 */
 	function comment($id, $comment, $cid = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->send_comment($id,$comment);
-		return $response;
+		$response = $c->send_comment($id, $comment);
+		return RST($response);
 	}
 
 	/**
@@ -763,7 +775,7 @@ class weibo {
 	function commentDestroy($id) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->comment_destroy($id);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -775,7 +787,7 @@ class weibo {
 	function commentDestroyBatch($ids) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		$response = $c->comment_destroy_batch($ids);
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -788,8 +800,8 @@ class weibo {
 	 */
 	function reply($id, $cid, $comment, $without_mention = 0) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->reply($id,$comment,$cid,$without_mention);
-		return $response;
+		$response = $c->reply($id, $comment, $cid, $without_mention);
+		return RST($response);
 	}
 
 	//用户接口
@@ -810,7 +822,7 @@ class weibo {
 		} else {
 			$response = $c->show_user_by_name($name);
 		}
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -827,7 +839,7 @@ class weibo {
 		} else {
 			$response = $c->users_show_batch_by_name($screen_name);
 		}
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -843,11 +855,11 @@ class weibo {
 	function getFriends($id = null, $user_id = null, $name = null, $cursor = null, $count = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		if ($user_id) {
-			$response = $c->friends_by_id($id,$cursor,$count);
+			$response = $c->friends_by_id($id, $cursor, $count);
 		} else {
-			$response = $c->friends_by_name($name,$cursor,$count);
+			$response = $c->friends_by_name($name, $cursor, $count);
 		}
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -863,11 +875,11 @@ class weibo {
 	function getFollowers($id = null, $user_id = null, $name = null, $cursor = null, $count = null) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		if ($user_id) {
-			$response = $c->followers_by_id($id,$cursor,$count);
+			$response = $c->followers_by_id($id, $cursor, $count);
 		} else {
-			$response = $c->followers_by_name($name,$cursor,$count);
+			$response = $c->followers_by_name($name, $cursor, $count);
 		}
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -879,8 +891,10 @@ class weibo {
 	 */
 	function getUserSuggestions($cursor = null, $count = null, $with_reason = 1) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->suggestions_may_interested($cursor,$count);//TODO $cursor需要转换成$page
-		return $response;
+		$response = $c->suggestions_may_interested($cursor, $count); //TODO $cursor需要转换成$page
+		print_r($response);
+		exit;
+		return RST($response);
 	}
 
 	/**
@@ -892,8 +906,8 @@ class weibo {
 	 */
 	function updateFriendRemark($id, $remark) {
 		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->update_remark($id,$remark);
-		return $response;
+		$response = $c->update_remark($id, $remark);
+		return RST($response);
 	}
 
 	/**
@@ -924,7 +938,7 @@ class weibo {
 
 		$response = $this->oAuthRequest($url, 'get', $params);
 
-		return $response;
+		return RST($response);
 	}
 
 	//私信接口

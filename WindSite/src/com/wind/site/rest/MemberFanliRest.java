@@ -36,9 +36,11 @@ import com.wind.core.exception.SystemException;
 import com.wind.core.util.DateUtils;
 import com.wind.site.command.CommandExecutor;
 import com.wind.site.command.impl.ReportsGetCommand;
+import com.wind.site.command.impl.UpdateUserTemplateByUserIdCommand;
 import com.wind.site.command.impl.UserItemDetailCommand;
 import com.wind.site.command.impl.UserShopDetailCommand;
 import com.wind.site.env.EnvManager;
+import com.wind.site.freemarker.method.ModuleMethod;
 import com.wind.site.model.AD;
 import com.wind.site.model.FanliTrade;
 import com.wind.site.model.Member;
@@ -107,8 +109,8 @@ public class MemberFanliRest {
 	@RequestMapping(value = "/meta", method = RequestMethod.GET)
 	public ModelAndView flMetadata(HttpServletRequest request) {
 		List<SiteMetadata> metas = memberService.findAllByCriterion(
-				SiteMetadata.class, R.eq("user_id", EnvManager.getUser()
-						.getUser_id()));
+				SiteMetadata.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		return new ModelAndView("site/member/fanli/metaManager", "metas", metas);
 	}
 
@@ -121,8 +123,8 @@ public class MemberFanliRest {
 	@RequestMapping(value = "/sitemap", method = RequestMethod.GET)
 	public ModelAndView flSiteMap(HttpServletRequest request) {
 		List<SiteMapCategory> cats = memberService.findAllByCriterionAndOrder(
-				SiteMapCategory.class, Order.asc("sortOrder"), R.eq("user_id",
-						EnvManager.getUser().getUser_id()));
+				SiteMapCategory.class, Order.asc("sortOrder"),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (cats == null || cats.size() == 0) {
 			cats = new ArrayList<SiteMapCategory>();
 			String nick = EnvManager.getUser().getNick();
@@ -164,8 +166,8 @@ public class MemberFanliRest {
 			for (SiteMapCategory cat : cats) {
 				if ("C".equals(cat.getType())) {// 如果是自定义,查询自定义链接
 					cat.setSites(memberService.findAllByCriterionAndOrder(
-							SiteMap.class, Order.asc("sortOrder"), R.eq("cid",
-									cat.getId())));
+							SiteMap.class, Order.asc("sortOrder"),
+							R.eq("cid", cat.getId())));
 				}
 			}
 		}
@@ -236,8 +238,8 @@ public class MemberFanliRest {
 	 */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public ModelAndView flAd(HttpServletRequest request) {
-		List<AD> ads = memberService.findAllByCriterion(AD.class, R.eq(
-				"user_id", EnvManager.getUser().getUser_id()));
+		List<AD> ads = memberService.findAllByCriterion(AD.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		return new ModelAndView("site/member/fanli/adManager", "ads", ads);
 	}
 
@@ -418,8 +420,8 @@ public class MemberFanliRest {
 			SystemException.handleMessageException("META标签不能为空");
 		}
 		SiteMetadata metadata = memberService.findByCriterion(
-				SiteMetadata.class, R.eq("metadata", meta), R.eq("user_id",
-						EnvManager.getUser().getUser_id()));
+				SiteMetadata.class, R.eq("metadata", meta),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (metadata != null) {
 			SystemException.handleMessageException("【" + meta + "】标签已存在");
 		}
@@ -550,20 +552,20 @@ public class MemberFanliRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("allFanli", fanliService.sumFanliMoneyByMemberId(id, null));// 总返利金额
 		// 等待站长支付返利
-		result.put("unBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 0));// 购买返利金额
-		result.put("unAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 0));// 推广返利金额
+		result.put("unBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 0));// 购买返利金额
+		result.put("unAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 0));// 推广返利金额
 		// 等待会员确认收款（已支付）
-		result.put("waitBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 1));// 购买返利金额
-		result.put("waitAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 1));// 推广返利金额
+		result.put("waitBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 1));// 购买返利金额
+		result.put("waitAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 1));// 推广返利金额
 		// 已完成
-		result.put("finishBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 2));// 购买返利金额
-		result.put("finishAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 2));// 推广返利金额
+		result.put("finishBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 2));// 购买返利金额
+		result.put("finishAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 2));// 推广返利金额
 		return new ModelAndView("site/member/fanli/back/flmemberIncome", result);
 	}
 
@@ -667,16 +669,12 @@ public class MemberFanliRest {
 								if (commandService.mergeReportTrade(Long
 										.valueOf(outCode.replace("xtfl", "")),
 										user_id, site_id, member)) {
-									result
-											.put("count",
-													result.get("count") + 1);
+									result.put("count", result.get("count") + 1);
 								}
 							} else {
 								if (commandService.mergeReportTrade(user_id,
 										site_id, member)) {
-									result
-											.put("count",
-													result.get("count") + 1);
+									result.put("count", result.get("count") + 1);
 								}
 							}
 						}
@@ -742,8 +740,8 @@ public class MemberFanliRest {
 		// 可分页，过滤会员名，时间排序
 		result.put("reports", memberService.findAllByCriterionAndOrder(page,
 				T_TaobaokeReportMember.class, Order.desc("pay_time"),
-				nickFilter, isFollowFilter, R.eq("site_id", site.getId()), R
-						.eq("user_id", EnvManager.getUser().getUser_id())));
+				nickFilter, isFollowFilter, R.eq("site_id", site.getId()),
+				R.eq("user_id", EnvManager.getUser().getUser_id())));
 		result.put("page", page);
 		result.put("q", q);
 		result.put("rel", rel);
@@ -788,8 +786,10 @@ public class MemberFanliRest {
 	public ModelAndView tradeReport(@PathVariable Long id,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("trades", memberService.findAllByCriterion(FanliTrade.class,
-				R.eq("report.trade_id", id)));
+		result.put(
+				"trades",
+				memberService.findAllByCriterion(FanliTrade.class,
+						R.eq("report.trade_id", id)));
 		return new ModelAndView("site/member/fanli/trade", result);
 	}
 
@@ -945,6 +945,9 @@ public class MemberFanliRest {
 	@Autowired
 	private FreeMarkerConfigurer fcg;
 
+	@Autowired
+	private ModuleMethod moduleMethod;
+
 	/**
 	 * 更新当前返利
 	 * 
@@ -1019,6 +1022,22 @@ public class MemberFanliRest {
 		} else
 			commission.setSina_appkey(null);
 
+		if (qq_appkey == null) {
+			qq_appkey = "";
+		}
+		if (!qq_appkey.equals(commission.getQq_appkey())) {
+			if (!CommandExecutor.getUpdatecommands().containsKey(// 如果没有包含修改命令,QQ修改了,则发布所有页面
+					"u-" + EnvManager.getUser().getUser_id())) {
+				UpdateUserTemplateByUserIdCommand command = new UpdateUserTemplateByUserIdCommand();
+				command.setFcg(fcg);
+				command.setType("站点基本信息");
+				command.setUser(EnvManager.getUser());
+				command.setPageService(pageService);
+				command.setModuleMethod(moduleMethod);
+				CommandExecutor.getUpdatecommands().putIfAbsent(
+						"u-" + EnvManager.getUser().getUser_id(), command);
+			}
+		}
 		if (StringUtils.isNotEmpty(qq_appkey)) {
 			commission.setQq_appkey(qq_appkey);
 		} else

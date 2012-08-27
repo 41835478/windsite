@@ -73,3 +73,21 @@ delete from xwb_xt_user_item_2 where user_id=365390632;
 delete from xwb_xt_user_item_weibo_2 where user_id=365390632;
 delete from xwb_xt_taoke_item_2 where user_id=365390632;
 delete from xwb_xt_taoke_item_weibo_2 where user_id=365390632;
+
+
+
+
+
+
+
+
+INSERT INTO `wp_xt_term_taxonomy`(term_id,taxonomy,keyword,description,parent,coutn,owner_id) VALUES ('2', 'tag', null, '', '0', '80', '0'), ('4', 'tag', null, '', '0', '80', '0'), ('5', 'tag', null, null, '0', '40', '0'), ('6', 'tag', null, null, '0', '40', '0'), ('8', 'tag', null, null, '0', '40', '0'), ('9', 'tag', null, null, '0', '40', '0'), ('10', 'tag', null, null, '0', '40', '0'), ('11', 'tag', null, null, '0', '40', '0'), ('12', 'tag', null, null, '0', '40', '0'), ('13', 'tag', null, null, '0', '40', '0'), ('14', 'tag', null, null, '2', '40', '0'), ('15', 'tag', null, null, '2', '40', '0'), ('16', 'tag', null, null, '2', '40', '0'), ('17', 'tag', null, null, '2', '40', '0'), ('18', 'tag', null, null, '4', '40', '0'), ('19', 'tag', null, null, '4', '40', '0'), ('20', 'tag', null, null, '4', '40', '0'), ('21', 'tag', null, null, '4', '40', '0'), ('22', 'tag', null, null, '5', '40', '0'), ('23', 'tag', null, null, '5', '40', '0'), ('24', 'tag', null, null, '5', '40', '0'), ('25', 'tag', null, null, '5', '40', '0');
+INSERT INTO `wp_xt_share_comment`(share_id,user_id,content,type,create_time) VALUES ('10225', '1', '评论4', '1', '2012-08-24 22:07:18'), ('10225', '1', '评论5', '1', '2012-08-24 22:07:43'), ('10225', '1', '评论6', '1', '2012-08-24 22:07:58'),('10225', '1', '评论6', '1', '2012-08-24 22:07:18'), ('10225', '1', '评论7', '1', '2012-08-24 22:07:43'), ('10225', '1', '评论8', '1', '2012-08-24 22:07:58'),('10225', '1', '评论9', '1', '2012-08-24 22:07:18'), ('10225', '1', '评论10', '1', '2012-08-24 22:07:43'), ('10225', '1', '评论11', '1', '2012-08-24 22:07:58'),('10225', '1', '评论12', '1', '2012-08-24 22:07:18'), ('10225', '1', '评论13', '1', '2012-08-24 22:07:43'), ('10225', '1', '评论14', '1', '2012-08-24 22:07:58');
+
+
+
+
+
+
+
+

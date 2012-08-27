@@ -176,6 +176,14 @@ if (file_exists($CONFIG_FILE)) { //微博站长是否配置了个人微博信息
 	define('XT_IS_CLOSED', isset ($CONFIG_ARRAY['XT_IS_CLOSED']) ? $CONFIG_ARRAY['XT_IS_CLOSED'] : 'false');
 	define('XT_YINGXIAO_SELF', isset ($CONFIG_ARRAY['XT_YINGXIAO_SELF']) ? $CONFIG_ARRAY['XT_YINGXIAO_SELF'] : 'false');
 	define('XT_IS_ITEMCLOSED', isset ($CONFIG_ARRAY['XT_IS_ITEMCLOSED']) ? $CONFIG_ARRAY['XT_IS_ITEMCLOSED'] : 'false');
+
+	//oauthor2 回调地址
+	if (WB_AKEY != WB_DEFAULT_AKEY) {
+		define('WB_CALLBACK_URL', 'http://' . XT_SITE_DOMAIN . '/map.oauthCallback');
+	} else {
+		define('WB_CALLBACK_URL', 'http://www.xintaowang.com/map.oauthCallback');
+	}
+	define('V2_ACCESS_TOKEN', isset ($CONFIG_ARRAY['V2_ACCESS_TOKEN']) ? $CONFIG_ARRAY['V2_ACCESS_TOKEN'] : '');
 	
 
 } else {

@@ -11,6 +11,16 @@ class accountProxy {
 		return RST($rs);
 	}
 
+	function updateByUserId($data, $id = '', $USER_ID) {
+		if (!is_array($data)) {
+			return RST(false, $errno = 1210000, $err = 'Parameter can not be empty');
+		}
+		$db = APP :: ADP('db');
+		$db->setTable(T_ACCOUNT_PROXY);
+		$rs = $db->save($data, $id, '', ' `user_id`=' . $USER_ID . ' AND sina_uid');
+		return RST($rs);
+	}
+
 	/**
 	 * 得到帐号列表
 	 */
@@ -66,12 +76,15 @@ class accountProxy {
 	/**
 	 * 清空指定的代理帐号
 	 */
-	function clearByTokenAndSecret($token = '', $secret = '') {
-		if ($token == '' || $secret == '') {
+	function clearByTokenAndSecret($token = '', $refresh = '') {
+		if ($token == '' || $refresh == '') {
 			return;
 		}
 		$db = APP :: ADP('db');
-		$sql = 'DELETE FROM ' . $db->getTable(T_ACCOUNT_PROXY) . ' WHERE `token`=\'' . $db->escape($token) . '\' AND `secret`=\'' . $db->escape($secret) . '\'';
+		$sql = 'DELETE FROM ' . $db->getTable(T_ACCOUNT_PROXY) . ' WHERE `v2_access_token`=\'' . $db->escape($token) . '\'';
+		if (!empty ($refresh)) {
+			$sql .= ' AND `v2_refresh_token` = \'' . $db->escape($refresh) . '\'';
+		}
 		return RST($db->execute($sql));
 	}
 }

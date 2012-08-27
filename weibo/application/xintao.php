@@ -184,6 +184,7 @@ if (file_exists($CONFIG_FILE)) { //微博站长是否配置了个人微博信息
 		define('WB_CALLBACK_URL', 'http://www.xintaowang.com/map.oauthCallback');
 	}
 	define('V2_ACCESS_TOKEN', isset ($CONFIG_ARRAY['V2_ACCESS_TOKEN']) ? $CONFIG_ARRAY['V2_ACCESS_TOKEN'] : '');
+	define('V2_REFRESH_TOKEN', isset ($CONFIG_ARRAY['V2_REFRESH_TOKEN']) ? $CONFIG_ARRAY['V2_REFRESH_TOKEN'] : '');
 	
 
 } else {

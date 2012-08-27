@@ -22,10 +22,7 @@ class weibo {
 	var $storage;
 	var $format = 'json';
 	var $logType = 'api';
-
-	var $access_token;
-	var $refresh_token;
-
+	
 	/**
 		 * 用于OAuth1.0 access token 更换至 OAuth2.0 access token
 		 *
@@ -43,16 +40,16 @@ class weibo {
 	/**
 	 * 构造函数
 	 *
-	 * @param $access_token
-	 * @param $refresh_token
+	 * @param $oauth_token
+	 * @param $oauth_token_secret
 	 * @return
 	 */
-	function weibo($access_token = NULL, $refresh_token = NULL) {
-		//$this->sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
-		//$this->consumer = new OAuthConsumer(WB_AKEY, WB_SKEY);
+	function weibo($oauth_token = NULL, $oauth_token_secret = NULL) {
+		$this->sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
+		$this->consumer = new OAuthConsumer(WB_AKEY, WB_SKEY);
 		$this->setConfig();
 
-		//$this->http = APP :: ADP('http');
+		$this->http = APP :: ADP('http');
 	}
 
 	/**
@@ -63,20 +60,14 @@ class weibo {
 	function setConfig() {
 		$key = USER :: getOAuthKey(true);
 
-		if (!empty ($key['access_token']) && !empty ($key['refresh_token'])) {
-			$this->access_token = $key['access_token'];
-			$this->refresh_token = $key['refresh_token'];
-			//$this->token = new OAuthConsumer($key['access_token'], $key['refresh_token']);
+		if (!empty ($key['oauth_token']) && !empty ($key['oauth_token_secret'])) {
+			$this->token = new OAuthConsumer($key['oauth_token'], $key['oauth_token_secret']);
 		} else { //如果未登录，默认启用随机代理帐号
 			$token = DS('accountProxy.getRandomAccount');
 			if ($token) {
-				$this->access_token = $token['v2_access_token'];
-				$this->refresh_token = $token['v2_refresh_token'];
-				//$this->token = new OAuthConsumer($token['token'], $token['secret']);
+				$this->token = new OAuthConsumer($token['token'], $token['secret']);
 			} else {
-				$this->access_token = V2_ACCESS_TOKEN;
-				$this->refresh_token = V2_REFRESH_TOKEN;
-				//$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
+				$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
 			}
 			//$this->token = NULL;
 		}
@@ -86,44 +77,32 @@ class weibo {
 	 * 手动设置Token
 	 *
 	 * @param int $type 身份类型，1代表当前用户，2代表随机代理用户（如果不存在就使用内置账户），3代表指定用户，4代表内置账户，默认是1
-	 * @param $access_token
-	 * @param $refresh_token
+	 * @param $oauth_token
+	 * @param $oauth_token_secret
 	 * @return unknown
 	 */
-	function setToken($type = 1, $access_token = null, $refresh_token = null) {
+	function setToken($type = 1, $oauth_token = null, $oauth_token_secret = null) {
 		if ($type == 1) {
 			$token = USER :: getOAuthKey(true);
-			$access_token = isset ($token['access_token']) ? $token['access_token'] : '';
-			$refresh_token = isset ($token['refresh_token']) ? $token['refresh_token'] : '';
-			$this->access_token = $access_token;
-			$this->refresh_token = $refresh_token;
-			//$this->token = new OAuthConsumer($access_token, $refresh_token);
+			$oauth_token = isset ($token['oauth_token']) ? $token['oauth_token'] : '';
+			$oauth_token_secret = isset ($token['oauth_token_secret']) ? $token['oauth_token_secret'] : '';
+			$this->token = new OAuthConsumer($oauth_token, $oauth_token_secret);
 		}
 		elseif ($type == 2) {
 			$token = DS('accountProxy.getRandomAccount');
 			if ($token) {
-				$this->access_token = $token['v2_access_token'];
-				$this->refresh_token = $token['v2_refresh_token'];
-				//$this->token = new OAuthConsumer($token['token'], $token['secret']);
+				$this->token = new OAuthConsumer($token['token'], $token['secret']);
 			} else {
-				$this->access_token = V2_ACCESS_TOKEN;
-				$this->refresh_token = V2_REFRESH_TOKEN;
-				//$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
+				$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
 			}
 		}
 		elseif ($type == 3) {
-			$this->access_token = $access_token;
-			$this->refresh_token = $refresh_token;
-			//$this->token = new OAuthConsumer($access_token, $refresh_token);
+			$this->token = new OAuthConsumer($oauth_token, $oauth_token_secret);
 		}
 		elseif ($type == 4) {
-			$this->access_token = V2_ACCESS_TOKEN;
-			$this->refresh_token = V2_REFRESH_TOKEN;
-			//$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
+			$this->token = new OAuthConsumer(WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET);
 		} else {
-			$this->access_token = null;
-			$this->refresh_token = null;
-			//$this->token = null;
+			$this->token = null;
 		}
 	}
 
@@ -143,7 +122,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果是token_rejected,清空当前站点无效的微博帐号
-				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->token->key, $this->token->secret, XT_USER_ID);
 				break;
 			case '40302' :
 				$msg = array (
@@ -165,7 +144,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果是invalid weibo user,清空当前站点无效的微博帐号
-				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->token->key, $this->token->secret, XT_USER_ID);
 				break;
 			case '40303' :
 				$msg = array (
@@ -419,7 +398,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果是accessor was revoked,清空当前站点无效的微博帐号
-				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->token->key, $this->token->secret, XT_USER_ID);
 				break;
 			case '40085' :
 				$api = APP :: O('apiStop');
@@ -473,8 +452,17 @@ class weibo {
 	 * @return array
 	 */
 	function getPublicTimeline($base_app = '0', $oauth = true, $count = 20) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->public_timeline(1, $count, $base_app);
+		$url = WEIBO_API_URL . 'statuses/public_timeline.' . $this->format;
+		$params = array ();
+		$params['base_app'] = $base_app;
+		$params['count'] = $count;
+
+		if ($oauth == false) {
+			$response = $this->sourceRequest($url, 'get', $params);
+		} else {
+			$response = $this->oAuthRequest($url, 'get', $params);
+		}
+
 		return $response;
 	}
 
@@ -488,8 +476,24 @@ class weibo {
 	 * @return array
 	 */
 	function getHomeTimeline($count = null, $page = null, $since_id = null, $max_id = null, $base_app = '0') {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->public_timeline($page, $count, $since_id, $max_id, $base_app);
+		$url = WEIBO_API_URL . 'statuses/home_timeline.' . $this->format;
+		$params = array ();
+		$params['base_app'] = $base_app;
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -506,8 +510,27 @@ class weibo {
 	 * @return array
 	 */
 	function getFriendsTimeline($count = null, $page = null, $since_id = null, $max_id = null, $base_app = '0', $feature = 0) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->friends_timeline($page, $count, $since_id, $max_id, $base_app);
+		$url = WEIBO_API_URL . 'statuses/friends_timeline.' . $this->format;
+		$params = array ();
+		$params['base_app'] = $base_app;
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+		if ($feature) {
+			$params['feature'] = $feature;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -525,11 +548,40 @@ class weibo {
 	 * @return array
 	 */
 	function getUserTimeline($id = null, $user_id = null, $name = null, $since_id = null, $max_id = null, $count = null, $page = null, $feature = 0, $oauth = true, $base_app = '0') {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		if ($id) {
-			$response = $c->user_timeline_by_id($id, $page, $count, $since_id, $max_id, $feature, 0, $base_app);
+			$url = WEIBO_API_URL . 'statuses/user_timeline/' . $id . '.' . $this->format;
 		} else {
-			$response = $c->user_timeline_by_name($name, $page, $count, $since_id, $max_id, $feature, 0, $base_app);
+			$url = WEIBO_API_URL . 'statuses/user_timeline.' . $this->format;
+		}
+
+		$params = array ();
+		$params['base_app'] = $base_app;
+		if ($user_id) {
+			$params['user_id'] = $user_id;
+		}
+		if ($name) {
+			$params['screen_name'] = $name;
+		}
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+		if ($feature) {
+			$params['feature'] = $feature;
+		}
+
+		if ($oauth === false) {
+			$response = $this->sourceRequest($url, 'get', $params);
+		} else {
+			$response = $this->oAuthRequest($url, 'get', $params);
 		}
 		return $response;
 	}
@@ -544,8 +596,24 @@ class weibo {
 	 * @return array
 	 */
 	function getMentions($count = null, $page = null, $since_id = null, $max_id = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->mentions($page, $count, $since_id, $max_id);
+		$url = WEIBO_API_URL . 'statuses/mentions.' . $this->format;
+
+		$params = array ();
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -559,8 +627,24 @@ class weibo {
 	 * @return array
 	 */
 	function getCommentsTimeline($count = null, $page = null, $since_id = null, $max_id = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->comments_timeline($page, $count, $since_id, $max_id);
+		$url = WEIBO_API_URL . 'statuses/comments_timeline.' . $this->format;
+
+		$params = array ();
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -574,10 +658,26 @@ class weibo {
 	 * @return array
 	 */
 	function getCommentsByMe($count = null, $page = null, $since_id = null, $max_id = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->comments_by_me($page, $count, $since_id, $max_id);
+		$url = WEIBO_API_URL . 'statuses/comments_by_me.' . $this->format;
+
+		$params = array ();
+
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
-		
 	}
 
 	/**
@@ -590,8 +690,24 @@ class weibo {
 	 * @return array
 	 */
 	function getCommentsToMe($count = null, $page = null, $since_id = null, $max_id = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->comments_to_me($page, $count, $since_id, $max_id);
+		$url = WEIBO_API_URL . 'statuses/comments_to_me.' . $this->format;
+
+		$params = array ();
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		if ($max_id) {
+			$params['max_id'] = $max_id;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -604,8 +720,20 @@ class weibo {
 	 * @return array
 	 */
 	function getComments($id, $count = null, $page = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->get_comments_by_sid($id,$page, $count);
+		$url = WEIBO_API_URL . 'statuses/comments.' . $this->format;
+
+		$params = array ();
+		$params['id'] = $id;
+
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($page) {
+			$params['page'] = $page;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -616,8 +744,21 @@ class weibo {
 	 * @return array
 	 */
 	function getCounts($ids, $oauth = true) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->getCount($ids);
+		$url = WEIBO_API_URL . 'statuses/counts.' . $this->format;
+
+		$params = array ();
+		if (is_array($ids)) {
+			$params['ids'] = implode(',', $ids);
+		} else {
+			$params['ids'] = $ids;
+		}
+
+		if ($oauth === false) {
+			$response = $this->sourceRequest($url, 'get', $params);
+		} else {
+			$response = $this->oAuthRequest($url, 'get', $params);
+		}
+
 		return $response;
 	}
 
@@ -629,10 +770,17 @@ class weibo {
 	 * @return array
 	 */
 	function getUnread($with_new_status = null, $since_id = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->getUnread(USER::uid());
+		$url = WEIBO_API_URL . 'statuses/unread.' . $this->format;
+
+		$params = array ();
+		if ($with_new_status) {
+			$params['with_new_status'] = $with_new_status;
+		}
+		if ($since_id) {
+			$params['since_id'] = $since_id;
+		}
+		$response = $this->oAuthRequest($url, 'get', $params);
 		return $response;
-		
 	}
 
 	//访问接口
@@ -644,8 +792,12 @@ class weibo {
 	 * @return array
 	 */
 	function getStatuseShow($id) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->show_status($id);
+		$url = WEIBO_API_URL . 'statuses/show/' . $id . '.' . $this->format;
+
+		$params = array ();
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -657,8 +809,21 @@ class weibo {
 	 * @return array
 	 */
 	function getStatusesBatchShow($ids, $del_ctrl = true, $oauth = true) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->show_batch($ids);
+		$url = WEIBO_API_URL . 'statuses/batch_show.' . $this->format;
+		$params = array ();
+
+		$params['ids'] = $ids;
+
+		if ($del_ctrl) {
+			$params['del_ctrl'] = $del_ctrl;
+		}
+
+		if ($oauth === false) {
+			$response = $this->sourceRequest($url, 'get', $params);
+		} else {
+			$response = $this->oAuthRequest($url, 'get', $params);
+		}
+
 		return $response;
 	}
 
@@ -669,8 +834,14 @@ class weibo {
 	 * @return array
 	 */
 	function update($status) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->update($status);
+		$url = WEIBO_API_URL . 'statuses/update.' . $this->format;
+
+		$params = array ();
+		//$params['status'] = urlencode($status);
+		$params['status'] = $status;
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -684,10 +855,22 @@ class weibo {
 	 * @return array
 	 */
 	function upload($status, $pic, $lat = null, $long = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->upload($status,$pic,$lat,$long);
+		$url = WEIBO_API_URL . 'statuses/upload.' . $this->format;
+
+		$params = array ();
+		//$params['status'] = urlencode($status);
+		$params['status'] = $status;
+		$params['pic'] = '@' . $pic;
+
+		if ($lat) {
+			$params['lat'] = $lat;
+		}
+		if ($long) {
+			$params['long'] = $long;
+		}
+		$response = $this->oAuthRequest($url, 'post', $params, true);
+
 		return $response;
-		
 	}
 
 	/**
@@ -697,7 +880,14 @@ class weibo {
 	 * @return array
 	 */
 	function uploadPic($pic) {
-		exit('该功能已被新浪废弃!');
+		$url = WEIBO_API_URL . 'statuses/upload_pic.' . $this->format;
+
+		$params = array ();
+		$params['pic'] = '@' . $pic;
+
+		$response = $this->oAuthRequest($url, 'post', $params, true);
+
+		return $response;
 	}
 
 	/**
@@ -709,8 +899,20 @@ class weibo {
 	 * @return array
 	 */
 	function uploadUrlText($status, $picid = null, $picurl = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->upload_url_text($status,$picurl);
+		$url = WEIBO_API_URL . 'statuses/upload_url_text.' . $this->format;
+
+		$params = array ();
+		//$params['status'] = urlencode($status);
+		$params['status'] = $status;
+		if ($picid) {
+			$params['pic_id'] = $picid;
+		}
+		if ($picurl) {
+			$params['url'] = $picurl;
+		}
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -721,8 +923,12 @@ class weibo {
 	 * @return array
 	 */
 	function destroy($id) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->destroy($id);
+		$url = WEIBO_API_URL . 'statuses/destroy/' . $id . '.' . $this->format;
+
+		$params = array ();
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -735,8 +941,18 @@ class weibo {
 	 * @return array
 	 */
 	function repost($id, $status = null, $is_comment = 0) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->repost($id,$status,$is_comment);
+		$url = WEIBO_API_URL . 'statuses/repost.' . $this->format;
+
+		$params = array ();
+		$params['id'] = $id;
+		if ($status) {
+			$params['status'] = urlencode($status);
+			//$params['status'] = $status;
+		}
+		$params['is_comment'] = $is_comment;
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -749,8 +965,18 @@ class weibo {
 	 * @return array
 	 */
 	function comment($id, $comment, $cid = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->send_comment($id,$comment);
+		$url = WEIBO_API_URL . 'statuses/comment.' . $this->format;
+
+		$params = array ();
+		$params['id'] = $id;
+		$params['comment'] = urlencode($comment);
+		//$params['comment'] = $comment;
+		if ($cid) {
+			$params['cid'] = $cid;
+		}
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -761,8 +987,12 @@ class weibo {
 	 * @return array
 	 */
 	function commentDestroy($id) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->comment_destroy($id);
+		$url = WEIBO_API_URL . 'statuses/comment_destroy/' . $id . '.' . $this->format;
+
+		$params = array ();
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -773,8 +1003,12 @@ class weibo {
 	 * @return array
 	 */
 	function commentDestroyBatch($ids) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->comment_destroy_batch($ids);
+		$url = WEIBO_API_URL . 'statuses/comment/destroy_batch.' . $this->format;
+
+		$params = array ();
+		$params['ids'] = join(',', $ids);
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -787,8 +1021,19 @@ class weibo {
 	 * @return array
 	 */
 	function reply($id, $cid, $comment, $without_mention = 0) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->reply($id,$comment,$cid,$without_mention);
+		$url = WEIBO_API_URL . 'statuses/reply.' . $this->format;
+
+		$params = array ();
+		$params['id'] = $id;
+		$params['comment'] = urlencode($comment);
+		//$params['comment'] = $comment;
+		$params['cid'] = $cid;
+		if ($without_mention > 0) {
+			$params['without_mention'] = 1;
+		}
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -804,11 +1049,24 @@ class weibo {
 	 * @return array
 	 */
 	function getUserShow($id = null, $user_id = null, $name = null, $oauth = true) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
 		if ($id) {
-			$response = $c->show_user_by_id($id);
+			$url = WEIBO_API_URL . 'users/show/' . $id . '.' . $this->format;
 		} else {
-			$response = $c->show_user_by_name($name);
+			$url = WEIBO_API_URL . 'users/show.' . $this->format;
+		}
+
+		$params = array ();
+		if ($user_id) {
+			$params['user_id'] = $user_id;
+		}
+		if ($name) {
+			$params['screen_name'] = $name;
+		}
+
+		if ($oauth === false) {
+			$response = $this->sourceRequest($url, 'get', $params);
+		} else {
+			$response = $this->oAuthRequest($url, 'get', $params);
 		}
 		return $response;
 	}
@@ -821,11 +1079,20 @@ class weibo {
 	* @return array
 	*/
 	function getUsersBatchShow($user_id = null, $screen_name = null, $oauth = true) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
+		$url = WEIBO_API_URL . 'users/batch_show.' . $this->format;
+
+		$params = array ();
 		if ($user_id) {
-			$response = $c->users_show_batch_by_id($user_id);
+			$params['user_id'] = $user_id;
+		}
+		if ($screen_name) {
+			$params['screen_name'] = $screen_name;
+		}
+
+		if ($oauth === false) {
+			$response = $this->sourceRequest($url, 'get', $params);
 		} else {
-			$response = $c->users_show_batch_by_name($screen_name);
+			$response = $this->oAuthRequest($url, 'get', $params);
 		}
 		return $response;
 	}
@@ -841,12 +1108,28 @@ class weibo {
 	 * @return array
 	 */
 	function getFriends($id = null, $user_id = null, $name = null, $cursor = null, $count = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		if ($user_id) {
-			$response = $c->friends_by_id($id,$cursor,$count);
+		if ($id) {
+			$url = WEIBO_API_URL . 'statuses/friends/' . $id . '.' . $this->format;
 		} else {
-			$response = $c->friends_by_name($name,$cursor,$count);
+			$url = WEIBO_API_URL . 'statuses/friends.' . $this->format;
 		}
+
+		$params = array ();
+		if ($user_id) {
+			$params['user_id'] = $user_id;
+		}
+		if ($name) {
+			$params['screen_name'] = $name;
+		}
+		if ($cursor) {
+			$params['cursor'] = $cursor;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -861,12 +1144,28 @@ class weibo {
 	 * @return array
 	 */
 	function getFollowers($id = null, $user_id = null, $name = null, $cursor = null, $count = null) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		if ($user_id) {
-			$response = $c->followers_by_id($id,$cursor,$count);
+		if ($id) {
+			$url = WEIBO_API_URL . 'statuses/followers/' . $id . '.' . $this->format;
 		} else {
-			$response = $c->followers_by_name($name,$cursor,$count);
+			$url = WEIBO_API_URL . 'statuses/followers.' . $this->format;
 		}
+
+		$params = array ();
+		if ($user_id) {
+			$params['user_id'] = $user_id;
+		}
+		if ($name) {
+			$params['screen_name'] = $name;
+		}
+		if ($cursor) {
+			$params['cursor'] = $cursor;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -878,8 +1177,21 @@ class weibo {
 	 * @return array
 	 */
 	function getUserSuggestions($cursor = null, $count = null, $with_reason = 1) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->suggestions_may_interested($cursor,$count);//TODO $cursor需要转换成$page
+		$url = WEIBO_API_URL . 'users/suggestions.' . $this->format;
+
+		$params = array ();
+		if ($cursor) {
+			$params['cursor'] = $cursor;
+		}
+		if ($count) {
+			$params['count'] = $count;
+		}
+		if ($with_reason) {
+			$params['with_reason'] = $with_reason;
+		}
+
+		$response = $this->oAuthRequest($url, 'get', $params);
+
 		return $response;
 	}
 
@@ -891,8 +1203,18 @@ class weibo {
 	 * @return array
 	 */
 	function updateFriendRemark($id, $remark) {
-		$c = new SaeTClientV2(WB_AKEY, WB_SKEY, $this->access_token);
-		$response = $c->update_remark($id,$remark);
+		$url = WEIBO_API_URL . 'user/friends/update_remark.' . $this->format;
+
+		$params = array ();
+		if ($id) {
+			$params['id'] = $id;
+		}
+		if ($remark) {
+			$params['remark'] = $remark;
+		}
+
+		$response = $this->oAuthRequest($url, 'post', $params);
+
 		return $response;
 	}
 
@@ -1523,7 +1845,7 @@ class weibo {
 	 * 获取request token
 	 *
 	 * @param string $oauth_callback
-	 * @return array a key/value array containing access_token and refresh_token
+	 * @return array a key/value array containing oauth_token and oauth_token_secret
 	 */
 	function getRequestToken($oauth_callback = NULL) {
 		$parameters = array ();
@@ -1534,7 +1856,7 @@ class weibo {
 		$this->token = null;
 		$request = $this->oAuthRequest(WEIBO_API_URL . 'oauth/request_token', 'GET', $parameters, false, true);
 		$token = OAuthUtil :: parse_parameters($request);
-		$this->token = new OAuthConsumer($token['access_token'], $token['refresh_token']);
+		$this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
 		return RST($token);
 	}
 
@@ -1549,12 +1871,12 @@ class weibo {
 	 */
 	function getAuthorizeURL($token, $sign_in_with_Weibo = TRUE, $url, $lang = 'zh-Hans') {
 		if (is_array($token)) {
-			$token = $token['access_token'];
+			$token = $token['oauth_token'];
 		}
 		if (empty ($sign_in_with_Weibo)) {
-			return WEIBO_API_URL . 'oauth/authorize' . "?access_token={$token}&oauth_callback=" . urlencode($url) . '&lang=' . $lang;
+			return WEIBO_API_URL . 'oauth/authorize' . "?oauth_token={$token}&oauth_callback=" . urlencode($url) . '&lang=' . $lang;
 		} else {
-			return WEIBO_API_URL . 'oauth/authenticate' . "?access_token={$token}&oauth_callback=" . urlencode($url) . '&lang=' . $lang;
+			return WEIBO_API_URL . 'oauth/authenticate' . "?oauth_token={$token}&oauth_callback=" . urlencode($url) . '&lang=' . $lang;
 		}
 	}
 
@@ -1569,12 +1891,12 @@ class weibo {
 	 */
 	function getAuthorizeToken($token, $user, $password) {
 		if (is_array($token)) {
-			$token = $token['access_token'];
+			$token = $token['oauth_token'];
 		}
 
 		$url = WEIBO_API_URL . 'oauth/authorize';
 		$params = array ();
-		$params['access_token'] = $token;
+		$params['oauth_token'] = $token;
 		$params['oauth_callback'] = $this->format;
 		$params['display'] = 'web';
 		$params['userId'] = $user;
@@ -1606,24 +1928,24 @@ class weibo {
 	 * secret, to sign API calls.
 	 *
 	 * @param string $oauth_verifier
-	 * @param array $access_token
-	 * @return array array("access_token" => the access token,
-	 *                "refresh_token" => the access secret)
+	 * @param array $oauth_token
+	 * @return array array("oauth_token" => the access token,
+	 *                "oauth_token_secret" => the access secret)
 	 */
-	function getAccessToken($oauth_verifier = FALSE, $access_token = false) {
+	function getAccessToken($oauth_verifier = FALSE, $oauth_token = false) {
 		$parameters = array ();
 		if (!empty ($oauth_verifier)) {
 			$parameters['oauth_verifier'] = $oauth_verifier;
 		}
 
-		$access_token = $access_token ? $access_token : USER :: getOAuthKey(false);
-		$this->token = new OAuthConsumer($access_token['access_token'], $access_token['refresh_token']);
+		$oauth_token = $oauth_token ? $oauth_token : USER :: getOAuthKey(false);
+		$this->token = new OAuthConsumer($oauth_token['oauth_token'], $oauth_token['oauth_token_secret']);
 		$request = $this->oAuthRequest(WEIBO_API_URL . 'oauth/access_token', 'GET', $parameters, false, true);
 		if (is_array($request) && !empty ($request['errno'])) {
 			return $request;
 		}
 		$token = OAuthUtil :: parse_parameters($request);
-		$this->token = new OAuthConsumer($token['access_token'], $token['refresh_token']);
+		$this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
 		return RST($token);
 	}
 
@@ -2689,7 +3011,7 @@ class weibo {
 		}
 
 		$token = OAuthUtil :: parse_parameters($request);
-		$this->token = new OAuthConsumer($token['access_token'], $token['refresh_token']);
+		$this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
 		return RST($token);
 	}
 

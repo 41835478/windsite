@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP SDK for weibo.com (using OAuth2)
  * 
@@ -11,7 +12,6 @@
 class OAuthException extends Exception {
 	// pass
 }
-
 
 /**
  * 新浪微博 OAuth 认证类(OAuth2)
@@ -119,11 +119,15 @@ class SaeTOAuthV2 {
 	/**
 	 * @ignore
 	 */
-	function accessTokenURL()  { return 'https://api.weibo.com/oauth2/access_token'; }
+	function accessTokenURL() {
+		return 'https://api.weibo.com/oauth2/access_token';
+	}
 	/**
 	 * @ignore
 	 */
-	function authorizeURL()    { return 'https://api.weibo.com/oauth2/authorize'; }
+	function authorizeURL() {
+		return 'https://api.weibo.com/oauth2/authorize';
+	}
 
 	/**
 	 * construct WeiboOAuth object
@@ -153,8 +157,8 @@ class SaeTOAuthV2 {
 	 *  - apponweibo	站内应用专用,站内应用不传display参数,并且response_type为token时,默认使用改display.授权后不会返回access_token，只是输出js刷新站内应用父框架
 	 * @return array
 	 */
-	function getAuthorizeURL( $url, $response_type = 'code', $state = NULL, $display = NULL ) {
-		$params = array();
+	function getAuthorizeURL($url, $response_type = 'code', $state = NULL, $display = NULL) {
+		$params = array ();
 		$params['client_id'] = $this->client_id;
 		$params['redirect_uri'] = $url;
 		$params['response_type'] = $response_type;
@@ -175,18 +179,20 @@ class SaeTOAuthV2 {
 	 *  - 当$type为token时： array('refresh_token'=>...)
 	 * @return array
 	 */
-	function getAccessToken( $type = 'code', $keys ) {
-		$params = array();
+	function getAccessToken($type = 'code', $keys) {
+		$params = array ();
 		$params['client_id'] = $this->client_id;
 		$params['client_secret'] = $this->client_secret;
-		if ( $type === 'token' ) {
+		if ($type === 'token') {
 			$params['grant_type'] = 'refresh_token';
 			$params['refresh_token'] = $keys['refresh_token'];
-		} elseif ( $type === 'code' ) {
+		}
+		elseif ($type === 'code') {
 			$params['grant_type'] = 'authorization_code';
 			$params['code'] = $keys['code'];
 			$params['redirect_uri'] = $keys['redirect_uri'];
-		} elseif ( $type === 'password' ) {
+		}
+		elseif ($type === 'password') {
 			$params['grant_type'] = 'password';
 			$params['username'] = $keys['username'];
 			$params['password'] = $keys['password'];
@@ -196,9 +202,9 @@ class SaeTOAuthV2 {
 
 		$response = $this->oAuthRequest($this->accessTokenURL(), 'POST', $params);
 		$token = json_decode($response, true);
-		if ( is_array($token) && !isset($token['error']) ) {
+		if (is_array($token) && !isset ($token['error'])) {
 			$this->access_token = $token['access_token'];
-			$this->refresh_token = isset($token['refresh_token'])?$token['refresh_token']:'';//fixed by fxy 2012-08-27
+			$this->refresh_token = isset ($token['refresh_token']) ? $token['refresh_token'] : ''; //fixed by fxy 2012-08-27
 		} else {
 			throw new OAuthException("get access token failed." . $token['error']);
 		}
@@ -213,19 +219,20 @@ class SaeTOAuthV2 {
 	 * @return array
 	 */
 	function parseSignedRequest($signed_request) {
-		list($encoded_sig, $payload) = explode('.', $signed_request, 2); 
-		$sig = self::base64decode($encoded_sig) ;
-		$data = json_decode(self::base64decode($payload), true);
-		if (strtoupper($data['algorithm']) !== 'HMAC-SHA256') return '-1';
+		list ($encoded_sig, $payload) = explode('.', $signed_request, 2);
+		$sig = self :: base64decode($encoded_sig);
+		$data = json_decode(self :: base64decode($payload), true);
+		if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
+			return '-1';
 		$expected_sig = hash_hmac('sha256', $payload, $this->client_secret, true);
-		return ($sig !== $expected_sig)? '-2':$data;
+		return ($sig !== $expected_sig) ? '-2' : $data;
 	}
 
 	/**
 	 * @ignore
 	 */
 	function base64decode($str) {
-		return base64_decode(strtr($str.str_repeat('=', (4 - strlen($str) % 4)), '-_', '+/'));
+		return base64_decode(strtr($str . str_repeat('=', (4 - strlen($str) % 4)), '-_', '+/'));
 	}
 
 	/**
@@ -235,9 +242,9 @@ class SaeTOAuthV2 {
 	 */
 	function getTokenFromJSSDK() {
 		$key = "weibojs_" . $this->client_id;
-		if ( isset($_COOKIE[$key]) && $cookie = $_COOKIE[$key] ) {
+		if (isset ($_COOKIE[$key]) && $cookie = $_COOKIE[$key]) {
 			parse_str($cookie, $token);
-			if ( isset($token['access_token']) && isset($token['refresh_token']) ) {
+			if (isset ($token['access_token']) && isset ($token['refresh_token'])) {
 				$this->access_token = $token['access_token'];
 				$this->refresh_token = $token['refresh_token'];
 				return $token;
@@ -256,11 +263,11 @@ class SaeTOAuthV2 {
 	 * @param array $arr 存有access_token和secret_token的数组
 	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
 	 */
-	function getTokenFromArray( $arr ) {
-		if (isset($arr['access_token']) && $arr['access_token']) {
-			$token = array();
+	function getTokenFromArray($arr) {
+		if (isset ($arr['access_token']) && $arr['access_token']) {
+			$token = array ();
 			$this->access_token = $token['access_token'] = $arr['access_token'];
-			if (isset($arr['refresh_token']) && $arr['refresh_token']) {
+			if (isset ($arr['refresh_token']) && $arr['refresh_token']) {
 				$this->refresh_token = $token['refresh_token'] = $arr['refresh_token'];
 			}
 
@@ -275,7 +282,7 @@ class SaeTOAuthV2 {
 	 *
 	 * @return mixed
 	 */
-	function get($url, $parameters = array()) {
+	function get($url, $parameters = array ()) {
 		$response = $this->oAuthRequest($url, 'GET', $parameters);
 		if ($this->format === 'json' && $this->decode_json) {
 			return json_decode($response, true);
@@ -288,8 +295,8 @@ class SaeTOAuthV2 {
 	 *
 	 * @return mixed
 	 */
-	function post($url, $parameters = array(), $multi = false) {
-		$response = $this->oAuthRequest($url, 'POST', $parameters, $multi );
+	function post($url, $parameters = array (), $multi = false) {
+		$response = $this->oAuthRequest($url, 'POST', $parameters, $multi);
 		if ($this->format === 'json' && $this->decode_json) {
 			return json_decode($response, true);
 		}
@@ -301,7 +308,7 @@ class SaeTOAuthV2 {
 	 *
 	 * @return mixed
 	 */
-	function delete($url, $parameters = array()) {
+	function delete($url, $parameters = array ()) {
 		$response = $this->oAuthRequest($url, 'DELETE', $parameters);
 		if ($this->format === 'json' && $this->decode_json) {
 			return json_decode($response, true);
@@ -319,22 +326,22 @@ class SaeTOAuthV2 {
 
 		if (strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0) {
 			$url = "{$this->host}{$url}.{$this->format}";
-	}
+		}
 
-	switch ($method) {
-		case 'GET':
-			$url = $url . '?' . http_build_query($parameters);
-			return $this->http($url, 'GET');
-		default:
-			$headers = array();
-			if (!$multi && (is_array($parameters) || is_object($parameters)) ) {
-				$body = http_build_query($parameters);
-			} else {
-				$body = self::build_http_query_multi($parameters);
-				$headers[] = "Content-Type: multipart/form-data; boundary=" . self::$boundary;
-			}
-			return $this->http($url, $method, $body, $headers);
-	}
+		switch ($method) {
+			case 'GET' :
+				$url = $url . '?' . http_build_query($parameters);
+				return $this->http($url, 'GET');
+			default :
+				$headers = array ();
+				if (!$multi && (is_array($parameters) || is_object($parameters))) {
+					$body = http_build_query($parameters);
+				} else {
+					$body = self :: build_http_query_multi($parameters);
+					$headers[] = "Content-Type: multipart/form-data; boundary=" . self :: $boundary;
+				}
+				return $this->http($url, $method, $body, $headers);
+		}
 	}
 
 	/**
@@ -343,8 +350,8 @@ class SaeTOAuthV2 {
 	 * @return string API results
 	 * @ignore
 	 */
-	function http($url, $method, $postfields = NULL, $headers = array()) {
-		$this->http_info = array();
+	function http($url, $method, $postfields = NULL, $headers = array ()) {
+		$this->http_info = array ();
 		$ci = curl_init();
 		/* Curl settings */
 		curl_setopt($ci, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
@@ -354,31 +361,34 @@ class SaeTOAuthV2 {
 		curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ci, CURLOPT_ENCODING, "");
 		curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
-		curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
+		curl_setopt($ci, CURLOPT_HEADERFUNCTION, array (
+			$this,
+			'getHeader'
+		));
 		curl_setopt($ci, CURLOPT_HEADER, FALSE);
 
 		switch ($method) {
-			case 'POST':
+			case 'POST' :
 				curl_setopt($ci, CURLOPT_POST, TRUE);
-				if (!empty($postfields)) {
+				if (!empty ($postfields)) {
 					curl_setopt($ci, CURLOPT_POSTFIELDS, $postfields);
 					$this->postdata = $postfields;
 				}
 				break;
-			case 'DELETE':
+			case 'DELETE' :
 				curl_setopt($ci, CURLOPT_CUSTOMREQUEST, 'DELETE');
-				if (!empty($postfields)) {
+				if (!empty ($postfields)) {
 					$url = "{$url}?{$postfields}";
 				}
 		}
 
-		if ( isset($this->access_token) && $this->access_token )
-			$headers[] = "Authorization: OAuth2 ".$this->access_token;
+		if (isset ($this->access_token) && $this->access_token)
+			$headers[] = "Authorization: OAuth2 " . $this->access_token;
 
 		$headers[] = "API-RemoteIP: " . $_SERVER['REMOTE_ADDR'];
-		curl_setopt($ci, CURLOPT_URL, $url );
-		curl_setopt($ci, CURLOPT_HTTPHEADER, $headers );
-		curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE );
+		curl_setopt($ci, CURLOPT_URL, $url);
+		curl_setopt($ci, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
 
 		$response = curl_exec($ci);
 		$this->http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
@@ -389,13 +399,13 @@ class SaeTOAuthV2 {
 			echo "=====post data======\r\n";
 			var_dump($postfields);
 
-			echo '=====info====='."\r\n";
-			print_r( curl_getinfo($ci) );
+			echo '=====info=====' . "\r\n";
+			print_r(curl_getinfo($ci));
 
-			echo '=====$response====='."\r\n";
-			print_r( $response );
+			echo '=====$response=====' . "\r\n";
+			print_r($response);
 		}
-		curl_close ($ci);
+		curl_close($ci);
 		return $response;
 	}
 
@@ -407,9 +417,9 @@ class SaeTOAuthV2 {
 	 */
 	function getHeader($ch, $header) {
 		$i = strpos($header, ':');
-		if (!empty($i)) {
+		if (!empty ($i)) {
 			$key = str_replace('-', '_', strtolower(substr($header, 0, $i)));
-			$value = trim(substr($header, $i + 2));
+			$value = trim(substr($header, $i +2));
 			$this->http_header[$key] = $value;
 		}
 		return strlen($header);
@@ -419,33 +429,39 @@ class SaeTOAuthV2 {
 	 * @ignore
 	 */
 	public static function build_http_query_multi($params) {
-		if (!$params) return '';
+		if (!$params)
+			return '';
 
 		uksort($params, 'strcmp');
 
-		$pairs = array();
+		$pairs = array ();
 
-		self::$boundary = $boundary = uniqid('------------------');
-		$MPboundary = '--'.$boundary;
-		$endMPboundary = $MPboundary. '--';
+		self :: $boundary = $boundary = uniqid('------------------');
+		$MPboundary = '--' . $boundary;
+		$endMPboundary = $MPboundary . '--';
 		$multipartbody = '';
 
 		foreach ($params as $parameter => $value) {
 
-			if( in_array($parameter, array('pic', 'image')) && $value{0} == '@' ) {
-				$url = ltrim( $value, '@' );
-				$content = file_get_contents( $url );
-				$array = explode( '?', basename( $url ) );
+			if (in_array($parameter, array (
+					'pic',
+					'image'
+				)) && $value {
+				0 }
+			== '@') {
+				$url = ltrim($value, '@');
+				$content = file_get_contents($url);
+				$array = explode('?', basename($url));
 				$filename = $array[0];
 
 				$multipartbody .= $MPboundary . "\r\n";
-				$multipartbody .= 'Content-Disposition: form-data; name="' . $parameter . '"; filename="' . $filename . '"'. "\r\n";
+				$multipartbody .= 'Content-Disposition: form-data; name="' . $parameter . '"; filename="' . $filename . '"' . "\r\n";
 				$multipartbody .= "Content-Type: image/unknown\r\n\r\n";
-				$multipartbody .= $content. "\r\n";
+				$multipartbody .= $content . "\r\n";
 			} else {
 				$multipartbody .= $MPboundary . "\r\n";
 				$multipartbody .= 'content-disposition: form-data; name="' . $parameter . "\"\r\n\r\n";
-				$multipartbody .= $value."\r\n";
+				$multipartbody .= $value . "\r\n";
 			}
 
 		}
@@ -454,7 +470,6 @@ class SaeTOAuthV2 {
 		return $multipartbody;
 	}
 }
-
 
 /**
  * 新浪微博操作类V2
@@ -465,8 +480,7 @@ class SaeTOAuthV2 {
  * @author Easy Chen, Elmer Zhang,Lazypeople
  * @version 1.0
  */
-class SaeTClientV2
-{
+class SaeTClientV2 {
 	/**
 	 * 构造函数
 	 * 
@@ -477,9 +491,40 @@ class SaeTClientV2
 	 * @param mixed $refresh_token OAuth认证返回的token secret
 	 * @return void
 	 */
-	function __construct( $akey, $skey, $access_token, $refresh_token = NULL)
-	{
-		$this->oauth = new SaeTOAuthV2( $akey, $skey, $access_token, $refresh_token );
+	function __construct($akey, $skey, $access_token, $refresh_token = NULL) {
+		$this->oauth = new SaeTOAuthV2($akey, $skey, $access_token, $refresh_token);
+	}
+	/**
+	 * 批量获取指定微博的转发数评论数
+	 *
+	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/count statuses/count}
+	 *
+	 * @access public
+	 * @param int $uid 需要获取消息未读数的用户UID，必须是当前登录用户。
+	 * @return array
+	 */
+	function getUnread($uid) {
+		$params = array ();
+		$params['uid'] = intval($uid);
+		return $this->oauth->get('remind/unread_count', $params); 
+	}
+	/**
+	 * 批量获取指定微博的转发数评论数
+	 *
+	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/count statuses/count}
+	 *
+	 * @access public
+	 * @param string|array $ids 需要获取数据的微博ID，多个之间用逗号分隔，最多不超过100个。
+	 * @return array
+	 */
+	function getCount($ids) {
+		$params = array ();
+		if (is_array($ids)) {
+			$params['ids'] = implode(',', $ids);
+		} else {
+			$params['ids'] = $ids;
+		}
+		return $this->oauth->get('statuses/count', $params);
 	}
 
 	/**
@@ -493,13 +538,12 @@ class SaeTClientV2
 	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * @return array
 	 */
-	function public_timeline( $page = 1, $count = 50, $base_app = 0 )
-	{
-		$params = array();
+	function public_timeline($page = 1, $count = 50, $base_app = 0) {
+		$params = array ();
 		$params['count'] = intval($count);
 		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get('statuses/public_timeline', $params);//可能是接口的bug不能补全
+		return $this->oauth->get('statuses/public_timeline', $params); //可能是接口的bug不能补全
 	}
 
 	/**
@@ -517,9 +561,8 @@ class SaeTClientV2
 	 * @param int $feature 过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
 	 * @return array
 	 */
-	function home_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
-	{
-		$params = array();
+	function home_timeline($page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -551,9 +594,8 @@ class SaeTClientV2
 	 * @param int $feature 微博类型，0全部，1原创，2图片，3视频，4音乐. 返回指定类型的微博信息内容。转为为0。可选。
 	 * @return array
 	 */
-	function friends_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
-	{
-		return $this->home_timeline( $since_id, $max_id, $count, $page, $base_app, $feature);
+	function friends_timeline($page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0) {
+		return $this->home_timeline($since_id, $max_id, $count, $page, $base_app, $feature);
 	}
 
 	/**
@@ -573,10 +615,9 @@ class SaeTClientV2
 	 * @param int $trim_user 返回值中user信息开关，0：返回完整的user信息、1：user字段仅返回uid，默认为0。
 	 * @return array
 	 */
-	function user_timeline_by_id( $uid = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0)
-	{
-		$params = array();
-		$params['uid']=$uid;
+	function user_timeline_by_id($uid = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0) {
+		$params = array ();
+		$params['uid'] = $uid;
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -591,10 +632,9 @@ class SaeTClientV2
 		$params['page'] = intval($page);
 		$params['trim_user'] = intval($trim_user);
 
-		return $this->oauth->get( 'statuses/user_timeline', $params );
+		return $this->oauth->get('statuses/user_timeline', $params);
 	}
-	
-	
+
 	/**
 	 * 获取用户发布的微博信息列表
 	 *
@@ -612,9 +652,8 @@ class SaeTClientV2
 	 * @param int $base_app 是否基于当前应用来获取数据。1为限制本应用微博，0为不做限制。默认为0。
 	 * @return array
 	 */
-	function user_timeline_by_name( $screen_name = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0 )
-	{
-		$params = array();
+	function user_timeline_by_name($screen_name = NULL, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
 		if ($since_id) {
 			$this->id_format($since_id);
@@ -630,11 +669,9 @@ class SaeTClientV2
 		$params['page'] = intval($page);
 		$params['trim_user'] = intval($trim_user);
 
-		return $this->oauth->get( 'statuses/user_timeline', $params );
+		return $this->oauth->get('statuses/user_timeline', $params);
 	}
-	
-	
-	
+
 	/**
 	 * 批量获取指定的一批用户的timeline
 	 *
@@ -647,16 +684,15 @@ class SaeTClientV2
 	 * @param int    $feature   过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
 	 * @return array
 	 */
-	function timeline_batch_by_name( $screen_name, $page = 1, $count = 50, $feature = 0, $base_app = 0)
-	{
-		$params = array();
-		if (is_array($screen_name) && !empty($screen_name)) {
+	function timeline_batch_by_name($screen_name, $page = 1, $count = 50, $feature = 0, $base_app = 0) {
+		$params = array ();
+		if (is_array($screen_name) && !empty ($screen_name)) {
 			$params['screen_name'] = join(',', $screen_name);
 		} else {
 			$params['screen_name'] = $screen_name;
 		}
 		$params['count'] = intval($count);
-		$params['page'] = intval($page); 
+		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
 		$params['feature'] = intval($feature);
 		return $this->oauth->get('statuses/timeline_batch', $params);
@@ -674,11 +710,10 @@ class SaeTClientV2
 	 * @param int    $feature   过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
 	 * @return array
 	 */
-	function timeline_batch_by_id( $uids, $page = 1, $count = 50, $feature = 0, $base_app = 0)
-	{
-		$params = array();
-		if (is_array($uids) && !empty($uids)) {
-			foreach($uids as $k => $v) {
+	function timeline_batch_by_id($uids, $page = 1, $count = 50, $feature = 0, $base_app = 0) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
 				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
@@ -686,12 +721,11 @@ class SaeTClientV2
 			$params['uids'] = $uids;
 		}
 		$params['count'] = intval($count);
-		$params['page'] = intval($page); 
+		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
 		$params['feature'] = intval($feature);
 		return $this->oauth->get('statuses/timeline_batch', $params);
 	}
-
 
 	/**
 	 * 返回一条原创微博消息的最新n条转发微博消息。本接口无法对非原创微博进行查询。 
@@ -707,11 +741,10 @@ class SaeTClientV2
 	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
 	 * @return array
 	 */
-	function repost_timeline( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
-	{
+	function repost_timeline($sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0) {
 		$this->id_format($sid);
 
-		$params = array();
+		$params = array ();
 		$params['id'] = $sid;
 		if ($since_id) {
 			$this->id_format($since_id);
@@ -723,7 +756,7 @@ class SaeTClientV2
 		}
 		$params['filter_by_author'] = intval($filter_by_author);
 
-		return $this->request_with_pager( 'statuses/repost_timeline', $page, $count, $params );
+		return $this->request_with_pager('statuses/repost_timeline', $page, $count, $params);
 	}
 
 	/**
@@ -738,9 +771,8 @@ class SaeTClientV2
 	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的记录。可选。
 	 * @return array
 	 */
-	function repost_by_me( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
-	{
-		$params = array();
+	function repost_by_me($page = 1, $count = 50, $since_id = 0, $max_id = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -750,7 +782,7 @@ class SaeTClientV2
 			$params['max_id'] = $max_id;
 		}
 
-		return $this->request_with_pager('statuses/repost_by_me', $page, $count, $params );
+		return $this->request_with_pager('statuses/repost_by_me', $page, $count, $params);
 	}
 
 	/**
@@ -769,9 +801,8 @@ class SaeTClientV2
 	 * @param int $filter_by_type 原创筛选类型，0：全部微博、1：原创的微博，默认为0。
 	 * @return array
 	 */
-	function mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0, $filter_by_type = 0 )
-	{
-		$params = array();
+	function mentions($page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0, $filter_by_type = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -784,9 +815,8 @@ class SaeTClientV2
 		$params['filter_by_source'] = $filter_by_source;
 		$params['filter_by_type'] = $filter_by_type;
 
-		return $this->request_with_pager( 'statuses/mentions', $page, $count, $params );
+		return $this->request_with_pager('statuses/mentions', $page, $count, $params);
 	}
-
 
 	/**
 	 * 根据ID获取单条微博信息内容
@@ -798,10 +828,9 @@ class SaeTClientV2
 	 * @param int $id 要获取已发表的微博ID, 如ID不存在返回空
 	 * @return array
 	 */
-	function show_status( $id )
-	{
+	function show_status($id) {
 		$this->id_format($id);
-		$params = array();
+		$params = array ();
 		$params['id'] = $id;
 		return $this->oauth->get('statuses/show', $params);
 	}
@@ -814,11 +843,10 @@ class SaeTClientV2
 	 * @param string $ids 需要查询的微博ID，用半角逗号分隔，最多不超过50个。
 	 * @return array
 	 */
-    function show_batch( $ids )
-	{
-		$params=array();
-		if (is_array($ids) && !empty($ids)) {
-			foreach($ids as $k => $v) {
+	function show_batch($ids) {
+		$params = array ();
+		if (is_array($ids) && !empty ($ids)) {
+			foreach ($ids as $k => $v) {
 				$this->id_format($ids[$k]);
 			}
 			$params['ids'] = join(',', $ids);
@@ -838,13 +866,12 @@ class SaeTClientV2
 	 * @param int $is_batch 是否使用批量模式，0：否、1：是，默认为0。
 	 * @return array
 	 */
-	function querymid( $id, $type = 1, $is_batch = 0 )
-	{
-		$params = array();
+	function querymid($id, $type = 1, $is_batch = 0) {
+		$params = array ();
 		$params['id'] = $id;
 		$params['type'] = intval($type);
 		$params['is_batch'] = intval($is_batch);
-		return $this->oauth->get( 'statuses/querymid',  $params);
+		return $this->oauth->get('statuses/querymid', $params);
 	}
 
 	/**
@@ -859,9 +886,8 @@ class SaeTClientV2
 	 * @param int $isBase62 MID是否是base62编码，0：否、1：是，默认为0。
 	 * @return array
 	 */
-	function queryid( $mid, $type = 1, $is_batch = 0, $inbox = 0, $isBase62 = 0)
-	{
-		$params = array();
+	function queryid($mid, $type = 1, $is_batch = 0, $inbox = 0, $isBase62 = 0) {
+		$params = array ();
 		$params['mid'] = $mid;
 		$params['type'] = intval($type);
 		$params['is_batch'] = intval($is_batch);
@@ -879,12 +905,11 @@ class SaeTClientV2
 	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * @return array
 	 */
-	function repost_daily( $count = 20, $base_app = 0)
-	{
-		$params = array();
+	function repost_daily($count = 20, $base_app = 0) {
+		$params = array ();
 		$params['count'] = intval($count);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get('statuses/hot/repost_daily',  $params);
+		return $this->oauth->get('statuses/hot/repost_daily', $params);
 	}
 
 	/**
@@ -896,12 +921,11 @@ class SaeTClientV2
 	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * @return array
 	 */
-	function repost_weekly( $count = 20,  $base_app = 0)
-	{
-		$params = array();
+	function repost_weekly($count = 20, $base_app = 0) {
+		$params = array ();
 		$params['count'] = intval($count);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get( 'statuses/hot/repost_weekly',  $params);
+		return $this->oauth->get('statuses/hot/repost_weekly', $params);
 	}
 
 	/**
@@ -913,12 +937,11 @@ class SaeTClientV2
 	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * @return array
 	 */
-	function comments_daily( $count = 20,  $base_app = 0)
-	{
-		$params =  array();
+	function comments_daily($count = 20, $base_app = 0) {
+		$params = array ();
 		$params['count'] = intval($count);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get( 'statuses/hot/comments_daily',  $params);
+		return $this->oauth->get('statuses/hot/comments_daily', $params);
 	}
 
 	/**
@@ -930,14 +953,12 @@ class SaeTClientV2
 	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
 	 * @return array
 	 */
-	function comments_weekly( $count = 20, $base_app = 0)
-	{
-		$params =  array();
+	function comments_weekly($count = 20, $base_app = 0) {
+		$params = array ();
 		$params['count'] = intval($count);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get( 'statuses/hot/comments_weekly', $params);
+		return $this->oauth->get('statuses/hot/comments_weekly', $params);
 	}
-
 
 	/**
 	 * 转发一条微博信息。
@@ -951,16 +972,16 @@ class SaeTClientV2
 	 * @param int $is_comment 是否在转发的同时发表评论，0：否、1：评论给当前微博、2：评论给原微博、3：都评论，默认为0。
 	 * @return array
 	 */
-	function repost( $sid, $text = NULL, $is_comment = 0 )
-	{
+	function repost($sid, $text = NULL, $is_comment = 0) {
 		$this->id_format($sid);
 
-		$params = array();
+		$params = array ();
 		$params['id'] = $sid;
 		$params['is_comment'] = $is_comment;
-		if( $text ) $params['status'] = $text;
+		if ($text)
+			$params['status'] = $text;
 
-		return $this->oauth->post( 'statuses/repost', $params  );
+		return $this->oauth->post('statuses/repost', $params);
 	}
 
 	/**
@@ -973,9 +994,8 @@ class SaeTClientV2
 	 * @param int $id 要删除的微博ID
 	 * @return array
 	 */
-	function delete( $id )
-	{
-		return $this->destroy( $id );
+	function delete($id) {
+		return $this->destroy($id);
 	}
 
 	/**
@@ -988,15 +1008,13 @@ class SaeTClientV2
 	 * @param int $id 要删除的微博ID
 	 * @return array
 	 */
-	function destroy( $id )
-	{
+	function destroy($id) {
 		$this->id_format($id);
-		$params = array();
+		$params = array ();
 		$params['id'] = $id;
-		return $this->oauth->post( 'statuses/destroy',  $params );
+		return $this->oauth->post('statuses/destroy', $params);
 	}
 
-	
 	/**
 	 * 发表微博
 	 *
@@ -1012,9 +1030,8 @@ class SaeTClientV2
 	 * @param mixed $annotations 可选参数。元数据，主要是为了方便第三方应用记录一些适合于自己使用的信息。每条微博可以包含一个或者多个元数据。请以json字串的形式提交，字串长度不超过512个字符，或者数组方式，要求json_encode后字串长度不超过512个字符。具体内容可以自定。例如：'[{"type2":123}, {"a":"b", "c":"d"}]'或array(array("type2"=>123), array("a"=>"b", "c"=>"d"))。
 	 * @return array
 	 */
-	function update( $status, $lat = NULL, $long = NULL, $annotations = NULL )
-	{
-		$params = array();
+	function update($status, $lat = NULL, $long = NULL, $annotations = NULL) {
+		$params = array ();
 		$params['status'] = $status;
 		if ($lat) {
 			$params['lat'] = floatval($lat);
@@ -1024,11 +1041,12 @@ class SaeTClientV2
 		}
 		if (is_string($annotations)) {
 			$params['annotations'] = $annotations;
-		} elseif (is_array($annotations)) {
+		}
+		elseif (is_array($annotations)) {
 			$params['annotations'] = json_encode($annotations);
 		}
 
-		return $this->oauth->post( 'statuses/update', $params );
+		return $this->oauth->post('statuses/update', $params);
 	}
 
 	/**
@@ -1045,11 +1063,10 @@ class SaeTClientV2
 	 * @param float $long 可选参数，经度。有效范围-180.0到+180.0, +表示东经。可选。
 	 * @return array
 	 */
-	function upload( $status, $pic_path, $lat = NULL, $long = NULL )
-	{
-		$params = array();
+	function upload($status, $pic_path, $lat = NULL, $long = NULL) {
+		$params = array ();
 		$params['status'] = $status;
-		$params['pic'] = '@'.$pic_path;
+		$params['pic'] = '@' . $pic_path;
 		if ($lat) {
 			$params['lat'] = floatval($lat);
 		}
@@ -1057,9 +1074,8 @@ class SaeTClientV2
 			$params['long'] = floatval($long);
 		}
 
-		return $this->oauth->post( 'statuses/upload', $params, true );
+		return $this->oauth->post('statuses/upload', $params, true);
 	}
-
 
 	/**
 	 * 指定一个图片URL地址抓取后上传并同时发布一条新微博
@@ -1070,14 +1086,12 @@ class SaeTClientV2
 	 * @param string $url    图片的URL地址，必须以http开头。
 	 * @return array
 	 */
-	function upload_url_text( $status,  $url )
-	{
-		$params = array();
+	function upload_url_text($status, $url) {
+		$params = array ();
 		$params['status'] = $status;
 		$params['url'] = $url;
-		return $this->oauth->post( 'statuses/upload', $params, true );
+		return $this->oauth->post('statuses/upload', $params, true);
 	}
-
 
 	/**
 	 * 获取表情列表
@@ -1090,14 +1104,12 @@ class SaeTClientV2
 	 * @param string $language 语言类别，"cnname"简体，"twname"繁体。默认为"cnname"。可选
 	 * @return array
 	 */
-	function emotions( $type = "face", $language = "cnname" )
-	{
-		$params = array();
+	function emotions($type = "face", $language = "cnname") {
+		$params = array ();
 		$params['type'] = $type;
 		$params['language'] = $language;
-		return $this->oauth->get( 'emotions', $params );
+		return $this->oauth->get('emotions', $params);
 	}
-
 
 	/**
 	 * 根据微博ID返回某条微博的评论列表
@@ -1112,9 +1124,8 @@ class SaeTClientV2
 	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
 	 * @return array
 	 */
-	function get_comments_by_sid( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
-	{
-		$params = array();
+	function get_comments_by_sid($sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0) {
+		$params = array ();
 		$this->id_format($sid);
 		$params['id'] = $sid;
 		if ($since_id) {
@@ -1128,9 +1139,8 @@ class SaeTClientV2
 		$params['count'] = $count;
 		$params['page'] = $page;
 		$params['filter_by_author'] = $filter_by_author;
-		return $this->oauth->get( 'comments/show',  $params );
+		return $this->oauth->get('comments/show', $params);
 	}
-
 
 	/**
 	 * 获取当前登录用户所发出的评论列表
@@ -1144,9 +1154,8 @@ class SaeTClientV2
 	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
 	 * @return array
 	 */
-	function comments_by_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0,  $filter_by_source = 0 )
-	{
-		$params = array();
+	function comments_by_me($page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_source = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -1158,7 +1167,7 @@ class SaeTClientV2
 		$params['count'] = $count;
 		$params['page'] = $page;
 		$params['filter_by_source'] = $filter_by_source;
-		return $this->oauth->get( 'comments/by_me', $params );
+		return $this->oauth->get('comments/by_me', $params);
 	}
 
 	/**
@@ -1173,10 +1182,9 @@ class SaeTClientV2
 	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
 	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
 	 * @return array
-	 */ 
-	function comments_to_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
-	{
-		$params = array();
+	 */
+	function comments_to_me($page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -1189,7 +1197,7 @@ class SaeTClientV2
 		$params['page'] = $page;
 		$params['filter_by_author'] = $filter_by_author;
 		$params['filter_by_source'] = $filter_by_source;
-		return $this->oauth->get( 'comments/to_me', $params );
+		return $this->oauth->get('comments/to_me', $params);
 	}
 
 	/**
@@ -1205,9 +1213,8 @@ class SaeTClientV2
 	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的评论。可选。
 	 * @return array
 	 */
-	function comments_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
-	{
-		$params = array();
+	function comments_timeline($page = 1, $count = 50, $since_id = 0, $max_id = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -1217,9 +1224,8 @@ class SaeTClientV2
 			$params['max_id'] = $max_id;
 		}
 
-		return $this->request_with_pager( 'comments/timeline', $page, $count, $params );
+		return $this->request_with_pager('comments/timeline', $page, $count, $params);
 	}
-
 
 	/**
 	 * 获取最新的提到当前登录用户的评论，即@我的评论
@@ -1233,19 +1239,17 @@ class SaeTClientV2
 	 * @param int $filter_by_author  作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
 	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
 	 * @return array
-	 */ 
-	function comments_mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
-	{
-		$params = array();
+	 */
+	function comments_mentions($page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0) {
+		$params = array ();
 		$params['since_id'] = $since_id;
 		$params['max_id'] = $max_id;
 		$params['count'] = $count;
 		$params['page'] = $page;
 		$params['filter_by_author'] = $filter_by_author;
 		$params['filter_by_source'] = $filter_by_source;
-		return $this->oauth->get( 'comments/mentions', $params );
+		return $this->oauth->get('comments/mentions', $params);
 	}
-
 
 	/**
 	 * 根据评论ID批量返回评论信息
@@ -1255,20 +1259,18 @@ class SaeTClientV2
 	 * @param string $cids 需要查询的批量评论ID，用半角逗号分隔，最大50
 	 * @return array
 	 */
-	function comments_show_batch( $cids )
-	{
-		$params = array();
-		if (is_array( $cids) && !empty( $cids)) {
-			foreach($cids as $k => $v) {
+	function comments_show_batch($cids) {
+		$params = array ();
+		if (is_array($cids) && !empty ($cids)) {
+			foreach ($cids as $k => $v) {
 				$this->id_format($cids[$k]);
 			}
 			$params['cids'] = join(',', $cids);
 		} else {
 			$params['cids'] = $cids;
 		}
-		return $this->oauth->get( 'comments/show_batch', $params );
+		return $this->oauth->get('comments/show_batch', $params);
 	}
-
 
 	/**
 	 * 对一条微博进行评论
@@ -1280,14 +1282,13 @@ class SaeTClientV2
 	 * @param int $comment_ori 当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
 	 * @return array
 	 */
-	function send_comment( $id , $comment , $comment_ori = 0)
-	{
-		$params = array();
+	function send_comment($id, $comment, $comment_ori = 0) {
+		$params = array ();
 		$params['comment'] = $comment;
 		$this->id_format($id);
 		$params['id'] = $id;
 		$params['comment_ori'] = $comment_ori;
-		return $this->oauth->post( 'comments/create', $params );
+		return $this->oauth->post('comments/create', $params);
 	}
 
 	/**
@@ -1300,13 +1301,11 @@ class SaeTClientV2
 	 * @param int $cid 要删除的评论id
 	 * @return array
 	 */
-	function comment_destroy( $cid )
-	{
-		$params = array();
+	function comment_destroy($cid) {
+		$params = array ();
 		$params['cid'] = $cid;
-		return $this->oauth->post( 'comments/destroy', $params);
+		return $this->oauth->post('comments/destroy', $params);
 	}
-
 
 	/**
 	 * 根据评论ID批量删除评论
@@ -1318,20 +1317,18 @@ class SaeTClientV2
 	 * @param string $ids 需要删除的评论ID，用半角逗号隔开，最多20个。
 	 * @return array
 	 */
-	function comment_destroy_batch( $ids )
-	{
-		$params = array();
-		if (is_array($ids) && !empty($ids)) {
-			foreach($ids as $k => $v) {
+	function comment_destroy_batch($ids) {
+		$params = array ();
+		if (is_array($ids) && !empty ($ids)) {
+			foreach ($ids as $k => $v) {
 				$this->id_format($ids[$k]);
 			}
 			$params['cids'] = join(',', $ids);
 		} else {
 			$params['cids'] = $ids;
 		}
-		return $this->oauth->post( 'comments/destroy_batch', $params);
+		return $this->oauth->post('comments/destroy_batch', $params);
 	}
-
 
 	/**
 	 * 回复一条评论
@@ -1344,21 +1341,20 @@ class SaeTClientV2
 	 * @param string $text 评论内容。
 	 * @param int $cid 评论id
 	 * @param int $without_mention 1：回复中不自动加入“回复@用户名”，0：回复中自动加入“回复@用户名”.默认为0.
-     * @param int $comment_ori	  当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
+	 * @param int $comment_ori	  当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
 	 * @return array
 	 */
-	function reply( $sid, $text, $cid, $without_mention = 0, $comment_ori = 0 )
-	{
-		$this->id_format( $sid );
-		$this->id_format( $cid );
-		$params = array();
+	function reply($sid, $text, $cid, $without_mention = 0, $comment_ori = 0) {
+		$this->id_format($sid);
+		$this->id_format($cid);
+		$params = array ();
 		$params['id'] = $sid;
 		$params['comment'] = $text;
 		$params['cid'] = $cid;
 		$params['without_mention'] = $without_mention;
 		$params['comment_ori'] = $comment_ori;
 
-		return $this->oauth->post( 'comments/reply', $params );
+		return $this->oauth->post('comments/reply', $params);
 
 	}
 
@@ -1372,17 +1368,16 @@ class SaeTClientV2
 	 * @param int  $uid 用户UID。
 	 * @return array
 	 */
-	function show_user_by_id( $uid )
-	{
-		$params=array();
-		if ( $uid !== NULL ) {
+	function show_user_by_id($uid) {
+		$params = array ();
+		if ($uid !== NULL) {
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
 
-		return $this->oauth->get('users/show', $params );
+		return $this->oauth->get('users/show', $params);
 	}
-	
+
 	/**
 	 * 根据用户UID或昵称获取用户资料
 	 *
@@ -1393,12 +1388,11 @@ class SaeTClientV2
 	 * @param string  $screen_name 用户UID。
 	 * @return array
 	 */
-	function show_user_by_name( $screen_name )
-	{
-		$params = array();
+	function show_user_by_name($screen_name) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
 
-		return $this->oauth->get( 'users/show', $params );
+		return $this->oauth->get('users/show', $params);
 	}
 
 	/**
@@ -1410,35 +1404,33 @@ class SaeTClientV2
 	 * @param mixed $domain 用户个性域名。例如：lazypeople，而不是http://weibo.com/lazypeople
 	 * @return array
 	 */
-	function domain_show( $domain )
-	{
-		$params = array();
+	function domain_show($domain) {
+		$params = array ();
 		$params['domain'] = $domain;
-		return $this->oauth->get( 'users/domain_show', $params );
+		return $this->oauth->get('users/domain_show', $params);
 	}
 
-	 /**
-	 * 批量获取用户信息按uids
-	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
-	 *
-	 * @param string $uids 需要查询的用户ID，用半角逗号分隔，一次最多20个。
-	 * @return array
-	 */
-	function users_show_batch_by_id( $uids )
-	{
-		$params = array();
-		if (is_array( $uids ) && !empty( $uids )) {
-			foreach( $uids as $k => $v ) {
-				$this->id_format( $uids[$k] );
+	/**
+	* 批量获取用户信息按uids
+	*
+	* 对应API：{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
+	*
+	* @param string $uids 需要查询的用户ID，用半角逗号分隔，一次最多20个。
+	* @return array
+	*/
+	function users_show_batch_by_id($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
+				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
 		} else {
 			$params['uids'] = $uids;
 		}
-		return $this->oauth->get( 'users/show_batch', $params );
+		return $this->oauth->get('users/show_batch', $params);
 	}
-	
+
 	/**
 	 * 批量获取用户信息按screen_name
 	 *
@@ -1447,17 +1439,15 @@ class SaeTClientV2
 	 * @param string  $screen_name 需要查询的用户昵称，用半角逗号分隔，一次最多20个。
 	 * @return array
 	 */
-	function users_show_batch_by_name( $screen_name )
-	{
-		$params = array();
-		if (is_array( $screen_name ) && !empty( $screen_name )) {
+	function users_show_batch_by_name($screen_name) {
+		$params = array ();
+		if (is_array($screen_name) && !empty ($screen_name)) {
 			$params['screen_name'] = join(',', $screen_name);
 		} else {
 			$params['screen_name'] = $screen_name;
 		}
-		return $this->oauth->get( 'users/show_batch', $params );
+		return $this->oauth->get('users/show_batch', $params);
 	}
-
 
 	/**
 	 * 获取用户的关注列表
@@ -1471,17 +1461,15 @@ class SaeTClientV2
 	 * @param int $uid  要获取的用户的ID。
 	 * @return array
 	 */
-	function friends_by_id( $uid, $cursor = 0, $count = 50 )
-	{
-		$params = array();
+	function friends_by_id($uid, $cursor = 0, $count = 50) {
+		$params = array ();
 		$params['cursor'] = $cursor;
 		$params['count'] = $count;
 		$params['uid'] = $uid;
 
-		return $this->oauth->get( 'friendships/friends', $params );
+		return $this->oauth->get('friendships/friends', $params);
 	}
-	
-	
+
 	/**
 	 * 获取用户的关注列表
 	 *
@@ -1494,15 +1482,13 @@ class SaeTClientV2
 	 * @param string $screen_name  要获取的用户的 screen_name
 	 * @return array
 	 */
-	function friends_by_name( $screen_name, $cursor = 0, $count = 50 )
-	{
-		$params = array();
+	function friends_by_name($screen_name, $cursor = 0, $count = 50) {
+		$params = array ();
 		$params['cursor'] = $cursor;
 		$params['count'] = $count;
 		$params['screen_name'] = $screen_name;
-		return $this->oauth->get( 'friendships/friends', $params );
+		return $this->oauth->get('friendships/friends', $params);
 	}
-
 
 	/**
 	 * 获取两个用户之间的共同关注人列表
@@ -1515,14 +1501,13 @@ class SaeTClientV2
 	 * @param int $page  返回结果的页码，默认为1。
 	 * @return array
 	 */
-	function friends_in_common( $uid, $suid = NULL, $page = 1, $count = 50 )
-	{
-		$params = array();
+	function friends_in_common($uid, $suid = NULL, $page = 1, $count = 50) {
+		$params = array ();
 		$params['uid'] = $uid;
 		$params['suid'] = $suid;
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'friendships/friends/in_common', $params  );
+		return $this->oauth->get('friendships/friends/in_common', $params);
 	}
 
 	/**
@@ -1536,14 +1521,13 @@ class SaeTClientV2
 	 * @param int $sort  排序类型，0：按关注时间最近排序，默认为0。
 	 * @return array
 	 **/
-	function bilateral( $uid, $page = 1, $count = 50, $sort = 0 )
-	{
-		$params = array();
+	function bilateral($uid, $page = 1, $count = 50, $sort = 0) {
+		$params = array ();
 		$params['uid'] = $uid;
 		$params['count'] = $count;
 		$params['page'] = $page;
 		$params['sort'] = $sort;
-		return $this->oauth->get( 'friendships/friends/bilateral', $params  );
+		return $this->oauth->get('friendships/friends/bilateral', $params);
 	}
 
 	/**
@@ -1557,14 +1541,13 @@ class SaeTClientV2
 	 * @param int $sort  排序类型，0：按关注时间最近排序，默认为0。
 	 * @return array
 	 **/
-	function bilateral_ids( $uid, $page = 1, $count = 50, $sort = 0)
-	{
-		$params = array();
+	function bilateral_ids($uid, $page = 1, $count = 50, $sort = 0) {
+		$params = array ();
 		$params['uid'] = $uid;
 		$params['count'] = $count;
 		$params['page'] = $page;
 		$params['sort'] = $sort;
-		return $this->oauth->get( 'friendships/friends/bilateral/ids',  $params  );
+		return $this->oauth->get('friendships/friends/bilateral/ids', $params);
 	}
 
 	/**
@@ -1579,16 +1562,15 @@ class SaeTClientV2
 	 * @param int $uid 要获取的用户 UID，默认为当前用户
 	 * @return array
 	 */
-	function friends_ids_by_id( $uid, $cursor = 0, $count = 500 )
-	{
-		$params = array();
+	function friends_ids_by_id($uid, $cursor = 0, $count = 500) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		$params['cursor'] = $cursor;
 		$params['count'] = $count;
-		return $this->oauth->get( 'friendships/friends/ids', $params );
+		return $this->oauth->get('friendships/friends/ids', $params);
 	}
-	
+
 	/**
 	 * 获取用户的关注列表uid
 	 *
@@ -1601,15 +1583,13 @@ class SaeTClientV2
 	 * @param string $screen_name 要获取的用户的 screen_name，默认为当前用户
 	 * @return array
 	 */
-	function friends_ids_by_name( $screen_name, $cursor = 0, $count = 500 )
-	{
-		$params = array();
+	function friends_ids_by_name($screen_name, $cursor = 0, $count = 500) {
+		$params = array ();
 		$params['cursor'] = $cursor;
 		$params['count'] = $count;
 		$params['screen_name'] = $screen_name;
-		return $this->oauth->get( 'friendships/friends/ids', $params );
+		return $this->oauth->get('friendships/friends/ids', $params);
 	}
-
 
 	/**
 	 * 批量获取当前登录用户的关注人的备注信息
@@ -1619,18 +1599,17 @@ class SaeTClientV2
 	 * @param string $uids  需要获取备注的用户UID，用半角逗号分隔，最多不超过50个。
 	 * @return array
 	 **/
-	function friends_remark_batch( $uids )
-	{
-		$params = array();
-		if (is_array( $uids ) && !empty( $uids )) {
-			foreach( $uids as $k => $v) {
-				$this->id_format( $uids[$k] );
+	function friends_remark_batch($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
+				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
 		} else {
 			$params['uids'] = $uids;
 		}
-		return $this->oauth->get( 'friendships/friends/remark_batch', $params  );
+		return $this->oauth->get('friendships/friends/remark_batch', $params);
 	}
 
 	/**
@@ -1643,16 +1622,15 @@ class SaeTClientV2
 	 * @param int $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
-	function followers_by_id( $uid , $cursor = 0 , $count = 50)
-	{
-		$params = array();
+	function followers_by_id($uid, $cursor = 0, $count = 50) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		$params['count'] = $count;
 		$params['cursor'] = $cursor;
-		return $this->oauth->get( 'friendships/followers', $params  );
+		return $this->oauth->get('friendships/followers', $params);
 	}
-	
+
 	/**
 	 * 获取用户的粉丝列表
 	 *
@@ -1663,13 +1641,12 @@ class SaeTClientV2
 	 * @param int  $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
-	function followers_by_name( $screen_name, $cursor = 0 , $count = 50 )
-	{
-		$params = array();
+	function followers_by_name($screen_name, $cursor = 0, $count = 50) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
 		$params['count'] = $count;
 		$params['cursor'] = $cursor;
-		return $this->oauth->get( 'friendships/followers', $params  );
+		return $this->oauth->get('friendships/followers', $params);
 	}
 
 	/**
@@ -1682,16 +1659,15 @@ class SaeTClientV2
 	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
-	function followers_ids_by_id( $uid, $cursor = 0 , $count = 50 )
-	{
-		$params = array();
+	function followers_ids_by_id($uid, $cursor = 0, $count = 50) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		$params['count'] = $count;
 		$params['cursor'] = $cursor;
-		return $this->oauth->get( 'friendships/followers/ids', $params  );
+		return $this->oauth->get('friendships/followers/ids', $params);
 	}
-	
+
 	/**
 	 * 获取用户的粉丝列表uid
 	 *
@@ -1702,13 +1678,12 @@ class SaeTClientV2
 	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 **/
-	function followers_ids_by_name( $screen_name, $cursor = 0 , $count = 50 )
-	{
-		$params = array();
+	function followers_ids_by_name($screen_name, $cursor = 0, $count = 50) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
 		$params['count'] = $count;
 		$params['cursor'] = $cursor;
-		return $this->oauth->get( 'friendships/followers/ids', $params  );
+		return $this->oauth->get('friendships/followers/ids', $params);
 	}
 
 	/**
@@ -1718,17 +1693,15 @@ class SaeTClientV2
 	 *
 	 * @param int $uid 需要查询的用户UID。
 	 * @param int $count 返回的记录条数，默认为20，最大不超过200。
-     * @return array
+	 * @return array
 	 **/
-	function followers_active( $uid,  $count = 20)
-	{
-		$param = array();
+	function followers_active($uid, $count = 20) {
+		$param = array ();
 		$this->id_format($uid);
 		$param['uid'] = $uid;
 		$param['count'] = $count;
-		return $this->oauth->get( 'friendships/followers/active', $param);
+		return $this->oauth->get('friendships/followers/active', $param);
 	}
-
 
 	/**
 	 * 获取当前登录用户的关注人中又关注了指定用户的用户列表
@@ -1740,14 +1713,13 @@ class SaeTClientV2
 	 * @param int $page 返回结果的页码，默认为1。
 	 * @return array
 	 **/
-	function friends_chain_followers( $uid, $page = 1, $count = 50 )
-	{
-		$params = array();
+	function friends_chain_followers($uid, $page = 1, $count = 50) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'friendships/friends_chain/followers',  $params );
+		return $this->oauth->get('friendships/friends_chain/followers', $params);
 	}
 
 	/**
@@ -1761,18 +1733,17 @@ class SaeTClientV2
 	 * @param mixed $source_id 源用户UID，可选，默认为当前的用户
 	 * @return array
 	 */
-	function is_followed_by_id( $target_id, $source_id = NULL )
-	{
-		$params = array();
+	function is_followed_by_id($target_id, $source_id = NULL) {
+		$params = array ();
 		$this->id_format($target_id);
 		$params['target_id'] = $target_id;
 
-		if ( $source_id != NULL ) {
+		if ($source_id != NULL) {
 			$this->id_format($source_id);
 			$params['source_id'] = $source_id;
 		}
 
-		return $this->oauth->get( 'friendships/show', $params );
+		return $this->oauth->get('friendships/show', $params);
 	}
 
 	/**
@@ -1786,16 +1757,15 @@ class SaeTClientV2
 	 * @param mixed $source_name 源用户的微博昵称，可选，默认为当前的用户
 	 * @return array
 	 */
-	function is_followed_by_name( $target_name, $source_name = NULL )
-	{
-		$params = array();
+	function is_followed_by_name($target_name, $source_name = NULL) {
+		$params = array ();
 		$params['target_screen_name'] = $target_name;
 
-		if ( $source_name != NULL ) {
+		if ($source_name != NULL) {
 			$params['source_screen_name'] = $source_name;
 		}
 
-		return $this->oauth->get( 'friendships/show', $params );
+		return $this->oauth->get('friendships/show', $params);
 	}
 
 	/**
@@ -1808,14 +1778,13 @@ class SaeTClientV2
 	 * @param int $uid 要关注的用户UID
 	 * @return array
 	 */
-	function follow_by_id( $uid )
-	{
-		$params = array();
+	function follow_by_id($uid) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
-		return $this->oauth->post( 'friendships/create', $params );
+		return $this->oauth->post('friendships/create', $params);
 	}
-	
+
 	/**
 	 * 关注一个用户。
 	 *
@@ -1826,13 +1795,11 @@ class SaeTClientV2
 	 * @param string $screen_name 要关注的用户昵称
 	 * @return array
 	 */
-	function follow_by_name( $screen_name )
-	{
-		$params = array();
+	function follow_by_name($screen_name) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
-		return $this->oauth->post( 'friendships/create', $params);
+		return $this->oauth->post('friendships/create', $params);
 	}
-
 
 	/**
 	 * 根据用户UID批量关注用户
@@ -1842,18 +1809,17 @@ class SaeTClientV2
 	 * @param string $uids 要关注的用户UID，用半角逗号分隔，最多不超过20个。
 	 * @return array
 	 */
-	function follow_create_batch( $uids )
-	{
-		$params = array();
-		if (is_array($uids) && !empty($uids)) {
-			foreach($uids as $k => $v) {
+	function follow_create_batch($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
 				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
 		} else {
 			$params['uids'] = $uids;
 		}
-		return $this->oauth->post( 'friendships/create_batch', $params);
+		return $this->oauth->post('friendships/create_batch', $params);
 	}
 
 	/**
@@ -1866,14 +1832,13 @@ class SaeTClientV2
 	 * @param int $uid 要取消关注的用户UID
 	 * @return array
 	 */
-	function unfollow_by_id( $uid )
-	{
-		$params = array();
+	function unfollow_by_id($uid) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
-		return $this->oauth->post( 'friendships/destroy', $params);
+		return $this->oauth->post('friendships/destroy', $params);
 	}
-	
+
 	/**
 	 * 取消关注某用户
 	 *
@@ -1884,11 +1849,10 @@ class SaeTClientV2
 	 * @param string $screen_name 要取消关注的用户昵称
 	 * @return array
 	 */
-	function unfollow_by_name( $screen_name )
-	{
-		$params = array();
+	function unfollow_by_name($screen_name) {
+		$params = array ();
 		$params['screen_name'] = $screen_name;
-		return $this->oauth->post( 'friendships/destroy', $params);
+		return $this->oauth->post('friendships/destroy', $params);
 	}
 
 	/**
@@ -1902,13 +1866,12 @@ class SaeTClientV2
 	 * @param string $remark 备注信息。
 	 * @return array
 	 */
-	function update_remark( $uid, $remark )
-	{
-		$params = array();
+	function update_remark($uid, $remark) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		$params['remark'] = $remark;
-		return $this->oauth->post( 'friendships/remark/update', $params);
+		return $this->oauth->post('friendships/remark/update', $params);
 	}
 
 	/**
@@ -1924,9 +1887,8 @@ class SaeTClientV2
 	 * @param int64 $max_id 返回ID不大于max_id(时间不晚于max_id)的私信。可选。
 	 * @return array
 	 */
-	function list_dm( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
-	{
-		$params = array();
+	function list_dm($page = 1, $count = 50, $since_id = 0, $max_id = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -1936,7 +1898,7 @@ class SaeTClientV2
 			$params['max_id'] = $max_id;
 		}
 
-		return $this->request_with_pager( 'direct_messages', $page, $count, $params );
+		return $this->request_with_pager('direct_messages', $page, $count, $params);
 	}
 
 	/**
@@ -1952,9 +1914,8 @@ class SaeTClientV2
 	 * @param int64 $max_id 返回ID不大于max_id(时间不晚于max_id)的私信。可选。
 	 * @return array
 	 */
-	function list_dm_sent( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
-	{
-		$params = array();
+	function list_dm_sent($page = 1, $count = 50, $since_id = 0, $max_id = 0) {
+		$params = array ();
 		if ($since_id) {
 			$this->id_format($since_id);
 			$params['since_id'] = $since_id;
@@ -1964,9 +1925,8 @@ class SaeTClientV2
 			$params['max_id'] = $max_id;
 		}
 
-		return $this->request_with_pager( 'direct_messages/sent', $page, $count, $params );
+		return $this->request_with_pager('direct_messages/sent', $page, $count, $params);
 	}
-
 
 	/**
 	 * 获取与当前登录用户有私信往来的用户列表，与该用户往来的最新私信
@@ -1977,13 +1937,12 @@ class SaeTClientV2
 	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
 	 * @return array
 	 */
-	function dm_user_list( $count = 20, $cursor = 0)
-	{
-		$params = array();
+	function dm_user_list($count = 20, $cursor = 0) {
+		$params = array ();
 		$params['count'] = $count;
 		$params['cursor'] = $cursor;
-		return $this->oauth->get( 'direct_messages/user_list', $params );
-	} 
+		return $this->oauth->get('direct_messages/user_list', $params);
+	}
 
 	/**
 	 * 获取与指定用户的往来私信列表
@@ -1997,9 +1956,8 @@ class SaeTClientV2
 	 * @param int $page  返回结果的页码，默认为1。
 	 * @return array
 	 */
-	function dm_conversation( $uid, $page = 1, $count = 50, $since_id = 0, $max_id = 0)
-	{
-		$params = array();
+	function dm_conversation($uid, $page = 1, $count = 50, $since_id = 0, $max_id = 0) {
+		$params = array ();
 		$this->id_format($uid);
 		$params['uid'] = $uid;
 		if ($since_id) {
@@ -2012,7 +1970,7 @@ class SaeTClientV2
 		}
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'direct_messages/conversation', $params );
+		return $this->oauth->get('direct_messages/conversation', $params);
 	}
 
 	/**
@@ -2023,18 +1981,17 @@ class SaeTClientV2
 	 * @param string  $dmids 需要查询的私信ID，用半角逗号分隔，一次最多50个
 	 * @return array
 	 */
-	function dm_show_batch( $dmids )
-	{
-		$params = array();
-		if (is_array($dmids) && !empty($dmids)) {
-			foreach($dmids as $k => $v) {
+	function dm_show_batch($dmids) {
+		$params = array ();
+		if (is_array($dmids) && !empty ($dmids)) {
+			foreach ($dmids as $k => $v) {
 				$this->id_format($dmids[$k]);
 			}
 			$params['dmids'] = join(',', $dmids);
 		} else {
 			$params['dmids'] = $dmids;
 		}
-		return $this->oauth->get( 'direct_messages/show_batch',  $params );
+		return $this->oauth->get('direct_messages/show_batch', $params);
 	}
 
 	/**
@@ -2049,19 +2006,18 @@ class SaeTClientV2
 	 * @param int $id 需要发送的微博ID。
 	 * @return array
 	 */
-	function send_dm_by_id( $uid, $text, $id = NULL )
-	{
-		$params = array();
-		$this->id_format( $uid );
+	function send_dm_by_id($uid, $text, $id = NULL) {
+		$params = array ();
+		$this->id_format($uid);
 		$params['text'] = $text;
 		$params['uid'] = $uid;
 		if ($id) {
-			$this->id_format( $id );
+			$this->id_format($id);
 			$params['id'] = $id;
 		}
-		return $this->oauth->post( 'direct_messages/new', $params );
+		return $this->oauth->post('direct_messages/new', $params);
 	}
-	
+
 	/**
 	 * 发送私信
 	 *
@@ -2074,16 +2030,15 @@ class SaeTClientV2
 	 * @param int $id 需要发送的微博ID。
 	 * @return array
 	 */
-	function send_dm_by_name( $screen_name, $text, $id = NULL )
-	{
-		$params = array();
+	function send_dm_by_name($screen_name, $text, $id = NULL) {
+		$params = array ();
 		$params['text'] = $text;
 		$params['screen_name'] = $screen_name;
 		if ($id) {
-			$this->id_format( $id );
+			$this->id_format($id);
 			$params['id'] = $id;
 		}
-		return $this->oauth->post( 'direct_messages/new', $params);
+		return $this->oauth->post('direct_messages/new', $params);
 	}
 
 	/**
@@ -2096,10 +2051,9 @@ class SaeTClientV2
 	 * @param int $did 要删除的私信主键ID
 	 * @return array
 	 */
-	function delete_dm( $did )
-	{
+	function delete_dm($did) {
 		$this->id_format($did);
-		$params = array();
+		$params = array ();
 		$params['id'] = $did;
 		return $this->oauth->post('direct_messages/destroy', $params);
 	}
@@ -2114,11 +2068,10 @@ class SaeTClientV2
 	 * @param mixed $dids 欲删除的一组私信ID，用半角逗号隔开，或者由一组评论ID组成的数组。最多20个。例如："4976494627, 4976262053"或array(4976494627,4976262053);
 	 * @return array
 	 */
-	function delete_dms( $dids )
-	{
-		$params = array();
-		if (is_array($dids) && !empty($dids)) {
-			foreach($dids as $k => $v) {
+	function delete_dms($dids) {
+		$params = array ();
+		if (is_array($dids) && !empty ($dids)) {
+			foreach ($dids as $k => $v) {
 				$this->id_format($dids[$k]);
 			}
 			$params['ids'] = join(',', $dids);
@@ -2126,10 +2079,8 @@ class SaeTClientV2
 			$params['ids'] = $dids;
 		}
 
-		return $this->oauth->post( 'direct_messages/destroy_batch', $params);
+		return $this->oauth->post('direct_messages/destroy_batch', $params);
 	}
-	
-
 
 	/**
 	 * 获取用户基本信息
@@ -2139,14 +2090,13 @@ class SaeTClientV2
 	 * @param int $uid  需要获取基本信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	function account_profile_basic( $uid = NULL  )
-	{
-		$params = array();
+	function account_profile_basic($uid = NULL) {
+		$params = array ();
 		if ($uid) {
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
-		return $this->oauth->get( 'account/profile/basic', $params );
+		return $this->oauth->get('account/profile/basic', $params);
 	}
 
 	/**
@@ -2157,14 +2107,13 @@ class SaeTClientV2
 	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	function account_education( $uid = NULL )
-	{
-		$params = array();
+	function account_education($uid = NULL) {
+		$params = array ();
 		if ($uid) {
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
-		return $this->oauth->get( 'account/profile/education', $params );
+		return $this->oauth->get('account/profile/education', $params);
 	}
 
 	/**
@@ -2175,11 +2124,10 @@ class SaeTClientV2
 	 * @param string $uids 需要获取教育信息的用户UID，用半角逗号分隔，最多不超过20。
 	 * @return array
 	 */
-	function account_education_batch( $uids  )
-	{
-		$params = array();
-		if (is_array($uids) && !empty($uids)) {
-			foreach($uids as $k => $v) {
+	function account_education_batch($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
 				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
@@ -2187,9 +2135,8 @@ class SaeTClientV2
 			$params['uids'] = $uids;
 		}
 
-		return $this->oauth->get( 'account/profile/education_batch', $params );
+		return $this->oauth->get('account/profile/education_batch', $params);
 	}
-
 
 	/**
 	 * 获取用户的职业信息
@@ -2199,14 +2146,13 @@ class SaeTClientV2
 	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
 	 * @return array
 	 */
-	function account_career( $uid = NULL )
-	{
-		$params = array();
+	function account_career($uid = NULL) {
+		$params = array ();
 		if ($uid) {
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
-		return $this->oauth->get( 'account/profile/career', $params );
+		return $this->oauth->get('account/profile/career', $params);
 	}
 
 	/**
@@ -2217,11 +2163,10 @@ class SaeTClientV2
 	 * @param string $uids 需要获取教育信息的用户UID，用半角逗号分隔，最多不超过20。
 	 * @return array
 	 */
-	function account_career_batch( $uids )
-	{
-		$params = array();
-		if (is_array($uids) && !empty($uids)) {
-			foreach($uids as $k => $v) {
+	function account_career_batch($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
+			foreach ($uids as $k => $v) {
 				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
@@ -2229,7 +2174,7 @@ class SaeTClientV2
 			$params['uids'] = $uids;
 		}
 
-		return $this->oauth->get( 'account/profile/career_batch', $params );
+		return $this->oauth->get('account/profile/career_batch', $params);
 	}
 
 	/**
@@ -2240,8 +2185,7 @@ class SaeTClientV2
 	 * @access public
 	 * @return array
 	 */
-	function get_privacy()
-	{
+	function get_privacy() {
 		return $this->oauth->get('account/get_privacy');
 	}
 
@@ -2262,11 +2206,10 @@ class SaeTClientV2
 	 * @access public
 	 * @return array
 	 */
-	function school_list( $query )
-	{
+	function school_list($query) {
 		$params = $query;
 
-		return $this->oauth->get( 'account/profile/school_list', $params );
+		return $this->oauth->get('account/profile/school_list', $params);
 	}
 
 	/**
@@ -2277,9 +2220,8 @@ class SaeTClientV2
 	 * @access public
 	 * @return array
 	 */
-	function rate_limit_status()
-	{
-		return $this->oauth->get( 'account/rate_limit_status' );
+	function rate_limit_status() {
+		return $this->oauth->get('account/rate_limit_status');
 	}
 
 	/**
@@ -2290,11 +2232,9 @@ class SaeTClientV2
 	 * @access public
 	 * @return array
 	 */
-	function get_uid()
-	{
-		return $this->oauth->get( 'account/get_uid' );
+	function get_uid() {
+		return $this->oauth->get('account/get_uid');
 	}
-
 
 	/**
 	 * 更改用户资料
@@ -2330,11 +2270,9 @@ class SaeTClientV2
 	 *  - 只填某日时，采用0000-00-28格式。
 	 * @return array
 	 */
-	function update_profile( $profile )
-	{
-		return $this->oauth->post( 'account/profile/basic_update',  $profile);
+	function update_profile($profile) {
+		return $this->oauth->post('account/profile/basic_update', $profile);
 	}
-
 
 	/**
 	 * 设置教育信息
@@ -2352,9 +2290,8 @@ class SaeTClientV2
 	 *  - visible		int		开放等级，0：仅自己可见、1：关注的人可见、2：所有人可见。
 	 * @return array
 	 */
-	function edu_update( $edu_update )
-	{
-		return $this->oauth->post( 'account/profile/edu_update',  $edu_update);
+	function edu_update($edu_update) {
+		return $this->oauth->post('account/profile/edu_update', $edu_update);
 	}
 
 	/**
@@ -2365,12 +2302,11 @@ class SaeTClientV2
 	 * @param int $id 教育信息里的学校ID。
 	 * @return array
 	 */
-	function edu_destroy( $id )
-	{
-		$this->id_format( $id );
-		$params = array();
+	function edu_destroy($id) {
+		$this->id_format($id);
+		$params = array ();
 		$params['id'] = $id;
-		return $this->oauth->post( 'account/profile/edu_destroy', $params);
+		return $this->oauth->post('account/profile/edu_destroy', $params);
 	}
 
 	/**
@@ -2392,9 +2328,8 @@ class SaeTClientV2
 	 * 参数id为空，则为新建职业信息，参数company变为必填项，参数id非空，则为更新，参数company可选
 	 * @return array
 	 */
-	function car_update( $car_update )
-	{
-		return $this->oauth->post( 'account/profile/car_update', $car_update);
+	function car_update($car_update) {
+		return $this->oauth->post('account/profile/car_update', $car_update);
 	}
 
 	/**
@@ -2406,12 +2341,11 @@ class SaeTClientV2
 	 * @param int $id  职业信息里的公司ID
 	 * @return array
 	 */
-	function car_destroy( $id )
-	{
+	function car_destroy($id) {
 		$this->id_format($id);
-		$params = array();
+		$params = array ();
 		$params['id'] = $id;
-		return $this->oauth->post( 'account/profile/car_destroy', $params);
+		return $this->oauth->post('account/profile/car_destroy', $params);
 	}
 
 	/**
@@ -2422,9 +2356,8 @@ class SaeTClientV2
 	 * @param string $image_path 要上传的头像路径, 支持url。[只支持png/jpg/gif三种格式, 增加格式请修改get_image_mime方法] 必须为小于700K的有效的GIF, JPG图片. 如果图片大于500像素将按比例缩放。
 	 * @return array
 	 */
-	function update_profile_image( $image_path )
-	{
-		$params = array();
+	function update_profile_image($image_path) {
+		$params = array ();
 		$params['image'] = "@{$image_path}";
 
 		return $this->oauth->post('account/avatar/upload', $params);
@@ -2446,11 +2379,9 @@ class SaeTClientV2
 	 * 以上参数全部选填
 	 * @return array
 	 */
-	function update_privacy( $privacy_settings )
-	{
-		return $this->oauth->post( 'account/update_privacy', $privacy_settings);
+	function update_privacy($privacy_settings) {
+		return $this->oauth->post('account/update_privacy', $privacy_settings);
 	}
-
 
 	/**
 	 * 获取当前用户的收藏列表
@@ -2463,15 +2394,13 @@ class SaeTClientV2
 	 * @param  int $count 单页返回的记录条数，默认为50。
 	 * @return array
 	 */
-	function get_favorites( $page = 1, $count = 50 )
-	{
-		$params = array();
+	function get_favorites($page = 1, $count = 50) {
+		$params = array ();
 		$params['page'] = intval($page);
 		$params['count'] = intval($count);
 
-		return $this->oauth->get( 'favorites', $params );
+		return $this->oauth->get('favorites', $params);
 	}
-
 
 	/**
 	 * 根据收藏ID获取指定的收藏信息
@@ -2483,14 +2412,12 @@ class SaeTClientV2
 	 * @param int $id 需要查询的收藏ID。
 	 * @return array
 	 */
-	function favorites_show( $id )
-	{
-		$params = array();
+	function favorites_show($id) {
+		$params = array ();
 		$this->id_format($id);
 		$params['id'] = $id;
-		return $this->oauth->get( 'favorites/show', $params );
+		return $this->oauth->get('favorites/show', $params);
 	}
-
 
 	/**
 	 * 根据标签获取当前登录用户该标签下的收藏列表
@@ -2503,15 +2430,13 @@ class SaeTClientV2
 	 * @param int $page 返回结果的页码，默认为1。
 	 * @return array
 	 */
-	function favorites_by_tags( $tid, $page = 1, $count = 50)
-	{
-		$params = array();
+	function favorites_by_tags($tid, $page = 1, $count = 50) {
+		$params = array ();
 		$params['tid'] = $tid;
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'favorites/by_tags', $params );
+		return $this->oauth->get('favorites/by_tags', $params);
 	}
-
 
 	/**
 	 * 获取当前登录用户的收藏标签列表
@@ -2523,14 +2448,12 @@ class SaeTClientV2
 	 * @param int $page 返回结果的页码，默认为1。
 	 * @return array
 	 */
-	function favorites_tags( $page = 1, $count = 50)
-	{
-		$params = array();
+	function favorites_tags($page = 1, $count = 50) {
+		$params = array ();
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'favorites/tags', $params );
+		return $this->oauth->get('favorites/tags', $params);
 	}
-
 
 	/**
 	 * 收藏一条微博信息
@@ -2541,13 +2464,12 @@ class SaeTClientV2
 	 * @param int $sid 收藏的微博id
 	 * @return array
 	 */
-	function add_to_favorites( $sid )
-	{
+	function add_to_favorites($sid) {
 		$this->id_format($sid);
-		$params = array();
+		$params = array ();
 		$params['id'] = $sid;
 
-		return $this->oauth->post( 'favorites/create', $params );
+		return $this->oauth->post('favorites/create', $params);
 	}
 
 	/**
@@ -2559,14 +2481,12 @@ class SaeTClientV2
 	 * @param int $id 要删除的收藏微博信息ID.
 	 * @return array
 	 */
-	function remove_from_favorites( $id )
-	{
+	function remove_from_favorites($id) {
 		$this->id_format($id);
-		$params = array();
+		$params = array ();
 		$params['id'] = $id;
-		return $this->oauth->post( 'favorites/destroy', $params);
+		return $this->oauth->post('favorites/destroy', $params);
 	}
-
 
 	/**
 	 * 批量删除微博收藏。
@@ -2578,10 +2498,9 @@ class SaeTClientV2
 	 * @param mixed $fids 欲删除的一组私信ID，用半角逗号隔开，或者由一组评论ID组成的数组。最多20个。例如："231101027525486630,201100826122315375"或array(231101027525486630,201100826122315375);
 	 * @return array
 	 */
-	function remove_from_favorites_batch( $fids )
-	{
-		$params = array();
-		if (is_array($fids) && !empty($fids)) {
+	function remove_from_favorites_batch($fids) {
+		$params = array ();
+		if (is_array($fids) && !empty ($fids)) {
 			foreach ($fids as $k => $v) {
 				$this->id_format($fids[$k]);
 			}
@@ -2590,9 +2509,8 @@ class SaeTClientV2
 			$params['ids'] = $fids;
 		}
 
-		return $this->oauth->post( 'favorites/destroy_batch', $params);
+		return $this->oauth->post('favorites/destroy_batch', $params);
 	}
-
 
 	/**
 	 * 更新一条收藏的收藏标签
@@ -2604,11 +2522,10 @@ class SaeTClientV2
 	 * @param string $tags 需要更新的标签内容，用半角逗号分隔，最多不超过2条。
 	 * @return array
 	 */
-	function favorites_tags_update( $id,  $tags )
-	{
-		$params = array();
+	function favorites_tags_update($id, $tags) {
+		$params = array ();
 		$params['id'] = $id;
-		if (is_array($tags) && !empty($tags)) {
+		if (is_array($tags) && !empty ($tags)) {
 			foreach ($tags as $k => $v) {
 				$this->id_format($tags[$k]);
 			}
@@ -2616,7 +2533,7 @@ class SaeTClientV2
 		} else {
 			$params['tags'] = $tags;
 		}
-		return $this->oauth->post( 'favorites/tags/update', $params );
+		return $this->oauth->post('favorites/tags/update', $params);
 	}
 
 	/**
@@ -2628,12 +2545,11 @@ class SaeTClientV2
 	 * @param string $tag  需要更新的标签内容。必填
 	 * @return array
 	 */
-	function favorites_update_batch( $tid, $tag )
-	{
-		$params = array();
+	function favorites_update_batch($tid, $tag) {
+		$params = array ();
 		$params['tid'] = $tid;
 		$params['tag'] = $tag;
-		return $this->oauth->post( 'favorites/tags/update_batch', $params);
+		return $this->oauth->post('favorites/tags/update_batch', $params);
 	}
 
 	/**
@@ -2645,11 +2561,10 @@ class SaeTClientV2
 	 * @param int $tid  需要更新的标签ID。必填
 	 * @return array
 	 */
-	function favorites_tags_destroy_batch( $tid )
-	{
-		$params = array();
+	function favorites_tags_destroy_batch($tid) {
+		$params = array ();
 		$params['tid'] = $tid;
-		return $this->oauth->post( 'favorites/tags/destroy_batch', $params);
+		return $this->oauth->post('favorites/tags/destroy_batch', $params);
 	}
 
 	/**
@@ -2662,21 +2577,19 @@ class SaeTClientV2
 	 * @param int $count 单页大小。缺省值10。可选。
 	 * @return array
 	 */
-	function get_trends( $uid = NULL, $page = 1, $count = 10 )
-	{
-		$params = array();
+	function get_trends($uid = NULL, $page = 1, $count = 10) {
+		$params = array ();
 		if ($uid) {
 			$params['uid'] = $uid;
 		} else {
 			$user_info = $this->get_uid();
 			$params['uid'] = $user_info['uid'];
 		}
-		$this->id_format( $params['uid'] );
+		$this->id_format($params['uid']);
 		$params['page'] = $page;
 		$params['count'] = $count;
-		return $this->oauth->get( 'trends', $params );
+		return $this->oauth->get('trends', $params);
 	}
-
 
 	/**
 	 * 判断当前用户是否关注某话题
@@ -2687,11 +2600,10 @@ class SaeTClientV2
 	 * @param string $trend_name 话题关键字。
 	 * @return array
 	 */
-	function trends_is_follow( $trend_name )
-	{
-		$params = array();
+	function trends_is_follow($trend_name) {
+		$params = array ();
 		$params['trend_name'] = $trend_name;
-		return $this->oauth->get( 'trends/is_follow', $params );
+		return $this->oauth->get('trends/is_follow', $params);
 	}
 
 	/**
@@ -2702,12 +2614,11 @@ class SaeTClientV2
 	 * @param  int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
 	 * @return array
 	 */
-	function hourly_trends( $base_app = 0 )
-	{
-		$params = array();
+	function hourly_trends($base_app = 0) {
+		$params = array ();
 		$params['base_app'] = $base_app;
 
-		return $this->oauth->get( 'trends/hourly', $params );
+		return $this->oauth->get('trends/hourly', $params);
 	}
 
 	/**
@@ -2718,12 +2629,11 @@ class SaeTClientV2
 	 * @param int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
 	 * @return array
 	 */
-	function daily_trends( $base_app = 0 )
-	{
-		$params = array();
+	function daily_trends($base_app = 0) {
+		$params = array ();
 		$params['base_app'] = $base_app;
 
-		return $this->oauth->get( 'trends/daily', $params );
+		return $this->oauth->get('trends/daily', $params);
 	}
 
 	/**
@@ -2735,12 +2645,11 @@ class SaeTClientV2
 	 * @param int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
 	 * @return array
 	 */
-	function weekly_trends( $base_app = 0 )
-	{
-		$params = array();
+	function weekly_trends($base_app = 0) {
+		$params = array ();
 		$params['base_app'] = $base_app;
 
-		return $this->oauth->get( 'trends/weekly', $params );
+		return $this->oauth->get('trends/weekly', $params);
 	}
 
 	/**
@@ -2752,11 +2661,10 @@ class SaeTClientV2
 	 * @param string $trend_name 要关注的话题关键词。
 	 * @return array
 	 */
-	function follow_trends( $trend_name )
-	{
-		$params = array();
+	function follow_trends($trend_name) {
+		$params = array ();
 		$params['trend_name'] = $trend_name;
-		return $this->oauth->post( 'trends/follow', $params );
+		return $this->oauth->post('trends/follow', $params);
 	}
 
 	/**
@@ -2768,14 +2676,13 @@ class SaeTClientV2
 	 * @param int $tid 要取消关注的话题ID。
 	 * @return array
 	 */
-	function unfollow_trends( $tid )
-	{
+	function unfollow_trends($tid) {
 		$this->id_format($tid);
 
-		$params = array();
+		$params = array ();
 		$params['trend_id'] = $tid;
 
-		return $this->oauth->post( 'trends/destroy', $params );
+		return $this->oauth->post('trends/destroy', $params);
 	}
 
 	/**
@@ -2788,19 +2695,18 @@ class SaeTClientV2
 	 * @param int $count 单页大小。缺省值20，最大值200。可选。
 	 * @return array
 	 */
-	function get_tags( $uid = NULL, $page = 1, $count = 20 )
-	{
-		$params = array();
-		if ( $uid ) {
+	function get_tags($uid = NULL, $page = 1, $count = 20) {
+		$params = array ();
+		if ($uid) {
 			$params['uid'] = $uid;
 		} else {
 			$user_info = $this->get_uid();
 			$params['uid'] = $user_info['uid'];
 		}
-		$this->id_format( $params['uid'] );
+		$this->id_format($params['uid']);
 		$params['page'] = $page;
 		$params['count'] = $count;
-		return $this->oauth->get( 'tags', $params );
+		return $this->oauth->get('tags', $params);
 	}
 
 	/**
@@ -2811,18 +2717,17 @@ class SaeTClientV2
 	 * @param  string $uids 要获取标签的用户ID。最大20，逗号分隔。必填
 	 * @return array
 	 */
-	function get_tags_batch( $uids )
-	{
-		$params = array();
-		if (is_array( $uids ) && !empty( $uids )) {
+	function get_tags_batch($uids) {
+		$params = array ();
+		if (is_array($uids) && !empty ($uids)) {
 			foreach ($uids as $k => $v) {
-				$this->id_format( $uids[$k] );
+				$this->id_format($uids[$k]);
 			}
 			$params['uids'] = join(',', $uids);
 		} else {
 			$params['uids'] = $uids;
 		}
-		return $this->oauth->get( 'tags/tags_batch', $params );
+		return $this->oauth->get('tags/tags_batch', $params);
 	}
 
 	/**
@@ -2834,11 +2739,10 @@ class SaeTClientV2
 	 * @param int $count 单页大小。缺省值10，最大值10。可选。
 	 * @return array
 	 */
-	function get_suggest_tags( $count = 10)
-	{
-		$params = array();
+	function get_suggest_tags($count = 10) {
+		$params = array ();
 		$params['count'] = intval($count);
-		return $this->oauth->get( 'tags/suggestions', $params );
+		return $this->oauth->get('tags/suggestions', $params);
 	}
 
 	/**
@@ -2850,15 +2754,14 @@ class SaeTClientV2
 	 * @param mixed $tags 要创建的一组标签，每个标签的长度不可超过7个汉字，14个半角字符。多个标签之间用逗号间隔，或由多个标签构成的数组。如："abc,drf,efgh,tt"或array("abc", "drf", "efgh", "tt")
 	 * @return array
 	 */
-	function add_tags( $tags )
-	{
-		$params = array();
-		if (is_array($tags) && !empty($tags)) {
+	function add_tags($tags) {
+		$params = array ();
+		if (is_array($tags) && !empty ($tags)) {
 			$params['tags'] = join(',', $tags);
 		} else {
 			$params['tags'] = $tags;
 		}
-		return $this->oauth->post( 'tags/create', $params);
+		return $this->oauth->post('tags/create', $params);
 	}
 
 	/**
@@ -2870,11 +2773,10 @@ class SaeTClientV2
 	 * @param int $tag_id 标签ID，必填参数
 	 * @return array
 	 */
-	function delete_tag( $tag_id )
-	{
-		$params = array();
+	function delete_tag($tag_id) {
+		$params = array ();
 		$params['tag_id'] = $tag_id;
-		return $this->oauth->post( 'tags/destroy', $params );
+		return $this->oauth->post('tags/destroy', $params);
 	}
 
 	/**
@@ -2886,17 +2788,15 @@ class SaeTClientV2
 	 * @param mixed $ids 必选参数，要删除的tag id，多个id用半角逗号分割，最多10个。或由多个tag id构成的数组。如：“553,554,555"或array(553, 554, 555)
 	 * @return array
 	 */
-	function delete_tags( $ids )
-	{
-		$params = array();
-		if (is_array($ids) && !empty($ids)) {
+	function delete_tags($ids) {
+		$params = array ();
+		if (is_array($ids) && !empty ($ids)) {
 			$params['ids'] = join(',', $ids);
 		} else {
 			$params['ids'] = $ids;
 		}
-		return $this->oauth->post( 'tags/destroy_batch', $params );
+		return $this->oauth->post('tags/destroy_batch', $params);
 	}
-
 
 	/**
 	 * 验证昵称是否可用，并给予建议昵称
@@ -2906,14 +2806,11 @@ class SaeTClientV2
 	 * @param string $nickname 需要验证的昵称。4-20个字符，支持中英文、数字、"_"或减号。必填
 	 * @return array
 	 */
-	function verify_nickname( $nickname )
-	{
-		$params = array();
+	function verify_nickname($nickname) {
+		$params = array ();
 		$params['nickname'] = $nickname;
-		return $this->oauth->get( 'register/verify_nickname', $params );
+		return $this->oauth->get('register/verify_nickname', $params);
 	}
-
-
 
 	/**
 	 * 搜索用户时的联想搜索建议
@@ -2924,14 +2821,12 @@ class SaeTClientV2
 	 * @param int $count 返回的记录条数，默认为10。
 	 * @return array
 	 */
-	function search_users( $q,  $count = 10 )
-	{
-		$params = array();
+	function search_users($q, $count = 10) {
+		$params = array ();
 		$params['q'] = $q;
 		$params['count'] = $count;
-		return $this->oauth->get( 'search/suggestions/users',  $params );
+		return $this->oauth->get('search/suggestions/users', $params);
 	}
-
 
 	/**
 	 * 搜索微博时的联想搜索建议
@@ -2942,14 +2837,12 @@ class SaeTClientV2
 	 * @param int $count 返回的记录条数，默认为10。
 	 * @return array
 	 */
-	function search_statuses( $q,  $count = 10)
-	{
-		$params = array();
+	function search_statuses($q, $count = 10) {
+		$params = array ();
 		$params['q'] = $q;
 		$params['count'] = $count;
-		return $this->oauth->get( 'search/suggestions/statuses', $params );
+		return $this->oauth->get('search/suggestions/statuses', $params);
 	}
-
 
 	/**
 	 * 搜索学校时的联想搜索建议
@@ -2961,13 +2854,12 @@ class SaeTClientV2
 	 * @param int type 学校类型，0：全部、1：大学、2：高中、3：中专技校、4：初中、5：小学，默认为0。选填
 	 * @return array
 	 */
-	function search_schools( $q,  $count = 10,  $type = 1)
-	{
-		$params = array();
+	function search_schools($q, $count = 10, $type = 1) {
+		$params = array ();
 		$params['q'] = $q;
 		$params['count'] = $count;
 		$params['type'] = $type;
-		return $this->oauth->get( 'search/suggestions/schools', $params );
+		return $this->oauth->get('search/suggestions/schools', $params);
 	}
 
 	/**
@@ -2979,14 +2871,12 @@ class SaeTClientV2
 	 * @param int $count 返回的记录条数，默认为10。
 	 * @return array
 	 */
-	function search_companies( $q, $count = 10)
-	{
-		$params = array();
+	function search_companies($q, $count = 10) {
+		$params = array ();
 		$params['q'] = $q;
 		$params['count'] = $count;
-		return $this->oauth->get( 'search/suggestions/companies', $params );
+		return $this->oauth->get('search/suggestions/companies', $params);
 	}
-
 
 	/**
 	 * ＠用户时的联想建议
@@ -2999,19 +2889,14 @@ class SaeTClientV2
 	 * @param int $range 联想范围，0：只联想关注人、1：只联想关注人的备注、2：全部，默认为2。选填
 	 * @return array
 	 */
-	function search_at_users( $q, $count = 10, $type=0, $range = 2)
-	{
-		$params = array();
+	function search_at_users($q, $count = 10, $type = 0, $range = 2) {
+		$params = array ();
 		$params['q'] = $q;
 		$params['count'] = $count;
 		$params['type'] = $type;
 		$params['range'] = $range;
-		return $this->oauth->get( 'search/suggestions/at_users', $params );
+		return $this->oauth->get('search/suggestions/at_users', $params);
 	}
-
-
-	
-
 
 	/**
 	 * 搜索与指定的一个或多个条件相匹配的微博
@@ -3035,12 +2920,9 @@ class SaeTClientV2
 	 * 以上参数全部选填
 	 * @return array
 	 */
-	function search_statuses_high( $query )
-	{
-		return $this->oauth->get( 'search/statuses', $query );
+	function search_statuses_high($query) {
+		return $this->oauth->get('search/statuses', $query);
 	}
-
-
 
 	/**
 	 * 通过关键词搜索用户
@@ -3064,12 +2946,9 @@ class SaeTClientV2
 	 * 以上所有参数全部选填
 	 * @return array
 	 */
-	function search_users_keywords( $query )
-	{
-		return $this->oauth->get( 'search/users', $query );
+	function search_users_keywords($query) {
+		return $this->oauth->get('search/users', $query);
 	}
-
-
 
 	/**
 	 * 获取系统推荐用户
@@ -3094,12 +2973,11 @@ class SaeTClientV2
 	 *  - stockplayer:炒股高手
 	 * @return array
 	 */
-	function hot_users( $category = "default" )
-	{
-		$params = array();
+	function hot_users($category = "default") {
+		$params = array ();
 		$params['category'] = $category;
 
-		return $this->oauth->get( 'suggestions/users/hot', $params );
+		return $this->oauth->get('suggestions/users/hot', $params);
 	}
 
 	/**
@@ -3113,12 +2991,11 @@ class SaeTClientV2
 	 * @return array
 	 * @ignore
 	 */
-	function suggestions_may_interested( $page = 1, $count = 10 )
-	{   
-		$params = array();
+	function suggestions_may_interested($page = 1, $count = 10) {
+		$params = array ();
 		$params['page'] = $page;
 		$params['count'] = $count;
-		return $this->oauth->get( 'suggestions/users/may_interested', $params);
+		return $this->oauth->get('suggestions/users/may_interested', $params);
 	}
 
 	/**
@@ -3131,12 +3008,11 @@ class SaeTClientV2
 	 * @param int $num 返回结果数目，默认为10。
 	 * @return array
 	 */
-	function suggestions_users_by_status( $content, $num = 10 )
-	{
-		$params = array();
+	function suggestions_users_by_status($content, $num = 10) {
+		$params = array ();
 		$params['content'] = $content;
 		$params['num'] = $num;
-		return $this->oauth->get( 'suggestions/users/by_status', $params);
+		return $this->oauth->get('suggestions/users/by_status', $params);
 	}
 
 	/**
@@ -3148,12 +3024,11 @@ class SaeTClientV2
 	 * @param int $page 返回页码，默认1。选填
 	 * @return array
 	 */
-	function hot_favorites( $page = 1, $count = 20 )
-	{
-		$params = array();
+	function hot_favorites($page = 1, $count = 20) {
+		$params = array ();
 		$params['count'] = $count;
 		$params['page'] = $page;
-		return $this->oauth->get( 'suggestions/favorites/hot', $params);
+		return $this->oauth->get('suggestions/favorites/hot', $params);
 	}
 
 	/**
@@ -3164,56 +3039,59 @@ class SaeTClientV2
 	 * @param int $uid 不感兴趣的用户的UID。
 	 * @return array
 	 */
-	function put_users_not_interested( $uid )
-	{
-		$params = array();
+	function put_users_not_interested($uid) {
+		$params = array ();
 		$params['uid'] = $uid;
-		return $this->oauth->post( 'suggestions/users/not_interested', $params);
+		return $this->oauth->post('suggestions/users/not_interested', $params);
 	}
-
-
 
 	// =========================================
 
 	/**
 	 * @ignore
 	 */
-	protected function request_with_pager( $url, $page = false, $count = false, $params = array() )
-	{
-		if( $page ) $params['page'] = $page;
-		if( $count ) $params['count'] = $count;
+	protected function request_with_pager($url, $page = false, $count = false, $params = array ()) {
+		if ($page)
+			$params['page'] = $page;
+		if ($count)
+			$params['count'] = $count;
 
-		return $this->oauth->get($url, $params );
+		return $this->oauth->get($url, $params);
 	}
 
 	/**
 	 * @ignore
 	 */
-	protected function request_with_uid( $url, $uid_or_name, $page = false, $count = false, $cursor = false, $post = false, $params = array())
-	{
-		if( $page ) $params['page'] = $page;
-		if( $count ) $params['count'] = $count;
-		if( $cursor )$params['cursor'] =  $cursor;
+	protected function request_with_uid($url, $uid_or_name, $page = false, $count = false, $cursor = false, $post = false, $params = array ()) {
+		if ($page)
+			$params['page'] = $page;
+		if ($count)
+			$params['count'] = $count;
+		if ($cursor)
+			$params['cursor'] = $cursor;
 
-		if( $post ) $method = 'post';
-		else $method = 'get';
+		if ($post)
+			$method = 'post';
+		else
+			$method = 'get';
 
-		if ( $uid_or_name !== NULL ) {
+		if ($uid_or_name !== NULL) {
 			$this->id_format($uid_or_name);
 			$params['id'] = $uid_or_name;
 		}
 
-		return $this->oauth->$method($url, $params );
+		return $this->oauth-> $method ($url, $params);
 
 	}
 
 	/**
 	 * @ignore
 	 */
-	protected function id_format(&$id) {
-		if ( is_float($id) ) {
+	protected function id_format(& $id) {
+		if (is_float($id)) {
 			$id = number_format($id, 0, '', '');
-		} elseif ( is_string($id) ) {
+		}
+		elseif (is_string($id)) {
 			$id = trim($id);
 		}
 	}

@@ -1,10 +1,13 @@
 <?php
 function clearApp() {
+	return;//TODO 需测试
 	F('xintao.update_config_file', array (
 		'WB_AKEY' => '',
 		'WB_SKEY' => '',
 		'SYSTEM_SINA_UID' => '',
 		'SYSTEM_SINA_USERNICK' => '',
+		'V2_ACCESS_TOKEN' => '',
+		'V2_REFRESH_TOKEN' => '',
 		'WB_USER_OAUTH_TOKEN' => '',
 		'WB_USER_OAUTH_TOKEN' => ''
 	), XT_USER_ID);
@@ -14,6 +17,8 @@ function clearApp() {
 		'appSecret' => '',
 		'sina_uid' => '',
 		'nickname' => '',
+		'v2_access_token' => '',
+		'v2_refresh_token' => '',
 		'access_token' => '',
 		'token_secret' => ''
 	), XT_USER_ID);
@@ -22,13 +27,16 @@ function clearApp() {
 	//删除所有代理帐号
 	DS('accountProxy.delAccountByUserId', '', XT_USER_ID);
 }
-function clear($token = '', $secret = '', $USER_ID = '') {
-	if (!empty ($token) && !empty ($secret) && !empty ($USER_ID)) {
-		if ($token == WB_USER_OAUTH_TOKEN && $secret == WB_USER_OAUTH_TOKEN_SECRET) {
+function clear($token = '', $refresh = '', $USER_ID = '') {
+	return;//TODO 需测试
+	if (!empty ($token) && !empty ($USER_ID)) {
+		if ($token == V2_ACCESS_TOKEN) {
 			//清空当前用户的帐号授权
 			F('xintao.update_config_file', array (
 				'SYSTEM_SINA_UID' => '',
 				'SYSTEM_SINA_USERNICK' => '',
+				'V2_ACCESS_TOKEN' => '',
+				'V2_REFRESH_TOKEN' => '',
 				'WB_USER_OAUTH_TOKEN' => '',
 				'WB_USER_OAUTH_TOKEN_SECRET' => ''
 			), $USER_ID);
@@ -36,12 +44,14 @@ function clear($token = '', $secret = '', $USER_ID = '') {
 			DS('mgr/adminCom.saveAdminByUserId', '', array (
 				'sina_uid' => '',
 				'nickname' => '',
+				'v2_access_token' => '',
+				'v2_refresh_token' => '',
 				'access_token' => '',
 				'token_secret' => ''
 			), $USER_ID);
 
 		} else {
-			DS('accountProxy.clearByTokenAndSecret', '', $token, $secret);
+			DS('accountProxy.clearByTokenAndSecret', '', $token, $refresh);
 		}
 	}
 }

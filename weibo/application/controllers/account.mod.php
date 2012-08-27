@@ -10,7 +10,7 @@
  * @Modified By:	xionghui/2010-11-15
  * @Brief			帐号相关操作
  */
-
+include_once (P_CLASS . '/saetv2.ex.class.php');
 class account_mod {
 	var $accAdapter;
 	function account_mod() {
@@ -337,7 +337,7 @@ class account_mod {
 
 		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt, false, '0');
 
-		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
+		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL,$oauthCbUrl);
 		//&from=xweibo 取消特制的XWEIBO授权页面
 		//$oauthUrl	.= '&forcelogin=true&xwb_'.$callbackOpt;
 		$oauthUrl .= '&xwb_' . $callbackOpt;
@@ -419,17 +419,20 @@ class account_mod {
 
 	/// 从 Oauth 登录回来后 分别对各需求进行处理
 	function oauthCallback() {
-		if (V('g:cb', 'login') == 'admin') { //后台绑定
-			header('Location:' . W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback?code='.V('g:code')));
-			return;
+		
+		$o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
+		$code = V('r:code', '');
+		$token = array ();
+		if (!empty ($code)) {
+			$keys = array ();
+			$keys['code'] = $code;
+			$keys['redirect_uri'] = WB_CALLBACK_URL;
+			try {
+				$token = $o->getAccessToken('code', $keys);
+			} catch (OAuthException $e) {
+			}
 		}
-		$oauth_verifier = V('r:oauth_verifier', '');
-		//非法访问，或者 Oauth 返回错误
-		if (empty ($oauth_verifier)) {
-			//APP::tips(); TODO
-			die('oauth_verifier error!');
-		}
-
+		
 		$site_uid = USER :: get('site_uid');
 		$callbackOpt = V('g:cb', 'login');
 

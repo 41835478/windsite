@@ -18,15 +18,74 @@ class map_mod {
 	}
 
 	function oauthCallback() {
-		$code = V('g:code','');
-		$state = V('g:state','');
-		print_r($code);
-		echo ',';
-		print_r($state);
+		$code = V('g:code', '');
+		$state = V('g:state', '');
 		if (!empty ($code) && !empty ($state)) {
 			header('Location:' . $state . '&code=' . $code);
 		}
 		exit;
+	}
+	function getOAthor2Proxy() {
+		$weibo = APP :: N('weibo');
+		$db = APP :: ADP('db');
+		$sql = "select u.sina_uid,u.user_id,u.token as access_token,u.secret as token_secret,a.appKey,a.appSecret from xwb_account_proxy u inner join xwb_admin a on u.user_id= a.user_id where u.token !='' and u.token is not null AND u.`v2_access_token` is null";
+		$result = (($db->query($sql)));
+		$count = 0;
+		foreach ($result as $user) {
+			$appKey = WB_DEFAULT_AKEY;
+			$appSecret = WB_DEFAULT_SKEY;
+			if (!empty ($user['appKey']) && !empty ($user['appSecret'])) {
+				$appKey = $user['appKey'];
+				$appSecret = $user['appSecret'];
+			}
+			$weibo->consumer = new OAuthConsumer($appKey, $appSecret); //指定新浪appKey
+			$weibo->setToken(3, $user['access_token'], $user['token_secret']); //指定帐户授权
+			$ret = $weibo->getOAuth2();
+			if (isset ($ret['rst']) && isset ($ret['rst']['access_token'])) { //暂不处理过期时间
+				$r = DR('accountProxy.updateByUserId', '', array (
+					'v2_access_token' => $ret['rst']['access_token']
+				), $user['sina_uid'], $user['user_id']);
+			} else {
+				$r = DR('accountProxy.updateByUserId', '', array (
+					'token' => '',
+					'secret' => ''
+				), $user['sina_uid'], $user['user_id']);
+				$count++;
+			}
+		}
+		echo 'total:' . count($result) . ',' . 'no:' . $count;
+
+	}
+	function getOAthor2Users() {
+		$weibo = APP :: N('weibo');
+		$db = APP :: ADP('db');
+		$sql = "select u.sina_uid,u.user_id,u.access_token,u.token_secret,a.appKey,a.appSecret from xwb_users u inner join xwb_admin a on u.user_id= a.user_id where u.access_token !='' and u.access_token is not null AND u.`v2_access_token` is null";
+		$result = (($db->query($sql)));
+		$count = 0;
+		foreach ($result as $user) {
+			$appKey = WB_DEFAULT_AKEY;
+			$appSecret = WB_DEFAULT_SKEY;
+			if (!empty ($user['appKey']) && !empty ($user['appSecret'])) {
+				$appKey = $user['appKey'];
+				$appSecret = $user['appSecret'];
+			}
+			$weibo->consumer = new OAuthConsumer($appKey, $appSecret); //指定新浪appKey
+			$weibo->setToken(3, $user['access_token'], $user['token_secret']); //指定帐户授权
+			$ret = $weibo->getOAuth2();
+			if (isset ($ret['rst']) && isset ($ret['rst']['access_token'])) { //暂不处理过期时间
+				$r = DR('mgr/userCom.insertUserByUserId', '', array (
+					'v2_access_token' => $ret['rst']['access_token']
+				), $user['sina_uid'], $user['user_id']);
+			} else {
+				$r = DR('mgr/userCom.insertUserByUserId', '', array (
+					'access_token' => '',
+					'token_secret' => ''
+				), $user['sina_uid'], $user['user_id']);
+				$count++;
+			}
+		}
+		echo 'total:' . count($result) . ',' . 'no:' . $count;
+
 	}
 	function getOAthor2() {
 		$weibo = APP :: N('weibo');

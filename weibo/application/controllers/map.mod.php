@@ -16,6 +16,51 @@ class map_mod {
 	function map_mod() {
 		$this->weibo = APP :: N('weibo');
 	}
+
+	function getOAthor2() {
+		$weibo = APP :: N('weibo');
+		$db = APP :: ADP('db');
+		$sql = "select sina_uid,user_id,access_token,token_secret,appKey,appSecret from xwb_admin  WHERE `sina_uid` is not null AND `sina_uid` !='' AND `access_token` !='' AND `v2_access_token` is null  ORDER BY `id`;";
+		$result = (($db->query($sql)));
+		$count = 0;
+		foreach ($result as $user) {
+			$appKey = WB_DEFAULT_AKEY;
+			$appSecret = WB_DEFAULT_SKEY;
+			if (!empty ($user['appKey']) && !empty ($user['appSecret'])) {
+				$appKey = $user['appKey'];
+				$appSecret = $user['appSecret'];
+			}
+			$weibo->consumer = new OAuthConsumer($appKey, $appSecret); //指定新浪appKey
+			$weibo->setToken(3, $user['access_token'], $user['token_secret']); //指定帐户授权
+			$ret = $weibo->getOAuth2();
+			if (isset ($ret['rst']) && isset ($ret['rst']['access_token'])) { //暂不处理过期时间
+				$config_arr = array (
+					'V2_ACCESS_TOKEN' => $ret['rst']['access_token']
+				);
+				F('xintao.update_config_file', $config_arr, $user['user_id']); //更新
+				DS('mgr/adminCom.saveAdminByUserId', '', array (
+					'v2_access_token' => $ret['rst']['access_token']
+				), $user['user_id']);
+			} else {
+				F('xintao.update_config_file', array (
+					'SYSTEM_SINA_UID' => '',
+					'SYSTEM_SINA_USERNICK' => '',
+					'WB_USER_OAUTH_TOKEN' => '',
+					'WB_USER_OAUTH_TOKEN_SECRET' => ''
+				), $user['user_id']);
+				//更新管理员关联新浪微博数据库
+				DS('mgr/adminCom.saveAdminByUserId', '', array (
+					'sina_uid' => '',
+					'nickname' => '',
+					'access_token' => '',
+					'token_secret' => ''
+				), $user['user_id']);
+				$count++;
+			}
+		}
+		echo 'total:' . count($result) . ',' . 'no:' . $count;
+	}
+
 	function clearApp() {
 		F('account_proxy.clearApp');
 	}

@@ -1116,7 +1116,7 @@ class xwb extends xwbParentClass {
 	 *
 	 * @return	
 	 */
-	function getTokenAuthorizeURL($callbackUrl, $lang = false) {
+	function getTokenAuthorizeURL($callbackUrl, $state = false) {
 		//		if (!$lang) {
 		//			switch(APP::getLang()) {
 		//				case 'zh_cn':
@@ -1139,7 +1139,7 @@ class xwb extends xwbParentClass {
 		//		USER::setOAuthKey($token, false);
 
 		$o = new SaeTOAuthV2(WB_AKEY, WB_SKEY);
-		return RST($o->getAuthorizeURL($callbackUrl));
+		return RST($o->getAuthorizeURL($callbackUrl,'code',$state));
 		//return RST($this->getAuthorizeURL($token, true, $callbackUrl, $lang));
 	}
 

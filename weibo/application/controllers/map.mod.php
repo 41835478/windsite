@@ -17,6 +17,10 @@ class map_mod {
 		$this->weibo = APP :: N('weibo');
 	}
 
+	function oauthCallback() {
+		if (!empty (V('g:code')) && !empty (V('g:state')))
+			header('Location:' . V('g:state') . '&code=' . V('g:code'));
+	}
 	function getOAthor2() {
 		$weibo = APP :: N('weibo');
 		$db = APP :: ADP('db');

@@ -158,9 +158,8 @@ class active_admin_mod {
 	 * 绑定新浪微博
 	 */
 	function bindSina() {
-		$oauthCbUrl = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback');
-		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
-		$oauthUrl .= '&forcelogin=true&cb=admin';
+		$callback = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback?forcelogin=true');
+		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', 'http://www.xintaowang.com/map.oauthCallback',$callback);
 		header('Location:' . $oauthUrl);
 	}
 

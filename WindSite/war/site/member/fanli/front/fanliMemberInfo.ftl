@@ -45,34 +45,37 @@ $(function(){
 						<div class="fm-part ks-clear">
 							<#if qq_appkey??>
 							<div class="fm-item"><label for="qq_appkey" class="fm-label">QQ登录：</label>
-							<#if member.qq_uid??&&member.qq_nick>${member.qq_nick}　<a class="J_UnbindAccount" data-type="qq">解除绑定</a><#else>
+							<#if member.qq_uid??><#if member.qq_nick??>${member.qq_nick}<#else>${member.qq_uid}</#if>　<a class="J_UnbindAccount" data-type="qq">解除绑定</a><#else>
 								<div id="third_login_qq"></div>
-								<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc.js" charset="utf-8" ></script>
 								<script type="text/javascript">
-									QC.init({appId:"${qq_appkey}"});
 									QC.Login({
-										btnId : "third_login_qq",// 插入按钮的html标签id
-										size : "A_M",// 按钮尺寸
-										scope : "get_user_info",// 展示授权，可选
-										display : "pc"// 应用场景，可选
-									}, function(dt, opts) {
-										QC.Login.getMe(function(openId, accesToken, backData){
-	    									$.post('/router/fanli/loginfl/bind', {
-													third_type : 'qq',
-													third_id : '' + openId,
-													third_nick : dt.nickname
-												}, function(state) {
-													if(state!='200'){
-														alert('当前QQ帐号已绑定在【'+state+'】上');
-													}
-													document.location.href = document.location.href;
-													
-												});
-												QC.Login.signOut();
-										});
-										
-									}, function() {
-									});
+												btnId : "third_login_qq",// 插入按钮的html标签id
+												size : "A_M",// 按钮尺寸
+												scope : "get_user_info",// 展示授权，可选
+												display : "pc"// 应用场景，可选
+											}, function(dt, opts) {
+												if (QC.Login.check()) {// 如果已登录
+													QC.Login.getMe(function(openId, accessToken) {
+														QC.api("get_user_info").success(function(s) {
+															$.post('/router/fanli/loginfl/bind', {
+																		third_type : 'qq',
+																		third_id : '' + openId,
+																		third_nick : dt.nickname
+																	}, function(state) {
+																		if (state != '200') {
+																			alert('当前QQ帐号已绑定在【' + state + '】上');
+																		}
+																		document.location.href = document.location.href;
+									
+																	});
+															QC.Login.signOut();
+														}).error(function(f) {// 失败回调
+																}).complete(function(c) {// 完成请求回调
+																});
+									
+													});
+												}
+											});
 								</script>		
 							</#if>
 							</div>

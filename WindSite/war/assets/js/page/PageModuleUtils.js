@@ -55,7 +55,53 @@ $(function() {
 
 	});
 })
+function QQ_LOGIN(qq) {
+	if (typeof (QC) != 'undefined' && typeof (qq) != 'undefined' && qq != '') {
+		if (QC.Login.check()) {// 如果已登录
+			QC.Login
+					.getMe(function(openId, accessToken) {
+						QC
+								.api("get_user_info")
+								.success(
+										function(s) {// 成功回调
+											$
+													.post(
+															'/router/fanli/loginfl/third',
+															{
+																third_type : 'qq',
+																third_id : ''
+																		+ openId,
+																third_nick : s.data.nickname,
+																referer : document.location.href
+															},
+															function(state) {
+																if (typeof (IS_LOGIN) != 'undefined'
+																		&& IS_LOGIN) {
+																	if (state == 202) {
+																		document.location.href = '/router/fanli/registe';
+																	} else {
+																		document.location.href = '/router/fanlimember';
+																	}
 
+																} else {
+																	if (state == 202) {
+																		document.location.href = '/router/fanli/registe?referer='
+																				+ document.location.href;
+																	} else {
+																		document.location.href = document.location.href;
+																	}
+																}
+															});
+											QC.Login.signOut();
+										}).error(function(f) {// 失败回调
+								}).complete(function(c) {// 完成请求回调
+								});
+
+					});
+		}
+
+	}
+}
 window.XT = {};
 window.XT.Suggest = {};
 window.XT.Suggest.ItemSearchCallback = function(d) {
@@ -83,13 +129,17 @@ var PageModuleUtils = {
 						return false;
 					});
 		}
+		
 		if (typeof (QC) != 'undefined') {
+			QQ_LOGIN(qq);
 			if ($('#nav_third_login_qq').length > 0) {
 				QC.Login({
 					btnId : "nav_third_login_qq",// 插入按钮的html标签id
 					size : "A_M",// 按钮尺寸
 					scope : "get_user_info",// 展示授权，全部可用授权可填 all
 					display : "pc"// 应用场景，可选
+				}, function(reqData, opts) {// 登录成功
+					QQ_LOGIN(qq);
 				});
 			}
 			if ($('#third_login_qq').length > 0) {
@@ -98,6 +148,8 @@ var PageModuleUtils = {
 					size : "A_M",// 按钮尺寸
 					scope : "get_user_info",// 展示授权，全部可用授权可填 all
 					display : "pc"// 应用场景，可选
+				}, function(reqData, opts) {// 登录成功
+					QQ_LOGIN();
 				});
 			}
 		}
@@ -206,52 +258,6 @@ var PageModuleUtils = {
 											});
 								}
 							});
-
-		}
-		if (typeof (QC) != 'undefined' && typeof (qq) != 'undefined'
-				&& qq != '') {
-			if (QC.Login.check()) {// 如果已登录
-				QC.Login
-						.getMe(function(openId, accessToken) {
-							QC
-									.api("get_user_info")
-									.success(
-											function(s) {// 成功回调
-												$
-														.post(
-																'/router/fanli/loginfl/third',
-																{
-																	third_type : 'qq',
-																	third_id : ''
-																			+ openId,
-																	third_nick : s.data.nickname,
-																	referer : document.location.href
-																},
-																function(state) {
-																	if (typeof (IS_LOGIN) != 'undefined'
-																			&& IS_LOGIN) {
-																		if (state == 202) {
-																			document.location.href = '/router/fanli/registe';
-																		} else {
-																			document.location.href = '/router/fanlimember';
-																		}
-
-																	} else {
-																		if (state == 202) {
-																			document.location.href = '/router/fanli/registe?referer='
-																					+ document.location.href;
-																		} else {
-																			document.location.href = document.location.href;
-																		}
-																	}
-																});
-												QC.Login.signOut();
-											}).error(function(f) {// 失败回调
-									}).complete(function(c) {// 完成请求回调
-									});
-
-						});
-			}
 
 		}
 	},

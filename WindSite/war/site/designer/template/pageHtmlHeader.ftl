@@ -15,6 +15,9 @@
 <#else>
 <link href="http://static.xintaonet.com/assets/min/stylesheets/skin/yellow_fixed.css?v=${dateVersion}" rel="stylesheet"/>
 </#if>
+<#if qq_appkey??&&www??>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
+</#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion}"></script>
 </head>
 <body>

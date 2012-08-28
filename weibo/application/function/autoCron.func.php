@@ -744,17 +744,17 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $refresh_t
 	$weibo->setToken(3, $token, $refresh_token); //指定帐户授权
 	//TODO 等申请高级接口upload_url_text后再取消注释
 	//if ($appKey != WB_DEFAULT_AKEY) { //TODO 暂时屏蔽微购的新浪发布
-//	if (isset ($pic_url) && !empty ($pic_url)) { //有图
-//		$result = $weibo->uploadUrlText($text, '', $pic_url);
-//		if (in_array($result['errno'], array (
-//				'1020100'
-//			))) { //40009[1020100]:Error: system error, does multipart has image?
-//			//如果发布带图微博失败，则发布不带图微博
-//			$result = $weibo->update($text);
-//		}
-//	} else { //无图
+	if (isset ($pic_url) && !empty ($pic_url)) { //有图
+		$result = $weibo->uploadUrlText($text, '', $pic_url);
+		if (in_array($result['errno'], array (
+				'1020100'
+			))) { //40009[1020100]:Error: system error, does multipart has image?
+			//如果发布带图微博失败，则发布不带图微博
+			$result = $weibo->update($text);
+		}
+	} else { //无图
 		$result = $weibo->update($text);
-//	}
+	}
 	//}
 
 	echo '发布新浪微博';

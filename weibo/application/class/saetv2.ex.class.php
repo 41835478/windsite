@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * PHP SDK for weibo.com (using OAuth2)
  * 
@@ -506,7 +507,7 @@ class SaeTClientV2 {
 	function getUnread($uid) {
 		$params = array ();
 		$params['uid'] = intval($uid);
-		return $this->oauth->get('remind/unread_count', $params); 
+		return $this->oauth->get('remind/unread_count', $params);
 	}
 	/**
 	 * 批量获取指定微博的转发数评论数
@@ -3095,5 +3096,34 @@ class SaeTClientV2 {
 			$id = trim($id);
 		}
 	}
+	/**
+	 * 短链接转换
+	 *
+	 * @param string $url 需要转换的url
+	 * @param boolean $is_short 默认为true，表示从长url转换成短url；false表示从短url转换成长url,true:1,false:0
+	 * @return array
+	 */
+	function shortUrl($urls, $is_short = true) {
+		$params = array ();
+		if ($is_short) {
+			$params['url_long'] = $urls;
+			return $this->oauth->post('short_url/shorten', $params);
+		} else {
+			$params['url_short'] = $urls;
+			return $this->oauth->post('short_url/expand', $params);
+		}
+	}
 
+	/**
+	 * 取得一个短链接所对应的页面信息，包含页面的title，原始的长链接，富内容（元数据）
+	 *
+	 * @param string $urls 短链接id，多个用逗号隔开
+	 *
+	 * @return array
+	 */
+	function shortUrlBatchInfo($urls) {
+		$params = array ();
+		$params['url_short'] = $urls;
+		return $this->oauth->post('short_url/info', $params);
+	}
 }

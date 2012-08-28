@@ -967,8 +967,6 @@ class weibo {
 	function getUserSuggestions($cursor = null, $count = null, $with_reason = 1) {
 		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
 		$response = $c->suggestions_may_interested($cursor, $count); //TODO $cursor需要转换成$page
-		print_r($response);
-		exit;
 		return RST($response);
 	}
 
@@ -1725,6 +1723,7 @@ class weibo {
 				} else {
 					$url = $url . '&' . http_build_query($parameters);
 				}
+				echo $url;exit;
 				$this->http->setUrl($url);
 				$this->http->setHeader('API-RemoteIP', F('get_client_ip'));
 				$result = $this->http->request();
@@ -1900,27 +1899,10 @@ class weibo {
 	 * @return array
 	 */
 	function emotions($language = false, $type = false) {
-		$url = WEIBO_API_URL . 'emotions.' . $this->format;
-		$params = array ();
-		switch ($language) {
-			case 'zh_cn' :
-				$lang = 'cnname';
-				break;
-			case 'zh_tw' :
-				$lang = 'twname';
-				break;
-			default :
-				$lang = 'cnname';
-		}
-		$params['language'] = $lang;
-
-		if ($type) {
-			$params['type'] = $type;
-		}
-
-		$response = $this->sourceRequest($url, 'get', $params);
-
-		return $response;
+		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
+		$response = $c->emotions($type, $language);
+		return RST($response);
+		
 	}
 
 	//热门话题

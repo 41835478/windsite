@@ -128,7 +128,7 @@ if(XT_SITE_DOMAIN == 't' . XT_USER_ID . '.xintaowang.com'){
 					        	<h4 class="main-title" style="font-size:14px;">新浪微博平台配置(<strong style="color:red;">请务必确认自己了解该功能的用途</strong>)</h4>
 					            <form action="" method="post" onsubmit="check();return false;">
 					            	<div class="active-area" style="margin-bottom:0px;">
-					            		<p class="tips-desc">1.请登录<A href="http://open.t.sina.com.cn/loginnew.php?source=xweibo" target="_blank">新浪微博开放平台</A>,<a target="_blank" href="http://bangpai.taobao.com/group/thread/14595174-266255015.htm">如何申请APP</a>,<a target="_blank" href="http://bangpai.taobao.com/group/thread/14595174-269690808.htm">如何在新浪微博网站接入</a></p>
+					            		<p class="tips-desc">1.请登录<A href="http://open.weibo.com/apps/new?sort=web" target="_blank">新浪微博开放平台</A>,<a target="_blank" href="http://bangpai.taobao.com/group/thread/14595174-266255015.htm">如何申请APP</a></p>
 					            		<p class="tips-desc">2.提醒：一旦设置AppKey以及Appkey Secret后，不建议再次更换，更换AppKey,Secret后：<br> <span class="tips" style="color:red">a.站点已加入的会员需要重新绑定新浪微博帐号</span><br><span class="tips" style="color:red">b.站长需要重新绑定自己的新浪微博帐号，以及重新绑定已有代理帐号</span></p>
 					            		<p class="tips-desc">3.进入新浪微博开放平台--我的应用--找到您创建的应用，填写各种基本信息，并提交文案审核</p>
 					                	<div class="admin-cont" style="margin-bottom:0px;">

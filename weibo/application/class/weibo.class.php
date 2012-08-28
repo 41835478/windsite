@@ -1245,8 +1245,8 @@ class weibo {
 	 *
 	 * @return array
 	 */
-	function verifyCredentials() {
-		return $this->getUserShow(USER :: uid());
+	function verifyCredentials($id=null) {
+		return $this->getUserShow($id==null?USER :: uid():$id);
 	}
 
 	/**

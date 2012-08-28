@@ -46,6 +46,8 @@ return array (
 	'SYSTEM_SINA_UID' => '',
 	'SYSTEM_SINA_USERNAME' => '',
 	'SYSTEM_SINA_USERNICK' => '',
+	'V2_ACCESS_TOKEN' => '',
+	'V2_REFRESH_TOKEN' => '',
 	'WB_USER_OAUTH_TOKEN' => '',
 	'WB_USER_OAUTH_TOKEN_SECRET' => '',
 	'WB_USER_SITENAME' => '',

@@ -12,7 +12,7 @@
 <body class="main-body">
 	<div class="path"><p>当前位置：营销管理<span>&gt;</span>自动营销</p></div>
     <div class="main-cont">
-    <?php if(!(SYSTEM_SINA_UID > 0 && WB_USER_OAUTH_TOKEN_SECRET != '' && WB_USER_OAUTH_TOKEN != '')){echo '<h3 class="title">您尚未<a href="#" rel="e:bindList">绑定新浪微博帐号</a>，绑定后可配置</h3>';}?>
+    <?php if(!(SYSTEM_SINA_UID > 0 && V2_ACCESS_TOKEN != '')){echo '<h3 class="title">您尚未<a href="#" rel="e:bindList">绑定新浪微博帐号</a>，绑定后可配置</h3>';}?>
     <form id="addForm" action="<?php echo URL('mgr/xintao/autoCron.yingxiaoSave');?>" method="post"  name="changes-newlink" style="width:820px;">
     <?php
 $xiaohuaChecked = array ();

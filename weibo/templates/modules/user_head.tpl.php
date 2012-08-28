@@ -3,6 +3,7 @@ $disallow_not_friend_local_pm = 1;
 if (USER::isUserLogin() && USER::uid() != $userinfo['id']) {
 	//获取相互关系
 	$friendship = DR('xweibo/xwb.getFriendship', '', $userinfo['id']);
+	
 	$friendship = $friendship['rst'];
 	
 	//我是否关注了ta

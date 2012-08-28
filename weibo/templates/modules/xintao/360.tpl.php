@@ -91,7 +91,7 @@ $HEALTH = 0;
 $HEALTH_NUMS = 0;
 
 //计算分数
-if (SYSTEM_SINA_UID > 0 && WB_USER_OAUTH_TOKEN_SECRET != '' && WB_USER_OAUTH_TOKEN != '') { //新浪微博
+if (SYSTEM_SINA_UID > 0 && V2_ACCESS_TOKEN != '') { //新浪微博
 	$h_sina = true;
 	$SCORE = $SCORE +10;
 	$COUNT++;

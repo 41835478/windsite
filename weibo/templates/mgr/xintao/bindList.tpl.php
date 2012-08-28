@@ -40,7 +40,7 @@
 						<td>新浪微博(必选)</td>
 						<td><?php echo $admin['nickname'];?></td>
 						<td>连接新浪微博后，您可以操作后台新浪微博相关功能及营销功能</td>
-						<td><?php if(empty($admin['sina_uid'])||WB_USER_OAUTH_TOKEN==''||WB_USER_OAUTH_TOKEN_SECRET==''){echo '<a class="icon-operate" href="javascript:openSinaAuthorityWin();">立刻连接</a>';}else{echo '<a class="icon-operate" href="javascript:cancelBind(\'sina\');">取消绑定</a>&nbsp;&nbsp;<a class="icon-operate" href="javascript:openSinaAuthorityWin();">更换帐号</a>';}?></td>
+						<td><?php if(empty($admin['sina_uid'])||V2_ACCESS_TOKEN==''){echo '<a class="icon-operate" href="javascript:openSinaAuthorityWin();">立刻连接</a>';}else{echo '<a class="icon-operate" href="javascript:cancelBind(\'sina\');">取消绑定</a>&nbsp;&nbsp;<a class="icon-operate" href="javascript:openSinaAuthorityWin();">更换帐号</a>';}?></td>
 					</tr>
 					<tr>
 						<td>腾讯微博</td>

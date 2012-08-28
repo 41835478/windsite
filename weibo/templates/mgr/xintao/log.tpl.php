@@ -11,6 +11,12 @@
 <body class="main-body">
 	<div class="path"><p>当前位置：更新日志</div>
     <div class="main-cont">
+    	<h3 class="title">2012-8-28</h3>
+    	<div class="box">
+		因新浪微博开放平台调整，我们已将新浪API升级为V2版本,请配置了自己APP平台的站长,进入新浪微博开放平台(http://open.weibo.com)--我的应用--应用信息--高级信息--OAuth2.0授权设置:<br/>
+		<strong style="color:red">授权回调地址:http://你的域名/map.oauthCallback</strong><br>
+		<strong style="color:red">取消授权回调地址:http://你的域名/map.cancelOauthCallback</strong><br>
+		</div>
     	<h3 class="title">2012-8-23</h3>
 		<div class="box">
 		微购升级服务器同时搬迁至香港，如果部分用户无法访问，请重启自己的路由器测试！已绑定独立域名且未使用cname(别名)指向www.xintaowang.com的站长，请尽快解除A记录解析，同时换成cname解析

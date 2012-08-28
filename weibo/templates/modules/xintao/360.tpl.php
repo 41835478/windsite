@@ -538,12 +538,12 @@ if ($h_map_keywords) {
 		<h3>更新日志</h3>
 		<ul style="margin-top:10px;">
 			<li>
+				2012-8-28：<br/>
+				因新浪微博开放平台调整，我们已将新浪API升级为V2版本,请配置了自己APP平台的站长,进入新浪微博开放平台(http://open.weibo.com)--我的应用--应用信息--高级信息--OAuth2.0授权设置:<br/>
+				<strong style="color:red">授权回调地址:http://你的域名/map.oauthCallback</strong><br>
+				<strong style="color:red">取消授权回调地址:http://你的域名/map.cancelOauthCallback</strong><br>
 				2012-8-23：<br/>
 				微购升级服务器同时搬迁至香港，如果部分用户无法访问，请重启自己的路由器测试！已绑定独立域名且未使用cname(别名)指向www.xintaowang.com的站长，请尽快解除A记录解析，同时换成cname解析<br/>
-				2012-7-30：<br/>
-				因新浪微博开放平台调整，目前未审核通过的APP无法调用原来的微博接口，所以以前设置了自己的APP，且通过新浪审核的用户，需要重新绑定自己的帐号(系统将自动识别未审核通过的APP，一旦发现，会自动清除设置以及帐号绑定)<br/>
-				
-				
 			</li>
 		</ul>
 	</div>

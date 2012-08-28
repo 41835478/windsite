@@ -9,7 +9,7 @@ function clearApp() {
 		'V2_ACCESS_TOKEN' => '',
 		'V2_REFRESH_TOKEN' => '',
 		'WB_USER_OAUTH_TOKEN' => '',
-		'WB_USER_OAUTH_TOKEN' => ''
+		'WB_USER_OAUTH_TOKEN_SECRET' => ''
 	), XT_USER_ID);
 	//更新管理员关联新浪微博数据库
 	DS('mgr/adminCom.saveAdminByUserId', '', array (

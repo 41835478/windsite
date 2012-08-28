@@ -1006,14 +1006,10 @@ class weibo {
 	 * @return array
 	 */
 	function getUsersHot($category = 'default') {
-		$url = WEIBO_API_URL . 'users/hot.' . $this->format;
-
-		$params = array ();
-		$params['category'] = $category;
-
-		$response = $this->oAuthRequest($url, 'get', $params);
-
+		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
+		$response = $c->hot_users($category);
 		return RST($response);
+		
 	}
 
 	//私信接口
@@ -1028,25 +1024,7 @@ class weibo {
 	 * @return array
 	 */
 	function getDirectMessages($count = null, $page = null, $since_id = null, $max_id = null) {
-		$url = WEIBO_API_URL . 'direct_messages.' . $this->format;
-
-		$params = array ();
-		if ($since_id) {
-			$params['since_id'] = $since_id;
-		}
-		if ($max_id) {
-			$params['max_id'] = $max_id;
-		}
-		if ($count) {
-			$params['count'] = $count;
-		}
-		if ($page) {
-			$params['page'] = $page;
-		}
-
-		$response = $this->oAuthRequest($url, 'get', $params);
-
-		return $response;
+		return RST(array());
 	}
 
 	/**
@@ -1059,25 +1037,7 @@ class weibo {
 	 * @return array
 	 */
 	function getSentDirectMessages($count = null, $page = null, $since_id = null, $max_id = null) {
-		$url = WEIBO_API_URL . 'direct_messages/sent.' . $this->format;
-
-		$params = array ();
-		if ($since_id) {
-			$params['since_id'] = $since_id;
-		}
-		if ($max_id) {
-			$params['max_id'] = $max_id;
-		}
-		if ($count) {
-			$params['count'] = $count;
-		}
-		if ($page) {
-			$params['page'] = $page;
-		}
-
-		$response = $this->oAuthRequest($url, 'get', $params);
-
-		return $response;
+		return RST(array());
 	}
 
 	/**
@@ -1090,21 +1050,7 @@ class weibo {
 	 * @return array
 	 */
 	function sendDirectMessage($id, $text, $name = null, $user_id = null) {
-		$url = WEIBO_API_URL . 'direct_messages/new.' . $this->format;
-
-		$params = array ();
-		$params['id'] = $id;
-		$params['text'] = $text;
-		if ($name) {
-			$params['screen_name'] = $name;
-		}
-		if ($user_id) {
-			$params['user_id'] = $user_id;
-		}
-
-		$response = $this->oAuthRequest($url, 'post', $params);
-
-		return $response;
+		return RST(array());
 	}
 
 	/**
@@ -1114,13 +1060,7 @@ class weibo {
 	 * @return array
 	 */
 	function deleteDirectMessage($id) {
-		$url = WEIBO_API_URL . 'direct_messages/destroy/' . $id . '.' . $this->format;
-
-		$params = array ();
-
-		$response = $this->oAuthRequest($url, 'post', $params);
-
-		return $response;
+		return RST(array());
 	}
 
 	//关注接口
@@ -1135,26 +1075,13 @@ class weibo {
 	 * @return array
 	 */
 	function createFriendship($id = null, $user_id = null, $name = null, $follow = null) {
-		if ($id) {
-			$url = WEIBO_API_URL . 'friendships/create/' . $id . '.' . $this->format;
-		} else {
-			$url = WEIBO_API_URL . 'friendships/create.' . $this->format;
+		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
+		if($id){
+			$response = $c->follow_by_id($id);	
+		}else{
+			$response = $c->follow_by_name($name);
 		}
-
-		$params = array ();
-		if ($user_id) {
-			$params['user_id'] = $user_id;
-		}
-		if ($name) {
-			$params['screen_name'] = $name;
-		}
-		if ($follow) {
-			$params['follow'] = $follow;
-		}
-
-		$response = $this->oAuthRequest($url, 'post', $params);
-
-		return $response;
+		return RST($response);
 	}
 
 	/**
@@ -1164,13 +1091,7 @@ class weibo {
 	 * @return array
 	 */
 	function createFriendshipBatch($ids) {
-		$url = WEIBO_API_URL . 'friendships/create_batch.' . $this->format;
-
-		$params = array ();
-		$params['ids'] = join(',', $ids);
-		$response = $this->oAuthRequest($url, 'post', $params);
-
-		return $response;
+		return RST(array());
 	}
 
 	/**

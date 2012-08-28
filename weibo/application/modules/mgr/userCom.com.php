@@ -51,7 +51,7 @@ class userCom {
 		$this->_cleanCache();
 		$db = APP :: ADP('db');
 		$table = $db->getTable(T_USERS);
-		$sql = "Update $table Set `access_token`='',`token_secret`='' Where `user_id`=" . $USER_ID;
+		$sql = "Update $table Set `v2_access_token`='',`v2_refresh_token`='',`access_token`='',`token_secret`='' Where `user_id`=" . $USER_ID;
 
 		if ($db->execute($sql) !== false) {
 			return TRUE;

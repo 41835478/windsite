@@ -286,6 +286,8 @@ class active_admin_mod {
 				'WB_SKEY' => $app_secret,
 				'SYSTEM_SINA_UID' => '',
 				'SYSTEM_SINA_USERNICK' => '',
+				'V2_ACCESS_TOKEN'=>'',
+				'V2_REFRESH_TOKEN'=>'',
 				'WB_USER_OAUTH_TOKEN' => '',
 				'WB_USER_OAUTH_TOKEN' => ''
 			), XT_USER_ID);
@@ -295,6 +297,8 @@ class active_admin_mod {
 				'appSecret' => $app_secret,
 				'sina_uid' => '',
 				'nickname' => '',
+				'v2_access_token' => '',
+				'v2_refresh_token' => '',
 				'access_token' => '',
 				'token_secret' => ''
 			), XT_USER_ID);
@@ -352,50 +356,50 @@ class active_admin_mod {
 	 * 保存管理员，授权信息
 	 */
 	function saveActive() {
-		$config_file = $date = $rs = "";
-		$app_key = trim(V('p:appkey', ''));
-		$app_secret = trim(V('p:secret', ''));
-
-		$sina_uid = $this->_getUserInfo('sina_uid');
-		$oauth = $this->_getUserInfo('XWB_OAUTH_CONFIRM');
-
-		$oauth_token = $oauth['oauth_token'];
-		$oauth_token_secret = $oauth['oauth_token_secret'];
-		if ($app_key != WB_AKEY) {
-			exit ('{"msg":"您输入的APPKEY不符","state":"1001"}');
-		}
-
-		if ($app_secret != WB_SKEY) {
-			exit ('{"msg":"您输入的APPKEY SECRET不符","state":"1002"}');
-		}
-
-		$data = array (
-			'sina_uid' => $this->_getUserInfo('sina_uid'),
-			'nickname' => $this->_getUserInfo('screen_name')
-		);
-
-		$rs = DR('mgr/adminCom.saveAdminById', '', $data);
-		if (strtolower(XWB_SERVER_ENV_TYPE) === 'sae') {
-			$config_arr = array (
-				'SYSTEM_SINA_UID' => $sina_uid,
-				'WB_USER_OAUTH_TOKEN' => $oauth_token,
-				'WB_USER_OAUTH_TOKEN_SECRET' => $oauth_token_secret
-			);
-			$this->sae_set_config($config_arr);
-		} else {
-
-			$config_file = IO :: read(get_config_path(XT_USER_ID)); //读取站长配置
-			$config_arr = array (
-				'SYSTEM_SINA_UID' => $sina_uid,
-				'WB_USER_OAUTH_TOKEN' => $oauth_token,
-				'WB_USER_OAUTH_TOKEN_SECRET' => $oauth_token_secret
-			);
-
-			//更新user_config数据
-			$config_file = F('set_define_value', $config_file, $config_arr);
-			IO :: write(get_config_path(XT_USER_ID), $config_file); //写入
-
-		}
+//		$config_file = $date = $rs = "";
+//		$app_key = trim(V('p:appkey', ''));
+//		$app_secret = trim(V('p:secret', ''));
+//
+//		$sina_uid = $this->_getUserInfo('sina_uid');
+//		$oauth = $this->_getUserInfo('XWB_OAUTH_CONFIRM');
+//
+//		$oauth_token = $oauth['oauth_token'];
+//		$oauth_token_secret = $oauth['oauth_token_secret'];
+//		if ($app_key != WB_AKEY) {
+//			exit ('{"msg":"您输入的APPKEY不符","state":"1001"}');
+//		}
+//
+//		if ($app_secret != WB_SKEY) {
+//			exit ('{"msg":"您输入的APPKEY SECRET不符","state":"1002"}');
+//		}
+//
+//		$data = array (
+//			'sina_uid' => $this->_getUserInfo('sina_uid'),
+//			'nickname' => $this->_getUserInfo('screen_name')
+//		);
+//
+//		$rs = DR('mgr/adminCom.saveAdminById', '', $data);
+//		if (strtolower(XWB_SERVER_ENV_TYPE) === 'sae') {
+//			$config_arr = array (
+//				'SYSTEM_SINA_UID' => $sina_uid,
+//				'WB_USER_OAUTH_TOKEN' => $oauth_token,
+//				'WB_USER_OAUTH_TOKEN_SECRET' => $oauth_token_secret
+//			);
+//			$this->sae_set_config($config_arr);
+//		} else {
+//
+//			$config_file = IO :: read(get_config_path(XT_USER_ID)); //读取站长配置
+//			$config_arr = array (
+//				'SYSTEM_SINA_UID' => $sina_uid,
+//				'WB_USER_OAUTH_TOKEN' => $oauth_token,
+//				'WB_USER_OAUTH_TOKEN_SECRET' => $oauth_token_secret
+//			);
+//
+//			//更新user_config数据
+//			$config_file = F('set_define_value', $config_file, $config_arr);
+//			IO :: write(get_config_path(XT_USER_ID), $config_file); //写入
+//
+//		}
 		//		session_regenerate_id(); //防御Session Fixation
 		//		USER :: set('isAdminAccount', 1); // 1为超级管理员
 		//		USER :: set('isAdminReport', 1); //设置为上报
@@ -403,27 +407,27 @@ class active_admin_mod {
 	}
 	function sae_set_config($data) {
 		//$config_file = IO::read(CONFIG_DOMAIN);
-		$storage = new SaeStorage();
-		$config_file = $storage->read(CONFIG_DOMAIN, md5(CONFIG_DOMAIN));
-		$site_base_info = array ();
-		parse_str($config_file, $site_base_info);
-
-		$site_base_info['user_name'] = $data['WB_USER_NAME'];
-		$site_base_info['user_email'] = $data['WB_USER_EMAIL'];
-		$site_base_info['user_qq'] = $data['WB_USER_QQ'];
-		$site_base_info['user_msn'] = $data['WB_USER_MSN'];
-		$site_base_info['user_tel'] = $data['WB_USER_TEL'];
-		$site_base_info['sina_id'] = $data['SYSTEM_SINA_UID'];
-		$site_base_info['user_oauth_token'] = $data['WB_USER_OAUTH_TOKEN'];
-		$site_base_info['user_oauth_token_secret'] = $data['WB_USER_OAUTH_TOKEN_SECRET'];
-
-		$temp = array ();
-		foreach ($site_base_info as $key => $value) {
-			$temp[] = $key . '=' . $value;
-		}
-		$base_info_str = implode('&', $temp);
-		//IO::write(CONFIG_DOMAIN,$base_info_str);
-		$storage->write(CONFIG_DOMAIN, md5(CONFIG_DOMAIN), $base_info_str);
+//		$storage = new SaeStorage();
+//		$config_file = $storage->read(CONFIG_DOMAIN, md5(CONFIG_DOMAIN));
+//		$site_base_info = array ();
+//		parse_str($config_file, $site_base_info);
+//
+//		$site_base_info['user_name'] = $data['WB_USER_NAME'];
+//		$site_base_info['user_email'] = $data['WB_USER_EMAIL'];
+//		$site_base_info['user_qq'] = $data['WB_USER_QQ'];
+//		$site_base_info['user_msn'] = $data['WB_USER_MSN'];
+//		$site_base_info['user_tel'] = $data['WB_USER_TEL'];
+//		$site_base_info['sina_id'] = $data['SYSTEM_SINA_UID'];
+//		$site_base_info['user_oauth_token'] = $data['WB_USER_OAUTH_TOKEN'];
+//		$site_base_info['user_oauth_token_secret'] = $data['WB_USER_OAUTH_TOKEN_SECRET'];
+//
+//		$temp = array ();
+//		foreach ($site_base_info as $key => $value) {
+//			$temp[] = $key . '=' . $value;
+//		}
+//		$base_info_str = implode('&', $temp);
+//		//IO::write(CONFIG_DOMAIN,$base_info_str);
+//		$storage->write(CONFIG_DOMAIN, md5(CONFIG_DOMAIN), $base_info_str);
 	}
 
 	/**

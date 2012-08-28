@@ -1427,7 +1427,7 @@ class action_mod
 		$uid = USER::uid();
 		if (!$uid) 
 		{
-			if (!defined('WB_USER_OAUTH_TOKEN') || !WB_USER_OAUTH_TOKEN) {
+			if (!defined('V2_ACCESS_TOKEN') || !V2_ACCESS_TOKEN) {
 				APP::ajaxRst(true, 0);
 				exit;
 			}

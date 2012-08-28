@@ -69,7 +69,7 @@ class pub_mod
 		$uid = USER::uid();
 
 		if (!$uid) {
-			if (!defined('WB_USER_OAUTH_TOKEN') || !WB_USER_OAUTH_TOKEN) {
+			if (!defined('V2_ACCESS_TOKEN') || !V2_ACCESS_TOKEN) {
 				APP::redirect(URL('index.account'), 4);
 			} else {
 				DR('xweibo/xwb.setToken', '', 2);

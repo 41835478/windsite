@@ -432,7 +432,9 @@ class account_mod {
 			} catch (OAuthException $e) {
 			}
 		}
-		
+		if(empty($token)){
+			exit('登陆错误');
+		}
 		$site_uid = USER :: get('site_uid');
 		$callbackOpt = V('g:cb', 'login');
 

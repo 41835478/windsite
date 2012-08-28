@@ -151,7 +151,7 @@ class account_mod extends action
     	} else {
     		$loginCallBack = !empty($back) ? '&loginCallBack=' . urlencode($back) : '';
     		$oauthCbUrl = W_BASE_HTTP . URL('account.oauthCallback', $callbackOpt) . $loginCallBack;
-			$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
+			$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL,$oauthCbUrl);
 			$oauthUrl .= '&xwb_&display=wap2.0&forcelogin=true';
 			APP::redirect($oauthUrl, 3);
     	}

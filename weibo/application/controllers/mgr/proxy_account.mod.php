@@ -10,7 +10,7 @@ class proxy_account_mod extends action{
 	
 	function addAccount() {
 		$oauthCbUrl = W_BASE_HTTP . URL('mgr/proxy_account.addAccountCallback');
-		$oauthUrl	 = DS('xweibo/xwb.getTokenAuthorizeURL', '', $oauthCbUrl);
+		$oauthUrl	 = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL,$oauthCbUrl);
 		$oauthUrl .= '&forcelogin=true';
 		header('Location:' . $oauthUrl);
 	}

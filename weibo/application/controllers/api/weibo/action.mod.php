@@ -1554,7 +1554,7 @@ class action_mod
 	function getTokenAuthorizeURL()
 	{
 		$url = V('p:url');
-		$oauth_url = DS('xweibo/xwb.getTokenAuthorizeURL', '', $url);
+		$oauth_url = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL,$url);
 		APP::ajaxRst($oauth_url);
 		exit;
 	}

@@ -21,7 +21,13 @@ class map_mod {
 		$code = V('g:code', '');
 		$state = V('g:state', '');
 		if (!empty ($code) && !empty ($state)) {
-			header('Location:' . $state . '&code=' . $code);
+			$state = str_replace('/http', 'http', $state);
+			if(strpos($state, "http://") === 0){
+				
+			}else{
+				$state='http://'.$state;
+			}
+			header('Location:' . urldecode($state) . '&code=' . $code);
 		}
 		exit;
 	}
@@ -135,26 +141,28 @@ class map_mod {
 		F('account_proxy.clearApp');
 	}
 	function test() {
-		$wb_list = DR('xweibo/weiboCopy.getList', '', array('disabled' => '0'), 10);
+		$wb_list = DR('xweibo/weiboCopy.getList', '', array (
+			'disabled' => '0'
+		), 10);
 		foreach ($wb_list as $wb) {
 			$wb_ids[] = $wb['id'];
 		}
 		print_r($wb_ids);
 		//$list = DR('xweibo/xwb.getPublicTimeline', '', 1);
 		if ($wb_ids) {
-			if (USER::isUserLogin()) {
+			if (USER :: isUserLogin()) {
 				$list = DR('xweibo/xwb.getStatusesBatchShow', '', implode(',', $wb_ids));
 			} else {
 				$list = DR('xweibo/xwb.getStatusesBatchShow', '', implode(',', $wb_ids), true, false);
 			}
 		} else {
-			$list['rst'] = array();
+			$list['rst'] = array ();
 			$list['errno'] = '';
 			$list['err'] = '';
 		}
 		print_r($list);
-//		Xpipe :: usePipe(false);
-//		TPL :: display('xintao/yingxiaoTest');
+		//		Xpipe :: usePipe(false);
+		//		TPL :: display('xintao/yingxiaoTest');
 	}
 	function rebuildConfig() {
 		$userId = V('g:userId');

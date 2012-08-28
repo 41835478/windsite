@@ -21,7 +21,7 @@ class xintao_mod extends action {
 		$type = V('p:type', '');
 		switch ($type) {
 			case 'sina' :
-				F('account_proxy.clear', WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, XT_USER_ID);
+				F('account_proxy.clear', V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, XT_USER_ID);
 				break;
 			case 'qq' :
 				F('account_proxy.clear_qq', XT_USER_ID);

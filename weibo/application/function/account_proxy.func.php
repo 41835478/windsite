@@ -1,6 +1,6 @@
 <?php
 function clearApp() {
-	return;//TODO 需测试
+	//return;//TODO 需测试
 	F('xintao.update_config_file', array (
 		'WB_AKEY' => '',
 		'WB_SKEY' => '',
@@ -28,7 +28,6 @@ function clearApp() {
 	DS('accountProxy.delAccountByUserId', '', XT_USER_ID);
 }
 function clear($token = '', $refresh = '', $USER_ID = '') {
-	return;//TODO 需测试
 	if (!empty ($token) && !empty ($USER_ID)) {
 		if ($token == V2_ACCESS_TOKEN) {
 			//清空当前用户的帐号授权

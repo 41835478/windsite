@@ -160,8 +160,9 @@ class active_admin_mod {
 	 */
 	function bindSina() {
 		$callback = W_BASE_HTTP . URL('mgr/xintao/active_admin.bindSinaCallback&forcelogin=true');
+		$callback = str_replace('http://','',$callback);
 		$oauthUrl = DS('xweibo/xwb.getTokenAuthorizeURL', '', WB_CALLBACK_URL, $callback);
-		header('Location:' . $oauthUrl);
+		header('Location:' . $oauthUrl.'&forcelogin=true');
 	}
 
 	// 绑定新浪微博回调（更新Admin以及更新配置）

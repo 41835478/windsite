@@ -267,7 +267,7 @@ class admin_mod extends action {
 		if ($rs['sina_uid']) { //如果设置了新浪管理员
 			if ($sina_uid && $sina_uid == $rs['sina_uid']) { //如果已经登录新浪，并且该用户是管理员，则空处理，否则设置为空
 			} else {
-				USER :: uid(''); //设置为空	
+				USER :: uid($rs['sina_uid']); //设置为空	
 			}
 		} else {
 			USER :: uid(''); //设置为空
@@ -284,10 +284,10 @@ class admin_mod extends action {
 		USER :: set('taobao_nick', $ret['nick']);
 		USER :: set('extra', $rs); //保存用户整体信息
 		//初始化SESSION 中新浪微博相关信息
-		if (!empty ($rs['access_token']) && !empty ($rs['token_secret'])) {
+		if (!empty ($rs['v2_access_token'])) {
 			USER :: setOAuthKey(array (
-				'oauth_token' => $rs['access_token'],
-				'oauth_token_secret' => $rs['token_secret']
+				'access_token' => $rs['v2_access_token'],
+				'refresh_token' => $rs['v2_refresh_token']
 			), true); //设置当前用户oAuthKey
 			DS('xweibo/xwb.setToken');
 			$uInfo = DR('xweibo/xwb.verifyCredentials');

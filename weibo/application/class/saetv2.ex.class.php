@@ -595,7 +595,7 @@ class SaeTClientV2 {
 	 * @return array
 	 */
 	function friends_timeline($page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0) {
-		return $this->home_timeline($since_id, $max_id, $count, $page, $base_app, $feature);
+		return $this->home_timeline($page, $count, $since_id, $max_id, $base_app, $feature);
 	}
 
 	/**
@@ -1090,7 +1090,7 @@ class SaeTClientV2 {
 		$params = array ();
 		$params['status'] = $status;
 		$params['url'] = $url;
-		return $this->oauth->post('statuses/upload', $params, true);
+		return $this->oauth->post('statuses/upload_url_text', $params, true);
 	}
 
 	/**

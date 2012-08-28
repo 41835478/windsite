@@ -38,7 +38,9 @@ class common_pls {
 		);
 		$p = array_merge($param, $p);
 		$modules = DS('PageModule.getPageModules', '', $p['type'], 1);
-
+		echo 'abcdefg';
+		print_r($modules);
+		exit;
 		if (isset ($modules[2])) {
 			foreach ($modules[2] as $mod) {
 				Xpipe :: pagelet('component/component_' . $mod['component_id'] . '.run', $mod);

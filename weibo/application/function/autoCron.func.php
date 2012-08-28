@@ -42,7 +42,8 @@ function autoCron($index = -1) {
 		6,
 		7
 	))) { //店铺
-	    if(XT_USER_NICK=='jping2') exit('jping2 no shop');
+		if (XT_USER_NICK == 'jping2')
+			exit ('jping2 no shop');
 		//exit;
 		$isYXSelf = true;
 		if (XT_IS_SELLER == 'true') {
@@ -68,7 +69,6 @@ function autoCron($index = -1) {
 		$WEIBO_TYPE = 'ITEM';
 	}
 	elseif ($index >= 500) { //淘客商品
-		echo '555720354::';
 		$weibo = autoCronTaokeItem();
 		$WEIBO_TYPE = 'TAOKE_ITEM';
 	}
@@ -102,27 +102,27 @@ function autoCron($index = -1) {
 	if (!empty ($weibo)) {
 		if ($WEIBO_TYPE == 'SHOP') { //店铺
 			if (!empty ($weibo['user_id']) && !empty ($weibo['text'])) {
-				sinaWeibo($WEIBO_TYPE, $weibo['sid'] . '-' . $weibo['user_id'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url'], $weibo);
+				sinaWeibo($WEIBO_TYPE, $weibo['sid'] . '-' . $weibo['user_id'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url'], $weibo);
 			}
 		}
 		elseif ($WEIBO_TYPE == 'ITEM') { //商品
 			if (!empty ($weibo['user_id']) && !empty ($weibo['text'])) {
-				sinaWeibo($WEIBO_TYPE, $weibo['nid'] . '-' . $weibo['user_id'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url'], $weibo);
+				sinaWeibo($WEIBO_TYPE, $weibo['nid'] . '-' . $weibo['user_id'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url'], $weibo);
 			}
 		}
 		elseif ($WEIBO_TYPE == 'TAOKE_ITEM') { //淘客商品
 			if (!empty ($weibo['user_id']) && !empty ($weibo['text'])) {
-				sinaWeibo($WEIBO_TYPE, $weibo['nid'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url'], $weibo);
+				sinaWeibo($WEIBO_TYPE, $weibo['nid'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url'], $weibo);
 			}
 		}
 		elseif ($WEIBO_TYPE == 'SHARE') { //分享
 			if (!empty ($weibo['id']) && !empty ($weibo['text'])) {
-				sinaWeibo($WEIBO_TYPE, $weibo['id'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url'], $weibo);
+				sinaWeibo($WEIBO_TYPE, $weibo['id'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url'], $weibo);
 			}
 		} else { //其他
 			if (isset ($weibo['id']) && !empty ($weibo['id']) && !empty ($weibo['text'])) {
 				//自动营销
-				sinaWeibo($WEIBO_TYPE, $weibo['id'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url']);
+				sinaWeibo($WEIBO_TYPE, $weibo['id'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url']);
 			}
 		}
 	}
@@ -214,7 +214,7 @@ function testAutoCronUserShop() {
 	$weibo = autoCronUserShop();
 	print_r($weibo);
 	if (!empty ($weibo['user_id']) && !empty ($weibo['text'])) {
-		sinaWeibo('SHOP', $weibo['sid'], XT_USER_ID, WB_AKEY, WB_SKEY, WB_USER_OAUTH_TOKEN, WB_USER_OAUTH_TOKEN_SECRET, $weibo['text'], $weibo['pic_url']);
+		sinaWeibo('SHOP', $weibo['sid'], XT_USER_ID, WB_AKEY, WB_SKEY, V2_ACCESS_TOKEN, V2_REFRESH_TOKEN, $weibo['text'], $weibo['pic_url']);
 	}
 }
 function autoCronTaokeItem() {
@@ -730,29 +730,31 @@ function autoCronTv($checked, $index = 0) {
 /**
 	 * 发送新浪微博
 	 */
-function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $token_secret, $text, $pic_url, $extra = array ()) {
+function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $refresh_token, $text, $pic_url, $extra = array ()) {
 	$CRON = array (
 		'user_id' => XT_USER_ID,
 		'type' => $TYPE,
 		'weibo' => $text,
 		'pic' => $pic_url
 	);
+	print_r($CRON);
 	$result = array ();
 	$weibo = APP :: N('weibo');
-	$weibo->consumer = new OAuthConsumer($appKey, $appSecret); //指定新浪appKey
-	$weibo->setToken(3, $token, $token_secret); //指定帐户授权
+	$weibo->setApp($appKey, $appSecret);
+	$weibo->setToken(3, $token, $refresh_token); //指定帐户授权
+	//TODO 等申请高级接口upload_url_text后再取消注释
 	//if ($appKey != WB_DEFAULT_AKEY) { //TODO 暂时屏蔽微购的新浪发布
-	if (isset ($pic_url) && !empty ($pic_url)) { //有图
-		$result = $weibo->uploadUrlText($text, '', $pic_url);
-		if (in_array($result['errno'], array (
-				'1020100'
-			))) { //40009[1020100]:Error: system error, does multipart has image?
-			//如果发布带图微博失败，则发布不带图微博
-			$result = $weibo->update($text);
-		}
-	} else { //无图
+//	if (isset ($pic_url) && !empty ($pic_url)) { //有图
+//		$result = $weibo->uploadUrlText($text, '', $pic_url);
+//		if (in_array($result['errno'], array (
+//				'1020100'
+//			))) { //40009[1020100]:Error: system error, does multipart has image?
+//			//如果发布带图微博失败，则发布不带图微博
+//			$result = $weibo->update($text);
+//		}
+//	} else { //无图
 		$result = $weibo->update($text);
-	}
+//	}
 	//}
 
 	echo '发布新浪微博';
@@ -765,6 +767,8 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $token_sec
 		F('xintao.update_config_file', array (
 			'SYSTEM_SINA_UID' => '',
 			'SYSTEM_SINA_USERNICK' => '',
+			'V2_ACCESS_TOKEN' => '',
+			'V2_REFRESH_TOKEN' => '',
 			'WB_USER_OAUTH_TOKEN' => '',
 			'WB_USER_OAUTH_TOKEN_SECRET' => ''
 		), $USER_ID);
@@ -772,6 +776,8 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $token_sec
 		DS('mgr/adminCom.saveAdminByUserId', '', array (
 			'sina_uid' => '',
 			'nickname' => '',
+			'v2_access_token' => '',
+			'v2_refresh_token' => '',
 			'access_token' => '',
 			'token_secret' => ''
 		), $USER_ID);

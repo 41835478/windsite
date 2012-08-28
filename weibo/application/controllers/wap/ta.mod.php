@@ -37,7 +37,7 @@ class ta_mod extends action {
                 $this->_showErr(L('controller__ta__profile__emptyTip'),WAP_URL('pub'));
                 
             }
-            $userinfo = DR('xweibo/xwb.getUserShow', 'p', null, $id, $name);
+            $userinfo = DR('xweibo/xwb.getUserShow', 'p', $id, $id, $name);
         } else {
             
             if (empty($name)) {
@@ -89,7 +89,7 @@ class ta_mod extends action {
                 /// 提示不存在
                 $this->_showErr(L('controller__tab__follow__errorUrl'),WAP_URL('pub'));
             }
-            $userinfo = DR('xweibo/xwb.getUserShow', 'p', null, $id, $name);
+            $userinfo = DR('xweibo/xwb.getUserShow', 'p', $id, $id, $name);
         } else {
             
             if (empty($name)) {
@@ -202,7 +202,7 @@ class ta_mod extends action {
                 $this->_showErr(L('controller__ta__defaultAction__emptyTip'),WAP_URL('pub'));
                 
             }
-            $userinfo = DR('xweibo/xwb.getUserShow', 'p', null, $id, $name);
+            $userinfo = DR('xweibo/xwb.getUserShow', 'p', $id, $id, $name);
         } else {
             
             if (empty($name)) {
@@ -260,7 +260,7 @@ class ta_mod extends action {
                  $this->_showErr(L('controller__ta__fans__emptyTip'),WAP_URL('pub'));
                 
             }
-            $userinfo = DR('xweibo/xwb.getUserShow', 'p', null, $id, $name);
+            $userinfo = DR('xweibo/xwb.getUserShow', 'p', $id, $id, $name);
         } else {
             
             if (empty($name)) {

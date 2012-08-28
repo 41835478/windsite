@@ -53,7 +53,7 @@ class ta_mod
 			}
 			
 			// 调用微博个人资料接口
-			$userinfo = DR('xweibo/xwb.getUserShow', 'p', null, $id, $name);
+			$userinfo = DR('xweibo/xwb.getUserShow', 'p', $id, $id, $name);
 			
 		} else 
 		{
@@ -69,6 +69,7 @@ class ta_mod
 		if(!$userinfo['rst']&&isset($userinfo['err'])&&!empty($userinfo['err'])){
 			APP::tips(array('tpl' => 'e404', 'msg' => $userinfo['err']));
 		}
+		
 		$userinfo = F('user_filter', $userinfo['rst'], true);
 		if (empty($userinfo)) {
 			/// 提示不存在	

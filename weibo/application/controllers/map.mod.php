@@ -330,7 +330,7 @@ class map_mod {
 	 */
 	function autoCron() {
 		//需考虑版本，（如免费版，不能使用画报，视频）
-		if (SYSTEM_SINA_UID != '' && WB_USER_OAUTH_TOKEN != '' && WB_USER_OAUTH_TOKEN_SECRET != '') {
+		if (SYSTEM_SINA_UID != '' && V2_ACCESS_TOKEN != '') {
 			set_time_limit(120); //设置总执行时间限制，预期不可超过2分钟。
 			//			$cache_name = 'autoCron_today_record_' . XT_USER_ID . '_';
 			//			$record = CACHE :: get($cache_name);
@@ -431,7 +431,7 @@ class map_mod {
 			exit ('微博编号不能为空');
 		}
 		//需考虑版本，（如免费版，不能使用画报，视频）
-		if (SYSTEM_SINA_UID != '' && WB_USER_OAUTH_TOKEN != '' && WB_USER_OAUTH_TOKEN_SECRET != '') {
+		if (SYSTEM_SINA_UID != '' && V2_ACCESS_TOKEN != '') {
 			$admin = CACHE :: get(TB_CACHE_KEY_PRE . 'autoCronsWeibo_' . $id);
 			//获取后删除缓存文件
 			CACHE :: delete(TB_CACHE_KEY_PRE . 'autoCronsWeibo_' . $id);

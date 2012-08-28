@@ -1088,7 +1088,7 @@ class SaeTClientV2 {
 	 */
 	function upload_url_text($status, $url) {
 		$params = array ();
-		$params['status'] = $status;
+		$params['status'] = ($status);
 		$params['url'] = $url;
 		return $this->oauth->post('statuses/upload_url_text', $params, true);
 	}

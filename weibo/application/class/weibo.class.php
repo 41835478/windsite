@@ -799,7 +799,7 @@ class weibo {
 	 */
 	function uploadUrlText($status, $picid = null, $picurl = null) {
 		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
-		$response = $c->upload_url_text($status, $picurl);
+		$response = $c->upload($status, $picurl);
 		return RST($response);
 	}
 

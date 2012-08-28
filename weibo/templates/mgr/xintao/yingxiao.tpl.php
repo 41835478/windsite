@@ -328,7 +328,7 @@ $(function(){
 	<?php
 
 
-if (SYSTEM_SINA_UID == '' || WB_USER_OAUTH_TOKEN == '' || WB_USER_OAUTH_TOKEN_SECRET == '') {
+if (SYSTEM_SINA_UID == '' || V2_ACCESS_TOKEN == '') {
 ?>	
 		Xwb.ui.MsgBox.tipError('您需要绑定新浪微博后才可以使用该功能！');
 		$('#addForm .form-cont input[type="checkbox"]').attr('disabled','true');

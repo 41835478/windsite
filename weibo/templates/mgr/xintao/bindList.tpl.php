@@ -13,6 +13,12 @@
     <div class="main-cont">
         <h3 class="title">您已绑定的网站及帐号</h3>
 		<div class="set-area" style="margin-left:0px;margin-right:0px;">
+		<?php if (WB_AKEY != WB_DEFAULT_AKEY) {?>
+		<p class="tips-desc">如果新浪微博不能正常绑定,请进入<a href="http://open.weibo.com" target="_blank">http://open.weibo.com</a>,我的应用---应用信息---高级信息---编辑授权回调地址
+			<br> <span class="tips" style="color:red">a.授权回调地址:http://<?php echo XT_SITE_DOMAIN;?>/map.oauthCallback</span>
+			<br><span class="tips" style="color:red">b.取消授权回调地址:http://<?php echo XT_SITE_DOMAIN;?>/map.cancelOauthCallback</span>
+		</p>
+		<?php }?>
         	<table class="table" cellpadding="0" cellspacing="0" width="100%" border="0">
             	<colgroup>
 						<col class="w120"/>

@@ -255,6 +255,21 @@ var MODULES = [{
 			isNew : false,
 			v : 1
 		}, {
+			name : 'shopShiYi',
+			title : '试衣间模块',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '添加一个淘宝联盟试衣间推广模块',
+			order : 0,
+			type : 0,
+			adType : 'other',
+			layout : '3,4',
+			content : 'bd',
+			limit : 1,
+			isHd : false,
+			isNew : false,
+			isFC : false,
+			v : 1
+		}, {
 			name : 'shopComplexA',
 			title : '综合类模块',
 			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
@@ -437,6 +452,36 @@ var MODULES = [{
 			isNew : false,
 			v : 1
 		}, {
+			name : 'shopChannelTab',
+			title : '淘宝内嵌模块',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '内嵌模块，提供美容咨询组件，以及热门搜索关键词，热卖商品，自动更新，关注热点。',
+			order : 0,
+			type : 0,
+			adType : 'item',
+			layout : '1,2,3,4',
+			content : 'bd',
+			limit : 2,
+			isHd : true,
+			isNew : false,
+			isFC : false,
+			v : 1
+		}, {
+			name : 'shopTopCode',
+			title : '淘宝热门榜单',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '自定义榜单，展示淘宝指定商品分类的热门关键词排名。可配置榜单类型，榜单维度，分类',
+			order : 0,
+			type : 0,
+			adType : 'item',
+			layout : '1',
+			content : 'bd',
+			limit : 2,
+			isHd : true,
+			isNew : false,
+			isFC : false,
+			v : 1
+		}, {
 			name : 'shopDisplay',
 			title : '页面推广(自动)',
 			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
@@ -506,6 +551,36 @@ var MODULES = [{
 			limit : 2,
 			isHd : true,
 			isNew : false,
+			v : 1
+		}, {
+			name : 'shopChannel',
+			title : '淘宝频道推广',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '添加一个淘宝的频道页面作为推广。',
+			order : 0,
+			type : 0,
+			adType : 'page',
+			layout : '4',
+			content : 'bd',
+			limit : 1,
+			isHd : false,
+			isNew : false,
+			isFC : false,
+			v : 1
+		}, {
+			name : 'shopChongzhi',
+			title : '虚拟充值框',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '添加一个含手机充值，游戏快充，机票的虚拟充值框。通过该充值框购买虚拟物品可正常获取佣金',
+			order : 0,
+			type : 0,
+			adType : 'other',
+			layout : '1,2,3,4',
+			content : 'bd',
+			limit : 1,
+			isHd : false,
+			isNew : false,
+			isFC : false,
 			v : 1
 		}, {
 			name : 'shopDisplay',

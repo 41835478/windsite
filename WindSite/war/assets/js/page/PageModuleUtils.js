@@ -21,83 +21,76 @@ $(function() {
 		 */
 		focusText : function(text, css, cssNode, removeOnFocus) {
 			this.each(function() {
-				$(this).focus(function() {
-					if (this.value === text) {
-						var selHolder = $(this).data('xwb_selholder');
-						if (selHolder)
-							selHolder.setText('');
-						else
-							this.value = '';
-					}
-					if (css) {
-						if (removeOnFocus)
-							$(cssNode || this).removeClass(css);
-						else
-							$(cssNode || this).addClass(css);
-					}
-				}).blur(function() {
-					if ($.trim(this.value) === '') {
-						var selHolder = $(this).data('xwb_selholder');
-						if (selHolder)
-							selHolder.setText(text);
-						else
-							this.value = text;
-					}
-					if (css) {
-						if (removeOnFocus)
-							$(cssNode || this).addClass(css);
-						else
-							$(cssNode || this).removeClass(css);
-					}
-				});
-			});
+						$(this).focus(function() {
+									if (this.value === text) {
+										var selHolder = $(this)
+												.data('xwb_selholder');
+										if (selHolder)
+											selHolder.setText('');
+										else
+											this.value = '';
+									}
+									if (css) {
+										if (removeOnFocus)
+											$(cssNode || this).removeClass(css);
+										else
+											$(cssNode || this).addClass(css);
+									}
+								}).blur(function() {
+									if ($.trim(this.value) === '') {
+										var selHolder = $(this)
+												.data('xwb_selholder');
+										if (selHolder)
+											selHolder.setText(text);
+										else
+											this.value = text;
+									}
+									if (css) {
+										if (removeOnFocus)
+											$(cssNode || this).addClass(css);
+										else
+											$(cssNode || this).removeClass(css);
+									}
+								});
+					});
 		}
 
 	});
 })
 function QQ_LOGIN(qq) {
-	if (typeof (QC) != 'undefined' && typeof (qq) != 'undefined' && qq != '') {
+	if (typeof(QC) != 'undefined' && typeof(qq) != 'undefined' && qq != '') {
 		if (QC.Login.check()) {// 如果已登录
-			QC.Login
-					.getMe(function(openId, accessToken) {
-						QC
-								.api("get_user_info")
-								.success(
-										function(s) {// 成功回调
-											$
-													.post(
-															'/router/fanli/loginfl/third',
-															{
-																third_type : 'qq',
-																third_id : ''
-																		+ openId,
-																third_nick : s.data.nickname,
-																referer : document.location.href
-															},
-															function(state) {
-																if (typeof (IS_LOGIN) != 'undefined'
-																		&& IS_LOGIN) {
-																	if (state == 202) {
-																		document.location.href = '/router/fanli/registe';
-																	} else {
-																		document.location.href = '/router/fanlimember';
-																	}
+			QC.Login.getMe(function(openId, accessToken) {
+				QC.api("get_user_info").success(function(s) {// 成功回调
+							$.post('/router/fanli/loginfl/third', {
+										third_type : 'qq',
+										third_id : '' + openId,
+										third_nick : s.data.nickname,
+										referer : document.location.href
+									}, function(state) {
+										if (typeof(IS_LOGIN) != 'undefined'
+												&& IS_LOGIN) {
+											if (state == 202) {
+												document.location.href = '/router/fanli/registe';
+											} else {
+												document.location.href = '/router/fanlimember';
+											}
 
-																} else {
-																	if (state == 202) {
-																		document.location.href = '/router/fanli/registe?referer='
-																				+ document.location.href;
-																	} else {
-																		document.location.href = document.location.href;
-																	}
-																}
-															});
-											QC.Login.signOut();
-										}).error(function(f) {// 失败回调
-								}).complete(function(c) {// 完成请求回调
-								});
+										} else {
+											if (state == 202) {
+												document.location.href = '/router/fanli/registe?referer='
+														+ document.location.href;
+											} else {
+												document.location.href = document.location.href;
+											}
+										}
+									});
+							QC.Login.signOut();
+						}).error(function(f) {// 失败回调
+						}).complete(function(c) {// 完成请求回调
+						});
 
-					});
+			});
 		}
 
 	}
@@ -118,146 +111,133 @@ var PageModuleUtils = {
 	},
 	unLoginSite : function(isLogin, sina, qq) {
 		if ('true' == isLogin) {
-			$('#J_LinkBuy').click(
-					function() {
-						$('#J_FanliLoginBox').data('overlay').load();
-						var link = $(this).attr('href');
-						$('#J_FanliLoginButton').attr('data-url', link);
-						$('#J_FanliRegiste').attr('href',
-								'/router/fanli/registe?referer=' + link);// 注册链接
-						$('#J_FanliLink').attr('href', link);
-						return false;
-					});
+			$('#J_LinkBuy').click(function() {
+				$('#J_FanliLoginBox').data('overlay').load();
+				var link = $(this).attr('href');
+				$('#J_FanliLoginButton').attr('data-url', link);
+				$('#J_FanliRegiste').attr('href',
+						'/router/fanli/registe?referer=' + link);// 注册链接
+				$('#J_FanliLink').attr('href', link);
+				return false;
+			});
 		}
-		
-		if (typeof (QC) != 'undefined') {
+
+		if (typeof(QC) != 'undefined') {
 			QQ_LOGIN(qq);
 			if ($('#nav_third_login_qq').length > 0) {
 				QC.Login({
-					btnId : "nav_third_login_qq",// 插入按钮的html标签id
-					size : "A_M",// 按钮尺寸
-					scope : "get_user_info",// 展示授权，全部可用授权可填 all
-					display : "pc"// 应用场景，可选
-				}, function(reqData, opts) {// 登录成功
-					QQ_LOGIN(qq);
-				});
+							btnId : "nav_third_login_qq",// 插入按钮的html标签id
+							size : "A_M",// 按钮尺寸
+							scope : "get_user_info",// 展示授权，全部可用授权可填 all
+							display : "pc"// 应用场景，可选
+						}, function(reqData, opts) {// 登录成功
+							QQ_LOGIN(qq);
+						});
 			}
 			if ($('#third_login_qq').length > 0) {
 				QC.Login({
-					btnId : "third_login_qq",// 插入按钮的html标签id
-					size : "A_M",// 按钮尺寸
-					scope : "get_user_info",// 展示授权，全部可用授权可填 all
-					display : "pc"// 应用场景，可选
-				}, function(reqData, opts) {// 登录成功
-					QQ_LOGIN();
-				});
+							btnId : "third_login_qq",// 插入按钮的html标签id
+							size : "A_M",// 按钮尺寸
+							scope : "get_user_info",// 展示授权，全部可用授权可填 all
+							display : "pc"// 应用场景，可选
+						}, function(reqData, opts) {// 登录成功
+							QQ_LOGIN();
+						});
 			}
 		}
 
-		if (typeof (sina) != 'undefined' && sina != '') {
-			$
-					.getScript(
-							'http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey='
-									+ sina,
-							function() {
-								if (typeof (WB2) != 'undefined') {
-									WB2
-											.anyWhere(function(W) {
-												if ($('#nav_third_login_sina').length > 0
-														&& $('#nav_third_login_sina .weibo_widget_connect_btn').length == 0) {
-													W.widget
-															.connectButton({
-																id : "nav_third_login_sina",
-																type : '3,2',
-																callback : {
-																	login : function(
-																			o) {
-																		$
-																				.post(
-																						'/router/fanli/loginfl/third',
-																						{
-																							third_type : 'sina',
-																							third_id : ''
-																									+ o.id,
-																							third_nick : o.screen_name,
-																							referer : document.location.href
-																						},
-																						function(
-																								state) {
-																							if (typeof (IS_LOGIN) != 'undefined'
-																									&& IS_LOGIN) {
-																								if (state == 202) {
-																									document.location.href = '/router/fanli/registe';
-																								} else {
-																									document.location.href = '/router/fanlimember';
-																								}
+		if (typeof(sina) != 'undefined' && sina != '') {
+			$.getScript('http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey='
+							+ sina, function() {
+						if (typeof(WB2) != 'undefined') {
+							WB2.anyWhere(function(W) {
+								if ($('#nav_third_login_sina').length > 0
+										&& $('#nav_third_login_sina .weibo_widget_connect_btn').length == 0) {
+									W.widget.connectButton({
+										id : "nav_third_login_sina",
+										type : '3,2',
+										callback : {
+											login : function(o) {
+												$
+														.post(
+																'/router/fanli/loginfl/third',
+																{
+																	third_type : 'sina',
+																	third_id : ''
+																			+ o.id,
+																	third_nick : o.screen_name,
+																	referer : document.location.href
+																}, function(
+																		state) {
+																	if (typeof(IS_LOGIN) != 'undefined'
+																			&& IS_LOGIN) {
+																		if (state == 202) {
+																			document.location.href = '/router/fanli/registe';
+																		} else {
+																			document.location.href = '/router/fanlimember';
+																		}
 
-																							} else {
-																								if (state == 202) {
-																									document.location.href = '/router/fanli/registe?referer='
-																											+ document.location.href;
-																								} else {
-																									document.location.href = document.location.href;
-																								}
-																							}
-																						});
-																		WB2
-																				.logout();
-																	},
-																	logout : function() {
+																	} else {
+																		if (state == 202) {
+																			document.location.href = '/router/fanli/registe?referer='
+																					+ document.location.href;
+																		} else {
+																			document.location.href = document.location.href;
+																		}
 																	}
-																}
-															});
-												}
-												if ($('#third_login_sina').length > 0
-														&& $('#third_login_sina .weibo_widget_connect_btn').length == 0) {
-													W.widget
-															.connectButton({
-																id : "third_login_sina",
-																type : '3,2',
-																callback : {
-																	login : function(
-																			o) {
-																		$
-																				.post(
-																						'/router/fanli/loginfl/third',
-																						{
-																							third_type : 'sina',
-																							third_id : ''
-																									+ o.id,
-																							third_nick : o.screen_name,
-																							referer : document.location.href
-																						},
-																						function(
-																								state) {
-																							if (typeof (IS_LOGIN) != 'undefined'
-																									&& IS_LOGIN) {
-																								if (state == 202) {
-																									document.location.href = '/router/fanli/registe';
-																								} else {
-																									document.location.href = '/router/fanlimember';
-																								}
+																});
+												WB2.logout();
+											},
+											logout : function() {
+											}
+										}
+									});
+								}
+								if ($('#third_login_sina').length > 0
+										&& $('#third_login_sina .weibo_widget_connect_btn').length == 0) {
+									W.widget.connectButton({
+										id : "third_login_sina",
+										type : '3,2',
+										callback : {
+											login : function(o) {
+												$
+														.post(
+																'/router/fanli/loginfl/third',
+																{
+																	third_type : 'sina',
+																	third_id : ''
+																			+ o.id,
+																	third_nick : o.screen_name,
+																	referer : document.location.href
+																}, function(
+																		state) {
+																	if (typeof(IS_LOGIN) != 'undefined'
+																			&& IS_LOGIN) {
+																		if (state == 202) {
+																			document.location.href = '/router/fanli/registe';
+																		} else {
+																			document.location.href = '/router/fanlimember';
+																		}
 
-																							} else {
-																								if (state == 202) {
-																									document.location.href = '/router/fanli/registe?referer='
-																											+ document.location.href;
-																								} else {
-																									document.location.href = document.location.href;
-																								}
-																							}
-																						});
-																		WB2
-																				.logout();
-																	},
-																	logout : function() {
+																	} else {
+																		if (state == 202) {
+																			document.location.href = '/router/fanli/registe?referer='
+																					+ document.location.href;
+																		} else {
+																			document.location.href = document.location.href;
+																		}
 																	}
-																}
-															});
-												}
-											});
+																});
+												WB2.logout();
+											},
+											logout : function() {
+											}
+										}
+									});
 								}
 							});
+						}
+					});
 
 		}
 	},
@@ -267,116 +247,99 @@ var PageModuleUtils = {
 			return;
 		}
 		$('.b2c-fl').show();
-		$(
-				'#content .shop-display .item,#content .list-view .list-item,#content .shop-tenorder .pic,#content .shop-complex-a .item,#content .shop-dianpu .shop-dianpu-ul li,#content .shop-child-floor .child-grid li')
-				.each(
-						function() {
-							var pre = '返利:';
-							var last = '元';
-							var c = $(this).attr('co');
-							if (c) {
-								var co = Math.floor(parseFloat(c) * rate * 100) / 100.00;
-								$(this).append(
-										'<div class="c-c" title="' + pre + co
-												+ last + '" style="">' + pre
-												+ co + last + '</div>');
-							} else {
-								c = $(this).attr('cr');
-								pre = '返利比例:';
-								last = '%';
-								if (c) {
-									var co = Math.floor(parseFloat(c) * rate
-											* 100) / 100.00;
-									$(this).append(
-											'<div class="c-c" title="' + pre
-													+ co + last + '" style="">'
-													+ pre + co + last
-													+ '</div>');
-								}
+		$(		'#content .shop-display .item,#content .list-view .list-item,#content .shop-tenorder .pic,#content .shop-complex-a .item,#content .shop-dianpu .shop-dianpu-ul li,#content .shop-child-floor .child-grid li')
+				.each(function() {
+					var pre = '返利:';
+					var last = '元';
+					var c = $(this).attr('co');
+					if (c) {
+						var co = Math.floor(parseFloat(c) * rate * 100)
+								/ 100.00;
+						$(this).append('<div class="c-c" title="' + pre + co
+										+ last + '" style="">' + pre + co
+										+ last + '</div>');
+					} else {
+						c = $(this).attr('cr');
+						pre = '返利比例:';
+						last = '%';
+						if (c) {
+							var co = Math.floor(parseFloat(c) * rate * 100)
+									/ 100.00;
+							$(this).append('<div class="c-c" title="' + pre
+											+ co + last + '" style="">' + pre
+											+ co + last + '</div>');
+						}
+					}
+				});
+		$('#detail .xt-detail-price:first').each(function() {
+			var pre = '返　　利：';
+			var last = '元';
+			var self = $(this);
+			var nid = $('#detail .xt-gallery .xt-s310').attr('data-id');
+			if (nid) {
+				var sender = new WindSender('/router/site/getCommission/' + nid
+								+ '?v=' + Math.random(), true);
+				sender.load("GET", {}, function(response) {
+					if (response.isSuccess()) {// 转换佣金返利成功
+						var c = response.body.co;
+						var price = response.body.price;
+						if (c == 0) {
+							return;
+						}
+						if (c > 0) {
+							var co = Math.floor(parseFloat(c) * rate * 100)
+									/ 100.00;
+							self
+									.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
+											+ pre
+											+ '</span>'
+											+ '<strong style="vertical-align: baseline;font-family: Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size: 24px;font-weight: normal;padding-right: 5px;line-height: 25px;">'
+											+ co + '</strong>' + last + '<li>');
+							if (price > 0) {
+								// var strong =
+								// self.find('strong');
+								// if
+								// (strong.text()
+								// != price) {
+								// strong.text(price);
+								// $.ajax({
+								// url :
+								// '/router/site/synitem/'
+								// + nid + '?v='
+								// +
+								// Math.random(),
+								// type : 'GET',
+								// data : {},
+								// beforeSend :
+								// function(xhr)
+								// {
+								// xhr.setRequestHeader(
+								// "WindType",
+								// "AJAX");//
+								// 请求方式
+								// xhr.setRequestHeader(
+								// "WindDataType",
+								// "HTML");//
+								// 请求返回内容类型
+								// },
+								// error :
+								// function(request,
+								// textStatus,
+								// errorThrown)
+								// {
+								// },
+								// success :
+								// function(data)
+								// {
+								// }
+								// });
+								// }
 							}
-						});
-		$('#detail .xt-detail-price:first')
-				.each(
-						function() {
-							var pre = '返　　利：';
-							var last = '元';
-							var self = $(this);
-							var nid = $('#detail .xt-gallery .xt-s310').attr(
-									'data-id');
-							if (nid) {
-								var sender = new WindSender(
-										'/router/site/getCommission/' + nid
-												+ '?v=' + Math.random(), true);
-								sender
-										.load(
-												"GET",
-												{},
-												function(response) {
-													if (response.isSuccess()) {// 转换佣金返利成功
-														var c = response.body.co;
-														var price = response.body.price;
-														if (c == 0) {
-															return;
-														}
-														if (c > 0) {
-															var co = Math
-																	.floor(parseFloat(c)
-																			* rate
-																			* 100) / 100.00;
-															self
-																	.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
-																			+ pre
-																			+ '</span>'
-																			+ '<strong style="vertical-align: baseline;font-family: Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size: 24px;font-weight: normal;padding-right: 5px;line-height: 25px;">'
-																			+ co
-																			+ '</strong>'
-																			+ last
-																			+ '<li>');
-															if (price > 0) {
-																// var strong =
-																// self.find('strong');
-																// if
-																// (strong.text()
-																// != price) {
-																// strong.text(price);
-																// $.ajax({
-																// url :
-																// '/router/site/synitem/'
-																// + nid + '?v='
-																// +
-																// Math.random(),
-																// type : 'GET',
-																// data : {},
-																// beforeSend :
-																// function(xhr)
-																// {
-																// xhr.setRequestHeader(
-																// "WindType",
-																// "AJAX");//
-																// 请求方式
-																// xhr.setRequestHeader(
-																// "WindDataType",
-																// "HTML");//
-																// 请求返回内容类型
-																// },
-																// error :
-																// function(request,
-																// textStatus,
-																// errorThrown)
-																// {
-																// },
-																// success :
-																// function(data)
-																// {
-																// }
-																// });
-																// }
-															}
-														}
-													}
-												});
-							}
-						});
+						}
+					}
+				});
+			}
+		});
 		// $('#detail .xt-gallery .xt-s310').each(function() {
 		// var pre = '返利:';
 		// var last = '元';
@@ -453,43 +416,29 @@ var PageModuleUtils = {
 	initShopTabNav : function(widget) {
 		$('body').append($('.J_MenuSub'));
 		var left = widget.offset().left;
-		widget
-				.find('.J_TabNav')
-				.each(
-						function() {
-							var self = $(this);
-							var cat = $(this).attr('cat');
-							var popId = '#J_SubMenuPopup_' + cat;
-							var pop = $(popId);
-							$(this)
-									.tooltip(
-											{
-												tip : pop,
-												position : 'bottom center',
-												onBeforeShow : function(event,
-														offset) {
-													self
-															.addClass(
-																	'submenu-active-item')
-															.siblings()
-															.removeClass(
-																	'submenu-active-item');
-													if (typeof (this.getConf().isTrue) == 'undefined') {
-														this.getConf().offset = [
-																-4,
-																left
-																		- offset.left ];
-														this.getConf().isTrue = true;
-													} else {
+		widget.find('.J_TabNav').each(function() {
+			var self = $(this);
+			var cat = $(this).attr('cat');
+			var popId = '#J_SubMenuPopup_' + cat;
+			var pop = $(popId);
+			$(this).tooltip({
+				tip : pop,
+				position : 'bottom center',
+				onBeforeShow : function(event, offset) {
+					self.addClass('submenu-active-item').siblings()
+							.removeClass('submenu-active-item');
+					if (typeof(this.getConf().isTrue) == 'undefined') {
+						this.getConf().offset = [-4, left - offset.left];
+						this.getConf().isTrue = true;
+					} else {
 
-													}
-												},
-												onHide : function() {
-													self
-															.removeClass('submenu-active-item');
-												}
-											});
-						});
+					}
+				},
+				onHide : function() {
+					self.removeClass('submenu-active-item');
+				}
+			});
+		});
 	},
 	initShopChongzhi : function(widget) {
 		var width = 300;
@@ -536,12 +485,12 @@ var PageModuleUtils = {
 	},
 	initShopB2cMall : function(widget) {
 		widget.find('a').each(function() {
-			var _href = $(this).attr('href');
-			if (_href && _href.indexOf('ymall-') != -1) {
-				var $href = _href.replace('/ymall-', '/ymall-go-');
-				$(this).attr('href', $href);
-			}
-		});
+					var _href = $(this).attr('href');
+					if (_href && _href.indexOf('ymall-') != -1) {
+						var $href = _href.replace('/ymall-', '/ymall-go-');
+						$(this).attr('href', $href);
+					}
+				});
 	},
 	/**
 	 * 顶部下拉菜单
@@ -552,46 +501,32 @@ var PageModuleUtils = {
 	initShopMallTabNav : function(widget) {
 		$('body').append($('.J_MallSub'));
 		var left = widget.offset().left;
-		widget
-				.find('.J_TabNav')
-				.each(
-						function() {
-							var self = $(this);
-							var cat = $(this).attr('cat');
-							var popId = '#J_MallSubMenuPopup_' + cat;
-							var pop = $(popId);
-							$(this)
-									.tooltip(
-											{
-												events : {
-													def : "click,mouseleave"
-												},
-												tip : pop,
-												position : 'bottom center',
-												onBeforeShow : function(event,
-														offset) {
-													self
-															.addClass(
-																	'submenu-active-item')
-															.siblings()
-															.removeClass(
-																	'submenu-active-item');
-													if (typeof (this.getConf().isTrue) == 'undefined') {
-														this.getConf().offset = [
-																-4,
-																left
-																		- offset.left ];
-														this.getConf().isTrue = true;
-													} else {
+		widget.find('.J_TabNav').each(function() {
+			var self = $(this);
+			var cat = $(this).attr('cat');
+			var popId = '#J_MallSubMenuPopup_' + cat;
+			var pop = $(popId);
+			$(this).tooltip({
+				events : {
+					def : "click,mouseleave"
+				},
+				tip : pop,
+				position : 'bottom center',
+				onBeforeShow : function(event, offset) {
+					self.addClass('submenu-active-item').siblings()
+							.removeClass('submenu-active-item');
+					if (typeof(this.getConf().isTrue) == 'undefined') {
+						this.getConf().offset = [-4, left - offset.left];
+						this.getConf().isTrue = true;
+					} else {
 
-													}
-												},
-												onHide : function() {
-													self
-															.removeClass('submenu-active-item');
-												}
-											});
-						});
+					}
+				},
+				onHide : function() {
+					self.removeClass('submenu-active-item');
+				}
+			});
+		});
 	},
 	/**
 	 * 初始化母婴分类模块
@@ -603,11 +538,12 @@ var PageModuleUtils = {
 		widget.find('#J_ChildCats li').each(function() {
 			var cat = $(this).attr('data-body');
 			$(this).hover(function() {
-				$(this).addClass('current').siblings().removeClass('current');
-				$('.tab-list-con', widget).removeClass('current');
-				$('.tab-list-con-' + cat, widget).addClass('current');
-			}, function() {
-			});
+						$(this).addClass('current').siblings()
+								.removeClass('current');
+						$('.tab-list-con', widget).removeClass('current');
+						$('.tab-list-con-' + cat, widget).addClass('current');
+					}, function() {
+					});
 		});
 	},
 	/**
@@ -617,65 +553,30 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopMallJingXi : function(widget) {
-		widget
-				.find('.jingxi-section')
-				.each(
-						function() {
-							var self = $(this);
-							var current = $(this).find('.items a.current');
-							var round = $(this).find('.round');
-							var details = $(this).find('.detail');
-							$(this)
-									.find('.items .trigger')
-									.each(
-											function() {
-												$(this)
-														.hover(
-																function() {
-																	var dround = $(
-																			this)
-																			.attr(
-																					'data-round');
-																	current
-																			.attr(
-																					'href',
-																					$(
-																							this)
-																							.attr(
-																									'href'))
-																			.attr(
-																					'style',
-																					'background-image:url('
-																							+ $(
-																									this)
-																									.attr(
-																											'data-image')
-																							+ ');');
-																	var browser = $.browser;
-																	if (browser.msie) {// IE修订
-																		round
-																				.attr(
-																						'class',
-																						'round IERound-'
-																								+ dround);
-																	} else {
-																		round
-																				.attr(
-																						'class',
-																						'round round-'
-																								+ dround);
-																	}
-																	details
-																			.hide();
-																	self
-																			.find(
-																					'.detail-'
-																							+ dround)
-																			.show();
-																}, function() {
-																});
-											});
-						});
+		widget.find('.jingxi-section').each(function() {
+			var self = $(this);
+			var current = $(this).find('.items a.current');
+			var round = $(this).find('.round');
+			var details = $(this).find('.detail');
+			$(this).find('.items .trigger').each(function() {
+				$(this).hover(function() {
+					var dround = $(this).attr('data-round');
+					current.attr('href', $(this).attr('href')).attr(
+							'style',
+							'background-image:url('
+									+ $(	this).attr('data-image') + ');');
+					var browser = $.browser;
+					if (browser.msie) {// IE修订
+						round.attr('class', 'round IERound-' + dround);
+					} else {
+						round.attr('class', 'round round-' + dround);
+					}
+					details.hide();
+					self.find('.detail-' + dround).show();
+				}, function() {
+				});
+			});
+		});
 	},
 	/**
 	 * 初始化商城浮动分类
@@ -690,18 +591,18 @@ var PageModuleUtils = {
 			var cat = $(this).attr('cat');
 			var pop = $('.J_PopSubCategory[cat="' + cat + '"]');
 			$(this).tooltip({
-				offset : [ 0, -40 ],
-				tip : pop,
-				position : 'center right',
-				onBeforeShow : function(event, offset) {
-					if (typeof (this.getConf().isTrue) == 'undefined') {
-						this.getConf().offset = [ top - offset.top, -40 ];
-						this.getConf().isTrue = true;
-					} else {
+						offset : [0, -40],
+						tip : pop,
+						position : 'center right',
+						onBeforeShow : function(event, offset) {
+							if (typeof(this.getConf().isTrue) == 'undefined') {
+								this.getConf().offset = [top - offset.top, -40];
+								this.getConf().isTrue = true;
+							} else {
 
-					}
-				}
-			});
+							}
+						}
+					});
 		});
 	},
 	/**
@@ -713,34 +614,24 @@ var PageModuleUtils = {
 	initShopMallSideNav : function(widget) {
 		$('body').append($('.J_MallPopSubCategory'));
 		var top = widget.offset().top;
-		widget
-				.find('.J_MenuItem')
-				.each(
-						function() {
-							var cat = $(this).attr('cat');
-							var pop = $('.J_MallPopSubCategory[cat="' + cat
-									+ '"]');
-							$(this)
-									.tooltip(
-											{
-												offset : [ 0, -40 ],
-												tip : pop,
-												position : 'center right',
-												onBeforeShow : function(event,
-														offset) {
-													if (typeof (this.getConf().isTrue) == 'undefined') {
-														this.getConf().offset = [
-																(top > offset.top ? top
-																		- offset.top
-																		: 0),
-																-40 ];
-														this.getConf().isTrue = true;
-													} else {
+		widget.find('.J_MenuItem').each(function() {
+			var cat = $(this).attr('cat');
+			var pop = $('.J_MallPopSubCategory[cat="' + cat + '"]');
+			$(this).tooltip({
+				offset : [0, -40],
+				tip : pop,
+				position : 'center right',
+				onBeforeShow : function(event, offset) {
+					if (typeof(this.getConf().isTrue) == 'undefined') {
+						this.getConf().offset = [
+								(top > offset.top ? top - offset.top : 0), -40];
+						this.getConf().isTrue = true;
+					} else {
 
-													}
-												}
-											});
-						});
+					}
+				}
+			});
+		});
 	},
 	/**
 	 * 初始化淘店铺列表模块
@@ -752,214 +643,135 @@ var PageModuleUtils = {
 		var hoverT = 0, hideT = 0;
 		if ($('#popinfo_wrap').length == 0) {
 			$('body')
-					.append(
-							'<div id="popinfo_wrap" class="area"> <div id="popinfo_bg"></div><div id="popinfo"><div class="loading"><img src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif"><br><span>正在加载，请稍后...</span></div></div></div>');
+					.append('<div id="popinfo_wrap" class="area"> <div id="popinfo_bg"></div><div id="popinfo"><div class="loading"><img src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif"><br><span>正在加载，请稍后...</span></div></div></div>');
 		}
 		var piw = $("#popinfo_wrap");
 		var img = new Image();
-		widget
-				.find(".shop-dianpu-ctr")
-				.find("a")
-				.hover(
-						function() {
-							if ($(this).hasClass('shop-mall-a')) {
-								var t = this, b2cId = $(t).attr('data-b2cId');
-								if (b2cId) {
-									hoverT = setTimeout(
-											function() {
-												var o = $(t).offset(), win = $(window), ot = o.top
-														- win.scrollTop(), ol = o.left
-														- win.scrollLeft(), wh = win
-														.height(), ww = win
-														.width(), lto = 25, tto = 19;
-												var rate = $(t).attr(
-														'data-rate'), cat = $(t)
-														.attr('data-cat'), start = $(
-														t).attr('data-start'), end = $(
-														t).attr('data-end'), picPath = $(
-														t).attr('data-pic');
-												var html = [
-														'<a class="shop_logo" href="'
-																+ $(t).attr(
-																		"href")
-																+ '" target="_blank">',
-														'<img class="wait" src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif">',
-														'</a>',
-														'<h4><a href="'
-																+ $(t).attr(
-																		"href")
-																+ '" target="_blank">'
-																+ $(t).text()
-																+ '</a></h4>',
-														'<div>',
-														'<label style="float:left;">最高返利：</label>',
-														'<span class="shop-dianpu-goods" style="float:left;" title="'
-																+ rate + '">'
-																+ rate
-																+ '</span>',
-														'<div class="ks-clear"></div></div>',
-														'<div>',
-														'<label>所属分类：</label>',
-														'<span>' + cat
-																+ '</span>',
-														'</div>',
-														'<div>',
-														'<label>开始时间：</label>',
-														'<span>' + start
-																+ '</span>',
-														'</div>',
-														'<div>',
-														'<label>结束时间：</label>',
-														'<span>' + end
-																+ '</span>',
-														'</div>' ].join('');
-												$("#popinfo .loading").hide()
-														.nextAll().remove();
-												$("#popinfo").append(html);
-												$(img)
-														.attr("src", picPath)
-														.load(
-																function() {
-																	$(
-																			"#popinfo .wait")
-																			.attr(
-																					"alt",
-																					$(
-																							t)
-																							.text())
-																			.attr(
-																					"src",
-																					this.src)
-																			.removeClass(
-																					"wait")
-																			.hide()
-																			.fadeIn(
-																					"slow");
-																});
-												if (ww / 1.5 > ol) {
-													lto = o.left - lto;
-												} else {
-													lto = o.left - 345
-															+ $(t).width()
-															+ lto;
-												}
-												if (wh / 1.7 > ot) {
-													tto = o.top + tto;
-												} else {
-													tto = o.top - 150;
-												}
-												piw.css({
-													top : tto,
-													left : lto
-												}).show();
-											}, 500);
-								}
-							} else {
-								var t = this, sid = $(t).attr("data-sid");
-								if (sid) {
-									hoverT = setTimeout(
-											function() {
-												var o = $(t).offset(), win = $(window), ot = o.top
-														- win.scrollTop(), ol = o.left
-														- win.scrollLeft(), wh = win
-														.height(), ww = win
-														.width(), lto = 25, tto = 19;
-												var zhuying = $(t).attr(
-														'data-zhuying'), haoping = $(
-														t).attr('data-haoping'), credit = $(
-														t).attr('data-credit'), city = $(
-														t).attr('data-city'), picPath = $(
-														t).attr('data-pic');
-												var html = [
-														'<a class="shop_logo" href="'
-																+ $(t).attr(
-																		"href")
-																+ '" target="_blank">',
-														'<img class="wait" src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif">',
-														'</a>',
-														'<h4><a href="'
-																+ $(t).attr(
-																		"href")
-																+ '" target="_blank">'
-																+ $(t).text()
-																+ '</a></h4>',
-														'<div>',
-														'<label style="float:left;">主营宝贝：</label>',
-														'<span class="shop-dianpu-goods" style="float:left;" title="'
-																+ zhuying
-																+ '">'
-																+ zhuying
-																+ '</span>',
-														'<div class="ks-clear"></div></div>',
-														'<div>',
-														'<label>好评率：</label>',
-														'<span>' + haoping
-																+ '</span>',
-														'</div>',
-														'<div>',
-														'<label>店铺等级：</label>',
-														'<span class="rank r'
-																+ credit
-																+ '"></span>',
-														'</div>',
-														'<div>',
-														'<label>卖家地址：</label>',
-														'<span>' + city
-																+ '</span>',
-														'</div>' ].join('');
-												$("#popinfo .loading").hide()
-														.nextAll().remove();
-												$("#popinfo").append(html);
-												$(img)
-														.attr("src", picPath)
-														.load(
-																function() {
-																	$(
-																			"#popinfo .wait")
-																			.attr(
-																					"alt",
-																					$(
-																							t)
-																							.text())
-																			.attr(
-																					"src",
-																					this.src)
-																			.removeClass(
-																					"wait")
-																			.hide()
-																			.fadeIn(
-																					"slow");
-																});
-												if (ww / 1.5 > ol) {
-													lto = o.left - lto;
-												} else {
-													lto = o.left - 345
-															+ $(t).width()
-															+ lto;
-												}
-												if (wh / 1.7 > ot) {
-													tto = o.top + tto;
-												} else {
-													tto = o.top - 150;
-												}
-												piw.css({
-													top : tto,
-													left : lto
-												}).show();
-											}, 500);
-								}
-							}
-						}, function() {
-							clearTimeout(hoverT);
-							hideT = setTimeout(function() {
-								piw.hide();
-							}, 500);
+		widget.find(".shop-dianpu-ctr").find("a").hover(function() {
+			if ($(this).hasClass('shop-mall-a')) {
+				var t = this, b2cId = $(t).attr('data-b2cId');
+				if (b2cId) {
+					hoverT = setTimeout(function() {
+						var o = $(t).offset(), win = $(window), ot = o.top
+								- win.scrollTop(), ol = o.left
+								- win.scrollLeft(), wh = win.height(), ww = win
+								.width(), lto = 25, tto = 19;
+						var rate = $(t).attr('data-rate'), cat = $(t)
+								.attr('data-cat'), start = $(t)
+								.attr('data-start'), end = $(t)
+								.attr('data-end'), picPath = $(t)
+								.attr('data-pic');
+						var html = [
+								'<a class="shop_logo" href="'
+										+ $(t).attr("href")
+										+ '" target="_blank">',
+								'<img class="wait" src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif">',
+								'</a>',
+								'<h4><a href="' + $(t).attr("href")
+										+ '" target="_blank">' + $(t).text()
+										+ '</a></h4>',
+								'<div>',
+								'<label style="float:left;">最高返利：</label>',
+								'<span class="shop-dianpu-goods" style="float:left;" title="'
+										+ rate + '">' + rate + '</span>',
+								'<div class="ks-clear"></div></div>', '<div>',
+								'<label>所属分类：</label>',
+								'<span>' + cat + '</span>', '</div>', '<div>',
+								'<label>开始时间：</label>',
+								'<span>' + start + '</span>', '</div>',
+								'<div>', '<label>结束时间：</label>',
+								'<span>' + end + '</span>', '</div>'].join('');
+						$("#popinfo .loading").hide().nextAll().remove();
+						$("#popinfo").append(html);
+						$(img).attr("src", picPath).load(function() {
+							$(		"#popinfo .wait").attr("alt", $(t).text())
+									.attr("src", this.src).removeClass("wait")
+									.hide().fadeIn("slow");
 						});
-		piw.mouseenter(function() {
-			clearTimeout(hideT);
-		}).mouseleave(function() {
-			$(this).hide();
+						if (ww / 1.5 > ol) {
+							lto = o.left - lto;
+						} else {
+							lto = o.left - 345 + $(t).width() + lto;
+						}
+						if (wh / 1.7 > ot) {
+							tto = o.top + tto;
+						} else {
+							tto = o.top - 150;
+						}
+						piw.css({
+									top : tto,
+									left : lto
+								}).show();
+					}, 500);
+				}
+			} else {
+				var t = this, sid = $(t).attr("data-sid");
+				if (sid) {
+					hoverT = setTimeout(function() {
+						var o = $(t).offset(), win = $(window), ot = o.top
+								- win.scrollTop(), ol = o.left
+								- win.scrollLeft(), wh = win.height(), ww = win
+								.width(), lto = 25, tto = 19;
+						var zhuying = $(t).attr('data-zhuying'), haoping = $(t)
+								.attr('data-haoping'), credit = $(t)
+								.attr('data-credit'), city = $(t)
+								.attr('data-city'), picPath = $(t)
+								.attr('data-pic');
+						var html = [
+								'<a class="shop_logo" href="'
+										+ $(t).attr("href")
+										+ '" target="_blank">',
+								'<img class="wait" src="http://img02.taobaocdn.com/tps/i2/T16WJqXaXeXXXXXXXX-32-32.gif">',
+								'</a>',
+								'<h4><a href="' + $(t).attr("href")
+										+ '" target="_blank">' + $(t).text()
+										+ '</a></h4>',
+								'<div>',
+								'<label style="float:left;">主营宝贝：</label>',
+								'<span class="shop-dianpu-goods" style="float:left;" title="'
+										+ zhuying + '">' + zhuying + '</span>',
+								'<div class="ks-clear"></div></div>', '<div>',
+								'<label>好评率：</label>',
+								'<span>' + haoping + '</span>', '</div>',
+								'<div>', '<label>店铺等级：</label>',
+								'<span class="rank r' + credit + '"></span>',
+								'</div>', '<div>', '<label>卖家地址：</label>',
+								'<span>' + city + '</span>', '</div>'].join('');
+						$("#popinfo .loading").hide().nextAll().remove();
+						$("#popinfo").append(html);
+						$(img).attr("src", picPath).load(function() {
+							$(		"#popinfo .wait").attr("alt", $(t).text())
+									.attr("src", this.src).removeClass("wait")
+									.hide().fadeIn("slow");
+						});
+						if (ww / 1.5 > ol) {
+							lto = o.left - lto;
+						} else {
+							lto = o.left - 345 + $(t).width() + lto;
+						}
+						if (wh / 1.7 > ot) {
+							tto = o.top + tto;
+						} else {
+							tto = o.top - 150;
+						}
+						piw.css({
+									top : tto,
+									left : lto
+								}).show();
+					}, 500);
+				}
+			}
+		}, function() {
+			clearTimeout(hoverT);
+			hideT = setTimeout(function() {
+						piw.hide();
+					}, 500);
 		});
+		piw.mouseenter(function() {
+					clearTimeout(hideT);
+				}).mouseleave(function() {
+					$(this).hide();
+				});
 	},
 	/**
 	 * 初始化浮动模块
@@ -972,9 +784,9 @@ var PageModuleUtils = {
 		var y = widget.find('.shop-float').attr('y');
 		if (x && y) {
 			widget.floating({
-				targetX : x,
-				targetY : y
-			});
+						targetX : x,
+						targetY : y
+					});
 		}
 	},
 	/**
@@ -986,22 +798,23 @@ var PageModuleUtils = {
 	initShopDetailShop : function(widget) {
 		if (SELLERNICK) {
 			$.ajax({
-				url : '/router/site/itemdetail/shopinfo?v=' + Math.random(),
-				type : 'POST',
-				data : {
-					nick : SELLERNICK
-				},
-				dataType : 'html',
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("WindType", "AJAX");// 请求方式
-					xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
-				},
-				error : function(request, textStatus, errorThrown) {
-				},
-				success : function(data) {
-					widget.find('.bd').empty().append(data);
-				}
-			});
+						url : '/router/site/itemdetail/shopinfo?v='
+								+ Math.random(),
+						type : 'POST',
+						data : {
+							nick : SELLERNICK
+						},
+						dataType : 'html',
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("WindType", "AJAX");// 请求方式
+							xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
+						},
+						error : function(request, textStatus, errorThrown) {
+						},
+						success : function(data) {
+							widget.find('.bd').empty().append(data);
+						}
+					});
 		}
 	},
 	/**
@@ -1011,7 +824,7 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopSearchHot : function(widget) {
-		if ((typeof (KEYWORD) == 'undefined' && typeof (CID) == 'undefined')
+		if ((typeof(KEYWORD) == 'undefined' && typeof(CID) == 'undefined')
 				|| ('' == KEYWORD && '' == CID)) {
 			return;
 		}
@@ -1029,20 +842,20 @@ var PageModuleUtils = {
 			data.count = 5;
 		}
 		$.ajax({
-			url : '/router/site/itemsearch/hot?v=' + Math.random(),
-			type : 'POST',
-			data : data,
-			dataType : 'html',
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("WindType", "AJAX");// 请求方式
-				xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
-			},
-			error : function(request, textStatus, errorThrown) {
-			},
-			success : function(data) {
-				widget.find('.bd').empty().append(data);
-			}
-		});
+					url : '/router/site/itemsearch/hot?v=' + Math.random(),
+					type : 'POST',
+					data : data,
+					dataType : 'html',
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader("WindType", "AJAX");// 请求方式
+						xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
+					},
+					error : function(request, textStatus, errorThrown) {
+					},
+					success : function(data) {
+						widget.find('.bd').empty().append(data);
+					}
+				});
 	},
 	/**
 	 * 初始化同类热卖推荐展示
@@ -1051,7 +864,7 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopDetailHot : function(widget) {
-		if (typeof (SELLERNICK) == 'undefined') {
+		if (typeof(SELLERNICK) == 'undefined') {
 			return;
 		}
 		var hot = widget.find('.shop-detailhot');
@@ -1073,20 +886,20 @@ var PageModuleUtils = {
 			data.count = 5;
 		}
 		$.ajax({
-			url : '/router/site/itemdetail/hot?v=' + Math.random(),
-			type : 'POST',
-			data : data,
-			dataType : 'html',
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("WindType", "AJAX");// 请求方式
-				xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
-			},
-			error : function(request, textStatus, errorThrown) {
-			},
-			success : function(data) {
-				widget.find('.bd').empty().append(data);
-			}
-		});
+					url : '/router/site/itemdetail/hot?v=' + Math.random(),
+					type : 'POST',
+					data : data,
+					dataType : 'html',
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader("WindType", "AJAX");// 请求方式
+						xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
+					},
+					error : function(request, textStatus, errorThrown) {
+					},
+					success : function(data) {
+						widget.find('.bd').empty().append(data);
+					}
+				});
 	},
 	/**
 	 * 初始化通用商品展示
@@ -1098,23 +911,24 @@ var PageModuleUtils = {
 		var id = widget.attr('data-id');
 		if (id) {
 			$.ajax({
-				url : '/router/site/module/' + id + '?v=' + Math.random(),
-				type : 'POST',
-				data : {
-					nick : USERNICK,
-					pid : PID
-				},
-				dataType : 'html',
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("WindType", "AJAX");// 请求方式
-					xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
-				},
-				error : function(request, textStatus, errorThrown) {
-				},
-				success : function(data) {
-					widget.replaceWith(data);
-				}
-			});
+						url : '/router/site/module/' + id + '?v='
+								+ Math.random(),
+						type : 'POST',
+						data : {
+							nick : USERNICK,
+							pid : PID
+						},
+						dataType : 'html',
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("WindType", "AJAX");// 请求方式
+							xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
+						},
+						error : function(request, textStatus, errorThrown) {
+						},
+						success : function(data) {
+							widget.replaceWith(data);
+						}
+					});
 		}
 	},
 	/**
@@ -1131,15 +945,15 @@ var PageModuleUtils = {
 		}
 		wScroll.find('.hd h3 span:first').after('<span class="navi"></span>');
 		wScroll.find('.bd').scrollable({
-			items : '.shop-scrollable-items',
-			vertical : isVertical,
-			circular : true
-		}).autoscroll({
-			autoplay : true,
-			interval : 4000
-		}).navigator({
-			navi : wScroll.find('.navi')
-		});
+					items : '.shop-scrollable-items',
+					vertical : isVertical,
+					circular : true
+				}).autoscroll({
+					autoplay : true,
+					interval : 4000
+				}).navigator({
+					navi : wScroll.find('.navi')
+				});
 	},
 	/**
 	 * 初始化滚动
@@ -1152,22 +966,21 @@ var PageModuleUtils = {
 		if (lis.length <= 1) {// 如果只有一个则不滚动
 			return;
 		}
-		var slider = widget.find('.J_Slider').scrollable(
-				{
-					items : '.ks-switchable-content',
-					vertical : true,
-					circular : true,
-					onBeforeSeek : function(event, index) {
-						lis.eq(index).addClass('current').siblings()
-								.removeClass('current');
-					}
-				}).autoscroll({
-			autoplay : true,
-			interval : 5000
-		}).data('scrollable');
+		var slider = widget.find('.J_Slider').scrollable({
+			items : '.ks-switchable-content',
+			vertical : true,
+			circular : true,
+			onBeforeSeek : function(event, index) {
+				lis.eq(index).addClass('current').siblings()
+						.removeClass('current');
+			}
+		}).autoscroll({
+					autoplay : true,
+					interval : 5000
+				}).data('scrollable');
 		lis.click(function() {
-			slider.seekTo($(this).index());
-		});
+					slider.seekTo($(this).index());
+				});
 	},
 	/**
 	 * 初始化商城楼层
@@ -1180,24 +993,23 @@ var PageModuleUtils = {
 		if (lis.length <= 1) {// 如果只有一个则不滚动
 			return;
 		}
-		var slider = widget.find('.J_Slider').scrollable(
-				{
-					items : '.ks-switchable-content',
-					vertical : true,
-					circular : true,
-					onBeforeSeek : function(event, index) {
-						lis.eq(index).addClass('ks-active').siblings()
-								.removeClass('ks-active');
-					}
-				}).autoscroll({
-			autoplay : true,
-			interval : 5000
-		}).data('scrollable');
+		var slider = widget.find('.J_Slider').scrollable({
+			items : '.ks-switchable-content',
+			vertical : true,
+			circular : true,
+			onBeforeSeek : function(event, index) {
+				lis.eq(index).addClass('ks-active').siblings()
+						.removeClass('ks-active');
+			}
+		}).autoscroll({
+					autoplay : true,
+					interval : 5000
+				}).data('scrollable');
 		lis.hover(function() {
-			slider.seekTo($(this).index());
-		}, function() {
-			//	
-		});
+					slider.seekTo($(this).index());
+				}, function() {
+					//	
+				});
 	},
 	/**
 	 * 初始化频道推广
@@ -1206,21 +1018,27 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopChannel : function(widget) {
-		if (typeof (VERSIONNO) != 'undefined' && 1.5 == VERSIONNO) {
+		if (typeof(ISDESIGNER) != 'undefined' && ISDESIGNER) {
 			widget
 					.find('.shop-custom')
 					.empty()
-					.append(
-							'<div>您当前使用的是新淘网淘客分成版，无法使用淘宝频道推广模块，请删除此模块，或者升级为淘客返利版（月租型）或卖家版</div>');
+					.append('<h2 style="">因联盟规则调整(<a href="http://club.alimama.com/read-htm-tid-3133847.html" target="_blank">http://club.alimama.com/read-htm-tid-3133847.html</a>),不再提供此类模块,请自行获取iframe代码,使用自定义模块--源码模式添加</h2>');
 		} else {
-			var value = $('.shop-channel', widget).attr('channel');
-			if (value) {
-				var channel = channels[value];
-				var iframe = $('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="100%" width="100%"></iframe>');
-				var src = channel.clickUrl.replace('mm_10011550_0_0', PID)
-						.replace('mm_13667242_0_0', PID);
-				iframe.attr('src', src).height(parseInt(channel.height));
-				widget.find('.shop-custom').empty().append(iframe);
+			if (typeof(VERSIONNO) != 'undefined' && 1.5 == VERSIONNO) {
+				widget
+						.find('.shop-custom')
+						.empty()
+						.append('<div>您当前使用的是新淘网淘客分成版，无法使用淘宝频道推广模块，请删除此模块，或者升级为淘客返利版（月租型）或卖家版</div>');
+			} else {
+				var value = $('.shop-channel', widget).attr('channel');
+				if (value) {
+					var channel = channels[value];
+					var iframe = $('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="100%" width="100%"></iframe>');
+					var src = channel.clickUrl.replace('mm_10011550_0_0', PID)
+							.replace('mm_13667242_0_0', PID);
+					iframe.attr('src', src).height(parseInt(channel.height));
+					widget.find('.shop-custom').empty().append(iframe);
+				}
 			}
 		}
 	},
@@ -1271,10 +1089,10 @@ var PageModuleUtils = {
 				&& $('#J_HeaderPagesPopup').length == 1) {// 页头下拉
 			$('body').append($('#J_HeaderPagesPopup'));
 			$('#J_HeaderPages').tooltip({
-				effect : 'fade',
-				tip : $('#J_HeaderPagesPopup'),
-				position : 'bottom center'
-			});
+						effect : 'fade',
+						tip : $('#J_HeaderPagesPopup'),
+						position : 'bottom center'
+					});
 		}
 		if ('nobg' == o.type) {
 			return;
@@ -1350,131 +1168,103 @@ var PageModuleUtils = {
 		var q = $('input[name="q"]', widget);
 		// 为当前Suggest框增加聚焦Class，标识Suggest回调
 		q.focus(function() {
-			$(this).addClass('focus');
-		}).blur(function() {
-			$(this).removeClass('focus');
-		});
-		var TIPS = [ '输入 宝贝 名称或宝贝地址', '输入 店铺 名称', '输入 宝贝 名称', '输入 画报 关键词' ]
+					$(this).addClass('focus');
+				}).blur(function() {
+					$(this).removeClass('focus');
+				});
+		var TIPS = ['输入 宝贝 名称或宝贝地址', '输入 店铺 名称', '输入 宝贝 名称', '输入 画报 关键词']
 				.join('');
-		$('.search-tab li', widget)
-				.click(
-						function() {
-							var rel = $(this).attr('rel');
-							var form = $('form', widget);
-							$('input[name="is_mall"]', widget).val('');
-							if ('item' == rel) {// 商品搜索
-								form.attr('action', '/searchbox?v='
-										+ Math.random());
-								if (!q.val() || TIPS.indexOf(q.val()) != -1) {
-									q.val('输入 宝贝 名称或宝贝地址');
-								}
-								q.unbind('focus').unbind('blur').focusText(
-										'输入 宝贝 名称或宝贝地址', 'focus');
-							} else if ('shop' == rel) {// 店铺搜索
-								form
-										.attr('action', '/shops?v='
-												+ Math.random());
-								if (!q.val() || TIPS.indexOf(q.val()) != -1) {
-									q.val('输入 店铺 名称');
-								}
-								q.unbind('focus').unbind('blur').focusText(
-										'输入 店铺 名称');
-							} else if ('mall' == rel) {// 商城搜索
-								$('input[name="is_mall"]', widget).val('true');
-								form.attr('action', '/searchbox?v='
-										+ Math.random());
-								if (!q.val() || TIPS.indexOf(q.val()) != -1) {
-									q.val('输入 宝贝 名称');
-								}
-								q.unbind('focus').unbind('blur').focusText(
-										'输入 宝贝 名称');
-							} else if ('poster' == rel) {// 画报搜索
-								form.attr('action',
-										'/router/huabao/search?words='
-												+ encodeURIComponent(q.val())
-												+ 'v=' + Math.random());
-								if (!q.val() || TIPS.indexOf(q.val()) != -1) {
-									q.val('输入 画报 关键词');
-								}
-								q.unbind('focus').unbind('blur').focusText(
-										'输入 画报 关键词');
-							}
-							// if (q.val()) {// 如果已经有关键词
-							// form.submit();
-							// } else {// 没有关键词则切换
-							$(this).addClass('selected').siblings()
-									.removeClass('selected');
-							// }
-						});
+		$('.search-tab li', widget).click(function() {
+			var rel = $(this).attr('rel');
+			var form = $('form', widget);
+			$('input[name="is_mall"]', widget).val('');
+			if ('item' == rel) {// 商品搜索
+				form.attr('action', '/searchbox?v=' + Math.random());
+				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
+					q.val('输入 宝贝 名称或宝贝地址');
+				}
+				q.unbind('focus').unbind('blur').focusText('输入 宝贝 名称或宝贝地址',
+						'focus');
+			} else if ('shop' == rel) {// 店铺搜索
+				form.attr('action', '/shops?v=' + Math.random());
+				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
+					q.val('输入 店铺 名称');
+				}
+				q.unbind('focus').unbind('blur').focusText('输入 店铺 名称');
+			} else if ('mall' == rel) {// 商城搜索
+				$('input[name="is_mall"]', widget).val('true');
+				form.attr('action', '/searchbox?v=' + Math.random());
+				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
+					q.val('输入 宝贝 名称');
+				}
+				q.unbind('focus').unbind('blur').focusText('输入 宝贝 名称');
+			} else if ('poster' == rel) {// 画报搜索
+				form.attr('action', '/router/huabao/search?words='
+								+ encodeURIComponent(q.val()) + 'v='
+								+ Math.random());
+				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
+					q.val('输入 画报 关键词');
+				}
+				q.unbind('focus').unbind('blur').focusText('输入 画报 关键词');
+			}
+			// if (q.val()) {// 如果已经有关键词
+			// form.submit();
+			// } else {// 没有关键词则切换
+			$(this).addClass('selected').siblings().removeClass('selected');
+				// }
+		});
 		$('.search-tab li.selected', widget).click();
-		$('#search-button', widget)
-				.click(
-						function() {
-							var rel = $('.search-tab li.selected', widget)
-									.attr('rel');
-							var form = $('form', widget);
-							if (TIPS.indexOf(q.val()) != -1) {
-								q.val('');
-							}
-							if ('item' == rel) {// 商品搜索
-								form.attr('action', '/searchbox?v='
-										+ Math.random());
-								if (q.val()) {
-									var _url = q.val();
-									q.val(_url.replace('-', ' '));
-									q.val(_url.replace('/', ' '));
-									var regExp = /(.*\.?taobao.com(\/|$))|(.*\.?tmall.com(\/|$))/i;
-									if (_url.match(regExp)) {
-										var parames = parse_url(_url);
-										if (typeof (parames) == 'object') {
-											var iid = parames['id'];
-											if (iid == null
-													|| iid == "undefined") {
-												var iid = parames['item_num_id'];
-												if (iid == null
-														|| iid == "undefined") {
-													var iid = parames['default_item_id'];
-												}
-											}
-											q.val(iid);
-											if (_url
-													.match(/(.*\.?tmall.com(\/|$))/i)) {
-												form
-														.find(
-																'input[name="is_mall"]')
-														.val('true');
-											}
-										}
-									}
+		$('#search-button', widget).click(function() {
+			var rel = $('.search-tab li.selected', widget).attr('rel');
+			var form = $('form', widget);
+			if (TIPS.indexOf(q.val()) != -1) {
+				q.val('');
+			}
+			if ('item' == rel) {// 商品搜索
+				form.attr('action', '/searchbox?v=' + Math.random());
+				if (q.val()) {
+					var _url = q.val();
+					q.val(_url.replace('-', ' '));
+					q.val(_url.replace('/', ' '));
+					var regExp = /(.*\.?taobao.com(\/|$))|(.*\.?tmall.com(\/|$))/i;
+					if (_url.match(regExp)) {
+						var parames = parse_url(_url);
+						if (typeof(parames) == 'object') {
+							var iid = parames['id'];
+							if (iid == null || iid == "undefined") {
+								var iid = parames['item_num_id'];
+								if (iid == null || iid == "undefined") {
+									var iid = parames['default_item_id'];
 								}
+							}
+							q.val(iid);
+							if (_url.match(/(.*\.?tmall.com(\/|$))/i)) {
+								form.find('input[name="is_mall"]').val('true');
+							}
+						}
+					}
+				}
 
-							} else if ('shop' == rel) {// 店铺搜索
-								form
-										.attr('action', '/shops?v='
-												+ Math.random());
-							} else if ('poster' == rel) {// 画报搜索
-								form.attr('action',
-										'/router/huabao/search?words='
-												+ encodeURIComponent($(
-														'input[name="q"]',
-														widget).val()) + 'v='
-												+ Math.random());
-							}
-							form.submit();
-						});
-		$('.search-auto input[name="q"]')
-				.autocomplete(
-						{
-							url : "http://suggest.taobao.com/sug?code=utf-8&extras=1&callback=XT.Suggest.ItemSearchCallback",
-							filterResults : false,
-							sortResults : false,
-							showResult : function(value, data) {
-								return '<span class="ks-suggest-key">'
-										+ value
-										+ '</span><span class="ks-suggest-result">约'
-										+ data + '个宝贝</span>';
-							}
-						});
+			} else if ('shop' == rel) {// 店铺搜索
+				form.attr('action', '/shops?v=' + Math.random());
+			} else if ('poster' == rel) {// 画报搜索
+				form.attr('action',
+						'/router/huabao/search?words='
+								+ encodeURIComponent($('input[name="q"]',
+										widget).val()) + 'v=' + Math.random());
+			}
+			form.submit();
+		});
+		$('.search-auto input[name="q"]').autocomplete({
+			url : "http://suggest.taobao.com/sug?code=utf-8&extras=1&callback=XT.Suggest.ItemSearchCallback",
+			filterResults : false,
+			sortResults : false,
+			showResult : function(value, data) {
+				return '<span class="ks-suggest-key">' + value
+						+ '</span><span class="ks-suggest-result">约' + data
+						+ '个宝贝</span>';
+			}
+		});
 		var content = $('.bd', widget);
 		if (content.length != 1) {
 			return;
@@ -1492,7 +1282,7 @@ var PageModuleUtils = {
 			$('ul.words,br', content).remove();
 			return;
 		}
-		if (typeof (KEYWORDS) == 'undefined') {
+		if (typeof(KEYWORDS) == 'undefined') {
 			$.getScript('/assets/min/js/keywords.min.js?v=' + Math.random(),
 					function() {
 						if (KEYWORDS)
@@ -1513,42 +1303,41 @@ var PageModuleUtils = {
 		var data = '';
 		var length = parseInt((widget.width() - 10) / 40);// 每行关键词长度
 		if (cid != '0') {
-			for ( var i in KEYWORDS[cid].sub) {
-				arr_data
-						.push([ KEYWORDS[cid].sub[i].w, KEYWORDS[cid].sub[i].c ]);
+			for (var i in KEYWORDS[cid].sub) {
+				arr_data.push([KEYWORDS[cid].sub[i].w, KEYWORDS[cid].sub[i].c]);
 			}
 		} else {
-			for ( var cat in KEYWORDS) {
-				for ( var i in KEYWORDS[cat].sub) {
-					arr_data.push([ KEYWORDS[cat].sub[i].w,
-							KEYWORDS[cat].sub[i].c ]);
+			for (var cat in KEYWORDS) {
+				for (var i in KEYWORDS[cat].sub) {
+					arr_data.push([KEYWORDS[cat].sub[i].w,
+							KEYWORDS[cat].sub[i].c]);
 				}
 			}
 		}
 		arr_data.sort(function(a, b) {
-			return Math.random() > 0.5 ? -1 : 1;
-		});
+					return Math.random() > 0.5 ? -1 : 1;
+				});
 		if (arr_data.length < line * length) {
 			var newarr_data = [];
-			for ( var cat in KEYWORDS) {
-				for ( var i in KEYWORDS[cat].sub) {
+			for (var cat in KEYWORDS) {
+				for (var i in KEYWORDS[cat].sub) {
 					if ((arr_data.length + newarr_data.length) > line * length) {
 						break;
 					}
-					newarr_data.push([ KEYWORDS[cat].sub[i].w,
-							KEYWORDS[cat].sub[i].c ]);
+					newarr_data.push([KEYWORDS[cat].sub[i].w,
+							KEYWORDS[cat].sub[i].c]);
 				}
 			}
 			newarr_data.sort(function(a, b) {
-				return Math.random() > 0.5 ? -1 : 1;
-			});
+						return Math.random() > 0.5 ? -1 : 1;
+					});
 			arr_data = arr_data.concat(newarr_data);
 		}
 		$('ul.words,br', content).remove();
-		for ( var j = 0; j < line; j++) {
+		for (var j = 0; j < line; j++) {
 			var ul = $('<ul class="words" style="width:'
 					+ (widget.width() - 10) + 'px;font-size:12px;"></ul>');
-			for ( var i = 0; i < length; i++) {
+			for (var i = 0; i < length; i++) {
 				try {
 					ul.append('<li><a target="_blank" href="/searchbox?q='
 							+ (encodeURIComponent(arr_data[i + j * length][0]))
@@ -1574,18 +1363,18 @@ var PageModuleUtils = {
 		var swf = widget.children().first();
 		var flash_p = parent.find('.flash_p');
 		parent.find('.page-loading').everyTime(1000, 'flash', function() {
-			try {
-				var p = swf[0].PercentLoaded();
-				flash_p.text(p + "%");
-				if (p == 100) {
-					$(this).stopTime('flash');
-					parent.find('.page-loading').remove();
-				}
-			} catch (e) {
-				$(this).stopTime('flash');
-				parent.find('.page-loading').remove();
-			}
-		});
+					try {
+						var p = swf[0].PercentLoaded();
+						flash_p.text(p + "%");
+						if (p == 100) {
+							$(this).stopTime('flash');
+							parent.find('.page-loading').remove();
+						}
+					} catch (e) {
+						$(this).stopTime('flash');
+						parent.find('.page-loading').remove();
+					}
+				});
 	}
 };
 /**
@@ -1610,7 +1399,7 @@ function parse_url(url) {
 	var pattern = /(\w+)=(\w+)/ig;
 	var parames = {};
 	url.replace(pattern, function(a, b, c) {
-		parames[b] = c;
-	});
+				parames[b] = c;
+			});
 	return parames;
 }

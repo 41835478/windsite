@@ -40,6 +40,8 @@ iptables -I INPUT -s 211.154.150.0/24 -j DROP
 iptables -I INPUT -s 211.154.149.0/24 -j DROP
 iptables -I INPUT -s 211.154.151.0/24 -j DROP
 
+
+iptables -I INPUT -s 157.55.18.0/24 -j DROP
 #2012-08-17
 iptables -I INPUT -s 157.55.18.22 -j DROP
 iptables -I INPUT -s 116.253.128.126 -j DROP

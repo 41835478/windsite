@@ -1022,7 +1022,7 @@ var PageModuleUtils = {
 			widget
 					.find('.shop-custom')
 					.empty()
-					.append('<h2 style="">因联盟规则调整(<a href="http://club.alimama.com/read-htm-tid-3133847.html" target="_blank">http://club.alimama.com/read-htm-tid-3133847.html</a>),不再提供此类模块,请自行获取iframe代码,使用自定义模块--源码模式添加</h2>');
+					.append('<h2 style="color:red;margin-top:50px;height:200px;">因联盟规则调整(<a href="http://club.alimama.com/read-htm-tid-3133847.html" target="_blank">http://club.alimama.com/read-htm-tid-3133847.html</a>),不再提供此类模块,请自行获取iframe代码,使用自定义模块--源码模式添加</h2>');
 		} else {
 			if (typeof(VERSIONNO) != 'undefined' && 1.5 == VERSIONNO) {
 				widget

@@ -71,23 +71,30 @@ public class YiqifaCommand {
 				parser = new Parser(
 						"http://www.yiqifa.com/searchCampaignView.do?campaignId="
 								+ mall.getB2cId());
-				NodeList list = parser.extractAllNodesThatMatch(
-						new HasAttributeFilter("class", "main")).elementAt(0)
-						.getChildren();
-				String url = list.extractAllNodesThatMatch(
-						new HasAttributeFilter("class", "font_blue_number"),
-						true).elementAt(0).toPlainTextString().trim();
-				String desc = list.extractAllNodesThatMatch(
-						new TagNameFilter("tr"), true).elementAt(1)
-						.getChildren().extractAllNodesThatMatch(
-								new TagNameFilter("td"), true).elementAt(0)
+				NodeList list = parser
+						.extractAllNodesThatMatch(
+								new HasAttributeFilter("class", "main"))
+						.elementAt(0).getChildren();
+				String url = list
+						.extractAllNodesThatMatch(
+								new HasAttributeFilter("class",
+										"font_blue_number"), true).elementAt(0)
 						.toPlainTextString().trim();
-				NodeList tds = list.extractAllNodesThatMatch(
-						new TagNameFilter("table"), true).elementAt(1)
-						.getChildren().extractAllNodesThatMatch(
-								new TagNameFilter("tr"), true).elementAt(4)
-						.getChildren().extractAllNodesThatMatch(
-								new TagNameFilter("td"), true);
+				String desc = list
+						.extractAllNodesThatMatch(new TagNameFilter("tr"), true)
+						.elementAt(1)
+						.getChildren()
+						.extractAllNodesThatMatch(new TagNameFilter("td"), true)
+						.elementAt(0).toPlainTextString().trim();
+				NodeList tds = list
+						.extractAllNodesThatMatch(new TagNameFilter("table"),
+								true)
+						.elementAt(1)
+						.getChildren()
+						.extractAllNodesThatMatch(new TagNameFilter("tr"), true)
+						.elementAt(4)
+						.getChildren()
+						.extractAllNodesThatMatch(new TagNameFilter("td"), true);
 				String isFanli = tds.elementAt(tds.size() - 1)
 						.toPlainTextString().trim();
 				detail = adminService.get(MallDetail.class, mall.getId());
@@ -144,8 +151,10 @@ public class YiqifaCommand {
 						.extractAllNodesThatMatch(new TagNameFilter("tr"), true);
 				if (list != null && list.size() != 0) {
 					YiqifaMall mall = null;
-					for (int i = 1; i < list.size(); i++) {// 
-						NodeList tds = list.elementAt(i).getChildren()
+					for (int i = 1; i < list.size(); i++) {//
+						NodeList tds = list
+								.elementAt(i)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("td"), true);
 						if (tds.size() != 8) {
@@ -162,15 +171,19 @@ public class YiqifaCommand {
 							}
 						}
 						// LOGO
-						String logo = ((ImageTag) tds.elementAt(0)
-								.getChildren().extractAllNodesThatMatch(
+						String logo = ((ImageTag) tds
+								.elementAt(0)
+								.getChildren()
+								.extractAllNodesThatMatch(
 										new TagNameFilter("img"), true)
 								.elementAt(0)).getImageURL();
 						// B2C ID
 						String b2cId = tds.elementAt(1).toPlainTextString()
 								.trim();
 						// title
-						String title = tds.elementAt(2).getChildren()
+						String title = tds
+								.elementAt(2)
+								.getChildren()
 								.extractAllNodesThatMatch(
 										new TagNameFilter("p"), true)
 								.elementAt(0).toPlainTextString().trim();
@@ -191,19 +204,38 @@ public class YiqifaCommand {
 						// audit
 						String audit = tds.elementAt(7).toPlainTextString()
 								.trim();
-						mall = adminService.findByCriterion(YiqifaMall.class, R
-								.eq("b2cId", b2cId));
+						mall = adminService.findByCriterion(YiqifaMall.class,
+								R.eq("b2cId", b2cId));
 						String auditV = "needless";
 						if ("自动审核".equals(audit)) {
 							auditV = "auto";
 						} else if ("人工审核".equals(audit)) {
 							auditV = "manual";
 						}
+						List<String> un = new ArrayList<String>();
+						un.add("满座");
+						un.add("大众点评");
+						un.add("美团");
+						un.add("乐峰");
+						un.add("糯米网");
+						un.add("学而思");
+						un.add("衣联网");
+						un.add("好乐买");
+						un.add("京东");
+						un.add("嘀嗒");
+						un.add("无忧英语");
+						un.add("58团");
+						for (String u : un) {
+							if (title.contains(u)) {
+								auditV = "manual";
+								break;
+							}
+						}
 						if (mall != null) {// 更新（不更新佣金）
 							mall.setAdType(adType);
 							mall.setAudit(auditV);
 							mall.setCid(map.get(cat).getId());
-							//mall.setCommissionRate(commissionRate);
+							// mall.setCommissionRate(commissionRate);
 							mall.setEndDate(DateUtils.parseDate(endDate,
 									new String[] { DateUtils.YYYY_MM_DD }));
 							mall.setStartDate(DateUtils.parseDate(startDate,
@@ -272,7 +304,7 @@ public class YiqifaCommand {
 							"font_index_b0627"));
 			YiqifaCategory cat = null;
 			if (list != null && list.size() != 0) {
-				for (int i = 0; i < list.size(); i++) {// 
+				for (int i = 0; i < list.size(); i++) {//
 					LinkTag a = (LinkTag) list.elementAt(i);
 					if (a != null) {
 						try {
@@ -384,8 +416,8 @@ public class YiqifaCommand {
 			Map<String, List<YiqifaMall>> catsMap = new HashMap<String, List<YiqifaMall>>();
 			for (YiqifaCategory cat : cats) {
 				catsMap.put(cat.getId() + "", adminService.findAllByCriterion(
-						YiqifaMall.class, R.eq("cid", cat.getId()), R.eq(
-								"isValid", true)));
+						YiqifaMall.class, R.eq("cid", cat.getId()),
+						R.eq("isValid", true)));
 			}
 			params.put("b2cMallsJson", new Gson().toJson(catsMap,
 					new TypeToken<Map<String, List<YiqifaMall>>>() {
@@ -451,8 +483,8 @@ public class YiqifaCommand {
 			Template template = null;
 			Writer out = null;
 			List<YiqifaMall> news = adminService.findAllByCriterionAndOrder(
-					new Page<YiqifaMall>(1, 20), YiqifaMall.class, Order
-							.asc("b2cId"), R.eq("isValid", true));// 查找最新
+					new Page<YiqifaMall>(1, 20), YiqifaMall.class,
+					Order.asc("b2cId"), R.eq("isValid", true));// 查找最新
 			List<YiqifaCategory> cats = EnvManager.getYiqifaCats();
 			for (YiqifaMall m : cMalls) {
 				try {
@@ -485,9 +517,10 @@ public class YiqifaCommand {
 					MallDetail detail = adminService.get(MallDetail.class, id);// 查找商城详情
 					params.put("detail", detail);// 详情
 					List<YiqifaMall> catMalls = adminService
-							.findAllByCriterionAndOrder(YiqifaMall.class, Order
-									.asc("sortOrder"), R.eq("cid", mall
-									.getCid()), R.eq("isValid", true));// 查找同类（暂时不考虑此处的性能优化【同类商城本可以缓存一下的】）
+							.findAllByCriterionAndOrder(YiqifaMall.class,
+									Order.asc("sortOrder"),
+									R.eq("cid", mall.getCid()),
+									R.eq("isValid", true));// 查找同类（暂时不考虑此处的性能优化【同类商城本可以缓存一下的】）
 					params.put("malls", catMalls);
 					params.put("news", news);// 最新
 					params.put("cats", cats);// 分类

@@ -50,6 +50,19 @@ public class YiqifaCommand {
 	private static final List<String> invalids = new ArrayList<String>();
 	static {
 		invalids.add("2060");
+		invalids.add("5330");
+		invalids.add("6198");
+		invalids.add("6536");
+		invalids.add("852");
+		invalids.add("6226");
+		invalids.add("6661");
+		invalids.add("6631");
+		invalids.add("4509");
+		invalids.add("254");
+		invalids.add("5799");
+		invalids.add("5610");
+		invalids.add("6643");
+		invalids.add("5486");
 	}
 
 	public void synYiqifa() {
@@ -212,25 +225,25 @@ public class YiqifaCommand {
 						} else if ("人工审核".equals(audit)) {
 							auditV = "manual";
 						}
-						List<String> un = new ArrayList<String>();
-						un.add("满座");
-						un.add("大众点评");
-						un.add("美团");
-						un.add("乐峰");
-						un.add("糯米网");
-						un.add("学而思");
-						un.add("衣联网");
-						un.add("好乐买");
-						un.add("京东");
-						un.add("嘀嗒");
-						un.add("无忧英语");
-						un.add("58团");
-						for (String u : un) {
-							if (title.contains(u)) {
-								auditV = "manual";
-								break;
-							}
-						}
+						// List<String> un = new ArrayList<String>();
+						// un.add("满座");
+						// un.add("大众点评");
+						// un.add("美团");
+						// un.add("乐峰");
+						// un.add("糯米");
+						// un.add("学而思");
+						// un.add("衣联网");
+						// un.add("好乐买");
+						// un.add("京东");
+						// un.add("嘀嗒");
+						// un.add("无忧英语");
+						// un.add("58团");
+						// for (String u : un) {
+						// if (title.contains(u)) {
+						// auditV = "manual";
+						// break;
+						// }
+						// }
 						if (mall != null) {// 更新（不更新佣金）
 							mall.setAdType(adType);
 							mall.setAudit(auditV);

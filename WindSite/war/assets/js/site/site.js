@@ -1259,13 +1259,15 @@ function deleteInvalidItems(id) {
  * @param {}
  *            desc
  */
-function updateSite(id, title, desc, metadata, cid) {
+function updateSite(id, title, desc, metadata, cid, pSiteId, pAdId) {
 	var sender = new WindSender("/router/member/site/update/" + id);
 	sender.load("POST", {
 				"title" : title,
 				"description" : desc,
 				"metadata" : metadata,
-				"cid" : cid
+				"cid" : cid,
+				"pSiteId" : pSiteId,
+				'pAdId' : pAdId
 			}, function(response) {
 				if (response.isSuccess()) {
 					gtUpdateSite();
@@ -1626,7 +1628,7 @@ function createReport(reports) {
 					break;
 				case 'weigou005' :
 					outer_code = '微购商城推广';
-					break;	
+					break;
 				case ('' != rep.outer_code && rep.outer_code.indexOf('xtfl') != -1) :
 					outer_code = '新淘网返利推广';
 					break;

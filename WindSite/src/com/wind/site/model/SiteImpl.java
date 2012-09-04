@@ -12,6 +12,8 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.wind.site.util.WindSiteRestUtil;
 
 /**
@@ -39,9 +41,9 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "discuzx", column = "discuzx"),
 		@FieldResult(name = "versionNo", column = "versionNo"),
 		@FieldResult(name = "domainName", column = "domainName") }) })
-@NamedNativeQueries( {
+@NamedNativeQueries({
 		@NamedNativeQuery(name = "findSiteImplNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id", resultSetMapping = "siteImpl"),
-		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
+		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.pSiteId as pSiteId,u.pAdId as pAdId,u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
 public class SiteImpl {
 	private String sid;
 	private String user_id;
@@ -130,6 +132,46 @@ public class SiteImpl {
 	private String qq_appsecret;
 
 	private String uyan;
+
+	private Long pSiteId;
+
+	private Long pAdId;
+	/**
+	 * 完整PID
+	 */
+	@SuppressWarnings("unused")
+	private String pPid;
+
+	@Transient
+	public String getpPid() {
+		if (StringUtils.isNotEmpty(pid)) {
+			if (pSiteId != null && pAdId != null) {
+				return pid.replace("_0_0", "") + "_" + pSiteId + "_" + pAdId;
+			}
+			return pid;
+		}
+		return "";
+	}
+
+	public void setpPid(String pPid) {
+		this.pPid = pPid;
+	}
+
+	public Long getpSiteId() {
+		return pSiteId;
+	}
+
+	public void setpSiteId(Long pSiteId) {
+		this.pSiteId = pSiteId;
+	}
+
+	public Long getpAdId() {
+		return pAdId;
+	}
+
+	public void setpAdId(Long pAdId) {
+		this.pAdId = pAdId;
+	}
 
 	/**
 	 * @return the user_id

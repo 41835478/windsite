@@ -240,6 +240,8 @@ public class WindSiteRestUtil {
 					result.put("qq_appsecret", siteImpl.getQq_appsecret());
 					result.put("uyan", siteImpl.getUyan());
 
+					result.put("pPid", siteImpl.getpPid());
+
 				} else {
 					SystemException
 							.handleException("该站点暂时没有权限访问该页面（需要您升级为分成版（绑定域名），淘客普及版（付费），返利版，卖家版）");
@@ -269,6 +271,7 @@ public class WindSiteRestUtil {
 						result.put("versionNo", EnvManager.getUser().getUsb()
 								.getVersionNo());
 						result.put("appType", EnvManager.getUser().getAppType());
+						result.put("pPid", EnvManager.getUser().getpPid());
 					} else {
 						SystemException
 								.handleException("该站点暂时没有权限访问该页面（需要您升级为分成版（绑定域名），淘客普及版（付费），返利版，卖家版）");
@@ -347,6 +350,7 @@ public class WindSiteRestUtil {
 					result.put("qq_appsecret", siteImpl.getQq_appsecret());
 					result.put("uyan", siteImpl.getUyan());
 
+					result.put("pPid", siteImpl.getpPid());
 					return siteImpl.getPid();
 				} else {
 					SystemException
@@ -448,6 +452,8 @@ public class WindSiteRestUtil {
 				result.put("qq_appsecret", siteImpl.getQq_appsecret());
 				result.put("uyan", siteImpl.getUyan());
 
+				result.put("pPid", siteImpl.getpPid());
+
 				return siteImpl.getPid();
 			}
 		} else {
@@ -471,6 +477,8 @@ public class WindSiteRestUtil {
 					result.put("versionNo", EnvManager.getUser().getUsb()
 							.getVersionNo());
 					result.put("appType", EnvManager.getUser().getAppType());
+
+					result.put("pPid", EnvManager.getUser().getpPid());
 				}
 				return EnvManager.getUser().getPid();
 			} else {
@@ -538,6 +546,10 @@ public class WindSiteRestUtil {
 		}
 		if (result.get("uyan") != null) {
 			impl.setUyan(String.valueOf(result.get("uyan")));
+		}
+
+		if (result.get("pPid") != null) {
+			impl.setpPid(String.valueOf(result.get("pPid")));
 		}
 
 		return impl;

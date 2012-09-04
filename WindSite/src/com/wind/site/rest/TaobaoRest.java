@@ -349,9 +349,9 @@ public class TaobaoRest {
 	}
 
 	private String searchWords(HttpServletResponse response, String q,
-			String appType, String nick, String pid) {
+			String appType, String nick, String pid, String pPid) {
 		if (StringUtils.isEmpty(q)) {
-			return searchCid(response, null, appType, nick, pid);
+			return searchCid(response, null, appType, nick, pid, pPid);
 		}
 		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
 		req.setNick(nick);
@@ -359,13 +359,13 @@ public class TaobaoRest {
 		req.setQ(q);
 		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req, pid);
 		if (StringUtils.isNotEmpty(clickUrl)) {
-			return clickUrl + "&taoke_type=1";
+			return (clickUrl + "&taoke_type=1").replaceAll(pid, pPid);
 		}
-		return searchCid(response, null, appType, nick, pid);
+		return searchCid(response, null, appType, nick, pid, pPid);
 	}
 
 	private String searchCid(HttpServletResponse response, String cid,
-			String appType, String nick, String pid) {
+			String appType, String nick, String pid, String pPid) {
 		if (StringUtils.isEmpty(cid)) {
 			cid = "16";
 		}
@@ -378,7 +378,7 @@ public class TaobaoRest {
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		String url = TaobaoFetchUtil.getItemCatUrl(appType, request, pid);
-		return url + "&taoke_type=1";
+		return (url + "&taoke_type=1").replaceAll(pid, pPid);
 	}
 
 	/**
@@ -399,6 +399,7 @@ public class TaobaoRest {
 		String appType = String.valueOf(result.get("appType"));
 		String nick = String.valueOf(result.get("nick"));
 		String pid = String.valueOf(result.get("pid"));
+		String pPid = String.valueOf(result.get("pPid"));
 		String clickUrl = null;
 		String cid = request.getParameter("cid");
 
@@ -451,7 +452,7 @@ public class TaobaoRest {
 						if ("true".equals(is_mall)) {
 							try {
 								response.sendRedirect("http://s.click.taobao.com/t_9?p="
-										+ pid
+										+ pPid
 										+ "&l="
 										+ URLEncoder.encode(
 												"http://detail.tmall.com/item.htm?id="
@@ -464,7 +465,7 @@ public class TaobaoRest {
 				}
 			}
 			if (StringUtils.isEmpty(clickUrl))
-				clickUrl = searchWords(response, q, appType, nick, pid);
+				clickUrl = searchWords(response, q, appType, nick, pid, pPid);
 		} else {
 			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
 				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class,
@@ -484,7 +485,7 @@ public class TaobaoRest {
 			} else {
 				cid = null;
 			}
-			clickUrl = searchCid(response, cid, appType, nick, pid);
+			clickUrl = searchCid(response, cid, appType, nick, pid, pPid);
 		}
 		result.put("q", q);
 		result.put("clickUrl", clickUrl);

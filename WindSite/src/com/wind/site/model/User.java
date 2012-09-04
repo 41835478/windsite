@@ -47,6 +47,26 @@ public class User extends TimestampModel {
 	 */
 	private String pid;
 
+	private Long pSiteId;
+
+	private Long pAdId;
+	@Transient
+	private String pPid;
+
+	public String getpPid() {
+		if (StringUtils.isNotEmpty(pid)) {
+			if (pSiteId != null && pAdId != null) {
+				return pid.replace("_0_0", "") + "_" + pSiteId + "_" + pAdId;
+			}
+			return pid;
+		}
+		return "";
+	}
+
+	public void setpPid(String pPid) {
+		this.pPid = pPid;
+	}
+
 	/**
 	 * 论坛密码
 	 */
@@ -760,6 +780,22 @@ public class User extends TimestampModel {
 
 	public Date getExpiredDate() {
 		return expiredDate;
+	}
+
+	public Long getpSiteId() {
+		return pSiteId;
+	}
+
+	public void setpSiteId(Long pSiteId) {
+		this.pSiteId = pSiteId;
+	}
+
+	public Long getpAdId() {
+		return pAdId;
+	}
+
+	public void setpAdId(Long pAdId) {
+		this.pAdId = pAdId;
 	}
 
 }

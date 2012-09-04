@@ -305,8 +305,8 @@ public class MemberRest {
 	@RequestMapping(value = "/domainname/check/{domainName}", method = RequestMethod.GET)
 	public String checkDomainName(@PathVariable String domainName,
 			HttpServletRequest request, HttpServletResponse response) {
-		List<Site> site = memberService.findAllByCriterion(Site.class, R.eq(
-				"domainName", domainName));
+		List<Site> site = memberService.findAllByCriterion(Site.class,
+				R.eq("domainName", domainName));
 		if (site.size() > 0) {
 			SystemException.handleMessageException("自定义二级域名【" + domainName
 					+ "】重复,请重新输入");
@@ -354,12 +354,18 @@ public class MemberRest {
 		String blogHql = "select new map(forum.id as id,forum.title as title,forum.title as siteTitle,forum.favorite as favorite)  from FavoriteForum where user_id=:user_id and type='3' ";
 		String microblogHql = "select new map(forum.id as id,forum.title as title,forum.title as siteTitle,forum.favorite as favorite) from FavoriteForum where user_id=:user_id and type='4' ";
 		params.put("user_id", EnvManager.getUser().getUser_id());// 查找当前用户收藏
-		result.put("forums", memberService.findByHql(forumHql
-				+ " order by forum.sortOrder asc", params));
-		result.put("blogs", memberService.findByHql(blogHql
-				+ " order by forum.sortOrder asc", params));
-		result.put("microblogs", memberService.findByHql(microblogHql
-				+ " order by forum.sortOrder asc", params));
+		result.put(
+				"forums",
+				memberService.findByHql(forumHql
+						+ " order by forum.sortOrder asc", params));
+		result.put(
+				"blogs",
+				memberService.findByHql(blogHql
+						+ " order by forum.sortOrder asc", params));
+		result.put(
+				"microblogs",
+				memberService.findByHql(microblogHql
+						+ " order by forum.sortOrder asc", params));
 		// 查询当前收藏下的盟友记录
 		Map<String, Object> partnerParams = new HashMap<String, Object>();
 
@@ -370,13 +376,15 @@ public class MemberRest {
 			partnerHql = "select new map(ff.id as id,ff.forum.id as forumId,u.uc_id as uc_id,ff.nick as nick,ff.forum.title as forum,ff.type as type) from FavoriteForum ff,User u where ff.forum.id=:fid and ff.user_id=u.user_id";
 		}
 		partnerParams.put("fid", fid);
-		result.put("partners", memberService.findByHql(page, partnerHql
-				+ " order by ff.created desc", partnerParams));
+		result.put(
+				"partners",
+				memberService.findByHql(page, partnerHql
+						+ " order by ff.created desc", partnerParams));
 		if (EnvManager.getUser().getUc_id() != null) {
-			result.put("friendIds", ucService.getFriends(EnvManager.getUser()
-					.getUc_id()));// 好友列表
-			result.put("unFriendIds", ucService.getUnFriends(EnvManager
-					.getUser().getUc_id()));// 未通过验证的好友列表
+			result.put("friendIds",
+					ucService.getFriends(EnvManager.getUser().getUc_id()));// 好友列表
+			result.put("unFriendIds",
+					ucService.getUnFriends(EnvManager.getUser().getUc_id()));// 未通过验证的好友列表
 		} else {
 			result.put("friendIds", "");
 			result.put("unFriendIds", "");
@@ -427,12 +435,18 @@ public class MemberRest {
 		String blogHql = "select new map(id as id,forum.title as title,forum.title as siteTitle,threads as threads)  from FavoriteForum where user_id=:user_id and type='3' ";
 		String microblogHql = "select new map(id as id,forum.title as title,forum.title as siteTitle,threads as threads) from FavoriteForum where user_id=:user_id and type='4' ";
 		params.put("user_id", ff.getUser_id());
-		result.put("forums", memberService.findByHql(forumHql
-				+ " order by forum.sortOrder asc", params));
-		result.put("blogs", memberService.findByHql(blogHql
-				+ " order by forum.sortOrder asc", params));
-		result.put("microblogs", memberService.findByHql(microblogHql
-				+ " order by forum.sortOrder asc", params));
+		result.put(
+				"forums",
+				memberService.findByHql(forumHql
+						+ " order by forum.sortOrder asc", params));
+		result.put(
+				"blogs",
+				memberService.findByHql(blogHql
+						+ " order by forum.sortOrder asc", params));
+		result.put(
+				"microblogs",
+				memberService.findByHql(microblogHql
+						+ " order by forum.sortOrder asc", params));
 		// 查询当前收藏下的推广记录
 		Map<String, Object> threadParams = new HashMap<String, Object>();
 		String threadHql = "select new map(id as id,title as title,url as url,account as account,fav.forum.title as forum,fav.type as type,createdDate as createdDate,createdBy as user_id) from ForumThread where fav.id=:fid";
@@ -451,8 +465,10 @@ public class MemberRest {
 			} catch (ParseException e) {
 			}
 		}
-		result.put("threads", memberService.findByHql(page, threadHql
-				+ " order by createdDate desc", threadParams));
+		result.put(
+				"threads",
+				memberService.findByHql(page, threadHql
+						+ " order by createdDate desc", threadParams));
 		result.put("page", page);
 		// 查询当前收藏下的帐号信息
 		// String accountHql =
@@ -633,8 +649,8 @@ public class MemberRest {
 		String account = request.getParameter("account");
 		String pwd = request.getParameter("pwd");
 		String desc = request.getParameter("desc");
-		ForumAccount acc = memberService.findByCriterion(ForumAccount.class, R
-				.eq("nick", nick), R.eq("fav.id", fid));
+		ForumAccount acc = memberService.findByCriterion(ForumAccount.class,
+				R.eq("nick", nick), R.eq("fav.id", fid));
 		if (acc != null) {
 			SystemException.handleMessageException("会员昵称信息重复");
 		}
@@ -670,8 +686,8 @@ public class MemberRest {
 		String desc = request.getParameter("desc");
 		if (!acc.getNick().equals(nick)) {
 			ForumAccount oldAcc = memberService.findByCriterion(
-					ForumAccount.class, R.eq("nick", nick), R.eq("fav.id", acc
-							.getFav().getId()));
+					ForumAccount.class, R.eq("nick", nick),
+					R.eq("fav.id", acc.getFav().getId()));
 			if (oldAcc != null) {
 				SystemException.handleMessageException("会员昵称信息重复");
 			}
@@ -846,8 +862,8 @@ public class MemberRest {
 		} else {
 			parent = memberService.get(ForumType.class, pcid);
 		}
-		types = memberService.findAllByCriterion(ForumType.class, R.eq(
-				"parent", parent.getId()));// 获取二级类目
+		types = memberService.findAllByCriterion(ForumType.class,
+				R.eq("parent", parent.getId()));// 获取二级类目
 		if (StringUtils.isEmpty(cid)) {// 如果未指定二级类目
 			type = types.get(0);
 			cid = type.getId();
@@ -882,9 +898,9 @@ public class MemberRest {
 		if (StringUtils.isEmpty(type)) {
 			SystemException.handleMessageException("收藏的阵地类型不能为空");
 		}
-		FavoriteForum ff = memberService.findByCriterion(FavoriteForum.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id()), R.eq(
-				"forum.id", fid));
+		FavoriteForum ff = memberService.findByCriterion(FavoriteForum.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.eq("forum.id", fid));
 		if (ff != null) {
 			return "{\"code\":\"0\"}";// 已经收藏
 		}
@@ -948,8 +964,8 @@ public class MemberRest {
 		String description = request.getParameter("desc");
 		String content = request.getParameter("content");
 		CustomeWidget cw = new CustomeWidget();
-		T_ItemCat cat = memberService.findByCriterion(T_ItemCat.class, R.eq(
-				"cid", cid));
+		T_ItemCat cat = memberService.findByCriterion(T_ItemCat.class,
+				R.eq("cid", cid));
 		if (cat != null) {
 			cw.setCat(cat);
 		}
@@ -958,10 +974,10 @@ public class MemberRest {
 		}
 
 		if (StringUtils.isNotEmpty(content)) {// 替换所有不正确的spid和pid
-			content = content.replaceAll(EnvManager.getUser().getPid(),
-					"\\${pid}").replaceAll("http://www.xintaonet.com",
-					"\\${siteurl}").replaceAll(HtmlDesignerRest.JQUERY_REGEX,
-					"");
+			content = content
+					.replaceAll(EnvManager.getUser().getPid(), "\\${pid}")
+					.replaceAll("http://www.xintaonet.com", "\\${siteurl}")
+					.replaceAll(HtmlDesignerRest.JQUERY_REGEX, "");
 		}
 		cw.setContent(content);
 		cw.setFriend(Integer.parseInt(friend));
@@ -1028,8 +1044,8 @@ public class MemberRest {
 		String color = request.getParameter("color");
 		String description = request.getParameter("desc");
 		String content = request.getParameter("content");
-		T_ItemCat cat = memberService.findByCriterion(T_ItemCat.class, R.eq(
-				"cid", cid));
+		T_ItemCat cat = memberService.findByCriterion(T_ItemCat.class,
+				R.eq("cid", cid));
 		if (cat != null) {
 			cw.setCat(cat);
 		}
@@ -1037,10 +1053,10 @@ public class MemberRest {
 			cw.setDescription(description);
 		}
 		if (StringUtils.isNotEmpty(content)) {// 替换所有不正确的spid和pid
-			content = content.replaceAll(EnvManager.getUser().getPid(),
-					"\\${pid}").replaceAll("http://www.xintaonet.com",
-					"\\${siteurl}").replaceAll(HtmlDesignerRest.JQUERY_REGEX,
-					"");
+			content = content
+					.replaceAll(EnvManager.getUser().getPid(), "\\${pid}")
+					.replaceAll("http://www.xintaonet.com", "\\${siteurl}")
+					.replaceAll(HtmlDesignerRest.JQUERY_REGEX, "");
 			;
 		}
 		cw.setContent(content);
@@ -1086,10 +1102,8 @@ public class MemberRest {
 				.getUser().getUser_id()));
 		result.put("myCount", memberService
 				.countCustomeWidgetByUserId(EnvManager.getUser().getUser_id()));
-		result
-				.put("favCount", memberService
-						.countFavoriteWidgetByUserId(EnvManager.getUser()
-								.getUser_id()));
+		result.put("favCount", memberService
+				.countFavoriteWidgetByUserId(EnvManager.getUser().getUser_id()));
 		result.put("allCount", memberService.countCustomeWidget());
 		result.put("sysCount", memberService.countWidget());
 
@@ -1262,10 +1276,8 @@ public class MemberRest {
 				widget.setContent(WidgetUtil.convertContent(widget, fcg, maps));
 			}
 		}
-		result
-				.put("favCount", memberService
-						.countFavoriteWidgetByUserId(EnvManager.getUser()
-								.getUser_id()));
+		result.put("favCount", memberService
+				.countFavoriteWidgetByUserId(EnvManager.getUser().getUser_id()));
 		result.put("allCount", memberService.countCustomeWidget());
 		result.put("sysCount", memberService.countWidget());
 		result.put("widgets", widgets);
@@ -1321,8 +1333,8 @@ public class MemberRest {
 		}
 
 		Page<CustomeWidget> page = new Page<CustomeWidget>(pageNo, pageSize);
-		User user = memberService.findByCriterion(User.class, R.eq("user_id",
-				id));
+		User user = memberService.findByCriterion(User.class,
+				R.eq("user_id", id));
 		if (user == null) {
 			SystemException.handleMessageException("未找到该会员");
 		}
@@ -1374,16 +1386,14 @@ public class MemberRest {
 		}
 		result.put("myFavorited", memberService.getMyFavoriteIds(EnvManager
 				.getUser().getUser_id()));
-		result
-				.put("favCount", memberService
-						.countFavoriteWidgetByUserId(EnvManager.getUser()
-								.getUser_id()));// 收藏数
+		result.put("favCount", memberService
+				.countFavoriteWidgetByUserId(EnvManager.getUser().getUser_id()));// 收藏数
 		result.put("allCount", memberService.countCustomeWidget());// 全部
 		result.put("sysCount", memberService.countWidget());// 系统
 		result.put("myCount", memberService
 				.countCustomeWidgetByUserId(EnvManager.getUser().getUser_id()));// 我的
-		result.put("allFavorite", memberService
-				.countAllFavoriteWidgetByUserId(id));// 指定会员的组件被收藏总数
+		result.put("allFavorite",
+				memberService.countAllFavoriteWidgetByUserId(id));// 指定会员的组件被收藏总数
 		result.put("allUsed", memberService.countAllUsedWidgetByUserId(id));// 指定会员的组件被使用总数
 		result.put("allWidgets", memberService.countCustomeWidgetByUserId(id));// 指定会员的组件被使用总数
 		result.put("widgets", widgets);// 设计师
@@ -1407,8 +1417,8 @@ public class MemberRest {
 	public String addFavoriteWidget(@PathVariable String cwid,
 			HttpServletRequest request, HttpServletResponse response) {
 		FavoriteWidget fw = memberService.findByCriterion(FavoriteWidget.class,
-				R.eq("user_id", EnvManager.getUser().getUser_id()), R.eq(
-						"widget.id", cwid));
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.eq("widget.id", cwid));
 		if (fw != null) {
 			return "{\"code\":\"0\"}";// 已经收藏
 		}
@@ -1641,10 +1651,8 @@ public class MemberRest {
 				.getUser().getUser_id()));
 		result.put("myCount", memberService
 				.countCustomeWidgetByUserId(EnvManager.getUser().getUser_id()));
-		result
-				.put("favCount", memberService
-						.countFavoriteWidgetByUserId(EnvManager.getUser()
-								.getUser_id()));
+		result.put("favCount", memberService
+				.countFavoriteWidgetByUserId(EnvManager.getUser().getUser_id()));
 		result.put("sysCount", memberService.countWidget());
 		result.put("widgets", widgets);
 		result.put("page", page);
@@ -1726,10 +1734,8 @@ public class MemberRest {
 				}
 			}
 		}
-		result
-				.put("favCount", memberService
-						.countFavoriteWidgetByUserId(EnvManager.getUser()
-								.getUser_id()));
+		result.put("favCount", memberService
+				.countFavoriteWidgetByUserId(EnvManager.getUser().getUser_id()));
 		result.put("allCount", memberService.countCustomeWidget());
 		result.put("myCount", memberService
 				.countCustomeWidgetByUserId(EnvManager.getUser().getUser_id()));
@@ -1987,14 +1993,14 @@ public class MemberRest {
 			HttpServletRequest request) {
 		UserTemplate template = memberService.get(UserTemplate.class, id);
 		List<UsedCustomeWidget> widgets = memberService.findAllByCriterion(
-				UsedCustomeWidget.class, R.eq("template.id", id), R.eq(
-						"user_id", EnvManager.getUser().getUser_id()));
+				UsedCustomeWidget.class, R.eq("template.id", id),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (template == null) {
 			SystemException.handleMessageException("未找到此模板");
 		}
 		List<UserTemplate> templates = memberService.findAllByCriterion(
-				UserTemplate.class, R.eq("user_id", EnvManager.getUser()
-						.getUser_id()));
+				UserTemplate.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("templates", templates);
 		result.put("template", template);
@@ -2023,8 +2029,8 @@ public class MemberRest {
 		String cid = request.getParameter("cid");
 		if (!name.equals(template.getName())) {
 			UserTemplate ut = memberService.findByCriterion(UserTemplate.class,
-					R.eq("name", name), R.eq("user_id", EnvManager.getUser()
-							.getUser_id()));
+					R.eq("name", name),
+					R.eq("user_id", EnvManager.getUser().getUser_id()));
 			if (ut != null) {
 				SystemException.handleMessageException("您的模板标题重复，请重新修改后添加");
 			}
@@ -2066,8 +2072,8 @@ public class MemberRest {
 	 */
 	@RequestMapping(value = "/template/add/view", method = RequestMethod.GET)
 	public ModelAndView addTemplateView(HttpServletRequest request) {
-		return new ModelAndView("site/member/addTemplate", "cats", EnvManager
-				.getRootCats());
+		return new ModelAndView("site/member/addTemplate", "cats",
+				EnvManager.getRootCats());
 	}
 
 	/**
@@ -2085,9 +2091,9 @@ public class MemberRest {
 		String parenttid = request.getParameter("parenttid");
 		String siteId = request.getParameter("siteId");
 		String cid = request.getParameter("cid");
-		UserTemplate ut = memberService.findByCriterion(UserTemplate.class, R
-				.eq("name", name), R.eq("user_id", EnvManager.getUser()
-				.getUser_id()));
+		UserTemplate ut = memberService.findByCriterion(UserTemplate.class,
+				R.eq("name", name),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (ut != null) {
 			SystemException.handleMessageException("您的模板标题重复，请重新修改后添加");
 		}
@@ -2136,9 +2142,9 @@ public class MemberRest {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("user_id", EnvManager.getUser().getUser_id());
-		ItemGroup oldGroup = memberService.findByCriterion(ItemGroup.class, R
-				.eq("name", name), R.eq("user_id", EnvManager.getUser()
-				.getUser_id()));
+		ItemGroup oldGroup = memberService.findByCriterion(ItemGroup.class,
+				R.eq("name", name),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (oldGroup != null) {
 			SystemException.handleMessageException("推广组名称[" + name
 					+ "]重复,请重新命名");
@@ -2256,8 +2262,8 @@ public class MemberRest {
 		map.put("group", group);
 		map.put("items", items);
 		map.put("groups", groups);
-		map.put("sortBy", sortby == null ? "sortOrder_asc" : sortby.replace(
-				" ", "_"));
+		map.put("sortBy",
+				sortby == null ? "sortOrder_asc" : sortby.replace(" ", "_"));
 		return new ModelAndView("site/member/itemgroup", map);
 	}
 
@@ -2539,14 +2545,15 @@ public class MemberRest {
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public ModelAndView getProfile(@PathVariable String id,
 			HttpServletRequest request) {
-		User user = memberService.findByCriterion(User.class, R.eq("user_id",
-				id));
-		T_SpaceUser sUser = memberService.findByCriterion(T_SpaceUser.class, R
-				.eq("uid", id));
+		User user = memberService.findByCriterion(User.class,
+				R.eq("user_id", id));
+		T_SpaceUser sUser = memberService.findByCriterion(T_SpaceUser.class,
+				R.eq("uid", id));
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (user.getSid() != null && !user.getSid().equals("0")) {
-			map.put("shop", memberService.get(T_TaobaokeShop.class, Long
-					.valueOf(user.getUser_id())));
+			map.put("shop",
+					memberService.get(T_TaobaokeShop.class,
+							Long.valueOf(user.getUser_id())));
 		}
 
 		map.put("user", user);
@@ -2567,11 +2574,11 @@ public class MemberRest {
 	public ModelAndView getMySites(HttpServletRequest request) {
 		List<Site> list = (List<Site>) memberService.findAllByCriterion(
 				Site.class, R.eq("user_id", EnvManager.getUser().getUser_id()));
-		CoolSite coolSite = memberService.findByCriterion(CoolSite.class, R.eq(
-				"user_id", EnvManager.getUser().getUser_id()));
-		UserTemplate ut = memberService.findByCriterion(UserTemplate.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id()), R
-				.isNull("parent"));
+		CoolSite coolSite = memberService.findByCriterion(CoolSite.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
+		UserTemplate ut = memberService.findByCriterion(UserTemplate.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.isNull("parent"));
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("sites", list);
 		result.put("coolSite", coolSite);
@@ -2594,9 +2601,11 @@ public class MemberRest {
 			result.put("indexTemplate", ut);
 		}
 		if (EnvManager.getUser().getLimit() == null) {
-			EnvManager.getUser().setLimit(
-					memberService.findByCriterion(Limit.class, R.eq("user_id",
-							EnvManager.getUser().getUser_id())));
+			EnvManager.getUser()
+					.setLimit(
+							memberService.findByCriterion(Limit.class, R.eq(
+									"user_id", EnvManager.getUser()
+											.getUser_id())));
 		}
 		return new ModelAndView("site/member/site", result);
 	}
@@ -2610,8 +2619,8 @@ public class MemberRest {
 	@RequestMapping(value = "/myitemgroups", method = RequestMethod.GET)
 	public ModelAndView getMyItemGroup(HttpServletRequest request) {
 		List<ItemGroup> list = (List<ItemGroup>) memberService
-				.findAllByCriterion(ItemGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		for (ItemGroup group : list) {
 			group.setCount(memberService.countItemsByGid(group.getId()));
 		}
@@ -2627,8 +2636,8 @@ public class MemberRest {
 	@RequestMapping(value = "/itemgroupsdialog", method = RequestMethod.GET)
 	public ModelAndView getMyItemGroupForDialog(HttpServletRequest request) {
 		List<ItemGroup> list = (List<ItemGroup>) memberService
-				.findAllByCriterion(ItemGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		for (ItemGroup group : list) {
 			group.setCount(memberService.countItemsByGid(group.getId()));
 		}
@@ -2655,13 +2664,15 @@ public class MemberRest {
 		String desc = request.getParameter("description");
 		String metadata = request.getParameter("metadata");
 		String cid = request.getParameter("cid");
+		String pSiteId = request.getParameter("pSiteId");
+		String pAdId = request.getParameter("pAdId");
 		Site site = memberService.get(Site.class, id);
 		if (site == null) {
 			SystemException.handleMessageException("指定的站点不存在！");
 		}
 		if (!site.getTitle().equals(title)) {
-			Site oldSite = memberService.findByCriterion(Site.class, R.eq(
-					"title", title));
+			Site oldSite = memberService.findByCriterion(Site.class,
+					R.eq("title", title));
 			if (oldSite != null) {
 				SystemException.handleMessageException("站点名称重复[" + title
 						+ "]重复,请重新命名");
@@ -2676,8 +2687,8 @@ public class MemberRest {
 			site.setMetadata(metadata);
 		}
 		if (!cid.equals(site.getCid())) {
-			ADBlogStatus blog = memberService.get(ADBlogStatus.class, site
-					.getId());
+			ADBlogStatus blog = memberService.get(ADBlogStatus.class,
+					site.getId());
 			if (blog != null) {
 				blog.setCid(cid);
 				memberService.update(blog);
@@ -2728,6 +2739,22 @@ public class MemberRest {
 		List<Site> sites = new ArrayList<Site>();
 		sites.add(site);
 		EnvManager.getUser().setSites(sites);
+		if (StringUtils.isNotEmpty(pSiteId) && StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID
+			try {
+				Long _pSiteId = Long.parseLong(pSiteId);
+				Long _pAdId = Long.parseLong(pAdId);
+				User user = memberService.get(User.class, EnvManager.getUser()
+						.getId());
+				if (user != null) {
+					user.setpSiteId(_pSiteId);
+					user.setpAdId(_pAdId);
+					memberService.update(user);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -2797,8 +2824,7 @@ public class MemberRest {
 		Boolean isNew = false;// 是否是新建检测
 		String isNewStr = request.getParameter("isNew");
 		if (memberService.isProcessingItemGroupDoctor(EnvManager.getUser()
-				.getUser_id())
-				|| "false".equals(isNewStr)) {// 如果正在检测中,则直接返回检测结果列表
+				.getUser_id()) || "false".equals(isNewStr)) {// 如果正在检测中,则直接返回检测结果列表
 			doctors = memberService.getItemGroupDoctors(EnvManager.getUser()
 					.getUser_id());
 			isNew = false;

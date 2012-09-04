@@ -1073,6 +1073,8 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 
 		WindSiteRestUtil.covertPID(siteService, result, userId);
+		String pid = String.valueOf(result.get("pid"));
+		String pPid = String.valueOf(result.get("pPid"));
 		// 详情
 		TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
 		getRequest.setNick(WindSiteRestUtil.filterUnValidNick((String) result
@@ -1116,7 +1118,7 @@ public class SiteRest {
 				}
 				result.put("title", keyword);
 				result.put("cid", catid);
-				result.put("redirect", clickurl);
+				result.put("redirect", clickurl.replaceAll(pid, pPid));
 				return new ModelAndView("site/taobaoRedirect", result);
 			}
 			SystemException.handleMessageException("该商品不存在，或者未加入淘宝推广计划");

@@ -19,6 +19,26 @@ $('#designerSite').button();
 			alert("淘站名称长度不能超过50");
 			return;
 		}
+		var reg_num = /^[0-9]{3,15}$/;
+		var pSiteId = $('#pSiteId').val();
+		if(pSiteId){
+			if(!reg_num.test(pSiteId)){
+				alert('网站ID不正确');
+				return;
+			}
+		}else{
+			pSiteId='';
+		}
+		
+		var pAdId = $('#pAdId').val();
+		if(pAdId){
+			if(!reg_num.test(pAdId)){
+				alert('广告位ID不正确');
+				return;
+			}
+		}else{
+			pAdId='';
+		}
 		var desc = $('#siteDescription').val();
 		if (desc) {
 			if (desc.length > 150) {
@@ -34,7 +54,7 @@ $('#designerSite').button();
 			}
 		}
 		updateSite($('#site_Id').val(), title, desc, metadata, $('#siteCid')
-						.val());
+						.val(),pSiteId,pAdId);
 		return false;
 	});
 	$('#cancelSite').button().click(function() {
@@ -64,6 +84,12 @@ $('#designerSite').button();
 		<tr><td width=60px>淘站地址:</td><td>
 			<input id="site_Url" type="text" style="width:200px;" value="http://<#if s.www??&&s.www!=''>${s.www}<#else>${s.domainName}.xintaonet.com</#if>">&nbsp;&nbsp;&nbsp;<input type="button" id="copySiteUrl" value="复制">
 		</td><tr>
+		<tr>
+			<td>网站ID:</td><td>${USER.pSiteId}</td>
+		</tr>
+		<tr>
+			<td>广告位ID:</td><td>${USER.pAdId}</td>
+		</tr>
 		<tr style="display:none;"><td>简介:</td><td>${s.description}</td><tr>
 		<tr><td>店铺类别:</td><td><#if cat??>${cat.name}<#else>尚未设置类目</#if></td><tr>
 		<tr style="display:none;"><td>关键词:</td><td>${s.metadata}</td><tr>
@@ -85,6 +111,12 @@ $('#designerSite').button();
 			<td>淘站名称:</td><td><input id="siteTitle" type="text" size="50" class="text" value="${s.title}"/></td>
 		</tr>
 		<tr>
+			<td>网站ID:</td><td><input id="pSiteId" type="text" size="50" class="text" value="${USER.pSiteId}"/></td>
+		</tr>
+		<tr>
+			<td>广告位ID:</td><td><input id="pAdId" type="text" size="50" class="text" value="${USER.pAdId}"/></td>
+		</tr>
+		<tr>
 			<td>店铺类别:</td><td>
 			<select id="siteCid" style="width:135px;">
 				<#list cats as c>
@@ -103,6 +135,17 @@ $('#designerSite').button();
 			<td>关键词:</td><td><textarea id="siteMetadata" rows="3" cols="50">${s.metadata}</textarea><br/><span>关键词可以让搜索引擎更好的了解您的站点.<br/>例如:女装,男装,韩装...</span></td>
 		</tr>
 		<tr><td><button id="updateSite">保存修改</button></td><td><button id="cancelSite">取消</button></td></tr>
+		<tr><td colspan="2">
+		<@ws.help>
+		<h3>1.什么是网站ID？</h3>
+		<p>网站ID指的是:在淘宝联盟登记您新淘网站点而得到的网站标识</P>
+		<h3>2.什么是广告位ID？</h3>
+		<p>广告位ID指的是:在淘宝联盟登记的您新淘网站点中创建的广告位的标识</P>
+		<h3>3.为什么要填写网站ID,广告位ID？</h3>
+		<p>因淘宝联盟规则发生变化.所有搜索框推广、频道推广、淘宝客搜索链接必须使用完整PID(mm_账户id编号_网站id编号_广告位id编号),2012-9-14后使用默认PID(mm_账户id编号_0_0)推广以上三种类型将无效</P>
+		<h3>4.如何得到我的网站ID,广告位ID？</h3>
+		<p><a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank">查看如何在淘宝联盟登记新淘网网站,创建广告位,获得网站ID,广告位ID?</a></P>
+		</@ws.help></td></tr>
 </table>
 </#list></#if>
 </@xt.taoketemplate>

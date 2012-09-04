@@ -47,7 +47,8 @@ td.fl-num{text-align:center;width:80px;}th strong{color:red} fieldset .wTable td
 	<td width=180px valign=top align=center><img src="http://www.xintaonet.com/discuz72/uc_server/avatar.php?uid=${USER.uc_id}"></td>
 	<td valign=top><table>
 	<tr><td height="20px;"><strong class="nick">${USER.nick}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#F60;" onClick="if(!isSyn){isSyn=true;synTaobao();}return false;" id="gtSynTaobao" target="_blank">同步淘宝公开信息</a></td></tr>
-	<tr><td align-left><span class="key">阿里妈妈PID：<span style="color:#F60;">${USER.pid}</span></span></td></tr>
+	<tr><td align-left><span class="key">默认PID：<span style="color:#F60;">${USER.pid}</span></span></td></tr>
+	<tr><td align-left><span class="key">完整PID：<span style="color:#F60;">${USER.pPid}</span></span></td></tr>
 	<tr><td align=left><span class="key">上次登录：${USER.last_visit?datetime}</span></td></tr>
 	<tr><td align=left><a href="/router/member/versions" style="font-size:14px;font-weight:700;color:red;">查看版本</a></td></tr>
 	</table></td>

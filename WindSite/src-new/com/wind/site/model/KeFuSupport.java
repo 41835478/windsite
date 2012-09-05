@@ -24,6 +24,8 @@ public class KeFuSupport implements Serializable {
 	private String nick;
 	@Column(length = 2000)
 	private String kefu;
+	@Column(length = 255)
+	private String alimama;
 
 	/**
 	 * @return the userId
@@ -68,6 +70,14 @@ public class KeFuSupport implements Serializable {
 	 */
 	public void setKefu(String kefu) {
 		this.kefu = kefu;
+	}
+
+	public String getAlimama() {
+		return alimama;
+	}
+
+	public void setAlimama(String alimama) {
+		this.alimama = alimama;
 	}
 
 }

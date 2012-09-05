@@ -75,8 +75,8 @@ public class MemberSiteManager {
 	 */
 	@RequestMapping(value = "/share", method = RequestMethod.GET)
 	public ModelAndView shareView(HttpServletRequest request) {
-		ShareSupport share = memberService.get(ShareSupport.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		ShareSupport share = memberService.get(ShareSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (share == null) {
 			share = new ShareSupport();
 			share.setNick(EnvManager.getUser().getNick());
@@ -95,8 +95,8 @@ public class MemberSiteManager {
 	@RequestMapping(value = "/share/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String shareUpdate(HttpServletRequest request) {
-		ShareSupport share = memberService.get(ShareSupport.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		ShareSupport share = memberService.get(ShareSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (share == null) {
 			SystemException.handleMessageException("您尚未创建分享与收藏");
 		}
@@ -108,6 +108,47 @@ public class MemberSiteManager {
 	}
 
 	/**
+	 * 阿里妈妈验证
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/alimama", method = RequestMethod.GET)
+	public ModelAndView alimamaView(HttpServletRequest request) {
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
+		if (kefu == null) {
+			kefu = new KeFuSupport();
+			kefu.setNick(EnvManager.getUser().getNick());
+			kefu.setUserId(Long.valueOf(EnvManager.getUser().getUser_id()));
+			memberService.save(kefu);
+		}
+		return new ModelAndView("site/member/site/alimama", "kefu", kefu);
+	}
+
+	/**
+	 * 阿里妈妈验证
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/alimama/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String alimamaUpdate(HttpServletRequest request) {
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
+		if (kefu == null) {
+			SystemException.handleMessageException("刷新页面");
+		}
+		String alimama = request.getParameter("alimama");
+		kefu.setAlimama(alimama);
+		memberService.update(kefu);
+		pageService.deployAlimamaRoot(fcg, String.valueOf(kefu.getUserId()),
+				alimama);
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	/**
 	 * 站点客服系统
 	 * 
 	 * @param request
@@ -115,8 +156,8 @@ public class MemberSiteManager {
 	 */
 	@RequestMapping(value = "/kefu", method = RequestMethod.GET)
 	public ModelAndView kefuView(HttpServletRequest request) {
-		KeFuSupport kefu = memberService.get(KeFuSupport.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (kefu == null) {
 			kefu = new KeFuSupport();
 			kefu.setNick(EnvManager.getUser().getNick());
@@ -135,8 +176,8 @@ public class MemberSiteManager {
 	@RequestMapping(value = "/kefu/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String kefuUpdate(HttpServletRequest request) {
-		KeFuSupport kefu = memberService.get(KeFuSupport.class, Long
-				.valueOf(EnvManager.getUser().getUser_id()));
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (kefu == null) {
 			SystemException.handleMessageException("您尚未创建客服");
 		}
@@ -163,20 +204,20 @@ public class MemberSiteManager {
 		String id = site.getId();
 		result.put("allFanli", fanliService.countFanliTradeBySiteId(id, null));// 总返利金额
 		// 等待站长支付返利记录数
-		result.put("unBuyFanli", fanliService.countFanliTradeBySiteId(id,
-				"BUY", 0));// 购买返利记录数
-		result.put("unAdsFanli", fanliService.countFanliTradeBySiteId(id,
-				"ADS", 0));// 推广返利记录数
+		result.put("unBuyFanli",
+				fanliService.countFanliTradeBySiteId(id, "BUY", 0));// 购买返利记录数
+		result.put("unAdsFanli",
+				fanliService.countFanliTradeBySiteId(id, "ADS", 0));// 推广返利记录数
 		// 等待会员确认收款（已支付）记录数
-		result.put("waitBuyFanli", fanliService.countFanliTradeBySiteId(id,
-				"BUY", 1));// 购买返利记录数
-		result.put("waitAdsFanli", fanliService.countFanliTradeBySiteId(id,
-				"ADS", 1));// 推广返利记录数
+		result.put("waitBuyFanli",
+				fanliService.countFanliTradeBySiteId(id, "BUY", 1));// 购买返利记录数
+		result.put("waitAdsFanli",
+				fanliService.countFanliTradeBySiteId(id, "ADS", 1));// 推广返利记录数
 		// 已完成记录数
-		result.put("finishBuyFanli", fanliService.countFanliTradeBySiteId(id,
-				"BUY", 2));// 购买返利记录数
-		result.put("finishAdsFanli", fanliService.countFanliTradeBySiteId(id,
-				"ADS", 2));// 推广返利记录数
+		result.put("finishBuyFanli",
+				fanliService.countFanliTradeBySiteId(id, "BUY", 2));// 购买返利记录数
+		result.put("finishAdsFanli",
+				fanliService.countFanliTradeBySiteId(id, "ADS", 2));// 推广返利记录数
 		return new ModelAndView("site/member/fanli/back/flmemberTradeCount",
 				result);
 	}
@@ -194,20 +235,20 @@ public class MemberSiteManager {
 		String id = site.getId();
 		result.put("allFanli", fanliService.sumFanliMoneyBySiteId(id, null));// 总返利金额
 		// 等待站长支付返利
-		result.put("unBuyFanli", fanliService.sumFanliMoneyBySiteId(id, "BUY",
-				0));// 购买返利金额
-		result.put("unAdsFanli", fanliService.sumFanliMoneyBySiteId(id, "ADS",
-				0));// 推广返利金额
+		result.put("unBuyFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "BUY", 0));// 购买返利金额
+		result.put("unAdsFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "ADS", 0));// 推广返利金额
 		// 等待会员确认收款（已支付）
-		result.put("waitBuyFanli", fanliService.sumFanliMoneyBySiteId(id,
-				"BUY", 1));// 购买返利金额
-		result.put("waitAdsFanli", fanliService.sumFanliMoneyBySiteId(id,
-				"ADS", 1));// 推广返利金额
+		result.put("waitBuyFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "BUY", 1));// 购买返利金额
+		result.put("waitAdsFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "ADS", 1));// 推广返利金额
 		// 已完成
-		result.put("finishBuyFanli", fanliService.sumFanliMoneyBySiteId(id,
-				"BUY", 2));// 购买返利金额
-		result.put("finishAdsFanli", fanliService.sumFanliMoneyBySiteId(id,
-				"ADS", 2));// 推广返利金额
+		result.put("finishBuyFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "BUY", 2));// 购买返利金额
+		result.put("finishAdsFanli",
+				fanliService.sumFanliMoneyBySiteId(id, "ADS", 2));// 推广返利金额
 		return new ModelAndView("site/member/fanli/back/flmemberIncome", result);
 	}
 
@@ -225,9 +266,9 @@ public class MemberSiteManager {
 		if (list != null && list.size() == 1) {
 			Site site = list.get(0);
 			if (site.getStatus() == null || site.getStatus() == 0) {// 未发布状态
-				UserPage page = memberService.findByCriterion(UserPage.class, R
-						.eq("isIndex", true), R
-						.eq("user_id", site.getUser_id()));
+				UserPage page = memberService.findByCriterion(UserPage.class,
+						R.eq("isIndex", true),
+						R.eq("user_id", site.getUser_id()));
 				if (page == null) {
 					result.put("site", site);
 					result.put("cats", EnvManager.getRootCats());
@@ -286,9 +327,11 @@ public class MemberSiteManager {
 
 		result.put("cats", EnvManager.getRootCats());
 		if (EnvManager.getUser().getLimit() == null) {
-			EnvManager.getUser().setLimit(
-					memberService.findByCriterion(Limit.class, R.eq("user_id",
-							EnvManager.getUser().getUser_id())));
+			EnvManager.getUser()
+					.setLimit(
+							memberService.findByCriterion(Limit.class, R.eq(
+									"user_id", EnvManager.getUser()
+											.getUser_id())));
 		}
 		return new ModelAndView("site/member/site/siteProfile", result);
 	}
@@ -306,15 +349,17 @@ public class MemberSiteManager {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("sites", list);
 		if (EnvManager.getUser().getLimit() == null) {
-			EnvManager.getUser().setLimit(
-					memberService.findByCriterion(Limit.class, R.eq("user_id",
-							EnvManager.getUser().getUser_id())));
+			EnvManager.getUser()
+					.setLimit(
+							memberService.findByCriterion(Limit.class, R.eq(
+									"user_id", EnvManager.getUser()
+											.getUser_id())));
 		}
-//		result.put("templates", memberService.findUserTemplates(EnvManager
-//				.getUser().getUser_id()));
-		UserTemplate ut = memberService.findByCriterion(UserTemplate.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id()), R
-				.isNull("parent"));
+		// result.put("templates", memberService.findUserTemplates(EnvManager
+		// .getUser().getUser_id()));
+		UserTemplate ut = memberService.findByCriterion(UserTemplate.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id()),
+				R.isNull("parent"));
 		if (ut != null) {
 			result.put("parenttid", ut.getId());
 			result.put("indexTemplate", ut);
@@ -335,12 +380,16 @@ public class MemberSiteManager {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("sites", list);
 		if (EnvManager.getUser().getLimit() == null) {
-			EnvManager.getUser().setLimit(
-					memberService.findByCriterion(Limit.class, R.eq("user_id",
-							EnvManager.getUser().getUser_id())));
+			EnvManager.getUser()
+					.setLimit(
+							memberService.findByCriterion(Limit.class, R.eq(
+									"user_id", EnvManager.getUser()
+											.getUser_id())));
 		}
-		result.put("coolSite", memberService.findByCriterion(CoolSite.class, R
-				.eq("user_id", EnvManager.getUser().getUser_id())));
+		result.put(
+				"coolSite",
+				memberService.findByCriterion(CoolSite.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id())));
 		return new ModelAndView("site/member/site/coolSite", result);
 	}
 
@@ -357,9 +406,11 @@ public class MemberSiteManager {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("sites", list);
 		if (EnvManager.getUser().getLimit() == null) {
-			EnvManager.getUser().setLimit(
-					memberService.findByCriterion(Limit.class, R.eq("user_id",
-							EnvManager.getUser().getUser_id())));
+			EnvManager.getUser()
+					.setLimit(
+							memberService.findByCriterion(Limit.class, R.eq(
+									"user_id", EnvManager.getUser()
+											.getUser_id())));
 		}
 		return new ModelAndView("site/member/site/thirdAnalytics", result);
 	}
@@ -373,8 +424,8 @@ public class MemberSiteManager {
 	@RequestMapping(value = "/groups", method = RequestMethod.GET)
 	public ModelAndView groups(HttpServletRequest request) {
 		List<ItemGroup> list = (List<ItemGroup>) memberService
-				.findAllByCriterion(ItemGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ItemGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		for (ItemGroup group : list) {
 			group.setCount(memberService.countItemsByGid(group.getId()));
 		}
@@ -392,8 +443,8 @@ public class MemberSiteManager {
 	@RequestMapping(value = "/shops", method = RequestMethod.GET)
 	public ModelAndView getMyShopsFavorite(HttpServletRequest request) {
 		List<ShopGroup> list = (List<ShopGroup>) memberService
-				.findAllByCriterion(ShopGroup.class, R.eq("user_id", EnvManager
-						.getUser().getUser_id()));
+				.findAllByCriterion(ShopGroup.class,
+						R.eq("user_id", EnvManager.getUser().getUser_id()));
 		for (ShopGroup group : list) {
 			group.setCount(memberService.countFavShops(group.getId()));
 		}
@@ -411,9 +462,9 @@ public class MemberSiteManager {
 	public String createShopGroup(HttpServletRequest request,
 			HttpServletResponse response) {
 		String name = request.getParameter("name");
-		ShopGroup oldGroup = memberService.findByCriterion(ShopGroup.class, R
-				.eq("name", name), R.eq("user_id", EnvManager.getUser()
-				.getUser_id()));
+		ShopGroup oldGroup = memberService.findByCriterion(ShopGroup.class,
+				R.eq("name", name),
+				R.eq("user_id", EnvManager.getUser().getUser_id()));
 		if (oldGroup != null) {
 			SystemException.handleMessageException("店铺分组名称[" + name
 					+ "]重复,请重新命名");
@@ -494,8 +545,8 @@ public class MemberSiteManager {
 		map.put("group", group);
 		map.put("shops", shops);
 		map.put("groups", groups);
-		map.put("sortBy", sortby == null ? "sellerCredit_desc" : sortby
-				.replace(" ", "_"));
+		map.put("sortBy",
+				sortby == null ? "sellerCredit_desc" : sortby.replace(" ", "_"));
 		return new ModelAndView("site/member/shopgroup", map);
 	}
 
@@ -578,8 +629,8 @@ public class MemberSiteManager {
 		result.put("templates", ads);
 		if (ads.size() > 0) {
 			List<Site> list = (List<Site>) memberService.findAllByCriterion(
-					Site.class, R.eq("user_id", EnvManager.getUser()
-							.getUser_id()));
+					Site.class,
+					R.eq("user_id", EnvManager.getUser().getUser_id()));
 			result.put("site", list.get(0));
 		}
 		return new ModelAndView("site/member/site/taokeIndexAdsManager", result);
@@ -734,8 +785,10 @@ public class MemberSiteManager {
 	public ModelAndView searchPlanItems(@PathVariable String id,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("items", memberService.findAllByCriterion(
-				ADTaobaokeItem.class, R.eq("planid", id)));
+		result.put(
+				"items",
+				memberService.findAllByCriterion(ADTaobaokeItem.class,
+						R.eq("planid", id)));
 		return new ModelAndView("site/member/seller/ads/planItems", result);
 	}
 }

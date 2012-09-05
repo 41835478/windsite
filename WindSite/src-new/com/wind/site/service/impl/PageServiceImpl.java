@@ -81,6 +81,34 @@ import freemarker.template.TemplateModelException;
 public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 
 	@Override
+	public void deployAlimamaRoot(FreeMarkerConfigurer fcg, String userId,
+			String code) {
+		// 发布阿里妈妈验证
+		try {
+			File htmlFile = new File(getAlimamaRootPath("shop" + userId));
+			File parent = new File(htmlFile.getParent());
+			if (!parent.exists()) {
+				parent.mkdirs();
+			}
+			if (!htmlFile.exists()) {// 如果不存在则是第一次发布
+				htmlFile.createNewFile();
+			}
+			Template template = fcg.getConfiguration().getTemplate(
+					"site/designer/template/root.ftl");
+			Writer out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(htmlFile), "UTF-8"));
+			Map<String, Object> maps = new HashMap<String, Object>();
+			maps.put("code", code);
+			template.setEncoding("UTF-8");
+			template.process(maps, out);// 生成具体模块内容并输出
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void fixedPageHeader(String siteId) {
 		PageMeta meta = this.getIndexPageMeta(siteId);
 		if (meta != null) {
@@ -352,8 +380,9 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			TaobaokeItemDetail detail) {
 		// 发布页头
 		try {
-			File htmlFile = new File(getItemDetailMetaPath(String
-					.valueOf(detail.getItem().getNumIid())));
+			File htmlFile = new File(
+					getItemDetailMetaPath(String.valueOf(detail.getItem()
+							.getNumIid())));
 			File parent = new File(htmlFile.getParent());
 			if (!parent.exists()) {
 				parent.mkdirs();
@@ -395,8 +424,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 					new FileOutputStream(htmlFile), "UTF-8"));
 			Map<String, Object> maps = new HashMap<String, Object>();
 			WindSiteRestUtil.covertPID(this, maps, userId);
-			maps.put("dateVersion", DateUtils.format(new Date(),
-					"yyyyMMddHHmmss"));// 资源版本号
+			maps.put("dateVersion",
+					DateUtils.format(new Date(), "yyyyMMddHHmmss"));// 资源版本号
 			template.setEncoding("UTF-8");
 			template.process(maps, out);// 生成具体模块内容并输出
 			out.flush();
@@ -439,8 +468,9 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 	public void deployItemDetail(FreeMarkerConfigurer fcg,
 			TaobaokeItemDetail detail) {
 		try {
-			File htmlFile = new File(getItemDetailDescPath(String
-					.valueOf(detail.getItem().getNumIid())));
+			File htmlFile = new File(
+					getItemDetailDescPath(String.valueOf(detail.getItem()
+							.getNumIid())));
 			File parent = new File(htmlFile.getParent());
 			if (!parent.exists()) {
 				parent.mkdirs();
@@ -542,8 +572,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 		}
 		PageModel model = PageUtils.convertPageModel(meta.getMetadata());// 获取旧页面元信息模型
 		// 删除当前页面BD内所有模块,区域,布局【为避免元信息内与数据库实际不符，查询数据库内实际布局进行删除】
-		List<PageLayout> oLayouts = this.findAllByCriterion(PageLayout.class, R
-				.eq("page", page.getId()));
+		List<PageLayout> oLayouts = this.findAllByCriterion(PageLayout.class,
+				R.eq("page", page.getId()));
 		// List<LayoutModel> oBd = model.getBd();
 		if (oLayouts != null && oLayouts.size() > 0) {
 			for (PageLayout olm : oLayouts) {
@@ -551,8 +581,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 						PageRegion.class, R.eq("layout", olm.getId()));
 				if (oRegions != null && oRegions.size() > 0) {
 					for (PageRegion oRm : oRegions) {
-						this.deleteAll(PageModule.class, R.eq("region", oRm
-								.getId()));// 删除容器内所有模块
+						this.deleteAll(PageModule.class,
+								R.eq("region", oRm.getId()));// 删除容器内所有模块
 					}
 				}
 				this.deleteAll(PageRegion.class, R.eq("layout", olm.getId()));// 删除布局内所有区域
@@ -612,9 +642,9 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 				sRm.setModules(mRms);
 			}
 			if (bLayout.getExtra() != null) {
-				PageRegion _region = PageUtils.copyPageRegion(bLayout
-						.getExtra(), PageRegion.COL_EXTRA, userId, siteId,
-						nick, page.getId(), _layout.getId());// 拷贝生成区域
+				PageRegion _region = PageUtils.copyPageRegion(
+						bLayout.getExtra(), PageRegion.COL_EXTRA, userId,
+						siteId, nick, page.getId(), _layout.getId());// 拷贝生成区域
 				this.save(_region);
 				List<ModuleModel> mRms = new ArrayList<ModuleModel>();
 				List<ModuleModel> _mms = bLayout.getExtra().getModules();
@@ -743,9 +773,9 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 				sRm.setModules(mRms);
 			}
 			if (bLayout.getExtra() != null) {
-				PageRegion _region = PageUtils.copyPageRegion(bLayout
-						.getExtra(), PageRegion.COL_EXTRA, userId, siteId,
-						nick, page.getId(), _layout.getId());// 拷贝生成区域
+				PageRegion _region = PageUtils.copyPageRegion(
+						bLayout.getExtra(), PageRegion.COL_EXTRA, userId,
+						siteId, nick, page.getId(), _layout.getId());// 拷贝生成区域
 				this.save(_region);
 				List<ModuleModel> mRms = new ArrayList<ModuleModel>();
 				List<ModuleModel> _mms = bLayout.getExtra().getModules();
@@ -894,8 +924,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 		if (!newIndex.getUser_id().equals(EnvManager.getUser().getUser_id())) {
 			SystemException.handleMessageException("您无权操作此页面");
 		}
-		UserPage oldIndex = this.findByCriterion(UserPage.class, R.eq(
-				"user_id", newIndex.getUser_id()), R.eq("isIndex", true));
+		UserPage oldIndex = this.findByCriterion(UserPage.class,
+				R.eq("user_id", newIndex.getUser_id()), R.eq("isIndex", true));
 		if (oldIndex == null) {
 			SystemException.handleMessageException("您之前尚未设置首页");
 		}
@@ -910,8 +940,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 				List<LayoutModel> hd = oldModel.getHd();
 				PageMeta newMeta = this.get(PageMeta.class, newIndex.getId());
 				if (newMeta != null) {
-					PageModel newModel = new Gson().fromJson(newMeta
-							.getMetadata(), PageModel.class);
+					PageModel newModel = new Gson().fromJson(
+							newMeta.getMetadata(), PageModel.class);
 					if (newModel != null) {
 						newModel.setHd(hd);// 设置新首页的页头元信息
 						newMeta.setMetadata(PageUtils
@@ -1082,8 +1112,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 				if (rm != null) {
 					List<ModuleModel> mms = rm.getModules();
 					if (mms != null && mms.size() > 0) {
-						User user = this.findByCriterion(User.class, R.eq(
-								"user_id", page.getUser_id()));
+						User user = this.findByCriterion(User.class,
+								R.eq("user_id", page.getUser_id()));
 						String ftl = "";
 						for (ModuleModel mm : mms) {
 							ftl += PageUtils.createModule(mm, user.getNick(),
@@ -1100,8 +1130,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 						}
 						htmlFile.setExecutable(true);// 设置为可执行即chmod +x
 						Template template = new Template("template_header_"
-								+ page.getId(), new StringReader(ftl), fcg
-								.getConfiguration());
+								+ page.getId(), new StringReader(ftl),
+								fcg.getConfiguration());
 						Writer out = new BufferedWriter(new OutputStreamWriter(
 								new FileOutputStream(htmlFile), "UTF-8"));
 						Map<String, Object> maps = new HashMap<String, Object>();
@@ -1169,8 +1199,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			Template template = fcg.getConfiguration().getTemplate(
 					"site/designer/include/pageFooterTemplate.ftl");
 			List<FanliFriendLinks> links = this.findAllByCriterionAndOrder(
-					FanliFriendLinks.class, Order.asc("sortOrder"), R.eq(
-							"user_id", userId));
+					FanliFriendLinks.class, Order.asc("sortOrder"),
+					R.eq("user_id", userId));
 			Writer out = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(htmlFile), "UTF-8"));
 			Map<String, Object> maps = new HashMap<String, Object>();
@@ -1180,8 +1210,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			if (kefu != null) {
 				maps.put("kefu", kefu);
 			}
-			ShareSupport share = this.get(ShareSupport.class, Long
-					.valueOf(userId));
+			ShareSupport share = this.get(ShareSupport.class,
+					Long.valueOf(userId));
 			if (share != null) {
 				maps.put("share", share);
 			}
@@ -1332,6 +1362,10 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 
 	private String getMetadataPath(String domainName) {
 		return EnvManager.getUserPath(domainName) + "metadata.html";
+	}
+
+	private String getAlimamaRootPath(String domainName) {
+		return EnvManager.getUserPath(domainName) + "root.txt";
 	}
 
 	private String getItemDetailPath(String numIid) {
@@ -1637,8 +1671,8 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 			SystemException.handleMessageException("页面元信息转换失败");
 		}
 		// 删除布局下所有内容，PageRegion,PageModule
-		List<PageRegion> regions = this.findAllByCriterion(PageRegion.class, R
-				.eq("layout", layout));
+		List<PageRegion> regions = this.findAllByCriterion(PageRegion.class,
+				R.eq("layout", layout));
 		if (regions.size() > 0) {
 			for (PageRegion region : regions) {// 删除容器内所有模块,然后删除该容器
 				List<PageModule> modules = this.findAllByCriterion(

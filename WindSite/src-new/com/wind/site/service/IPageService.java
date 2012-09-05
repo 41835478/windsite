@@ -34,6 +34,15 @@ import com.wind.site.model.UserPageSearch;
  * 
  */
 public interface IPageService extends IBaseService {
+
+	/**
+	 * 发布阿里妈妈验证
+	 * 
+	 * @param fcg
+	 * @param user
+	 */
+	void deployAlimamaRoot(FreeMarkerConfigurer fcg, String userId, String code);
+
 	/**
 	 * 修复页面
 	 * 

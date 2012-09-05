@@ -126,7 +126,7 @@ function loadVersionInfo(msg) {
 <li<#if bdselected=='site-share'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/share">分享与收藏</a></span><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></li>
 <!--<li><span><a href="/router/member/widget/my" target="_blank">自定义组件库</a></span></li>-->
 <li<#if bdselected=='site-doctor'> class="selected"</#if>><span><a href="/router/member/sitemanager/doctor">淘站卫士</a></span></li>
-<li<#if bdselected=='site-alimama'> class="selected"</#if>><span><a href="/router/member/sitemanager/alimama">淘站卫士</a></span></li>
+<li<#if bdselected=='site-alimama'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/alimama">淘宝联盟验证</a></span><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></li>
 </ul> 
 </div>
 <#if (USER.usb.versionNo>=2)>

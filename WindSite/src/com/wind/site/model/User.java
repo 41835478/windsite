@@ -47,8 +47,9 @@ public class User extends TimestampModel {
 	 */
 	private String pid;
 
+	@Column(name = "pSiteId", length = 20, nullable = true)
 	private Long pSiteId;
-
+	@Column(name = "pAdId", length = 20, nullable = true)
 	private Long pAdId;
 	@Transient
 	private String pPid;

@@ -2696,14 +2696,7 @@ public class MemberRest {
 		}
 		site.setCid(cid);
 		memberService.update(site);
-		// 更新缓存中的站点信息
-		SiteImpl siteImpl = EnvManager.getSites().get(site.getUser_id());
-		if (siteImpl != null) {
-			siteImpl = siteService.getSiteImplByUserId(site.getUser_id());
-			if (siteImpl != null) {
-				EnvManager.getSites().put(siteImpl.getUser_id(), siteImpl);
-			}
-		}
+
 		if (site.getStatus() != null && 1 == site.getStatus()) {// 如果状态已发布
 			if (!CommandExecutor.getUpdatecommands().containsKey(// 如果没有包含修改命令
 					"u-" + EnvManager.getUser().getUser_id())) {
@@ -2749,11 +2742,21 @@ public class MemberRest {
 					user.setpSiteId(_pSiteId);
 					user.setpAdId(_pAdId);
 					memberService.update(user);
+					user.setSites(sites);
+					EnvManager.setUser(user);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+		}
+		// 更新缓存中的站点信息
+		SiteImpl siteImpl = EnvManager.getSites().get(site.getUser_id());
+		if (siteImpl != null) {
+			siteImpl = siteService.getSiteImplByUserId(site.getUser_id());
+			if (siteImpl != null) {
+				EnvManager.getSites().put(siteImpl.getUser_id(), siteImpl);
+			}
 		}
 		return WindSiteRestUtil.SUCCESS;
 	}

@@ -3,6 +3,7 @@ package com.wind.site.model;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityResult;
 import javax.persistence.FieldResult;
@@ -28,6 +29,8 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "sid", column = "sid"),
 		@FieldResult(name = "user_id", column = "user_id"),
 		@FieldResult(name = "uc_id", column = "uc_id"),
+		@FieldResult(name = "pSiteId", column = "pSiteId"),
+		@FieldResult(name = "pAdId", column = "pAdId"),
 		@FieldResult(name = "appType", column = "appType"),
 		@FieldResult(name = "nick", column = "nick"),
 		@FieldResult(name = "pid", column = "pid"),
@@ -133,8 +136,9 @@ public class SiteImpl {
 
 	private String uyan;
 
+	@Column(name = "pSiteId", length = 20, nullable = true)
 	private Long pSiteId;
-
+	@Column(name = "pAdId", length = 20, nullable = true)
 	private Long pAdId;
 	/**
 	 * 完整PID

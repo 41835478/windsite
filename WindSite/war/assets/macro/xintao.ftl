@@ -36,6 +36,9 @@
 	<#elseif (USER.usb.versionNo==3)>
 		<div style="height:30px;line-height:14px;">版本提示：您当前使用的为新淘网_卖家版${ENDDATE}</div>	
 	</#if>
+	<#if USER.pid==USER.pPid>
+		<div style="height:30px;line-height:14px;">重要提示：您尚未配置网站ID,广告位ID,查看帮助:<a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-05:如何在新淘网配置完整PID?</strong></a></div>
+	</#if>
 </#if>
 </#macro>
 <!--我是淘客-->

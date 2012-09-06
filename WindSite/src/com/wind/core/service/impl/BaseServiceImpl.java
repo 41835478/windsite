@@ -41,8 +41,9 @@ public class BaseServiceImpl implements IBaseService {
 	public Map<String, List<Map<String, Object>>> getAds(String userId) {
 		Map<String, List<Map<String, Object>>> result = new HashMap<String, List<Map<String, Object>>>();
 		// 日志右侧
-		List<AD> ads = this.findAllByCriterion(AD.class, R.eq("pageType",
-				AD.BLOG_RIGHT), R.eq("isValid", true), R.eq("user_id", userId));
+		List<AD> ads = this.findAllByCriterion(AD.class,
+				R.eq("pageType", AD.BLOG_RIGHT), R.eq("isValid", true),
+				R.eq("user_id", userId));
 		List<Map<String, Object>> br = new ArrayList<Map<String, Object>>();
 		Map<String, Object> ad = null;
 		if (ads != null && ads.size() > 0) {
@@ -58,8 +59,8 @@ public class BaseServiceImpl implements IBaseService {
 		result.put(AD.BLOG_RIGHT, br);// 存储日志右侧广告位列表
 		// 画报内容顶部
 		ads = this.findAllByCriterion(AD.class,
-				R.eq("pageType", AD.HUABAO_TOP), R.eq("isValid", true), R.eq(
-						"user_id", userId));
+				R.eq("pageType", AD.HUABAO_TOP), R.eq("isValid", true),
+				R.eq("user_id", userId));
 		br = new ArrayList<Map<String, Object>>();
 		if (ads != null && ads.size() > 0) {
 			for (AD a : ads) {
@@ -103,23 +104,23 @@ public class BaseServiceImpl implements IBaseService {
 				impl.setYiqifa_secret(sc.getYiqifa_secret());
 
 				impl.setSina_appkey(sc.getSina_appkey());
-				impl.setTaobao_appkey(sc.getTaobao_appkey());
+				impl.setTaobao_appkey(impl.getAppKey());
 				impl.setQq_appkey(sc.getQq_appkey());
 				impl.setSina_appsecret(sc.getSina_appsecret());
-				impl.setTaobao_appsecret(sc.getTaobao_appsecret());
+				impl.setTaobao_appsecret(impl.getAppSecret());
 				impl.setQq_appsecret(sc.getQq_appsecret());
 				impl.setUyan(sc.getUyan());
 
 				try {
 					PageDetailLayout detailLayout = this.findByCriterion(
-							PageDetailLayout.class, R.eq("site_id", impl
-									.getSid()));
+							PageDetailLayout.class,
+							R.eq("site_id", impl.getSid()));
 					if (detailLayout != null) {
 						impl.setSite_detailLayout(detailLayout.getLayout());
 					}
 					PageSearchLayout searchLayout = this.findByCriterion(
-							PageSearchLayout.class, R.eq("site_id", impl
-									.getSid()));
+							PageSearchLayout.class,
+							R.eq("site_id", impl.getSid()));
 					if (searchLayout != null) {
 						impl.setSite_searchLayout(searchLayout.getLayout());
 					}

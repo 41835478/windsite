@@ -6,7 +6,7 @@
 		您好,${MEMBER.info.username}！<a href="/router/fanli/logout">[退出]</a>&nbsp;&nbsp;|
 		<a href="http://${www}/router/fanlimember"><span>会员中心</span></a>
 	<#else>
-		<script>$(function(){PageModuleUtils.unLoginSite('<#if 'true'==site_isLogin>true<#else>false</#if>','${sina_appkey}','${qq_appkey}'),'${taobao_appkey}';});</script>
+		<script>$(function(){PageModuleUtils.unLoginSite('<#if 'true'==site_isLogin>true<#else>false</#if>','${sina_appkey}','${qq_appkey}','${taobao_appkey}');});</script>
 		<#if isAsyn??&&isAsyn&&commissionRate??&&''!=commissionRate><script>$(function(){PageModuleUtils.addFanliCommission(parseFloat(${commissionRate}/100));});</script></#if>
 		<span style="float:left;width:170px;">您好,游客！
 		<a href="http://${www}/router/fanli/login">[请登录]</a>&nbsp;|&nbsp;<a href="http://${www}/router/fanli/registe">注册</a></span>

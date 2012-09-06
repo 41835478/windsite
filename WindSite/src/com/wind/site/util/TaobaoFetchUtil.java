@@ -796,7 +796,8 @@ public class TaobaoFetchUtil {
 	public static TaobaokeShopsGetResponse shopsGet(String appKey,
 			String appSecret, String appType, TaobaokeShopsGetRequest request,
 			String pid) {
-		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+				|| "null".equals(appKey) || "null".equals(appSecret)) {
 			appKey = EnvManager.getAppKey(appType);
 			appSecret = EnvManager.getSecret(appType);
 		}
@@ -820,7 +821,8 @@ public class TaobaoFetchUtil {
 	public static String itemDescription(String appKey, String appSecret,
 			String numIids, String nick, String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(null);
 				appSecret = EnvManager.getSecret(null);
 			}
@@ -870,7 +872,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, String numIids, String nick,
 			String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -897,7 +900,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, String numIids, String nick,
 			String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -936,7 +940,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType,
 			TaobaokeItemsDetailGetRequest request, String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -965,7 +970,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, TaobaokeItemsGetRequest request,
 			String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -1136,7 +1142,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, String nick, String sids,
 			String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -1220,7 +1227,8 @@ public class TaobaoFetchUtil {
 	public static String getKeyWordUrl(String appKey, String appSecret,
 			String appType, TaobaokeListurlGetRequest request, String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}
@@ -1244,7 +1252,8 @@ public class TaobaoFetchUtil {
 	public static String getItemCatUrl(String appKey, String appSecret,
 			String appType, TaobaokeCaturlGetRequest request, String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+					|| "null".equals(appKey) || "null".equals(appSecret)) {
 				appKey = EnvManager.getAppKey(appType);
 				appSecret = EnvManager.getSecret(appType);
 			}

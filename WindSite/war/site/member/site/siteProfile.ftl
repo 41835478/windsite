@@ -21,7 +21,7 @@ $('#designerSite').button();
 		}
 		var reg_app = /^[0-9]{3,15}$/;
 		var appKey = $('#appKey').val();
-		if(!reg_num.test(appKey)){
+		if(!reg_app.test(appKey)){
 				alert('网站AppKey不正确');
 				return;
 		}

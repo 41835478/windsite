@@ -6,20 +6,19 @@
 		您好,${MEMBER.info.username}！<a href="/router/fanli/logout">[退出]</a>&nbsp;&nbsp;|
 		<a href="http://${www}/router/fanlimember"><span>会员中心</span></a>
 	<#else>
-		<script>$(function(){PageModuleUtils.unLoginSite('<#if 'true'==site_isLogin>true<#else>false</#if>','${sina_appkey}','${qq_appkey}');});</script>
+		<script>$(function(){PageModuleUtils.unLoginSite('<#if 'true'==site_isLogin>true<#else>false</#if>','${sina_appkey}','${qq_appkey}'),'${taobao_appkey}';});</script>
 		<#if isAsyn??&&isAsyn&&commissionRate??&&''!=commissionRate><script>$(function(){PageModuleUtils.addFanliCommission(parseFloat(${commissionRate}/100));});</script></#if>
 		<span style="float:left;width:170px;">您好,游客！
 		<a href="http://${www}/router/fanli/login">[请登录]</a>&nbsp;|&nbsp;<a href="http://${www}/router/fanli/registe">注册</a></span>
-		<#if qq_appkey??>&nbsp;&nbsp;<span id="nav_third_login_qq" style="position:absolute;height:22px;left:170px;top:0px;width:130px;"></span></#if>
-		<#if sina_appkey??>&nbsp;&nbsp;<span id="nav_third_login_sina" style="position:absolute;height:22px;left:<#if qq_appkey??>300px<#else>170px</#if>;top:0px;width:130px;"></span></#if>
+		<#if taobao_appkey??>&nbsp;&nbsp;<span id="nav_third_login_taobao" style="position:absolute;height:22px;left:170px;top:0px;width:100px;"></span></#if>
+		<#if qq_appkey??>&nbsp;&nbsp;<span id="nav_third_login_qq" style="position:absolute;height:22px;left:<#if taobao_appkey??>300px<#else>170px</#if>;top:0px;width:130px;"></span></#if>
+		<#if sina_appkey??>&nbsp;&nbsp;<span id="nav_third_login_sina" style="position:absolute;height:22px;left:<#if qq_appkey??&&taobao_appkey??>430px<#else><#if qq_appkey??||taobao_appkey??>300px<#else>170px</#if></#if>;top:0px;width:130px;"></span></#if>
 	</#if>
 </p>
 <ul class="quick-menu">
     <li class="home"><a href="http://${www}/">购物首页</a></li>
 	<li><a href="#" onclick="AddFavorite('${sitetitle}')">加入收藏</a></li>
-	<li><a href="#" onclick="SetHome(this)">设为首页</a></li>
 	<li><a href="http://${www}/ymall.html" target="_blank">综合商城</a></li>
-	<#if weibo??&&''!=weibo><li><a href="http://${www}/router/fanli/loginuc?redirect=http://${weibo}" target="_blank">微博广场</a></li></#if>
 	<li><a href="http://${www}/huabao/index.html" target="_blank">画报导购</a></li>
 	<li><a href="http://${www}/dianpu.html" target="_blank">淘店铺</a></li>
 	<li><a href="http://${www}/tblogs/584.html" target="_blank">帮助</a></li>
@@ -30,7 +29,6 @@
 <ul class="quick-menu">
     <li class="home"><a href="/">购物首页</a></li>
 	<li><a href="#" onclick="AddFavorite('${sitetitle}')">加入收藏</a></li>
-	<li><a href="#" onclick="SetHome(this)">设为首页</a></li>
 	<li><a href="/huabao/index.html" target="_blank">导购画报</a></li>
 	<li><a href="/dianpu.html" target="_blank">淘店铺</a></li>
 	<li><a href="/tblogs.html" target="_blank">资讯</a></li>

@@ -14,7 +14,7 @@ b)}}}function AddFavorite(a){var b=window.location.href;try{window.external.addF
 		<a href="http://${www}/router/fanli/login">[请登录]</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://${www}/router/fanli/registe">注册</a>&nbsp;&nbsp;
 		</#if>
 		</td>
-		<td align="right"><#if topLinks??><#list topLinks as t><a href="<#if t.url?starts_with('/')>http://${www}${t.url}<#else>${t.url}</#if>" target="_blank">${t.title}</a>&nbsp;&nbsp;|&nbsp;&nbsp;</#list></#if><a href="http://${www}">购物首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="AddFavorite('${sitetitle}')">加入收藏</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="SetHome(this)">设为首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank">分享</a>
+		<td align="right"><#if topLinks??><#list topLinks as t><a href="<#if t.url?starts_with('/')>http://${www}${t.url}<#else>${t.url}</#if>" target="_blank">${t.title}</a>&nbsp;&nbsp;|&nbsp;&nbsp;</#list></#if><a href="http://${www}">购物首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="AddFavorite('${sitetitle}')">加入收藏</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank">分享</a>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>&nbsp;&nbsp;|&nbsp;&nbsp;<#if weibo??&&''!=weibo><a href="http://${www}/router/fanli/loginuc?redirect=http://${weibo}" target="_blank">微博广场</a>&nbsp;&nbsp;|&nbsp;&nbsp;</#if><a href="http://${www}/huabao/index.html" target="_blank">画报返利</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://${www}/tblogs/584.html" target="_blank">帮助</a></td>
 	</tr>
 </table></div></div>
@@ -28,7 +28,7 @@ b)}}}function AddFavorite(a){var b=window.location.href;try{window.external.addF
 		<td align="left">
 		您好,欢迎访问！
 		</td>
-		<td align="right"><a href="/">购物首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="AddFavorite('${sitetitle}')">加入收藏</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="SetHome(this)">设为首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank">分享</a>
+		<td align="right"><a href="/">购物首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="AddFavorite('${sitetitle}')">加入收藏</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank">分享</a>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script></td>
 	</tr>
 </table></div></div>

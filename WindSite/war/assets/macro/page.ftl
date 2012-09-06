@@ -195,6 +195,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if qq_appkey??&&www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
+<#if taobao_appkey??&&www??>
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${taobao_appkey}"></script>
+</#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 </head>
 <body>
@@ -317,6 +320,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </#if>
 <#if qq_appkey??&&www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
+</#if>
+<#if taobao_appkey??&&www??>
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${taobao_appkey}"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 <script src="/assets/js/jquery/ui/jquery-ui.min.js"></script>

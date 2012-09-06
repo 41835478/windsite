@@ -56,10 +56,13 @@ ${content}
 <#if P_SITEIMPL??&&P_SITEIMPL.qq_appkey??&&P_SITEIMPL.www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${P_SITEIMPL.qq_appkey}" data-redirecturi="http://${P_SITEIMPL.www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
+<#if P_SITEIMPL??&&P_SITEIMPL.taobao_appkey??&&P_SITEIMPL.www??>
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${taobao_appkey}"></script>
+</#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion}"></script>
 <!--Designer-->
 <script type="text/javascript">
-var DEBUG=false,ISDESIGNER=false,SITEID='${site.id}',APP=${user.appType},PAGEID='${page.id}',PAGEADSID='${page.pageid}',USERID='${user.user_id}',USERNICK='${user.nick}',PID='${user.pid}'<#if versionNo??>,VERSIONNO=${versionNo}<#else>,VERSIONNO=1</#if>;
+var DEBUG=false,ISDESIGNER=false,SITEID='${site.id}',APP=${user.appType},PAGEID='${page.id}',PAGEADSID='${page.pageid}',USERID='${user.user_id}',USERNICK='${user.nick}',PPID='${user.pid}',PID='${user.pid}'<#if versionNo??>,VERSIONNO=${versionNo}<#else>,VERSIONNO=1</#if>;
 </script>
 </body>
 </html>

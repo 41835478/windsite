@@ -57,6 +57,42 @@ $(function() {
 
 	});
 })
+function TB_LOGIN(tb, container) {
+	if (typeof(TOP) != 'undefined' && typeof(tb) != 'undefined' && tb != '') {
+		TOP.ui("login-btn", {
+			container : container,
+			type : "1,1",
+			callback : {
+				login : function(user) {
+					$.post('/router/fanli/loginfl/third', {
+								third_type : 'taobao',
+								third_id : '' + user.nick,
+								third_nick : user.nick,
+								referer : document.location.href
+							}, function(state) {
+								if (typeof(IS_LOGIN) != 'undefined' && IS_LOGIN) {
+									if (state == 202) {
+										document.location.href = '/router/fanli/registe';
+									} else {
+										document.location.href = '/router/fanlimember';
+									}
+
+								} else {
+									if (state == 202) {
+										document.location.href = '/router/fanli/registe?referer='
+												+ document.location.href;
+									} else {
+										document.location.href = document.location.href;
+									}
+								}
+							});
+				},
+				logout : function() {
+				}
+			}
+		});
+	}
+}
 function QQ_LOGIN(qq) {
 	if (typeof(QC) != 'undefined' && typeof(qq) != 'undefined' && qq != '') {
 		if (QC.Login.check()) {// 如果已登录
@@ -105,11 +141,17 @@ window.XT.Suggest.ItemSearchCallback = function(d) {
 		q.data('autocompleter').filterAndShowResults(r);
 	}
 }
+function XT_PID() {
+	if (typeof(PPID) != 'undefined') {
+		return PPID;
+	}
+	return PID;
+}
 var PageModuleUtils = {
-	unlogin : function(sina, qq) {
-		PageModuleUtils.unLoginSite('true', sina, qq);
+	unlogin : function(sina, qq, taobao) {
+		PageModuleUtils.unLoginSite('true', sina, qq, taobao);
 	},
-	unLoginSite : function(isLogin, sina, qq) {
+	unLoginSite : function(isLogin, sina, qq, taobao) {
 		if ('true' == isLogin) {
 			$('#J_LinkBuy').click(function() {
 				$('#J_FanliLoginBox').data('overlay').load();
@@ -121,7 +163,14 @@ var PageModuleUtils = {
 				return false;
 			});
 		}
-
+		if (typeof(TOP) != 'undefined') {
+			if ($('#nav_third_login_taobao').length > 0) {
+				TB_LOGIN(taobao, '#nav_third_login_taobao');
+			}
+			if ($('#third_login_taobao').length > 0) {
+				TB_LOGIN(taobao, '#third_login_taobao');
+			}
+		}
 		if (typeof(QC) != 'undefined') {
 			QQ_LOGIN(qq);
 			if ($('#nav_third_login_qq').length > 0) {
@@ -247,7 +296,7 @@ var PageModuleUtils = {
 			return;
 		}
 		$('.b2c-fl').show();
-		$(		'#content .shop-display .item,#content .list-view .list-item,#content .shop-tenorder .pic,#content .shop-complex-a .item,#content .shop-dianpu .shop-dianpu-ul li,#content .shop-child-floor .child-grid li')
+		$('#content .shop-display .item,#content .list-view .list-item,#content .shop-tenorder .pic,#content .shop-complex-a .item,#content .shop-dianpu .shop-dianpu-ul li,#content .shop-child-floor .child-grid li')
 				.each(function() {
 					var pre = '返利:';
 					var last = '元';
@@ -256,8 +305,8 @@ var PageModuleUtils = {
 						var co = Math.floor(parseFloat(c) * rate * 100)
 								/ 100.00;
 						$(this).append('<div class="c-c" title="' + pre + co
-										+ last + '" style="">' + pre + co
-										+ last + '</div>');
+								+ last + '" style="">' + pre + co + last
+								+ '</div>');
 					} else {
 						c = $(this).attr('cr');
 						pre = '返利比例:';
@@ -266,8 +315,8 @@ var PageModuleUtils = {
 							var co = Math.floor(parseFloat(c) * rate * 100)
 									/ 100.00;
 							$(this).append('<div class="c-c" title="' + pre
-											+ co + last + '" style="">' + pre
-											+ co + last + '</div>');
+									+ co + last + '" style="">' + pre + co
+									+ last + '</div>');
 						}
 					}
 				});
@@ -441,10 +490,11 @@ var PageModuleUtils = {
 		});
 	},
 	initShopChongzhi : function(widget) {
+
 		var width = 300;
 		var height = 170;
 		var src = "http://www.taobao.com/go/app/tbk_app/chongzhi_300_170.php?pid="
-				+ PID
+				+ XT_PID()
 				+ "&page=chongzhi_300_170.php&size_w=300&size_h=170&stru_phone=1&stru_game=1&stru_travel=1&size_cat=std";
 		var layout = widget.parents('.layout:first');
 		var region = widget.parents('.J_TRegion:first');
@@ -452,20 +502,20 @@ var PageModuleUtils = {
 			width = 956;
 			height = 30;
 			src = "http://www.taobao.com/go/app/tbk_app/chongzhi_950_30.php?pid="
-					+ PID
+					+ XT_PID()
 					+ "&page=chongzhi_950_30.php&size_w=956&size_h=30&stru_phone=1&stru_game=1&stru_travel=1&size_cat=std";
 		} else if (layout.hasClass('grid-s5m0') || layout.hasClass('grid-m0s5')) {// 两栏
 			if (region.hasClass('col-main')) {
 				width = 750;
 				height = 170;
 				src = "http://www.taobao.com/go/app/tbk_app/chongzhi_300_170.php?pid="
-						+ PID
+						+ XT_PID()
 						+ "&page=chongzhi_300_170.php&size_w=750&size_h=170&stru_phone=1&stru_game=1&stru_travel=1&size_cat=cst";
 			} else {
 				width = 210;
 				height = 200;
 				src = "http://www.taobao.com/go/app/tbk_app/chongzhi_210_200.php?pid="
-						+ PID
+						+ XT_PID()
 						+ "&page=chongzhi_210_200.php&size_w=210&size_h=200&stru_phone=1&stru_game=1&stru_travel=1&size_cat=cst";
 			}
 
@@ -476,7 +526,7 @@ var PageModuleUtils = {
 				width = 210;
 				height = 200;
 				src = "http://www.taobao.com/go/app/tbk_app/chongzhi_210_200.php?pid="
-						+ PID
+						+ XT_PID()
 						+ "&page=chongzhi_210_200.php&size_w=210&size_h=200&stru_phone=1&stru_game=1&stru_travel=1&size_cat=cst";
 			}
 		}
@@ -564,7 +614,7 @@ var PageModuleUtils = {
 					current.attr('href', $(this).attr('href')).attr(
 							'style',
 							'background-image:url('
-									+ $(	this).attr('data-image') + ');');
+									+ $(this).attr('data-image') + ');');
 					var browser = $.browser;
 					if (browser.msie) {// IE修订
 						round.attr('class', 'round IERound-' + dround);
@@ -684,9 +734,9 @@ var PageModuleUtils = {
 						$("#popinfo .loading").hide().nextAll().remove();
 						$("#popinfo").append(html);
 						$(img).attr("src", picPath).load(function() {
-							$(		"#popinfo .wait").attr("alt", $(t).text())
-									.attr("src", this.src).removeClass("wait")
-									.hide().fadeIn("slow");
+							$("#popinfo .wait").attr("alt", $(t).text()).attr(
+									"src", this.src).removeClass("wait").hide()
+									.fadeIn("slow");
 						});
 						if (ww / 1.5 > ol) {
 							lto = o.left - lto;
@@ -740,9 +790,9 @@ var PageModuleUtils = {
 						$("#popinfo .loading").hide().nextAll().remove();
 						$("#popinfo").append(html);
 						$(img).attr("src", picPath).load(function() {
-							$(		"#popinfo .wait").attr("alt", $(t).text())
-									.attr("src", this.src).removeClass("wait")
-									.hide().fadeIn("slow");
+							$("#popinfo .wait").attr("alt", $(t).text()).attr(
+									"src", this.src).removeClass("wait").hide()
+									.fadeIn("slow");
 						});
 						if (ww / 1.5 > ol) {
 							lto = o.left - lto;
@@ -1034,8 +1084,8 @@ var PageModuleUtils = {
 				if (value) {
 					var channel = channels[value];
 					var iframe = $('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="100%" width="100%"></iframe>');
-					var src = channel.clickUrl.replace('mm_10011550_0_0', PID)
-							.replace('mm_13667242_0_0', PID);
+					var src = channel.clickUrl.replace('mm_10011550_0_0',
+							XT_PID()).replace('mm_13667242_0_0', XT_PID());
 					iframe.attr('src', src).height(parseInt(channel.height));
 					widget.find('.shop-custom').empty().append(iframe);
 				}
@@ -1143,7 +1193,7 @@ var PageModuleUtils = {
 					count : '20',
 					sz : '15',
 					type : '2',
-					i : PID
+					i : XT_PID()
 				}
 				if (flash.length == 0) {
 					flash = $('<div style="height:90px;"></div>');

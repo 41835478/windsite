@@ -19,6 +19,19 @@ $('#designerSite').button();
 			alert("淘站名称长度不能超过50");
 			return;
 		}
+		var reg_app = /^[0-9]{3,15}$/;
+		var appKey = $('#appKey').val();
+		if(!reg_num.test(appKey)){
+				alert('网站AppKey不正确');
+				return;
+		}
+		var reg_secret = /^[a-zA-Z0-9]{15,50}$/;
+		var appSecret = $('#appSecret').val();
+		if(!reg_secret.test(appSecret)){
+				alert('网站AppSecret不正确');
+				return;
+		}
+		
 		var reg_num = /^[0-9]{3,15}$/;
 		var pSiteId = $('#pSiteId').val();
 		if(pSiteId){
@@ -54,7 +67,7 @@ $('#designerSite').button();
 			}
 		}
 		updateSite($('#site_Id').val(), title, desc, metadata, $('#siteCid')
-						.val(),pSiteId,pAdId);
+						.val(),pSiteId,pAdId,appKey,appSecret);
 		return false;
 	});
 	$('#cancelSite').button().click(function() {
@@ -85,6 +98,12 @@ $('#designerSite').button();
 			<input id="site_Url" type="text" style="width:200px;" value="http://<#if s.www??&&s.www!=''>${s.www}<#else>${s.domainName}.xintaonet.com</#if>">&nbsp;&nbsp;&nbsp;<input type="button" id="copySiteUrl" value="复制">
 		</td><tr>
 		<tr>
+			<td>AppKey:</td><td>${USER.appKey}</td>
+		</tr>
+		<tr>
+			<td>AppSecret:</td><td>${USER.appSecret}</td>
+		</tr>
+		<tr>
 			<td>网站ID:</td><td>${USER.pSiteId}</td>
 		</tr>
 		<tr>
@@ -109,6 +128,12 @@ $('#designerSite').button();
 <table  id="updateSiteTable" style="display:none;" cellspacing="5" cellpadding="5">
 		<tr>
 			<td>淘站名称:</td><td><input id="siteTitle" type="text" size="50" class="text" value="${s.title}"/></td>
+		</tr>
+		<tr>
+			<td>AppKey:</td><td><input id="appKey" type="text" size="50" class="text" value="${USER.appKey}"/></td>
+		</tr>
+		<tr>
+			<td>AppSecret:</td><td><input id="appSecret" type="text" size="50" class="text" value="${USER.appSecret}"/></td>
 		</tr>
 		<tr>
 			<td>网站ID:</td><td><input id="pSiteId" type="text" size="50" class="text" value="${USER.pSiteId}"/></td>

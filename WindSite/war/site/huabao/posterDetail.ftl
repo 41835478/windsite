@@ -10,7 +10,7 @@
 <#if isAsyn&&commissionRate??&&''!=commissionRate><#assign RATE=(commissionRate/100)?number></#if>
 </#if> 
 <script>
-var data={};var HID=${poster.id};var PID='${pid}';var PICID=${picId!'0'};var ISFANLI=<#if ISFANLI>true<#else>false</#if>;var ISMEMBER=${ISMEMBER};var WWW='${www}';
+var data={};var HID=${poster.id};var PID='${pid}';var PPID='${pPid}';var PICID=${picId!'0'};var ISFANLI=<#if ISFANLI>true<#else>false</#if>;var ISMEMBER=${ISMEMBER};var WWW='${www}';
 if (!String.prototype.replaceAll) {String.prototype.replaceAll = function(b, a) {return this.replace(new RegExp(b, "gm"), a)}}
 </script>
 </@p.huabaoHeader>

@@ -600,21 +600,21 @@
 			 * 转换推广链接
 			 */
 			_convertLink : function(item) {
-//				if (PID && item.markerItemLink) {
-//					return item.markerItemLink.replace(
-//							/mm_\d{0,24}_\d{0,24}_\d{0,24}/gi, PID).split('#')[0]
-//							+ '&pid=' + PID;
-//				}
+				// if (PID && item.markerItemLink) {
+				// return item.markerItemLink.replace(
+				// /mm_\d{0,24}_\d{0,24}_\d{0,24}/gi, PID).split('#')[0]
+				// + '&pid=' + PID;
+				// }
 				return o.defaultLink.replace('NUMIID', item.markerItemId);
 			},
 			/**
 			 * 转换relatedgoogdlink
 			 */
 			_convertGoodLink : function(goodlink) {
-				if (PID && goodlink) {
+				if (PPID && goodlink) {
 					return goodlink.replace(/mm_\d{0,24}_\d{0,24}_\d{0,24}/gi,
-							PID).split('#')[0]
-							+ '&pid=' + PID;
+							PPID).split('#')[0]
+							+ '&pid=' + PPID;
 				}
 				return '#';
 			},

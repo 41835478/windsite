@@ -20,13 +20,13 @@ $('#designerSite').button();
 			return;
 		}
 		var reg_app = /^[0-9]{3,15}$/;
-		var appKey = $('#appKey').val();
+		var appKey = $.trim($('#appKey').val());
 		if(!reg_app.test(appKey)){
 				alert('网站AppKey不正确');
 				return;
 		}
 		var reg_secret = /^[a-zA-Z0-9]{15,50}$/;
-		var appSecret = $('#appSecret').val();
+		var appSecret = $.trim($('#appSecret').val());
 		if(!reg_secret.test(appSecret)){
 				alert('网站AppSecret不正确');
 				return;
@@ -130,13 +130,13 @@ $('#designerSite').button();
 			<td>淘站名称:</td><td><input id="siteTitle" type="text" size="50" class="text" value="${s.title}"/></td>
 		</tr>
 		<tr>
-			<td>AppKey:</td><td><input id="appKey" type="text" size="50" class="text" value="${USER.appKey}"/></td>
+			<td>AppKey:</td><td><input id="appKey" type="text" size="50" class="text" value="${USER.appKey}"/><a target="_blank" href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51753">帮助</a></td>
 		</tr>
 		<tr>
 			<td>AppSecret:</td><td><input id="appSecret" type="text" size="50" class="text" value="${USER.appSecret}"/></td>
 		</tr>
 		<tr>
-			<td>网站ID:</td><td><input id="pSiteId" type="text" size="50" class="text" value="${USER.pSiteId}"/></td>
+			<td>网站ID:</td><td><input id="pSiteId" type="text" size="50" class="text" value="${USER.pSiteId}"/><a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank">帮助</a></td>
 		</tr>
 		<tr>
 			<td>广告位ID:</td><td><input id="pAdId" type="text" size="50" class="text" value="${USER.pAdId}"/></td>

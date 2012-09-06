@@ -115,7 +115,8 @@ public class ShopComplexAInterceptor extends AbstractModuleInterceptor {
 										numiids += i.getNumIid();
 									}
 									List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-											.itemsConvert(
+											.itemsConvert(siteImpl.getAppKey(),
+													siteImpl.getAppSecret(),
 													siteImpl.getAppType(),
 													numiids,
 													siteImpl.getNick(),

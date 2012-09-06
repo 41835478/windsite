@@ -102,8 +102,8 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 							}
 							try {
 								List<TaobaokeShop> _shops = TaobaoFetchUtil
-										.convertTaobaoShop(null, "fxy060608",
-												sid, null);
+										.convertTaobaoShop(null, null, null,
+												"fxy060608", sid, null);
 								if (_shops == null || _shops.size() == 0) {
 									continue;// 跳出继续下一个
 								}

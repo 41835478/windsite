@@ -1305,8 +1305,9 @@ public class PageDesignerRest {
 		getRequest.setSort("commissionNum_desc");
 		getRequest.setNick(EnvManager.getUser().getNick());
 		TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-				EnvManager.getUser().getAppType(), getRequest, EnvManager
-						.getUser().getPid());
+				EnvManager.getUser().getAppKey(), EnvManager.getUser()
+						.getAppSecret(), EnvManager.getUser().getAppType(),
+				getRequest, EnvManager.getUser().getPid());
 		if (getResponse != null) {// 查询女装下第一个商品
 			List<TaobaokeItem> items = getResponse.getTaobaokeItems();
 			if (items != null && items.size() == 1) {
@@ -1316,7 +1317,9 @@ public class PageDesignerRest {
 				getDetailRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 				getDetailRequest.setOuterCode(EnvManager.getItemsOuterCode());
 				TaobaokeItemsDetailGetResponse getDetailResponse = TaobaoFetchUtil
-						.getItemsDetail(EnvManager.getUser().getAppType(),
+						.getItemsDetail(EnvManager.getUser().getAppKey(),
+								EnvManager.getUser().getAppSecret(), EnvManager
+										.getUser().getAppType(),
 								getDetailRequest, EnvManager.getUser().getPid());// 转换女装下第一个商品
 				if (getDetailResponse == null) {
 					SystemException.handleMessageException("该商品已移除或者被卖家下架");

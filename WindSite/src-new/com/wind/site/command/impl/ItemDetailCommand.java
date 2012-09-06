@@ -58,7 +58,7 @@ public class ItemDetailCommand implements ICommand {
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			getRequest.setNumIids(numIid + "");
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(null, getRequest, null);
+					.getItemsDetail(null, null, null, getRequest, null);
 			if (getResponse == null) {
 				return;
 			}

@@ -103,8 +103,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				request.setNick(String.valueOf(params.get("nick")));
 				request.setPageSize(Long.valueOf(itemnum));
 				TaobaokeItemsGetResponse response = TaobaoFetchUtil
-						.searchItems("0", request,
-								String.valueOf(params.get("pid")));
+						.searchItems(impl.getAppKey(), impl.getAppSecret(),
+								"0", request, String.valueOf(params.get("pid")));
 				if (response != null) {// 获取商品结果并转换为本次对象
 					List<T_TaobaokeItem> items = TaobaoFetchUtil
 							.covertItems(response.getTaobaokeItems());
@@ -176,8 +176,10 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 								numiids += i.getNumIid();
 							}
 							List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-									.itemsConvert(siteImpl.getAppType(),
-											numiids, siteImpl.getNick(),
+									.itemsConvert(siteImpl.getAppKey(),
+											siteImpl.getAppSecret(),
+											siteImpl.getAppType(), numiids,
+											siteImpl.getNick(),
 											siteImpl.getPid());
 							if (StringUtils.isNotEmpty(sort)
 									&& taokeItems != null
@@ -299,7 +301,9 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				shopGetRequest.setPageNo(1L);
 				shopGetRequest.setPageSize(Long.valueOf(itemnum));
 				TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil
-						.shopsGet(siteImpl.getAppType(), shopGetRequest,
+						.shopsGet(siteImpl.getAppKey(),
+								siteImpl.getAppSecret(), siteImpl.getAppType(),
+								shopGetRequest,
 								String.valueOf(params.get("pid")));
 				if (shopGetResponse != null) {
 					if (shopGetResponse.isSuccess()) {

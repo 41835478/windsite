@@ -908,9 +908,11 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 							oShop.setDeliveryScore(score.getDeliveryScore());
 						}
 						List<TaobaokeShop> shops = TaobaoFetchUtil
-								.convertTaobaoShop(EnvManager.getAppType(),
-										user.getNick(), shop.getSid() + "",
-										user.getPid());
+								.convertTaobaoShop(EnvManager.getUser()
+										.getAppKey(), EnvManager.getUser()
+										.getAppSecret(), EnvManager
+										.getAppType(), user.getNick(),
+										shop.getSid() + "", user.getPid());
 						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 							oShop.setCommissionRate(shops.get(0)
 									.getCommissionRate());
@@ -933,9 +935,11 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 							oShop.setDeliveryScore(score.getDeliveryScore());
 						}
 						List<TaobaokeShop> shops = TaobaoFetchUtil
-								.convertTaobaoShop(EnvManager.getAppType(),
-										user.getNick(), shop.getSid() + "",
-										user.getPid());
+								.convertTaobaoShop(EnvManager.getUser()
+										.getAppKey(), EnvManager.getUser()
+										.getAppSecret(), EnvManager
+										.getAppType(), user.getNick(),
+										shop.getSid() + "", user.getPid());
 						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 							oShop.setCommissionRate(shops.get(0)
 									.getCommissionRate());
@@ -1076,8 +1080,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		request.setNick(user.getNick());
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
-			String url = TaobaoFetchUtil.getItemCatUrl(user.getAppType(),
-					request, user.getPid());
+			String url = TaobaoFetchUtil.getItemCatUrl(null, null,
+					user.getAppType(), request, user.getPid());
 			String pid = url.split("pid=")[1].split("&")[0];
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

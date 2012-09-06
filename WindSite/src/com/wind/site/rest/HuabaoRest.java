@@ -416,6 +416,8 @@ public class HuabaoRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		WindSiteRestUtil.covertPID(siteService, result, userId);
 		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
+				String.valueOf(result.get("appKey")),
+				String.valueOf(result.get("appSecret")),
 				String.valueOf(result.get("appType")), numiids,
 				(String) result.get("nick"), String.valueOf(result.get("pid")));
 		String[] numArray = numiids.split(",");

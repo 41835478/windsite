@@ -34,6 +34,8 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "appType", column = "appType"),
 		@FieldResult(name = "nick", column = "nick"),
 		@FieldResult(name = "pid", column = "pid"),
+		@FieldResult(name = "appKey", column = "appKey"),
+		@FieldResult(name = "appSecret", column = "appSecret"),
 		@FieldResult(name = "siteTitle", column = "siteTitle"),
 		@FieldResult(name = "analyticsType", column = "analyticsType"),
 		@FieldResult(name = "laid", column = "laid"),
@@ -46,13 +48,15 @@ import com.wind.site.util.WindSiteRestUtil;
 		@FieldResult(name = "domainName", column = "domainName") }) })
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "findSiteImplNativeSQL", query = "select u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id", resultSetMapping = "siteImpl"),
-		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.pSiteId as pSiteId,u.pAdId as pAdId,u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
+		@NamedNativeQuery(name = "findSiteImplByUserIdNativeSQL", query = "select u.appKey as appKey,u.appSecret as appSecret,u.pSiteId as pSiteId,u.pAdId as pAdId,u.uc_id as uc_id,u.appType as appType,u.nick as nick,s.domainName as domainName,u.pid as pid,s.id as sid,s.title as siteTitle,s.www as www,s.weibo as weibo,s.discuzx as discuzx,s.analyticsType as analyticsType,s.laid as laid,s.lid as lid,s.gid as gid,u.user_id as user_id,usb.versionNo as versionNo from  w_site as s left join w_user as u on s.user_id=u.user_id left join t_usersubscribe as usb on s.user_id=usb.user_id where  s.user_id=:user_id", resultSetMapping = "siteImpl") })
 public class SiteImpl {
 	private String sid;
 	private String user_id;
 	private String uc_id;
 	private String nick;
 	private String pid;
+	private String appKey;
+	private String appSecret;
 	private String siteTitle;
 	private String analyticsType;
 	private String laid;
@@ -159,6 +163,22 @@ public class SiteImpl {
 
 	public void setpPid(String pPid) {
 		this.pPid = pPid;
+	}
+
+	public String getAppKey() {
+		return appKey;
+	}
+
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
+	}
+
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
 	}
 
 	public Long getpSiteId() {

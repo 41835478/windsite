@@ -36,6 +36,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.taobao.api.request.ShopcatsListGetRequest;
 import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
 import com.wind.core.util.DateUtils;
@@ -85,6 +86,7 @@ import com.wind.site.model.convert.WidgetAttributeConvert;
 import com.wind.site.service.IMemberService;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
+import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WidgetUtil;
 import com.wind.site.util.WindSiteRestUtil;
 import com.wind.uc.model.UCSpace;
@@ -2666,6 +2668,23 @@ public class MemberRest {
 		String cid = request.getParameter("cid");
 		String pSiteId = request.getParameter("pSiteId");
 		String pAdId = request.getParameter("pAdId");
+		String appKey = request.getParameter("appKey");
+		String appSecret = request.getParameter("appSecret");
+		if (StringUtils.isEmpty(appKey)) {
+			SystemException.handleMessageException("appKey不能为空");
+
+		}
+		if (StringUtils.isEmpty(appSecret)) {
+			SystemException.handleMessageException("appSecret不能为空");
+		}
+		ShopcatsListGetRequest getRequest = new ShopcatsListGetRequest();
+		getRequest.setFields("cid");
+		try {
+			TaobaoFetchUtil.shopCatsGet(appKey, appSecret, getRequest);
+		} catch (Exception e) {
+			SystemException.handleMessageException("非法的AppKey,AppSecret");
+		}
+
 		Site site = memberService.get(Site.class, id);
 		if (site == null) {
 			SystemException.handleMessageException("指定的站点不存在！");
@@ -2732,23 +2751,25 @@ public class MemberRest {
 		List<Site> sites = new ArrayList<Site>();
 		sites.add(site);
 		EnvManager.getUser().setSites(sites);
-		if (StringUtils.isNotEmpty(pSiteId) && StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID
-			try {
-				Long _pSiteId = Long.parseLong(pSiteId);
-				Long _pAdId = Long.parseLong(pAdId);
-				User user = memberService.get(User.class, EnvManager.getUser()
-						.getId());
-				if (user != null) {
+		User user = memberService.get(User.class, EnvManager.getUser().getId());
+		if (user != null) {
+			user.setAppKey(appKey);
+			user.setAppSecret(appSecret);
+			if (StringUtils.isNotEmpty(pSiteId)
+					&& StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID
+				try {
+					Long _pSiteId = Long.parseLong(pSiteId);
+					Long _pAdId = Long.parseLong(pAdId);
 					user.setpSiteId(_pSiteId);
 					user.setpAdId(_pAdId);
-					memberService.update(user);
-					user.setSites(sites);
-					EnvManager.setUser(user);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 
+			}
+			memberService.update(user);
+			user.setSites(sites);
+			EnvManager.setUser(user);
 		}
 		// 更新缓存中的站点信息
 		SiteImpl siteImpl = EnvManager.getSites().get(site.getUser_id());

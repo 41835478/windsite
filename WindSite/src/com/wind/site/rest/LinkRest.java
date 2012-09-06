@@ -277,6 +277,8 @@ public class LinkRest {
 		shopGetRequest.setPageNo(Long.valueOf(pageNo));
 		Page<T_TaobaokeShop> page = new Page<T_TaobaokeShop>(pageNo, 10);
 		TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil.shopsGet(
+				String.valueOf(result.get("appKey")),
+				String.valueOf(result.get("appSecret")),
 				String.valueOf(result.get("appType")), shopGetRequest,
 				EnvManager.getUser().getPid());
 		if (shopGetResponse != null) {
@@ -373,8 +375,9 @@ public class LinkRest {
 			SystemException.handleMessageException("未提供转换商品的标识列表");
 		}
 		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppType(), nids, EnvManager.getUser().getNick(),
-				EnvManager.getUser().getPid());
+				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
+				EnvManager.getUser().getAppType(), nids, EnvManager.getUser()
+						.getNick(), EnvManager.getUser().getPid());
 		Map<String, Object> result = new HashMap<String, Object>();
 		// TODO 目前因权限问题无法根据商品标识查询非推广商品（需要高级权限来使用taobao.items.list.get）
 		// if (items != null && items.size() > 0) {
@@ -451,9 +454,11 @@ public class LinkRest {
 			}
 			if (num_iid != null) {
 				List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(
-						EnvManager.getUser().getAppType(), String
-								.valueOf(num_iid), EnvManager.getUser()
-								.getNick(), EnvManager.getUser().getPid());
+						EnvManager.getUser().getAppKey(), EnvManager.getUser()
+								.getAppSecret(), EnvManager.getUser()
+								.getAppType(), String.valueOf(num_iid),
+						EnvManager.getUser().getNick(), EnvManager.getUser()
+								.getPid());
 				if (items != null && items.size() == 1) {
 					result.put("item", items.get(0));
 				} else {
@@ -465,8 +470,10 @@ public class LinkRest {
 			String sid = value;
 			if (StringUtils.isNotEmpty(sid)) {
 				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-						EnvManager.getUser().getAppType(), EnvManager.getUser()
-								.getNick(), sid, EnvManager.getUser().getPid());
+						EnvManager.getUser().getAppKey(), EnvManager.getUser()
+								.getAppSecret(), EnvManager.getUser()
+								.getAppType(), EnvManager.getUser().getNick(),
+						sid, EnvManager.getUser().getPid());
 				if (shops != null && shops.size() == 1) {
 					TaobaokeShop shop = shops.get(0);
 					T_TaobaokeShop oShop = memberService.get(

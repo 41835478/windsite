@@ -754,8 +754,28 @@ public class TaobaoFetchUtil {
 
 	}
 
+	public static ShopcatsListGetResponse shopCatsGet(String appKey,
+			String appSecret, ShopcatsListGetRequest request) {
+		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+				appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+		request.setFields(TAOBAO_SHOPCAT_FIELDS);
+		try {
+			ShopcatsListGetResponse response = client.execute(request);
+			if (response.isSuccess()) {
+				return response;
+			} else {
+				handleError(response);
+			}
+		} catch (ApiException e) {
+			SystemException.handleMessageException(e);
+		}
+		return null;
+
+	}
+
 	public static TaobaokeReportGetResponse reportGet(String appType,
 			TaobaokeReportGetRequest request, String session) {
+
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 				EnvManager.getAppKey(appType), EnvManager.getSecret(appType),
 				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
@@ -773,11 +793,15 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static TaobaokeShopsGetResponse shopsGet(String appType,
-			TaobaokeShopsGetRequest request, String pid) {
+	public static TaobaokeShopsGetResponse shopsGet(String appKey,
+			String appSecret, String appType, TaobaokeShopsGetRequest request,
+			String pid) {
+		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+			appKey = EnvManager.getAppKey(appType);
+			appSecret = EnvManager.getSecret(appType);
+		}
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-				EnvManager.getAppKey(appType), EnvManager.getSecret(appType),
-				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+				appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 		try {
 			request.setOuterCode(EnvManager.getShopsOuterCode());
 			request.setPid(WindSiteRestUtil.getPid(pid));
@@ -793,11 +817,15 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static String itemDescription(String numIids, String nick, String pid) {
+	public static String itemDescription(String appKey, String appSecret,
+			String numIids, String nick, String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(null);
+				appSecret = EnvManager.getSecret(null);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(null), EnvManager.getSecret(null),
-					Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
 			request.setFields("desc");
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
@@ -838,13 +866,16 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static List<TaobaokeItem> huabaoItemConvert(String appType,
-			String numIids, String nick, String pid) {
+	public static List<TaobaokeItem> huabaoItemConvert(String appKey,
+			String appSecret, String appType, String numIids, String nick,
+			String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			TaobaokeItemsConvertRequest request = new TaobaokeItemsConvertRequest();
 			request.setFields("num_iid,click_url,commission,price");
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
@@ -862,13 +893,16 @@ public class TaobaoFetchUtil {
 		return new ArrayList<TaobaokeItem>();
 	}
 
-	public static List<TaobaokeItem> itemsConvert(String appType,
-			String numIids, String nick, String pid) {
+	public static List<TaobaokeItem> itemsConvert(String appKey,
+			String appSecret, String appType, String numIids, String nick,
+			String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			TaobaokeItemsConvertRequest request = new TaobaokeItemsConvertRequest();
 			request.setFields(TaobaoFetchUtil.TAOBAOKEITEM_FIELDS);
 			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
@@ -888,23 +922,26 @@ public class TaobaoFetchUtil {
 		return new ArrayList<TaobaokeItem>();
 	}
 
-	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appType,
-			Long num_iid, String pid) {
+	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appKey,
+			String appSecret, String appType, Long num_iid, String pid) {
 		TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
 		request.setFields(TAOBAOKEITEMDETAIL_FIELDS);
 		request.setNumIids(String.valueOf(num_iid));
 		request.setNick(EnvManager.getUser().getNick());
 		request.setPid(WindSiteRestUtil.getPid(EnvManager.getUser().getPid()));
-		return getItemsDetail(appType, request, pid);
+		return getItemsDetail(appKey, appSecret, appType, request, pid);
 	}
 
-	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appType,
+	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appKey,
+			String appSecret, String appType,
 			TaobaokeItemsDetailGetRequest request, String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeItemsDetailGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
@@ -924,13 +961,16 @@ public class TaobaoFetchUtil {
 	 * @param request
 	 * @return
 	 */
-	public static TaobaokeItemsGetResponse searchItems(String appType,
-			TaobaokeItemsGetRequest request, String pid) {
+	public static TaobaokeItemsGetResponse searchItems(String appKey,
+			String appSecret, String appType, TaobaokeItemsGetRequest request,
+			String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			Long PID = WindSiteRestUtil.getPid(pid);
 			if (PID != null)
 				request.setPid(String.valueOf(PID));
@@ -1092,13 +1132,16 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static List<TaobaokeShop> convertTaobaoShop(String appType,
-			String nick, String sids, String pid) {
+	public static List<TaobaokeShop> convertTaobaoShop(String appKey,
+			String appSecret, String appType, String nick, String sids,
+			String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			TaobaokeShopsConvertRequest request = new TaobaokeShopsConvertRequest();
 			request.setFields(TAOBAOKESHOP_FIELDS);
 			request.setNick(nick);
@@ -1174,13 +1217,15 @@ public class TaobaoFetchUtil {
 		return null;
 	}
 
-	public static String getKeyWordUrl(String appType,
-			TaobaokeListurlGetRequest request, String pid) {
+	public static String getKeyWordUrl(String appKey, String appSecret,
+			String appType, TaobaokeListurlGetRequest request, String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			request.setOuterCode(EnvManager.getKeywordsOuterCode());
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeListurlGetResponse response = client.execute(request);
@@ -1196,13 +1241,15 @@ public class TaobaoFetchUtil {
 
 	}
 
-	public static String getItemCatUrl(String appType,
-			TaobaokeCaturlGetRequest request, String pid) {
+	public static String getItemCatUrl(String appKey, String appSecret,
+			String appType, TaobaokeCaturlGetRequest request, String pid) {
 		try {
+			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)) {
+				appKey = EnvManager.getAppKey(appType);
+				appSecret = EnvManager.getSecret(appType);
+			}
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeCaturlGetResponse response = client.execute(request);
 			if (response.isSuccess()) {

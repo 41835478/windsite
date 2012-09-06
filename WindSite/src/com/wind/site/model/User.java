@@ -39,6 +39,14 @@ public class User extends TimestampModel {
 	 */
 	private String nick;
 	/**
+	 * 用户APPKEY
+	 */
+	private String appKey;
+	/**
+	 * 用户APPSECRET
+	 */
+	private String appSecret;
+	/**
 	 * 应用类型(目前0：月租型，1：分成型)
 	 */
 	private String appType;
@@ -797,6 +805,22 @@ public class User extends TimestampModel {
 
 	public void setpAdId(Long pAdId) {
 		this.pAdId = pAdId;
+	}
+
+	public String getAppKey() {
+		return appKey;
+	}
+
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
+	}
+
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
 	}
 
 }

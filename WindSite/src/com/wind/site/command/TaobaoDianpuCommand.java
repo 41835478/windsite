@@ -200,7 +200,8 @@ public class TaobaoDianpuCommand {
 						}
 						if (shop != null) {
 							List<TaobaokeShop> shops = TaobaoFetchUtil
-									.convertTaobaoShop("0", "fxy060608",
+									.convertTaobaoShop(null, null, "0",
+											"fxy060608",
 											String.valueOf(shop.getSid()), null);
 							dp.setNick(nick);
 							dp.setSid(shop.getSid());

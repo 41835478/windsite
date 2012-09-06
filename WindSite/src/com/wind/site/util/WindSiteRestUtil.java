@@ -241,6 +241,13 @@ public class WindSiteRestUtil {
 					result.put("uyan", siteImpl.getUyan());
 
 					result.put("pPid", siteImpl.getpPid());
+					result.put("appKey",
+							siteImpl.getAppKey() != null ? siteImpl.getAppKey()
+									: "");
+					result.put(
+							"appSecret",
+							siteImpl.getAppSecret() != null ? siteImpl
+									.getAppSecret() : "");
 
 				} else {
 					SystemException
@@ -351,6 +358,13 @@ public class WindSiteRestUtil {
 					result.put("uyan", siteImpl.getUyan());
 
 					result.put("pPid", siteImpl.getpPid());
+					result.put("appKey",
+							siteImpl.getAppKey() != null ? siteImpl.getAppKey()
+									: "");
+					result.put(
+							"appSecret",
+							siteImpl.getAppSecret() != null ? siteImpl
+									.getAppSecret() : "");
 					return siteImpl.getPid();
 				} else {
 					SystemException
@@ -453,6 +467,13 @@ public class WindSiteRestUtil {
 				result.put("uyan", siteImpl.getUyan());
 
 				result.put("pPid", siteImpl.getpPid());
+				result.put("appKey",
+						siteImpl.getAppKey() != null ? siteImpl.getAppKey()
+								: "");
+				result.put(
+						"appSecret",
+						siteImpl.getAppSecret() != null ? siteImpl
+								.getAppSecret() : "");
 
 				return siteImpl.getPid();
 			}
@@ -551,7 +572,12 @@ public class WindSiteRestUtil {
 		if (result.get("pPid") != null) {
 			impl.setpPid(String.valueOf(result.get("pPid")));
 		}
-
+		if (result.get("appKey") != null) {
+			impl.setAppKey(String.valueOf(result.get("appKey")));
+		}
+		if (result.get("appSecert") != null) {
+			impl.setAppKey(String.valueOf(result.get("appSecret")));
+		}
 		return impl;
 	}
 

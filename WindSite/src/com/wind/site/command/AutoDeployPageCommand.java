@@ -136,8 +136,8 @@ public class AutoDeployPageCommand {
 			for (T_MallBrand brand : brands) {
 				try {
 					List<TaobaokeShop> shops = TaobaoFetchUtil
-							.convertTaobaoShop("0", "fxy060608", brand.getSid()
-									.toString(), null);
+							.convertTaobaoShop(null, null, "0", "fxy060608",
+									brand.getSid().toString(), null);
 					if (shops != null && shops.size() == 1) {
 						brand.setIsValid(true);
 					} else {

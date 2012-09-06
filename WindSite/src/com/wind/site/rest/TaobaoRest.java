@@ -215,6 +215,8 @@ public class TaobaoRest {
 		// List<ADTaobaokeItem> aditems = taobaoService.searchADItemsByFilter(
 		// new Page<ADTaobaokeItem>(pageNo, 5), cid, keyword);
 		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(
+				String.valueOf(result.get("appKey")),
+				String.valueOf(result.get("appSecret")),
 				String.valueOf(result.get("appType")), req,
 				String.valueOf(result.get("pid")));
 		if (resp.getTaobaokeItems() != null) {
@@ -327,6 +329,8 @@ public class TaobaoRest {
 		}
 		Page<TaobaokeShop> page = new Page<TaobaokeShop>(pageNo, 30);
 		TaobaokeShopsGetResponse resp = TaobaoFetchUtil.shopsGet(
+				String.valueOf(result.get("appKey")),
+				String.valueOf(result.get("appSecret")),
 				String.valueOf(result.get("appType")), req,
 				String.valueOf(result.get("pid")));
 		if (resp != null) {
@@ -349,23 +353,28 @@ public class TaobaoRest {
 	}
 
 	private String searchWords(HttpServletResponse response, String q,
-			String appType, String nick, String pid, String pPid) {
+			String appType, String nick, String pid, String pPid,
+			String appKey, String appSecret) {
 		if (StringUtils.isEmpty(q)) {
-			return searchCid(response, null, appType, nick, pid, pPid);
+			return searchCid(response, null, appType, nick, pid, pPid, appKey,
+					appSecret);
 		}
 		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
 		req.setNick(nick);
 		req.setOuterCode(EnvManager.getKeywordsOuterCode());
 		req.setQ(q);
-		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appType, req, pid);
+		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appKey, appSecret,
+				appType, req, pid);
 		if (StringUtils.isNotEmpty(clickUrl)) {
 			return (clickUrl + "&taoke_type=1").replaceAll(pid, pPid);
 		}
-		return searchCid(response, null, appType, nick, pid, pPid);
+		return searchCid(response, null, appType, nick, pid, pPid, appKey,
+				appSecret);
 	}
 
 	private String searchCid(HttpServletResponse response, String cid,
-			String appType, String nick, String pid, String pPid) {
+			String appType, String nick, String pid, String pPid,
+			String appKey, String appSecret) {
 		if (StringUtils.isEmpty(cid)) {
 			cid = "16";
 		}
@@ -377,7 +386,8 @@ public class TaobaoRest {
 		}
 		request.setNick(nick);
 		request.setOuterCode(EnvManager.getCatsOuterCode());
-		String url = TaobaoFetchUtil.getItemCatUrl(appType, request, pid);
+		String url = TaobaoFetchUtil.getItemCatUrl(appKey, appSecret, appType,
+				request, pid);
 		return (url + "&taoke_type=1").replaceAll(pid, pPid);
 	}
 
@@ -400,6 +410,8 @@ public class TaobaoRest {
 		String nick = String.valueOf(result.get("nick"));
 		String pid = String.valueOf(result.get("pid"));
 		String pPid = String.valueOf(result.get("pPid"));
+		String appKey = String.valueOf(result.get("appKey"));
+		String appSecret = String.valueOf(result.get("appSecret"));
 		String clickUrl = null;
 		String cid = request.getParameter("cid");
 
@@ -418,7 +430,9 @@ public class TaobaoRest {
 				getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 				getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 				TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-						.getItemsDetail(appType, getRequest, pid);
+						.getItemsDetail(String.valueOf(result.get("appKey")),
+								String.valueOf(result.get("appSecret")),
+								appType, getRequest, pid);
 				TaobaokeItemDetail item = null;
 				if (getResponse != null) {
 					List<TaobaokeItemDetail> itemList = getResponse
@@ -465,7 +479,8 @@ public class TaobaoRest {
 				}
 			}
 			if (StringUtils.isEmpty(clickUrl))
-				clickUrl = searchWords(response, q, appType, nick, pid, pPid);
+				clickUrl = searchWords(response, q, appType, nick, pid, pPid,
+						appKey, appSecret);
 		} else {
 			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
 				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class,
@@ -485,7 +500,8 @@ public class TaobaoRest {
 			} else {
 				cid = null;
 			}
-			clickUrl = searchCid(response, cid, appType, nick, pid, pPid);
+			clickUrl = searchCid(response, cid, appType, nick, pid, pPid,
+					appKey, appSecret);
 		}
 		result.put("q", q);
 		result.put("clickUrl", clickUrl);
@@ -548,8 +564,10 @@ public class TaobaoRest {
 			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(String.valueOf(result.get("appType")),
-							getRequest, String.valueOf(result.get("pid")));
+					.getItemsDetail(String.valueOf(result.get("appKey")),
+							String.valueOf(result.get("appSecret")),
+							String.valueOf(result.get("appType")), getRequest,
+							String.valueOf(result.get("pid")));
 			if (getResponse != null) {
 				List<TaobaokeItemDetail> itemList = getResponse
 						.getTaobaokeItemDetails();
@@ -833,6 +851,8 @@ public class TaobaoRest {
 				}
 				result.put("itemsMap", itemsMap);
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
+						String.valueOf(result.get("appKey")),
+						String.valueOf(result.get("appSecret")),
 						String.valueOf(result.get("appType")), numiids, nick,
 						String.valueOf(result.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
@@ -1175,6 +1195,8 @@ public class TaobaoRest {
 					numiids += i.getNumIid();
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
+						String.valueOf(result.get("appKey")),
+						String.valueOf(result.get("appSecret")),
 						String.valueOf(siteImpl.get("appType")), numiids, nick,
 						String.valueOf(siteImpl.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
@@ -1347,7 +1369,7 @@ public class TaobaoRest {
 				request.setNick(user.getNick());
 				request.setOuterCode(EnvManager.getCatsOuterCode());
 				try {
-					String url = TaobaoFetchUtil.getItemCatUrl(
+					String url = TaobaoFetchUtil.getItemCatUrl(null, null,
 							user.getAppType(), request, user.getPid());
 					String pid = StringUtils
 							.substringBetween(url, "?p=", "&u=");
@@ -1447,7 +1469,8 @@ public class TaobaoRest {
 			req.setNick("fxy060608");
 			req.setOuterCode(EnvManager.getCatsOuterCode());
 			try {
-				String clickUrl = TaobaoFetchUtil.getItemCatUrl("0", req, null);
+				String clickUrl = TaobaoFetchUtil.getItemCatUrl(null, null,
+						"0", req, null);
 				if (StringUtils.isNotEmpty(clickUrl)) {
 					icat.setClickUrl(clickUrl.replaceAll("mm_13667242_0_0",
 							"{pid}"));

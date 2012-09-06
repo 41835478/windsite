@@ -67,7 +67,8 @@ public class MemberSellerManager {
 					shop.setDeliveryScore(score.getDeliveryScore());
 				}
 				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-						EnvManager.getAppType(),
+						EnvManager.getUser().getAppKey(), EnvManager.getUser()
+								.getAppSecret(), EnvManager.getAppType(),
 						EnvManager.getUser().getNick(), nShop.getSid() + "",
 						EnvManager.getUser().getPid());
 				if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
@@ -121,9 +122,10 @@ public class MemberSellerManager {
 				shop.setDeliveryScore(score.getDeliveryScore());
 			}
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-					EnvManager.getUser().getAppType(), EnvManager.getUser()
-							.getNick(), shop.getSid() + "", EnvManager
-							.getUser().getPid());
+					EnvManager.getUser().getAppKey(), EnvManager.getUser()
+							.getAppSecret(), EnvManager.getUser().getAppType(),
+					EnvManager.getUser().getNick(), shop.getSid() + "",
+					EnvManager.getUser().getPid());
 			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 				shop.setCommissionRate(shops.get(0).getCommissionRate());
 				shop.setIsValid(true);
@@ -144,9 +146,10 @@ public class MemberSellerManager {
 				shop.setDeliveryScore(score.getDeliveryScore());
 			}
 			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-					EnvManager.getUser().getAppType(), EnvManager.getUser()
-							.getNick(), shop.getSid() + "", EnvManager
-							.getUser().getPid());
+					EnvManager.getUser().getAppKey(), EnvManager.getUser()
+							.getAppSecret(), EnvManager.getUser().getAppType(),
+					EnvManager.getUser().getNick(), shop.getSid() + "",
+					EnvManager.getUser().getPid());
 			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
 				shop.setCommissionRate(shops.get(0).getCommissionRate());
 				shop.setIsValid(true);

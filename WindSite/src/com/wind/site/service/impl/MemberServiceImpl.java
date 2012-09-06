@@ -826,8 +826,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	@Override
 	public void addItem2ItemGroup(String numiids, String gid) {
 		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppType(), numiids, EnvManager.getUser()
-				.getNick(), EnvManager.getUser().getPid());
+				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
+				EnvManager.getUser().getAppType(), numiids, EnvManager
+						.getUser().getNick(), EnvManager.getUser().getPid());
 		Integer count = this.countItemsByGid(gid);
 		if (items != null && items.size() > 0 && count < 30) {
 			Integer length = items.size();
@@ -858,8 +859,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	public void addShop(String nick) {
 		Shop shop = TaobaoFetchUtil.getTaobaoShop("0", nick);
 		if (shop != null) {
-			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop("0",
-					"fxy060608", String.valueOf(shop.getSid()), null);
+			List<TaobaokeShop> shops = TaobaoFetchUtil
+					.convertTaobaoShop(null, null, "0", "fxy060608",
+							String.valueOf(shop.getSid()), null);
 			if (shops != null && shops.size() == 1) {
 				TaobaokeShop tShop = shops.get(0);
 				T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class,
@@ -1050,8 +1052,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 			return;
 		}
 		List<TaobaokeItem> tItems = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppType(), num_iids.substring(0,
-				num_iids.length() - 1), null, null);
+				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
+				EnvManager.getUser().getAppType(), num_iids.substring(0,
+						num_iids.length() - 1), null, null);
 		if (tItems == null) {
 			tItems = new ArrayList<TaobaokeItem>();
 		}
@@ -1315,8 +1318,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		request.setNick(user.getNick());
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
-			String url = TaobaoFetchUtil.getItemCatUrl("0", request,
-					user.getPid());
+			String url = TaobaoFetchUtil.getItemCatUrl(null, null, "0",
+					request, user.getPid());
 			String pid = StringUtils.substringBetween(url, "&p=", "&u=");
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

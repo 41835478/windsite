@@ -2670,19 +2670,16 @@ public class MemberRest {
 		String pAdId = request.getParameter("pAdId");
 		String appKey = request.getParameter("appKey");
 		String appSecret = request.getParameter("appSecret");
-		if (StringUtils.isEmpty(appKey)) {
-			SystemException.handleMessageException("appKey不能为空");
 
-		}
-		if (StringUtils.isEmpty(appSecret)) {
-			SystemException.handleMessageException("appSecret不能为空");
-		}
 		ShopcatsListGetRequest getRequest = new ShopcatsListGetRequest();
 		getRequest.setFields("cid");
-		try {
-			TaobaoFetchUtil.shopCatsGet(appKey, appSecret, getRequest);
-		} catch (Exception e) {
-			SystemException.handleMessageException("非法的AppKey,AppSecret");
+		if (StringUtils.isNotEmpty(appKey) && StringUtils.isNotEmpty(appSecret)) {
+
+			try {
+				TaobaoFetchUtil.shopCatsGet(appKey, appSecret, getRequest);
+			} catch (Exception e) {
+				SystemException.handleMessageException("非法的AppKey,AppSecret");
+			}
 		}
 
 		Site site = memberService.get(Site.class, id);
@@ -2753,8 +2750,11 @@ public class MemberRest {
 		EnvManager.getUser().setSites(sites);
 		User user = memberService.get(User.class, EnvManager.getUser().getId());
 		if (user != null) {
-			user.setAppKey(appKey);
-			user.setAppSecret(appSecret);
+			if (StringUtils.isNotEmpty(appKey)
+					&& StringUtils.isNotEmpty(appSecret)) {
+				user.setAppKey(appKey);
+				user.setAppSecret(appSecret);
+			}
 			if (StringUtils.isNotEmpty(pSiteId)
 					&& StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID
 				try {

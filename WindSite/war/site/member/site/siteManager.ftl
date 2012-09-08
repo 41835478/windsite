@@ -40,7 +40,10 @@ $(function(){
 td.fl-num{text-align:center;width:80px;}th strong{color:red} fieldset .wTable td.value{text-align:left;}a.a-num-un,a.a-num-wait,a.a-num-finish{font-weight:800;font-size:16px;text-decoration: underline;}a.a-num-un{color:red;}a.a-num-wait{color:#090;}a.a-num-finish{color:gray}
 </style>
 <@xt.taoketemplate navselected='taoke' bdselected='site-manager'>
-<@ws.info><a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-05:如何在新淘网配置完整PID?</strong></a>&nbsp;&nbsp;<br/><a target="_blank" href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=46363"><strong style="color:red;font-weight:bold;font-size:16px;">2012-07-03:关于近期未开店淘客无法订购新淘网的问题!</strong></a></@ws.info><br/>
+<@ws.info>
+<a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51753" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-07:开放淘宝开放平台APPKEY,APPSECRET配置?</strong></a>&nbsp;&nbsp;<br/>
+<a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-05:如何在新淘网配置完整PID?</strong></a>&nbsp;&nbsp;
+<br/><a target="_blank" href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=46363"><strong style="color:red;font-weight:bold;font-size:16px;">2012-07-03:关于近期未开店淘客无法订购新淘网的问题!</strong></a></@ws.info><br/>
 <table width=750px ><tr><td width=500px valign=top>
 <table width=500px class="member-info" style="line-height:20px;">
 <tr>

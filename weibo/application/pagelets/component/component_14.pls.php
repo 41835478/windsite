@@ -12,22 +12,22 @@ class component_14_pls extends component_abstract_pls {
 		parent :: run($mod);
 
 		//取缓存
-		if (XT_IS_SELLER == 'true') {
-			$mod['seller'] = XT_USER_NICK;
-		}
-		if ($_SERVER['SERVER_NAME'] == 'www.xintaowang.com') {
-			$mod['domain'] = 'www.xintaowang.com';
-		}
-		$cacheKey = "component14#" . md5(serialize($mod));
-		$wbListKey = "$cacheKey#wbList";
-		$cacheTime = V('-:tpl/cache_time/pagelet_component14');
-		if (ENABLE_CACHE && ($content = CACHE :: get($cacheKey))) {
-			echo $content;
-			return array (
-				'cls' => 'wblist',
-				'list' => CACHE :: get($wbListKey)
-			);
-		}
+//		if (XT_IS_SELLER == 'true') {
+//			$mod['seller'] = XT_USER_NICK;
+//		}
+//		if ($_SERVER['SERVER_NAME'] == 'www.xintaowang.com') {
+//			$mod['domain'] = 'www.xintaowang.com';
+//		}
+//		$cacheKey = "component14#" . md5(serialize($mod));
+//		$wbListKey = "$cacheKey#wbList";
+//		$cacheTime = V('-:tpl/cache_time/pagelet_component14');
+//		if (ENABLE_CACHE && ($content = CACHE :: get($cacheKey))) {
+//			echo $content;
+//			return array (
+//				'cls' => 'wblist',
+//				'list' => CACHE :: get($wbListKey)
+//			);
+//		}
 
 		$ret = DR('components/pubTimelineBaseApp.get', '', $mod['param']);
 

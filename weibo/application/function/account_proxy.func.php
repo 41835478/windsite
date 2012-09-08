@@ -49,7 +49,7 @@ function clear($token = '', $refresh = '', $USER_ID = '') {
 				'token_secret' => ''
 			), $USER_ID);
 
-		} else {
+		} else {	
 			DS('accountProxy.clearByTokenAndSecret', '', $token, $refresh);
 		}
 	}

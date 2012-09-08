@@ -77,7 +77,7 @@ class accountProxy {
 	 * 清空指定的代理帐号
 	 */
 	function clearByTokenAndSecret($token = '', $refresh = '') {
-		if ($token == '' || $refresh == '') {
+		if ($token == '') {
 			return;
 		}
 		$db = APP :: ADP('db');

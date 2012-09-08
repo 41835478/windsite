@@ -352,6 +352,7 @@ class SaeTOAuthV2 {
 	 * @ignore
 	 */
 	function http($url, $method, $postfields = NULL, $headers = array ()) {
+		$log_func_start_time = microtime(TRUE);
 		$this->http_info = array ();
 		$ci = curl_init();
 		/* Curl settings */
@@ -407,9 +408,362 @@ class SaeTOAuthV2 {
 			print_r($response);
 		}
 		curl_close($ci);
+
+		LogMgr :: warningLog($log_func_start_time, $this->logType, "[oAuthRequest]API Request method=$method", LOG_LEVEL_WARNING, $postfields);
+		LOGSTR($this->logType, "[oAuthRequest]API Request method=$method", LOG_LEVEL_INFO, $postfields, $log_func_start_time);
+
+		if (200 != $this->http_code) {
+			//log
+			$logMsg = 'url: ' . $url . " \r\ncode: " . $this->http_code . " \r\nret: " . $response . "\r\nerror: " . "\r\nbase_string:: " . $request->base_string . "\r\nkey_string: " . WB_SKEY;
+			LOGSTR($this->logType, "[oAuthRequest]API Request method=$method&" . $logMsg);
+
+			return $this->throwException($response);
+		}
+
 		return $response;
 	}
-
+	var $logType = 'api';
+	/**
+		 * 格式化错误信息
+		 *
+		 * @param array $error api返回的错误信息
+		 * @return unknown
+		 */
+	function throwException($error) {
+		$error = json_decode($error, true);
+		$error_code = $error['error_code'];
+		switch ($error_code) {
+			case 21332:
+			case 21327 :
+				$msg = array (
+					'error_code' => '1040000',
+					'error' => $error['error']
+				);
+				//TODO 如果是expired_token,清空当前站点无效的微博帐号
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				break;
+			case '40113' :
+				$msg = array (
+					'error_code' => '1040000',
+					'error' => $error['error']
+				);
+				//TODO 如果是token_rejected,清空当前站点无效的微博帐号
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				break;
+			case '40302' :
+				$msg = array (
+					'error_code' => '1040011',
+					'error' => $error['error']
+				);
+				//TODO 如果40302:unauthorized_client，清空当前站点自定义APP，已授权
+				F('account_proxy.clearApp');
+				break;
+			case '40312' :
+				$msg = array (
+					'error_code' => '1040009',
+					'error' => $error['error']
+				);
+				break;
+			case '40313' :
+				$msg = array (
+					'error_code' => '1040001',
+					'error' => $error['error']
+				);
+				//TODO 如果是invalid weibo user,清空当前站点无效的微博帐号
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				break;
+			case '40303' :
+				$msg = array (
+					'error_code' => '1020805',
+					'error' => $error['error']
+				);
+				break;
+			case '40012' :
+				if (strpos($error['request'], 'update')) {
+					$error_code = '1020000';
+				}
+				elseif (strpos($error['request'], 'comment')) {
+					$error_code = '1020401';
+				}
+				elseif (strpos($error['request'], 'reply')) {
+					$error_code = '1020502';
+				}
+				elseif (strpos($error['request'], 'direct_messages')) {
+					$error_code = '1020900';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40013' :
+				if (strpos($error['request'], 'update')) {
+					$error_code = '1020001';
+				}
+				elseif (strpos($error['request'], 'upload')) {
+					$error_code = '1020103';
+				}
+				elseif (strpos($error['request'], 'repost')) {
+					$error_code = '1020201';
+				}
+				elseif (strpos($error['request'], 'comment')) {
+					$error_code = '1020403';
+				}
+				elseif (strpos($error['request'], 'reply')) {
+					$error_code = '1020503';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40025' :
+				$msg = array (
+					'error_code' => '1020002',
+					'error' => $error['error']
+				);
+				break;
+			case '40035' :
+				$msg = array (
+					'error_code' => '1021002',
+					'error' => $error['error']
+				);
+				break;
+			case '40009' :
+				$msg = array (
+					'error_code' => '1020100',
+					'error' => $error['error']
+				);
+				break;
+			case '40045' :
+				$msg = array (
+					'error_code' => '1020101',
+					'error' => $error['error']
+				);
+				break;
+			case '40008' :
+				$msg = array (
+					'error_code' => '1020102',
+					'error' => $error['error']
+				);
+				break;
+			case '40027' :
+				$msg = array (
+					'error_code' => '1040008',
+					'error' => $error['error']
+				);
+				break;
+			case '40028' :
+				if (strpos($error['error'], 'M01129')) {
+					$error_code = '1021300';
+				}
+				elseif (strpos($error['error'], '发表违法和不良信息')) {
+					$error_code = '1040004';
+				}
+				elseif (strpos($error['error'], ':发微博太多')) {
+					$error_code = '1040006';
+				}
+				elseif (strpos($error['error'], '发评论太多')) {
+					$error_code = '1040007';
+				}
+				elseif (strpos($error['error'], '昵称') || strpos($error['error'], '用户名')) {
+					$error_code = '1021301';
+				}
+				elseif (strpos($error['error'], '添加')) {
+					$error_code = '1020800';
+				}
+				elseif (strpos($error['request'], 'create') && strpos($error['error'], 'fuid')) {
+					$error_code = '1020801';
+				}
+				elseif (strpos($error['request'], 'destroy')) {
+					$error_code = '1020802';
+				}
+				elseif (strpos($error['error'], '你无法进行评论')) {
+					$error_code = '1020404';
+				}
+				elseif (strpos($error['error'], '你不能进行此操作')) {
+					$error_code = '1020405';
+				}
+				elseif (strpos($error['error'], '关注过于频繁')) {
+					$error_code = '1020806';
+				}
+				elseif (strpos($error['error'], '加关注前请先解除')) {
+					$error_code = '1020807';
+				}
+				elseif (strpos($error['error'], '不能关注自己')) {
+					$error_code = '1020808';
+				}
+				elseif (strpos($error['error'], '关注人数已达到上限')) {
+					$error_code = '1020809';
+				}
+				elseif (strpos($error['error'], '接下来的时间想想如何让大家都来关注你吧')) {
+					$error_code = '1020811';
+				}
+				elseif (strpos($error['error'], '你今天已经关注很多喽')) {
+					$error_code = '1020810';
+				} else {
+					$error_code = '1020104';
+				}
+				/*
+					else {
+					$error_code = '1020803';
+				}
+				 */
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40016' :
+				if (strpos($error['request'], 'repost')) {
+					$error_code = '1020200';
+				}
+				elseif (strpos($error['request'], 'destroy')) {
+					$error_code = '1020300';
+				}
+				elseif (strpos($error['request'], 'comment')) {
+					$error_code = '1020400';
+				}
+				elseif (strpos($error['request'], 'reply')) {
+					$error_code = '1020500';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40031' :
+				if (strpos($error['request'], 'destroy')) {
+					$error_code = '1020301';
+				}
+				elseif (strpos($error['request'], 'comment')) {
+					$error_code = '1020402';
+				}
+				elseif (strpos($error['request'], 'reply')) {
+					$error_code = '1020504';
+				}
+				elseif (strpos($error['request'], 'favorites')) {
+					$error_code = '1020701';
+				} else {
+					$error_code = $error_code;
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40036' :
+				if (strpos($error['request'], 'destroy')) {
+					$error_code = '1020302';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40020' :
+				if (strpos($error['reqeust'], 'reply')) {
+					$error_code = '1020501';
+				}
+				elseif (strpos($error['request'], 'comment_destroy')) {
+					$error_code = '1020600';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '40015' :
+				if (strpos($error['request'], 'comment_destroy')) {
+					$error_code = '1020601';
+				}
+				$msg = array (
+					'error_code' => $error_code,
+					'error' => $error['error']
+				);
+				break;
+			case '50001' :
+				$msg = array (
+					'error_code' => '1020700',
+					'error' => $error['error']
+				);
+				break;
+			case '40017' :
+				$msg = array (
+					'error_code' => '1020902',
+					'error' => $error['error']
+				);
+				break;
+			case '40021' :
+				$msg = array (
+					'error_code' => '1020903',
+					'error' => $error['error']
+				);
+				break;
+			case '40010' :
+				$msg = array (
+					'error_code' => '1020904',
+					'error' => $error['error']
+				);
+				break;
+			case '40022' :
+				$msg = array (
+					'error_code' => '1040003',
+					'error' => $error['error']
+				);
+				break;
+			case '40026' :
+				$msg = array (
+					'error_code' => '1021200',
+					'error' => $error['error']
+				);
+				break;
+			case '40072' :
+				$msg = array (
+					'error_code' => '1040008',
+					'error' => $error['error']
+				);
+				//TODO 如果是accessor was revoked,清空当前站点无效的微博帐号
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				break;
+			case '40085' :
+				$api = APP :: O('apiStop');
+				$api->setStop();
+				break;
+			case '40358' :
+			case '40314' :
+			case '40070' :
+			case '40312' :
+			case '40310' :
+			case '40308' :
+			case '40305' :
+			case '40011' :
+			case '40304' :
+				$msg = array (
+					'error_code' => '1040016',
+					'error' => $error['error']
+				);
+				break;
+			case '40315' :
+				$msg = array (
+					'error_code' => '1023001',
+					'error' => '调用user/show接口超限制'
+				);
+				break;
+			case '40089' :
+				$msg = array (
+					'error_code' => '40089',
+					'error' => '访问的帐号异常'
+				);
+				break;
+			default :
+				$msg = array (
+					'error_code' => '1050000',
+					'error' => 'unknow system error  api: ' . $error['error']
+				);
+		}
+		return RST('', $msg['error_code'], $msg['error'], 0);
+	}
 	/**
 	 * Get the header info to store.
 	 *

@@ -144,13 +144,21 @@ class weibo {
 		$error = json_decode($error, true);
 		$error_array = explode(':', $error['error']);
 		switch ($error_array[0]) {
+			case '21327':
+				$msg = array (
+					'error_code' => '1040000',
+					'error' => $error['error']
+				);
+				//TODO 如果是expired_token,清空当前站点无效的微博帐号
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				break;
 			case '40113' :
 				$msg = array (
 					'error_code' => '1040000',
 					'error' => $error['error']
 				);
 				//TODO 如果是token_rejected,清空当前站点无效的微博帐号
-				//F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
 				break;
 			case '40302' :
 				$msg = array (
@@ -158,7 +166,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果40302:unauthorized_client，清空当前站点自定义APP，已授权
-				//F('account_proxy.clearApp');
+				F('account_proxy.clearApp');
 				break;
 			case '40312' :
 				$msg = array (
@@ -172,7 +180,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果是invalid weibo user,清空当前站点无效的微博帐号
-				//F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
 				break;
 			case '40303' :
 				$msg = array (
@@ -426,7 +434,7 @@ class weibo {
 					'error' => $error['error']
 				);
 				//TODO 如果是accessor was revoked,清空当前站点无效的微博帐号
-				//F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
+				F('account_proxy.clear', $this->access_token, $this->refresh_token, XT_USER_ID);
 				break;
 			case '40085' :
 				$api = APP :: O('apiStop');

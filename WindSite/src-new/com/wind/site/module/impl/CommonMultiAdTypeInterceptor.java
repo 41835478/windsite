@@ -103,8 +103,8 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 				request.setNick(String.valueOf(params.get("nick")));
 				request.setPageSize(Long.valueOf(itemnum));
 				TaobaokeItemsGetResponse response = TaobaoFetchUtil
-						.searchItems(impl.getAppKey(), impl.getAppSecret(),
-								"0", request, String.valueOf(params.get("pid")));
+						.searchItems(null, null, "0", request,
+								String.valueOf(params.get("pid")));
 				if (response != null) {// 获取商品结果并转换为本次对象
 					List<T_TaobaokeItem> items = TaobaoFetchUtil
 							.covertItems(response.getTaobaokeItems());

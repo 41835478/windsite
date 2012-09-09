@@ -2440,10 +2440,8 @@ public class SiteRest {
 			getRequest.setSort("commissionNum_desc");
 			getRequest.setNick(String.valueOf(result.get("nick")));
 			TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-					String.valueOf(result.get("appKey")),
-					String.valueOf(result.get("appSecret")),
-					String.valueOf(result.get("appType")), getRequest,
-					String.valueOf(result.get("pid")));
+					null, null, String.valueOf(result.get("appType")),
+					getRequest, String.valueOf(result.get("pid")));
 			if (getResponse != null) {//
 				List<TaobaokeItem> items = getResponse.getTaobaokeItems();
 				if (items != null) {
@@ -2545,9 +2543,7 @@ public class SiteRest {
 		getRequest.setSort(sort);
 		getRequest.setNick(String.valueOf(result.get("nick")));
 		TaobaokeItemsGetResponse getResponse = TaobaoFetchUtil.searchItems(
-				String.valueOf(result.get("appKey")),
-				String.valueOf(result.get("appSecret")),
-				String.valueOf(result.get("appType")), getRequest,
+				null, null, String.valueOf(result.get("appType")), getRequest,
 				String.valueOf(result.get("pid")));
 		if (getResponse != null) {//
 			List<TaobaokeItem> items = getResponse.getTaobaokeItems();

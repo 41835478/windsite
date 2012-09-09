@@ -21,11 +21,12 @@ class map_mod {
 		$code = V('g:code', '');
 		$state = V('g:state', '');
 		if (!empty ($code) && !empty ($state)) {
+			$state = urldecode($state);
 			$state = str_replace('/http', 'http', $state);
-			if(strpos($state, "http://") === 0){
-				
-			}else{
-				$state='http://'.$state;
+			if (strpos($state, "http://") === 0) {
+
+			} else {
+				$state = 'http://' . $state;
 			}
 			header('Location:' . urldecode($state) . '&code=' . $code);
 		}

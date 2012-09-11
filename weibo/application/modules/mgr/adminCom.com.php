@@ -64,7 +64,7 @@ class adminCom {
 	 */
 	function getAdminsByAutoCrons(){
 		$db = APP :: ADP('db');
-		$sql = 'SELECT admin.`user_id`,admin.`group_id`,admin.`appKey`,yx.crons FROM ' . $db->getPrefix() . T_ADMIN . ' admin,'.$db->getTable(T_XT_YINGXIAO).' yx WHERE admin.group_id!=0 AND admin.`sina_uid` !=\'\' AND admin.`v2_access_token` !=\'\' AND admin.user_id=yx.user_id ORDER BY admin.`id`';
+		$sql = 'SELECT admin.`user_id`,admin.`group_id`,admin.`appKey`,yx.crons FROM ' . $db->getPrefix() . T_ADMIN . ' admin,'.$db->getTable(T_XT_YINGXIAO).' yx WHERE admin.group_id!=0 AND ((admin.`sina_uid` !=\'\' AND admin.`v2_access_token` !=\'\') OR (admin.`sh_access_token` !=\'\') OR (admin.`qq_access_token` != \'\') OR (admin.`wy_access_token` !=\'\' )) AND admin.user_id=yx.user_id ORDER BY admin.`id`';
 		return RST($db->query($sql));
 	}
 	/*

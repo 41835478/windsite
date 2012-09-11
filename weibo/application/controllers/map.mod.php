@@ -339,7 +339,7 @@ class map_mod {
 	 */
 	function autoCron() {
 		//需考虑版本，（如免费版，不能使用画报，视频）
-		if (SYSTEM_SINA_UID != '' && V2_ACCESS_TOKEN != '') {
+		if ((SYSTEM_SINA_UID != '' && V2_ACCESS_TOKEN != '') || WB_QQ_USER_OAUTH_TOKEN != '' || WB_SOHU_USER_OAUTH_TOKEN != '' || WB_WY_USER_OAUTH_TOKEN != '') {
 			set_time_limit(120); //设置总执行时间限制，预期不可超过2分钟。
 			//			$cache_name = 'autoCron_today_record_' . XT_USER_ID . '_';
 			//			$record = CACHE :: get($cache_name);
@@ -354,7 +354,7 @@ class map_mod {
 			echo 'index:' . $index . '=========';
 			F('autoCron.autoCron', $index);
 		} else {
-			exit (XT_USER_NICK . ':' . XT_SITE_DOMAIN . '站点未绑定新浪微博');
+			exit (XT_USER_NICK . ':' . XT_SITE_DOMAIN . '站点未绑定任何微博');
 		}
 
 	}

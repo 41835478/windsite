@@ -341,7 +341,7 @@ function autoCronUserItem($isSelf) {
 			$item['price'],
 			$nickname,
 			$link
-		), 'DATE' . ':TITLE,￥PRICE元,详情:LINKNICKNAME。[' . F('wkey', $user_id) . ']' . ($WEIBO_TOPIC != '' ? (',' . $WEIBO_TOPIC . '') : ''));
+		), 'DATE' . ':TITLE,￥PRICE元,详情:LINKNICKNAME。(' . F('wkey', $user_id) . ')' . ($WEIBO_TOPIC != '' ? (',' . $WEIBO_TOPIC . '') : ''));
 		$pic_url = !empty ($item['pic_url']) ? $item['pic_url'] : '';
 	}
 	return array (
@@ -456,7 +456,7 @@ function autoCronUserShop($isSelf) {
 			$nickname,
 			'http://' . XT_DEFAULT_DOMAIN . '/go/sid-' . $shop['sid'] . '?v=' . rand(),
 			$remark
-		), 'DATE' . ':TITLEREMARK详情:LINKNICKNAME。[' . F('wkey', $user_id) . ']' . ($WEIBO_TOPIC != '' ? (',' . $WEIBO_TOPIC . '') : ''));
+		), 'DATE' . ':TITLEREMARK详情:LINKNICKNAME。(' . F('wkey', $user_id) . ')' . ($WEIBO_TOPIC != '' ? (',' . $WEIBO_TOPIC . '') : ''));
 
 	}
 	return array (
@@ -932,15 +932,18 @@ function sinaWeibo($TYPE, $ID, $USER_ID, $appKey, $appSecret, $token, $refresh_t
 				case 'SHOP' : //店铺推广（记录）
 					$ids = explode('-', $ID); //0是店铺ID，1是该店铺所属于的用户ID
 					DR('mgr/xintao/cronCom.updateUserShopNums', '', $ids[0], $qqId > 0);
+					DS('mgr/xintao/cronCom.updateYingxiaoShopNums', '', $ids[1]); //递加每日店铺营销数量
 					break;
 				case 'ITEM' : //商品推广（记录）
 					$ids = explode('-', $ID); //0是商品ID，1是该商品所属于的用户ID
 					DR('mgr/xintao/cronCom.updateUserItemNums', '', $ids[0], $ids[1], $qqId > 0);
+					DS('mgr/xintao/cronCom.updateYingxiaoItemNums', '', $ids[1]); //递加每日商品营销数量
 					break;
 				case 'TAOKE_ITEM' : //淘宝客自主商品推广（记录）
 					DR('mgr/xintao/cronCom.updateTaokeItemNums', '', $ID);
 					break;
 			}
+			
 		} catch (Exception $e) {
 
 		}

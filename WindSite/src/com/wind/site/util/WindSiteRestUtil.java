@@ -58,6 +58,7 @@ public class WindSiteRestUtil {
 		UNVALIDS.add("tamir0");
 		UNVALIDS.add("e网情深资源坊");
 		UNVALIDS.add("鼎胜服饰");
+		UNVALIDS.add("魏梦得");
 	}
 
 	/**

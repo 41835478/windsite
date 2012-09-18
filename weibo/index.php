@@ -156,6 +156,8 @@ define('TB_CONTAINER', 'http://container.open.taobao.com/container?appkey=' . TB
 define('TB_BACK_CONTAINER', 'http://container.open.taobao.com/container?appkey=' . TB_APP_KEY_1 . '&encode=utf-8');
 define('TB_GATEWAY', 'http://gw.api.taobao.com/router/rest');
 if (!in_array(APP :: getRequestRoute(), array (
+		'map.oauthCallback',
+		'map.cancelOauthCallback',
 		'map.upgrade',
 		'map.autoCron',
 		'map.synItem',

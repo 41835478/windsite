@@ -51,6 +51,23 @@ public class User extends TimestampModel {
 	 */
 	private String appType;
 	/**
+	 * 淘宝昵称对应的pid
+	 */
+	private String nPid;
+	/**
+	 * 淘宝客报表session
+	 */
+	private String reportSession;
+
+	public String getReportSession() {
+		return reportSession;
+	}
+
+	public void setReportSession(String reportSession) {
+		this.reportSession = reportSession;
+	}
+
+	/**
 	 * 淘宝TOP对应的pid
 	 */
 	private String pid;
@@ -821,6 +838,14 @@ public class User extends TimestampModel {
 
 	public void setAppSecret(String appSecret) {
 		this.appSecret = appSecret;
+	}
+
+	public String getnPid() {
+		return nPid;
+	}
+
+	public void setnPid(String nPid) {
+		this.nPid = nPid;
 	}
 
 }

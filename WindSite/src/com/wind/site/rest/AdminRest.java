@@ -222,6 +222,13 @@ public class AdminRest {
 		return "";
 	}
 
+	@RequestMapping(value = "/synNPID")
+	@ResponseBody
+	public String synNPID() {
+		WindSiteRestUtil.synPid(adminService);
+		return WindSiteRestUtil.SUCCESS;
+	}
+
 	@RequestMapping(value = "/checkwww/{isUpdate}")
 	@ResponseBody
 	public String checkWWW(@PathVariable String isUpdate) {

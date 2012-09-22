@@ -21,6 +21,8 @@ import org.hibernate.criterion.R;
 import weibo4j.util.WeiboConfig;
 
 import com.google.gson.JsonObject;
+import com.taobao.api.request.TaobaokeCaturlGetRequest;
+import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
 import com.wind.core.service.IBaseService;
 import com.wind.site.command.CommandExecutor;
@@ -66,6 +68,40 @@ public class WindSiteRestUtil {
 	 * 默认成功信息
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
+
+	public static void synPid(IBaseService service) {
+		_synPid(service, new Page<User>(1, 1000));
+	}
+
+	public static void _synPid(IBaseService service, Page<User> page) {
+		List<User> users = (List<User>) service.findByHql(page,
+				"from User where nPid is null", new HashMap<String, Object>());
+		TaobaokeCaturlGetRequest request = new TaobaokeCaturlGetRequest();
+		request.setCid(0L);
+		if (users != null && users.size() > 0) {
+			for (User user : users) {
+				request.setNick(user.getNick());
+				user.getNick();
+				try {
+					String url = TaobaoFetchUtil.getItemCatUrl(null, null,
+							user.getAppType(), request, user.getPid());
+					String pid = url.split("pid=")[1].split("&")[0];
+					if (StringUtils.isNotEmpty(pid)) {
+						user.setPid(pid);
+						service.update(user);
+					}
+				} catch (Exception e) {
+					logger.info(e.toString());
+				}
+			}
+		}
+		users.clear();
+		users = null;
+		if (page.isHasNextPage()) {
+			page.setPageNo(page.getNextPage());
+			_synPid(service, page);
+		}
+	}
 
 	public static Long getPid(String pid) {
 		Long PID = null;

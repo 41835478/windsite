@@ -679,10 +679,16 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				site.setCommission(commission);
 				// 新增的话，抓取最近90天内交易
 				ReportsGetCommand command = new ReportsGetCommand();
-				command.setSession(EnvManager.getTaobaoSession());
+				if (StringUtils.isNotEmpty(user.getReportSession())) {
+					command.setSession(user.getReportSession());
+					command.setAppType("1");
+				} else {
+					command.setSession(EnvManager.getTaobaoSession());
+					command.setAppType(EnvManager.getAppType());
+				}
 				command.setSite_id(user.getSites().get(0).getId());
 				command.setUser_id(user.getUser_id());
-				command.setAppType(EnvManager.getAppType());
+
 				Calendar start = Calendar.getInstance();
 				start.add(Calendar.DATE, -90);
 				command.setStart(start.getTime());
@@ -731,7 +737,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			if (StringUtils.isNotEmpty(site.getWww())) {// 如果版本号大于普及版以及已绑定顶级域名（即满足返利版要求）
 				// if (EnvManager.getAppType().equals(user.getAppType()))//
 				// 如果当前登录应用与会员应用版本一致
-				user.settSession(tSession);// 存储当前SESSION
+				if (user.getPid().equals(user.getnPid()))
+					user.settSession(tSession);// 存储当前SESSION
 			} else
 				user.settSession(null);
 		} else {
@@ -1085,6 +1092,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			String pid = url.split("pid=")[1].split("&")[0];
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);
+				user.setnPid(pid);
 			}
 		} catch (Exception e) {
 			logger.info(e.toString());

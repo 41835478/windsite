@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.R;
 
 import com.wind.site.command.impl.ReportsGetCommand;
@@ -34,8 +35,8 @@ public class TaobaoSessionCommand {
 				T_UserSubscribe.class, R.ge("versionNo", 2f));// 淘宝
 		Calendar calendar = Calendar.getInstance();
 		List<W_UserSubscribe> wusbs = taobaoService.findAllByCriterion(
-				W_UserSubscribe.class, R.gt("endDate", calendar.getTime()), R
-						.ge("versionNo", 2f));// 本地
+				W_UserSubscribe.class, R.gt("endDate", calendar.getTime()),
+				R.ge("versionNo", 2f));// 本地
 		Set<String> ids = new HashSet<String>();
 		if (usbs != null && usbs.size() > 0) {
 			for (T_UserSubscribe usb : usbs) {
@@ -50,20 +51,30 @@ public class TaobaoSessionCommand {
 		Map<String, Object> params = new HashMap<String, Object>();
 		for (String user_id : ids) {
 			params.put("user_id", user_id);
-			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.tSession as session) from User u where u.tSession is not null and user_id=:user_id";
+			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.tSession as session,u.reportSessoin as reportSession) from User u where (u.tSession is not null or u.reportSession is not null) and user_id=:user_id";
 			List<Map<String, Object>> users = (List<Map<String, Object>>) taobaoService
 					.findByHql(hql, params);
 			if (users != null && users.size() == 1) {
 				Map<String, Object> user = users.get(0);
 				Map<String, Object> result = new HashMap<String, Object>();
-				WindSiteRestUtil.covertPID(taobaoService, result, String
-						.valueOf(user.get("user_id")));// 获取SID
+				WindSiteRestUtil.covertPID(taobaoService, result,
+						String.valueOf(user.get("user_id")));// 获取SID
 				if (result.get("sid") != null) {
 					ReportsGetCommand command = new ReportsGetCommand();
-					command.setSession(String.valueOf(user.get("session")));
+					String reportSession = String.valueOf(user
+							.get("reportSession"));
+					if (StringUtils.isNotEmpty(reportSession)
+							&& !"null".equals(reportSession)) {
+						command.setSession(reportSession);
+						command.setAppType("1");
+					} else {
+						command.setSession(String.valueOf(user.get("session")));
+						command.setAppType(String.valueOf(user.get("appType")));
+					}
+
 					command.setSite_id(String.valueOf(result.get("sid")));
 					command.setUser_id(String.valueOf(user.get("user_id")));
-					command.setAppType(String.valueOf(user.get("appType")));
+
 					calendar.add(Calendar.DATE, -1);
 					command.setStart(calendar.getTime());
 					command.setIsTimer(true);// 将该命令标识为定时作业

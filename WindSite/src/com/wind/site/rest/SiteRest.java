@@ -1631,8 +1631,19 @@ public class SiteRest {
 		}
 		if (StringUtils.isNotEmpty(userId)) {// 返利登录
 			if (EnvManager.getMember() != null) {// 如果已登录
-				return new ModelAndView(new RedirectView("router/fanlimember"),
-						"USER", request.getParameter("USER"));// 重定向到会员中心
+				String bind = request.getParameter("xintao");
+				if (StringUtils.isNotEmpty(bind)) {
+					if (StringUtils.isNotEmpty(request
+							.getParameter("top_parameters"))) {// 淘宝回调
+						validateTaobaoBind(request);// 淘宝回调校验成功(设置reportSession)
+					}
+					return new ModelAndView(new RedirectView(
+							"router/member/fl/report"));// 重定向到会员中心
+				} else {
+					return new ModelAndView(new RedirectView(
+							"router/fanlimember"), "USER",
+							request.getParameter("USER"));// 重定向到会员中心
+				}
 			}
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");// TODO 密码加密
@@ -2055,6 +2066,45 @@ public class SiteRest {
 			users = siteService.searchUserBySiteTitle(keyword);
 		}
 		return new ModelAndView("site/searchResult", "users", users);
+	}
+
+	private void validateTaobaoBind(HttpServletRequest request) {
+		String topParams = request.getParameter("top_parameters");
+		String topSession = request.getParameter("top_session");
+		String topSign = request.getParameter("top_sign");
+		// String versionNo = request.getParameter("versionNo");
+		String appType = request.getParameter("appType");// 当前应用类型
+		// String appKey = request.getParameter("top_appkey");// 当前应用标识
+		// String leaseId = request.getParameter("leaseId");
+		// String timestamp = request.getParameter("timestamp");
+		// String sign = request.getParameter("sign");
+		// String itemCode = request.getParameter("itemCode");
+
+		appType = "1";
+
+		if (EncryptUtil.verifyTopResponse(topParams, topSession, topSign,
+				EnvManager.getAppKey(appType), EnvManager.getSecret(appType))) {// 校验签名
+			Map<String, String> parameters = EncryptUtil
+					.convertBase64StringtoMap(topParams);// 参数解析
+			// 时间戳校验
+			Long sessionTime = Long.valueOf(parameters.get("ts"));
+			Calendar calendar = Calendar.getInstance(Locale.CHINA);
+			Long time = calendar.getTimeInMillis() - sessionTime;
+			logger.info("Session时间差：" + (time));
+			if (time > 1800000) {
+				SystemException.handleMessageException("当前Session已超时,请重新授权绑定");
+			}
+			String user_id = parameters.get("visitor_id");
+			User user = siteService.findByCriterion(User.class,
+					R.eq("user_id", user_id));
+			if (user != null) {
+				user.setReportSession(topSession);
+				siteService.update(user);
+			}
+		} else {
+			logger.info("sign error|淘宝业务签名错误");
+			logger.info("_sign:" + topSign);
+		}
 	}
 
 	private Boolean validateTaobao(HttpServletRequest request) {

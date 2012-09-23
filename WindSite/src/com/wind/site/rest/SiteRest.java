@@ -1631,19 +1631,8 @@ public class SiteRest {
 		}
 		if (StringUtils.isNotEmpty(userId)) {// 返利登录
 			if (EnvManager.getMember() != null) {// 如果已登录
-				String bind = request.getParameter("xintao");
-				if (StringUtils.isNotEmpty(bind)) {
-					if (StringUtils.isNotEmpty(request
-							.getParameter("top_parameters"))) {// 淘宝回调
-						validateTaobaoBind(request);// 淘宝回调校验成功(设置reportSession)
-					}
-					return new ModelAndView(new RedirectView(
-							"router/member/fl/report"));// 重定向到会员中心
-				} else {
-					return new ModelAndView(new RedirectView(
-							"router/fanlimember"), "USER",
-							request.getParameter("USER"));// 重定向到会员中心
-				}
+				return new ModelAndView(new RedirectView("router/fanlimember"),
+						"USER", request.getParameter("USER"));// 重定向到会员中心
 			}
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");// TODO 密码加密
@@ -1684,7 +1673,21 @@ public class SiteRest {
 
 		}
 		if (StringUtils.isNotEmpty(request.getParameter("top_parameters"))) {// 淘宝回调
-			validateTaobao(request);// 淘宝回调校验成功
+			String bind = request.getParameter("xintao");
+			if (EnvManager.getUser() != null && StringUtils.isNotEmpty(bind)) {
+				if (StringUtils.isNotEmpty(request
+						.getParameter("top_parameters"))) {// 淘宝回调
+					validateTaobaoBind(request);// 淘宝回调校验成功(设置reportSession)
+				}
+				try {
+					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+							+ "/router/member/fl/report");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				validateTaobao(request);// 淘宝回调校验成功
+			}
 		}
 		// if (EnvManager.isAudit()) {// 如果是审核过程中，每次校验
 		// if (StringUtils.isNotEmpty(request.getParameter("top_parameters")))

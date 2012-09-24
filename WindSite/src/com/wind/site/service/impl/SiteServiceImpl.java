@@ -866,7 +866,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 						SystemException
 								.handleMessageException("当前淘宝帐号【"
 										+ user.getNick()
-										+ "】为无效用户，选择下列任一版本（咨询客服QQ：153647646）！<ul><li>1.月租型：<a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li><li>2.分成版：请进入(<strong style=\"color:red\">选择淘宝帐号登录</strong>)<a href=\"http://www.alimama.com/membersvc/member/login.htm\" target=\"_blank\">淘宝联盟</a>--->淘宝客--->API接入--->新淘网分成版--->立即使用</li></ul>");
+										+ "】为无效用户(淘宝联盟已不再提供分成版)，请订购付费版本（咨询客服QQ：153647646）！<ul><li><a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li></ul>");
 					}
 				}
 			}

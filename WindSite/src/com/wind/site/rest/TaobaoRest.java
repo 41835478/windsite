@@ -359,12 +359,13 @@ public class TaobaoRest {
 			return searchCid(response, null, appType, nick, pid, pPid, appKey,
 					appSecret);
 		}
-		TaobaokeListurlGetRequest req = new TaobaokeListurlGetRequest();
-		req.setNick(nick);
-		req.setOuterCode(EnvManager.getKeywordsOuterCode());
-		req.setQ(q);
-		String clickUrl = TaobaoFetchUtil.getKeyWordUrl(appKey, appSecret,
-				appType, req, pid);
+		TaobaokeCaturlGetRequest request = new TaobaokeCaturlGetRequest();
+		request.setCid(0L);
+		request.setNick(nick);
+		request.setQ(q);
+		request.setOuterCode(EnvManager.getKeywordsOuterCode());
+		String clickUrl = TaobaoFetchUtil.getItemCatUrl(appKey, appSecret,
+				appType, request, pid);
 		if (StringUtils.isNotEmpty(clickUrl)) {
 			return (clickUrl + "&taoke_type=1").replaceAll(pid, pPid);
 		}

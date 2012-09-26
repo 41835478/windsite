@@ -51,7 +51,7 @@ public class TaobaoSessionCommand {
 		Map<String, Object> params = new HashMap<String, Object>();
 		for (String user_id : ids) {
 			params.put("user_id", user_id);
-			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.tSession as session,u.reportSessoin as reportSession) from User u where (u.tSession is not null or u.reportSession is not null) and user_id=:user_id";
+			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.tSession as session,u.reportSession as reportSession) from User u where (u.tSession is not null or u.reportSession is not null) and user_id=:user_id";
 			List<Map<String, Object>> users = (List<Map<String, Object>>) taobaoService
 					.findByHql(hql, params);
 			if (users != null && users.size() == 1) {

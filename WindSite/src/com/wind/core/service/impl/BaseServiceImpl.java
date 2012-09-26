@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -19,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wind.core.dao.IDaoService;
 import com.wind.core.dao.Page;
 import com.wind.core.service.IBaseService;
+import com.wind.site.command.TaobaoSessionCommand;
 import com.wind.site.model.AD;
 import com.wind.site.model.PageDetailLayout;
 import com.wind.site.model.PageSearchLayout;
@@ -34,7 +36,8 @@ import com.wind.site.model.SiteTheme;
  */
 @Transactional
 public class BaseServiceImpl implements IBaseService {
-
+	private static final Logger logger = Logger.getLogger(BaseServiceImpl.class
+			.getName());
 	private IDaoService daoService;
 
 	@Override
@@ -84,8 +87,15 @@ public class BaseServiceImpl implements IBaseService {
 		org.hibernate.Query query = this.getHibernateSession().getNamedQuery(
 				"findSiteImplByUserIdNativeSQL");
 		query.setProperties(map);
-		SiteImpl impl = (SiteImpl) query.uniqueResult();
-		if (impl.getVersionNo() != null && impl.getVersionNo() >= 2) {// 如果已绑定顶级域名并且版本是返利，卖家版
+		SiteImpl impl = null;
+		try {
+			impl = (SiteImpl) query.uniqueResult();
+		} catch (Exception e) {
+			logger.info("siteimpl[" + userId + "] is error");
+		}
+
+		if (impl != null && impl.getVersionNo() != null
+				&& impl.getVersionNo() >= 2) {// 如果已绑定顶级域名并且版本是返利，卖家版
 			impl.setAds(getAds(userId));// 广告位
 			SiteCommission sc = this.get(SiteCommission.class, impl.getSid());
 			if (sc != null) {

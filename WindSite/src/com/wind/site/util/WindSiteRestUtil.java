@@ -87,7 +87,7 @@ public class WindSiteRestUtil {
 							user.getAppType(), request, user.getPid());
 					String pid = url.split("pid=")[1].split("&")[0];
 					if (StringUtils.isNotEmpty(pid)) {
-						user.setPid(pid);
+						user.setnPid(pid);
 						service.update(user);
 					}
 				} catch (Exception e) {

@@ -74,16 +74,16 @@ public class WindSiteDelay {
 						CommandExecutor.getWeigoucommands().putIfAbsent(pageId,
 								command);
 					} else {// 新淘网
-						if (!CommandExecutor.getUpdatecommands().containsKey(
-								"p-" + pageId)) {// 如果没有包含修改命令
-							UpdateUserTemplateByTemplateCommand command = new UpdateUserTemplateByTemplateCommand();
-							command.setFcg(fcg);
-							command.setPageId(pageId);
-							command.setModuleMethod(moduleMethod);
-							command.setPageService(pageService);
-							CommandExecutor.getUpdatecommands().putIfAbsent(
-									"p" + pageId, command);
-						}
+//						if (!CommandExecutor.getUpdatecommands().containsKey(
+//								"p-" + pageId)) {// 如果没有包含修改命令
+//							UpdateUserTemplateByTemplateCommand command = new UpdateUserTemplateByTemplateCommand();
+//							command.setFcg(fcg);
+//							command.setPageId(pageId);
+//							command.setModuleMethod(moduleMethod);
+//							command.setPageService(pageService);
+//							CommandExecutor.getUpdatecommands().putIfAbsent(
+//									"p" + pageId, command);
+//						}
 					}
 					cacheObjMap.remove(pageId);
 				}

@@ -181,8 +181,8 @@ public class WeigouAutocronGetTimer {
 							pre.add(1);
 							Calendar calendar = Calendar.getInstance();
 							int hour = calendar.get(Calendar.HOUR_OF_DAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour > 9 ? hour
-									: 9);
+							calendar.set(Calendar.HOUR_OF_DAY, hour > 7 ? hour
+									: 7);
 							calendar.set(Calendar.MINUTE, 0);
 							calendar.set(Calendar.SECOND, 0);
 							// for (int i = 0; i < preCount * 5; i++) {
@@ -222,10 +222,10 @@ public class WeigouAutocronGetTimer {
 							// calendar.set(Calendar.SECOND, 0);
 							for (int i = 0; i < count; i++) {
 								String autoCron = autoCrons.get(i);
-								calendar.add(Calendar.SECOND, pre
-										.get((int) (Math.random() * 3) + 1));// 随机获取pre里的1，2，3元素
-								WindSiteDelay.addWeigouQueue(autoCron, calendar
-										.getTime(), TimeUnit.SECONDS);//
+								calendar.add(Calendar.SECOND,
+										pre.get((int) (Math.random() * 3) + 1));// 随机获取pre里的1，2，3元素
+								WindSiteDelay.addWeigouQueue(autoCron,
+										calendar.getTime(), TimeUnit.SECONDS);//
 								// 加入超时队列(加入3小时的随机)
 							}
 						}

@@ -243,7 +243,7 @@ public class HuabaoRest {
 			List<T_PosterPicture> pics = siteService.findAllByCriterion(
 					T_PosterPicture.class, R.eq("poster_id", id));
 			if (pics == null || pics.size() == 0) {// 抓取
-				xintaoHuabaoJob.posterPictureParse(local);
+				// xintaoHuabaoJob.posterPictureParse(local);
 			}
 			if (pics != null && pics.size() > 0) {
 				List<HuabaoPicture> hPics = new ArrayList<HuabaoPicture>();

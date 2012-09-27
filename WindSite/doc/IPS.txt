@@ -37,6 +37,21 @@ chinaz工具的IP地址
 #2012-09-23
 iptables -I INPUT -s 113.12.154.44 -j DROP
 
+
+#2012-09-26
+iptables -I INPUT -s 65.55.52.111 -j DROP
+iptables -I INPUT -s 180.141.63.56 -j DROP
+iptables -I INPUT -s 157.55.32.0/24 -j DROP
+iptables -I INPUT -s 157.55.34.0/24 -j DROP
+iptables -I INPUT -s 218.30.103.0/24 -j DROP
+iptables -I INPUT -s 220.181.89.0/24 -j DROP
+iptables -I INPUT -s 182.118.25.0/24 -j DROP
+iptables -I INPUT -s 182.118.21.0/24 -j DROP
+iptables -I INPUT -s 1.62.63.163 -j DROP
+iptables -I INPUT -s 116.54.112.207 -j DROP
+iptables -I INPUT -s 219.134.20.236 -j DROP
+iptables -I INPUT -s 222.169.62.30 -j DROP
+
 iptables -I INPUT -s 180.138.66.4 -j DROP
 #2012-09-13
 iptables -I INPUT -s 157.55.33.0/24 -j DROP

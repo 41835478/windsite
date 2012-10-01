@@ -25,7 +25,7 @@
 			<ref bean="autoCronJobDetail" />
 		</property>
 		<property name="cronExpression">
-			<value>0 30 8 * * ?</value>
+			<value>0 30 6 * * ?</value>
 		</property>
 	</bean>
 	<!--更新凡客的商品信息-->

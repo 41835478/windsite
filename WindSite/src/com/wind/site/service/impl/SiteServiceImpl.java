@@ -877,6 +877,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		if (tus.getVersionNo() > 2) {
 			setAdPlanisValid(user.getNick());
 		}
+
 		user.setUsb(tus);// 设置订购信息
 	}
 

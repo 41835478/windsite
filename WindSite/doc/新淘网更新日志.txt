@@ -292,6 +292,7 @@ http://o.yiqifa.com/servlet/queryCpsMultiRow?ed=2011-11-22&username=guxingduxia@
 
  find /data/hitem/906/ -type f -size 0 | xargs -exec rm -f {};
  find /var/www/htdocs/zone/ -name itemDetail.html | xargs -exec rm -f {};
+ find /usr/local/apache2/htdocs/zone/ -name itemDetail.html | xargs -exec rm -f {};
 //当文件系统变只读，重新挂载rw
 umount /dev/xvdb1
 mount -o remount,rw /data

@@ -39,7 +39,7 @@
 						</div>
 						<!--文章内容区广告位结束-->
 						</#if>
-						${blog.message?replace('http://home.xintaonet.com/attachment/','attachment/')?replace('attachment/','http://home.xintaonet.com/attachment/')?replace('mm_[0-9]+_0_0',pid,'r')?replace('\\[flash=?(media|real)*\\](.+)\\[\\/flash\\]', blog_flash('$2', '$1'),'r')}
+						${blog.message?replace('http://home.xintaonet.com/attachment/','attachment/')?replace('attachment/','http://home.xintaonet.com/attachment/')?replace('mm_[0-9]+_0_0',pid,'r')?replace('\\[flash=?(media|real)*\\](.+?)\\[\\/flash\\]', blog_flash('$2', '$1'),'r')}
 						</div>
 					</div>
 					<ul class="cvl-line">

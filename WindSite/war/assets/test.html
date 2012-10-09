@@ -1,7 +1,60 @@
-<div class="xt-bind-checkbox">
-	<input type="checkbox" checked="checked" value="share">说说 
-	<input type="checkbox" checked="checked" value="album">专辑 
-	<input type="checkbox" checked="checked" value="topic">主题 
-	<input type="checkbox" checked="checked" value="honor">勋章 
-	<a href="javascript:;" data-type="sina"><b>设置同步内容</b><i></i></a>
+<div class="tablenav top">
+	<div class="alignleft actions"></div>
+	<div class="tablenav-pages">
+		<span class="displaying-num">
+			<?php xt_tags_pagination_count();?>
+		</span> <span class="pagination-links">
+			<?php xt_tags_pagination_links();?>
+		</span>
+	</div>
+	<br class="clear">
 </div>
+<table class="wp-list-table widefat fixed tags" cellspacing="0">
+	<thead>
+		<tr>
+			<th class="manage-column" style="width: 100px"><span>编号</span></th>
+			<th class="manage-column"><span>名称</span></th>
+			<th class="manage-column" style="width: 100px"><span>排序</span></th>
+			<th class="manage-column" style="width: 100px"><span>分享</span></th>
+		</tr>
+	</thead>
+
+	<tfoot>
+		<tr>
+			<th class="manage-column" style="width: 100px"><span>编号</span></th>
+			<th class="manage-column"><span>名称</span></th>
+			<th class="manage-column" style="width: 100px"><span>排序</span></th>
+			<th class="manage-column" style="width: 100px"><span>分享</span></th>
+		</tr>
+	</tfoot>
+	<tbody id="the-list" class="list:catalog">
+		<?php
+
+$_tag_count = 0;
+foreach ($_tags as $tag) {
+	xt_row_tag($tag, $_tag_count);
+	$_cat_count++;
+}
+?>
+	</tbody>
+</table>
+<table style="display: none">
+	<tbody>
+		<tr id="inline-edit" class="inline-edit-row">
+			<td colspan="4" class="colspanchange">
+				<fieldset>
+					<div class="inline-edit-col">
+						<h4>快速编辑</h4>
+						<label> <span class="title">名称</span> <span class="input-text-wrap"><input type="text" name="title" class="ptitle" value="" /></span>
+						</label> <label> <span class="title">排序</span> <span class="input-text-wrap"><input type="text" name="sort" class="ptitle" value="" /></span>
+						</label>
+					</div>
+				</fieldset>
+				<p class="inline-edit-save submit">
+					<a accesskey="c" href="#inline-edit" title="取消" class="cancel button-secondary alignleft">取消</a> <a accesskey="s" href="#inline-edit" title="更新分类" class="save button-primary alignright">更新分类</a>
+					<img class="waiting" style="display: none;" src="<?php echo esc_url( admin_url( 'images/wpspin_dark.gif' ) ); ?>" alt="" /> <span class="error" style="display: none;"></span> <br class="clear" />
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>

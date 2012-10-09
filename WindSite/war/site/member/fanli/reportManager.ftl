@@ -37,6 +37,13 @@ $(function(){
 	<tr><td align=center colspan=2><span id="getReport-result" style="color:red;font-size:14px;font-weight:700;padding:2px;line-height:17px;"></span></td></tr>
 </table>
 </div>
+<#if USER.nPid??&&USER.pid??&&USER.pid!=USER.nPid>
+<#if USER.reportSession??>
+如果发现订单不能同步,请<a href="http://container.open.taobao.com/container?appkey=12194773&xintao=bind">重新授权</a>.
+<#else>
+您自定义了PID,为保证可以获取交易记录,请使用当前PID所对应的淘宝账号授权:<a href="http://container.open.taobao.com/container?appkey=12194773&xintao=bind">点击授权</a>
+</#if>
+</#if>
 <ol class="step step-four"><li><span>1.登录返利网站</span></li><li><span>2.淘宝网交易</span></li><li><span>3.确认收货</span></li><li class="last"><span>返利</span></li></ol>
 <div class="search-form">
 	<fieldset>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.wind.site.command.CommandExecutor;
 import com.wind.site.command.impl.IPCrawlerCommand;
 import com.wind.site.env.EnvManager;
 import com.wind.site.service.ISiteService;
+import com.wind.site.util.HMacMD5;
 import com.wind.site.util.WindSiteRestUtil;
 
 /**
@@ -46,10 +48,9 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		response
-				.setHeader(
-						"P3P",
-						"CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"");
+		response.setHeader(
+				"P3P",
+				"CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"");
 		String uri = request.getRequestURI();
 		// IPTABLE start 后台IP调整,黑名单页面,验证码页面无过滤,其他页面需过滤
 		// 客户端IP
@@ -98,8 +99,24 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 					.getRealPath("/"));
 		HttpSession session = request.getSession();
 		EnvManager.registerSession(session);
+		String userId = request.getParameter("USER");
+		if (StringUtils.isNotEmpty(userId)) {
+			Map<String, Object> result = new HashMap<String, Object>();
+			WindSiteRestUtil.covertPID(siteService, result, userId);
+			Object appKeyObj = result.get("appKey");
+			if (appKeyObj != null) {
+				String appKey = String.valueOf(appKeyObj);
+				String appSecret = String.valueOf(result.get("appSecret"));
+				Cookie c1 = new Cookie("timestamp", timestamp);
+				Cookie c2 = new Cookie("sign", getSign(appKey, appSecret));
+				Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
+						appSecret));
+				response.addCookie(c1);
+				response.addCookie(c2);
+				response.addCookie(c3);
+			}
+		}
 		if (isFanliNotMember(uri, request)) {// 如果是返利非会员功能
-			String userId = request.getParameter("USER");
 			Map<String, Object> result = new HashMap<String, Object>();
 			WindSiteRestUtil.covertFanliPID(siteService, request, result,
 					userId);
@@ -300,6 +317,53 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 
 	public IPTable getIpTable() {
 		return ipTable;
+	}
+
+	/**
+	 * $secret.'app_key'.$app_key.'timestamp'.$timestamp.$secret;
+	 * 
+	 * @return
+	 */
+	public static String getSign(String appkey, String secret) {
+		String result = null;
+		StringBuilder signStr = new StringBuilder();
+		signStr.append(secret).append("app_key").append(appkey)
+				.append("timestamp").append(timestamp).append(secret);
+		try {
+			result = byte2hex(HMacMD5.getHmacMd5Bytes(signStr.toString()
+					.getBytes("utf-8"), secret.getBytes("utf-8")));
+		} catch (Exception ex) {
+			throw new java.lang.RuntimeException("sign error !");
+		}
+		return result;
+	}
+
+	public static String timestamp = String.valueOf(System.currentTimeMillis());
+
+	public static String getOriginalSign(String appkey, String secret) {
+		String result = null;
+		StringBuilder signStr = new StringBuilder();
+		signStr.append(secret).append("app_key").append(appkey)
+				.append("timestamp").append(timestamp).append(secret);
+		try {
+			result = signStr.toString();
+		} catch (Exception ex) {
+			throw new java.lang.RuntimeException("sign error !");
+		}
+		return result;
+	}
+
+	private static String byte2hex(byte[] data) {
+		StringBuffer hs = new StringBuffer();
+		String stmp = "";
+		for (int n = 0; n < data.length; n++) {
+			stmp = (java.lang.Integer.toHexString(data[n] & 0XFF));
+			if (stmp.length() == 1)
+				hs.append("0").append(stmp);
+			else
+				hs.append(stmp);
+		}
+		return hs.toString().toUpperCase();
 	}
 
 }

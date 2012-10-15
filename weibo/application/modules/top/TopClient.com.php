@@ -719,272 +719,283 @@ class TopClient {
 	 * 淘画报---获得频道详情
 	 */
 	public function posterChannelGet($channel_id) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.channel.get";
-		if (isset ($channel_id) && '' != $channel_id) {
-			$req_array['channel_id'] = $channel_id;
-		} else {
-			return RST(false, '100000', '未指定频道标识');
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.channel.get";
+		//		if (isset ($channel_id) && '' != $channel_id) {
+		//			$req_array['channel_id'] = $channel_id;
+		//		} else {
+		//			return RST(false, '100000', '未指定频道标识');
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 淘画报---获得画报所有频道
 	 */
 	public function posterChannelsGet() {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.channels.get";
-
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.channels.get";
+		//
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 淘画报---搜索画报
 	 */
 	public function posterPostersSearch($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.posters.search";
-
-		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
-			$req_array['channel_ids'] = $params['channel_ids'];
-		} else {
-			//默认搜索所有频道
-			$req_array['channel_ids'] = '1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21';
-		}
-		if (isset ($params['key_word']) && '' != $params['key_word']) {
-			$req_array['key_word'] = $params['key_word'];
-		}
-		if (isset ($params['date']) && '' != $params['date']) {
-			if ('today' == $params['date']) {
-				$date = date("Y-m-d") . ' 00:00:00';
-				$req_array['start_date'] = $date;
-				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
-			}
-			elseif ('yesterday' == $params['date']) {
-				$yesterday = date("Y-m-d", time() - 24 * 60 * 60 * 1) . ' 00:00:00';
-				$req_array['start_date'] = $yesterday;
-				$req_array['end_date'] = date("Y-m-d") . ' 00:00:00';
-			}
-			elseif ('week' == $params['date']) {
-				$week = date("Y-m-d", time() - 24 * 60 * 60 * 7) . ' 00:00:00';
-				$req_array['start_date'] = $week;
-				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
-			}
-			elseif ('month' == $params['date']) {
-				$month = date("Y-m-d", time() - 24 * 60 * 60 * 30) . ' 00:00:00';
-				$req_array['start_date'] = $month;
-				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
-			}
-		}
-		if (isset ($params['show_num']) && '' != $params['show_num']) {
-			$req_array['page_size'] = $params['show_num'];
-		} else {
-			$req_array['page_size'] = 5;
-		}
-		if (isset ($params['page_no']) && '' != $params['page_no']) {
-			$req_array['page_no'] = $params['page_no'];
-		} else {
-			$req_array['page_no'] = 1;
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.posters.search";
+		//
+		//		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
+		//			$req_array['channel_ids'] = $params['channel_ids'];
+		//		} else {
+		//			//默认搜索所有频道
+		//			$req_array['channel_ids'] = '1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21';
+		//		}
+		//		if (isset ($params['key_word']) && '' != $params['key_word']) {
+		//			$req_array['key_word'] = $params['key_word'];
+		//		}
+		//		if (isset ($params['date']) && '' != $params['date']) {
+		//			if ('today' == $params['date']) {
+		//				$date = date("Y-m-d") . ' 00:00:00';
+		//				$req_array['start_date'] = $date;
+		//				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
+		//			}
+		//			elseif ('yesterday' == $params['date']) {
+		//				$yesterday = date("Y-m-d", time() - 24 * 60 * 60 * 1) . ' 00:00:00';
+		//				$req_array['start_date'] = $yesterday;
+		//				$req_array['end_date'] = date("Y-m-d") . ' 00:00:00';
+		//			}
+		//			elseif ('week' == $params['date']) {
+		//				$week = date("Y-m-d", time() - 24 * 60 * 60 * 7) . ' 00:00:00';
+		//				$req_array['start_date'] = $week;
+		//				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
+		//			}
+		//			elseif ('month' == $params['date']) {
+		//				$month = date("Y-m-d", time() - 24 * 60 * 60 * 30) . ' 00:00:00';
+		//				$req_array['start_date'] = $month;
+		//				$req_array['end_date'] = date("Y-m-d", time() + 24 * 60 * 60 * 1) . ' 00:00:00';
+		//			}
+		//		}
+		//		if (isset ($params['show_num']) && '' != $params['show_num']) {
+		//			$req_array['page_size'] = $params['show_num'];
+		//		} else {
+		//			$req_array['page_size'] = 5;
+		//		}
+		//		if (isset ($params['page_no']) && '' != $params['page_no']) {
+		//			$req_array['page_no'] = $params['page_no'];
+		//		} else {
+		//			$req_array['page_no'] = 1;
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 取淘画报-指定频道Id的画报列表
 	 */
 	public function posterPostersGet($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.posters.get";
-
-		if (isset ($params['channel_id']) && '' != $params['channel_id']) {
-			$req_array['channel_id'] = $params['channel_id'];
-		} else {
-			$req_array['channel_id'] = 0;
-		}
-
-		if (isset ($params['show_num']) && '' != $params['show_num']) {
-			$req_array['page_size'] = $params['show_num'];
-		} else {
-			$req_array['page_size'] = 5;
-		}
-		if (isset ($params['page_no']) && '' != $params['page_no']) {
-			$req_array['page_no'] = $params['page_no'];
-		} else {
-			$req_array['page_no'] = 1;
-		}
-
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.posters.get";
+		//
+		//		if (isset ($params['channel_id']) && '' != $params['channel_id']) {
+		//			$req_array['channel_id'] = $params['channel_id'];
+		//		} else {
+		//			$req_array['channel_id'] = 0;
+		//		}
+		//
+		//		if (isset ($params['show_num']) && '' != $params['show_num']) {
+		//			$req_array['page_size'] = $params['show_num'];
+		//		} else {
+		//			$req_array['page_size'] = 5;
+		//		}
+		//		if (isset ($params['page_no']) && '' != $params['page_no']) {
+		//			$req_array['page_no'] = $params['page_no'];
+		//		} else {
+		//			$req_array['page_no'] = 1;
+		//		}
+		//
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 取无线画报-指定频道Id的画报列表
 	 */
 	public function huabaoPostersGet($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.huabao.posters.get";
-
-		if (isset ($params['channel_id']) && '' != $params['channel_id']) {
-			$req_array['channel_id'] = $params['channel_id'];
-		} else {
-			$req_array['channel_id'] = 0;
-		}
-
-		if (isset ($params['show_num']) && '' != $params['show_num']) {
-			$req_array['page_size'] = $params['show_num'];
-		} else {
-			$req_array['page_size'] = 5;
-		}
-		if (isset ($params['page_no']) && '' != $params['page_no']) {
-			$req_array['page_no'] = $params['page_no'];
-		} else {
-			$req_array['page_no'] = 1;
-		}
-
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.huabao.posters.get";
+		//
+		//		if (isset ($params['channel_id']) && '' != $params['channel_id']) {
+		//			$req_array['channel_id'] = $params['channel_id'];
+		//		} else {
+		//			$req_array['channel_id'] = 0;
+		//		}
+		//
+		//		if (isset ($params['show_num']) && '' != $params['show_num']) {
+		//			$req_array['page_size'] = $params['show_num'];
+		//		} else {
+		//			$req_array['page_size'] = 5;
+		//		}
+		//		if (isset ($params['page_no']) && '' != $params['page_no']) {
+		//			$req_array['page_no'] = $params['page_no'];
+		//		} else {
+		//			$req_array['page_no'] = 1;
+		//		}
+		//
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 获取淘画报-指定画报列表
 	 */
 	public function posterAppointedpostersGet($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.appointedposters.get";
-
-		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
-			$req_array['channel_ids'] = $params['channel_ids'];
-		} else {
-			$req_array['channel_ids'] = 0;
-		}
-
-		if (isset ($params['show_num']) && '' != $params['show_num']) {
-			$req_array['re_num'] = $params['show_num'];
-		} else {
-			$req_array['re_num'] = 5;
-		}
-		if (isset ($params['appointed_type']) && '' != $params['appointed_type']) {
-			$req_array['appointed_type'] = $params['type'];
-		} else {
-			$req_array['appointed_type'] = 'HOT';
-		}
-
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.appointedposters.get";
+		//
+		//		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
+		//			$req_array['channel_ids'] = $params['channel_ids'];
+		//		} else {
+		//			$req_array['channel_ids'] = 0;
+		//		}
+		//
+		//		if (isset ($params['show_num']) && '' != $params['show_num']) {
+		//			$req_array['re_num'] = $params['show_num'];
+		//		} else {
+		//			$req_array['re_num'] = 5;
+		//		}
+		//		if (isset ($params['appointed_type']) && '' != $params['appointed_type']) {
+		//			$req_array['appointed_type'] = $params['type'];
+		//		} else {
+		//			$req_array['appointed_type'] = 'HOT';
+		//		}
+		//
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 获取无线画报-指定画报列表
 	 */
 	public function huabaoSpecialpostersGet($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.huabao.specialposters.get";
-
-		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
-			$req_array['channel_ids'] = $params['channel_ids'];
-		} else {
-			$req_array['channel_ids'] = 0;
-		}
-
-		if (isset ($params['show_num']) && '' != $params['show_num']) {
-			$req_array['number'] = $params['show_num'];
-		} else {
-			$req_array['number'] = 5;
-		}
-		if (isset ($params['type']) && '' != $params['type']) {
-			$req_array['type'] = $params['type'];
-		} else {
-			$req_array['type'] = 'HOT';
-		}
-
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.huabao.specialposters.get";
+		//
+		//		if (isset ($params['channel_ids']) && '' != $params['channel_ids']) {
+		//			$req_array['channel_ids'] = $params['channel_ids'];
+		//		} else {
+		//			$req_array['channel_ids'] = 0;
+		//		}
+		//
+		//		if (isset ($params['show_num']) && '' != $params['show_num']) {
+		//			$req_array['number'] = $params['show_num'];
+		//		} else {
+		//			$req_array['number'] = 5;
+		//		}
+		//		if (isset ($params['type']) && '' != $params['type']) {
+		//			$req_array['type'] = $params['type'];
+		//		} else {
+		//			$req_array['type'] = 'HOT';
+		//		}
+		//
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 获取淘画报-指定画报
 	 */
 	public function posterPosterdetailGet($poster_id) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.posterdetail.get";
-
-		if (isset ($poster_id) && '' != $poster_id) {
-			if (!is_numeric($poster_id)) {
-				return RST(false, '1210002', '画报标识格式不正确');
-			}
-			$req_array['poster_id'] = $poster_id;
-		} else {
-			return RST(false, '100000', '未指定画报标识');
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY_2;
-		$this->secretKey = TB_APP_SECRET_2;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.posterdetail.get";
+		//
+		//		if (isset ($poster_id) && '' != $poster_id) {
+		//			if (!is_numeric($poster_id)) {
+		//				return RST(false, '1210002', '画报标识格式不正确');
+		//			}
+		//			$req_array['poster_id'] = $poster_id;
+		//		} else {
+		//			return RST(false, '100000', '未指定画报标识');
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY_2;
+		//		$this->secretKey = TB_APP_SECRET_2;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 获取无线画报-指定画报列表
 	 */
 	public function huabaoPosterGet($params) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.huabao.poster.get";
-
-		if (isset ($params['poster_id']) && '' != $params['poster_id']) {
-			$req_array['poster_id'] = $params['poster_id'];
-		} else {
-			return RST(false, '100000', '未指定画报标识');
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.huabao.poster.get";
+		//
+		//		if (isset ($params['poster_id']) && '' != $params['poster_id']) {
+		//			$req_array['poster_id'] = $params['poster_id'];
+		//		} else {
+		//			return RST(false, '100000', '未指定画报标识');
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 取得淘画报-画报相关商品信息
 	 */
 	public function posterPosterGoodsinfoGet($poster_id) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.poster.postauctions.get";
-
-		if (isset ($poster_id) && '' != $poster_id) {
-			if (!is_numeric($poster_id)) {
-				return RST(false, '1210002', '画报标识格式不正确');
-			}
-			$req_array['poster_id'] = $poster_id;
-		} else {
-			return RST(false, '100000', '未指定画报标识');
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.poster.postauctions.get";
+		//
+		//		if (isset ($poster_id) && '' != $poster_id) {
+		//			if (!is_numeric($poster_id)) {
+		//				return RST(false, '1210002', '画报标识格式不正确');
+		//			}
+		//			$req_array['poster_id'] = $poster_id;
+		//		} else {
+		//			return RST(false, '100000', '未指定画报标识');
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 取得无线画报-画报相关商品信息
 	 */
 	public function huabaoPosterGoodsinfoGet($poster_id) {
-		$req_array = array ();
-		$req_array['method'] = "taobao.huabao.poster.goodsinfo.get";
-
-		if (isset ($poster_id) && '' != $poster_id) {
-			$req_array['poster_id'] = $poster_id;
-		} else {
-			return RST(false, '100000', '未指定画报标识');
-		}
-		//执行搜索
-		$this->appkey = TB_APP_KEY;
-		$this->secretKey = TB_APP_SECRET;
-		return $this->exec($req_array);
+		//		$req_array = array ();
+		//		$req_array['method'] = "taobao.huabao.poster.goodsinfo.get";
+		//
+		//		if (isset ($poster_id) && '' != $poster_id) {
+		//			$req_array['poster_id'] = $poster_id;
+		//		} else {
+		//			return RST(false, '100000', '未指定画报标识');
+		//		}
+		//		//执行搜索
+		//		$this->appkey = TB_APP_KEY;
+		//		$this->secretKey = TB_APP_SECRET;
+		//		return $this->exec($req_array);
+		exit ('淘宝不再支持画报');
 	}
 	/**
 	 * 获取后台供卖家发布商品的标准商品类目

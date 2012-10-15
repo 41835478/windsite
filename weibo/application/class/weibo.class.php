@@ -144,7 +144,7 @@ class weibo {
 		$error = json_decode($error, true);
 		$error_array = explode(':', $error['error']);
 		switch ($error_array[0]) {
-			case '21327':
+			case '21327' || '21301' :
 				$msg = array (
 					'error_code' => '1040000',
 					'error' => $error['error']
@@ -1253,8 +1253,8 @@ class weibo {
 	 *
 	 * @return array
 	 */
-	function verifyCredentials($id=null) {
-		return $this->getUserShow($id==null?USER :: uid():$id);
+	function verifyCredentials($id = null) {
+		return $this->getUserShow($id == null ? USER :: uid() : $id);
 	}
 
 	/**
@@ -1789,6 +1789,12 @@ class weibo {
 	 */
 	function emotions($language = false, $type = false) {
 		$c = new SaeTClientV2($this->appKey, $this->appSecret, $this->access_token);
+		if (!$type) {
+			$type = 'face';
+		}
+		if (!$language) {
+			$language = 'cnname';
+		}
 		$response = $c->emotions($type, $language);
 		return RST($response);
 

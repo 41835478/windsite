@@ -847,6 +847,9 @@ class SaeTClientV2 {
 	 * @return void
 	 */
 	function __construct($akey, $skey, $access_token, $refresh_token = NULL) {
+		if(empty($access_token)){
+			exit('您尚未绑定新浪微博');
+		}
 		$this->oauth = new SaeTOAuthV2($akey, $skey, $access_token, $refresh_token);
 	}
 	/**

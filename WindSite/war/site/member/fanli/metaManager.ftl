@@ -26,8 +26,8 @@ $('#addMetaDialog').dialog({
 						if(!meta){
 							alert('您尚未填写元标记验证');return false;
 						}
-						if(meta.length>150){
-							alert('请确认您的元标记代码正确，长度超过150，如果确认正确，可联系客服QQ：153647646');return flase;
+						if(meta.length>300){
+							alert('请确认您的元标记代码正确，长度超过300，如果确认正确，可联系客服QQ：153647646');return flase;
 						}
 						if(!reg.test(meta)){
 							alert('请确认您的元标记代码正确，如果确认正确，可联系客服QQ：153647646');return flase;
@@ -58,8 +58,8 @@ $('a.updateMetaButton').click(function(){
 	if(!meta){
 		alert('您尚未填写元标记验证');return false;
 	}
-	if(meta.length>150){
-		alert('请确认您的元标记代码正确，长度超过150，如果确认正确，可联系客服QQ：153647646');return flase;
+	if(meta.length>300){
+		alert('请确认您的元标记代码正确，长度超过300，如果确认正确，可联系客服QQ：153647646');return flase;
 	}
 	if(!reg.test(meta)){
 		alert('请确认您的元标记代码正确，如果确认正确，可联系客服QQ：153647646');return flase;

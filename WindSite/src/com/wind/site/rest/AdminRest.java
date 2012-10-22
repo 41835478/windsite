@@ -1215,24 +1215,24 @@ public class AdminRest {
 	@RequestMapping(value = "/syn/posterchannel")
 	@ResponseBody
 	public String synPosterChannel(HttpServletRequest request) {
-		adminService.deleteAll(T_PosterChannel.class);// 删除所有画报频道
-		HuabaoChannelsGetRequest req = new HuabaoChannelsGetRequest();
-		HuabaoChannelsGetResponse resp = TaobaoFetchUtil.channelsGet(req);
-		if (resp != null) {
-			List<PosterChannel> channels = resp.getChannels();
-			if (channels != null && channels.size() > 0) {
-				T_PosterChannel c = null;
-				for (PosterChannel channel : channels) {
-					c = new T_PosterChannel();
-					c.setCn_name(channel.getCnName());
-					c.setDescription(channel.getDesc());
-					c.setId(Long.valueOf(channel.getId()));
-					c.setName(channel.getName());
-					c.setUrl(channel.getUrl());
-					adminService.save(c);
-				}
-			}
-		}
+//		adminService.deleteAll(T_PosterChannel.class);// 删除所有画报频道
+//		HuabaoChannelsGetRequest req = new HuabaoChannelsGetRequest();
+//		HuabaoChannelsGetResponse resp = TaobaoFetchUtil.channelsGet(req);
+//		if (resp != null) {
+//			List<PosterChannel> channels = resp.getChannels();
+//			if (channels != null && channels.size() > 0) {
+//				T_PosterChannel c = null;
+//				for (PosterChannel channel : channels) {
+//					c = new T_PosterChannel();
+//					c.setCn_name(channel.getCnName());
+//					c.setDescription(channel.getDesc());
+//					c.setId(Long.valueOf(channel.getId()));
+//					c.setName(channel.getName());
+//					c.setUrl(channel.getUrl());
+//					adminService.save(c);
+//				}
+//			}
+//		}
 		return WindSiteRestUtil.SUCCESS;
 	}
 

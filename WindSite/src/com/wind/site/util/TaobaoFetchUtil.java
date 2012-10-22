@@ -1168,11 +1168,11 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, String nick, String sids,
 			String pid) {
 		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
-					|| "null".equals(appKey) || "null".equals(appSecret)) {
-				appKey = EnvManager.getAppKey(appType);
-				appSecret = EnvManager.getSecret(appType);
-			}
+			// if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+			// || "null".equals(appKey) || "null".equals(appSecret)) {
+			appKey = EnvManager.getAppKey(null);
+			appSecret = EnvManager.getSecret(null);
+			// }
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			TaobaokeShopsConvertRequest request = new TaobaokeShopsConvertRequest();
@@ -1180,7 +1180,7 @@ public class TaobaoFetchUtil {
 			request.setNick(nick);
 			request.setOuterCode(EnvManager.getShopsOuterCode());
 			request.setSids(sids);
-			
+
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeShopsConvertResponse response = client.execute(request);
 			if (response.isSuccess()) {

@@ -923,10 +923,7 @@ public class SiteRest {
 		try {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
 			List<TaobaokeShop> taokeShops = TaobaoFetchUtil.convertTaobaoShop(
-					String.valueOf(result.get("appKey")),
-					String.valueOf(result.get("appSecret")),
-					String.valueOf(result.get("appType")),
-					(String) result.get("nick"), sid,
+					null, null, null, (String) result.get("nick"), sid,
 					String.valueOf(result.get("pid")));
 			if (taokeShops == null || taokeShops.size() != 1) {
 				try {

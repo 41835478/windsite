@@ -175,11 +175,9 @@ public class SiteRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
-		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(
-				String.valueOf(result.get("appKey")),
-				String.valueOf(result.get("appSecret")),
-				String.valueOf(result.get("appType")), numIid + "",
-				(String) result.get("nick"), String.valueOf(result.get("pid")));
+		List<TaobaokeItem> items = TaobaoFetchUtil.huabaoItemConvert(null,
+				null, null, numIid + "", (String) result.get("nick"),
+				String.valueOf(result.get("pid")));
 		if (items != null && items.size() == 1) {
 			return "{\"co\":\"" + items.get(0).getCommission()
 					+ "\",\"price\":\"" + items.get(0).getPrice() + "\"}";
@@ -1046,19 +1044,11 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		try {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
-			Float versionNo = 1.0f;
-			try {
-				versionNo = Float.valueOf(String.valueOf(result
-						.get("versionNo")));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(String
-					.valueOf(result.get("appKey")), String.valueOf(result
-					.get("appSecret")), versionNo > 1.5f ? null : "1",
-					WindSiteRestUtil.filterUnValidNick((String) result
-							.get("nick")), sid, String.valueOf(result
-							.get("pid")));
+
+			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(null,
+					null, null, WindSiteRestUtil
+							.filterUnValidNick((String) result.get("nick")),
+					sid, String.valueOf(result.get("pid")));
 			if (shops == null || shops.size() != 1) {
 				SystemException.handleMessageException("该店铺不存在，或者未加入淘宝推广计划");
 			}

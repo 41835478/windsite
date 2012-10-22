@@ -852,10 +852,7 @@ public class TaobaoRest {
 				}
 				result.put("itemsMap", itemsMap);
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appKey")),
-						String.valueOf(result.get("appSecret")),
-						String.valueOf(result.get("appType")), numiids, nick,
-						String.valueOf(result.get("pid")));
+						numiids, nick, String.valueOf(result.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
 				if (categories != null && categories.size() > 0) {
 					List<T_ItemCat> itemCats = EnvManager.getCats();
@@ -1196,10 +1193,7 @@ public class TaobaoRest {
 					numiids += i.getNumIid();
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						String.valueOf(result.get("appKey")),
-						String.valueOf(result.get("appSecret")),
-						String.valueOf(siteImpl.get("appType")), numiids, nick,
-						String.valueOf(siteImpl.get("pid")));
+						numiids, nick, String.valueOf(siteImpl.get("pid")));
 				List<ItemCategory> categories = search.getItemCategories();
 				if (categories != null && categories.size() > 0) {
 					List<T_ItemCat> itemCats = EnvManager.getCats();

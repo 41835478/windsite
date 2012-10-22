@@ -509,11 +509,11 @@ public class TaobaoFetchUtil {
 
 	public static void handleError(TaobaoResponse response) {
 		if (StringUtils.isEmpty(response.getSubCode())) {// 系统错误
-			SystemException.handleException(response.getErrorCode(),
-					response.getMsg());
+			SystemException.handleException(response.getErrorCode(), "["
+					+ response.getErrorCode() + "]" + response.getMsg());
 		} else {// 业务错误
-			SystemException.handleException(response.getSubCode(),
-					response.getSubMsg());
+			SystemException.handleException(response.getSubCode(), "["
+					+ response.getSubCode() + "]" + response.getSubMsg());
 		}
 	}
 
@@ -896,6 +896,32 @@ public class TaobaoFetchUtil {
 		return new ArrayList<TaobaokeItem>();
 	}
 
+	public static List<TaobaokeItem> itemsConvert(String numIids, String nick,
+			String pid) {
+		try {
+			String appKey = EnvManager.getAppKey("0");
+			String appSecret = EnvManager.getSecret("0");
+			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+			TaobaokeItemsConvertRequest request = new TaobaokeItemsConvertRequest();
+			request.setFields(TaobaoFetchUtil.TAOBAOKEITEM_FIELDS);
+			request.setNick(StringUtils.isNotEmpty(nick) ? nick : EnvManager
+					.getUser().getNick());
+			request.setPid(WindSiteRestUtil.getPid(pid));
+			request.setNumIids(numIids);
+			request.setOuterCode(EnvManager.getItemsOuterCode());// 自定义输入串
+			TaobaokeItemsConvertResponse response = client.execute(request);
+			if (response.isSuccess()) {
+				return response.getTaobaokeItems();
+			} else {
+				handleError(response);
+			}
+		} catch (ApiException e) {
+			SystemException.handleMessageException(e);
+		}
+		return new ArrayList<TaobaokeItem>();
+	}
+
 	public static List<TaobaokeItem> itemsConvert(String appKey,
 			String appSecret, String appType, String numIids, String nick,
 			String pid) {
@@ -1154,6 +1180,7 @@ public class TaobaoFetchUtil {
 			request.setNick(nick);
 			request.setOuterCode(EnvManager.getShopsOuterCode());
 			request.setSids(sids);
+			
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeShopsConvertResponse response = client.execute(request);
 			if (response.isSuccess()) {

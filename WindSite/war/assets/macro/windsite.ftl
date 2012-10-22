@@ -204,7 +204,6 @@ $(function() {
 				<!--<li id="myWidget" style="position:relative;"><a href="/router/member/widget/my"><span>我的组件库</span></a></li>
 				<li id="myForums" style="position:relative;"><a href="/router/member/forums"><span>我的推广阵地</span></a></li>-->
 				</#if>
-				<li id="coolSitesMenu"><a href="/router/site/coolsites"><span>酷站展示</span></a></li>
 				<#if !USER??>
 				<li id="aboutMenu"><a href="/router/site/view/about"><span>新淘介绍</span></a></li>
 				</#if>

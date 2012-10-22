@@ -1,60 +1,13 @@
-<div class="tablenav top">
-	<div class="alignleft actions"></div>
-	<div class="tablenav-pages">
-		<span class="displaying-num">
-			<?php xt_tags_pagination_count();?>
-		</span> <span class="pagination-links">
-			<?php xt_tags_pagination_links();?>
-		</span>
-	</div>
-	<br class="clear">
+<div class="ranking">
+	<h2 class="f14_f">社区热荐排行榜</h2>
+	<ul class="items_pop">
+		<li><a target="_blank" href="http://www.meilishuo.com/guang/attr/34370?frm=welcometop_1"><span class="right_f gray_f">3987件</span><span class="num1">1</span>大衣高人气 气质出街做暖美人</a></li>
+		<li class="odd_num"><a target="_blank" href="http://www.meilishuo.com/guang/attr/34362?frm=welcometop_2"><span class="right_f gray_f">3912件</span><span class="num1">2</span>秋季必备小外套 时尚又百搭！</a></li>
+		<li><a target="_blank" href="http://www.meilishuo.com/guang/attr/34375?frm=welcometop_3"><span class="right_f gray_f">3754件</span><span class="num1">3</span>酷感十足 机车皮衣秋季新鲜搭</a></li>
+		<li class="odd_num"><a target="_blank" href="http://www.meilishuo.com/guang/attr/34359?frm=welcometop_4"><span class="right_f gray_f">3566件</span><span class="num2">4</span>毛衣的时尚美搭 保暖秋装必备</a></li>
+		<li><a target="_blank" href="http://www.meilishuo.com/guang/attr/34516?frm=welcometop_5"><span class="right_f gray_f">3465件</span><span class="num2">5</span>早秋必备短靴 尽显脚下风采！</a></li>
+		<li class="odd_num"><a target="_blank" href="http://www.meilishuo.com/guang/attr/34423?frm=welcometop_6"><span class="right_f gray_f">2477件</span><span class="num2">6</span>入秋巧穿打底裤 显瘦又百搭</a></li>
+		<li><a target="_blank" href="http://www.meilishuo.com/guang/attr/34466?frm=welcometop_7"><span class="right_f gray_f">2232件</span><span class="num2">7</span>精美高跟鞋 无限增高好驾驭</a></li>
+		<li class="odd_num"><a target="_blank" href="http://www.meilishuo.com/guang/attr/34363?frm=welcometop_8"><span class="right_f gray_f">2217件</span><span class="num2">8</span>西装巧搭配 帅气摩登新形象！</a></li>
+	</ul>
 </div>
-<table class="wp-list-table widefat fixed tags" cellspacing="0">
-	<thead>
-		<tr>
-			<th class="manage-column" style="width: 100px"><span>编号</span></th>
-			<th class="manage-column"><span>名称</span></th>
-			<th class="manage-column" style="width: 100px"><span>排序</span></th>
-			<th class="manage-column" style="width: 100px"><span>分享</span></th>
-		</tr>
-	</thead>
-
-	<tfoot>
-		<tr>
-			<th class="manage-column" style="width: 100px"><span>编号</span></th>
-			<th class="manage-column"><span>名称</span></th>
-			<th class="manage-column" style="width: 100px"><span>排序</span></th>
-			<th class="manage-column" style="width: 100px"><span>分享</span></th>
-		</tr>
-	</tfoot>
-	<tbody id="the-list" class="list:catalog">
-		<?php
-
-$_tag_count = 0;
-foreach ($_tags as $tag) {
-	xt_row_tag($tag, $_tag_count);
-	$_cat_count++;
-}
-?>
-	</tbody>
-</table>
-<table style="display: none">
-	<tbody>
-		<tr id="inline-edit" class="inline-edit-row">
-			<td colspan="4" class="colspanchange">
-				<fieldset>
-					<div class="inline-edit-col">
-						<h4>快速编辑</h4>
-						<label> <span class="title">名称</span> <span class="input-text-wrap"><input type="text" name="title" class="ptitle" value="" /></span>
-						</label> <label> <span class="title">排序</span> <span class="input-text-wrap"><input type="text" name="sort" class="ptitle" value="" /></span>
-						</label>
-					</div>
-				</fieldset>
-				<p class="inline-edit-save submit">
-					<a accesskey="c" href="#inline-edit" title="取消" class="cancel button-secondary alignleft">取消</a> <a accesskey="s" href="#inline-edit" title="更新分类" class="save button-primary alignright">更新分类</a>
-					<img class="waiting" style="display: none;" src="<?php echo esc_url( admin_url( 'images/wpspin_dark.gif' ) ); ?>" alt="" /> <span class="error" style="display: none;"></span> <br class="clear" />
-				</p>
-			</td>
-		</tr>
-	</tbody>
-</table>

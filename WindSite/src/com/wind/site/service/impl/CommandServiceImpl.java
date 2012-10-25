@@ -173,24 +173,27 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 		if (m.getParentId() != null) {// 如果存在父推广人
 			Member parentM = this.get(Member.class, m.getParentId());
 			if (parentM != null && parentM.getUser_id().equals(user_id)
-					&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,则生成推广人的返利记录
-				AdsFanliTrade trade = new AdsFanliTrade();
-				trade.setFlMember(parentM);
-				trade.setReport(report);
-				trade.setSite_id(site_id);
-				trade.setUser_id(user_id);
-				trade.setStatus(0);
+					&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,且推广比例大于0,则生成推广人的返利记录
 				Integer adCommissionRate = parentM.getAdCommissionRate();
 				if (adCommissionRate == null) {// 如果没有设置推广返利比例，则取当前站点的推广返利比例
 					if (sc == null)
 						sc = this.get(SiteCommission.class, site_id);
 					adCommissionRate = sc.getAdCommissionRate();
 				}
-				re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
-				trade.setCommission(convertCommission(re));// 只保留小数点后两位
-				report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
-				trade.setStatusDate(new Date());
-				this.save(trade);
+				if (adCommissionRate > 0) {
+					AdsFanliTrade trade = new AdsFanliTrade();
+					trade.setFlMember(parentM);
+					trade.setReport(report);
+					trade.setSite_id(site_id);
+					trade.setUser_id(user_id);
+					trade.setStatus(0);
+
+					re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+					trade.setCommission(convertCommission(re));// 只保留小数点后两位
+					report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
+					trade.setStatusDate(new Date());
+					this.save(trade);
+				}
 			}
 		}
 		return true;
@@ -202,8 +205,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 		Member m = this.get(Member.class, member_id);
 		if (m != null && m.getUser_id().equals(user_id)
 				&& m.getSite_id().equals(site_id)) {// 如果购买人存在，并且是该站点的会员
-			YiqifaReport report = this.findByCriterion(YiqifaReport.class, R
-					.eq("yiqifaId", yiqifa.getYiqifaId()));
+			YiqifaReport report = this.findByCriterion(YiqifaReport.class,
+					R.eq("yiqifaId", yiqifa.getYiqifaId()));
 			Boolean isNew = false;
 			if (report == null) {
 				// 新淘网字段
@@ -249,13 +252,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 				if (m.getParentId() != null) {// 如果存在父推广人
 					Member parentM = this.get(Member.class, m.getParentId());
 					if (parentM != null && parentM.getUser_id().equals(user_id)
-							&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,则生成推广人的返利记录
-						AdsFanliTrade trade = new AdsFanliTrade();
-						trade.setFlMember(parentM);
-						trade.setYiqifa(yiqifa);
-						trade.setSite_id(site_id);
-						trade.setUser_id(user_id);
-						trade.setStatus(0);
+							&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,且推广比例大于0,则生成推广人的返利记录
 						Integer adCommissionRate = parentM
 								.getAdCommissionRate();
 						if (adCommissionRate == null) {// 如果没有设置推广返利比例，则取当前站点的推广返利比例
@@ -263,11 +260,20 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 								sc = this.get(SiteCommission.class, site_id);
 							adCommissionRate = sc.getAdCommissionRate();
 						}
-						re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
-						trade.setCommission(convertCommission(re));// 只保留小数点后两位
-						yiqifa.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
-						trade.setStatusDate(new Date());
-						this.save(trade);
+						if (adCommissionRate > 0) {
+							AdsFanliTrade trade = new AdsFanliTrade();
+							trade.setFlMember(parentM);
+							trade.setYiqifa(yiqifa);
+							trade.setSite_id(site_id);
+							trade.setUser_id(user_id);
+							trade.setStatus(0);
+
+							re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+							trade.setCommission(convertCommission(re));// 只保留小数点后两位
+							yiqifa.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
+							trade.setStatusDate(new Date());
+							this.save(trade);
+						}
 					}
 				}
 				return isNew;
@@ -281,8 +287,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 	@Override
 	public Boolean mergeYiqifaReportTrade(String userId, String siteId,
 			YiqifaReport yiqifa) {
-		YiqifaReport report = this.findByCriterion(YiqifaReport.class, R.eq(
-				"yiqifaId", yiqifa.getYiqifaId()));
+		YiqifaReport report = this.findByCriterion(YiqifaReport.class,
+				R.eq("yiqifaId", yiqifa.getYiqifaId()));
 		Boolean isNew = false;
 		if (report == null) {// 新增
 			// 新淘网字段
@@ -440,8 +446,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 	@Override
 	public void clearAdsBlog(ADPlan plan) {
 		// 第一步清理已有系统推荐
-		List<ADBlogSystem> adps = this.findAllByCriterion(ADBlogSystem.class, R
-				.eq("pk.aid", plan.getId()));
+		List<ADBlogSystem> adps = this.findAllByCriterion(ADBlogSystem.class,
+				R.eq("pk.aid", plan.getId()));
 		if (adps != null && adps.size() > 0) {
 			for (ADBlogSystem aps : adps) {
 				ADBlogStatus apsa = this.get(ADBlogStatus.class, aps.getPk()
@@ -460,8 +466,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 	@Override
 	public void clearUserTemplate(ADPlan plan) {
 		// 第一步清理已有系统推荐
-		List<ADPageSystem> adps = this.findAllByCriterion(ADPageSystem.class, R
-				.eq("pk.aid", plan.getId()));
+		List<ADPageSystem> adps = this.findAllByCriterion(ADPageSystem.class,
+				R.eq("pk.aid", plan.getId()));
 		if (adps != null && adps.size() > 0) {
 			for (ADPageSystem aps : adps) {
 				ADPageStatus apsa = this.get(ADPageStatus.class, aps.getPk()
@@ -497,8 +503,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 				for (Map<String, Object> ad : accurateAds) {
 					if (validAds > 0) {
 						// 生成投放记录
-						if (createAdBlog(plan.getId(), String.valueOf(ad
-								.get("id")))) {
+						if (createAdBlog(plan.getId(),
+								String.valueOf(ad.get("id")))) {
 							validAds--;
 						} else {
 							break;
@@ -514,8 +520,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : allCidAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdBlog(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdBlog(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {
@@ -532,8 +538,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : nullAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdBlog(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdBlog(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {
@@ -550,8 +556,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : freeAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdBlog(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdBlog(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {
@@ -596,8 +602,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 				for (Map<String, Object> ad : accurateAds) {
 					if (validAds > 0) {
 						// 生成投放记录
-						if (createAdPage(plan.getId(), String.valueOf(ad
-								.get("id")))) {
+						if (createAdPage(plan.getId(),
+								String.valueOf(ad.get("id")))) {
 							validAds--;
 						}
 					} else {
@@ -613,8 +619,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : allCidAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdPage(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdPage(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {
@@ -631,8 +637,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : nullAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdPage(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdPage(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {
@@ -649,8 +655,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					for (Map<String, Object> ad : freeAds) {
 						if (validAds > 0) {
 							// 生成投放记录
-							if (createAdPage(plan.getId(), String.valueOf(ad
-									.get("id")))) {
+							if (createAdPage(plan.getId(),
+									String.valueOf(ad.get("id")))) {
 								validAds--;
 							}
 						} else {

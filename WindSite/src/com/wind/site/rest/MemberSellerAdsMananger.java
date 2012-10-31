@@ -121,10 +121,8 @@ public class MemberSellerAdsMananger {
 		plan.setType(type);
 		plan.setIsSuccess(true);
 		plan.setUsed(0);
-		memberService.addADPlan(plan, TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
-				EnvManager.getUser().getAppType(), numIids, EnvManager
-						.getUser().getNick(), EnvManager.getUser().getPid()),
+		memberService.addADPlan(plan, TaobaoFetchUtil.itemsConvert(numIids,
+				EnvManager.getUser().getNick(), EnvManager.getUser().getPid()),
 				tags);
 		return WindSiteRestUtil.SUCCESS;
 	}
@@ -215,12 +213,9 @@ public class MemberSellerAdsMananger {
 		plan.setName(name);
 		if (StringUtils.isNotEmpty(desc))
 			plan.setDescription(desc);
-		memberService.updateADPlan(plan, TaobaoFetchUtil.itemsConvert(
-				EnvManager.getUser().getAppKey(), EnvManager.getUser()
-						.getAppSecret(), EnvManager.getUser().getAppType(),
-				numIids, EnvManager.getUser().getNick(), EnvManager.getUser()
-						.getPid()), tags, "true".equals(isDefault) ? true
-				: false);
+		memberService.updateADPlan(plan, TaobaoFetchUtil.itemsConvert(numIids,
+				EnvManager.getUser().getNick(), EnvManager.getUser().getPid()),
+				tags, "true".equals(isDefault) ? true : false);
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -294,10 +289,8 @@ public class MemberSellerAdsMananger {
 					numiids += i.getNumIid();
 				}
 				List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-						EnvManager.getUser().getAppKey(), EnvManager.getUser()
-								.getAppSecret(), EnvManager.getUser()
-								.getAppType(), numiids, EnvManager.getUser()
-								.getNick(), EnvManager.getUser().getPid());
+						numiids, EnvManager.getUser().getNick(), EnvManager
+								.getUser().getPid());
 				result.put("items", taokeItems);
 			}
 		}

@@ -825,10 +825,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 
 	@Override
 	public void addItem2ItemGroup(String numiids, String gid) {
-		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
-				EnvManager.getUser().getAppType(), numiids, EnvManager
-						.getUser().getNick(), EnvManager.getUser().getPid());
+		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(numiids,
+				EnvManager.getUser().getNick(), EnvManager.getUser().getPid());
 		Integer count = this.countItemsByGid(gid);
 		if (items != null && items.size() > 0 && count < 30) {
 			Integer length = items.size();
@@ -1051,10 +1049,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		if (num_iids.length() == 0) {
 			return;
 		}
-		List<TaobaokeItem> tItems = TaobaoFetchUtil.itemsConvert(EnvManager
-				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
-				EnvManager.getUser().getAppType(), num_iids.substring(0,
-						num_iids.length() - 1), null, null);
+		List<TaobaokeItem> tItems = TaobaoFetchUtil.itemsConvert(
+				num_iids.substring(0, num_iids.length() - 1), null, null);
 		if (tItems == null) {
 			tItems = new ArrayList<TaobaokeItem>();
 		}

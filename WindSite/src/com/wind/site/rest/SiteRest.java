@@ -2516,13 +2516,8 @@ public class SiteRest {
 								numiids += i.getNumIid();
 							}
 							List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-									.itemsConvert(String.valueOf(result
-											.get("appKey")), String
-											.valueOf(result.get("appSecret")),
-											String.valueOf(result
-													.get("appType")), numiids,
-											nick, String.valueOf(result
-													.get("pid")));
+									.itemsConvert(numiids, nick,
+											String.valueOf(result.get("pid")));
 							result.put("data", taokeItems);
 						}
 					}

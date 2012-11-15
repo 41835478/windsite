@@ -48,7 +48,7 @@ var PageBaiduConfig = {
 			alert('广告代码不能为空');
 			return false;
 		}
-		var cpro_idReg = /cpro_id\s*=\s*'(.*)'/;
+		var cpro_idReg = /cpro_id\s*=\s*['|"](.*)['|"]/;
 		var cpro_id = this.getParams(code, cpro_idReg);
 		if (cpro_id == null) {
 			alert('cpro_id不能为空');
@@ -74,7 +74,7 @@ var PageBaiduConfig = {
 			alert('广告代码不能为空');
 			return false;
 		}
-		var cpro_idReg = /cpro_id\s*=\s*'(.*)'/;
+		var cpro_idReg = /cpro_id\s*=\s*['|"](.*)['|"]/;
 		var cpro_id = this.getParams(code, cpro_idReg);
 		if (cpro_id == null) {
 			alert('cpro_id不能为空');

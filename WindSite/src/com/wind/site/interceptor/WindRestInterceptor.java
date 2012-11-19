@@ -111,6 +111,12 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 				Cookie c2 = new Cookie("sign", getSign(appKey, appSecret));
 				Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
 						appSecret));
+				if (StringUtils.isNotEmpty(request.getParameter("topPath"))) {
+					String topPath = request.getParameter("topPath");
+					c1.setPath(topPath);
+					c2.setPath(topPath);
+					c3.setPath(topPath);
+				}
 				response.addCookie(c1);
 				response.addCookie(c2);
 				response.addCookie(c3);
@@ -339,6 +345,10 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	public static String timestamp = String.valueOf(System.currentTimeMillis());
+
+	public static void main(String[] args) {
+		System.out.println(timestamp);
+	}
 
 	public static String getOriginalSign(String appkey, String secret) {
 		String result = null;

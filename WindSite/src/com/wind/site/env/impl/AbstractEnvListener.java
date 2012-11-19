@@ -129,8 +129,8 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		}
 		EnvManager.setKeywordCats(cats);
 		// 初始化阵地分类
-		EnvManager.setForumTypes(adminService.findAllByCriterion(
-				ForumType.class, R.eq("parent", "1")));
+//		EnvManager.setForumTypes(adminService.findAllByCriterion(
+//				ForumType.class, R.eq("parent", "1")));
 		// 初始化活动
 		EnvManager.setActivities((List<Activity>) adminService.findByHql(
 				"from Activity order by created desc",
@@ -160,7 +160,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				new HashMap<String, Object>())).get(0)).intValue());
 		EnvManager.setHuabaoCounts(counts);
 		// 初始化画报有效会员
-		EnvManager.setValidHuabaoMembers(new HashSet<String>());
+		//EnvManager.setValidHuabaoMembers(new HashSet<String>());
 		// try {
 		// // 初始化排行榜
 		// EnvManager.setDayTaoke(adminService

@@ -1,3 +1,5 @@
+rsync --delete-before -a -H -v --progress --stats /usr/local/apache2/htdocs/test/ /usr/local/apache2/htdocs/hitem
+
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/httpd-2.2.22.tar /opt
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/php-5.4.0.tar /opt
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/mysql-5.1.62.tar /opt
@@ -304,9 +306,9 @@ e2fsck [-p,-C] /dev/xvdb1
 
 mysqlcheck --auto-repair windsite -uroot -p
 cd /usr/local/mysql/bin
- mysqladmin -u root -p shutdown
+ ./mysqladmin -u root -p shutdown
  
- mysqld_safe &
+ ./mysqld_safe &
  重启
 修复站点用户标识被置空
 select user_id,site_id,nick from w_page where site_id in (select id from w_site where user_id is null);

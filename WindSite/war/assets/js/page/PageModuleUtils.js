@@ -326,67 +326,32 @@ var PageModuleUtils = {
 			var self = $(this);
 			var nid = $('#detail .xt-gallery .xt-s310').attr('data-id');
 			if (nid) {
-				var sender = new WindSender('/router/site/getCommission/' + nid
-								+ '?v=' + Math.random(), true);
-				sender.load("GET", {}, function(response) {
-					if (response.isSuccess()) {// 转换佣金返利成功
-						var c = response.body.co;
-						var price = response.body.price;
-						if (c == 0) {
-							return;
-						}
-						if (c > 0) {
-							var co = Math.floor(parseFloat(c) * rate * 100)
-									/ 100.00;
-							self
-									.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
-											+ pre
-											+ '</span>'
-											+ '<strong style="vertical-align: baseline;font-family: Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size: 24px;font-weight: normal;padding-right: 5px;line-height: 25px;">'
-											+ co + '</strong>' + last + '<li>');
-							if (price > 0) {
-								// var strong =
-								// self.find('strong');
-								// if
-								// (strong.text()
-								// != price) {
-								// strong.text(price);
-								// $.ajax({
-								// url :
-								// '/router/site/synitem/'
-								// + nid + '?v='
-								// +
-								// Math.random(),
-								// type : 'GET',
-								// data : {},
-								// beforeSend :
-								// function(xhr)
-								// {
-								// xhr.setRequestHeader(
-								// "WindType",
-								// "AJAX");//
-								// 请求方式
-								// xhr.setRequestHeader(
-								// "WindDataType",
-								// "HTML");//
-								// 请求返回内容类型
-								// },
-								// error :
-								// function(request,
-								// textStatus,
-								// errorThrown)
-								// {
-								// },
-								// success :
-								// function(data)
-								// {
-								// }
-								// });
-								// }
-							}
-						}
-					}
-				});
+				if (typeof(TOP) != 'undefined') {
+					TOP.api({
+								method : 'taobao.taobaoke.widget.items.convert',
+								fields : 'commission,price',
+								num_iids : nid
+							}, function(resp) {
+								try {
+									if (resp.taobaoke_items.taobaoke_item) {
+										var c = resp.taobaoke_items.taobaoke_item[0].commission;
+										var co = Math.floor(parseFloat(c)
+												* rate * 100)
+												/ 100.00;
+										self
+												.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
+														+ pre
+														+ '</span>'
+														+ '<strong style="vertical-align: baseline;font-family:Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size:24px;font-weight: normal;padding-right: 5px;line-height:25px;">'
+														+ co
+														+ '</strong>'
+														+ last + '<li>');
+									}
+								} catch (e) {
+								}
+
+							});
+				}
 			}
 		});
 		// $('#detail .xt-gallery .xt-s310').each(function() {

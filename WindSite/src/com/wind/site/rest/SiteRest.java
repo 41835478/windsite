@@ -1159,9 +1159,7 @@ public class SiteRest {
 		getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-				.getItemsDetail(String.valueOf(result.get("appKey")),
-						String.valueOf(result.get("appSecret")),
-						String.valueOf(result.get("appType")), getRequest,
+				.getItemsDetail(null, null, null, getRequest,
 						String.valueOf(result.get("pid")));
 		if (getResponse == null) {
 			try {
@@ -1198,38 +1196,39 @@ public class SiteRest {
 		result.put("rates", rates);
 		result.put("item", item.getItem());
 		result.put("detail", item);
-		File file = new File(EnvManager.getUserPath("shop" + userId)
-				+ "itemDetail.html");
-		if (!file.exists()) {// 生成当前用户的新版宝贝详情页
-			if (!CommandExecutor.getCachecommands().containsKey(
-					"user-" + userId)) {// 如果不在队列中
-				UserItemDetailCommand command = new UserItemDetailCommand();
-				command.setFcg(fcg);
-				command.setPageService(pageService);
-				command.setUserId(userId);
-				CommandExecutor.getCachecommands().put("user-" + userId,
-						command);
-			}
-		}
+		// File file = new File(EnvManager.getUserPath("shop" + userId)
+		// + "itemDetail.html");
+		// if (!file.exists()) {// 生成当前用户的新版宝贝详情页
+		// if (!CommandExecutor.getCachecommands().containsKey(
+		// "user-" + userId)) {// 如果不在队列中
+		// UserItemDetailCommand command = new UserItemDetailCommand();
+		// command.setFcg(fcg);
+		// command.setPageService(pageService);
+		// command.setUserId(userId);
+		// CommandExecutor.getCachecommands().put("user-" + userId,
+		// command);
+		// }
+		// }
 
-		file = new File(EnvManager.getItemPath() + File.separator
-				+ nid.substring(nid.length() - 3, nid.length())
-				+ File.separator + nid + File.separator + nid + ".html");
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
-		if (!file.exists() || file.lastModified() < calendar.getTimeInMillis()) {// 如果不存在或者时间差超过1天
-			// 生成当前商品详情相关页
-			Long numIid = item.getItem().getNumIid();
-			if (!CommandExecutor.getCachecommands().containsKey(
-					"item-" + numIid)) {// 如果不在队列中
-				ItemDetailCommand command = new ItemDetailCommand();
-				command.setDetail(item);
-				command.setFcg(fcg);
-				command.setPageService(pageService);
-				CommandExecutor.getCachecommands().put("item-" + numIid,
-						command);
-			}
-		}
+		// file = new File(EnvManager.getItemPath() + File.separator
+		// + nid.substring(nid.length() - 3, nid.length())
+		// + File.separator + nid + File.separator + nid + ".html");
+		// Calendar calendar = Calendar.getInstance();
+		// calendar.add(Calendar.DATE, -1);
+		// if (!file.exists() || file.lastModified() <
+		// calendar.getTimeInMillis()) {// 如果不存在或者时间差超过1天
+		// // 生成当前商品详情相关页
+		// Long numIid = item.getItem().getNumIid();
+		// if (!CommandExecutor.getCachecommands().containsKey(
+		// "item-" + numIid)) {// 如果不在队列中
+		// ItemDetailCommand command = new ItemDetailCommand();
+		// command.setDetail(item);
+		// command.setFcg(fcg);
+		// command.setPageService(pageService);
+		// CommandExecutor.getCachecommands().put("item-" + numIid,
+		// command);
+		// }
+		// }
 		return new ModelAndView("site/itemdetails", result);
 	}
 

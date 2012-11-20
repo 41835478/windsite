@@ -105,21 +105,23 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
 			Object appKeyObj = result.get("appKey");
 			if (appKeyObj != null) {
+				String timestamp = String.valueOf(System.currentTimeMillis());
 				String appKey = String.valueOf(appKeyObj);
 				String appSecret = String.valueOf(result.get("appSecret"));
 				Cookie c1 = new Cookie("timestamp", timestamp);
-				Cookie c2 = new Cookie("sign", getSign(appKey, appSecret));
-				Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
-						appSecret));
+				Cookie c2 = new Cookie("sign", getSign(appKey, appSecret,
+						timestamp));
+				// Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
+				// appSecret));
 				if (StringUtils.isNotEmpty(request.getParameter("topPath"))) {
 					String topPath = request.getParameter("topPath");
 					c1.setPath(topPath);
 					c2.setPath(topPath);
-					c3.setPath(topPath);
+					// c3.setPath(topPath);
 				}
 				response.addCookie(c1);
 				response.addCookie(c2);
-				response.addCookie(c3);
+				// response.addCookie(c3);
 			}
 		}
 		if (isFanliNotMember(uri, request)) {// 如果是返利非会员功能
@@ -330,7 +332,7 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 	 * 
 	 * @return
 	 */
-	public static String getSign(String appkey, String secret) {
+	public static String getSign(String appkey, String secret, String timestamp) {
 		String result = null;
 		StringBuilder signStr = new StringBuilder();
 		signStr.append(secret).append("app_key").append(appkey)
@@ -344,24 +346,18 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 		return result;
 	}
 
-	public static String timestamp = String.valueOf(System.currentTimeMillis());
-
-	public static void main(String[] args) {
-		System.out.println(timestamp);
-	}
-
-	public static String getOriginalSign(String appkey, String secret) {
-		String result = null;
-		StringBuilder signStr = new StringBuilder();
-		signStr.append(secret).append("app_key").append(appkey)
-				.append("timestamp").append(timestamp).append(secret);
-		try {
-			result = signStr.toString();
-		} catch (Exception ex) {
-			throw new java.lang.RuntimeException("sign error !");
-		}
-		return result;
-	}
+	// public static String getOriginalSign(String appkey, String secret) {
+	// String result = null;
+	// StringBuilder signStr = new StringBuilder();
+	// signStr.append(secret).append("app_key").append(appkey)
+	// .append("timestamp").append(timestamp).append(secret);
+	// try {
+	// result = signStr.toString();
+	// } catch (Exception ex) {
+	// throw new java.lang.RuntimeException("sign error !");
+	// }
+	// return result;
+	// }
 
 	private static String byte2hex(byte[] data) {
 		StringBuffer hs = new StringBuffer();

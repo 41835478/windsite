@@ -64,6 +64,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init() {
+		logger.info("1");
 		// 亿起发商城分类
 		EnvManager.setYiqifaCats(adminService.loadAll(YiqifaCategory.class));
 		// 亿起发所有B2C商城
@@ -75,6 +76,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 			}
 		}
 		EnvManager.setYiqifaMalls(map);
+		logger.info("2");
 		Map<String, List<LayoutModel>> templates = new ConcurrentHashMap<String, List<LayoutModel>>();
 		Map<Long, PageModule> modules = new ConcurrentHashMap<Long, PageModule>();
 		List<PageTemplate> ts = adminService.loadAll(PageTemplate.class);
@@ -93,6 +95,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				}
 			}
 		}
+		logger.info("3");
 		EnvManager.setTemplates(templates);
 		EnvManager.setModules(modules);
 		Map<String, SiteImpl> sites = new ConcurrentHashMap<String, SiteImpl>();
@@ -102,11 +105,14 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				DianPuCategory.class, R.isNull("parent"));// 查询所有父分类
 		if (dRoots != null && dRoots.size() > 0) {
 			for (DianPuCategory root : dRoots) {
-				dianpuCats.put(root.getName(), adminService.findAllByCriterion(
-						DianPuCategory.class, R.eq("parent", root.getId())));
+				dianpuCats.put(
+						root.getName(),
+						adminService.findAllByCriterion(DianPuCategory.class,
+								R.eq("parent", root.getId())));
 			}
 		}
 		EnvManager.setDianpuCats(dianpuCats);
+		logger.info("4");
 		// }
 		// 初始化所有分类
 		EnvManager.setCats(adminService.loadAll(T_ItemCat.class));
@@ -117,20 +123,21 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				R.eq("parentCid", "0")));
 		// 初始化所有店铺前台分类
 		EnvManager.setShopCats(adminService.loadAll(T_ShopCat.class));
+		logger.info("5");
 		// 初始化所有关键词分类
 		List<TaobaoKeywordCategory> cats = adminService.findAllByCriterion(
 				TaobaoKeywordCategory.class, R.isNull("parent"));
 		if (cats != null && cats.size() > 0) {
 			for (TaobaoKeywordCategory cat : cats) {
 				cat.setCats(adminService.findAllByCriterion(
-						TaobaoKeywordCategory.class, R
-								.eq("parent", cat.getId())));
+						TaobaoKeywordCategory.class,
+						R.eq("parent", cat.getId())));
 			}
 		}
 		EnvManager.setKeywordCats(cats);
 		// 初始化阵地分类
-//		EnvManager.setForumTypes(adminService.findAllByCriterion(
-//				ForumType.class, R.eq("parent", "1")));
+		// EnvManager.setForumTypes(adminService.findAllByCriterion(
+		// ForumType.class, R.eq("parent", "1")));
 		// 初始化活动
 		EnvManager.setActivities((List<Activity>) adminService.findByHql(
 				"from Activity order by created desc",
@@ -139,6 +146,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		EnvManager.setChannels((List<Channel>) adminService.findByHql(
 				"from Channel order by sortOrder",
 				new HashMap<String, Object>()));
+		logger.info("6");
 		// 初始化金词
 		EnvManager.setTotalWords(new ArrayList<KeyWord>());
 		// 初始化所有画报热门标签
@@ -159,8 +167,9 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				"select count(h) from T_PosterPicture h",
 				new HashMap<String, Object>())).get(0)).intValue());
 		EnvManager.setHuabaoCounts(counts);
+		logger.info("7");
 		// 初始化画报有效会员
-		//EnvManager.setValidHuabaoMembers(new HashSet<String>());
+		// EnvManager.setValidHuabaoMembers(new HashSet<String>());
 		// try {
 		// // 初始化排行榜
 		// EnvManager.setDayTaoke(adminService
@@ -187,6 +196,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 				}
 			}
 		}
+		logger.info("8");
 		// result.clear();
 		// 修订所有已发布的页面广告计划表
 		adminService.refreshAdsUserTemplate();
@@ -194,6 +204,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 		adminService.refreshAdsBlog();
 		// refreshUserTemplatePageId(new Page<UserTemplate>(1, 100));
 		// 初始化广告投放参数
+		logger.info("9");
 		Integer validPage = adminService.countValidPage();// 总的可供投放首页计划的单页面数
 		Integer validADPlanIndex = adminService.countValidADPlan("index");// 总的有效首页计划数
 		Integer validADPlanBlog = adminService.countValidADPlan("blog");// 总的有效文章广告计划数
@@ -217,6 +228,7 @@ public abstract class AbstractEnvListener implements IEnvListener {
 										.get("versionNo")))), TimeUnit.SECONDS);// 加入超时队列(加入3小时的随机)
 			}
 		}
+		logger.info("10");
 		new WindSiteDelay(fcg, pageService, moduleMethod, fetch);// 启动守护线程
 		if (!EnvManager.getZonePath().contains("Apache2.2")) {// 本地不启用主动通知，避免踢掉服务器主动通知，测试的话，可以注释掉该代码
 			// topCometStreamJob.topCometRefresh();// 主动通知

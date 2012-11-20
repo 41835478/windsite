@@ -327,30 +327,33 @@ var PageModuleUtils = {
 			var nid = $('#detail .xt-gallery .xt-s310').attr('data-id');
 			if (nid) {
 				if (typeof(TOP) != 'undefined') {
-					TOP.api({
-								method : 'taobao.taobaoke.widget.items.convert',
-								fields : 'commission,price',
-								num_iids : nid
-							}, function(resp) {
-								try {
-									if (resp.taobaoke_items.taobaoke_item) {
-										var c = resp.taobaoke_items.taobaoke_item[0].commission;
-										var co = Math.floor(parseFloat(c)
-												* rate * 100)
-												/ 100.00;
-										self
-												.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
-														+ pre
-														+ '</span>'
-														+ '<strong style="vertical-align: baseline;font-family:Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size:24px;font-weight: normal;padding-right: 5px;line-height:25px;">'
-														+ co
-														+ '</strong>'
-														+ last + '<li>');
+					try {
+						TOP.api({
+									method : 'taobao.taobaoke.widget.items.convert',
+									fields : 'commission,price',
+									num_iids : nid
+								}, function(resp) {
+									try {
+										if (resp.taobaoke_items.taobaoke_item) {
+											var c = resp.taobaoke_items.taobaoke_item[0].commission;
+											var co = Math.floor(parseFloat(c)
+													* rate * 100)
+													/ 100.00;
+											self
+													.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
+															+ pre
+															+ '</span>'
+															+ '<strong style="vertical-align: baseline;font-family:Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size:24px;font-weight: normal;padding-right: 5px;line-height:25px;">'
+															+ co
+															+ '</strong>'
+															+ last + '<li>');
+										}
+									} catch (e) {
 									}
-								} catch (e) {
-								}
 
-							});
+								});
+					} catch (e) {
+					}
 				}
 			}
 		});

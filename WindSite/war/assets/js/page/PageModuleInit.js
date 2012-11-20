@@ -124,8 +124,17 @@ $(function() {
 	var nav = $('#site-nav-bd');
 	var footer = $('#footer');
 	if (nav.length == 1 && nav.children().size() == 0) {
+		var topPath = document.location.pathname;
+		if (topPath.indexOf('titem') != -1 || topPath.indexOf('tshop') != -1) {
+		} else {
+			topPath = '';
+		}
 		$.ajax({
-					url : '/router/site/pageHeader?v=' + Math.random(),
+					url : '/router/site/pageHeader?v='
+							+ Math.random()
+							+ (topPath != ''
+									? ('&topPath=' + encodeURIComponent(topPath))
+									: ''),
 					type : 'GET',
 					data : {},
 					dataType : 'html',

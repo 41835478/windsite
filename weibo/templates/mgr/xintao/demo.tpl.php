@@ -34,5 +34,4 @@ $(function(){
 });
 
 </script>
-<script type="text/javascript" src=" http://toptrace.taobao.com/assets/getAppKey.js" topappkey="12321683"></script>
 </html>

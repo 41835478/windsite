@@ -98,7 +98,7 @@ public class ShopDetailCommand implements ICommand {
 									}
 									numiids += i.getNumIid();
 								}
-								taokeItems = TaobaoFetchUtil.itemsConvert(null,
+								taokeItems = TaobaoFetchUtil.newItemsConvert(null,
 										null, null, numiids, sellerNick, pid);
 							}
 						}

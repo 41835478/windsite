@@ -176,7 +176,7 @@ public class CommonMultiAdTypeInterceptor extends AbstractModuleInterceptor {
 								numiids += i.getNumIid();
 							}
 							List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-									.itemsConvert(siteImpl.getAppKey(),
+									.newItemsConvert(siteImpl.getAppKey(),
 											siteImpl.getAppSecret(),
 											siteImpl.getAppType(), numiids,
 											siteImpl.getNick(),

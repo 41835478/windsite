@@ -1,9 +1,11 @@
 package com.wind.site.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +14,7 @@ import com.taobao.api.ApiException;
 import com.taobao.api.Constants;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
+import com.taobao.api.TaobaoParser;
 import com.taobao.api.TaobaoResponse;
 import com.taobao.api.domain.ArticleBizOrder;
 import com.taobao.api.domain.ArticleUserSubscribe;
@@ -20,6 +23,7 @@ import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.Item;
 import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.ItemProp;
+import com.taobao.api.domain.Location;
 import com.taobao.api.domain.Poster;
 import com.taobao.api.domain.PosterGoodsInfo;
 import com.taobao.api.domain.PropValue;
@@ -28,6 +32,7 @@ import com.taobao.api.domain.TaobaokeItem;
 import com.taobao.api.domain.TaobaokeItemDetail;
 import com.taobao.api.domain.TaobaokeShop;
 import com.taobao.api.domain.User;
+import com.taobao.api.internal.parser.json.ObjectJsonParser;
 import com.taobao.api.request.HuabaoChannelsGetRequest;
 import com.taobao.api.request.HuabaoPosterGetRequest;
 import com.taobao.api.request.HuabaoPosterGoodsinfoGetRequest;
@@ -51,7 +56,6 @@ import com.taobao.api.request.TaobaokeReportGetRequest;
 import com.taobao.api.request.TaobaokeShopsConvertRequest;
 import com.taobao.api.request.TaobaokeShopsGetRequest;
 import com.taobao.api.request.TaobaokeToolRelationRequest;
-import com.taobao.api.request.TraderatesSearchRequest;
 import com.taobao.api.request.UserGetRequest;
 import com.taobao.api.request.VasOrderSearchRequest;
 import com.taobao.api.request.VasSubscribeGetRequest;
@@ -78,7 +82,6 @@ import com.taobao.api.response.TaobaokeReportGetResponse;
 import com.taobao.api.response.TaobaokeShopsConvertResponse;
 import com.taobao.api.response.TaobaokeShopsGetResponse;
 import com.taobao.api.response.TaobaokeToolRelationResponse;
-import com.taobao.api.response.TraderatesSearchResponse;
 import com.taobao.api.response.UserGetResponse;
 import com.taobao.api.response.VasOrderSearchResponse;
 import com.taobao.api.response.VasSubscribeGetResponse;
@@ -90,6 +93,7 @@ import com.wind.site.model.T_Poster;
 import com.wind.site.model.T_PosterPicture;
 import com.wind.site.model.T_TaobaoItem;
 import com.wind.site.model.T_TaobaokeItem;
+import com.wind.site.util.taobao.HttpRequestUtil;
 
 /**
  * 淘宝辅助
@@ -113,7 +117,7 @@ public class TaobaoFetchUtil {
 	public static final String TAOBAOUSER_FIELDS = "user_id,nick,sex,buyer_credit,seller_credit,location.city,created,last_visit,birthday,type,has_more_pic,item_img_num,item_img_size,prop_img_num,prop_img_size,auto_repost,promoted_type,status,alipay_bind,consumer_protection,alipay_account,alipay_no";
 	public static final String TAOBAOSHOP_FIELDS = "sid,cid,nick,title,desc,shop_score,bulletin,pic_path,created,modified";
 	public static final String TAOBAOKESHOP_FIELDS = "user_id,shop_title,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count";
-	public static final String TAOBAOKEITEMDETAIL_FIELDS = "cid,click_url,shop_click_url,seller_credit_score,title,nick,pic_url,delist_time,price,volume,num_iid";
+	public static final String TAOBAOKEITEMDETAIL_FIELDS = "cid,click_url,shop_click_url,seller_credit_score,title,nick,pic_url,delist_time,price,volume,num_iid,location";
 	public static final String TAOBAOITEMCATPROPVALUE_FIELDS = "cid,pid,prop_name,vid,name,name_alias,is_parent,status,sort_order,binds";
 	public static final String TAOBAOITEMCATITEMPROP_FIELDS = "pid,parent_pid,parent_vid,name,is_key_prop,is_sale_prop,is_color_prop,is_enum_prop,is_input_prop,is_item_prop,must,multi,prop_values,status,sort_order,child_template,is_allow_alias";
 	public static final String TAOBAOREPORT_FIELDS = "app_key,outer_code,trade_id,pay_time,pay_price,num_iid,item_title,item_num,category_id,category_name,shop_title,commission_rate,commission,seller_nick";
@@ -1298,5 +1302,163 @@ public class TaobaoFetchUtil {
 		}
 		return null;
 
+	}
+
+	public static Object[][] obj_array_chunk(Object[] array, int size) {
+		Object[][] target = new Object[(array.length + size - 1) / size][];
+
+		for (int i = 0; i < target.length; i++) {
+			int innerArraySize = array.length - i * size >= size ? size
+					: array.length - i * size;
+			Object[] inner = new Object[innerArraySize];
+			System.arraycopy(array, i * size, inner, 0, innerArraySize);
+			target[i] = inner;
+		}
+
+		return target;
+	}
+
+	public static String[][] array_chunk(String[] array, int size) {
+		String[][] target = new String[(array.length + size - 1) / size][];
+
+		for (int i = 0; i < target.length; i++) {
+			int innerArraySize = array.length - i * size >= size ? size
+					: array.length - i * size;
+			String[] inner = new String[innerArraySize];
+			System.arraycopy(array, i * size, inner, 0, innerArraySize);
+			target[i] = inner;
+		}
+
+		return target;
+	}
+
+	public static List<TaobaokeItem> newItemsConvert(String num_iids,
+			String nick, String pid) {
+		return newItemsConvert(EnvManager.getAppKey(null),
+				EnvManager.getSecret(null), null, num_iids, nick, pid);
+	}
+
+	public static List<TaobaokeItem> newItemsConvert(String appKey,
+			String appSecret, String appType, String num_iids, String nick,
+			String pid) {
+		// return itemsConvert(num_iids, nick, pid);
+
+		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+				|| "null".equals(appKey) || "null".equals(appSecret)) {
+			appKey = EnvManager.getAppKey(appType);
+			appSecret = EnvManager.getSecret(appType);
+		}
+		String url = "http://gw.api.taobao.com/tql/2.0/json";
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (StringUtils.isNotEmpty(num_iids)) {
+			String qls = "";
+			String[][] chunkedArray = array_chunk(num_iids.split(","), 10);
+			if (StringUtils.isNotEmpty(nick)) {
+				nick = " and nick=" + nick;
+			}
+			if (StringUtils.isNotEmpty(pid)) {
+				pid = " and pid=" + pid;
+			}
+			for (String[] objs : chunkedArray) {
+				String strs = "";
+				Boolean isFirst = true;
+				for (String obj : objs) {
+					if (!isFirst) {
+						strs += ",";
+					} else {
+						isFirst = false;
+					}
+					strs += obj;
+				}
+				qls += "{select "
+						+ TAOBAOKEITEMDETAIL_FIELDS
+						+ " from taobao.taobaoke.items.detail.get where num_iids ="
+						+ strs + nick + pid + " }";
+			}
+			params.put("ql", qls);
+			params.put("top_tql_seperator", "true");
+			params.put("app_key", appKey);
+			params.put("sign_method", "md5");
+
+			byte[] result = HttpRequestUtil.sendRequestV1(url, params,
+					appSecret, "post", null, "UTF-8", null, null, null);
+
+			String rs = null;
+			try {
+				rs = new String(result, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			String[] rss = rs.split("\r\n");
+			TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
+			TaobaoParser<TaobaokeItemsDetailGetResponse> parser = new ObjectJsonParser<TaobaokeItemsDetailGetResponse>(
+					request.getResponseClass());
+			List<TaobaokeItemDetail> taobaokeItemDetails = new ArrayList<TaobaokeItemDetail>();
+			TaobaokeItemsDetailGetResponse response;
+			for (String detail : rss) {
+				if (StringUtils.isNotEmpty(detail)) {
+					try {
+						response = parser.parse(detail);
+						List<TaobaokeItemDetail> details = response
+								.getTaobaokeItemDetails();
+						if (details != null && details.size() > 1) {
+							for (TaobaokeItemDetail d : details) {
+								taobaokeItemDetails.add(d);
+							}
+						}
+					} catch (ApiException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return convertDetailToTaobaokeItem(taobaokeItemDetails);
+		}
+		return new ArrayList<TaobaokeItem>();
+	}
+
+	public static List<TaobaokeItem> convertDetailToTaobaokeItem(
+			List<TaobaokeItemDetail> details) {
+		List<TaobaokeItem> items = new ArrayList<TaobaokeItem>();
+		if (details != null && details.size() > 0) {
+			TaobaokeItem item = null;
+			for (TaobaokeItemDetail detail : details) {
+				Item detailItem = detail.getItem();
+				item = new TaobaokeItem();
+				item.setClickUrl(detail.getClickUrl());
+				Location location = detailItem.getLocation();
+				if (location != null)
+					item.setItemLocation(location.getState() + " "
+							+ location.getCity());
+				item.setNick(detailItem.getNick());
+				item.setNumIid(detailItem.getNumIid());
+				item.setPicUrl(detailItem.getPicUrl());
+				item.setPrice(detailItem.getPrice());
+				item.setSellerCreditScore(detail.getSellerCreditScore());
+				item.setShopClickUrl(detail.getShopClickUrl());
+				item.setTitle(detailItem.getTitle());
+				item.setVolume(detailItem.getVolume());
+				items.add(item);
+			}
+		}
+		return items;
+	}
+
+	public static void main(String[] args) {
+		String num_iids = "16272290352,17820515411,16078842780,20226124528,15439073490,16526411341,19392072071,15678998794,16574707167,15679074799,17385691153,15474174172,17834239180,18997436570,16082317715,16129538834,20226148341,19392080537,20226100648,15678978334,16419445989,16078658537,18855152155,20226096630,20329928036,15438074853,20226188056,19401900860,20329852318,19402684118,20225936932,20919260054,17834083716,20919008887,20918968915,20919060655,20329908292";
+		List<TaobaokeItem> items = newItemsConvert(num_iids, "fxy060608",
+				"mm_13667242_0_0");
+		System.out.println(items.size());
+		// System.out.println(Arrays.deepToString(chunkedArray));
+		// List<TaobaokeItem> items = getTaobaokeItemsBySeller("珂丝琪旗舰店",
+		// "12034285", "2c18a03c14736c62a0b70804618f8c45", "", 1);
+		// String str = "";
+		// for (TaobaokeItem item : items) {
+		// str = str + item.getNumIid() + ",";
+		// }
+		// System.out.println(str);
+		// System.out.println(getTaobaokeItemsBySeller("珂丝琪旗舰店", "12034285",
+		// "2c18a03c14736c62a0b70804618f8c45", "", 2));
+		// System.out.println(getTaobaokeItemsBySeller("珂丝琪旗舰店", "12034285",
+		// "2c18a03c14736c62a0b70804618f8c45", "", 3));
 	}
 }

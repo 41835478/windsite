@@ -374,7 +374,7 @@ public class LinkRest {
 		if (StringUtils.isEmpty(nids)) {
 			SystemException.handleMessageException("未提供转换商品的标识列表");
 		}
-		List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(EnvManager
+		List<TaobaokeItem> items = TaobaoFetchUtil.newItemsConvert(EnvManager
 				.getUser().getAppKey(), EnvManager.getUser().getAppSecret(),
 				EnvManager.getUser().getAppType(), nids, EnvManager.getUser()
 						.getNick(), EnvManager.getUser().getPid());
@@ -453,7 +453,7 @@ public class LinkRest {
 				SystemException.handleMessageException("当前商品推广链接对应的商品标识错误");
 			}
 			if (num_iid != null) {
-				List<TaobaokeItem> items = TaobaoFetchUtil.itemsConvert(
+				List<TaobaokeItem> items = TaobaoFetchUtil.newItemsConvert(
 						EnvManager.getUser().getAppKey(), EnvManager.getUser()
 								.getAppSecret(), EnvManager.getUser()
 								.getAppType(), String.valueOf(num_iid),

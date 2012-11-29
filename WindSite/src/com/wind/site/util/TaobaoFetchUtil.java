@@ -1342,7 +1342,8 @@ public class TaobaoFetchUtil {
 			String appSecret, String appType, String num_iids, String nick,
 			String pid) {
 		// return itemsConvert(num_iids, nick, pid);
-
+		// logger.info("nick:" + nick);
+		// logger.info("pid:" + pid);
 		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
 				|| "null".equals(appKey) || "null".equals(appSecret)) {
 			appKey = EnvManager.getAppKey(appType);
@@ -1356,8 +1357,8 @@ public class TaobaoFetchUtil {
 			if (StringUtils.isNotEmpty(nick)) {
 				nick = " and nick=" + nick;
 			}
-			if (StringUtils.isNotEmpty(pid)) {
-				pid = " and pid=" + pid;
+			if (StringUtils.isNotEmpty(pid) && !pid.equals("null")) {
+				pid = " and pid=" + pid.replace("mm_", "").replace("_0_0", "");
 			}
 			for (String[] objs : chunkedArray) {
 				String strs = "";
@@ -1389,6 +1390,8 @@ public class TaobaoFetchUtil {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
+			// logger.info(qls);
+			// logger.info(rs);
 			String[] rss = rs.split("\r\n");
 			TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
 			TaobaoParser<TaobaokeItemsDetailGetResponse> parser = new ObjectJsonParser<TaobaokeItemsDetailGetResponse>(
@@ -1445,8 +1448,9 @@ public class TaobaoFetchUtil {
 
 	public static void main(String[] args) {
 		String num_iids = "16272290352,17820515411,16078842780,20226124528,15439073490,16526411341,19392072071,15678998794,16574707167,15679074799,17385691153,15474174172,17834239180,18997436570,16082317715,16129538834,20226148341,19392080537,20226100648,15678978334,16419445989,16078658537,18855152155,20226096630,20329928036,15438074853,20226188056,19401900860,20329852318,19402684118,20225936932,20919260054,17834083716,20919008887,20918968915,20919060655,20329908292";
-		List<TaobaokeItem> items = newItemsConvert(num_iids, "fxy060608",
-				"mm_13667242_0_0");
+		List<TaobaokeItem> items = newItemsConvert("12034285",
+				"2c18a03c14736c62a0b70804618f8c45", null, num_iids, "",
+				"25170759");
 		System.out.println(items.size());
 		// System.out.println(Arrays.deepToString(chunkedArray));
 		// List<TaobaokeItem> items = getTaobaokeItemsBySeller("珂丝琪旗舰店",

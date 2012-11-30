@@ -922,40 +922,25 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		try {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
-			List<TaobaokeShop> taokeShops = TaobaoFetchUtil.convertTaobaoShop(
-					null, null, null, (String) result.get("nick"), sid,
-					String.valueOf(result.get("pid")));
-			if (taokeShops == null || taokeShops.size() != 1) {
-				try {
+
+			T_TaobaokeShop local = siteService.findByCriterion(
+					T_TaobaokeShop.class, R.eq("sid", Long.valueOf(sid)));
+			Long cid = null;
+			result.put("sid", sid);
+			if (local == null) {
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+						result, userId) + "error/shop404");
+			}
+			if (local != null) {
+				cid = local.getCid();
+				if (StringUtils.isNotEmpty(local.getNick())) {
+					result.put("local", local);// 本地店铺
+				} else {
 					response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 							result, userId) + "error/shop404");
-				} catch (Exception e) {
 				}
-			}
-			Long cid = null;
-			TaobaokeShop shop = taokeShops.get(0);
-			T_TaobaokeShop local = siteService.findByCriterion(
-					T_TaobaokeShop.class, R.eq("sid", Long.valueOf(sid)));
-			result.put("shop", shop);// 店铺
-			result.put("sid", sid);
-			if (local != null) {
-				if (StringUtils.isNotEmpty(local.getNick())) {
-					cid = local.getCid();
-					result.put("local", local);// 本地店铺
-				} else {
-					return new ModelAndView("site/tshop", result);// 直接定向至推广
-				}
-			} else {// 如果本地没有则加入
-				local = new T_TaobaokeShop();
-				local.setCommissionRate(shop.getCommissionRate());
-				local.setIsValid(true);
-				local.setSellerCredit(shop.getSellerCredit());
-				local.setTitle(shop.getShopTitle());
-				local.setUserId(shop.getUserId());
-				local.setSid(Long.valueOf(sid));
-				siteService.save(local);
-				return new ModelAndView("site/tshop", result);// 直接定向至推广
 			}
 			// 查询同类店铺
 			if (cid != null) {
@@ -988,40 +973,41 @@ public class SiteRest {
 					}
 				}
 			}
-			File file = new File(EnvManager.getUserPath("shop" + userId)
-					+ "shopDetail.html");
-			if (!file.exists()) {// 生成当前用户的新版店铺详情页
-				if (!CommandExecutor.getCachecommands().containsKey(
-						"usershop-" + userId)) {// 如果不在队列中
-					UserShopDetailCommand command = new UserShopDetailCommand();
-					command.setFcg(fcg);
-					command.setPageService(pageService);
-					command.setUserId(userId);
-					CommandExecutor.getCachecommands().put(
-							"usershop-" + userId, command);
-				}
-			}
-			if (local != null && StringUtils.isNotEmpty(local.getNick())) {
-				file = new File(EnvManager.getShopPath() + File.separator
-						+ sid.substring(sid.length() - 2, sid.length())
-						+ File.separator + sid + File.separator + sid + ".html");
-				Calendar calendar = Calendar.getInstance();
-				calendar.add(Calendar.DATE, -3);
-				if (!file.exists()
-						|| file.lastModified() < calendar.getTimeInMillis()) {// 如果不存在或者时间差超过3天
-					// 生成当前店铺详情相关页
-					if (!CommandExecutor.getCachecommands().containsKey(
-							"shop-" + sid)) {// 如果不在队列中
-						ShopDetailCommand command = new ShopDetailCommand();
-						command.setFcg(fcg);
-						command.setPageService(pageService);
-						command.setSellerNick(local.getNick());
-						command.setSid(Long.valueOf(sid));
-						CommandExecutor.getCachecommands().put("shop-" + sid,
-								command);
-					}
-				}
-			}
+			// File file = new File(EnvManager.getUserPath("shop" + userId)
+			// + "shopDetail.html");
+			// if (!file.exists()) {// 生成当前用户的新版店铺详情页
+			// if (!CommandExecutor.getCachecommands().containsKey(
+			// "usershop-" + userId)) {// 如果不在队列中
+			// UserShopDetailCommand command = new UserShopDetailCommand();
+			// command.setFcg(fcg);
+			// command.setPageService(pageService);
+			// command.setUserId(userId);
+			// CommandExecutor.getCachecommands().put(
+			// "usershop-" + userId, command);
+			// }
+			// }
+			// if (local != null && StringUtils.isNotEmpty(local.getNick())) {
+			// file = new File(EnvManager.getShopPath() + File.separator
+			// + sid.substring(sid.length() - 2, sid.length())
+			// + File.separator + sid + File.separator + sid + ".html");
+			// Calendar calendar = Calendar.getInstance();
+			// calendar.add(Calendar.DATE, -3);
+			// if (!file.exists()
+			// || file.lastModified() < calendar.getTimeInMillis()) {//
+			// 如果不存在或者时间差超过3天
+			// // 生成当前店铺详情相关页
+			// if (!CommandExecutor.getCachecommands().containsKey(
+			// "shop-" + sid)) {// 如果不在队列中
+			// ShopDetailCommand command = new ShopDetailCommand();
+			// command.setFcg(fcg);
+			// command.setPageService(pageService);
+			// command.setSellerNick(local.getNick());
+			// command.setSid(Long.valueOf(sid));
+			// CommandExecutor.getCachecommands().put("shop-" + sid,
+			// command);
+			// }
+			// }
+			// }
 		} catch (Exception e) {
 			return redirect(result, response);
 		}
@@ -1041,15 +1027,19 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		try {
 			WindSiteRestUtil.covertPID(siteService, result, userId);
-
-			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(null,
-					null, null, WindSiteRestUtil
-							.filterUnValidNick((String) result.get("nick")),
-					sid, String.valueOf(result.get("pid")));
-			if (shops == null || shops.size() != 1) {
-				SystemException.handleMessageException("该店铺不存在，或者未加入淘宝推广计划");
+			if (result.get("appKey") == null) {
+				SystemException.handleMessageException("您尚未配置AppKey");
+			} else if (String.valueOf(result.get("appKey")).equals("null")
+					|| StringUtils
+							.isEmpty(String.valueOf(result.get("appKey")))) {
+				SystemException.handleMessageException("您尚未配置AppKey");
 			}
-			result.put("shop", shops.get(0));
+			T_TaobaokeShop shop = siteService.findByCriterion(
+					T_TaobaokeShop.class, R.eq("sid", Long.valueOf(sid)));
+			if (shop == null || StringUtil.isEmpty(shop.getNick())) {
+				SystemException.handleMessageException("该店铺不存在");
+			}
+			result.put("shop", shop);
 			result.put("sid", sid);
 		} catch (Exception e) {
 			return redirect(result, response);

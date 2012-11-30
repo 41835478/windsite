@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.taobao.api.domain.Shop;
 import com.taobao.api.domain.TaobaokeItem;
 import com.taobao.api.domain.TaobaokeShop;
 import com.taobao.api.request.TaobaokeShopsGetRequest;
@@ -289,23 +290,46 @@ public class LinkRest {
 					List<TaobaokeShop> shops = shopGetResponse
 							.getTaobaokeShops();
 					for (TaobaokeShop shop : shops) {
-						T_TaobaokeShop localShop = memberService.get(
-								T_TaobaokeShop.class, shop.getUserId());
-						if (localShop == null) {
-							localShop = new T_TaobaokeShop();
-							localShop.setCommissionRate(shop
-									.getCommissionRate());
-							localShop.setIsValid(true);
-							localShop.setSellerCredit(shop.getSellerCredit());
-							localShop.setTitle(shop.getShopTitle());
-							localShop.setUserId(shop.getUserId());
-							memberService.save(localShop);
-						} else {
-							if (StringUtils.isNotEmpty(localShop.getNick())) {
-								localMaps.put(localShop.getUserId() + "",
-										localShop);
+						try {
+							T_TaobaokeShop localShop = memberService.get(
+									T_TaobaokeShop.class, shop.getUserId());
+							if (localShop == null) {
+								Shop tShop = TaobaoFetchUtil.getTaobaoShop(
+										null, shop.getSellerNick());
+								if (tShop != null) {
+									localShop = new T_TaobaokeShop();
+									localShop.setSid(tShop.getSid());
+									localShop.setCid(tShop.getCid());
+									localShop.setPicPath(tShop.getPicPath());
+									localShop.setSid(tShop.getSid());
+									localShop.setItemScore(tShop.getShopScore()
+											.getItemScore());
+									localShop.setServiceScore(tShop
+											.getShopScore().getServiceScore());
+									localShop.setDeliveryScore(tShop
+											.getShopScore().getDeliveryScore());
+									localShop.setNick(shop.getSellerNick());
+									localShop.setCommissionRate(shop
+											.getCommissionRate());
+									localShop.setIsValid(true);
+									localShop.setSellerCredit(shop
+											.getSellerCredit());
+									localShop.setTitle(shop.getShopTitle());
+									localShop.setUserId(shop.getUserId());
+									memberService.save(localShop);
+								}
+
 							}
+							if (localShop != null) {
+								if (StringUtils.isNotEmpty(localShop.getNick())) {
+									localMaps.put(localShop.getUserId() + "",
+											localShop);
+								}
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
+
 					}
 					result.put("shops", shops);
 					result.put("extra", localMaps);

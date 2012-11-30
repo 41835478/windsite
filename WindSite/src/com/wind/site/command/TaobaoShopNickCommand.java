@@ -11,6 +11,7 @@ import org.hibernate.criterion.R;
 import org.htmlparser.Parser;
 import org.htmlparser.filters.HasAttributeFilter;
 import org.htmlparser.nodes.TagNode;
+import org.htmlparser.util.NodeIterator;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 
@@ -155,38 +156,42 @@ public class TaobaoShopNickCommand {
 		}
 	}
 
+	public static void main(String[] args) {
+		try {
+			Parser parser = new Parser(
+					"http://rate.taobao.com/user-rate-58626512.htm");
+			NodeList list = parser
+					.extractAllNodesThatMatch(new HasAttributeFilter("class",
+							"J_WangWang J_MakePoint"));
+			if (list != null && list.size() > 0) {
+				TagNode ww = (TagNode) list.elementAt(list.size() - 1);
+				System.out.println(ww.getAttribute("data-nick"));
+			}
+			NodeList user = parser
+					.extractAllNodesThatMatch(new HasAttributeFilter("id",
+							"monthuserid"));
+			System.out.println(user.size());
+			if (user != null && user.size() > 0) {
+				TagNode ww = (TagNode) user.elementAt(user.size() - 1);
+				System.out.println(ww.getAttribute("value"));
+			}
+		} catch (Exception e) {
+			if (e instanceof ParserException
+					|| e instanceof FileNotFoundException) {
+
+			}
+		}
+	}
+
 	public void synNicks() {
 		// synVersion();
 		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(
 				new Page<T_TaobaokeShop>(1, 200), T_TaobaokeShop.class,
-				R.isNull("nick"));
+				R.isNull("itemScore"));
 		ShopGetRequest request = new ShopGetRequest();
 		request.setFields("sid,cid,pic_path,shop_score");
 		if (shops != null && shops.size() > 0) {
 			for (T_TaobaokeShop shop : shops) {
-				if (StringUtils.isEmpty(shop.getNick())) { // 获取昵称
-					try {
-						Parser parser = new Parser(
-								"http://rate.taobao.com/user-rate-"
-										+ shop.getUserId() + ".htm");
-						NodeList list = parser
-								.extractAllNodesThatMatch(new HasAttributeFilter(
-										"class", "J_WangWang"));
-						if (list != null && list.size() > 0) {
-							TagNode ww = (TagNode) list
-									.elementAt(list.size() - 1);
-							shop.setNick(ww.getAttribute("data-nick"));
-						}
-					} catch (Exception e) {
-						if (e instanceof ParserException
-								|| e instanceof FileNotFoundException) {
-							break;
-						}
-						// 删除无法获取昵称的店铺
-						adminService.delete(T_TaobaokeShop.class,
-								shop.getUserId());
-					}
-				}
 				if (StringUtils.isNotEmpty(shop.getNick())
 						&& StringUtils.isEmpty(shop.getItemScore())) {
 					request.setNick(shop.getNick());

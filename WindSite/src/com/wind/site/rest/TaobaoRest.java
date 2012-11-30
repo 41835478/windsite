@@ -850,59 +850,68 @@ public class TaobaoRest {
 					itemsMap.put(String.valueOf(i.getNumIid()), i);
 				}
 				result.put("itemsMap", itemsMap);
-				List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-						.newItemsConvert(String.valueOf(result.get("appKey")),
-								String.valueOf(result.get("appSecret")), null,
-								numiids, nick,
-								String.valueOf(result.get("pid")));
-				// List<TaobaokeItem> taokeItems = TaobaoFetchUtil.itemsConvert(
-				// numiids, nick, String.valueOf(result.get("pid")));
-				List<ItemCategory> categories = search.getItemCategories();
-				if (categories != null && categories.size() > 0) {
-					List<T_ItemCat> itemCats = EnvManager.getCats();
-					Iterator<ItemCategory> itr = categories.iterator();
-					while (itr.hasNext()) {
-						ItemCategory cat = itr.next();
-						List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils.find(
-								itemCats, T_ItemCat.class, "cid",
-								cat.getCategoryId(), null);// 查找类目
-						if (cs != null && cs.size() == 1) {
-							T_ItemCat c = cs.get(0);
-							if (c.getName().equals("其它")) {
-								itr.remove();
+				try {
+
+					List<TaobaokeItem> taokeItems = TaobaoFetchUtil
+							.newItemsConvert(
+									String.valueOf(result.get("appKey")),
+									String.valueOf(result.get("appSecret")),
+									null, numiids, nick,
+									String.valueOf(result.get("pid")));
+					// List<TaobaokeItem> taokeItems =
+					// TaobaoFetchUtil.itemsConvert(
+					// numiids, nick, String.valueOf(result.get("pid")));
+					List<ItemCategory> categories = search.getItemCategories();
+					if (categories != null && categories.size() > 0) {
+						List<T_ItemCat> itemCats = EnvManager.getCats();
+						Iterator<ItemCategory> itr = categories.iterator();
+						while (itr.hasNext()) {
+							ItemCategory cat = itr.next();
+							List<T_ItemCat> cs = (List<T_ItemCat>) JoSqlUtils
+									.find(itemCats, T_ItemCat.class, "cid",
+											cat.getCategoryId(), null);// 查找类目
+							if (cs != null && cs.size() == 1) {
+								T_ItemCat c = cs.get(0);
+								if (c.getName().equals("其它")) {
+									itr.remove();
+								} else {
+									cat.setName(c.getName());
+								}
 							} else {
-								cat.setName(c.getName());
+								itr.remove();
 							}
-						} else {
-							itr.remove();
 						}
 					}
-				}
-				Collections.sort(categories, new ItemCategoryComparator());
+					Collections.sort(categories, new ItemCategoryComparator());
 
-				// if (StringUtils.isNotEmpty(order_by) && taokeItems != null
-				// && taokeItems.size() > 0) {
-				// if ("volume:desc".equals(order_by)) {
-				// Collections.sort(taokeItems,
-				// new ItemVolumeDescComparator());
-				// } else if ("seller_credit:desc".equals(order_by)) {
-				// Collections.sort(taokeItems,
-				// new ItemCreditDescComparator());
-				// } else if ("price:asc".equals(order_by)) {
-				// Collections.sort(taokeItems,
-				// new ItemPriceAscComparator());
-				// } else if ("price:desc".equals(order_by)) {
-				// Collections.sort(taokeItems,
-				// new ItemPriceDescComparator());
-				// }
-				// }
-				result.put("categories", categories);
-				result.put("items", taokeItems);
-				if (taokeItems != null)
-					result.put("invalidCount", items.size() - taokeItems.size());
-				else
-					result.put("invalidCount", 30);
-				result.put("totalResults", resp.getTotalResults());
+					// if (StringUtils.isNotEmpty(order_by) && taokeItems !=
+					// null
+					// && taokeItems.size() > 0) {
+					// if ("volume:desc".equals(order_by)) {
+					// Collections.sort(taokeItems,
+					// new ItemVolumeDescComparator());
+					// } else if ("seller_credit:desc".equals(order_by)) {
+					// Collections.sort(taokeItems,
+					// new ItemCreditDescComparator());
+					// } else if ("price:asc".equals(order_by)) {
+					// Collections.sort(taokeItems,
+					// new ItemPriceAscComparator());
+					// } else if ("price:desc".equals(order_by)) {
+					// Collections.sort(taokeItems,
+					// new ItemPriceDescComparator());
+					// }
+					// }
+					result.put("categories", categories);
+					result.put("items", taokeItems);
+					if (taokeItems != null)
+						result.put("invalidCount",
+								items.size() - taokeItems.size());
+					else
+						result.put("invalidCount", 30);
+					result.put("totalResults", resp.getTotalResults());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			result.put("categories", new ArrayList<ItemCategory>());

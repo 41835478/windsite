@@ -56,7 +56,8 @@ import com.taobao.api.request.TaobaokeReportGetRequest;
 import com.taobao.api.request.TaobaokeShopsConvertRequest;
 import com.taobao.api.request.TaobaokeShopsGetRequest;
 import com.taobao.api.request.TaobaokeToolRelationRequest;
-import com.taobao.api.request.UserGetRequest;
+import com.taobao.api.request.UserBuyerGetRequest;
+import com.taobao.api.request.UserSellerGetRequest;
 import com.taobao.api.request.VasOrderSearchRequest;
 import com.taobao.api.request.VasSubscribeGetRequest;
 import com.taobao.api.response.HuabaoChannelsGetResponse;
@@ -82,7 +83,8 @@ import com.taobao.api.response.TaobaokeReportGetResponse;
 import com.taobao.api.response.TaobaokeShopsConvertResponse;
 import com.taobao.api.response.TaobaokeShopsGetResponse;
 import com.taobao.api.response.TaobaokeToolRelationResponse;
-import com.taobao.api.response.UserGetResponse;
+import com.taobao.api.response.UserBuyerGetResponse;
+import com.taobao.api.response.UserSellerGetResponse;
 import com.taobao.api.response.VasOrderSearchResponse;
 import com.taobao.api.response.VasSubscribeGetResponse;
 import com.wind.core.dao.Page;
@@ -1052,10 +1054,9 @@ public class TaobaoFetchUtil {
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
-			UserGetRequest req = new UserGetRequest();
+			UserBuyerGetRequest req = new UserBuyerGetRequest();
 			req.setFields(TAOBAOUSER_FIELDS);
-			req.setNick(nick);
-			UserGetResponse response = client.execute(req,
+			UserBuyerGetResponse response = client.execute(req,
 					EnvManager.getTaobaoSession());
 			if (response.isSuccess()) {
 				return response.getUser();
@@ -1152,10 +1153,9 @@ public class TaobaoFetchUtil {
 					EnvManager.getAppKey(appType),
 					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
 					TIMEOUT, TIMEOUT);
-			UserGetRequest req = new UserGetRequest();
+			UserSellerGetRequest req = new UserSellerGetRequest();
 			req.setFields("seller_credit");
-			req.setNick(nick);
-			UserGetResponse response = client.execute(req,
+			UserSellerGetResponse response = client.execute(req,
 					EnvManager.getTaobaoSession());
 			if (response.isSuccess()) {
 				return response.getUser();

@@ -1330,11 +1330,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
 				EnvManager.getUser().getAppType(), userId, nick);
 		User user = this.findByCriterion(User.class, R.eq("user_id", userId));
-		user.setAlipay_account(tUser.getAlipayAccount());
-		user.setAlipay_bind(tUser.getAlipayBind());
-		user.setAlipay_no(tUser.getAlipayNo());
-		user.setAuto_repost(tUser.getAutoRepost());
-		user.setBirthday(tUser.getBirthday());
+//		user.setAlipay_account(tUser.getAlipayAccount());
+//		user.setAlipay_bind(tUser.getAlipayBind());
+//		user.setAlipay_no(tUser.getAlipayNo());
+//		user.setAuto_repost(tUser.getAutoRepost());
+//		user.setBirthday(tUser.getBirthday());
 		// TODO 暂时屏蔽信用
 		// UserCredit bCredit = tUser.getBuyerCredit();
 		// this.deleteAll(T_UserCredit.class, R.eq("createdBy", userId));
@@ -1355,21 +1355,21 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		// tsCredit.setTotalNum(sCredit.getTotalNum().intValue());
 		// user.setSeller_credit(tsCredit);
 		// }
-		user.setCity(tUser.getLocation() != null ? tUser.getLocation()
-				.getCity() : null);
-		user.setConsumer_protection("true".equals(tUser.getConsumerProtection()) ? true
-				: false);
-		user.setHas_more_pic(tUser.getHasMorePic());
-		user.setItem_img_num(tUser.getItemImgNum().intValue());
-		user.setItem_img_size(tUser.getItemImgSize().intValue());
-		user.setPromoted_type(tUser.getPromotedType());
-		user.setProp_img_num(tUser.getPropImgNum().intValue());
-		user.setProp_img_size(tUser.getPropImgSize().intValue());
+//		user.setCity(tUser.getLocation() != null ? tUser.getLocation()
+//				.getCity() : null);
+//		user.setConsumer_protection("true".equals(tUser.getConsumerProtection()) ? true
+//				: false);
+//		user.setHas_more_pic(tUser.getHasMorePic());
+//		user.setItem_img_num(tUser.getItemImgNum().intValue());
+//		user.setItem_img_size(tUser.getItemImgSize().intValue());
+//		user.setPromoted_type(tUser.getPromotedType());
+//		user.setProp_img_num(tUser.getPropImgNum().intValue());
+//		user.setProp_img_size(tUser.getPropImgSize().intValue());
 		user.setSex(tUser.getSex());
-		user.setT_created(tUser.getCreated());
-		user.setT_last_visit(tUser.getLastVisit());
-		user.setT_status(tUser.getStatus());
-		user.setT_type(tUser.getType());
+//		user.setT_created(tUser.getCreated());
+//		user.setT_last_visit(tUser.getLastVisit());
+//		user.setT_status(tUser.getStatus());
+//		user.setT_type(tUser.getType());
 		user.setIsNew(EnvManager.getUser().getIsNew());
 		Limit limit = this.findByCriterion(Limit.class,
 				R.eq("user_id", user.getUser_id()));

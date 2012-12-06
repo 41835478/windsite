@@ -1,8 +1,8 @@
 <#setting url_escaping_charset='utf8'> 
 <@p.pageHeader>
-<meta name="keywords" content="${shop.shopTitle}">
-<meta name="description" content="${shop.shopTitle}<#if local??>,掌柜:${local.nick}</#if>">
-<title>${shop.shopTitle}- ${sitetitle}</title>
+<meta name="keywords" content="${local.title}">
+<meta name="description" content="${local.title}<#if local??>,掌柜:${local.nick}</#if>">
+<title>${local.title}- ${sitetitle}</title>
 </@p.pageHeader>
 <style>
 .store_show_box{ float:left; margin:5px 0px; padding:0; width:945px; height:auto;}.store_show_box_logo{ float:left; margin:0px 0px 0px 5px; padding:0; width:222px; height:182px;color:#333333; overflow:hidden;}
@@ -39,11 +39,11 @@
 						<div class="custom-area">
 							<div class="store_show_box">
 							    <div class="store_show_box_logo">
-									<p class="t1"><a href="/gshop/${sid}.html" target="_blank"><img src="<#if local??&&''!=local.picPath>http://logo.taobao.com/shop-logo${local.picPath}<#else><#if shop.shopType=='C'>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png<#else>http://img03.taobaocdn.com/tps/i3/T1N.tyXcNpXXXXXXXX-70-70.png</#if></#if>" class="pic" alt="${shop.shopTitle}"></a></p><p class="t4"><a href="/gshop/${sid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/jump.gif" class="jump" alt="${shop.shopTitle}"></a></p>
+									<p class="t1"><a href="/gshop/${sid}.html" target="_blank"><img src="<#if local??&&''!=local.picPath>http://logo.taobao.com/shop-logo${local.picPath}<#else>http://img02.taobaocdn.com/tps/i2/T1nB0EXnBwXXXXXXXX-80-80.png</#if>" class="pic" alt="${local.title}"></a></p><p class="t4"><a href="/gshop/${sid}.html" target="_blank"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/jump.gif" class="jump" alt="${local.title}"></a></p>
 								</div>
 								<div class="store_show_box_info">
 									<ul>
-										<li style="width:550px;">店铺名称：<h1><a href="/gshop/${sid}.html" target="_self" title="${shop.shopTitle}">${shop.shopTitle}</a></h1></li>
+										<li style="width:550px;">店铺名称：<h1><a href="/gshop/${sid}.html" target="_self" title="${local.title}">${local.title}</a></h1></li>
 										<li style="width:145px;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/315.gif" alt="品质卖家"></li>
 										<#if local??><li>店铺掌柜：${local.nick}<a href="http://amos.im.alisoft.com/msg.aw?v=2&amp;uid=${local.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" target="_blank"><img src="http://amos.im.alisoft.com/online.aw?v=2&amp;uid=${local.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" alt="点击这里给我发消息"></a></li></#if>
 										<#if local??&&local.sellerCredit??&&''!=local.sellerCredit><li>卖家信用：<span><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${local.sellerCredit}.gif" style="vertical-align: text-bottom;"/></span></li></#if>
@@ -107,7 +107,38 @@
 <@p.pageFooter>
 <#if local??>var SELLERNICK='${local.nick}';</#if>
 <#if pid??&&pid!=''>
-_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${sid}', '${shop.shopTitle}']);
+_gaq.push(['_trackEvent', 'xt-${pid}', 'shop-d-${sid}', '${local.title}']);
+</#if>
+<#if appKey??>
+if (typeof(TOP) != 'undefined') {
+	try {
+		TOP.api({
+					method : 'taobao.taobaoke.widget.items.convert',
+					fields : 'commission,price',
+					num_iids : nid
+				}, function(resp) {
+					try {
+						if (resp.taobaoke_items.taobaoke_item) {
+							var c = resp.taobaoke_items.taobaoke_item[0].commission;
+							var co = Math.floor(parseFloat(c)
+									* rate * 100)
+									/ 100.00;
+							self
+									.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
+							+ pre
+							+ '</span>'
+							+ '<strong style="vertical-align: baseline;font-family:Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size:24px;font-weight: normal;padding-right: 5px;line-height:25px;">'
+							+ co
+							+ '</strong>'
+							+ last + '<li>');
+						}
+					} catch (e) {
+					}
+	
+				});
+	} catch (e) {
+	}
+}
 </#if>
 </@p.pageFooter>
 			

@@ -610,8 +610,10 @@ public class MemberFanliRest {
 		if (StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
 			SystemException.handleMessageException("开始时间与结束时间不能为空");
 		}
-		EnvManager.setUser(siteService.get(User.class,
-				R.eq("user_id", EnvManager.getUser().getUser_id())));
+		String user_id = EnvManager.getUser().getUser_id();
+		User user = siteService.findByCriterion(User.class,
+				R.eq("user_id", user_id));
+		EnvManager.getUser().setReportSession(user.getReportSession());
 		if (StringUtils.isEmpty(EnvManager.getUser().getAppKey())) {
 			SystemException.handleMessageException("尚未配置appKey");
 		}

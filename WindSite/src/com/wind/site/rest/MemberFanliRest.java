@@ -51,6 +51,7 @@ import com.wind.site.model.SiteMap;
 import com.wind.site.model.SiteMapCategory;
 import com.wind.site.model.SiteMetadata;
 import com.wind.site.model.T_TaobaokeReportMember;
+import com.wind.site.model.User;
 import com.wind.site.service.ICommandService;
 import com.wind.site.service.IFanliService;
 import com.wind.site.service.IMemberService;
@@ -609,6 +610,8 @@ public class MemberFanliRest {
 		if (StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
 			SystemException.handleMessageException("开始时间与结束时间不能为空");
 		}
+		EnvManager.setUser(siteService.get(User.class,
+				R.eq("user_id", EnvManager.getUser().getUser_id())));
 		if (StringUtils.isEmpty(EnvManager.getUser().getAppKey())) {
 			SystemException.handleMessageException("尚未配置appKey");
 		}

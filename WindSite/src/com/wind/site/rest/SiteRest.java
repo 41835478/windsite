@@ -2072,8 +2072,7 @@ public class SiteRest {
 	@RequestMapping(value = "/bind", method = RequestMethod.GET)
 	@ResponseBody
 	public String bind(HttpServletRequest request, HttpServletResponse response) {
-
-		if (StringUtils.isNotEmpty(request.getParameter("top_parameters"))) {// 淘宝回调
+		if (StringUtils.isNotEmpty(request.getParameter("code"))) {// 淘宝回调
 			try {
 				if (validateTaobaoUserBind(request)) {
 					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
@@ -2155,7 +2154,6 @@ public class SiteRest {
 				.get("appKey")) : "";
 		String appSecret = result.get("appSecret") != null ? String
 				.valueOf(result.get("appSecret")) : "";
-		logger.info(result.toString());
 		if (StringUtils.isEmpty(appKey)) {
 			logger.info("您尚未配置appKey");
 			SystemException.handleMessageException("您尚未配置appKey");

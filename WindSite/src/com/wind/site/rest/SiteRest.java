@@ -38,6 +38,7 @@ import javax.net.ssl.X509TrustManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
@@ -2071,22 +2072,18 @@ public class SiteRest {
 	@RequestMapping(value = "/bind", method = RequestMethod.GET)
 	@ResponseBody
 	public String bind(HttpServletRequest request, HttpServletResponse response) {
-		if (EnvManager.getUser() == null) {
-			System.out.println("您尚未登录新淘网");
-		}
+
 		if (StringUtils.isNotEmpty(request.getParameter("top_parameters"))) {// 淘宝回调
 			try {
-				validateTaobaoUserBind(request);
+				if (validateTaobaoUserBind(request)) {
+					response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+							+ "/router/member/fl/report");
+				}
 			} catch (Exception e) {
 				SystemException.handleMessageException(e);
 			}// 淘宝回调校验成功(设置reportSession)
 		}
-		try {
-			response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
-					+ "/router/member/fl/report");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -2105,10 +2102,14 @@ public class SiteRest {
 		// }
 	}
 
-	public void validateTaobaoUserBind(HttpServletRequest request)
+	public Boolean validateTaobaoUserBind(HttpServletRequest request)
 			throws KeyManagementException, NoSuchAlgorithmException,
 			IOException {
 		String code = request.getParameter("code");
+		String user_id = request.getParameter("USER");
+		logger.info("user_id:" + user_id);
+		Map<String, Object> result = new HashMap<String, Object>();
+		WindSiteRestUtil.covertPID(siteService, result, user_id);
 		if (StringUtils.isEmpty(code)) {
 			SystemException.handleMessageException("无效的code");
 		}
@@ -2145,15 +2146,21 @@ public class SiteRest {
 		};
 		// Install the all-trusting host verifier
 		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-		User user = EnvManager.getUser();
-		Site site = user.getSites().get(0);
-		String www = site.getDomainName() + ".xintaonet.com";
-		if (StringUtils.isNotEmpty(site.getWww())) {
-			www = site.getWww();
+		String www = result.get("domainName") + ".xintaonet.com";
+		if (result.get("www") != null
+				&& StringUtils.isNotEmpty(String.valueOf(result.get("www")))) {
+			www = String.valueOf(result.get("www"));
 		}
-		String appKey = user.getAppKey();
-		String appSecret = user.getAppSecret();
-
+		String appKey = result.get("appKey") != null ? String.valueOf(result
+				.get("appKey")) : "";
+		String appSecret = result.get("appSecret") != null ? String
+				.valueOf(result.get("appSecret")) : "";
+		logger.info(result.toString());
+		if (StringUtils.isEmpty(appKey)) {
+			logger.info("您尚未配置appKey");
+			SystemException.handleMessageException("您尚未配置appKey");
+			return false;
+		}
 		URL url = new URL(
 				"https://oauth.taobao.com/token?grant_type=authorization_code&client_id="
 						+ appKey + "&client_secret=" + appSecret + "&code="
@@ -2178,20 +2185,27 @@ public class SiteRest {
 			input = httpsURLConnection.getErrorStream();
 		}
 		BufferedReader in = new BufferedReader(new InputStreamReader(input));
-		StringBuilder result = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		String line = null;
 		while ((line = in.readLine()) != null) {
-			result.append(line);
+			sb.append(line);
 		}
-		System.out.println(result.toString());
-		Map<String, String> map = new Gson().fromJson(result.toString(),
+		logger.info(sb.toString());
+		// System.out.println(sb.toString());
+		Map<String, String> map = new Gson().fromJson(sb.toString(),
 				new TypeToken<Map<String, String>>() {
 				}.getType());
 		if (map != null) {
 			String topSession = map.get("access_token");
-			user.setReportSession(topSession);
-			siteService.update(user);
+			if (StringUtils.isNotEmpty(topSession)) {
+				User user = siteService.findByCriterion(User.class,
+						R.eq("user_id", user_id));
+				user.setReportSession(topSession);
+				siteService.update(user);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	private void validateTaobaoBind(HttpServletRequest request) {

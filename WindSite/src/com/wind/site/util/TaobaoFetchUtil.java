@@ -1409,7 +1409,7 @@ public class TaobaoFetchUtil {
 							}
 						}
 					} catch (ApiException e) {
-						e.printStackTrace();
+						SystemException.handleMessageException(e);
 					}
 				}
 			}

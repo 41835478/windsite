@@ -609,6 +609,12 @@ public class MemberFanliRest {
 		if (StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
 			SystemException.handleMessageException("开始时间与结束时间不能为空");
 		}
+		if (StringUtils.isEmpty(EnvManager.getUser().getAppKey())) {
+			SystemException.handleMessageException("尚未配置appKey");
+		}
+		if (StringUtils.isEmpty(EnvManager.getUser().getReportSession())) {
+			SystemException.handleMessageException("尚未授权");
+		}
 		String[] p = new String[] { DateUtils.YYYY_MM_DD };
 		try {
 			Calendar start = Calendar.getInstance();
@@ -650,7 +656,9 @@ public class MemberFanliRest {
 		req.setPageNo(page);
 		req.setPageSize(ReportsGetCommand.PAGE_SIZE);
 		TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-				EnvManager.getAppType(), req, EnvManager.getTaobaoSession());
+				EnvManager.getUser().getAppKey(), EnvManager.getUser()
+						.getAppSecret(), req, EnvManager.getUser()
+						.getReportSession());
 		if (response != null) {
 			TaobaokeReport report = response.getTaobaokeReport();
 			if (report != null) {

@@ -779,12 +779,11 @@ public class TaobaoFetchUtil {
 
 	}
 
-	public static TaobaokeReportGetResponse reportGet(String appType,
-			TaobaokeReportGetRequest request, String session) {
+	public static TaobaokeReportGetResponse reportGet(String appKey,
+			String appSecret, TaobaokeReportGetRequest request, String session) {
 
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-				EnvManager.getAppKey(appType), EnvManager.getSecret(appType),
-				Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+				appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 		try {
 			TaobaokeReportGetResponse response = client.execute(request,
 					session);

@@ -677,45 +677,52 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				commission.setIsValid(true);
 				this.save(commission);
 				site.setCommission(commission);
-				// 新增的话，抓取最近90天内交易
-				ReportsGetCommand command = new ReportsGetCommand();
-				if (StringUtils.isNotEmpty(user.getReportSession())) {
-					command.setSession(user.getReportSession());
-					command.setAppType("1");
-				} else {
-					command.setSession(EnvManager.getTaobaoSession());
-					command.setAppType(EnvManager.getAppType());
-				}
-				command.setSite_id(user.getSites().get(0).getId());
-				command.setUser_id(user.getUser_id());
+				if (StringUtils.isNotEmpty(user.getAppKey())
+						&& StringUtils.isNotEmpty(user.getReportSession())) {
+					// 新增的话，抓取最近90天内交易
+					ReportsGetCommand command = new ReportsGetCommand();
+					if (StringUtils.isNotEmpty(user.getReportSession())) {
+						command.setSession(user.getReportSession());
+						command.setAppType("1");
+					} else {
+						command.setSession(EnvManager.getTaobaoSession());
+						command.setAppType(EnvManager.getAppType());
+					}
+					command.setSite_id(user.getSites().get(0).getId());
+					command.setUser_id(user.getUser_id());
 
-				Calendar start = Calendar.getInstance();
-				start.add(Calendar.DATE, -90);
-				command.setStart(start.getTime());
-				CommandExecutor.getCommands().add(command);
-				if (site.getStatus() != null && 1 == site.getStatus()) {// 如果状态已发布，则自动发布最新
-					if (!CommandExecutor.getUpdatecommands().containsKey(// 如果没有包含修改命令
-							"u-" + user.getUser_id())) {
-						UpdateUserTemplateByUserIdCommand siteCommand = new UpdateUserTemplateByUserIdCommand();
-						siteCommand.setDeployZone(deployZone);
-						siteCommand.setFcg(fcg);
-						siteCommand.setType("站点基本信息");
-						siteCommand.setUser(user);
-						siteCommand.setWidgetCustomer(widgetCustomer);
-						siteCommand.setPageService(pageService);
-						siteCommand.setModuleMethod(moduleMethod);
-						CommandExecutor.getUpdatecommands().putIfAbsent(
-								"u-" + user.getUser_id(), siteCommand);
+					Calendar start = Calendar.getInstance();
+					start.add(Calendar.DATE, -90);
+					command.setStart(start.getTime());
+					CommandExecutor.getCommands().add(command);
+					if (site.getStatus() != null && 1 == site.getStatus()) {// 如果状态已发布，则自动发布最新
+						if (!CommandExecutor.getUpdatecommands().containsKey(// 如果没有包含修改命令
+								"u-" + user.getUser_id())) {
+							UpdateUserTemplateByUserIdCommand siteCommand = new UpdateUserTemplateByUserIdCommand();
+							siteCommand.setDeployZone(deployZone);
+							siteCommand.setFcg(fcg);
+							siteCommand.setType("站点基本信息");
+							siteCommand.setUser(user);
+							siteCommand.setWidgetCustomer(widgetCustomer);
+							siteCommand.setPageService(pageService);
+							siteCommand.setModuleMethod(moduleMethod);
+							CommandExecutor.getUpdatecommands().putIfAbsent(
+									"u-" + user.getUser_id(), siteCommand);
+						}
 					}
 				}
+
 			} else {// 如果已有，则根据上次登录时间来抓取
-				ReportsGetCommand command = new ReportsGetCommand();
-				command.setSession(EnvManager.getTaobaoSession());
-				command.setSite_id(user.getSites().get(0).getId());
-				command.setUser_id(user.getUser_id());
-				command.setAppType(EnvManager.getAppType());
-				command.setStart(user.getLast_visit());
-				CommandExecutor.getCommands().add(command);
+				if (StringUtils.isNotEmpty(user.getAppKey())
+						&& StringUtils.isNotEmpty(user.getReportSession())) {
+					ReportsGetCommand command = new ReportsGetCommand();
+					command.setSession(EnvManager.getTaobaoSession());
+					command.setSite_id(user.getSites().get(0).getId());
+					command.setUser_id(user.getUser_id());
+					command.setAppType(EnvManager.getAppType());
+					command.setStart(user.getLast_visit());
+					CommandExecutor.getCommands().add(command);
+				}
 			}
 			List<FanliClass> clazzes = this.findAllByCriterion(
 					FanliClass.class, R.eq("type", 0),
@@ -1008,11 +1015,11 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		try {
 			com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
 					EnvManager.getAppType(), user.getUser_id(), nick);
-//			user.setAlipay_account(tUser.getAlipayAccount());
-//			user.setAlipay_bind(tUser.getAlipayBind());
-//			user.setAlipay_no(tUser.getAlipayNo());
-//			user.setAuto_repost(tUser.getAutoRepost());
-//			user.setBirthday(tUser.getBirthday());
+			// user.setAlipay_account(tUser.getAlipayAccount());
+			// user.setAlipay_bind(tUser.getAlipayBind());
+			// user.setAlipay_no(tUser.getAlipayNo());
+			// user.setAuto_repost(tUser.getAutoRepost());
+			// user.setBirthday(tUser.getBirthday());
 			// UserCredit bCredit = tUser.getBuyerCredit();
 			// if (bCredit != null) {
 			// T_UserCredit tbCredit = new T_UserCredit();
@@ -1031,21 +1038,21 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			// tsCredit.setTotalNum(sCredit.getTotalNum().intValue());
 			// user.setBuyer_credit(tsCredit);
 			// }
-//			user.setCity(tUser.getLocation() != null ? tUser.getLocation()
-//					.getCity() : null);
-//			user.setConsumer_protection("true".equals(tUser
-//					.getConsumerProtection()) ? true : false);
-//			user.setHas_more_pic(tUser.getHasMorePic());
-//			user.setItem_img_num(tUser.getItemImgNum().intValue());
-//			user.setItem_img_size(tUser.getItemImgSize().intValue());
-//			user.setPromoted_type(tUser.getPromotedType());
-//			user.setProp_img_num(tUser.getPropImgNum().intValue());
-//			user.setProp_img_size(tUser.getPropImgSize().intValue());
+			// user.setCity(tUser.getLocation() != null ? tUser.getLocation()
+			// .getCity() : null);
+			// user.setConsumer_protection("true".equals(tUser
+			// .getConsumerProtection()) ? true : false);
+			// user.setHas_more_pic(tUser.getHasMorePic());
+			// user.setItem_img_num(tUser.getItemImgNum().intValue());
+			// user.setItem_img_size(tUser.getItemImgSize().intValue());
+			// user.setPromoted_type(tUser.getPromotedType());
+			// user.setProp_img_num(tUser.getPropImgNum().intValue());
+			// user.setProp_img_size(tUser.getPropImgSize().intValue());
 			user.setSex(tUser.getSex());
-//			user.setT_created(tUser.getCreated());
-//			user.setT_last_visit(tUser.getLastVisit());
-//			user.setT_status(tUser.getStatus());
-//			user.setT_type(tUser.getType());
+			// user.setT_created(tUser.getCreated());
+			// user.setT_last_visit(tUser.getLastVisit());
+			// user.setT_status(tUser.getStatus());
+			// user.setT_type(tUser.getType());
 		} catch (Exception e) {
 			logger.info(e.toString());
 		}

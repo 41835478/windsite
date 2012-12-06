@@ -1,11 +1,18 @@
 package com.wind.site.rest;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +29,12 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,9 +82,6 @@ import com.wind.core.exception.SystemException;
 import com.wind.site.command.CommandExecutor;
 import com.wind.site.command.impl.ItemDetailCommand;
 import com.wind.site.command.impl.ShopBlogCommand;
-import com.wind.site.command.impl.ShopDetailCommand;
-import com.wind.site.command.impl.UserItemDetailCommand;
-import com.wind.site.command.impl.UserShopDetailCommand;
 import com.wind.site.delay.WindSiteDelay;
 import com.wind.site.env.EnvManager;
 import com.wind.site.freemarker.IDeployZone;
@@ -928,9 +938,7 @@ public class SiteRest {
 			Long cid = null;
 			result.put("sid", sid);
 			if (local == null) {
-				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-						result, userId) + "error/shop404");
+
 			}
 			if (local != null) {
 				cid = local.getCid();
@@ -941,6 +949,14 @@ public class SiteRest {
 					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 							result, userId) + "error/shop404");
 				}
+			} else {
+				local = new T_TaobaokeShop();
+				local.setTitle("店铺不存在");
+				local.setNick("未知");
+				result.put("local", local);// 本地店铺
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+						result, userId) + "error/shop404");
 			}
 			// 查询同类店铺
 			if (cid != null) {
@@ -2047,43 +2063,175 @@ public class SiteRest {
 		return new ModelAndView("site/searchResult", "users", users);
 	}
 
-	private void validateTaobaoBind(HttpServletRequest request) {
-		String topParams = request.getParameter("top_parameters");
-		String topSession = request.getParameter("top_session");
-		String topSign = request.getParameter("top_sign");
-		// String versionNo = request.getParameter("versionNo");
-		String appType = request.getParameter("appType");// 当前应用类型
-		// String appKey = request.getParameter("top_appkey");// 当前应用标识
-		// String leaseId = request.getParameter("leaseId");
-		// String timestamp = request.getParameter("timestamp");
-		// String sign = request.getParameter("sign");
-		// String itemCode = request.getParameter("itemCode");
-
-		appType = "1";
-
-		if (EncryptUtil.verifyTopResponse(topParams, topSession, topSign,
-				EnvManager.getAppKey(appType), EnvManager.getSecret(appType))) {// 校验签名
-			Map<String, String> parameters = EncryptUtil
-					.convertBase64StringtoMap(topParams);// 参数解析
-			// 时间戳校验
-			Long sessionTime = Long.valueOf(parameters.get("ts"));
-			Calendar calendar = Calendar.getInstance(Locale.CHINA);
-			Long time = calendar.getTimeInMillis() - sessionTime;
-			logger.info("Session时间差：" + (time));
-			if (time > 1800000) {
-				SystemException.handleMessageException("当前Session已超时,请重新授权绑定");
-			}
-			String user_id = parameters.get("visitor_id");
-			User user = siteService.findByCriterion(User.class,
-					R.eq("user_id", user_id));
-			if (user != null) {
-				user.setReportSession(topSession);
-				siteService.update(user);
-			}
-		} else {
-			logger.info("sign error|淘宝业务签名错误");
-			logger.info("_sign:" + topSign);
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/bind", method = RequestMethod.GET)
+	@ResponseBody
+	public String bind(HttpServletRequest request, HttpServletResponse response) {
+		if (EnvManager.getUser() == null) {
+			System.out.println("您尚未登录新淘网");
 		}
+		if (StringUtils.isNotEmpty(request.getParameter("top_parameters"))) {// 淘宝回调
+			try {
+				validateTaobaoUserBind(request);
+			} catch (Exception e) {
+				SystemException.handleMessageException(e);
+			}// 淘宝回调校验成功(设置reportSession)
+		}
+		try {
+			response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+					+ "/router/member/fl/report");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	public static void main(String[] args) {
+		// try {
+		// validateTaobaoUserBind(null);
+		// } catch (KeyManagementException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// } catch (NoSuchAlgorithmException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+	}
+
+	public void validateTaobaoUserBind(HttpServletRequest request)
+			throws KeyManagementException, NoSuchAlgorithmException,
+			IOException {
+		String code = request.getParameter("code");
+		if (StringUtils.isEmpty(code)) {
+			SystemException.handleMessageException("无效的code");
+		}
+		// String code = "Ay5Kf1mBhzJ0j2J6D0PrEzXH258220";
+		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+			@Override
+			public void checkClientTrusted(
+					java.security.cert.X509Certificate[] arg0, String arg1)
+					throws CertificateException {
+			}
+
+			@Override
+			public void checkServerTrusted(
+					java.security.cert.X509Certificate[] arg0, String arg1)
+					throws CertificateException {
+			}
+
+			@Override
+			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+
+		} };
+
+		SSLContext sc = SSLContext.getInstance("SSL");
+		sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+		// Create all-trusting host name verifier
+		HostnameVerifier allHostsValid = new HostnameVerifier() {
+			public boolean verify(String hostname, SSLSession session) {
+				return true;
+			}
+		};
+		// Install the all-trusting host verifier
+		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+		User user = EnvManager.getUser();
+		Site site = user.getSites().get(0);
+		String www = site.getDomainName() + ".xintaonet.com";
+		if (StringUtils.isNotEmpty(site.getWww())) {
+			www = site.getWww();
+		}
+		String appKey = user.getAppKey();
+		String appSecret = user.getAppSecret();
+
+		URL url = new URL(
+				"https://oauth.taobao.com/token?grant_type=authorization_code&client_id="
+						+ appKey + "&client_secret=" + appSecret + "&code="
+						+ code + "&redirect_uri="
+						+ ("http://" + www + "/router/site/bind"));
+		HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url
+				.openConnection();
+		httpsURLConnection.setConnectTimeout(30000);
+		httpsURLConnection.setReadTimeout(30000);
+		httpsURLConnection.setDoOutput(true);
+		httpsURLConnection.setDoInput(true);
+		httpsURLConnection.setUseCaches(false);
+		httpsURLConnection.setRequestMethod("POST");
+
+		httpsURLConnection.connect();
+
+		int responseCode = httpsURLConnection.getResponseCode();
+		InputStream input = null;
+		if (responseCode == 200) {
+			input = httpsURLConnection.getInputStream();
+		} else {
+			input = httpsURLConnection.getErrorStream();
+		}
+		BufferedReader in = new BufferedReader(new InputStreamReader(input));
+		StringBuilder result = new StringBuilder();
+		String line = null;
+		while ((line = in.readLine()) != null) {
+			result.append(line);
+		}
+		System.out.println(result.toString());
+		Map<String, String> map = new Gson().fromJson(result.toString(),
+				new TypeToken<Map<String, String>>() {
+				}.getType());
+		if (map != null) {
+			String topSession = map.get("access_token");
+			user.setReportSession(topSession);
+			siteService.update(user);
+		}
+	}
+
+	private void validateTaobaoBind(HttpServletRequest request) {
+		// String topParams = request.getParameter("top_parameters");
+		// String topSession = request.getParameter("top_session");
+		// String topSign = request.getParameter("top_sign");
+		// // String versionNo = request.getParameter("versionNo");
+		// String appType = request.getParameter("appType");// 当前应用类型
+		// // String appKey = request.getParameter("top_appkey");// 当前应用标识
+		// // String leaseId = request.getParameter("leaseId");
+		// // String timestamp = request.getParameter("timestamp");
+		// // String sign = request.getParameter("sign");
+		// // String itemCode = request.getParameter("itemCode");
+		//
+		// appType = "1";
+		//
+		// if (EncryptUtil.verifyTopResponse(topParams, topSession, topSign,
+		// EnvManager.getAppKey(appType), EnvManager.getSecret(appType))) {//
+		// 校验签名
+		// Map<String, String> parameters = EncryptUtil
+		// .convertBase64StringtoMap(topParams);// 参数解析
+		// // 时间戳校验
+		// Long sessionTime = Long.valueOf(parameters.get("ts"));
+		// Calendar calendar = Calendar.getInstance(Locale.CHINA);
+		// Long time = calendar.getTimeInMillis() - sessionTime;
+		// logger.info("Session时间差：" + (time));
+		// if (time > 1800000) {
+		// SystemException.handleMessageException("当前Session已超时,请重新授权绑定");
+		// }
+		// String user_id = parameters.get("visitor_id");
+		// User user = siteService.findByCriterion(User.class,
+		// R.eq("user_id", user_id));
+		// if (user != null) {
+		// user.setReportSession(topSession);
+		// siteService.update(user);
+		// }
+		// } else {
+		// logger.info("sign error|淘宝业务签名错误");
+		// logger.info("_sign:" + topSign);
+		// }
 	}
 
 	private Boolean validateTaobao(HttpServletRequest request) {

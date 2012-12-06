@@ -28,13 +28,15 @@ public class ReportsGetCommand implements ICommand {
 	private String site_id;
 	private String session;
 	private String appType;
+	private String appKey;
+	private String appSecret;
 	private Date start;
 	private Boolean isTimer = false;
 
 	@Override
 	public void execute(ICommandService service) {
 		if (user_id != null && site_id != null && session != null
-				&& start != null) {
+				&& start != null && appKey != null) {
 			Calendar from = Calendar.getInstance();
 			from.setTime(start);
 			from.set(Calendar.HOUR, 0);
@@ -64,7 +66,7 @@ public class ReportsGetCommand implements ICommand {
 		request.setPageSize(PAGE_SIZE);
 		try {
 			TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-					appType, request, session);
+					appKey, appSecret, request, session);
 			if (response != null) {
 				TaobaokeReport report = response.getTaobaokeReport();
 				if (report != null) {
@@ -105,12 +107,12 @@ public class ReportsGetCommand implements ICommand {
 				if (exception instanceof BaseException) {// 如果是本系统级错误
 					BaseException e = (BaseException) exception;
 					if ("27".equals(e.getKey())) {// 如果是淘宝Session超时
-						User user = service.findByCriterion(User.class, R.eq(
-								"user_id", user_id));
+						User user = service.findByCriterion(User.class,
+								R.eq("user_id", user_id));
 						if (user != null) {// 将该用户的淘宝Session置为空
 							user.setSites(service.findAllByCriterion(
-									Site.class, R.eq("user_id", user
-											.getUser_id())));
+									Site.class,
+									R.eq("user_id", user.getUser_id())));
 							user.settSession(null);
 							service.update(user);
 						}
@@ -232,6 +234,22 @@ public class ReportsGetCommand implements ICommand {
 
 	public String getAppType() {
 		return appType;
+	}
+
+	public String getAppKey() {
+		return appKey;
+	}
+
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
+	}
+
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
 	}
 
 }

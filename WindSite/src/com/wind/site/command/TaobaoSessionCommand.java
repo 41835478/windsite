@@ -51,7 +51,7 @@ public class TaobaoSessionCommand {
 		Map<String, Object> params = new HashMap<String, Object>();
 		for (String user_id : ids) {
 			params.put("user_id", user_id);
-			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.tSession as session,u.reportSession as reportSession) from User u where (u.tSession is not null or u.reportSession is not null) and user_id=:user_id";
+			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.appKey as appKey,u.appSecret as appSecret,u.reportSession as reportSession) from User u where (u.reportSession is not null) and user_id=:user_id";
 			List<Map<String, Object>> users = (List<Map<String, Object>>) taobaoService
 					.findByHql(hql, params);
 			if (users != null && users.size() == 1) {
@@ -66,19 +66,17 @@ public class TaobaoSessionCommand {
 					if (StringUtils.isNotEmpty(reportSession)
 							&& !"null".equals(reportSession)) {
 						command.setSession(reportSession);
-						command.setAppType("1");
-					} else {
-						command.setSession(String.valueOf(user.get("session")));
-						command.setAppType(String.valueOf(user.get("appType")));
+						command.setAppKey(String.valueOf(user.get("appKey")));
+						command.setAppSecret(String.valueOf(user
+								.get("appSecret")));
+						command.setSite_id(String.valueOf(result.get("sid")));
+						command.setUser_id(String.valueOf(user.get("user_id")));
+
+						calendar.add(Calendar.DATE, -1);
+						command.setStart(calendar.getTime());
+						command.setIsTimer(true);// 将该命令标识为定时作业
+						CommandExecutor.getCommands().add(command);
 					}
-
-					command.setSite_id(String.valueOf(result.get("sid")));
-					command.setUser_id(String.valueOf(user.get("user_id")));
-
-					calendar.add(Calendar.DATE, -1);
-					command.setStart(calendar.getTime());
-					command.setIsTimer(true);// 将该命令标识为定时作业
-					CommandExecutor.getCommands().add(command);
 				}
 			}
 		}

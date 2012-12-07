@@ -744,7 +744,12 @@ var PageUtils = {
 					return 'http://banner.alimama.com/ml?adboard_id='
 							+ split_H[0] + '&bannerSize=' + split_H[2];
 				} else {
-					alert('请确认广告牌地址是否有效');
+					if (src.indexOf('tbcdn') != -1) {
+						return 'http://img1.tbcdn.cn/tfscom/' + split_A
+								+ '.swf';
+					} else {
+						alert('请确认广告牌地址是否有效');
+					}
 				}
 			} catch (e) {
 				alert(e + '请确认广告牌地址是否有效');

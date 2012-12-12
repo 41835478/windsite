@@ -156,6 +156,8 @@ tar xvf mysql-5.1.62.tar
 --with-plugins=innobase //数据库插件 
 --with-plugins=partition //分表功能，将一个大表分割成多个小表
 ./configure --prefix=/usr/local/mysql --datadir=/usr/local/mysql/mydata --with-charset=utf8 --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-ssl --with-embedded-server --enable-local-infile --enable-assembler --with-plugins=innobase --with-plugins=partition
+make 
+make install
 二、新建用户和组 
 groupadd mysql
 useradd -g mysql -s /sbin/nologin mysql
@@ -189,6 +191,7 @@ tar xvf php-5.4.0.tar
 cd php-5.4.0
 './configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib' 
 #'--with-mcrypt=/usr/local/libmcrypt'
+
 #同步
 /usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/var/www/htdocs/ /var/www/htdocs
 /usr/bin/rsync -avzuP  --password-file=/etc/rsync.password root@223.4.86.100:/data/hitem/ /var/www/htdocs/hitem
@@ -250,7 +253,7 @@ ulimit -a  显示当前所有的 limit 信息
 
 加入一行：
 
-*/15 * * * * ntpdate ntp.sjtu.edu.cn
+*/15 * * * * ntpdate 210.72.145.44
 
 备注： 上海交通大学网络中心NTP服务器地址
  

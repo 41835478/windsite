@@ -1,7 +1,6 @@
-.shop-custom .bd {
+.tb-shop .box .shop-custom .bd {
 	padding: 5px 0 0;
 	line-height: 1.2;
-	overflow: hidden;
 }
 
 .expanded .shop-custom {

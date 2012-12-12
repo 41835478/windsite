@@ -180,7 +180,7 @@ Grids Layout for Taobao
 510    190    190    .grid-m0s5e5
 */
 .grid-m .main-wrap { /*width: 950px;*/
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .col-sub,.col-extra {

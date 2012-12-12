@@ -11,7 +11,7 @@ $('#kefuButton').click(function(){
 		var isTrue=false;
 		var reg = /script/gi;
 		var srcreg=/src=/gi;
-		var bzooz=/bzooz.com/gi;
+		var bzooz=/2kefu.com/gi;
 		var mpn=/mpnco.com.cn/gi;
 		var talk=/lead.soperson.com/gi;
 		var tq=/tq.cn/gi;

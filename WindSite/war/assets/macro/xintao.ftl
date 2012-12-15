@@ -100,8 +100,8 @@ function loadVersionInfo(msg) {
 <div class="menu-box"> 
 <h3 class="taoke-bar"><span style="position:relative;">淘客建站<a class="function-guide" did="taoke-guide-dialog" durl="/site/step/taokeGuide.html" style="position:absolute;right:0px;color:red;font-size:12px;">向导</a></span><button class="<#if (1<group)>menu-open<#else>menu-close</#if>">-</button></h3> 
 <ul class="group" <#if (1<group)>style="display:none;"</#if>>
-<li style="position:relative;"><span><a  href="/router/member/page/manager" target="_blank">淘站装修</a><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></span></li>
-<li<#if bdselected=='site-versions'> class="selected"</#if> style="position:relative;"><span><a  href="/router/member/versions">版本说明</a><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></span></li>
+<li style="position:relative;"><span><a  href="/router/member/page/manager" target="_blank">淘站装修</a></span></li>
+<li<#if bdselected=='site-versions'> class="selected"</#if> style="position:relative;"><span><a  href="/router/member/versions">版本说明</a></span></li>
 <li class="fold-open"><span><a  href="javascript:void(0);">淘站管理</a></span>									
 	<ul style=""> 
 		<li<#if bdselected=='site-proflie'> class="selected"</#if>><a href="/router/member/sitemanager/profile">基本信息</a></li>
@@ -120,13 +120,14 @@ function loadVersionInfo(msg) {
 <li><span><a class="J_UnvalidVersionNo" v="1.6">友情链接</a></span></li>
 <li><span><a class="J_UnvalidVersionNo" v="1.6">文章管理</a></span></li>
 </#if>
-<li<#if bdselected=='site-shopgroups'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/shops">我的店铺收藏</a><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></span></li>
+<li<#if bdselected=='site-shopgroups'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/shops">我的店铺收藏</a></span></li>
 <li<#if bdselected=='site-groups'> class="selected"</#if>><span><a href="/router/member/sitemanager/groups">我的推广组</a></span></li>
 <li<#if bdselected=='site-kefu'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/kefu">在线客服</a></span></li>
-<li<#if bdselected=='site-share'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/share">分享与收藏</a></span><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></li>
+<li<#if bdselected=='site-share'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/share">分享与收藏</a></span></li>
 <!--<li><span><a href="/router/member/widget/my" target="_blank">自定义组件库</a></span></li>-->
 <li<#if bdselected=='site-doctor'> class="selected"</#if>><span><a href="/router/member/sitemanager/doctor">淘站卫士</a></span></li>
 <li<#if bdselected=='site-alimama'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/alimama">淘宝联盟验证</a></span><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></li>
+<li<#if bdselected=='site-xtaoAuth'> class="selected"</#if> style="position:relative;"><span><a href="/router/member/sitemanager/xtaoAuth">xtaoAuth验证</a></span><img style="position:absolute;right:0px;top:0px;" src="/designer/assets/images/new.gif"/></li>
 </ul> 
 </div>
 <#if (USER.usb.versionNo>=2)>

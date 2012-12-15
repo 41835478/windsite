@@ -108,6 +108,47 @@ public class MemberSiteManager {
 	}
 
 	/**
+	 * xtao验证
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/xtaoAuth", method = RequestMethod.GET)
+	public ModelAndView xtaoView(HttpServletRequest request) {
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
+		if (kefu == null) {
+			kefu = new KeFuSupport();
+			kefu.setNick(EnvManager.getUser().getNick());
+			kefu.setUserId(Long.valueOf(EnvManager.getUser().getUser_id()));
+			memberService.save(kefu);
+		}
+		return new ModelAndView("site/member/site/xtaoAuth", "kefu", kefu);
+	}
+
+	/**
+	 * xtao验证
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/xtaoAuth/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String xtaoUpdate(HttpServletRequest request) {
+		KeFuSupport kefu = memberService.get(KeFuSupport.class,
+				Long.valueOf(EnvManager.getUser().getUser_id()));
+		if (kefu == null) {
+			SystemException.handleMessageException("刷新页面");
+		}
+		String xtaoAuth = request.getParameter("xtaoAuth");
+		kefu.setXtaoAuth(xtaoAuth);
+		memberService.update(kefu);
+		pageService.deployXtaoAuth(fcg, String.valueOf(kefu.getUserId()),
+				xtaoAuth);
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	/**
 	 * 阿里妈妈验证
 	 * 
 	 * @param request

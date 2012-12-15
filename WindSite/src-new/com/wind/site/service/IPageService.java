@@ -44,6 +44,14 @@ public interface IPageService extends IBaseService {
 	void deployAlimamaRoot(FreeMarkerConfigurer fcg, String userId, String code);
 
 	/**
+	 * 发布xtao验证
+	 * 
+	 * @param fcg
+	 * @param user
+	 */
+	void deployXtaoAuth(FreeMarkerConfigurer fcg, String userId, String code);
+
+	/**
 	 * 修复页面
 	 * 
 	 * @param id

@@ -26,6 +26,8 @@ public class KeFuSupport implements Serializable {
 	private String kefu;
 	@Column(length = 255)
 	private String alimama;
+	@Column(length = 255)
+	private String xtaoAuth;
 
 	/**
 	 * @return the userId
@@ -78,6 +80,14 @@ public class KeFuSupport implements Serializable {
 
 	public void setAlimama(String alimama) {
 		this.alimama = alimama;
+	}
+
+	public String getXtaoAuth() {
+		return xtaoAuth;
+	}
+
+	public void setXtaoAuth(String xtaoAuth) {
+		this.xtaoAuth = xtaoAuth;
 	}
 
 }

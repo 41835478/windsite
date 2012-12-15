@@ -109,6 +109,34 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 	}
 
 	@Override
+	public void deployXtaoAuth(FreeMarkerConfigurer fcg, String userId,
+			String code) {
+		// 发布xtao验证
+		try {
+			File htmlFile = new File(getXtaoAuthPath("shop" + userId));
+			File parent = new File(htmlFile.getParent());
+			if (!parent.exists()) {
+				parent.mkdirs();
+			}
+			if (!htmlFile.exists()) {// 如果不存在则是第一次发布
+				htmlFile.createNewFile();
+			}
+			Template template = fcg.getConfiguration().getTemplate(
+					"site/designer/template/root.ftl");
+			Writer out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(htmlFile), "UTF-8"));
+			Map<String, Object> maps = new HashMap<String, Object>();
+			maps.put("code", code);
+			template.setEncoding("UTF-8");
+			template.process(maps, out);// 生成具体模块内容并输出
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void fixedPageHeader(String siteId) {
 		PageMeta meta = this.getIndexPageMeta(siteId);
 		if (meta != null) {
@@ -1366,6 +1394,10 @@ public class PageServiceImpl extends BaseServiceImpl implements IPageService {
 
 	private String getAlimamaRootPath(String domainName) {
 		return EnvManager.getUserPath(domainName) + "root.txt";
+	}
+
+	private String getXtaoAuthPath(String domainName) {
+		return EnvManager.getUserPath(domainName) + "xtaoAuth.html";
 	}
 
 	private String getItemDetailPath(String numIid) {

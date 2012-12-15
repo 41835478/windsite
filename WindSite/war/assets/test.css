@@ -1,0 +1,61 @@
+
+/*scaffolding 170*/
+a {
+	color: @linkColor;
+}
+
+a:hover {
+	color: @linkColorHover;
+}
+
+/*dropdowns 2821*/
+.dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a
+	{ #gradient > .vertical(@dropdownLinkBackgroundHover,
+	darken(@dropdownLinkBackgroundHover, 5%));
+	
+}
+
+.dropdown-menu .active>a,.dropdown-menu .active>a:hover { #gradient >
+	.vertical(@dropdownLinkBackgroundActive,
+	darken(@dropdownLinkBackgroundActive, 5%));
+	
+}
+/*buttons 3214*/
+.btn-primary { .buttonBackground (@btnPrimaryBackground,
+	@btnPrimaryBackgroundHighlight);
+	
+}
+
+.btn-link {
+	color: @linkColor;
+}
+
+.btn-link:hover {
+	color: @linkColorHover;
+}
+/*navs 3284*/
+.nav-list>.active>a,.nav-list>.active>a:hover {
+	background-color: @linkColor;
+}
+
+.nav-pills>.active>a,.nav-pills>.active>a:hover {
+	background-color: @linkColor;
+}
+
+.nav .dropdown-toggle .caret {
+	border-top-color: @linkColor;
+	border-bottom-color: @linkColor;
+}
+
+.nav .dropdown-toggle:hover .caret {
+	border-top-color: @linkColorHover;
+	border-bottom-color: @linkColorHover;
+}
+/*button-groups 3617*/
+.btn-group.open .btn-primary.dropdown-toggle {
+	background-color: @btnPrimaryBackgroundHighlight;
+}
+/*thumbnails 5335*/
+a.thumbnail:hover {
+	border-color: @linkColor;
+}

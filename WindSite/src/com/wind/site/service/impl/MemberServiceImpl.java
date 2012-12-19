@@ -1049,11 +1049,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		if (num_iids.length() == 0) {
 			return;
 		}
-		List<TaobaokeItem> tItems = TaobaoFetchUtil.newItemsConvert(
-				num_iids.substring(0, num_iids.length() - 1), null, null);
-		if (tItems == null) {
-			tItems = new ArrayList<TaobaokeItem>();
-		}
+//		List<TaobaokeItem> tItems = TaobaoFetchUtil.newItemsConvert(
+//				num_iids.substring(0, num_iids.length() - 1), null, null);
+//		if (tItems == null) {
+//			tItems = new ArrayList<TaobaokeItem>();
+//		}
+		List<TaobaokeItem> tItems = new ArrayList<TaobaokeItem>();
 		Set<T_TaobaokeItem> itemsSet = new HashSet<T_TaobaokeItem>();
 		for (T_TaobaokeItem item : items) {
 			Boolean isValid = false;
@@ -1065,6 +1066,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 					break;
 				}
 			}
+			isValid = true;
 			item.setIsValid(isValid);
 			// 查询当前淘客是否已有此商品
 			T_TaobaokeItem oldItem = this.findByCriterion(T_TaobaokeItem.class,

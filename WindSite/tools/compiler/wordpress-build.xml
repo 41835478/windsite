@@ -1,0 +1,106 @@
+<project basedir="." default="compile">
+	<property file="wordpress-build.properties" />
+	<target name="compile" depends="clean,compile.core.utils,compile.bootstrap.ie,compile.account,compile.core,compile.login,compile.post,compile.widgets,compile.css,copy.min">
+	</target>
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<!--清理-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${output}" includes="**/*.*"/>
+		</delete>
+	</target>
+	<target name="compile.core.utils">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xintaoke-utils.min.js">
+			<sources dir="${war}">
+				<file name="base64.js" />
+				<file name="bootstrap.js" />
+				<file name="holder.js" />
+				<file name="jquery.infinitescroll.min.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.bootstrap.ie">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/bootstrap-ie.min.js">
+			<sources dir="${war}">
+				<file name="bootstrap-ie.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.account">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-account.min.js">
+			<sources dir="${war}">
+				<file name="xt-account.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.core">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xintaoke.min.js">
+			<sources dir="${war}">
+				<file name="xt-core.js" />
+				<file name="xt-share.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.login">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-login.min.js">
+			<sources dir="${war}">
+				<file name="xt-login.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.post">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-post.min.js">
+			<sources dir="${war}">
+				<file name="xt-core.js" />
+				<file name="xt-post.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.widgets">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-widgets.min.js">
+			<sources dir="${war}">
+				<file name="xt-widgets.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<path id="yuiClasspath">
+		<fileset dir="lib">
+			<include name="yuicompressor-2.4.2.jar" />
+			<include name="YUIAnt.jar" />
+		</fileset>
+	</path>
+	<!--编译设计器css-->
+	<target name="compile.css" description="xintaoke.min.css">
+		<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+			<classpath>
+				<path refid="yuiClasspath" />
+			</classpath>
+		</taskdef>
+		<yuicompress linebreak="300" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${output}">
+			<fileset dir="${war}">
+				<include name="*.css" />
+			</fileset>
+		</yuicompress>
+		<!--生成新版本站点CSS文件-->
+		<concat destfile="${output}/xintaoke.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}" files="bootstrap.css,xintaoke.css" />
+		</concat>
+		<delete>
+			<filelist dir="${output}/" files="bootstrap.css,xintaoke.css" />
+		</delete>
+	</target>
+	<target name="copy.min" description="copy assets min">
+		<copy todir="${xintaoke}/xt-themes">
+			<filelist dir="${output}" files="xintaoke.min.css,ie.css" />
+		</copy>
+		<copy todir="${xintaoke}/xt-core/css">
+			<filelist dir="${output}" files="xt-widgets.css" />
+		</copy>
+		<copy todir="${xintaoke}/xt-core/js">
+			<filelist dir="${output}" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xt-widgets.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
+		</copy>
+		<!--<copy todir="${apache}/help">
+			<fileset dir="${war}/help" excludes="**/.svn/**" />
+		</copy>-->
+	</target>
+</project>

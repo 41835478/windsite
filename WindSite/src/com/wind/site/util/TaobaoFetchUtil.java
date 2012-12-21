@@ -967,6 +967,18 @@ public class TaobaoFetchUtil {
 		return getItemsDetail(appKey, appSecret, appType, request, pid);
 	}
 
+	public static List<TaobaokeItem> items(String appKey, String appSecret,
+			String appType, String num_iids, String pid) {
+		TaobaokeItemsDetailGetRequest request = new TaobaokeItemsDetailGetRequest();
+		request.setFields(TAOBAOKEITEMDETAIL_FIELDS);
+		request.setNumIids(num_iids);
+		request.setNick(EnvManager.getUser().getNick());
+		request.setPid(WindSiteRestUtil.getPid(EnvManager.getUser().getPid()));
+		TaobaokeItemsDetailGetResponse response = getItemsDetail(appKey,
+				appSecret, appType, request, pid);
+		return convertDetailToTaobaokeItem(response.getTaobaokeItemDetails());
+	}
+
 	public static TaobaokeItemsDetailGetResponse getItemsDetail(String appKey,
 			String appSecret, String appType,
 			TaobaokeItemsDetailGetRequest request, String pid) {
@@ -981,6 +993,8 @@ public class TaobaoFetchUtil {
 			request.setPid(WindSiteRestUtil.getPid(pid));
 			TaobaokeItemsDetailGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
+				List<TaobaokeItemDetail> details = response
+						.getTaobaokeItemDetails();
 				return response;
 			} else {
 				handleError(response);

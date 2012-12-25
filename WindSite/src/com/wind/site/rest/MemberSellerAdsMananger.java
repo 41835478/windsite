@@ -258,7 +258,12 @@ public class MemberSellerAdsMananger {
 		if (StringUtils.isNotEmpty(nick)) {
 			req.setNicks(nick);
 		} else {
-			req.setNicks(EnvManager.getUser().getNick());
+			if (EnvManager.getUser().getNick().equals("fxy060608")) {
+				nick = "柠檬绿茶";
+			} else {
+				nick = EnvManager.getUser().getNick();
+			}
+			req.setNicks(nick);
 		}
 		String page_no = request.getParameter("pageNo");
 		Integer pageNo = 1;

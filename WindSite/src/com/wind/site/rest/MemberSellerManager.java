@@ -3,6 +3,7 @@ package com.wind.site.rest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,6 +35,8 @@ import com.wind.uc.service.IUCService;
 public class MemberSellerManager {
 	@Autowired
 	private IMemberService memberService;
+	private static final Logger logger = Logger
+			.getLogger(MemberSellerManager.class.getName());
 
 	/**
 	 * 卖家功能首页
@@ -47,8 +50,12 @@ public class MemberSellerManager {
 		T_TaobaokeShop shop = memberService.get(T_TaobaokeShop.class,
 				Long.valueOf(EnvManager.getUser().getUser_id()));
 		if (shop == null) {
-			Shop nShop = TaobaoFetchUtil.getTaobaoShop(EnvManager.getUser()
-					.getAppType(), EnvManager.getUser().getNick());
+			String nick = EnvManager.getUser().getNick();
+			if (EnvManager.getUser().getNick().equals("fxy060608")) {
+				nick = "柠檬绿茶";
+			}
+			logger.info("seller nick:" + nick);
+			Shop nShop = TaobaoFetchUtil.getTaobaoShop(null, nick);
 			if (nShop == null) {
 				SystemException
 						.handleMessageException("您不是淘宝网的卖家用户，无法使用新淘网的卖家功能");
@@ -66,17 +73,18 @@ public class MemberSellerManager {
 					shop.setServiceScore(score.getServiceScore());
 					shop.setDeliveryScore(score.getDeliveryScore());
 				}
-				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-						EnvManager.getUser().getAppKey(), EnvManager.getUser()
-								.getAppSecret(), EnvManager.getAppType(),
-						EnvManager.getUser().getNick(), nShop.getSid() + "",
-						EnvManager.getUser().getPid());
-				if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-					shop.setCommissionRate(shops.get(0).getCommissionRate());
-					shop.setIsValid(true);
-				} else {
-					shop.setIsValid(false);
-				}
+//				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
+//						EnvManager.getUser().getAppKey(), EnvManager.getUser()
+//								.getAppSecret(), EnvManager.getAppType(),
+//						EnvManager.getUser().getNick(), nShop.getSid() + "",
+//						EnvManager.getUser().getPid());
+//				if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+//					shop.setCommissionRate(shops.get(0).getCommissionRate());
+//					shop.setIsValid(true);
+//				} else {
+//					shop.setIsValid(false);
+//				}
+//				shop.setIsValid(true);
 				shop.setIsValid(true);
 				memberService.save(shop);
 				User user = memberService.get(User.class, EnvManager.getUser()

@@ -472,10 +472,19 @@ public class TaobaoFetchUtil {
 	public static void convertItems(T_TaobaoItem item, TaobaokeItem tItem) {
 		item.setIid(tItem.getIid());
 		item.setClick_url(tItem.getClickUrl());
-		item.setCommission(Float.parseFloat(tItem.getCommission()));
-		item.setCommission_num(Integer.parseInt(tItem.getCommissionNum()));
-		item.setCommission_rate(Float.parseFloat(tItem.getCommissionRate()));
-		item.setCommission_volume(Float.parseFloat(tItem.getCommissionVolume()));
+		if (tItem.getCommission() != null) {
+			item.setCommission(Float.parseFloat(tItem.getCommission()));
+		}
+		if (tItem.getCommissionNum() != null) {
+			item.setCommission_num(Integer.parseInt(tItem.getCommissionNum()));
+		}
+		if (tItem.getCommissionRate() != null) {
+			item.setCommission_rate(Float.parseFloat(tItem.getCommissionRate()));
+		}
+		if (tItem.getCommissionVolume() != null) {
+			item.setCommission_volume(Float.parseFloat(tItem
+					.getCommissionVolume()));
+		}
 		item.setNick(tItem.getNick());
 		item.setPic_url(tItem.getPicUrl());
 		item.setPrice(Float.parseFloat(tItem.getPrice()));

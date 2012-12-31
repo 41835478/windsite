@@ -299,11 +299,10 @@ var PageModuleUtils = {
 		$('#content .shop-display .item,#content .list-view .list-item,#content .shop-tenorder .pic,#content .shop-complex-a .item,#content .shop-dianpu .shop-dianpu-ul li,#content .shop-child-floor .child-grid li')
 				.each(function() {
 					var pre = '返利:';
-					var last = '元';
+					var last = '集分宝';
 					var c = $(this).attr('co');
 					if (c) {
 						var co = Math.floor(parseFloat(c) * rate * 100)
-								/ 100.00;
 						$(this).append('<div class="c-c" title="' + pre + co
 								+ last + '" style="">' + pre + co + last
 								+ '</div>');
@@ -322,7 +321,7 @@ var PageModuleUtils = {
 				});
 		$('#detail .xt-detail-price:first').each(function() {
 			var pre = '返　　利：';
-			var last = '元';
+			var last = '集分宝';
 			var self = $(this);
 			var nid = $('#detail .xt-gallery .xt-s310').attr('data-id');
 			if (nid) {
@@ -338,7 +337,6 @@ var PageModuleUtils = {
 											var c = resp.taobaoke_items.taobaoke_item[0].commission;
 											var co = Math.floor(parseFloat(c)
 													* rate * 100)
-													/ 100.00;
 											self
 													.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
 															+ pre

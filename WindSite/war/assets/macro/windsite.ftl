@@ -65,7 +65,7 @@
 </#function>
 <#macro rate RATE commission=0>
 <#if www??&&''!=www&&((versionNo??&&versionNo>=2))>
-<#if 0==RATE><a class="fanli-login" onClick="openLoginFanliDialog();return false;" target="_blank">需登录</a><#else><span class="fanli">${commission*RATE}元</span></#if>
+<#if 0==RATE><a class="fanli-login" onClick="openLoginFanliDialog();return false;" target="_blank">需登录</a><#else><span class="fanli">${commission*RATE*100}集分宝</span></#if>
 </#if>
 </#macro>
 <#macro convertLink href=''>

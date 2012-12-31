@@ -6,7 +6,7 @@
 	<!--清理-->
 	<target name="clean">
 		<delete>
-			<fileset dir="${output}" includes="**/*.*"/>
+			<fileset dir="${output}" includes="**/*.*" />
 		</delete>
 	</target>
 	<target name="compile.core.utils">
@@ -93,12 +93,16 @@
 		<copy todir="${xintaoke}/xt-themes">
 			<filelist dir="${output}" files="xintaoke.min.css,ie.css" />
 		</copy>
-		<copy todir="${xintaoke}/xt-core/css">
-			<filelist dir="${output}" files="xt-widgets.css" />
+		<copy todir="${xt}/css">
+			<filelist dir="${output}" files="xintaoke.min.css,xt-widgets.css" />
 		</copy>
 		<copy todir="${xintaoke}/xt-core/js">
-			<filelist dir="${output}" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xt-widgets.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
+			<filelist dir="${output}" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
 		</copy>
+		<copy todir="${xt}/js">
+			<filelist dir="${output}" files="xt-widgets.min.js" />
+		</copy>
+
 		<!--<copy todir="${apache}/help">
 			<fileset dir="${war}/help" excludes="**/.svn/**" />
 		</copy>-->

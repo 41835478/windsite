@@ -27,7 +27,7 @@
 						</fieldset>
 						<fieldset><legend>最新淘宝订单</legend>
 						<TABLE width=100% class="wTable">
-							<THEAD><TR><TH width=120px>淘宝交易号</TH><TH width=300px>商品名称</TH><TH width=60px>单价</TH><TH width=40px>数量</TH><TH width=80px>返利金额</TH><TH>交易时间</TH></TR></THEAD>
+							<THEAD><TR><TH width=120px>淘宝交易号</TH><TH width=300px>商品名称</TH><TH width=60px>单价</TH><TH width=40px>数量</TH><TH width=150px>返利(集分宝)</TH><TH>交易时间</TH></TR></THEAD>
 							<TBODY id="reportTaobaoSearchResult"></TBODY>
 						</TABLE>
 						</fieldset>

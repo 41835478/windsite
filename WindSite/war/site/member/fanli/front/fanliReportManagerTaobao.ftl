@@ -19,11 +19,13 @@
 							</tr>
 						</table>
 						<TABLE class="wTable" border="0" cellspacing="1" cellpadding="1">
-							<THEAD><TR><TH width=120px>淘宝交易号</TH><TH width=300px>商品名称</TH><TH width=60px>单价</TH><TH width=40px>数量</TH><TH width=80px>返利金额</TH><TH>交易时间</TH></TR></THEAD>
+							<THEAD><TR><TH width=120px>淘宝交易号</TH><TH width=300px>商品名称</TH><TH width=60px>单价</TH><TH width=40px>数量</TH><TH width=150px>返利(集分宝)</TH><TH>交易时间</TH></TR></THEAD>
 							<TBODY id="reportTaobaoSearchResult"></TBODY>
 						</TABLE>
 						<@ws.help>
-						<h3>1.什么情况下会产生交易记录？</h3>
+						<h3>1.什么是集分宝？</h3>
+						<p><a href="http://help.alipay.com/lab/help_detail.htm?help_id=211849" target="_blank">支付宝集分宝介绍</a>,100集分宝=1元</p>
+						<h3>2.什么情况下会产生交易记录？</h3>
 						<p>当您以正常的返利流程完成购物，并且确认收货后，将同时产生交易记录和对应的返利记录。如果您发现交易记录和返利记录出现问题，您可以联系我们的客服</p>
 						</@ws.help>
 					</div>

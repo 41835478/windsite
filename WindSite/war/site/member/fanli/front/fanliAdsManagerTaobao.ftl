@@ -17,7 +17,7 @@
 									<TH width=320px>商品名称</TH>
 									<TH width=50px>单价</TH>
 									<TH width=50px>数量</TH>
-									<TH width=80px>推广返利</TH>
+									<TH width=150px>推广返利(集分宝)</TH>
 									<TH width=120px>交易时间</TH>
 									<TH>会员</TH>
 								</TR>
@@ -25,6 +25,10 @@
 							<TBODY id="reportTaobaoSearchResult">
 							</TBODY>
 						</TABLE>
+						<@ws.help>
+						<h3>1.什么是集分宝？</h3>
+						<p><a href="http://help.alipay.com/lab/help_detail.htm?help_id=211849" target="_blank">支付宝集分宝介绍</a>,100集分宝=1元</p>
+						</@ws.help>
 					</div>
 				</div>
 			</div>			

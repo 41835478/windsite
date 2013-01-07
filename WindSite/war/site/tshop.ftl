@@ -26,6 +26,19 @@ img {
 <#if appKey??>
 <script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
 </#if>
+</head>
+<body>
+<center>
+<div id="Shop_Box" 
+	style="display:none;padding: 15px 60px; border: 1px solid #D5E5E8; background: #F4FBFF; text-align: center; margin: 20% auto auto; width: 55%">
+<#assign href = domainName+'.xintaonet.com'>
+<#if www??&&www!=''>
+<#assign href = www>
+</#if>
+<a id="Shop_Go" href="http://${href}" class="shop_click" onclick="">进入淘宝店铺:【${shop.title}】</a></a><br />
+<a id="Shop_Go_2" href="http://${href}" class="shop_click">如果您的浏览器没有自动跳转,请点击这里</a></div>
+</center>
+<#include "/site/template/analytics.ftl">
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push( [ '_setAccount', 'UA-10891782-8' ]);
@@ -40,43 +53,40 @@ img {
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(ga, s);
 	})();
-	if (typeof(TOP) != 'undefined') {
-	try {
-		TOP.api({
-					method : 'taobao.taobaoke.widget.shops.convert',
-					fields : 'click_url',
-					seller_nicks : '${shop.nick}',
-					nick:'${nick}'
-				}, function(resp) {
-					try {
-						if (resp.taobaoke_shops.taobaoke_shop) {
-							var c = resp.taobaoke_shops.taobaoke_shop[0].click_url;
-							if(!window.attachEvent){
-						      document.write('<input type="button" id="exe" value="AAAAA" onclick="window.location=\''+(c)+'\'">');
-						      document.getElementById('exe').click();
-						    }else{
-						      document.write('<a href="'+(c)+'" id="exe">AAAAAA</a>');
-						      document.getElementById('exe').click();
-					   		}
-						}
-					} catch (e) {
-					alert(e);
-					}
-	
-				});
-	} catch (e) {
-	alert(e);
+	function goShop(){
+		if (typeof(TOP) != 'undefined') {
+			try {
+				TOP.api({
+							method : 'taobao.taobaoke.widget.shops.convert',
+							fields : 'click_url',
+							seller_nicks : '${shop.nick}',
+							nick:'${nick}'
+						}, function(resp) {
+							try {
+								if (resp.taobaoke_shops.taobaoke_shop) {
+									var c = resp.taobaoke_shops.taobaoke_shop[0].click_url;
+									if(!window.attachEvent){
+								      document.write('<input style="display:none" type="button" id="exe" value="AAAAA" onclick="window.location=\''+(c)+'\'">');
+								      document.getElementById('exe').click();
+								    }else{
+								      document.getElementById('Shop_Box').display='';
+								      document.getElementById('Shop_Go').href=c;
+								      document.getElementById('Shop_Go_2').href=c;
+								      document.write('<a style="display:none" href="'+(c)+'" id="exe">AAAAAA</a>');
+								      document.getElementById('exe').click();
+							   		}
+								}
+							} catch (e) {
+								var href = document.getElementById('Shop_Go_2').href;
+								document.getElementById('Shop_Go_2').click();
+							}
+			
+						});
+			} catch (e) {
+			}
+		}
 	}
-}
+	goShop();
 </script>
-</head>
-<body>
-<center>
-<div
-	style="display:none;padding: 15px 60px; border: 1px solid #D5E5E8; background: #F4FBFF; text-align: center; margin: 20% auto auto; width: 55%">
-<a href="" class="shop_click" onclick="">进入淘宝店铺:【${shop.title}】</a></a><br />
-<a href="" class="shop_click">如果您的浏览器没有自动跳转,请点击这里</a></div>
-</center>
-<#include "/site/template/analytics.ftl">
 </body>
 </html>

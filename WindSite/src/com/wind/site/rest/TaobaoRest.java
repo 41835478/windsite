@@ -564,9 +564,7 @@ public class TaobaoRest {
 			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(String.valueOf(result.get("appKey")),
-							String.valueOf(result.get("appSecret")),
-							String.valueOf(result.get("appType")), getRequest,
+					.getItemsDetail(null, null, null, getRequest,
 							String.valueOf(result.get("pid")));
 			if (getResponse != null) {
 				List<TaobaokeItemDetail> itemList = getResponse
@@ -853,10 +851,7 @@ public class TaobaoRest {
 				try {
 
 					List<TaobaokeItem> taokeItems = TaobaoFetchUtil
-							.newItemsConvert(
-									String.valueOf(result.get("appKey")),
-									String.valueOf(result.get("appSecret")),
-									null, numiids, nick,
+							.newItemsConvert(null, null, null, numiids, nick,
 									String.valueOf(result.get("pid")));
 					// List<TaobaokeItem> taokeItems =
 					// TaobaoFetchUtil.itemsConvert(
@@ -1004,9 +999,7 @@ public class TaobaoRest {
 			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
 			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
 			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(String.valueOf(result.get("appKey")),
-							String.valueOf(result.get("appSecret")),
-							String.valueOf(result.get("appType")), getRequest,
+					.getItemsDetail(null, null, null, getRequest,
 							String.valueOf(result.get("pid")));
 			if (getResponse != null) {
 				List<TaobaokeItemDetail> itemList = getResponse
@@ -1089,11 +1082,8 @@ public class TaobaoRest {
 			req.setPageSize(30L);
 		}
 
-		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(
-				String.valueOf(result.get("appKey")),
-				String.valueOf(result.get("appSecret")),
-				String.valueOf(result.get("appType")), req,
-				String.valueOf(result.get("pid")));
+		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(null, null,
+				null, req, String.valueOf(result.get("pid")));
 		if (resp.getTaobaokeItems() != null) {
 			result.put("items", resp.getTaobaokeItems());
 		} else {

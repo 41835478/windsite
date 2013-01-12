@@ -1193,31 +1193,32 @@ public class TaobaoFetchUtil {
 	public static List<TaobaokeShop> convertTaobaoShop(String appKey,
 			String appSecret, String appType, String nick, String sids,
 			String pid) {
-		try {
-			// if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
-			// || "null".equals(appKey) || "null".equals(appSecret)) {
-			appKey = EnvManager.getAppKey(null);
-			appSecret = EnvManager.getSecret(null);
-			// }
-			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
-			TaobaokeShopsConvertRequest request = new TaobaokeShopsConvertRequest();
-			request.setFields(TAOBAOKESHOP_FIELDS);
-			request.setNick(nick);
-			request.setOuterCode(EnvManager.getShopsOuterCode());
-			request.setSids(sids);
-
-			request.setPid(WindSiteRestUtil.getPid(pid));
-			TaobaokeShopsConvertResponse response = client.execute(request);
-			if (response.isSuccess()) {
-				return response.getTaobaokeShops();
-			} else {
-				handleError(response);
-			}
-		} catch (ApiException e) {
-			SystemException.handleMessageException("淘宝请求失败,请重试:" + e);
-		}
-		return null;
+		// try {
+		// // if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+		// // || "null".equals(appKey) || "null".equals(appSecret)) {
+		// appKey = EnvManager.getAppKey(null);
+		// appSecret = EnvManager.getSecret(null);
+		// // }
+		// TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+		// appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+		// TaobaokeShopsConvertRequest request = new
+		// TaobaokeShopsConvertRequest();
+		// request.setFields(TAOBAOKESHOP_FIELDS);
+		// request.setNick(nick);
+		// request.setOuterCode(EnvManager.getShopsOuterCode());
+		// request.setSids(sids);
+		//
+		// request.setPid(WindSiteRestUtil.getPid(pid));
+		// TaobaokeShopsConvertResponse response = client.execute(request);
+		// if (response.isSuccess()) {
+		// return response.getTaobaokeShops();
+		// } else {
+		// handleError(response);
+		// }
+		// } catch (ApiException e) {
+		// SystemException.handleMessageException("淘宝请求失败,请重试:" + e);
+		// }
+		return new ArrayList<TaobaokeShop>();
 	}
 
 	public static List<ItemCat> getItemCats(String appType,

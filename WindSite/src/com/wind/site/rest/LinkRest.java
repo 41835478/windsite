@@ -492,33 +492,33 @@ public class LinkRest {
 			return new ModelAndView("site/member/link/itemLink", result);
 		case 2:// 店铺推广
 			String sid = value;
-			if (StringUtils.isNotEmpty(sid)) {
-				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-						EnvManager.getUser().getAppKey(), EnvManager.getUser()
-								.getAppSecret(), EnvManager.getUser()
-								.getAppType(), EnvManager.getUser().getNick(),
-						sid, EnvManager.getUser().getPid());
-				if (shops != null && shops.size() == 1) {
-					TaobaokeShop shop = shops.get(0);
-					T_TaobaokeShop oShop = memberService.get(
-							T_TaobaokeShop.class,
-							R.eq("sid", Long.valueOf(sid)));
-					if (oShop != null) {
-						oShop.setCommissionRate(shop.getCommissionRate());
-						oShop.setTitle(shop.getShopTitle());
-						memberService.update(oShop);
-						result.put("shop", oShop);
-					} else {
-						SystemException
-								.handleMessageException("当前指定店铺尚未被新淘网收录");
-					}
-				} else {
-					SystemException
-							.handleMessageException("当前推广店铺转换时发生错误【请确认当前店铺加入了淘宝客推广】");
-				}
-			} else {
-				SystemException.handleMessageException("当前店铺推广链接对应的店铺标识错误");
-			}
+			// if (StringUtils.isNotEmpty(sid)) {
+			// List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
+			// EnvManager.getUser().getAppKey(), EnvManager.getUser()
+			// .getAppSecret(), EnvManager.getUser()
+			// .getAppType(), EnvManager.getUser().getNick(),
+			// sid, EnvManager.getUser().getPid());
+			// if (shops != null && shops.size() == 1) {
+			// TaobaokeShop shop = shops.get(0);
+			// T_TaobaokeShop oShop = memberService.get(
+			// T_TaobaokeShop.class,
+			// R.eq("sid", Long.valueOf(sid)));
+			// if (oShop != null) {
+			// oShop.setCommissionRate(shop.getCommissionRate());
+			// oShop.setTitle(shop.getShopTitle());
+			// memberService.update(oShop);
+			// result.put("shop", oShop);
+			// } else {
+			// SystemException
+			// .handleMessageException("当前指定店铺尚未被新淘网收录");
+			// }
+			// } else {
+			// SystemException
+			// .handleMessageException("当前推广店铺转换时发生错误【请确认当前店铺加入了淘宝客推广】");
+			// }
+			// } else {
+			SystemException.handleMessageException("不再支持店铺链接转换,请进入淘宝联盟获取推广链接");
+			// }
 			return new ModelAndView("site/member/link/shopLink", result);
 		case 3:// 推广组推广
 			String gid = value;

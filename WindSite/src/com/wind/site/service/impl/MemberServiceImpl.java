@@ -857,50 +857,49 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 	public void addShop(String nick) {
 		Shop shop = TaobaoFetchUtil.getTaobaoShop("0", nick);
 		if (shop != null) {
-			List<TaobaokeShop> shops = TaobaoFetchUtil
-					.convertTaobaoShop(null, null, "0", "fxy060608",
-							String.valueOf(shop.getSid()), null);
-			if (shops != null && shops.size() == 1) {
-				TaobaokeShop tShop = shops.get(0);
-				T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class,
-						tShop.getUserId());
-				if (oShop != null) {// 更新
-					oShop.setCid(shop.getCid());
-					oShop.setTitle(shop.getTitle());
-					oShop.setPicPath(shop.getPicPath());
-					oShop.setSid(shop.getSid());
-					oShop.setNick(shop.getNick());
-					ShopScore score = shop.getShopScore();
-					if (score != null) {
-						oShop.setItemScore(score.getItemScore());
-						oShop.setServiceScore(score.getServiceScore());
-						oShop.setDeliveryScore(score.getDeliveryScore());
-					}
-					oShop.setCommissionRate(tShop.getCommissionRate());
-					oShop.setIsValid(true);
-					this.update(oShop);
-				} else {// 新增
-					oShop = new T_TaobaokeShop();
-					oShop.setUserId(tShop.getUserId());
-					oShop.setCid(shop.getCid());
-					oShop.setTitle(shop.getTitle());
-					oShop.setPicPath(shop.getPicPath());
-					oShop.setSid(shop.getSid());
-					oShop.setNick(shop.getNick());
-					ShopScore score = shop.getShopScore();
-					if (score != null) {
-						oShop.setItemScore(score.getItemScore());
-						oShop.setServiceScore(score.getServiceScore());
-						oShop.setDeliveryScore(score.getDeliveryScore());
-					}
-					oShop.setCommissionRate(tShop.getCommissionRate());
-					oShop.setIsValid(true);
-					this.save(oShop);
-				}
-			} else {
-				SystemException.handleMessageException("您选择要添加的店铺【"
-						+ shop.getTitle() + "】尚未加入淘宝客推广计划！");
-			}
+			// List<TaobaokeShop> shops = TaobaoFetchUtil
+			// .convertTaobaoShop(null, null, "0", "fxy060608",
+			// String.valueOf(shop.getSid()), null);
+			// if (shops != null && shops.size() == 1) {
+			// TaobaokeShop tShop = shops.get(0);
+			// T_TaobaokeShop oShop = this.get(T_TaobaokeShop.class,
+			// tShop.getUserId());
+			// if (oShop != null) {// 更新
+			// oShop.setCid(shop.getCid());
+			// oShop.setTitle(shop.getTitle());
+			// oShop.setPicPath(shop.getPicPath());
+			// oShop.setSid(shop.getSid());
+			// oShop.setNick(shop.getNick());
+			// ShopScore score = shop.getShopScore();
+			// if (score != null) {
+			// oShop.setItemScore(score.getItemScore());
+			// oShop.setServiceScore(score.getServiceScore());
+			// oShop.setDeliveryScore(score.getDeliveryScore());
+			// }
+			// oShop.setCommissionRate(tShop.getCommissionRate());
+			// oShop.setIsValid(true);
+			// this.update(oShop);
+			// } else {// 新增
+			// oShop = new T_TaobaokeShop();
+			// oShop.setUserId(tShop.getUserId());
+			// oShop.setCid(shop.getCid());
+			// oShop.setTitle(shop.getTitle());
+			// oShop.setPicPath(shop.getPicPath());
+			// oShop.setSid(shop.getSid());
+			// oShop.setNick(shop.getNick());
+			// ShopScore score = shop.getShopScore();
+			// if (score != null) {
+			// oShop.setItemScore(score.getItemScore());
+			// oShop.setServiceScore(score.getServiceScore());
+			// oShop.setDeliveryScore(score.getDeliveryScore());
+			// }
+			// oShop.setCommissionRate(tShop.getCommissionRate());
+			// oShop.setIsValid(true);
+			// this.save(oShop);
+			// }
+			// } else {
+			SystemException.handleMessageException("不再支持添加店铺");
+			// }
 		} else {
 			SystemException.handleMessageException("您选择要添加的店铺卖家【" + nick
 					+ "】不存在！");
@@ -1049,11 +1048,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		if (num_iids.length() == 0) {
 			return;
 		}
-//		List<TaobaokeItem> tItems = TaobaoFetchUtil.newItemsConvert(
-//				num_iids.substring(0, num_iids.length() - 1), null, null);
-//		if (tItems == null) {
-//			tItems = new ArrayList<TaobaokeItem>();
-//		}
+		// List<TaobaokeItem> tItems = TaobaoFetchUtil.newItemsConvert(
+		// num_iids.substring(0, num_iids.length() - 1), null, null);
+		// if (tItems == null) {
+		// tItems = new ArrayList<TaobaokeItem>();
+		// }
 		List<TaobaokeItem> tItems = new ArrayList<TaobaokeItem>();
 		Set<T_TaobaokeItem> itemsSet = new HashSet<T_TaobaokeItem>();
 		for (T_TaobaokeItem item : items) {
@@ -1332,11 +1331,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
 				EnvManager.getUser().getAppType(), userId, nick);
 		User user = this.findByCriterion(User.class, R.eq("user_id", userId));
-//		user.setAlipay_account(tUser.getAlipayAccount());
-//		user.setAlipay_bind(tUser.getAlipayBind());
-//		user.setAlipay_no(tUser.getAlipayNo());
-//		user.setAuto_repost(tUser.getAutoRepost());
-//		user.setBirthday(tUser.getBirthday());
+		// user.setAlipay_account(tUser.getAlipayAccount());
+		// user.setAlipay_bind(tUser.getAlipayBind());
+		// user.setAlipay_no(tUser.getAlipayNo());
+		// user.setAuto_repost(tUser.getAutoRepost());
+		// user.setBirthday(tUser.getBirthday());
 		// TODO 暂时屏蔽信用
 		// UserCredit bCredit = tUser.getBuyerCredit();
 		// this.deleteAll(T_UserCredit.class, R.eq("createdBy", userId));
@@ -1357,21 +1356,22 @@ public class MemberServiceImpl extends BaseServiceImpl implements
 		// tsCredit.setTotalNum(sCredit.getTotalNum().intValue());
 		// user.setSeller_credit(tsCredit);
 		// }
-//		user.setCity(tUser.getLocation() != null ? tUser.getLocation()
-//				.getCity() : null);
-//		user.setConsumer_protection("true".equals(tUser.getConsumerProtection()) ? true
-//				: false);
-//		user.setHas_more_pic(tUser.getHasMorePic());
-//		user.setItem_img_num(tUser.getItemImgNum().intValue());
-//		user.setItem_img_size(tUser.getItemImgSize().intValue());
-//		user.setPromoted_type(tUser.getPromotedType());
-//		user.setProp_img_num(tUser.getPropImgNum().intValue());
-//		user.setProp_img_size(tUser.getPropImgSize().intValue());
+		// user.setCity(tUser.getLocation() != null ? tUser.getLocation()
+		// .getCity() : null);
+		// user.setConsumer_protection("true".equals(tUser.getConsumerProtection())
+		// ? true
+		// : false);
+		// user.setHas_more_pic(tUser.getHasMorePic());
+		// user.setItem_img_num(tUser.getItemImgNum().intValue());
+		// user.setItem_img_size(tUser.getItemImgSize().intValue());
+		// user.setPromoted_type(tUser.getPromotedType());
+		// user.setProp_img_num(tUser.getPropImgNum().intValue());
+		// user.setProp_img_size(tUser.getPropImgSize().intValue());
 		user.setSex(tUser.getSex());
-//		user.setT_created(tUser.getCreated());
-//		user.setT_last_visit(tUser.getLastVisit());
-//		user.setT_status(tUser.getStatus());
-//		user.setT_type(tUser.getType());
+		// user.setT_created(tUser.getCreated());
+		// user.setT_last_visit(tUser.getLastVisit());
+		// user.setT_status(tUser.getStatus());
+		// user.setT_type(tUser.getType());
 		user.setIsNew(EnvManager.getUser().getIsNew());
 		Limit limit = this.findByCriterion(Limit.class,
 				R.eq("user_id", user.getUser_id()));

@@ -135,14 +135,14 @@ public class AutoDeployPageCommand {
 		if (brands != null && brands.size() > 0) {
 			for (T_MallBrand brand : brands) {
 				try {
-					List<TaobaokeShop> shops = TaobaoFetchUtil
-							.convertTaobaoShop(null, null, "0", "fxy060608",
-									brand.getSid().toString(), null);
-					if (shops != null && shops.size() == 1) {
+//					List<TaobaokeShop> shops = TaobaoFetchUtil
+//							.convertTaobaoShop(null, null, "0", "fxy060608",
+//									brand.getSid().toString(), null);
+//					if (shops != null && shops.size() == 1) {
 						brand.setIsValid(true);
-					} else {
-						brand.setIsValid(false);
-					}
+//					} else {
+//						brand.setIsValid(false);
+//					}
 					pageService.update(brand);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -73,18 +73,18 @@ public class MemberSellerManager {
 					shop.setServiceScore(score.getServiceScore());
 					shop.setDeliveryScore(score.getDeliveryScore());
 				}
-//				List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-//						EnvManager.getUser().getAppKey(), EnvManager.getUser()
-//								.getAppSecret(), EnvManager.getAppType(),
-//						EnvManager.getUser().getNick(), nShop.getSid() + "",
-//						EnvManager.getUser().getPid());
-//				if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-//					shop.setCommissionRate(shops.get(0).getCommissionRate());
-//					shop.setIsValid(true);
-//				} else {
-//					shop.setIsValid(false);
-//				}
-//				shop.setIsValid(true);
+				// List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
+				// EnvManager.getUser().getAppKey(), EnvManager.getUser()
+				// .getAppSecret(), EnvManager.getAppType(),
+				// EnvManager.getUser().getNick(), nShop.getSid() + "",
+				// EnvManager.getUser().getPid());
+				// if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+				// shop.setCommissionRate(shops.get(0).getCommissionRate());
+				// shop.setIsValid(true);
+				// } else {
+				// shop.setIsValid(false);
+				// }
+				// shop.setIsValid(true);
 				shop.setIsValid(true);
 				memberService.save(shop);
 				User user = memberService.get(User.class, EnvManager.getUser()
@@ -129,17 +129,18 @@ public class MemberSellerManager {
 				shop.setServiceScore(score.getServiceScore());
 				shop.setDeliveryScore(score.getDeliveryScore());
 			}
-			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-					EnvManager.getUser().getAppKey(), EnvManager.getUser()
-							.getAppSecret(), EnvManager.getUser().getAppType(),
-					EnvManager.getUser().getNick(), shop.getSid() + "",
-					EnvManager.getUser().getPid());
-			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-				shop.setCommissionRate(shops.get(0).getCommissionRate());
-				shop.setIsValid(true);
-			} else {
-				shop.setIsValid(false);
-			}
+			// List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
+			// EnvManager.getUser().getAppKey(), EnvManager.getUser()
+			// .getAppSecret(), EnvManager.getUser().getAppType(),
+			// EnvManager.getUser().getNick(), shop.getSid() + "",
+			// EnvManager.getUser().getPid());
+			// if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+			// shop.setCommissionRate(shops.get(0).getCommissionRate());
+			// shop.setIsValid(true);
+			// } else {
+			// shop.setIsValid(false);
+			// }
+			shop.setIsValid(true);
 			memberService.save(shop);
 		} else {
 			shop.setCid(nShop.getCid());
@@ -153,17 +154,18 @@ public class MemberSellerManager {
 				shop.setServiceScore(score.getServiceScore());
 				shop.setDeliveryScore(score.getDeliveryScore());
 			}
-			List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
-					EnvManager.getUser().getAppKey(), EnvManager.getUser()
-							.getAppSecret(), EnvManager.getUser().getAppType(),
-					EnvManager.getUser().getNick(), shop.getSid() + "",
-					EnvManager.getUser().getPid());
-			if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-				shop.setCommissionRate(shops.get(0).getCommissionRate());
-				shop.setIsValid(true);
-			} else {
-				shop.setIsValid(false);
-			}
+			// List<TaobaokeShop> shops = TaobaoFetchUtil.convertTaobaoShop(
+			// EnvManager.getUser().getAppKey(), EnvManager.getUser()
+			// .getAppSecret(), EnvManager.getUser().getAppType(),
+			// EnvManager.getUser().getNick(), shop.getSid() + "",
+			// EnvManager.getUser().getPid());
+			// if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+			// shop.setCommissionRate(shops.get(0).getCommissionRate());
+			// shop.setIsValid(true);
+			// } else {
+			// shop.setIsValid(false);
+			// }
+			shop.setIsValid(true);
 			memberService.update(shop);
 		}
 		User user = memberService.get(User.class, EnvManager.getUser().getId());

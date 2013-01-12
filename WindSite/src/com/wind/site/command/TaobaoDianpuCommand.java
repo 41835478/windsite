@@ -199,20 +199,20 @@ public class TaobaoDianpuCommand {
 							adminService.delete(DianPu.class, dp.getId());// 删除不存在的店铺
 						}
 						if (shop != null) {
-							List<TaobaokeShop> shops = TaobaoFetchUtil
-									.convertTaobaoShop(null, null, "0",
-											"fxy060608",
-											String.valueOf(shop.getSid()), null);
+							// List<TaobaokeShop> shops = TaobaoFetchUtil
+							// .convertTaobaoShop(null, null, "0",
+							// "fxy060608",
+							// String.valueOf(shop.getSid()), null);
 							dp.setNick(nick);
 							dp.setSid(shop.getSid());
 							dp.setCid(shop.getCid());
 							dp.setTitle(shop.getTitle());
-							if (shops != null && shops.size() == 1) {
-								TaobaokeShop s = shops.get(0);
-								dp.setCommissionRate(s.getCommissionRate());
-								dp.setUserId(s.getUserId());
-								adminService.update(dp);
-							}
+							// if (shops != null && shops.size() == 1) {
+							// TaobaokeShop s = shops.get(0);
+							// dp.setCommissionRate(s.getCommissionRate());
+							// dp.setUserId(s.getUserId());
+							adminService.update(dp);
+							// }
 						} else {
 							logger.info(nick + " is not exist");
 							adminService.delete(DianPu.class, dp.getId());// 删除非推广店铺

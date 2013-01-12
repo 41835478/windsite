@@ -1324,18 +1324,18 @@ public class AdminRest {
 						shop.setServiceScore(score.getServiceScore());
 						shop.setDeliveryScore(score.getDeliveryScore());
 					}
-					List<TaobaokeShop> tShops = TaobaoFetchUtil
-							.convertTaobaoShop(null, null,
-									EnvManager.getAppType(), "fxy060608",
-									shop.getSid() + "", null);
-					if (tShops != null && tShops.size() == 1) {// 查询信用和佣金比率
-						shop.setTitle(tShops.get(0).getShopTitle());
-						shop.setCommissionRate(tShops.get(0)
-								.getCommissionRate());
-						shop.setIsValid(true);
-					} else {
-						shop.setIsValid(false);
-					}
+//					List<TaobaokeShop> tShops = TaobaoFetchUtil
+//							.convertTaobaoShop(null, null,
+//									EnvManager.getAppType(), "fxy060608",
+//									shop.getSid() + "", null);
+//					if (tShops != null && tShops.size() == 1) {// 查询信用和佣金比率
+//						shop.setTitle(tShops.get(0).getShopTitle());
+//						shop.setCommissionRate(tShops.get(0)
+//								.getCommissionRate());
+//						shop.setIsValid(true);
+//					} else {
+//						shop.setIsValid(false);
+//					}
 					shop.setIsValid(true);
 					adminService.update(shop);
 				} catch (Exception e) {
@@ -1361,37 +1361,37 @@ public class AdminRest {
 	}
 
 	private void getTaobaokeShopCommission(Page<T_TaobaokeShop> page) {
-		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
-				T_TaobaokeShop.class,
-				R.or(R.isNull("title"), R.isNull("sellerCredit")),
-				R.isNotNull("sid"));
-		if (shops != null && shops.size() > 0) {
-			String sids = "";
-			Boolean isFirst = true;
-			for (T_TaobaokeShop shop : shops) {
-				if (isFirst) {
-					isFirst = false;
-				} else {
-					sids += ",";
-				}
-				sids += shop.getSid();
-			}
-			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
-					null, "0", "fxy060608", sids, null);
-			if (tShops != null && tShops.size() > 0) {
-				for (TaobaokeShop shop : tShops) {
-					T_TaobaokeShop oShop = adminService.get(
-							T_TaobaokeShop.class, shop.getUserId());
-					oShop.setTitle(shop.getShopTitle());
-					oShop.setCommissionRate(shop.getCommissionRate());
-					adminService.update(oShop);
-				}
-			}
-		}
-		if (page.isHasNextPage()) {
-			page.setPageNo(page.getNextPage());
-			getTaobaokeShopCommission(page);
-		}
+//		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
+//				T_TaobaokeShop.class,
+//				R.or(R.isNull("title"), R.isNull("sellerCredit")),
+//				R.isNotNull("sid"));
+//		if (shops != null && shops.size() > 0) {
+//			String sids = "";
+//			Boolean isFirst = true;
+//			for (T_TaobaokeShop shop : shops) {
+//				if (isFirst) {
+//					isFirst = false;
+//				} else {
+//					sids += ",";
+//				}
+//				sids += shop.getSid();
+//			}
+//			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
+//					null, "0", "fxy060608", sids, null);
+//			if (tShops != null && tShops.size() > 0) {
+//				for (TaobaokeShop shop : tShops) {
+//					T_TaobaokeShop oShop = adminService.get(
+//							T_TaobaokeShop.class, shop.getUserId());
+//					oShop.setTitle(shop.getShopTitle());
+//					oShop.setCommissionRate(shop.getCommissionRate());
+//					adminService.update(oShop);
+//				}
+//			}
+//		}
+//		if (page.isHasNextPage()) {
+//			page.setPageNo(page.getNextPage());
+//			getTaobaokeShopCommission(page);
+//		}
 	}
 
 	/**

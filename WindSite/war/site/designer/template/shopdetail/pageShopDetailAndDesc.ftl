@@ -14,8 +14,8 @@
 										<li style="width:550px;">店铺名称：<h1><a href="/gshop/${shop.sid}.html" target="_self" title="${shop.title}">${shop.title}</a></h1></li>
 										<li style="width:145px;"><img src="http://static.xintaonet.com/assets/min/stylesheets/images/315.gif" alt="品质卖家"></li>
 										<li>店铺掌柜：${shop.nick}<a href="http://amos.im.alisoft.com/msg.aw?v=2&amp;uid=${shop.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" target="_blank"><img src="http://amos.im.alisoft.com/online.aw?v=2&amp;uid=${shop.nick}&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" alt="点击这里给我发消息"></a></li>
-										<#if tShop.sellerCredit??&&''!=tShop.sellerCredit><li>卖家信用：<span><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${tShop.sellerCredit}.gif" style="vertical-align: text-bottom;"/></span></li></#if>
-										<#if tShop.auctionCount??><li>商品总数：<span>${tShop.auctionCount}件</span></li></#if>
+										<#if tShop??&&tShop.sellerCredit??&&''!=tShop.sellerCredit><li>卖家信用：<span><img src="http://static.xintaonet.com/assets/min/stylesheets/images/${tShop.sellerCredit}.gif" style="vertical-align: text-bottom;"/></span></li></#if>
+										<#if tShop??&&tShop.auctionCount??><li>商品总数：<span>${tShop.auctionCount}件</span></li></#if>
 										<#if shop.shopScore??><#assign score=shop.shopScore>
 										<li>商品描述：<span class="c-value-no" title="${score.itemScore}/5.0"><i style="width: ${score.itemScore}em"></i></span></li>
 										<li>服务态度：<span class="c-value-no" title="${score.serviceScore}/5.0"><i style="width: ${score.serviceScore}em"></i></span></li>

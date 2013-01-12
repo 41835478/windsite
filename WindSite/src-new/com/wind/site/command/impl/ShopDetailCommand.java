@@ -53,74 +53,72 @@ public class ShopDetailCommand implements ICommand {
 	@Override
 	public void execute(ICommandService service) {
 		try {
-			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
-					null, null, "fxy060608", sid + "", null);
-			if (tShops != null && tShops.size() == 1) {
-				TaobaokeShop tShop = tShops.get(0);
-				Shop shop = TaobaoFetchUtil.getTaobaoShop(null, sellerNick);
-				if (shop != null) {
-					Long cid = shop.getCid();
-					if (null != cid) {
-						String key = "shopcat-" + cid;
-						if (!CommandExecutor.getCachecommands()
-								.containsKey(key)) {// 静态化当前店铺分类
-							ShopCatsCommand command = new ShopCatsCommand();
-							command.setCid(cid);
-							command.setFcg(fcg);
-							command.setPageService(pageService);
-							command.setIsAll(false);
-							CommandExecutor.getCachecommands()
-									.put(key, command);
-						}
-					}
-					List<TaobaokeItem> taokeItems = new ArrayList<TaobaokeItem>();
-					ItemsSearchRequest itemSearchRequest = new ItemsSearchRequest();
-					itemSearchRequest.setNicks(sellerNick);
-					itemSearchRequest.setOrderBy("volume:desc");
-					itemSearchRequest.setPageNo(1L);
-					itemSearchRequest.setPageSize(20L);
-					itemSearchRequest.setFields("num_iid");
-					ItemsSearchResponse itemSearchResponse = TaobaoFetchUtil
-							.taobaoSearchItems(null, itemSearchRequest);
-					if (itemSearchResponse != null) {
-						ItemSearch itemSearch = itemSearchResponse
-								.getItemSearch();
-						if (itemSearch != null) {
-							List<Item> items = itemSearch.getItems();
-							if (items != null && items.size() > 0) {
-								Boolean isFirst = true;
-								String numiids = "";
-								for (Item i : items) {
-									if (isFirst) {
-										isFirst = false;
-									} else {
-										numiids += ",";
-									}
-									numiids += i.getNumIid();
-								}
-								taokeItems = TaobaoFetchUtil.newItemsConvert(null,
-										null, null, numiids, sellerNick, pid);
-							}
-						}
-					}
-					deployShopDetailMeta(shop);
-					deployShopAnddesc(shop, tShop, taokeItems);
-					// 记录日志
-					ShopCacheLog log = pageService.get(ShopCacheLog.class, sid);
-					if (log == null) {
-						log = new ShopCacheLog();
-						log.setDeploy(new Date());
-						log.setId(sid);
-						log.setNick(sellerNick);
-						log.setTotalHits(1L);
-						log.setHits(1L);
-						pageService.save(log);
-					} else {
-						log.setDeploy(new Date());
-						pageService.update(log);
+			// List<TaobaokeShop> tShops =
+			// TaobaoFetchUtil.convertTaobaoShop(null,
+			// null, null, "fxy060608", sid + "", null);
+			// if (tShops != null && tShops.size() == 1) {
+			// TaobaokeShop tShop = tShops.get(0);
+			Shop shop = TaobaoFetchUtil.getTaobaoShop(null, sellerNick);
+			if (shop != null) {
+				Long cid = shop.getCid();
+				if (null != cid) {
+					String key = "shopcat-" + cid;
+					if (!CommandExecutor.getCachecommands().containsKey(key)) {// 静态化当前店铺分类
+						ShopCatsCommand command = new ShopCatsCommand();
+						command.setCid(cid);
+						command.setFcg(fcg);
+						command.setPageService(pageService);
+						command.setIsAll(false);
+						CommandExecutor.getCachecommands().put(key, command);
 					}
 				}
+				List<TaobaokeItem> taokeItems = new ArrayList<TaobaokeItem>();
+				ItemsSearchRequest itemSearchRequest = new ItemsSearchRequest();
+				itemSearchRequest.setNicks(sellerNick);
+				itemSearchRequest.setOrderBy("volume:desc");
+				itemSearchRequest.setPageNo(1L);
+				itemSearchRequest.setPageSize(20L);
+				itemSearchRequest.setFields("num_iid");
+				ItemsSearchResponse itemSearchResponse = TaobaoFetchUtil
+						.taobaoSearchItems(null, itemSearchRequest);
+				if (itemSearchResponse != null) {
+					ItemSearch itemSearch = itemSearchResponse.getItemSearch();
+					if (itemSearch != null) {
+						List<Item> items = itemSearch.getItems();
+						if (items != null && items.size() > 0) {
+							Boolean isFirst = true;
+							String numiids = "";
+							for (Item i : items) {
+								if (isFirst) {
+									isFirst = false;
+								} else {
+									numiids += ",";
+								}
+								numiids += i.getNumIid();
+							}
+							taokeItems = TaobaoFetchUtil.newItemsConvert(null,
+									null, null, numiids, sellerNick, pid);
+						}
+					}
+				}
+				deployShopDetailMeta(shop);
+				deployShopAnddesc(shop, null, taokeItems);
+				// 记录日志
+				ShopCacheLog log = pageService.get(ShopCacheLog.class, sid);
+				if (log == null) {
+					log = new ShopCacheLog();
+					log.setDeploy(new Date());
+					log.setId(sid);
+					log.setNick(sellerNick);
+					log.setTotalHits(1L);
+					log.setHits(1L);
+					pageService.save(log);
+				} else {
+					log.setDeploy(new Date());
+					pageService.update(log);
+				}
 			}
+			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -100,16 +100,16 @@ public class TaobaoJiePaihangSpider implements IModuleSpider {
 								img = tag.getAttribute("src");
 
 							}
-							try {
-								List<TaobaokeShop> _shops = TaobaoFetchUtil
-										.convertTaobaoShop(null, null, null,
-												"fxy060608", sid, null);
-								if (_shops == null || _shops.size() == 0) {
-									continue;// 跳出继续下一个
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
+//							try {
+//								List<TaobaokeShop> _shops = TaobaoFetchUtil
+//										.convertTaobaoShop(null, null, null,
+//												"fxy060608", sid, null);
+//								if (_shops == null || _shops.size() == 0) {
+//									continue;// 跳出继续下一个
+//								}
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//							}
 							shop.put("sid", sid);
 							shop.put("title", shopTitle);
 							shop.put("picUrl", img);

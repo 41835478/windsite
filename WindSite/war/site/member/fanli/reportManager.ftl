@@ -43,7 +43,6 @@ $(function(){
 <#if site.www??&&site.www!=''>
 <#assign www=site.www>	
 </#if>
-<h2 style="font-size:18px;margin-bottom:10px;">如果无法获取订单,请点击<a style="font-size:18px;" href="https://oauth.taobao.com/authorize?client_id=${USER.appKey}&response_type=code&redirect_uri=${('http://'+www+'/router/site/bind')?url}&scope=&state=${USER.user_id}&view=">授权</a></h2>
 <#else>
 <h2 style="font-size:18px;margin-bottom:10px;">您尚未配置自己的appKey,appSecret,无法获取订单记录</h2>
 </#if>

@@ -677,15 +677,12 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				commission.setIsValid(true);
 				this.save(commission);
 				site.setCommission(commission);
-				if (StringUtils.isNotEmpty(user.getAppKey())
-						&& StringUtils.isNotEmpty(user.getReportSession())) {
+				if (StringUtils.isNotEmpty(user.getAppKey())) {
 					// 新增的话，抓取最近90天内交易
 					ReportsGetCommand command = new ReportsGetCommand();
 					if (StringUtils.isNotEmpty(user.getReportSession())) {
-						command.setSession(user.getReportSession());
 						command.setAppType("1");
 					} else {
-						command.setSession(EnvManager.getTaobaoSession());
 						command.setAppType(EnvManager.getAppType());
 					}
 					command.setSite_id(user.getSites().get(0).getId());
@@ -713,10 +710,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 				}
 
 			} else {// 如果已有，则根据上次登录时间来抓取
-				if (StringUtils.isNotEmpty(user.getAppKey())
-						&& StringUtils.isNotEmpty(user.getReportSession())) {
+				if (StringUtils.isNotEmpty(user.getAppKey())) {
 					ReportsGetCommand command = new ReportsGetCommand();
-					command.setSession(EnvManager.getTaobaoSession());
 					command.setSite_id(user.getSites().get(0).getId());
 					command.setUser_id(user.getUser_id());
 					command.setAppType(EnvManager.getAppType());
@@ -922,19 +917,19 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 							oShop.setServiceScore(score.getServiceScore());
 							oShop.setDeliveryScore(score.getDeliveryScore());
 						}
-//						List<TaobaokeShop> shops = TaobaoFetchUtil
-//								.convertTaobaoShop(EnvManager.getUser()
-//										.getAppKey(), EnvManager.getUser()
-//										.getAppSecret(), EnvManager
-//										.getAppType(), user.getNick(),
-//										shop.getSid() + "", user.getPid());
-//						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-//							oShop.setCommissionRate(shops.get(0)
-//									.getCommissionRate());
-//							oShop.setIsValid(true);
-//						} else {
-//							oShop.setIsValid(false);
-//						}
+						// List<TaobaokeShop> shops = TaobaoFetchUtil
+						// .convertTaobaoShop(EnvManager.getUser()
+						// .getAppKey(), EnvManager.getUser()
+						// .getAppSecret(), EnvManager
+						// .getAppType(), user.getNick(),
+						// shop.getSid() + "", user.getPid());
+						// if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+						// oShop.setCommissionRate(shops.get(0)
+						// .getCommissionRate());
+						// oShop.setIsValid(true);
+						// } else {
+						// oShop.setIsValid(false);
+						// }
 						oShop.setIsValid(true);
 						this.save(oShop);
 					} else {// 店铺更新
@@ -949,19 +944,19 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 							oShop.setServiceScore(score.getServiceScore());
 							oShop.setDeliveryScore(score.getDeliveryScore());
 						}
-//						List<TaobaokeShop> shops = TaobaoFetchUtil
-//								.convertTaobaoShop(EnvManager.getUser()
-//										.getAppKey(), EnvManager.getUser()
-//										.getAppSecret(), EnvManager
-//										.getAppType(), user.getNick(),
-//										shop.getSid() + "", user.getPid());
-//						if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
-//							oShop.setCommissionRate(shops.get(0)
-//									.getCommissionRate());
-//							oShop.setIsValid(true);
-//						} else {
-//							oShop.setIsValid(false);
-//						}
+						// List<TaobaokeShop> shops = TaobaoFetchUtil
+						// .convertTaobaoShop(EnvManager.getUser()
+						// .getAppKey(), EnvManager.getUser()
+						// .getAppSecret(), EnvManager
+						// .getAppType(), user.getNick(),
+						// shop.getSid() + "", user.getPid());
+						// if (shops != null && shops.size() == 1) {// 查询信用和佣金比率
+						// oShop.setCommissionRate(shops.get(0)
+						// .getCommissionRate());
+						// oShop.setIsValid(true);
+						// } else {
+						// oShop.setIsValid(false);
+						// }
 						oShop.setIsValid(true);
 						this.update(shop);
 					}

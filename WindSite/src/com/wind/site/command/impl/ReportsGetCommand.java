@@ -26,7 +26,6 @@ public class ReportsGetCommand implements ICommand {
 	public static final Long PAGE_SIZE = 100L;
 	private String user_id;
 	private String site_id;
-	private String session;
 	private String appType;
 	private String appKey;
 	private String appSecret;
@@ -35,8 +34,8 @@ public class ReportsGetCommand implements ICommand {
 
 	@Override
 	public void execute(ICommandService service) {
-		if (user_id != null && site_id != null && session != null
-				&& start != null && appKey != null) {
+		if (user_id != null && site_id != null && start != null
+				&& appKey != null) {
 			Calendar from = Calendar.getInstance();
 			from.setTime(start);
 			from.set(Calendar.HOUR, 0);
@@ -66,7 +65,7 @@ public class ReportsGetCommand implements ICommand {
 		request.setPageSize(PAGE_SIZE);
 		try {
 			TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-					appKey, appSecret, request, session);
+					appKey, appSecret, request, null);
 			if (response != null) {
 				TaobaokeReport report = response.getTaobaokeReport();
 				if (report != null) {
@@ -195,21 +194,6 @@ public class ReportsGetCommand implements ICommand {
 	 */
 	public void setSite_id(String siteId) {
 		site_id = siteId;
-	}
-
-	/**
-	 * @return the session
-	 */
-	public String getSession() {
-		return session;
-	}
-
-	/**
-	 * @param session
-	 *            the session to set
-	 */
-	public void setSession(String session) {
-		this.session = session;
 	}
 
 	public void setStart(Date start) {

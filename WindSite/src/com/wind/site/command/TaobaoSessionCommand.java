@@ -51,7 +51,7 @@ public class TaobaoSessionCommand {
 		Map<String, Object> params = new HashMap<String, Object>();
 		for (String user_id : ids) {
 			params.put("user_id", user_id);
-			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.appKey as appKey,u.appSecret as appSecret,u.reportSession as reportSession) from User u where (u.reportSession is not null) and user_id=:user_id";
+			String hql = "select new map(u.appType as appType,u.user_id as user_id,u.appKey as appKey,u.appSecret as appSecret,u.reportSession as reportSession) from User u where (u.appKey is not null) and user_id=:user_id";
 			List<Map<String, Object>> users = (List<Map<String, Object>>) taobaoService
 					.findByHql(hql, params);
 			if (users != null && users.size() == 1) {
@@ -61,11 +61,9 @@ public class TaobaoSessionCommand {
 						String.valueOf(user.get("user_id")));// 获取SID
 				if (result.get("sid") != null) {
 					ReportsGetCommand command = new ReportsGetCommand();
-					String reportSession = String.valueOf(user
-							.get("reportSession"));
-					if (StringUtils.isNotEmpty(reportSession)
-							&& !"null".equals(reportSession)) {
-						command.setSession(reportSession);
+					String appKey = String.valueOf(user.get("appKey"));
+					if (StringUtils.isNotEmpty(appKey)
+							&& !"null".equals(appKey)) {
 						command.setAppKey(String.valueOf(user.get("appKey")));
 						command.setAppSecret(String.valueOf(user
 								.get("appSecret")));

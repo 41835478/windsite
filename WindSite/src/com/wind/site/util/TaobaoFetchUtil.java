@@ -794,8 +794,7 @@ public class TaobaoFetchUtil {
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 				appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 		try {
-			TaobaokeReportGetResponse response = client.execute(request,
-					session);
+			TaobaokeReportGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;
 			} else {

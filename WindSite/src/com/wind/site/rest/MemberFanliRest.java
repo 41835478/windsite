@@ -617,9 +617,9 @@ public class MemberFanliRest {
 		if (StringUtils.isEmpty(EnvManager.getUser().getAppKey())) {
 			SystemException.handleMessageException("尚未配置appKey");
 		}
-		if (StringUtils.isEmpty(EnvManager.getUser().getReportSession())) {
-			SystemException.handleMessageException("尚未授权");
-		}
+//		if (StringUtils.isEmpty(EnvManager.getUser().getReportSession())) {
+//			SystemException.handleMessageException("尚未授权");
+//		}
 		String[] p = new String[] { DateUtils.YYYY_MM_DD };
 		try {
 			Calendar start = Calendar.getInstance();

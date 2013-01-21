@@ -30,20 +30,6 @@ $(function(){
 		boxs.hide();
 		$('#'+$(this).attr('data-box')).show();
 	});
-	if(typeof(TOP)!='undefined'){
-		TOP.api({ 
-		      method:'taobao.taobaoke.widget.shops.convert', 
-		      fields:'user_id,shop_title,click_url,commission_rate',
-		      seller_nicks:'',
-		      outer_code:'' 
-		},function(resp){ 
-			if(resp.taobaoke_shops){ 
-			      alert('success!'); 
-			}else{ 
-			      alert('failure!'); 
-			} 
-		});
-	}
 });
 </script>
 </body>

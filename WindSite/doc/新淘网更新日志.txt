@@ -8,38 +8,64 @@ rsync --delete-before -a -H -v --progress --stats /usr/local/apache2/htdocs/test
 
 rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/mnt/ebs/opt/mysqldata /opt
 
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/iweibo /usr/local/apache2/htdocs
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/mysql /usr/local/apache2/htdocs
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/piwik /usr/local/apache2/htdocs
+rsync -avzuP /old/usr/local/apache2/htdocs/iweibo /usr/local/apache2/htdocs
+rsync -avzuP /old/usr/local/apache2/htdocs/mysql /usr/local/apache2/htdocs
+rsync -avzuP /old/usr/local/apache2/htdocs/piwik /usr/local/apache2/htdocs
 
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/api /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/application /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/assets /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/css /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/doc /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/flash /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/help /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/img /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/install /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/js /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/OpenSDK /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/restore /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/Services /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/Spreadsheet /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/xintao /usr/local/apache2/htdocs/weibo21/
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/templates /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/api /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/application /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/assets /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/css /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/doc /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/flash /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/help /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/img /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/install /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/js /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/OpenSDK /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/restore /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/Services /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/Spreadsheet /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/xintao /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/templates /usr/local/apache2/htdocs/weibo21/
 
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var /usr/local/apache2/htdocs/weibo21/
- 
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/backup /usr/local/apache2/htdocs/weibo21/var
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/data /usr/local/apache2/htdocs/weibo21/var
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/lock /usr/local/apache2/htdocs/weibo21/var
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/log /usr/local/apache2/htdocs/weibo21/var
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/upload /usr/local/apache2/htdocs/weibo21/var
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/backup /usr/local/apache2/htdocs/weibo21/var
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/data /usr/local/apache2/htdocs/weibo21/var
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/lock /usr/local/apache2/htdocs/weibo21/var
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/log /usr/local/apache2/htdocs/weibo21/var
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/upload /usr/local/apache2/htdocs/weibo21/var
 
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_poster /usr/local/apache2/htdocs/weibo21/var/cache_xt
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_posters /usr/local/apache2/htdocs/weibo21/var/cache_xt
-rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.114.148:/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_tv /usr/local/apache2/htdocs/weibo21/var/cache_xt
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/.htaccess /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/.project /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/admin.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/checkFileBom.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/config.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/crossdomain.xml /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/deny.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/favicon.ico /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/index.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/robots.txt /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/root.txt /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/share.html /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/test.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/top_monitor.html /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/upgrade.html /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/user_config.php /usr/local/apache2/htdocs/weibo21/
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/wap.php /usr/local/apache2/htdocs/weibo21/
+
+
+rsync -avzuP /old/usr/local/apache2/conf /usr/local/apache2/
+
+rsync -avzuP /old/etc/sysctl.conf /etc
+
+rsync -avzuP /old/etc/sysconfig/iptables /etc/sysconfig
+
+rsync -avzuP /old/etc/crontab /etc/
+
+
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_poster /usr/local/apache2/htdocs/weibo21/var/cache_xt
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_posters /usr/local/apache2/htdocs/weibo21/var/cache_xt
+rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_tv /usr/local/apache2/htdocs/weibo21/var/cache_xt
 
 
 
@@ -271,7 +297,7 @@ ulimit -a  显示当前所有的 limit 信息
 
 
 alias net-pf-10 off
- alias ipv6 off
+alias ipv6 off
 
 2. #vim /etc/sysconfig/network文件，确认其中含有如下行：
 

@@ -103,11 +103,7 @@
 			<filelist dir="${output}" files="xt-widgets.min.js" />
 		</copy>
 		<copy todir="${xintaoke}/xt-includes">
-			<filelist dir="${plugin}/includes" files="category-taobao.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+			<filelist dir="${plugin}/includes" files="yiqifa.function.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
 		</copy>
-
-		<!--<copy todir="${apache}/help">
-			<fileset dir="${war}/help" excludes="**/.svn/**" />
-		</copy>-->
 	</target>
 </project>

@@ -22,7 +22,7 @@
 						<tr><td class="key">注册时间:</td><td class="value">${member.created?datetime}</td><td class="key">上次登录:</td><td class="value">${member.lastVisit?datetime}</td><td class="key">登录次数:</td><td class="value">${member.visits}</td></tr>
 						<tr><td class="key">QQ:</td><td class="value">${member.info.qq}</td><td class="key">MSN:</td><td class="value">${member.info.msn}</td><td class="key">旺旺:</td><td class="value">${member.info.wangwang}</td></tr>
 						<tr><td class="key">手机:</td><td class="value" style="width:auto;">${member.info.mobile}</td><!--<td class="key">购买返利比例:</td><td class="value" style="width:auto;"><#if member.commissionRate??>${member.commissionRate}<#else>${siteCommission.commissionRate}</#if>%</td>-->
-						<td class="key">推广返利比例:</td><td class="value" style="width:auto;"><#if member.adCommissionRate??>${member.adCommissionRate}<#else>${siteCommission.adCommissionRate}</#if>%</td><td></td><td></td></tr>
+						<#if siteCommission.adCommissionRate??&&''!=siteCommission.adCommissionRate&&(siteCommission.adCommissionRate>0)><td class="key">推广返利比例:</td><td class="value" style="width:auto;"><#if member.adCommissionRate??>${member.adCommissionRate}<#else>${siteCommission.adCommissionRate}</#if>%</td><#else><td></td><td></td></#if><td></td><td></td></tr>
 						</table>
 						</fieldset>
 						<fieldset><legend>最新淘宝订单</legend>

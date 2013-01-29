@@ -196,7 +196,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
 <#if appKey??>
-<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 </head>
@@ -285,7 +285,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 		</div>
 	</div>
 </div>
-<div name="shopCategory" class="box J_TBox ks-clear">
+<#if MEMBER??>
+	<#if MEMBER.adCommissionRate??&&''!=MEMBER.adCommissionRate&&(MEMBER.adCommissionRate>0)>
+	<div name="shopCategory" class="box J_TBox ks-clear">
 	<div class="shop-category">
 		<div class="hd"><h3><span>我的推广</span></h3></div>
 		<div class="bd">
@@ -297,6 +299,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 		</div>
 	</div>
 </div>
+	</#if>
+</#if>
 </#macro>
 <#macro pageMemberHeader>
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
@@ -322,7 +326,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
 <#if appKey??>
-<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 <script src="/assets/js/jquery/ui/jquery-ui.min.js"></script>

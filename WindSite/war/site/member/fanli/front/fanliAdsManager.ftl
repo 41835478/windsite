@@ -3,6 +3,9 @@
 <meta name="description" content="会员中心">
 <title>我的推广- ${sitetitle}</title>
 </@p.pageMemberHeader>
+<#assign commission=0>
+<#if member.adCommissionRate><#assign commission=member.adCommissionRate><#else><#assign commission=siteCommission.adCommissionRate></#if>
+<#if (commission>0)>
 <script>$(function(){initFanliSiteAds('${q}');});</script>
 <div class="layout grid-m0 ks-clear"><div class="col-main"><div class="main-wrap J_TRegion"><dl id="position"><dt>找回订单</dt><dd> &gt; <span id="UserMap">找回商城订单</span></dd></dl></div></div></div>
 <div class="layout grid-s5m0 ks-clear">
@@ -25,8 +28,7 @@
 							<TBODY id="membersSearchResult">
 							</TBODY>
 						</TABLE>
-						<#assign commission=0>
-						<#if member.commissionRate><#assign commission=member.adCommissionRate><#else><#assign commission=siteCommission.adCommissionRate></#if>
+						
 						<@ws.help>
 						<span style="color: #F60;">提醒:</span>&nbsp;&nbsp;您目前的推广返利比例为&nbsp;<strong style="color:red;">${commission}</strong>%。推广链接为<input id="adsLink" style="width:400px;padding:2px;" value="http://${www}/router/fanli/registe?id=${member.id}">
 						<h3>1.什么是我的推广？</h3>
@@ -41,6 +43,20 @@
 		<@p.pageMemberSideMenu></@p.pageMemberSideMenu>
 	</div>
 </div>
+<#else>
+<div class="layout grid-s5m0 ks-clear">
+	<div class="col-main">
+		<div class="main-wrap J_TRegion">
+			<div class="box J_TBox ks-clear">
+				<center><h1>站点已停止推广返利</h1></center>				
+			</div>			
+		</div>
+	</div>
+	<div class="col-sub J_TRegion">
+		<@p.pageMemberSideMenu></@p.pageMemberSideMenu>
+	</div>
+</div>
+</#if>
 <@p.pageFooter>
 </@p.pageFooter>
 			

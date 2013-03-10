@@ -24,7 +24,7 @@ img {
 }
 </style>
 <#if appKey??>
-<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
 </#if>
 </head>
 <body>

@@ -21,7 +21,7 @@ body{color: #666;font-family: Tahoma, SimSun, Arial;font-size: 12px;font-weight:
 				对不起！您浏览的网页可能已被删除,重命名或暂时不可用！
 			<#else>
 				<#if msg??&&msg!=''>
-					错误信息:${msg}<#if msg?contains('升级版本')>，<a href="http://pay.taobao.com/mysub/subdeal/upgrade_order_sub_deal.htm?servId=22000691&appstore=myapp2upgrade" target="_blank" style="font-size: 16px;font-weight: bold;color:#f60;">立刻升级</a></#if>
+					错误信息:${msg?replace('<script>','')?replace('</sCript>','')?replace('</script>','')?replace('alert','')}<#if msg?contains('升级版本')>，<a href="http://pay.taobao.com/mysub/subdeal/upgrade_order_sub_deal.htm?servId=22000691&appstore=myapp2upgrade" target="_blank" style="font-size: 16px;font-weight: bold;color:#f60;">立刻升级</a></#if>
 				<#elseif code??&&code!=''>
 					错误信息:${code}
 				<#else>

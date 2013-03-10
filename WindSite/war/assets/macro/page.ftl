@@ -288,17 +288,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if MEMBER??>
 	<#if MEMBER.adCommissionRate??&&''!=MEMBER.adCommissionRate&&(MEMBER.adCommissionRate>0)>
 	<div name="shopCategory" class="box J_TBox ks-clear">
-	<div class="shop-category">
-		<div class="hd"><h3><span>我的推广</span></h3></div>
-		<div class="bd">
-			<ul id="J_Cats" class="cats J_TWidget">
-				<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads">我的推广会员</a></li></ul></li>
-				<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads/report/tao">淘宝推广记录</a></li></ul></li>
-				<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads/report/mall">商城推广记录</a></li></ul></li>
-			</ul>
+		<div class="shop-category">
+			<div class="hd"><h3><span>我的推广</span></h3></div>
+			<div class="bd">
+				<ul id="J_Cats" class="cats J_TWidget">
+					<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads" target="_self">我的推广会员</a></li></ul></li>
+					<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads/report/tao">淘宝推广记录</a></li></ul></li>
+					<li class="cat expand"><ul class="cat-bd"><li><a href="/router/fanlimember/ads/report/mall">商城推广记录</a></li></ul></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
 	</#if>
 </#if>
 </#macro>

@@ -34,6 +34,77 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+
+iptables -I INPUT -s 120.10.193.71 -j DROP
+iptables -I INPUT -s 183.62.13.67 -j DROP
+iptables -I INPUT -s 60.191.99.151 -j DROP
+iptables -I INPUT -s 123.233.133.2 -j DROP
+iptables -I INPUT -s 125.127.0.250 -j DROP
+iptables -I INPUT -s 114.217.232.166 -j DROP
+iptables -I INPUT -s 116.55.250.210 -j DROP
+iptables -I INPUT -s 111.128.231.63 -j DROP
+iptables -I INPUT -s 122.143.52.148 -j DROP
+iptables -I INPUT -s 27.194.243.145 -j DROP
+iptables -I INPUT -s 113.104.216.118 -j DROP
+iptables -I INPUT -s 60.2.236.247 -j DROP
+iptables -I INPUT -s 123.9.192.120 -j DROP
+iptables -I INPUT -s 112.67.3.151 -j DROP
+iptables -I INPUT -s 218.58.123.90 -j DROP
+iptables -I INPUT -s 183.201.255.5 -j DROP
+iptables -I INPUT -s 182.128.250.12 -j DROP
+iptables -I INPUT -s 125.127.0.250 -j DROP
+iptables -I INPUT -s 59.51.104.92 -j DROP
+iptables -I INPUT -s 180.117.0.136 -j DROP
+iptables -I INPUT -s 123.155.205.71 -j DROP
+iptables -I INPUT -s 183.201.255.5 -j DROP
+iptables -I INPUT -s 125.118.220.37 -j DROP
+iptables -I INPUT -s 113.225.146.88 -j DROP
+iptables -I INPUT -s 112.86.30.135 -j DROP
+iptables -I INPUT -s 112.233.149.34 -j DROP
+iptables -I INPUT -s 183.201.255.4 -j DROP
+iptables -I INPUT -s 122.87.218.101 -j DROP
+iptables -I INPUT -s 119.60.0.67 -j DROP
+iptables -I INPUT -s 60.30.68.155 -j DROP
+iptables -I INPUT -s 60.2.236.247 -j DROP
+iptables -I INPUT -s 182.128.37.250 -j DROP
+iptables -I INPUT -s 58.16.175.39 -j DROP
+iptables -I INPUT -s 27.197.102.11 -j DROP
+iptables -I INPUT -s 118.81.57.58 -j DROP
+iptables -I INPUT -s 120.0.212.178 -j DROP
+iptables -I INPUT -s 222.35.11.251 -j DROP
+iptables -I INPUT -s 221.181.232.147 -j DROP
+iptables -I INPUT -s 14.211.72.52 -j DROP
+iptables -I INPUT -s 125.118.220.37 -j DROP
+iptables -I INPUT -s 118.123.155.41 -j DROP
+iptables -I INPUT -s 117.79.232.6 -j DROP
+iptables -I INPUT -s 180.213.146.40 -j DROP
+iptables -I INPUT -s 125.32.118.178 -j DROP
+iptables -I INPUT -s 61.140.213.125 -j DROP
+iptables -I INPUT -s 59.148.120.108 -j DROP
+iptables -I INPUT -s 124.126.227.172 -j DROP
+iptables -I INPUT -s 114.139.157.123 -j DROP
+iptables -I INPUT -s 123.64.55.109 -j DROP
+iptables -I INPUT -s 60.7.102.186 -j DROP
+iptables -I INPUT -s 49.73.83.239 -j DROP
+
+iptables -I INPUT -s 50.31.96.0/24 -j DROP
+
+iptables -I INPUT -s 218.30.116.0/24 -j DROP
+iptables -I INPUT -s 218.77.17.0/24 -j DROP
+iptables -I INPUT -s 101.226.89.0/24 -j DROP
+
+iptables -I INPUT -s 183.71.51.92 -j DROP
+iptables -I INPUT -s 1.174.229.0/24 -j DROP
+iptables -I INPUT -s 218.94.118.150 -j DROP
+iptables -I INPUT -s 220.181.55.30 -j DROP
+iptables -I INPUT -s 118.122.51.76 -j DROP
+iptables -I INPUT -s 218.30.117.71 -j DROP
+iptables -I INPUT -s 61.178.19.100 -j DROP
+iptables -I INPUT -s 207.241.237.230 -j DROP
+
+
+iptables -I INPUT -s 101.226.89.0/24 -j DROP
+iptables -I INPUT -s 101.227.4.0/24 -j DROP
 #2013-02-17
 iptables -I INPUT -s 103.29.132.0/24 -j DROP
 #2013-02-08

@@ -314,7 +314,7 @@
 		</property>
 		<!-- 每隔半小时-->
 		<property name="cronExpression">
-			<value>0 */30 * * * ?</value>
+			<value>0 */50 * * * ?</value>
 		</property>
 	</bean>
 	<!--淘宝关键词更新-->

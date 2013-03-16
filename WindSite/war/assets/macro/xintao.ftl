@@ -183,7 +183,7 @@ function loadVersionInfo(msg) {
     <li<#if bdselected=='analytics-advanced'> class="selected"</#if>><span><a href="/router/member/analyticsmanager/advanced">高级统计</a></span></li>
 </ul>
 </div>-->
-<div class="menu-box" id="cs"> 
+<div class="menu-box" id="cs" style="display:none"> 
 <h3 class="taoke-bar"><span>收入报表</span><button class="<#if (5<group)>menu-open<#else>menu-close</#if>">-</button></h3> 
 	<ul class="group" <#if (5<group)>style="display:none;"</#if>>
         <li<#if bdselected=='income-report'> class="selected"</#if>><span><a href="/router/member/sitemanager/report">收入查询</a></span></li>

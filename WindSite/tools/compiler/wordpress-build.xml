@@ -1,6 +1,6 @@
 <project basedir="." default="compile">
 	<property file="wordpress-build.properties" />
-	<target name="compile" depends="clean,compile.core.utils,compile.bootstrap.ie,compile.account,compile.core,compile.login,compile.post,compile.widgets,compile.css,copy.min">
+	<target name="compile" depends="clean,compile.core.utils,compile.bootstrap.ie,compile.account,compile.core,compile.login,compile.post,compile.widgets,compile.catalog,compile.css,copy.min">
 	</target>
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
 	<!--清理-->
@@ -60,6 +60,14 @@
 		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-widgets.min.js">
 			<sources dir="${war}">
 				<file name="xt-widgets.js" />
+				<file name="xt-catalog.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<target name="compile.catalog">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xt-catalog.min.js">
+			<sources dir="${war}">
+				<file name="xt-catalog.js" />
 			</sources>
 		</jscomp>
 	</target>
@@ -100,7 +108,7 @@
 			<filelist dir="${output}" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
 		</copy>
 		<copy todir="${xt}/js">
-			<filelist dir="${output}" files="xt-widgets.min.js" />
+			<filelist dir="${output}" files="xt-widgets.min.js,xt-catalog.min.js" />
 		</copy>
 		<copy todir="${xintaoke}/xt-includes">
 			<filelist dir="${plugin}/includes" files="yiqifa.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />

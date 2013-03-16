@@ -65,6 +65,25 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 						if (!ipTable.isBlack(ip)) {// 如果不在黑名单,计数
 							ICache<String, Object> cache = EnvManager
 									.getCache();
+							ICache<String, Object> tempCache = EnvManager
+									.getCache();
+							Object tempV = tempCache.get(ip);// 获取当前IP计数
+							if (tempV != null) {// 如果已存在
+								Long count = (Long) tempV + 1;
+								tempCache.putExpiry(ip, count);// 计数加一,保留有效期数据
+								if (ipTable.getIsFilter() && count > 50) {// 如果允许过滤并超出流量
+									// TODO 进入验证码页面
+									// 记录 Crawler IP
+									IPCrawlerCommand command = new IPCrawlerCommand();
+									command.setIp(ip);
+									CommandExecutor.getCommands().add(command);
+									response.sendRedirect("http://"
+											+ WindSiteRestUtil.DOMAIN
+											+ "/help/crawler.html");
+								}
+							} else {// 不存在,带过期值进入缓存
+								tempCache.put(ip, 1L, 10);// 10秒超时
+							}
 							Object v = cache.get(ip);// 获取当前IP计数
 							if (v != null) {// 如果已存在
 								Long count = (Long) v + 1;

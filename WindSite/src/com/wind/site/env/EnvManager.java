@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.wind.core.cache.ICache;
 import com.wind.core.cache.impl.DefaultCacheImpl;
+import com.wind.core.cache.impl.TempDefaultCacheImpl;
 import com.wind.core.exception.SystemException;
 import com.wind.site.model.Activity;
 import com.wind.site.model.Channel;
@@ -49,6 +50,7 @@ public class EnvManager {
 			.getName());
 
 	private static ICache<String, Object> cache;
+	private static ICache<String, Object> tempCache;
 	/**
 	 * 淘宝环境
 	 */
@@ -134,6 +136,7 @@ public class EnvManager {
 		if (listener != null) {
 			listener.init();
 			cache = new DefaultCacheImpl(listener.getAdminService());// 初始化本地缓存
+			tempCache = new TempDefaultCacheImpl(listener.getAdminService());// 初始化本地缓存
 
 			logger.info("环境初始化成功");
 		} else {
@@ -143,6 +146,10 @@ public class EnvManager {
 
 	public static ICache<String, Object> getCache() {
 		return cache;
+	}
+
+	public static ICache<String, Object> getTempCache() {
+		return tempCache;
 	}
 
 	public static Map<String, YiqifaMall> getYiqifaMalls() {
@@ -369,8 +376,8 @@ public class EnvManager {
 	public static String getUserPath(String domainName) {
 		return EnvManager.getZonePath()
 				+ File.separator
-				+ domainName.substring(domainName.length() - 2, domainName
-						.length()) + File.separator
+				+ domainName.substring(domainName.length() - 2,
+						domainName.length()) + File.separator
 				+ domainName.substring(4, domainName.length()) + File.separator;
 	}
 
@@ -649,8 +656,8 @@ public class EnvManager {
 			if (obj != null) {// 新淘网会员
 				User sessionUser = (User) obj;
 				if (sessionUser != null)
-					EnvManager.getListener().getAdminService().updateOnLine(
-							sessionUser.getId());
+					EnvManager.getListener().getAdminService()
+							.updateOnLine(sessionUser.getId());
 			}
 			if (mObj != null) {// 返利会员
 				Member sessionMember = (Member) mObj;

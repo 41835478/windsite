@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -87,7 +86,6 @@ import com.wind.site.model.convert.WidgetAttributeConvert;
 import com.wind.site.service.IMemberService;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
-import com.wind.site.util.EncryptUtil;
 import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WidgetUtil;
 import com.wind.site.util.WindSiteRestUtil;
@@ -124,7 +122,6 @@ public class MemberRest {
 	private WidgetCustomerMethod widgetCustomer;
 	@Autowired
 	private DatelineMethod dateline;
-
 
 	/**
 	 * 会员普通功能通用视图访问
@@ -2673,6 +2670,7 @@ public class MemberRest {
 		String pAdId = request.getParameter("pAdId");
 		String appKey = request.getParameter("appKey");
 		String appSecret = request.getParameter("appSecret");
+		String pid = request.getParameter("pid");
 
 		ShopcatsListGetRequest getRequest = new ShopcatsListGetRequest();
 		getRequest.setFields("cid");
@@ -2757,6 +2755,11 @@ public class MemberRest {
 					&& StringUtils.isNotEmpty(appSecret)) {
 				user.setAppKey(appKey);
 				user.setAppSecret(appSecret);
+			}
+			if (StringUtils.isNotEmpty(pid)) {
+				user.setPid(pid);
+			} else {
+				user.setPid(user.getnPid());
 			}
 			if (StringUtils.isNotEmpty(pSiteId)
 					&& StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID

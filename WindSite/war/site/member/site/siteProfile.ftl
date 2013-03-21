@@ -21,15 +21,20 @@ $('#designerSite').button();
 		}
 		var reg_app = /^[0-9]{3,15}$/;
 		var appKey = $.trim($('#appKey').val());
-		if(!reg_app.test(appKey)){
-				alert('网站AppKey不正确');
-				return;
+		if(appKey){
+			if(!reg_app.test(appKey)){
+					alert('网站AppKey不正确');
+					return;
+			}
 		}
 		var reg_secret = /^[a-zA-Z0-9]{15,50}$/;
+		var reg_pid = /^mm_[0-9]+_0_0$/;
 		var appSecret = $.trim($('#appSecret').val());
-		if(!reg_secret.test(appSecret)){
-				alert('网站AppSecret不正确');
-				return;
+		if(appSecret){
+			if(!reg_secret.test(appSecret)){
+					alert('网站AppSecret不正确');
+					return;
+			}
 		}
 		
 		var reg_num = /^[0-9]{3,15}$/;
@@ -52,6 +57,14 @@ $('#designerSite').button();
 		}else{
 			pAdId='';
 		}
+		var pid = $('#PID').val();
+		if(pid){
+			if(!reg_pid.test(pid)){
+				alert('PID格式不正确');
+			}
+		}else{
+			pid='';
+		}
 		var desc = $('#siteDescription').val();
 		if (desc) {
 			if (desc.length > 150) {
@@ -67,7 +80,7 @@ $('#designerSite').button();
 			}
 		}
 		updateSite($('#site_Id').val(), title, desc, metadata, $('#siteCid')
-						.val(),pSiteId,pAdId,appKey,appSecret);
+						.val(),pSiteId,pAdId,appKey,appSecret,pid);
 		return false;
 	});
 	$('#cancelSite').button().click(function() {
@@ -109,6 +122,9 @@ $('#designerSite').button();
 		<tr>
 			<td>广告位ID:</td><td>${USER.pAdId}</td>
 		</tr>
+		<tr>
+			<td>PID:</td><td>${USER.pid}</td>
+		</tr>
 		<tr style="display:none;"><td>简介:</td><td>${s.description}</td><tr>
 		<tr><td>店铺类别:</td><td><#if cat??>${cat.name}<#else>尚未设置类目</#if></td><tr>
 		<tr style="display:none;"><td>关键词:</td><td>${s.metadata}</td><tr>
@@ -140,6 +156,10 @@ $('#designerSite').button();
 		</tr>
 		<tr>
 			<td>广告位ID:</td><td><input id="pAdId" type="text" size="50" class="text" value="${USER.pAdId}"/></td>
+		</tr>
+		<tr<#if (USER.usb??&&(USER.usb.versionNo>1.6))> style="display:none;"</#if>>
+			<td>
+			PID:</td><td><input id="PID" type="text" size="50" class="text" value="${USER.pid}"/><br><span>返利版站长请不要修改PID,否则无法获取订单</span></td>
 		</tr>
 		<tr>
 			<td>店铺类别:</td><td>

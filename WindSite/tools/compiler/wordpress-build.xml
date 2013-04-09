@@ -7,13 +7,17 @@
 	<target name="clean">
 		<delete>
 			<fileset dir="${output}" includes="**/*.*" />
+			<filelist dir="${xintaoke}/xt-themes" files="xintaoke.min.css,ie.css" />
+			<filelist dir="${xintaoke}/xt-core/js" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
+			<filelist dir="${xintaoke}/xt-includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+			<filelist dir="${xt}/css" files="xintaoke.min.css,xt-widgets.css" />
+			<filelist dir="${xt}/js" files="xt-widgets.min.js,xt-catalog.min.js" />
 		</delete>
 	</target>
 	<target name="compile.core.utils">
 		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/xintaoke-utils.min.js">
 			<sources dir="${war}">
 				<file name="base64.js" />
-				<file name="bootstrap.js" />
 				<file name="holder.js" />
 				<file name="jquery.infinitescroll.min.js" />
 			</sources>
@@ -111,7 +115,10 @@
 			<filelist dir="${output}" files="xt-widgets.min.js,xt-catalog.min.js" />
 		</copy>
 		<copy todir="${xintaoke}/xt-includes">
-			<filelist dir="${plugin}/includes" files="yiqifa.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+			<filelist dir="${plugin}/includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+		</copy>
+		<copy todir="${test}/">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
 	</target>
 </project>

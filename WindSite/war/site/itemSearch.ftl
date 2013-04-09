@@ -4,7 +4,7 @@
 <@p.pageHeader>
 <meta name="keywords" content="<#if isCat>${categories[0].name}<#else>${q}</#if>,${sitetitle}">
 <meta name="description" content="${sitetitle}<#if isCat>提供为您带来有关${categories[0].name}产品批发价格,品牌专卖店新品，厂家专卖产品等信息,是${categories[0].name}选购的最佳网站<#else>帮你找到${q}的所有关于价格，商家，产品图片和评测信息，你可以通过比较${q}不同商家的报价、服务、用户评论，帮您做出最好的购买选择</#if>">
-<title><#if isCat>${categories[0].name}<#else><#if q??&&q!=''>${q}<#elseif ''!=nicks>淘宝掌柜${nicks}<#else>类目${cid}搜索</#if></#if>-${sitetitle}</title>
+<title><#if isCat>${categories[0].name}<#else><#if q??&&q!=''>${q}<#elseif ''!=nicks>淘宝掌柜${nicks}<#else>类目${cid?number}搜索</#if></#if>-${sitetitle}</title>
 </@p.pageHeader>
 <link rel="stylesheet" href="http://static.xintaonet.com/assets/min/stylesheets/itemSearch.css?v=${dateVersion()}" type="text/css"/>
 <#if 'list'==view>

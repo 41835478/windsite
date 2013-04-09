@@ -35,7 +35,6 @@ $(function(){
 <tr><td>
 <table style="padding:15px;line-height:20px;">
 	<tr><td><span class="key">店铺名称：</span>${shop.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#F60;" id="synShop" target="_blank">同步店铺推广信息</a></td></tr>
-	<tr><td><span class="key">佣金比例：</span><#if shop.commissionRate??>${shop.commissionRate}%<#else>您尚未加入推广</#if></td></tr>
 	<tr><td><span class="key">店铺等级：</span>:<img src="http://static.xintaonet.com/assets/min/stylesheets/images/${shop.sellerCredit}.gif"/></td></tr>	
 </table>
 </td></tr>

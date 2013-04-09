@@ -157,7 +157,7 @@ $('#designerSite').button();
 		<tr>
 			<td>广告位ID:</td><td><input id="pAdId" type="text" size="50" class="text" value="${USER.pAdId}"/></td>
 		</tr>
-		<tr<#if (USER.usb??&&(USER.usb.versionNo>1.6))> style="display:none;"</#if>>
+		<tr<#if ((USER.usb??&&(USER.usb.versionNo>1.6)&&USER.nick!='wangzhiqiang19841012'))> style="display:none;"</#if>>
 			<td>
 			PID:</td><td><input id="PID" type="text" size="50" class="text" value="${USER.pid}"/><br><span>返利版站长请不要修改PID,否则无法获取订单</span></td>
 		</tr>

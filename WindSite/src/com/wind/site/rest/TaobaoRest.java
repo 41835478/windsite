@@ -337,17 +337,27 @@ public class TaobaoRest {
 			result.put("shops", resp.getTaobaokeShops());
 		}
 		result.put("page", page);
-		result.put("cid", cid);
-		result.put("start_credit", start_credit);
-		result.put("end_credit", end_credit);
-		result.put("start_commissionrate", start_commissionrate);
-		result.put("end_commissionrate", end_commissionrate);
-		result.put("start_auctioncount", start_auctioncount);
-		result.put("end_auctioncount", end_auctioncount);
-		result.put("start_totalaction", start_totalaction);
-		result.put("end_totalaction", end_totalaction);
-		result.put("only_mall", only_mall);
-		result.put("keyword", keyword);
+		try {
+			result.put("cid", Long.valueOf(cid));
+		} catch (Exception e) {
+		}
+		result.put("start_credit", WindSiteRestUtil.xssFilter(start_credit));
+		result.put("end_credit", WindSiteRestUtil.xssFilter(end_credit));
+		result.put("start_commissionrate",
+				WindSiteRestUtil.xssFilter(start_commissionrate));
+		result.put("end_commissionrate",
+				WindSiteRestUtil.xssFilter(end_commissionrate));
+		result.put("start_auctioncount",
+				WindSiteRestUtil.xssFilter(start_auctioncount));
+		result.put("end_auctioncount",
+				WindSiteRestUtil.xssFilter(end_auctioncount));
+		result.put("start_totalaction",
+				WindSiteRestUtil.xssFilter(start_totalaction));
+		result.put("end_totalaction",
+				WindSiteRestUtil.xssFilter(end_totalaction));
+		result.put("only_mall", WindSiteRestUtil.xssFilter(only_mall));
+		result.put("keyword", WindSiteRestUtil.xssFilter(keyword));
+
 		return new ModelAndView("site/itemSearch", result);
 	}
 
@@ -914,21 +924,28 @@ public class TaobaoRest {
 			result.put("invalidCount", 0);
 			result.put("totalResults", 0);
 		}
-		result.put("q", q);
-		result.put("nicks", nicks);
-		result.put("cid", cid);
-		result.put("is_mall", is_mall);
-		result.put("is_cod", is_cod);
-		result.put("post_free", post_free);
-		result.put("order_by", order_by);
-		result.put("state", state);
-		result.put("city", city);
-		result.put("start_price", start_price);
-		result.put("end_price", end_price);
-		result.put("page_no", page_no);
+		result.put("q", WindSiteRestUtil.xssFilter(q));
+		result.put("nicks", WindSiteRestUtil.xssFilter(nicks));
+		try {
+			result.put("cid", Long.valueOf(cid));
+		} catch (Exception e) {
+		}
+		result.put("is_mall", WindSiteRestUtil.xssFilter(is_mall));
+		result.put("is_cod", WindSiteRestUtil.xssFilter(is_cod));
+		result.put("post_free", WindSiteRestUtil.xssFilter(post_free));
+		result.put("order_by", WindSiteRestUtil.xssFilter(order_by));
+		result.put("state", WindSiteRestUtil.xssFilter(state));
+		result.put("city", WindSiteRestUtil.xssFilter(city));
+		result.put("start_price", WindSiteRestUtil.xssFilter(start_price));
+		result.put("end_price", WindSiteRestUtil.xssFilter(end_price));
+		try {
+			result.put("page_no", Integer.parseInt(page_no));
+		} catch (Exception e) {
+		}
 		result.put("page", page);
-		result.put("view", view);
-		result.put("props", props);
+		result.put("view", WindSiteRestUtil.xssFilter(view));
+		result.put("props", WindSiteRestUtil.xssFilter(props));
+
 		// logger.info(result.toString());
 		return new ModelAndView("site/itemSearch", result);
 	}
@@ -1109,12 +1126,18 @@ public class TaobaoRest {
 			result.put("invalidCount", 0);
 			result.put("totalResults", 0);
 		}
-		result.put("q", q);
-		result.put("cid", cid);
-		result.put("order_by", order_by);
-		result.put("page_no", page_no);
+		result.put("q", WindSiteRestUtil.xssFilter(q));
+		try {
+			result.put("cid", Long.valueOf(cid));
+		} catch (Exception e) {
+		}
+		result.put("order_by", WindSiteRestUtil.xssFilter(order_by));
+		try {
+			result.put("page_no", Integer.parseInt(page_no));
+		} catch (Exception e) {
+		}
 		result.put("page", page);
-		result.put("view", view);
+		result.put("view", WindSiteRestUtil.xssFilter(view));
 		return new ModelAndView("site/itemSearch", result);
 	}
 

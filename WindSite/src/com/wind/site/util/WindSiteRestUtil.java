@@ -69,6 +69,23 @@ public class WindSiteRestUtil {
 	 */
 	public static final String SUCCESS = new JsonObject().toString();
 
+	public static String xssFilter(String message) {
+		if (StringUtils.isNotEmpty(message)) {
+			message = message.replace('<', ' ');
+			message = message.replace('>', ' ');
+			message = message.replace('"', ' ');
+			message = message.replace('\'', ' ');
+			message = message.replace('/', ' ');
+			message = message.replace('%', ' ');
+			message = message.replace(';', ' ');
+			message = message.replace('(', ' ');
+			message = message.replace(')', ' ');
+			message = message.replace('&', ' ');
+			message = message.replace('+', '_');
+		}
+		return message;
+	}
+
 	public static void synPid(IBaseService service) {
 		_synPid(service, new Page<User>(1, 1000));
 	}

@@ -1,0 +1,18 @@
+<project basedir="." default="compile">
+	<property file="deploy-wordpress.properties" />
+	<target name="compile" depends="deploy">
+	</target>
+	<target name="deploy" description="zip sae and bae,then deploy plugin">
+		<copy todir="${SAE}/wp-content/plugins/wp-xintaoke">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+		<zip destfile="${WORDPRESS}/WordPress3.4.1 For SAE.zip" basedir="${SAE}" update="true" />
+		<copy todir="${BAE}/wp-content/plugins/wp-xintaoke">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+		<zip destfile="${WORDPRESS}/WordPress3.5.1 For BAE.zip" basedir="${BAE}" update="true" />
+		<copy todir="${PLUGIN}/">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+	</target>
+</project>

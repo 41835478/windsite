@@ -1,16 +1,16 @@
 <project basedir="." default="compile">
 	<property file="wordpress-build.properties" />
-	<target name="compile" depends="clean,compile.core.utils,compile.bootstrap.ie,compile.account,compile.core,compile.login,compile.post,compile.widgets,compile.catalog,compile.css,copy.min">
+	<target name="compile" depends="clean,compile.core.utils,compile.account,compile.core,compile.login,compile.post,compile.widgets,compile.catalog,compile.css,copy.min">
 	</target>
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
 	<!--清理-->
 	<target name="clean">
 		<delete>
 			<fileset dir="${output}" includes="**/*.*" />
-			<filelist dir="${xintaoke}/xt-themes" files="xintaoke.min.css,ie.css" />
-			<filelist dir="${xintaoke}/xt-core/js" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
-			<filelist dir="${xintaoke}/xt-includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
-			<filelist dir="${xt}/css" files="xintaoke.min.css,xt-widgets.css" />
+			<filelist dir="${xintaoke}/xt-themes" files="bootstrap.min.css,bootstrap-ie6.min.css,xintaoke.min.css" />
+			<filelist dir="${xintaoke}/xt-core/js" files="xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
+			<filelist dir="${xintaoke}/xt-includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-taobao-shopcats.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+			<filelist dir="${xt}/css" files="bootstrap.min.css,bootstrap-ie6.min.css,xintaoke.min.css,xt-widgets.css" />
 			<filelist dir="${xt}/js" files="xt-widgets.min.js,xt-catalog.min.js" />
 		</delete>
 	</target>
@@ -20,13 +20,6 @@
 				<file name="base64.js" />
 				<file name="holder.js" />
 				<file name="jquery.infinitescroll.min.js" />
-			</sources>
-		</jscomp>
-	</target>
-	<target name="compile.bootstrap.ie">
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/bootstrap-ie.min.js">
-			<sources dir="${war}">
-				<file name="bootstrap-ie.js" />
 			</sources>
 		</jscomp>
 	</target>
@@ -95,30 +88,51 @@
 		</yuicompress>
 		<!--生成新版本站点CSS文件-->
 		<concat destfile="${output}/xintaoke.min.css" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${output}" files="bootstrap.css,xintaoke.css" />
+			<filelist dir="${output}" files="xintaoke.css" />
+		</concat>
+		<concat destfile="${output}/bootstrap.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}" files="bootstrap.css" />
+		</concat>
+		<concat destfile="${output}/bootstrap-ie6.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${output}" files="bootstrap-ie6.css" />
 		</concat>
 		<delete>
-			<filelist dir="${output}/" files="bootstrap.css,xintaoke.css" />
+			<filelist dir="${output}/" files="bootstrap.css,xintaoke.css,bootstrap-ie6.css" />
 		</delete>
 	</target>
 	<target name="copy.min" description="copy assets min">
 		<copy todir="${xintaoke}/xt-themes">
-			<filelist dir="${output}" files="xintaoke.min.css,ie.css" />
+			<filelist dir="${output}" files="bootstrap.min.css,bootstrap-ie6.min.css,xintaoke.min.css" />
 		</copy>
 		<copy todir="${xt}/css">
-			<filelist dir="${output}" files="xintaoke.min.css,xt-widgets.css" />
+			<filelist dir="${output}" files="bootstrap.min.css,bootstrap-ie6.min.css,xintaoke.min.css,xt-widgets.css" />
 		</copy>
 		<copy todir="${xintaoke}/xt-core/js">
-			<filelist dir="${output}" files="bootstrap-ie.min.js,xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
+			<filelist dir="${output}" files="xt-account.min.js,xt-login.min.js,xt-post.min.js,xintaoke.min.js,xintaoke-utils.min.js" />
 		</copy>
 		<copy todir="${xt}/js">
 			<filelist dir="${output}" files="xt-widgets.min.js,xt-catalog.min.js" />
 		</copy>
 		<copy todir="${xintaoke}/xt-includes">
-			<filelist dir="${plugin}/includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
+			<filelist dir="${plugin}/includes" files="share.php,taobao.function.php,paipai.function.php,yiqifa2.function.php,data-taobao-shopcats.php,data-tmall-star.php,data-tmall-brand.php,data-temai-category.php,data-taobao.php,data-tuan-category.php,data-tuan-city.php,data-tuan-city-region.php,data-bijia-category.php,default-page-widgets.php,default-system-widgets.php,default-widgets.php,widgets.php" />
 		</copy>
 		<copy todir="${test}/">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
+		<copy todir="${baetest}/">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+		<copy todir="${SAE}/wp-content/plugins/wp-xintaoke">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+		<zip destfile="${WORDPRESS}/WordPress3.4.1 For SAE.zip" basedir="${SAE}" update="true" />
+		<copy todir="${BAE}/wp-content/plugins/wp-xintaoke">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+		<zip destfile="${WORDPRESS}/WordPress3.5.1 For BAE.zip" basedir="${BAE}" update="true" />
+		<copy todir="${PLUGIN}/">
+			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
+		</copy>
+
 	</target>
 </project>

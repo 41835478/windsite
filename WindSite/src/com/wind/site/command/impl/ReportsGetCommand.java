@@ -88,17 +88,20 @@ public class ReportsGetCommand implements ICommand {
 								}
 							}
 						}
-					}
-					Long results = report.getTotalResults();
-					if (results != null && results > PAGE_SIZE) {
-						int totalPageCount = (int) (results / PAGE_SIZE);
-						if (results % PAGE_SIZE > 0) {
-							totalPageCount++;
-						}
-						if (page < totalPageCount) {// 如果当前页数小于总页数,继续同步
+						if (members.size() == PAGE_SIZE) {
 							getReportByPage(page + 1, from, service);
 						}
 					}
+					// Long results = report.getTotalResults();
+					// if (results != null && results > PAGE_SIZE) {
+					// int totalPageCount = (int) (results / PAGE_SIZE);
+					// if (results % PAGE_SIZE > 0) {
+					// totalPageCount++;
+					// }
+					// if (page < totalPageCount) {// 如果当前页数小于总页数,继续同步
+					// getReportByPage(page + 1, from, service);
+					// }
+					// }
 				}
 			}
 		} catch (Exception exception) {

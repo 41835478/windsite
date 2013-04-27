@@ -105,7 +105,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 			<li>
 			<table width="100%"><tr><td><a onClick="$('#site-login-dialog').dialog('open');"><img src="http://static.xintaonet.com/assets/images/login-button.gif"></a></td>
 			<td align="right">
-			<img src="http://static.xintaonet.com/assets/images/help.png"/><a href="/router/site/view/support" target="_blank" style="margin-left:3px;color:#6189b7;font-weight:bold;font-size:11pt;">寻求更多帮助？</a>
+			<a href="http://plugin.xintaonet.com" target="_blank" style="margin-left:3px;color:#6189b7;font-weight:bold;font-size:11pt;">程序版下载</a>
 			</td></tr></table>
 			</li>
 		</ul>

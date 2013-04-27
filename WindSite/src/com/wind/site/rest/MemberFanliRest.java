@@ -617,9 +617,9 @@ public class MemberFanliRest {
 		if (StringUtils.isEmpty(EnvManager.getUser().getAppKey())) {
 			SystemException.handleMessageException("尚未配置appKey");
 		}
-//		if (StringUtils.isEmpty(EnvManager.getUser().getReportSession())) {
-//			SystemException.handleMessageException("尚未授权");
-//		}
+		// if (StringUtils.isEmpty(EnvManager.getUser().getReportSession())) {
+		// SystemException.handleMessageException("尚未授权");
+		// }
 		String[] p = new String[] { DateUtils.YYYY_MM_DD };
 		try {
 			Calendar start = Calendar.getInstance();
@@ -692,17 +692,21 @@ public class MemberFanliRest {
 							}
 						}
 					}
-					Long results = report.getTotalResults();
-					if (results != null
-							&& results > ReportsGetCommand.PAGE_SIZE) {
-						int totalPageCount = (int) (results / ReportsGetCommand.PAGE_SIZE);
-						if (results % ReportsGetCommand.PAGE_SIZE > 0) {
-							totalPageCount++;
-						}
-						if (page < totalPageCount) {// 如果当前页数小于总页数,继续同步
-							getReportByPage(result, page + 1, start);
-						}
+					if (members.size() == ReportsGetCommand.PAGE_SIZE) {
+						getReportByPage(result, page + 1, start);
 					}
+					// Long results = report.getTotalResults();
+					// if (results != null
+					// && results > ReportsGetCommand.PAGE_SIZE) {
+					// int totalPageCount = (int) (results /
+					// ReportsGetCommand.PAGE_SIZE);
+					// if (results % ReportsGetCommand.PAGE_SIZE > 0) {
+					// totalPageCount++;
+					// }
+					// if (page < totalPageCount) {// 如果当前页数小于总页数,继续同步
+					// getReportByPage(result, page + 1, start);
+					// }
+					// }
 				}
 			}
 		}

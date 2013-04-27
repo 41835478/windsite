@@ -1,7 +1,5 @@
-<project basedir="." default="compile">
+<project basedir="." default="deploy">
 	<property file="deploy-wordpress.properties" />
-	<target name="compile" depends="deploy">
-	</target>
 	<target name="deploy" description="zip sae and bae,then deploy plugin">
 		<copy todir="${SAE}/wp-content/plugins/wp-xintaoke">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />

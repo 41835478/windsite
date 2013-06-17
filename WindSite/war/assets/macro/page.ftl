@@ -197,6 +197,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </#if>
 <#if appKey??>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<#else>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 </head>
@@ -327,6 +329,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </#if>
 <#if appKey??>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<#else>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion()}"></script>
 <script src="/assets/js/jquery/ui/jquery-ui.min.js"></script>

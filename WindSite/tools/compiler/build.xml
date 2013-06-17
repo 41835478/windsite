@@ -240,6 +240,7 @@
 				<file name="ShopBaidu.js" />
 				<file name="ShopGoogle.js" />
 				<file name="ShopAlimama.js" />
+				<file name="ShopAlimamaTanx.js" />
 				<file name="ShopShiYi.js" />
 				<file name="ShopDianPu.js" />
 				<file name="ShopDianpuPaiHang.js" />
@@ -308,6 +309,7 @@
 				<file name="PageBaiduConfig.js" />
 				<file name="PageGoogleConfig.js" />
 				<file name="PageAlimamaConfig.js" />
+				<file name="PageAlimamaTanxConfig.js" />
 				<file name="PageCategoryVanclConfig.js" />
 				<file name="PageDianPuConfig.js" />
 				<file name="PageDianPuCatConfig.js" />

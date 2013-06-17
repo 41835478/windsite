@@ -20,6 +20,8 @@
 </#if>
 <#if appKey??>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<#else>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>
 </#if>
 <script src="/assets/min/js/page/page.min.js?v=${dateVersion}"></script>
 </head>

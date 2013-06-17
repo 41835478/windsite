@@ -56,7 +56,7 @@ ${content}
 <#if P_SITEIMPL??&&P_SITEIMPL.qq_appkey??&&P_SITEIMPL.www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${P_SITEIMPL.qq_appkey}" data-redirecturi="http://${P_SITEIMPL.www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
-<#if P_SITEIMPL??&&P_SITEIMPL.appKey??>
+<#if P_SITEIMPL??&&P_SITEIMPL.appKey??&&P_SITEIMPL.appKey!=''>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${P_SITEIMPL.appKey}"></script>
 <#else>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>

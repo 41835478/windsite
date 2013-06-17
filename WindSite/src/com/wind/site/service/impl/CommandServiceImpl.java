@@ -306,6 +306,20 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 	}
 
 	@Override
+	public Integer mergeReportTrades(String userId, String siteId,
+			Set<TaobaokeReportMember> members) {
+		Integer success = 0;
+		if (members != null && members.size() > 0) {
+			for (TaobaokeReportMember member : members) {
+				if (this.mergeReportTrade(userId, siteId, member)) {
+					success++;
+				}
+			}
+		}
+		return success;
+	}
+
+	@Override
 	public Boolean mergeReportTrade(String userId, String siteId,
 			TaobaokeReportMember member) {
 		T_TaobaokeReportMember report = this.get(T_TaobaokeReportMember.class,

@@ -123,25 +123,27 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 			Map<String, Object> result = new HashMap<String, Object>();
 			WindSiteRestUtil.covertPID(siteService, result, userId);
 			Object appKeyObj = result.get("appKey");
+			String appKey = EnvManager.getAppKey(null);
+			String appSecret = EnvManager.getSecret(null);
 			if (appKeyObj != null) {
-				String timestamp = String.valueOf(System.currentTimeMillis());
-				String appKey = String.valueOf(appKeyObj);
-				String appSecret = String.valueOf(result.get("appSecret"));
-				Cookie c1 = new Cookie("timestamp", timestamp);
-				Cookie c2 = new Cookie("sign", getSign(appKey, appSecret,
-						timestamp));
-				// Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
-				// appSecret));
-				if (StringUtils.isNotEmpty(request.getParameter("topPath"))) {
-					String topPath = request.getParameter("topPath");
-					c1.setPath(topPath);
-					c2.setPath(topPath);
-					// c3.setPath(topPath);
-				}
-				response.addCookie(c1);
-				response.addCookie(c2);
-				// response.addCookie(c3);
+				appKey = String.valueOf(appKeyObj);
+				appSecret = String.valueOf(result.get("appSecret"));
 			}
+			String timestamp = String.valueOf(System.currentTimeMillis());
+			Cookie c1 = new Cookie("timestamp", timestamp);
+			Cookie c2 = new Cookie("sign",
+					getSign(appKey, appSecret, timestamp));
+			// Cookie c3 = new Cookie("orignalSign", getOriginalSign(appKey,
+			// appSecret));
+			if (StringUtils.isNotEmpty(request.getParameter("topPath"))) {
+				String topPath = request.getParameter("topPath");
+				c1.setPath(topPath);
+				c2.setPath(topPath);
+				// c3.setPath(topPath);
+			}
+			response.addCookie(c1);
+			response.addCookie(c2);
+			// response.addCookie(c3);
 		}
 		if (isFanliNotMember(uri, request)) {// 如果是返利非会员功能
 			Map<String, Object> result = new HashMap<String, Object>();

@@ -2152,6 +2152,11 @@ public class PageDesignerRest {
 				result.put("height", height);
 				result.put("type", type);
 			}
+		} else if ("tanx".equals(union_type)) {
+			String pid = request.getParameter("pid");
+			if (StringUtils.isNotEmpty(pid)) {
+				result.put("pid", pid);
+			}
 		}
 		result.put("union_type", union_type);
 		return new ModelAndView("assets/js/page/module/CommonUnionConfig",

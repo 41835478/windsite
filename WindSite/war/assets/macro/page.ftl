@@ -195,8 +195,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if qq_appkey??&&www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
-<#if appKey??>
-<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<#if appKey??&&appKey!=''>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}&"></script>
 <#else>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>
 </#if>
@@ -327,8 +327,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <#if qq_appkey??&&www??>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="${qq_appkey}" data-redirecturi="http://${www}/zone/qc_callback.html" charset="utf-8" ></script>
 </#if>
-<#if appKey??>
-<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}"></script>
+<#if appKey??&&appKey!=''>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=${appKey}&"></script>
 <#else>
 <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=12034285"></script>
 </#if>

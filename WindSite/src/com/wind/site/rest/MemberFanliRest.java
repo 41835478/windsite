@@ -7,8 +7,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.Criterion;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
@@ -57,6 +61,7 @@ import com.wind.site.service.IFanliService;
 import com.wind.site.service.IMemberService;
 import com.wind.site.service.IPageService;
 import com.wind.site.service.ISiteService;
+import com.wind.site.util.JExcelUtil;
 import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WindSiteRestUtil;
 
@@ -72,6 +77,48 @@ public class MemberFanliRest {
 	private ISiteService siteService;
 	@Autowired
 	private ICommandService commandService;
+
+	/**
+	 * 上传亿起发推广链接
+	 * 
+	 * @param view
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/taobao/upload", method = RequestMethod.POST)
+	public void uploadTaobao(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (StringUtils.isEmpty(EnvManager.getRealPath()))
+			EnvManager.setRealPath(request.getSession().getServletContext()
+					.getRealPath("/"));
+		SiteCommission commission = memberService.get(SiteCommission.class,
+				EnvManager.getUser().getSites().get(0).getId());
+		if (commission == null) {
+			SystemException.handleMessageException("您的站点尚未启用返利功能");
+		}
+
+		try {
+			// 转型为MultipartHttpRequest：
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			// 获得文件：
+			Map<String, MultipartFile> files = multipartRequest.getFileMap();
+			if (files.size() == 1) {
+				String userId = (EnvManager.getUser().getUser_id());
+				String siteId = EnvManager.getUser().getSites().get(0).getId();
+				for (String fileName : files.keySet()) {
+					// 获得输入流：
+					Set<TaobaokeReportMember> members = JExcelUtil
+							.readTaobao(files.get(fileName).getInputStream());
+					// 批量更新
+					commandService.mergeReportTrades(userId, siteId, members);
+				}
+				response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
+						+ "/router/member/fl/report");
+			}
+		} catch (Exception e) {
+			SystemException.handleMessageException(e);
+		}
+	}
 
 	/**
 	 * 返利基本设置

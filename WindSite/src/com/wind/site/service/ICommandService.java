@@ -76,6 +76,16 @@ public interface ICommandService extends IBaseService {
 			TaobaokeReportMember member);
 
 	/**
+	 * 同步返利收入报表(非跟单，批量)
+	 * 
+	 * @param user_id
+	 * @param site_id
+	 * @param member
+	 */
+	Integer mergeReportTrades(String user_id, String site_id,
+			Set<TaobaokeReportMember> members);
+
+	/**
 	 * 同步返利收入报表(跟单)
 	 * 
 	 * @param member_id

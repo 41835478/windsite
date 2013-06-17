@@ -37,6 +37,18 @@ $(function(){
 	<tr><td align=center colspan=2><span id="getReport-result" style="color:red;font-size:14px;font-weight:700;padding:2px;line-height:17px;"></span></td></tr>
 </table>
 </div>
+<div id="uploadReport-dialog" title="上传淘宝订单" style="display:none;position:relative;">
+<@ws.help>
+	<p>
+		<ul>
+		<li>第一步：登录<a href="http://u.alimama.com/union/newreport/taobaokeDetail.htm?toPage=1&perPageSize=20&&DownloadID=&payStatus=3&total=0&queryType=1" style="color:red;text-decoration: underline" target="_blank">阿里妈妈</a>后台，效果报表----淘宝客推广明细----选择订单结算状态，导出为Excel</li>
+		<li>第二步：选择您下载的淘宝客推广明细XLS文件上传</li>
+		</ul>
+	</p>
+</@ws.help>
+<form id="uploadReport_form" name="uploadReport_form" method="post" action="/router/member/fl/taobao/upload" enctype="multipart/form-data">xls文件：<input type="file" class="multi" name="uploadReport_xls" id="uploadReport_xls"></form>
+<div class="fm-item ks-clear" style="padding-left:100px;"><span class="btn btn-ok" id="J_ConfirmUploadReport"><input type="button" value="确认上传"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="J_CloseUpload" href="javascript:;" style="color:#f30;">关闭</a></div>
+</div>
 <#if USER.appKey??&&USER.appSecret??>
 <#assign site = USER.sites[0]>
 <#assign www=site.domainName+'.xintaonet.com'>
@@ -54,6 +66,7 @@ $(function(){
 			<ul class="search-tab" id="J_SearchTab" redirect="true">
 				<li class="<#if rel=="member">selected </#if>first rel" rel="member"><s class="l"></s><s class="r"></s><a>会员</a></li>
 				<li class="<#if rel=="trade">selected </#if>rel" rel="trade"><s class="l"></s><s class="r"></s><a>淘宝交易号</a></li>
+				<li id="uploadReport"><s class="l"></s><s class="r"></s><a style="font-weight:800;color:red;">上传淘宝订单</a></li>
 				<li id="getReport"><s class="l"></s><s class="r"></s><a style="font-weight:800;color:red;">手动获取订单</a></li>
 			</ul>
 			<div class="search-auto">
@@ -86,3 +99,39 @@ $(function(){
 <p>当您的返利网站会员以正常的返利流程完成购物，并且确认收货后，您的站点将同时产生交易记录和对应的返利记录。如果您发现交易记录和返利记录出现问题，您可以手动获取指定时间的交易记录</p>
 </@ws.help>
 </@xt.taoketemplate>
+<script>
+jQuery(function($){
+$('#uploadReport-dialog').dialog(
+			{
+				bgiframe : true,
+				autoOpen : false,
+				width : 450,
+				height : 250,
+				zIndex : 1000,
+				modal : true
+			});
+	$('#J_ConfirmUploadReport').click(function() {
+				var self = $(this);
+				if (self.hasClass('btn-ok-disabled')) {
+					return false;
+				}
+				if (!$('#uploadReport_xls').val()) {
+					alert('您尚未选择要上传的文件');
+					return false;
+				}
+				if ($('#uploadReport_xls').val().indexOf('.xls') == -1) {
+					alert('要上传的文件格式必须为XLS格式');
+					return false;
+				}
+				self.addClass('btn-ok-disabled');
+				$('#J_ConfirmUploadReport input:first').val('上传中...稍后');
+				$('#uploadReport_form').submit();
+			});
+	$('#J_OpenUpload').click(function() {
+				$('#uploadReport-dialog').dialog('open');
+			});
+	$('#J_CloseUpload').click(function() {
+				$('#uploadReport-dialog').dialog('close');
+			});
+})
+<script>

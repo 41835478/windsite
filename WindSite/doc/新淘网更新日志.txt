@@ -1,5 +1,7 @@
 rsync --delete-before -a -H -v --progress --stats /usr/local/apache2/htdocs/test/ /usr/local/apache2/htdocs/hitem
 
+rsync --delete-before -a -H -v --progress --stats /home/wwwroot/mini/application/test/ /home/wwwroot/mini/application/cache/
+
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/httpd-2.2.22.tar /opt
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/php-5.4.0.tar /opt
 /usr/bin/rsync -avzuP  root@199.119.138.50:/opt/mysql-5.1.62.tar /opt

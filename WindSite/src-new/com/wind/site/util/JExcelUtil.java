@@ -31,12 +31,11 @@ public class JExcelUtil {
 
 	public static void main(String[] args) {
 		try {
-			Set<TaobaokeReportMember> members= readTaobao(new FileInputStream(
+			Set<TaobaokeReportMember> members = readTaobao(new FileInputStream(
 					new File(
 							"/Users/fengxiaoyun/Downloads/Taokedetail-2013-06-18.xls")));
 			Gson gson = new Gson();
-			System.out
-					.println(gson.toJson(members));
+			System.out.println(gson.toJson(members));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -55,29 +54,31 @@ public class JExcelUtil {
 			Integer rows = sheet.getRows();// 行数
 			TaobaokeReportMember member = null;
 			for (int i = 1; i < rows; i++) {
-				member = new TaobaokeReportMember();
-				member.setCommission(sheet.getCell(16, i).getContents());
-				double commission_rate = Double.valueOf(sheet.getCell(8, i)
-						.getContents().replace("%", "")) * 100 / 10000;
-				double mall_rate = Double.valueOf(sheet.getCell(10, i)
-						.getContents().replace("%", "")) * 100 / 10000;
-				member.setCommissionRate(String.valueOf(commission_rate
-						+ mall_rate));
-				member.setItemNum(Long.valueOf(sheet.getCell(5, i)
-						.getContents()));
-				member.setItemTitle(sheet.getCell(1, i).getContents());
-				member.setNumIid(Long
-						.valueOf(sheet.getCell(2, i).getContents()));
-				member.setPayPrice(sheet.getCell(6, i).getContents());
-				String[] formats = { DateUtils.YYYY_MM_DD };
-				member.setPayTime(DateUtils.parseDate(sheet.getCell(19, i)
-						.getContents(), formats));
-				member.setRealPayFee(sheet.getCell(7, i).getContents());
-				member.setSellerNick(sheet.getCell(3, i).getContents());
-				member.setShopTitle(sheet.getCell(4, i).getContents());
-				member.setTradeId(Long.valueOf(sheet.getCell(17, i)
-						.getContents()));
-				members.add(member);
+				if (sheet.getCell(18, i).getContents().equals("订单结算")) {
+					member = new TaobaokeReportMember();
+					member.setCommission(sheet.getCell(16, i).getContents());
+					double commission_rate = Double.valueOf(sheet.getCell(8, i)
+							.getContents().replace("%", "")) * 100 / 10000;
+					double mall_rate = Double.valueOf(sheet.getCell(10, i)
+							.getContents().replace("%", "")) * 100 / 10000;
+					member.setCommissionRate(String.valueOf(commission_rate
+							+ mall_rate));
+					member.setItemNum(Long.valueOf(sheet.getCell(5, i)
+							.getContents()));
+					member.setItemTitle(sheet.getCell(1, i).getContents());
+					member.setNumIid(Long.valueOf(sheet.getCell(2, i)
+							.getContents()));
+					member.setPayPrice(sheet.getCell(6, i).getContents());
+					String[] formats = { DateUtils.YYYY_MM_DD };
+					member.setPayTime(DateUtils.parseDate(sheet.getCell(19, i)
+							.getContents(), formats));
+					member.setRealPayFee(sheet.getCell(7, i).getContents());
+					member.setSellerNick(sheet.getCell(3, i).getContents());
+					member.setShopTitle(sheet.getCell(4, i).getContents());
+					member.setTradeId(Long.valueOf(sheet.getCell(17, i)
+							.getContents()));
+					members.add(member);
+				}
 			}
 		} catch (BiffException e) {
 			e.printStackTrace();

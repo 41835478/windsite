@@ -2676,12 +2676,13 @@ public class MemberRest {
 		ShopcatsListGetRequest getRequest = new ShopcatsListGetRequest();
 		getRequest.setFields("cid");
 		if (StringUtils.isNotEmpty(appKey) && StringUtils.isNotEmpty(appSecret)) {
-
 			try {
 				TaobaoFetchUtil.shopCatsGet(appKey, appSecret, getRequest);
 			} catch (Exception e) {
 				SystemException.handleMessageException("非法的AppKey,AppSecret");
 			}
+		} else {
+
 		}
 
 		Site site = memberService.get(Site.class, id);
@@ -2756,6 +2757,9 @@ public class MemberRest {
 					&& StringUtils.isNotEmpty(appSecret)) {
 				user.setAppKey(appKey);
 				user.setAppSecret(appSecret);
+			} else {
+				user.setAppKey(null);
+				user.setAppSecret(null);
 			}
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

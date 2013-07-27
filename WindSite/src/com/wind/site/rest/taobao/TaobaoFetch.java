@@ -24,9 +24,9 @@ import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
  * 
  */
 public class TaobaoFetch {
-	protected static final int DEFAULT_CONNECT_TIMEOUT = 5000;
+	protected static final int DEFAULT_CONNECT_TIMEOUT = 10000;
 
-	protected static final int DEFAULT_READ_TIMEOUT = 5000;
+	protected static final int DEFAULT_READ_TIMEOUT = 10000;
 
 	protected static final int DEFAULT_MAX_TOTAL_CONNECTIONS = 1000;
 

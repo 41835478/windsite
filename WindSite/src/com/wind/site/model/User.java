@@ -55,6 +55,10 @@ public class User extends TimestampModel {
 	 */
 	private String nPid;
 	/**
+	 * 淘点金pid
+	 */
+	private String tdjPid;
+	/**
 	 * 淘宝客报表session
 	 */
 	private String reportSession;
@@ -846,6 +850,14 @@ public class User extends TimestampModel {
 
 	public void setnPid(String nPid) {
 		this.nPid = nPid;
+	}
+
+	public String getTdjPid() {
+		return tdjPid;
+	}
+
+	public void setTdjPid(String tdjPid) {
+		this.tdjPid = tdjPid;
 	}
 
 }

@@ -110,7 +110,10 @@ public class MemberFanliRest {
 					Set<TaobaokeReportMember> members = JExcelUtil
 							.readTaobao(files.get(fileName).getInputStream());
 					// 批量更新
-					commandService.mergeReportTrades(userId, siteId, members);
+					if (members != null && members.size() > 0) {
+						commandService.mergeReportTrades(userId, siteId,
+								members);
+					}
 				}
 				response.sendRedirect("http://" + WindSiteRestUtil.DOMAIN
 						+ "/router/member/fl/report");

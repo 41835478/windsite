@@ -16,6 +16,7 @@ import com.wind.site.model.YiqifaReport;
  * 
  */
 public interface ICommandService extends IBaseService {
+
 	/**
 	 * 同步模块商品广告投放
 	 * 

@@ -126,8 +126,10 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 			String appKey = EnvManager.getAppKey(null);
 			String appSecret = EnvManager.getSecret(null);
 			if (appKeyObj != null) {
-				appKey = String.valueOf(appKeyObj);
-				appSecret = String.valueOf(result.get("appSecret"));
+				if (StringUtils.isNotEmpty(String.valueOf(appKeyObj))) {
+					appKey = String.valueOf(appKeyObj);
+					appSecret = String.valueOf(result.get("appSecret"));
+				}
 			}
 			String timestamp = String.valueOf(System.currentTimeMillis());
 			Cookie c1 = new Cookie("timestamp", timestamp);
@@ -393,4 +395,7 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 		return hs.toString().toUpperCase();
 	}
 
+	public static void main(String[] args) {
+		System.out.println(String.valueOf(null));
+	}
 }

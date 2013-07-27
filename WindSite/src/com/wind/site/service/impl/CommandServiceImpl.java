@@ -1,5 +1,7 @@
 package com.wind.site.service.impl;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -80,6 +82,11 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 		if (!"A".equals(report.getOrderStatus())) {// 如果订单状态是不是成功订单（未确认或无效订单）
 			return true;
 		}
+		DecimalFormat df = new DecimalFormat("#0.##");
+		df.setMaximumFractionDigits(2);
+		df.setGroupingSize(0);
+		df.setRoundingMode(RoundingMode.FLOOR);
+
 		// 生成购买人的返利记录
 		BuyFanliTrade buyTrade = new BuyFanliTrade();
 		buyTrade.setFlMember(m);
@@ -94,7 +101,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 			commissionRate = sc.getCommissionRate();
 		}
 		Double dc = Double.valueOf(report.getCommission());// 双精度佣金
-		String re = String.valueOf(dc * commissionRate / 100);// 计算最终返利并字符串化
+		String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
 		buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
 		report.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
 		buyTrade.setStatusDate(new Date());
@@ -115,7 +122,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 						sc = this.get(SiteCommission.class, site_id);
 					adCommissionRate = sc.getAdCommissionRate();
 				}
-				re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+				re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
 				trade.setCommission(convertCommission(re));// 只保留小数点后两位
 				report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
 				trade.setStatusDate(new Date());
@@ -152,6 +159,11 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 		report.setOuter_code("xtfl" + m.getId());// 外部推广标识
 		this.update(report);// 更新交易记录
 		// 生成购买人的返利记录
+		DecimalFormat df = new DecimalFormat("#0.##");
+		df.setMaximumFractionDigits(2);
+		df.setGroupingSize(0);
+		df.setRoundingMode(RoundingMode.FLOOR);
+
 		BuyFanliTrade buyTrade = new BuyFanliTrade();
 		buyTrade.setFlMember(m);
 		buyTrade.setReport(report);
@@ -165,7 +177,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 			commissionRate = sc.getCommissionRate();
 		}
 		Double dc = Double.valueOf(report.getCommission());// 双精度佣金
-		String re = String.valueOf(dc * commissionRate / 100);// 计算最终返利并字符串化
+		String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
 		buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
 		report.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
 		buyTrade.setStatusDate(new Date());
@@ -188,7 +200,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					trade.setUser_id(user_id);
 					trade.setStatus(0);
 
-					re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+					re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
 					trade.setCommission(convertCommission(re));// 只保留小数点后两位
 					report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
 					trade.setStatusDate(new Date());
@@ -230,6 +242,11 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 				if (trades.size() > 0) {// 如果已经生成返利记录
 					return isNew;
 				}
+				DecimalFormat df = new DecimalFormat("#0.##");
+				df.setMaximumFractionDigits(2);
+				df.setGroupingSize(0);
+				df.setRoundingMode(RoundingMode.FLOOR);
+
 				// 生成购买人的返利记录
 				BuyFanliTrade buyTrade = new BuyFanliTrade();
 				buyTrade.setFlMember(m);
@@ -244,7 +261,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					commissionRate = sc.getCommissionRate();
 				}
 				Double dc = Double.valueOf(yiqifa.getCommission());// 双精度佣金
-				String re = String.valueOf(dc * commissionRate / 100);// 计算最终返利并字符串化
+				String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
 				buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
 				yiqifa.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
 				buyTrade.setStatusDate(new Date());
@@ -268,7 +285,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 							trade.setUser_id(user_id);
 							trade.setStatus(0);
 
-							re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+							re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
 							trade.setCommission(convertCommission(re));// 只保留小数点后两位
 							yiqifa.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
 							trade.setStatusDate(new Date());
@@ -359,6 +376,11 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 			T_TaobaokeReportMember report = this.get(
 					T_TaobaokeReportMember.class, member.getTradeId());
 			if (report == null) {
+				DecimalFormat df = new DecimalFormat("#0.##");
+				df.setMaximumFractionDigits(2);
+				df.setGroupingSize(0);
+				df.setRoundingMode(RoundingMode.FLOOR);
+
 				report = new T_TaobaokeReportMember();
 				// 淘宝字段
 				report.setApp_key(member.getAppKey());
@@ -395,7 +417,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 					commissionRate = sc.getCommissionRate();
 				}
 				Double dc = Double.valueOf(report.getCommission());// 双精度佣金
-				String re = String.valueOf(dc * commissionRate / 100);// 计算最终返利并字符串化
+				String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
 				buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
 				report.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
 				buyTrade.setStatusDate(new Date());
@@ -417,7 +439,7 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 								sc = this.get(SiteCommission.class, site_id);
 							adCommissionRate = sc.getAdCommissionRate();
 						}
-						re = String.valueOf(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+						re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
 						trade.setCommission(convertCommission(re));// 只保留小数点后两位
 						report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
 						trade.setStatusDate(new Date());
@@ -776,5 +798,22 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 			return sb.toString();
 		}
 		return null;
+	}
+
+	public static void main(String[] args) {
+
+		AdsFanliTrade trade = new AdsFanliTrade();
+
+		// DecimalFormat df = new DecimalFormat("#0.##");
+		// df.setMaximumFractionDigits(2);
+		// df.setGroupingSize(0);
+		// df.setRoundingMode(RoundingMode.FLOOR);
+		// Double dc = Double.valueOf("0.04");// 双精度佣金
+		// String re = String.valueOf(dc * 90 / 100);// 计算最终返利并字符串化
+		// System.out.println(convertCommission(re));
+		// re = String.valueOf(dc * 1 / 100);// 计算最终返利并字符串化
+		// System.out.println(convertCommission(re));
+		// System.out.println(convertCommission(df.format(dc * 90 / 100)));
+		// System.out.println(convertCommission(df.format(dc * 1 / 100)));
 	}
 }

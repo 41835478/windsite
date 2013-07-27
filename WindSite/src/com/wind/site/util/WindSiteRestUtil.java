@@ -296,6 +296,7 @@ public class WindSiteRestUtil {
 					result.put("uyan", siteImpl.getUyan());
 
 					result.put("pPid", siteImpl.getpPid());
+					result.put("tdjPid", siteImpl.getTdjPid());
 					result.put("appKey",
 							siteImpl.getAppKey() != null ? siteImpl.getAppKey()
 									: "");
@@ -334,6 +335,7 @@ public class WindSiteRestUtil {
 								.getVersionNo());
 						result.put("appType", EnvManager.getUser().getAppType());
 						result.put("pPid", EnvManager.getUser().getpPid());
+						result.put("tdjPid", EnvManager.getUser().getTdjPid());
 					} else {
 						SystemException
 								.handleException("该站点暂时没有权限访问该页面（需要您升级为分成版（绑定域名），淘客普及版（付费），返利版，卖家版）");
@@ -413,6 +415,7 @@ public class WindSiteRestUtil {
 					result.put("uyan", siteImpl.getUyan());
 
 					result.put("pPid", siteImpl.getpPid());
+					result.put("tdjPid", siteImpl.getTdjPid());
 					result.put("appKey",
 							siteImpl.getAppKey() != null ? siteImpl.getAppKey()
 									: "");
@@ -522,6 +525,7 @@ public class WindSiteRestUtil {
 				result.put("uyan", siteImpl.getUyan());
 
 				result.put("pPid", siteImpl.getpPid());
+				result.put("tdjPid", siteImpl.getTdjPid());
 				result.put("appKey",
 						siteImpl.getAppKey() != null ? siteImpl.getAppKey()
 								: "");
@@ -555,6 +559,7 @@ public class WindSiteRestUtil {
 					result.put("appType", EnvManager.getUser().getAppType());
 
 					result.put("pPid", EnvManager.getUser().getpPid());
+					result.put("tdjPid", EnvManager.getUser().getTdjPid());
 				}
 				return EnvManager.getUser().getPid();
 			} else {
@@ -626,6 +631,9 @@ public class WindSiteRestUtil {
 
 		if (result.get("pPid") != null) {
 			impl.setpPid(String.valueOf(result.get("pPid")));
+		}
+		if (result.get("tdjPid") != null) {
+			impl.setpPid(String.valueOf(result.get("tdjPid")));
 		}
 		if (result.get("appKey") != null) {
 			impl.setAppKey(String.valueOf(result.get("appKey")));

@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,17 +53,13 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.taobao.api.domain.PosterChannel;
 import com.taobao.api.domain.Shop;
 import com.taobao.api.domain.ShopCat;
 import com.taobao.api.domain.ShopScore;
 import com.taobao.api.domain.TaobaokeItemDetail;
-import com.taobao.api.domain.TaobaokeShop;
-import com.taobao.api.request.HuabaoChannelsGetRequest;
 import com.taobao.api.request.ShopGetRequest;
 import com.taobao.api.request.ShopcatsListGetRequest;
 import com.taobao.api.request.TaobaokeItemsDetailGetRequest;
-import com.taobao.api.response.HuabaoChannelsGetResponse;
 import com.taobao.api.response.ShopcatsListGetResponse;
 import com.taobao.api.response.TaobaokeItemsDetailGetResponse;
 import com.wind.core.cache.ICache;
@@ -100,6 +98,7 @@ import com.wind.site.freemarker.method.ModuleMethod;
 import com.wind.site.freemarker.method.WidgetCustomerMethod;
 import com.wind.site.model.ADPlan;
 import com.wind.site.model.ADTaobaokeItem;
+import com.wind.site.model.AdsFanliTrade;
 import com.wind.site.model.CoolSite;
 import com.wind.site.model.CustomeWidget;
 import com.wind.site.model.DesignerErrorLog;
@@ -119,13 +118,14 @@ import com.wind.site.model.PageThemeColor;
 import com.wind.site.model.PageThemeIndustry;
 import com.wind.site.model.PageThemeSkin;
 import com.wind.site.model.Site;
+import com.wind.site.model.SiteCommission;
 import com.wind.site.model.SiteImpl;
 import com.wind.site.model.T_ItemCat;
 import com.wind.site.model.T_MallBrand;
 import com.wind.site.model.T_MallBrandCat;
 import com.wind.site.model.T_Poster;
-import com.wind.site.model.T_PosterChannel;
 import com.wind.site.model.T_ShopCat;
+import com.wind.site.model.T_TaobaokeReportMember;
 import com.wind.site.model.T_TaobaokeShop;
 import com.wind.site.model.T_UserSubscribe;
 import com.wind.site.model.User;
@@ -138,6 +138,7 @@ import com.wind.site.model.WidgetType;
 import com.wind.site.module.IModuleSpider;
 import com.wind.site.service.IAdminService;
 import com.wind.site.service.IPageService;
+import com.wind.site.service.impl.CommandServiceImpl;
 import com.wind.site.util.PageUtils;
 import com.wind.site.util.TaobaoFetchUtil;
 import com.wind.site.util.WindSiteRestUtil;
@@ -208,6 +209,42 @@ public class AdminRest {
 	private WeigouAutocronGetTimer autoCronCommand;
 	@Autowired
 	private WeeklyMailCreateCommand mailCommand;
+
+	@RequestMapping(value = "/fixedAds")
+	@ResponseBody
+	public String fixedAds() {
+		this.fixedAdsCommission();
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	public void fixedAdsCommission() {
+		DecimalFormat df = new DecimalFormat("#0.##");
+		df.setMaximumFractionDigits(2);
+		df.setGroupingSize(0);
+		df.setRoundingMode(RoundingMode.FLOOR);
+		List<AdsFanliTrade> trades = (List<AdsFanliTrade>) adminService
+				.findByHql("From AdsFanliTrade Where commission like '%E%'",
+						new HashMap<String, Object>());
+		logger.info(trades.toString());
+		if (trades != null && trades.size() > 0) {
+			for (AdsFanliTrade trade : trades) {
+				Integer adCommissionRate = trade.getFlMember()
+						.getAdCommissionRate();
+				if (adCommissionRate == null) {// 如果没有设置推广返利比例，则取当前站点的推广返利比例
+					SiteCommission sc = adminService.get(SiteCommission.class,
+							trade.getSite_id());
+					adCommissionRate = sc.getAdCommissionRate();
+				}
+				T_TaobaokeReportMember report = trade.getReport();
+				Double dc = Double.valueOf(trade.getReport().getCommission());// 双精度佣金
+				String re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+				trade.setCommission(CommandServiceImpl.convertCommission(re));// 只保留小数点后两位
+				report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
+				adminService.update(trade);
+				adminService.update(report);
+			}
+		}
+	}
 
 	@RequestMapping(value = "/checkfencheng")
 	@ResponseBody
@@ -1215,24 +1252,24 @@ public class AdminRest {
 	@RequestMapping(value = "/syn/posterchannel")
 	@ResponseBody
 	public String synPosterChannel(HttpServletRequest request) {
-//		adminService.deleteAll(T_PosterChannel.class);// 删除所有画报频道
-//		HuabaoChannelsGetRequest req = new HuabaoChannelsGetRequest();
-//		HuabaoChannelsGetResponse resp = TaobaoFetchUtil.channelsGet(req);
-//		if (resp != null) {
-//			List<PosterChannel> channels = resp.getChannels();
-//			if (channels != null && channels.size() > 0) {
-//				T_PosterChannel c = null;
-//				for (PosterChannel channel : channels) {
-//					c = new T_PosterChannel();
-//					c.setCn_name(channel.getCnName());
-//					c.setDescription(channel.getDesc());
-//					c.setId(Long.valueOf(channel.getId()));
-//					c.setName(channel.getName());
-//					c.setUrl(channel.getUrl());
-//					adminService.save(c);
-//				}
-//			}
-//		}
+		// adminService.deleteAll(T_PosterChannel.class);// 删除所有画报频道
+		// HuabaoChannelsGetRequest req = new HuabaoChannelsGetRequest();
+		// HuabaoChannelsGetResponse resp = TaobaoFetchUtil.channelsGet(req);
+		// if (resp != null) {
+		// List<PosterChannel> channels = resp.getChannels();
+		// if (channels != null && channels.size() > 0) {
+		// T_PosterChannel c = null;
+		// for (PosterChannel channel : channels) {
+		// c = new T_PosterChannel();
+		// c.setCn_name(channel.getCnName());
+		// c.setDescription(channel.getDesc());
+		// c.setId(Long.valueOf(channel.getId()));
+		// c.setName(channel.getName());
+		// c.setUrl(channel.getUrl());
+		// adminService.save(c);
+		// }
+		// }
+		// }
 		return WindSiteRestUtil.SUCCESS;
 	}
 
@@ -1324,18 +1361,18 @@ public class AdminRest {
 						shop.setServiceScore(score.getServiceScore());
 						shop.setDeliveryScore(score.getDeliveryScore());
 					}
-//					List<TaobaokeShop> tShops = TaobaoFetchUtil
-//							.convertTaobaoShop(null, null,
-//									EnvManager.getAppType(), "fxy060608",
-//									shop.getSid() + "", null);
-//					if (tShops != null && tShops.size() == 1) {// 查询信用和佣金比率
-//						shop.setTitle(tShops.get(0).getShopTitle());
-//						shop.setCommissionRate(tShops.get(0)
-//								.getCommissionRate());
-//						shop.setIsValid(true);
-//					} else {
-//						shop.setIsValid(false);
-//					}
+					// List<TaobaokeShop> tShops = TaobaoFetchUtil
+					// .convertTaobaoShop(null, null,
+					// EnvManager.getAppType(), "fxy060608",
+					// shop.getSid() + "", null);
+					// if (tShops != null && tShops.size() == 1) {// 查询信用和佣金比率
+					// shop.setTitle(tShops.get(0).getShopTitle());
+					// shop.setCommissionRate(tShops.get(0)
+					// .getCommissionRate());
+					// shop.setIsValid(true);
+					// } else {
+					// shop.setIsValid(false);
+					// }
 					shop.setIsValid(true);
 					adminService.update(shop);
 				} catch (Exception e) {
@@ -1361,37 +1398,37 @@ public class AdminRest {
 	}
 
 	private void getTaobaokeShopCommission(Page<T_TaobaokeShop> page) {
-//		List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
-//				T_TaobaokeShop.class,
-//				R.or(R.isNull("title"), R.isNull("sellerCredit")),
-//				R.isNotNull("sid"));
-//		if (shops != null && shops.size() > 0) {
-//			String sids = "";
-//			Boolean isFirst = true;
-//			for (T_TaobaokeShop shop : shops) {
-//				if (isFirst) {
-//					isFirst = false;
-//				} else {
-//					sids += ",";
-//				}
-//				sids += shop.getSid();
-//			}
-//			List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
-//					null, "0", "fxy060608", sids, null);
-//			if (tShops != null && tShops.size() > 0) {
-//				for (TaobaokeShop shop : tShops) {
-//					T_TaobaokeShop oShop = adminService.get(
-//							T_TaobaokeShop.class, shop.getUserId());
-//					oShop.setTitle(shop.getShopTitle());
-//					oShop.setCommissionRate(shop.getCommissionRate());
-//					adminService.update(oShop);
-//				}
-//			}
-//		}
-//		if (page.isHasNextPage()) {
-//			page.setPageNo(page.getNextPage());
-//			getTaobaokeShopCommission(page);
-//		}
+		// List<T_TaobaokeShop> shops = adminService.findAllByCriterion(page,
+		// T_TaobaokeShop.class,
+		// R.or(R.isNull("title"), R.isNull("sellerCredit")),
+		// R.isNotNull("sid"));
+		// if (shops != null && shops.size() > 0) {
+		// String sids = "";
+		// Boolean isFirst = true;
+		// for (T_TaobaokeShop shop : shops) {
+		// if (isFirst) {
+		// isFirst = false;
+		// } else {
+		// sids += ",";
+		// }
+		// sids += shop.getSid();
+		// }
+		// List<TaobaokeShop> tShops = TaobaoFetchUtil.convertTaobaoShop(null,
+		// null, "0", "fxy060608", sids, null);
+		// if (tShops != null && tShops.size() > 0) {
+		// for (TaobaokeShop shop : tShops) {
+		// T_TaobaokeShop oShop = adminService.get(
+		// T_TaobaokeShop.class, shop.getUserId());
+		// oShop.setTitle(shop.getShopTitle());
+		// oShop.setCommissionRate(shop.getCommissionRate());
+		// adminService.update(oShop);
+		// }
+		// }
+		// }
+		// if (page.isHasNextPage()) {
+		// page.setPageNo(page.getNextPage());
+		// getTaobaokeShopCommission(page);
+		// }
 	}
 
 	/**

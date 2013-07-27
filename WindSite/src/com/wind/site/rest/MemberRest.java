@@ -2671,6 +2671,7 @@ public class MemberRest {
 		String appKey = request.getParameter("appKey");
 		String appSecret = request.getParameter("appSecret");
 		String pid = request.getParameter("pid");
+		String tdjPid = request.getParameter("tdjPid");
 
 		ShopcatsListGetRequest getRequest = new ShopcatsListGetRequest();
 		getRequest.setFields("cid");
@@ -2761,6 +2762,9 @@ public class MemberRest {
 			} else {
 				user.setPid(user.getnPid());
 			}
+			if (StringUtils.isNotEmpty(tdjPid)) {
+				user.setTdjPid(tdjPid);
+			}
 			if (StringUtils.isNotEmpty(pSiteId)
 					&& StringUtils.isNotEmpty(pAdId)) {// 更新网站ID,广告位ID
 				try {
@@ -2785,6 +2789,12 @@ public class MemberRest {
 				EnvManager.getSites().put(siteImpl.getUser_id(), siteImpl);
 			}
 		}
+		try {
+			pageService.deployFooter(fcg, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return WindSiteRestUtil.SUCCESS;
 	}
 

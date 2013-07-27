@@ -56,7 +56,7 @@ $(function(){
 <#assign www=site.www>	
 </#if>
 <#else>
-<h2 style="font-size:18px;margin-bottom:10px;">您尚未配置自己的appKey,appSecret,无法获取订单记录</h2>
+<h2 style="font-size:18px;margin-bottom:10px;">您尚未配置自己的appKey,appSecret,无法手动获取订单记录</h2>
 </#if>
 <ol class="step step-four"><li><span>1.登录返利网站</span></li><li><span>2.淘宝网交易</span></li><li><span>3.确认收货</span></li><li class="last"><span>返利</span></li></ol>
 <div class="search-form">
@@ -98,7 +98,7 @@ $(function(){
 <h3>1.什么情况下会产生交易记录？</h3>
 <p>当您的返利网站会员以正常的返利流程完成购物，并且确认收货后，您的站点将同时产生交易记录和对应的返利记录。如果您发现交易记录和返利记录出现问题，您可以手动获取指定时间的交易记录</p>
 </@ws.help>
-</@xt.taoketemplate>
+
 <script>
 jQuery(function($){
 $('#uploadReport-dialog').dialog(
@@ -127,11 +127,13 @@ $('#uploadReport-dialog').dialog(
 				$('#J_ConfirmUploadReport input:first').val('上传中...稍后');
 				$('#uploadReport_form').submit();
 			});
-	$('#J_OpenUpload').click(function() {
+	$('#uploadReport a').click(function() {
+	alert(1);
 				$('#uploadReport-dialog').dialog('open');
 			});
 	$('#J_CloseUpload').click(function() {
 				$('#uploadReport-dialog').dialog('close');
 			});
 })
-<script>
+</script>
+</@xt.taoketemplate>

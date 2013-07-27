@@ -41,7 +41,7 @@ td.fl-num{text-align:center;width:80px;}th strong{color:red} fieldset .wTable td
 </style>
 <@xt.taoketemplate navselected='taoke' bdselected='site-manager'>
 <@ws.info>
-<a href="http://plugin.xintaonet.com" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2013-04-25:新淘客WordPress插件版提供下载！</strong></a>&nbsp;&nbsp;<br/>
+<a href="http://plugin.xintaonet.com" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2013-04-25:新淘客WordPress插件版提供下载！购买即送价值130元新淘网返利版</strong></a>&nbsp;&nbsp;<br/>
 <a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=65525" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2013-04-10:【提醒】，淘宝客搜索产品权限申请通知！</strong></a>&nbsp;&nbsp;<br/>
 <a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51753" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-07:开放淘宝开放平台APPKEY,APPSECRET配置?</strong></a>&nbsp;&nbsp;<br/>
 <a href="http://home.xintaonet.com/space.php?uid=1&do=blog&id=51434" target="_blank"><strong style="color:red;font-weight:bold;font-size:16px;">2012-09-05:如何在新淘网配置完整PID?</strong></a>&nbsp;&nbsp;

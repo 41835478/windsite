@@ -1260,7 +1260,7 @@ function deleteInvalidItems(id) {
  *            desc
  */
 function updateSite(id, title, desc, metadata, cid, pSiteId, pAdId, appKey,
-		appSecret, pid) {
+		appSecret, pid, tdjPid) {
 	var sender = new WindSender("/router/member/site/update/" + id);
 	sender.load("POST", {
 				"title" : title,
@@ -1271,7 +1271,8 @@ function updateSite(id, title, desc, metadata, cid, pSiteId, pAdId, appKey,
 				'pAdId' : pAdId,
 				'appKey' : appKey,
 				'appSecret' : appSecret,
-				'pid' : pid
+				'pid' : pid,
+				'tdjPid' : tdjPid
 			}, function(response) {
 				if (response.isSuccess()) {
 					gtUpdateSite();

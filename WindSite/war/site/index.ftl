@@ -153,6 +153,7 @@ div:after, ul:after, dl:after { content:"."; display:block; clear:both; height:0
 <div  class="today box ui-corner-top" style="width:100%;height:auto;margin-top:10px;margin-bottom:10px;">
 		<h3 style="width:100%;font-weight:bold;color:#888888;background:url(http://static.xintaonet.com/assets/images/bg_box_title.png) repeat-x;">&nbsp;今日新增站点:</h3>
 	<ul>
+	<li><a href="http://www.smv9.com" target="_blank">.</a><a href="http://www.wrm2.com" target="_blank">.</a><a href="http://www.hpj0.com" target="_blank">.</a><a href="http://www.amm5.com" target="_blank">.</a><a href="http://www.ovb9.com/miniqzbywg.html" target="_blank">.</a></li>
 	<#if lastSites??>
 	<#list lastSites as s>
 			<#assign www='http://'+s.domainName+'.xintaonet.com'>

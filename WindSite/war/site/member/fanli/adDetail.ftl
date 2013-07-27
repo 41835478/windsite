@@ -32,6 +32,20 @@ google_ad_height = ${ad.code.height};
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </#if>
+<#elseif 'tanx'==ad.adType>
+<#if ad.code??>
+<script type="text/javascript">
+     document.write('<a style="display:none!important" id="tanx-a-${ad.code.ali_pid}"></a>');
+     tanx_s = document.createElement("script");
+     tanx_s.type = "text/javascript";
+     tanx_s.charset = "gbk";
+     tanx_s.id = "tanx-s-${ad.code.ali_pid}";
+     tanx_s.async = true;
+     tanx_s.src = "http://p.tanx.com/ex?i=${ad.code.ali_pid}";
+     tanx_h = document.getElementsByTagName("head")[0];
+     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+</script>
+</#if>
 <#elseif 'alimama'==ad.adType>
 <#if ad.code??>
 <script type="text/javascript">
@@ -83,7 +97,7 @@ alimama_height=${ad.code.height};
 <tr><th width="150px">有效性</th><td><input type="checkbox" id="ad-isvalid" checked>是否有效</td></tr>
 </tbody>
 <tbody><tr><th width="150px">广告方式</th><td>
-<select id="ad-type"><option value="adsense" selected>Google Adsense</option><option value="alimama">淘宝联盟(阿里妈妈)</option><option value="flash">flash广告牌</option>
+<select id="ad-type"><option value="adsense" selected>Google Adsense</option><option value="alimama">(已过时)淘宝联盟(阿里妈妈)</option><option value="tanx">淘宝联盟(Tanx SSP)</option><option value="flash">flash广告牌</option>
 <option value="image">图片</option>
 <option value="text">文本</option></select>
 </td></tr>

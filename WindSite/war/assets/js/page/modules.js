@@ -88,12 +88,26 @@ var MODULES = [{
 			v : 1.6
 		}, {
 			name : 'shopAlimama',
-			title : '淘宝联盟',
+			title : '(已过时)淘宝联盟',
 			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
 			desc : '添加一个淘宝联盟推广模块。',
 			order : 0,
 			type : 1,
 			adType : 'alimama',
+			layout : '1,2,3,4,5',
+			content : 'bd',
+			limit : 2,
+			isHd : false,
+			isNew : false,
+			v : 1.6
+		}, {
+			name : 'shopAlimamaTanx',
+			title : '淘宝联盟Tanx SSP',
+			icon : 'http://img01.taobaocdn.com/tps/i1/T1obVrXXJaXXXXXXXX-50-50.gif',
+			desc : '添加一个淘宝联盟Tanx SSP推广模块。',
+			order : 0,
+			type : 1,
+			adType : 'tanx',
 			layout : '1,2,3,4,5',
 			content : 'bd',
 			limit : 2,

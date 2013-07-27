@@ -20,6 +20,20 @@ var cpro_id = '${cpro_id}';
 </script>
 <script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 </#if>
+<#elseif 'tanx'==ad.adType>
+<#if pid??>
+<script type="text/javascript">
+     document.write('<a style="display:none!important" id="tanx-a-${pid}"></a>');
+     tanx_s = document.createElement("script");
+     tanx_s.type = "text/javascript";
+     tanx_s.charset = "gbk";
+     tanx_s.id = "tanx-s-${pid}";
+     tanx_s.async = true;
+     tanx_s.src = "http://p.tanx.com/ex?i=${pid}";
+     tanx_h = document.getElementsByTagName("head")[0];
+     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+</script>
+</#if>
 <#elseif 'alimama'==union_type>
 <#if pid??>
 <script type="text/javascript">

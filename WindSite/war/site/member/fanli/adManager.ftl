@@ -14,6 +14,7 @@
 </style>
 </@ws.header>
 <script src="/assets/js/page/PageAlimamaConfig.js" type="text/javascript"></script>
+<script src="/assets/js/page/PageAlimamaTanxConfig.js" type="text/javascript"></script>
 <script src="/assets/js/page/PageGoogleConfig.js" type="text/javascript"></script>
 <script>
 $(function() {
@@ -118,6 +119,11 @@ $(function() {
 			}
 		} else if ('alimama' == adType) {// 阿里妈妈
 			adMeta = PageAlimamaConfig.createCommonAlimamaParams();
+			if (!adMeta) {
+				return false;
+			}
+		}else if ('tanx' == adType) {// 阿里妈妈
+			adMeta = PageAlimamaTanxConfig.createCommonAlimamaTanxParams();
 			if (!adMeta) {
 				return false;
 			}
@@ -240,7 +246,7 @@ $(function() {
 <tbody>
 <tr><th>标题</th><th width="20%">广告方式</th><th width="20%">页面位置</th><th width="8%">有效</th><th width="8%">编辑</th></tr>
 <#if ads??&&ads?size!=0>
-<#assign map={'alimama':'阿里妈妈(淘宝联盟)','adsense':'Google Adsense','flash','Flash广告牌','image':'图片','text':'文本'} pMap={'br':'文章内容区域','ht':'画报内容区域'}>
+<#assign map={'tanx':'阿里妈妈(Tanx SSP)','alimama':'(已过时)阿里妈妈(淘宝联盟)','adsense':'Google Adsense','flash','Flash广告牌','image':'图片','text':'文本'} pMap={'br':'文章内容区域','ht':'画报内容区域'}>
 <#list ads as a>
 <tr pagetype="${a.pageType}"><td><input type="checkbox" name="ad-delete" aid="${a.id}" value="5">${a.title}</td>
 <td>${map[a.adType]}</td>

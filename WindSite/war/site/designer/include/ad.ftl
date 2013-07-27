@@ -8,6 +8,20 @@ google_ad_height = ${ad.adMeta.height};
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </#if>
+<#elseif 'tanx'==ad.adType>
+<#if ad.adMeta??>
+<script type="text/javascript">
+     document.write('<a style="display:none!important" id="tanx-a-${ad.adMeta.ali_pid}"></a>');
+     tanx_s = document.createElement("script");
+     tanx_s.type = "text/javascript";
+     tanx_s.charset = "gbk";
+     tanx_s.id = "tanx-s-${ad.adMeta.ali_pid}";
+     tanx_s.async = true;
+     tanx_s.src = "http://p.tanx.com/ex?i=${ad.adMeta.ali_pid}";
+     tanx_h = document.getElementsByTagName("head")[0];
+     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+</script>
+</#if>
 <#elseif 'alimama'==ad.adType>
 <#if ad.adMeta??>
 <script type="text/javascript">

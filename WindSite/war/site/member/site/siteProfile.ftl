@@ -29,6 +29,7 @@ $('#designerSite').button();
 		}
 		var reg_secret = /^[a-zA-Z0-9]{15,50}$/;
 		var reg_pid = /^mm_[0-9]+_0_0$/;
+		var reg_tdjPid = /^mm_[0-9]+_[0-9]{5,11}_[0-9]{5,11}$/;
 		var appSecret = $.trim($('#appSecret').val());
 		if(appSecret){
 			if(!reg_secret.test(appSecret)){
@@ -65,6 +66,14 @@ $('#designerSite').button();
 		}else{
 			pid='';
 		}
+		var tdjPid = $('#tdjPID').val();
+		if(tdjPid){
+			if(!reg_tdjPid.test(tdjPid)){
+				alert('淘点金完整PID格式不正确');
+			}
+		}else{
+			tdjPid='';
+		}
 		var desc = $('#siteDescription').val();
 		if (desc) {
 			if (desc.length > 150) {
@@ -80,7 +89,7 @@ $('#designerSite').button();
 			}
 		}
 		updateSite($('#site_Id').val(), title, desc, metadata, $('#siteCid')
-						.val(),pSiteId,pAdId,appKey,appSecret,pid);
+						.val(),pSiteId,pAdId,appKey,appSecret,pid,tdjPid);
 		return false;
 	});
 	$('#cancelSite').button().click(function() {
@@ -125,6 +134,9 @@ $('#designerSite').button();
 		<tr>
 			<td>PID:</td><td>${USER.pid}</td>
 		</tr>
+		<tr>
+			<td>淘点金PID:</td><td>${USER.tdjPid}</td>
+		</tr>
 		<tr style="display:none;"><td>简介:</td><td>${s.description}</td><tr>
 		<tr><td>店铺类别:</td><td><#if cat??>${cat.name}<#else>尚未设置类目</#if></td><tr>
 		<tr style="display:none;"><td>关键词:</td><td>${s.metadata}</td><tr>
@@ -160,6 +172,9 @@ $('#designerSite').button();
 		<tr<#if ((USER.usb??&&(USER.usb.versionNo>1.6)&&USER.nick!='wangzhiqiang19841012'))> style="display:none;"</#if>>
 			<td>
 			PID:</td><td><input id="PID" type="text" size="50" class="text" value="${USER.pid}"/><br><span>返利版站长请不要修改PID,否则无法获取订单</span></td>
+		</tr>
+		<tr>
+			<td>淘点金PID:</td><td><input id="tdjPID" type="text" size="50" class="text" value="${USER.tdjPid}"/><br><span>请填写您域名下的淘点金完整PID</span></td>
 		</tr>
 		<tr>
 			<td>店铺类别:</td><td>

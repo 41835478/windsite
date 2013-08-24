@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +34,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.taobao.api.domain.TaobaokeReport;
 import com.taobao.api.domain.TaobaokeReportMember;
-import com.taobao.api.request.TaobaokeReportGetRequest;
-import com.taobao.api.response.TaobaokeReportGetResponse;
+import com.taobao.api.request.TaobaokeRebateReportGetRequest;
+import com.taobao.api.response.TaobaokeRebateReportGetResponse;
 import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
 import com.wind.core.util.DateUtils;
@@ -79,7 +80,7 @@ public class MemberFanliRest {
 	private ICommandService commandService;
 
 	/**
-	 * 上传亿起发推广链接
+	 * 上传淘宝客推广记录
 	 * 
 	 * @param view
 	 * @param response
@@ -673,28 +674,32 @@ public class MemberFanliRest {
 		String[] p = new String[] { DateUtils.YYYY_MM_DD };
 		try {
 			Calendar start = Calendar.getInstance();
-			Calendar end = Calendar.getInstance();
+			// Calendar end = Calendar.getInstance();
 			start.setTime(DateUtils.parseDate(startDate, p));
-			end.setTime(DateUtils.parseDate(endDate, p));
-			start.set(Calendar.HOUR, 0);
+			// end.setTime(DateUtils.parseDate(endDate, p));
+			start.set(Calendar.HOUR_OF_DAY, 0);
 			start.set(Calendar.MINUTE, 0);
 			start.set(Calendar.SECOND, 0);
-			end.add(Calendar.DATE, 1);
-			end.set(Calendar.HOUR, 0);
-			end.set(Calendar.MINUTE, 0);
-			end.set(Calendar.SECOND, 0);
-			if (!end.after(start)) {
-				SystemException.handleMessageException("结束时间不能小于开始时间");
-			}
-			if (end.get(Calendar.DATE) - start.get(Calendar.DATE) > 90) {
-				SystemException.handleMessageException("您一次最多只能获取90天的交易记录");
-			}
+			// end.add(Calendar.DATE, 1);
+			// end.set(Calendar.HOUR_OF_DAY, 0);
+			// end.set(Calendar.MINUTE, 0);
+			// end.set(Calendar.SECOND, 0);
+			// if (!end.after(start)) {
+			// SystemException.handleMessageException("结束时间不能小于开始时间");
+			// }
+			// if (end.get(Calendar.DATE) - start.get(Calendar.DATE) > 90) {
+			// SystemException.handleMessageException("您一次最多只能获取90天的交易记录");
+			// }
 			Map<String, Integer> result = new HashMap<String, Integer>();
 			result.put("all", 0);
 			result.put("count", 0);
-			for (; end.after(start); start.add(Calendar.DATE, 1)) {// 循环时间段
-				getReportByPage(result, 1L, start);
+			List<Date> froms = TaobaoFetchUtil.getReportTimes(start.getTime());
+			for (Date date : froms) {
+				getReportByPage(result, 1L, date);
 			}
+			// for (; end.after(start); start.add(Calendar.DATE, 1)) {// 循环时间段
+			// getReportByPage(result, 1L, start);
+			// }
 			return "{\"all\":\"" + result.get("all") + "\",\"success\":\""
 					+ result.get("count") + "\"}";
 		} catch (ParseException e) {
@@ -704,18 +709,21 @@ public class MemberFanliRest {
 	}
 
 	private void getReportByPage(Map<String, Integer> result, Long page,
-			Calendar start) {
-		TaobaokeReportGetRequest req = new TaobaokeReportGetRequest();
+			Date start) {
+		TaobaokeRebateReportGetRequest req = new TaobaokeRebateReportGetRequest();
 		req.setFields(TaobaoFetchUtil.TAOBAOREPORT_FIELDS);
-		req.setDate(DateUtils.format(start.getTime(), DateUtils.YYYYMMDD));
+		req.setStartTime(start);
+		req.setSpan(600L);
 		req.setPageNo(page);
 		req.setPageSize(ReportsGetCommand.PAGE_SIZE);
-		TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-				EnvManager.getUser().getAppKey(), EnvManager.getUser()
-						.getAppSecret(), req, EnvManager.getUser()
+		TaobaokeRebateReportGetResponse response = TaobaoFetchUtil
+				.reportRebateGet(EnvManager.getUser().getAppKey(), EnvManager
+						.getUser().getAppSecret(), req, EnvManager.getUser()
 						.getReportSession());
 		if (response != null) {
-			TaobaokeReport report = response.getTaobaokeReport();
+			// TaobaokeReport report = response.getTaobaokeReport();
+			TaobaokeReport report = TaobaoFetchUtil.convertReport(response
+					.getTaobaokePayments());
 			if (report != null) {
 				List<TaobaokeReportMember> members = report
 						.getTaobaokeReportMembers();

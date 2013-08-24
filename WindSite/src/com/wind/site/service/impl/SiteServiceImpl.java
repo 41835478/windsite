@@ -1010,7 +1010,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 	public User synTUser(User user, String nick) {
 		try {
 			com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
-					EnvManager.getAppType(), user.getUser_id(), nick);
+					null, user.getUser_id(), nick);
 			// user.setAlipay_account(tUser.getAlipayAccount());
 			// user.setAlipay_bind(tUser.getAlipayBind());
 			// user.setAlipay_no(tUser.getAlipayNo());
@@ -1091,8 +1091,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 		request.setNick(user.getNick());
 		request.setOuterCode(EnvManager.getCatsOuterCode());
 		try {
-			String url = TaobaoFetchUtil.getItemCatUrl(null, null,
-					user.getAppType(), request, user.getPid());
+			String url = TaobaoFetchUtil.getItemCatUrl(null, null, null,
+					request, user.getPid());
 			String pid = url.split("pid=")[1].split("&")[0];
 			if (StringUtils.isNotEmpty(pid)) {
 				user.setPid(pid);

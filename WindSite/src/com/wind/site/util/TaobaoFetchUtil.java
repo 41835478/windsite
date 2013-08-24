@@ -2,6 +2,7 @@ package com.wind.site.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,9 @@ import com.taobao.api.domain.PropValue;
 import com.taobao.api.domain.Shop;
 import com.taobao.api.domain.TaobaokeItem;
 import com.taobao.api.domain.TaobaokeItemDetail;
+import com.taobao.api.domain.TaobaokePayment;
+import com.taobao.api.domain.TaobaokeReport;
+import com.taobao.api.domain.TaobaokeReportMember;
 import com.taobao.api.domain.TaobaokeShop;
 import com.taobao.api.domain.User;
 import com.taobao.api.internal.parser.json.ObjectJsonParser;
@@ -52,8 +56,7 @@ import com.taobao.api.request.TaobaokeItemsConvertRequest;
 import com.taobao.api.request.TaobaokeItemsDetailGetRequest;
 import com.taobao.api.request.TaobaokeItemsGetRequest;
 import com.taobao.api.request.TaobaokeListurlGetRequest;
-import com.taobao.api.request.TaobaokeReportGetRequest;
-import com.taobao.api.request.TaobaokeShopsConvertRequest;
+import com.taobao.api.request.TaobaokeRebateReportGetRequest;
 import com.taobao.api.request.TaobaokeShopsGetRequest;
 import com.taobao.api.request.TaobaokeToolRelationRequest;
 import com.taobao.api.request.UserBuyerGetRequest;
@@ -79,8 +82,7 @@ import com.taobao.api.response.TaobaokeItemsConvertResponse;
 import com.taobao.api.response.TaobaokeItemsDetailGetResponse;
 import com.taobao.api.response.TaobaokeItemsGetResponse;
 import com.taobao.api.response.TaobaokeListurlGetResponse;
-import com.taobao.api.response.TaobaokeReportGetResponse;
-import com.taobao.api.response.TaobaokeShopsConvertResponse;
+import com.taobao.api.response.TaobaokeRebateReportGetResponse;
 import com.taobao.api.response.TaobaokeShopsGetResponse;
 import com.taobao.api.response.TaobaokeToolRelationResponse;
 import com.taobao.api.response.UserBuyerGetResponse;
@@ -90,6 +92,7 @@ import com.taobao.api.response.VasSubscribeGetResponse;
 import com.wind.core.dao.Page;
 import com.wind.core.exception.SystemException;
 import com.wind.core.service.IBaseService;
+import com.wind.core.util.DateUtils;
 import com.wind.site.env.EnvManager;
 import com.wind.site.model.T_Poster;
 import com.wind.site.model.T_PosterPicture;
@@ -788,13 +791,57 @@ public class TaobaoFetchUtil {
 
 	}
 
-	public static TaobaokeReportGetResponse reportGet(String appKey,
-			String appSecret, TaobaokeReportGetRequest request, String session) {
+	public static List<Date> getReportTimes(Date date) {
+		List<Date> dates = new ArrayList<Date>();
+		Calendar from = Calendar.getInstance();
+		from.setTime(date);
+		from.set(Calendar.HOUR_OF_DAY, 0);
+		from.set(Calendar.MINUTE, 0);
+		from.set(Calendar.SECOND, 0);
+		for (int i = 0; i < 144; i++) {
+			System.out.println(DateUtils.format(from.getTime(),
+					DateUtils.yyyy_MM_DD_HH_MM_SS));
+			dates.add(from.getTime());
+			from.add(Calendar.MINUTE, 10);
+
+		}
+		return dates;
+	}
+
+	public static TaobaokeReport convertReport(List<TaobaokePayment> payments) {
+		TaobaokeReport report = new TaobaokeReport();
+		List<TaobaokeReportMember> members = new ArrayList<TaobaokeReportMember>();
+		for (TaobaokePayment payment : payments) {
+			TaobaokeReportMember member = new TaobaokeReportMember();
+			member.setAppKey(payment.getAppKey());
+			member.setCategoryId(payment.getCategoryId());
+			member.setCategoryName(payment.getCategoryName());
+			member.setCommission(payment.getCommission());
+			member.setCommissionRate(payment.getCommissionRate());
+			member.setItemNum(payment.getItemNum());
+			member.setItemTitle(payment.getItemTitle());
+			member.setNumIid(payment.getNumIid());
+			member.setOuterCode(payment.getOuterCode());
+			member.setPayPrice(payment.getPayPrice());
+			member.setPayTime(payment.getPayTime());
+			member.setRealPayFee(payment.getRealPayFee());
+			member.setSellerNick(payment.getSellerNick());
+			member.setShopTitle(payment.getShopTitle());
+			member.setTradeId(payment.getTradeId());
+			members.add(member);
+		}
+		report.setTaobaokeReportMembers(members);
+		return report;
+	}
+
+	public static TaobaokeRebateReportGetResponse reportRebateGet(
+			String appKey, String appSecret,
+			TaobaokeRebateReportGetRequest request, String session) {
 
 		TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
 				appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 		try {
-			TaobaokeReportGetResponse response = client.execute(request);
+			TaobaokeRebateReportGetResponse response = client.execute(request);
 			if (response.isSuccess()) {
 				return response;
 			} else {
@@ -1072,9 +1119,8 @@ public class TaobaoFetchUtil {
 	public static User getTaobaoUser(String appType, String uid, String nick) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					EnvManager.getAppKey(null), EnvManager.getSecret(null),
+					Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			UserBuyerGetRequest req = new UserBuyerGetRequest();
 			req.setFields(TAOBAOUSER_FIELDS);
 			UserBuyerGetResponse response = client.execute(req,
@@ -1469,11 +1515,13 @@ public class TaobaoFetchUtil {
 	}
 
 	public static void main(String[] args) {
-		String num_iids = "16272290352,17820515411,16078842780,20226124528,15439073490,16526411341,19392072071,15678998794,16574707167,15679074799,17385691153,15474174172,17834239180,18997436570,16082317715,16129538834,20226148341,19392080537,20226100648,15678978334,16419445989,16078658537,18855152155,20226096630,20329928036,15438074853,20226188056,19401900860,20329852318,19402684118,20225936932,20919260054,17834083716,20919008887,20918968915,20919060655,20329908292";
-		List<TaobaokeItem> items = newItemsConvert("12034285",
-				"2c18a03c14736c62a0b70804618f8c45", null, num_iids, "",
-				"25170759");
-		System.out.println(items.size());
+		System.out.println(getReportTimes(new Date()));
+		// String num_iids =
+		// "16272290352,17820515411,16078842780,20226124528,15439073490,16526411341,19392072071,15678998794,16574707167,15679074799,17385691153,15474174172,17834239180,18997436570,16082317715,16129538834,20226148341,19392080537,20226100648,15678978334,16419445989,16078658537,18855152155,20226096630,20329928036,15438074853,20226188056,19401900860,20329852318,19402684118,20225936932,20919260054,17834083716,20919008887,20918968915,20919060655,20329908292";
+		// List<TaobaokeItem> items = newItemsConvert("12034285",
+		// "2c18a03c14736c62a0b70804618f8c45", null, num_iids, "",
+		// "25170759");
+		// System.out.println(items.size());
 		// System.out.println(Arrays.deepToString(chunkedArray));
 		// List<TaobaokeItem> items = getTaobaokeItemsBySeller("珂丝琪旗舰店",
 		// "12034285", "2c18a03c14736c62a0b70804618f8c45", "", 1);

@@ -10,10 +10,9 @@ import org.hibernate.criterion.R;
 
 import com.taobao.api.domain.TaobaokeReport;
 import com.taobao.api.domain.TaobaokeReportMember;
-import com.taobao.api.request.TaobaokeReportGetRequest;
-import com.taobao.api.response.TaobaokeReportGetResponse;
+import com.taobao.api.request.TaobaokeRebateReportGetRequest;
+import com.taobao.api.response.TaobaokeRebateReportGetResponse;
 import com.wind.core.exception.BaseException;
-import com.wind.core.util.DateUtils;
 import com.wind.site.command.ICommand;
 import com.wind.site.model.Site;
 import com.wind.site.model.User;
@@ -38,36 +37,41 @@ public class ReportsGetCommand implements ICommand {
 				&& appKey != null) {
 			Calendar from = Calendar.getInstance();
 			from.setTime(start);
-			from.set(Calendar.HOUR, 0);
+			from.set(Calendar.HOUR_OF_DAY, 0);
 			from.set(Calendar.MINUTE, 0);
 			from.set(Calendar.SECOND, 0);
-			Calendar now = Calendar.getInstance();
-			now.setTime(new Date());
-			now.add(Calendar.DATE, 1);
-			Integer diff = now.get(Calendar.DATE) - from.get(Calendar.DATE);
-			if (diff > 90) {// 如果时间差大于90.则将开始时间移至90天前
-				from.add(Calendar.DATE, diff - 90);
-				diff = 90;
+			List<Date> froms = TaobaoFetchUtil.getReportTimes(from.getTime());
+			for (Date date : froms) {
+				getReportByPage(1L, date, service);
 			}
-			// 日期迭代
-			for (int i = 0; i < diff; i++) {
-				getReportByPage(1L, from, service);
-			}
+			// Calendar now = Calendar.getInstance();
+			// now.setTime(new Date());
+			// now.add(Calendar.DATE, 1);
+			// Integer diff = now.get(Calendar.DATE) - from.get(Calendar.DATE);
+			// if (diff > 90) {// 如果时间差大于90.则将开始时间移至90天前
+			// from.add(Calendar.DATE, diff - 90);
+			// diff = 90;
+			// }
+			// // 日期迭代
+			// for (int i = 0; i < diff; i++) {
+			// getReportByPage(1L, from, service);
+			// }
 		}
 	}
 
-	public void getReportByPage(Long page, Calendar from,
-			ICommandService service) {
-		TaobaokeReportGetRequest request = new TaobaokeReportGetRequest();
+	public void getReportByPage(Long page, Date from, ICommandService service) {
+		TaobaokeRebateReportGetRequest request = new TaobaokeRebateReportGetRequest();
 		request.setFields(TaobaoFetchUtil.TAOBAOREPORT_FIELDS);
-		request.setDate(DateUtils.format(from.getTime(), DateUtils.YYYYMMDD));
+		request.setStartTime(from);
+		request.setSpan(600L);
 		request.setPageNo(page);
 		request.setPageSize(PAGE_SIZE);
 		try {
-			TaobaokeReportGetResponse response = TaobaoFetchUtil.reportGet(
-					appKey, appSecret, request, null);
+			TaobaokeRebateReportGetResponse response = TaobaoFetchUtil
+					.reportRebateGet(appKey, appSecret, request, null);
 			if (response != null) {
-				TaobaokeReport report = response.getTaobaokeReport();
+				TaobaokeReport report = TaobaoFetchUtil.convertReport(response
+						.getTaobaokePayments());
 				if (report != null) {
 					List<TaobaokeReportMember> members = report
 							.getTaobaokeReportMembers();
@@ -123,7 +127,7 @@ public class ReportsGetCommand implements ICommand {
 			}
 			exception.printStackTrace();
 		}
-		from.add(Calendar.DATE, 1);
+		//from.add(Calendar.DATE, 1);
 	}
 
 	public static void main(String[] args) {

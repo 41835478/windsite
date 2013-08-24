@@ -340,7 +340,7 @@ function initFanliReport(q, rel) {
 				firstDay : 1,
 				max : 1
 			}).val(sDate.format("yyyy-mm-dd"));
-	sDate.addDays(-7);
+	//sDate.addDays(-7);
 	$("#startDate").dateinput({
 				format : 'yyyy-mm-dd',
 				speed : 'fast',
@@ -357,29 +357,34 @@ function initFanliReport(q, rel) {
 			}, function() {
 				$(this).removeClass('btn-ok-hover');
 			}).click(function() {
-		if ($(this).hasClass('btn-ok-disabled')) {
-			return;
-		}
-		var startDate = $("#startDate").data('dateinput').getValue();
-		var endDate = $("#endDate").data('dateinput').getValue();
-		if (!startDate || !endDate) {
-			alert('请选择时间段');
-			return;
-		}
-		if (endDate < startDate) {
-			alert('结束时间不能小于开始时间');
-			return;
-		}
-		if ((endDate.getTime() - startDate.getTime()) / (24 * 3600 * 1000) > 30) {
-			alert('时间段间隔不能超过30天');
-			return;
-		}
-		$(this).addClass('btn-ok-disabled');
-		$('#getReport-result').empty();
-		$(this).parent().find('.loading-text').removeClass('fn-hide');
-		getFanliReport($('#startDate').val(), $('#endDate').val());
+				if ($(this).hasClass('btn-ok-disabled')) {
+					return;
+				}
+				var startDate = $("#startDate").data('dateinput').getValue();
+				var endDate = $("#endDate").data('dateinput').getValue();
+				if (!startDate) {
+					alert('请选择时间段');
+					return;
+				}
+				// if (!startDate || !endDate) {
+				// alert('请选择时间段');
+				// return;
+				// }
+				// if (endDate < startDate) {
+				// alert('结束时间不能小于开始时间');
+				// return;
+				// }
+				// if ((endDate.getTime() - startDate.getTime()) / (24 * 3600 *
+				// 1000) > 30) {
+				// alert('时间段间隔不能超过30天');
+				// return;
+				// }
+				$(this).addClass('btn-ok-disabled');
+				$('#getReport-result').empty();
+				$(this).parent().find('.loading-text').removeClass('fn-hide');
+				getFanliReport($('#startDate').val(), $('#endDate').val());
 
-	});
+			});
 	$('#getReport').click(function() {
 				$('#getReport-dialog').dialog('open');
 			});

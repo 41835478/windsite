@@ -28,11 +28,11 @@ $(function(){
 <@xt.taoketemplate navselected='taoke' bdselected='fanli-report' group=2>
 <div id="getReport-dialog" title="手动获取订单">
 <@ws.info>
-<span style="color: #F60;">提醒:</span>&nbsp;&nbsp;手动获取订单时间段最多只能选择30天。并且只能获取最近3个月内的交易记录，已经获取了的交易记录将自动忽略。
+<span style="color: #F60;">提醒:</span>&nbsp;&nbsp;手动获取订单时间段最多只能选择1天。并且只能获取最近3个月内的交易记录，已经获取了的交易记录将自动忽略。
 </@ws.info>
 <table width=100%>
 	<tr>
-	<td width=80px align=right>时间段：</td><td align=left>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="startDate" id="startDate" data-value="-7" value="" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" name="endDate" id="endDate" value="" data-value="Today"/></td></tr>
+	<td width=80px align=right>时间段：</td><td align=left>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="startDate" id="startDate" data-value="-7" value="" /><input type="text" name="endDate" id="endDate" value="" data-value="Today" style="display:none;"/></td></tr>
 	<tr><td align=center colspan=2><span class="btn btn-ok" id="getReportButton"><input type="button" value="获取交易记录"></span><span class="fm-confirm"><span class="loading-text fn-hide">正在获取订单...</span></span></td></tr>
 	<tr><td align=center colspan=2><span id="getReport-result" style="color:red;font-size:14px;font-weight:700;padding:2px;line-height:17px;"></span></td></tr>
 </table>
@@ -128,7 +128,6 @@ $('#uploadReport-dialog').dialog(
 				$('#uploadReport_form').submit();
 			});
 	$('#uploadReport a').click(function() {
-	alert(1);
 				$('#uploadReport-dialog').dialog('open');
 			});
 	$('#J_CloseUpload').click(function() {

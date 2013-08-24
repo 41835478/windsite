@@ -1,7 +1,7 @@
 <@ws.siteHeader isSearch=false>
-<meta name="keywords" content="${sitetitle},${cidKeywords}">
-<meta name="description" content="${sitetitle}挑选了淘宝网热卖人气店铺,这些${cidKeywords}热卖的店铺都提供了人气高而且价格便宜的热卖商品">
-<title>店铺搜索-${keyword}-${sitetitle}</title>
+<meta name="keywords" content="${sitetitle},${cidKeywords?html}">
+<meta name="description" content="${sitetitle}挑选了淘宝网热卖人气店铺,这些${cidKeywords?html}热卖的店铺都提供了人气高而且价格便宜的热卖商品">
+<title>店铺搜索-${keyword?html}-${sitetitle?html}</title>
 
 <link rel="stylesheet" href="http://static.xintaonet.com/assets/min/css/shops.css?v=${dateVersion()}" type="text/css"/>
 </@ws.siteHeader>

@@ -2,9 +2,9 @@
 <#assign isCat=false>
 <#if catName??&&''!=catName><#assign isCat=true></#if> 
 <@p.pageHeader>
-<meta name="keywords" content="<#if isCat>${catName},</#if>${q},${sitetitle}">
-<meta name="description" content="${sitetitle}<#if isCat>提供为您带来有关${catName}精品店铺,产品批发价格,品牌专卖店新品，厂家专卖产品等信息,是${catName}选购的最佳网站<#else>帮你找到${q}的所有商家信息，你可以通过比较${q}不同商家的报价、服务、用户评论，帮您做出最好的购买选择</#if>">
-<title><#if isCat>${catName}-<#else><#if q??&&q!=''>${q}-</#if></#if>店铺搜索-${sitetitle}</title>
+<meta name="keywords" content="<#if isCat>${catName?html},</#if>${q?html},${sitetitle?html}">
+<meta name="description" content="${sitetitle?html}<#if isCat>提供为您带来有关${catName?html}精品店铺,产品批发价格,品牌专卖店新品，厂家专卖产品等信息,是${catName?html}选购的最佳网站<#else>帮你找到${q?html}的所有商家信息，你可以通过比较${q?html}不同商家的报价、服务、用户评论，帮您做出最好的购买选择</#if>">
+<title><#if isCat>${catName?html}-<#else><#if q??&&q!=''>${q?html}-</#if></#if>店铺搜索-${sitetitle?html}</title>
 </@p.pageHeader>
 <script src="/assets/min/js/page/jquery.tooltip.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="http://static.xintaonet.com/assets/min/stylesheets/shopSearch.css?v=${dateVersion()}" type="text/css"/>
@@ -12,7 +12,7 @@
 <div class="layout grid-m ks-clear">
 	<div class="col-main">
 		<div class="main-wrap J_TRegion">
-			<div class="crumbs"><a href="/">购物首页</a><span>&gt;</span>店铺搜索<#if isCat><span>&gt;</span>${catName}(${page.totalCount})</#if></div>
+			<div class="crumbs"><a href="/">购物首页</a><span>&gt;</span>店铺搜索<#if isCat><span>&gt;</span>${catName?html}(${page.totalCount})</#if></div>
 		</div>
 	</div>
 </div>
@@ -35,7 +35,7 @@
 								</ul>
 								<div class="search-auto" style="margin-top:-3px;">
 									<input name="is_mall" type="hidden" value="">
-									<input name="q" class="search-input" value="${q}"  autocomplete="off">
+									<input name="q" class="search-input" value="${q?html}"  autocomplete="off">
 									<input type="button" id="search-button"/>
 								</div>
 							</fieldset>
@@ -46,9 +46,9 @@
 			</div>
 			<div id="main-content" class="tab-item"><!-- tab bar start --> <!-- tabbar.vm-->
 				<ul class="tabbar">
-					<li<#if ''==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q}">所有店铺</a></li>
-					<li<#if '1goldencrown'==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q}&start_credit=1goldencrown">至尊店铺</a></li>
-					<li<#if '1crown'==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q}&start_credit=1crown">皇冠店铺</a></li>
+					<li<#if ''==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q?html}">所有店铺</a></li>
+					<li<#if '1goldencrown'==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q?html}&start_credit=1goldencrown">至尊店铺</a></li>
+					<li<#if '1crown'==start_credit> class="selected"</#if>><a href="/shops?cid=${cid}&q=${q?html}&start_credit=1crown">皇冠店铺</a></li>
 					<li class="pagination">
 						<div class="page-top">
 						<#assign totalPageCount=page.totalPageCount>
@@ -158,7 +158,7 @@
 				</div>
 				<#else>
 				<div id="no-result">
-					<h2>很抱歉！没有找到与“<em>${q}</em>”相关的店铺</h2>
+					<h2>很抱歉！没有找到与“<em>${q?html}</em>”相关的店铺</h2>
 					<dl>
 						<dt>温馨提示：</dt>
 						<dd>

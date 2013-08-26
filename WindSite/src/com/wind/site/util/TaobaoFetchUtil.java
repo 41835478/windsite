@@ -811,24 +811,26 @@ public class TaobaoFetchUtil {
 	public static TaobaokeReport convertReport(List<TaobaokePayment> payments) {
 		TaobaokeReport report = new TaobaokeReport();
 		List<TaobaokeReportMember> members = new ArrayList<TaobaokeReportMember>();
-		for (TaobaokePayment payment : payments) {
-			TaobaokeReportMember member = new TaobaokeReportMember();
-			member.setAppKey(payment.getAppKey());
-			member.setCategoryId(payment.getCategoryId());
-			member.setCategoryName(payment.getCategoryName());
-			member.setCommission(payment.getCommission());
-			member.setCommissionRate(payment.getCommissionRate());
-			member.setItemNum(payment.getItemNum());
-			member.setItemTitle(payment.getItemTitle());
-			member.setNumIid(payment.getNumIid());
-			member.setOuterCode(payment.getOuterCode());
-			member.setPayPrice(payment.getPayPrice());
-			member.setPayTime(payment.getPayTime());
-			member.setRealPayFee(payment.getRealPayFee());
-			member.setSellerNick(payment.getSellerNick());
-			member.setShopTitle(payment.getShopTitle());
-			member.setTradeId(payment.getTradeId());
-			members.add(member);
+		if (payments != null && payments.size() > 0) {
+			for (TaobaokePayment payment : payments) {
+				TaobaokeReportMember member = new TaobaokeReportMember();
+				member.setAppKey(payment.getAppKey());
+				member.setCategoryId(payment.getCategoryId());
+				member.setCategoryName(payment.getCategoryName());
+				member.setCommission(payment.getCommission());
+				member.setCommissionRate(payment.getCommissionRate());
+				member.setItemNum(payment.getItemNum());
+				member.setItemTitle(payment.getItemTitle());
+				member.setNumIid(payment.getNumIid());
+				member.setOuterCode(payment.getOuterCode());
+				member.setPayPrice(payment.getPayPrice());
+				member.setPayTime(payment.getPayTime());
+				member.setRealPayFee(payment.getRealPayFee());
+				member.setSellerNick(payment.getSellerNick());
+				member.setShopTitle(payment.getShopTitle());
+				member.setTradeId(payment.getTradeId());
+				members.add(member);
+			}
 		}
 		report.setTaobaokeReportMembers(members);
 		return report;

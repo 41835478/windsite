@@ -149,7 +149,7 @@
 		<!--正式容器地址 -->
 		<property name="taobaoContainer" value="http://container.open.taobao.com/container" />
 		<!--REST正式地址 -->
-		<property name="taobaoUrl" value="http://gw.api.taobao.com/router/rest" />
+		<property name="taobaoUrl" value="http://110.75.69.11/router/rest" />
 		<!--目前支持的API集合 -->
 		<property name="API">
 			<map>
@@ -202,7 +202,7 @@
 	<!--新淘网统计客户端环境配置 -->
 	<bean id="gaClient" class="com.wind.site.util.XintaoAnalyticsClient">
 		<property name="username" value="fxy060608@gmail.com" />
-		<property name="password" value="iloveyou1817" />
+		<property name="password" value="ezvueyzhanfkkfyo" />
 		<property name="tableId" value="ga:30907871" />
 		<property name="applicaitonName" value="xt-ga" />
 		<property name="startDate" value="2010-08-08" />

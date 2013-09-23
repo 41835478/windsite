@@ -25,7 +25,6 @@ public class T_TaobaokeReportMember implements Serializable {
 	/**
 	 * 淘宝交易号
 	 **/
-	@Id
 	private Long trade_id;
 	private Long mini_trade_id;
 	/**

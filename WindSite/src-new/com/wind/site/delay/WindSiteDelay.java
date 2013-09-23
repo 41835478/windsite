@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.wind.core.util.DateUtils;
 import com.wind.site.command.CommandExecutor;
-import com.wind.site.command.impl.UpdateUserTemplateByTemplateCommand;
 import com.wind.site.command.impl.WeigouAutoCronCommand;
 import com.wind.site.freemarker.method.ModuleMethod;
 import com.wind.site.rest.taobao.TaobaoFetch;
@@ -194,7 +193,14 @@ public class WindSiteDelay {
 
 	// 测试入口函数
 	public static void main(String[] args) throws Exception {
-
+		Date date1 = new Date();
+		date1 = DateUtils.parseDate("2011-01-19 23:17:47", new String[]{DateUtils.yyyy_MM_DD_HH_MM_SS});
+		//date1.setTime(1295450267000L);
+		System.out.println(date1.getTime());
+		Date date2 = new Date();
+		date2.setTime(1295479067000L-8*3600*1000L);
+		System.out.println(date2);
+		System.out.println(1295479067000L-8*3600*1000L);
 	}
 
 }

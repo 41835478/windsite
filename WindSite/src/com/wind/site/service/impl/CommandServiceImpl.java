@@ -35,6 +35,7 @@ import com.wind.site.model.SiteCommission;
 import com.wind.site.model.T_TaobaokeReportMember;
 import com.wind.site.model.YiqifaReport;
 import com.wind.site.service.ICommandService;
+import com.wind.site.util.WindSiteRestUtil;
 
 /**
  * 异步命令业务实现类
@@ -134,80 +135,87 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 
 	@Override
 	public Boolean confirmReportTrade(Long tradeId, Long memberId) {
-		T_TaobaokeReportMember report = this.get(T_TaobaokeReportMember.class,
-				tradeId);
-		if (report == null) {
+		List<T_TaobaokeReportMember> reports = this
+				.findAllByCriterion(
+						T_TaobaokeReportMember.class,
+						R.eq("mini_trade_id",
+								WindSiteRestUtil.getMiniTradeId(tradeId)));
+		if (reports == null || reports.size() == 0) {
 			SystemException.handleMessageException("当前指定订单不存在");
 		}
 		Member m = this.get(Member.class, memberId);
 		if (m == null) {
 			SystemException.handleMessageException("当前指定会员不存在");
 		}
-		if (!(report.getUser_id().equals(m.getUser_id()) && report.getSite_id()
-				.equals(m.getSite_id()))) {
+		T_TaobaokeReportMember firstReport = reports.get(0);
+		if (!(firstReport.getUser_id().equals(m.getUser_id()) && firstReport
+				.getSite_id().equals(m.getSite_id()))) {
 			SystemException.handleMessageException("您无权确认当前订单");
 		}
-		if (StringUtils.isNotEmpty(report.getNick())) {
+		if (StringUtils.isNotEmpty(firstReport.getNick())) {
 			SystemException.handleMessageException("当前订单已经被【"
-					+ report.getNick() + "】确认成功");
+					+ firstReport.getNick() + "】确认成功");
 		}
-		String user_id = report.getUser_id();
-		String site_id = report.getSite_id();
-		// 新淘网字段
-		report.setNick(m.getInfo().getUsername());// 当前购买会员
-		report.setAdNick(m.getParentUserName());// 购买人的上级推广人
-		report.setOuter_code("xtfl" + m.getId());// 外部推广标识
-		this.update(report);// 更新交易记录
-		// 生成购买人的返利记录
-		DecimalFormat df = new DecimalFormat("#0.##");
-		df.setMaximumFractionDigits(2);
-		df.setGroupingSize(0);
-		df.setRoundingMode(RoundingMode.FLOOR);
+		String user_id = firstReport.getUser_id();
+		String site_id = firstReport.getSite_id();
+		for (T_TaobaokeReportMember report : reports) {
+			// 新淘网字段
+			report.setNick(m.getInfo().getUsername());// 当前购买会员
+			report.setAdNick(m.getParentUserName());// 购买人的上级推广人
+			report.setOuter_code("xtfl" + m.getId());// 外部推广标识
+			this.update(report);// 更新交易记录
+			// 生成购买人的返利记录
+			DecimalFormat df = new DecimalFormat("#0.##");
+			df.setMaximumFractionDigits(2);
+			df.setGroupingSize(0);
+			df.setRoundingMode(RoundingMode.FLOOR);
 
-		BuyFanliTrade buyTrade = new BuyFanliTrade();
-		buyTrade.setFlMember(m);
-		buyTrade.setReport(report);
-		buyTrade.setSite_id(site_id);
-		buyTrade.setUser_id(user_id);
-		buyTrade.setStatus(0);
-		Integer commissionRate = m.getCommissionRate();
-		SiteCommission sc = null;
-		if (commissionRate == null) {// 如果没有设置返利比例，则取当前站点的返利比例
-			sc = this.get(SiteCommission.class, site_id);
-			commissionRate = sc.getCommissionRate();
-		}
-		Double dc = Double.valueOf(report.getCommission());// 双精度佣金
-		String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
-		buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
-		report.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
-		buyTrade.setStatusDate(new Date());
-		this.save(buyTrade);
-		if (m.getParentId() != null) {// 如果存在父推广人
-			Member parentM = this.get(Member.class, m.getParentId());
-			if (parentM != null && parentM.getUser_id().equals(user_id)
-					&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,且推广比例大于0,则生成推广人的返利记录
-				Integer adCommissionRate = parentM.getAdCommissionRate();
-				if (adCommissionRate == null) {// 如果没有设置推广返利比例，则取当前站点的推广返利比例
-					if (sc == null)
-						sc = this.get(SiteCommission.class, site_id);
-					adCommissionRate = sc.getAdCommissionRate();
-				}
-				if (adCommissionRate > 0) {
-					AdsFanliTrade trade = new AdsFanliTrade();
-					trade.setFlMember(parentM);
-					trade.setReport(report);
-					trade.setSite_id(site_id);
-					trade.setUser_id(user_id);
-					trade.setStatus(0);
+			BuyFanliTrade buyTrade = new BuyFanliTrade();
+			buyTrade.setFlMember(m);
+			buyTrade.setReport(report);
+			buyTrade.setSite_id(site_id);
+			buyTrade.setUser_id(user_id);
+			buyTrade.setStatus(0);
+			Integer commissionRate = m.getCommissionRate();
+			SiteCommission sc = null;
+			if (commissionRate == null) {// 如果没有设置返利比例，则取当前站点的返利比例
+				sc = this.get(SiteCommission.class, site_id);
+				commissionRate = sc.getCommissionRate();
+			}
+			Double dc = Double.valueOf(report.getCommission());// 双精度佣金
+			String re = df.format(dc * commissionRate / 100);// 计算最终返利并字符串化
+			buyTrade.setCommission(convertCommission(re));// 只保留小数点后两位
+			report.setBuyCommission(buyTrade.getCommission());// 设置交易记录的购买返利
+			buyTrade.setStatusDate(new Date());
+			this.save(buyTrade);
+			if (m.getParentId() != null) {// 如果存在父推广人
+				Member parentM = this.get(Member.class, m.getParentId());
+				if (parentM != null && parentM.getUser_id().equals(user_id)
+						&& parentM.getSite_id().equals(site_id)) {// 如果父推广人存在并且是该站点会员,且推广比例大于0,则生成推广人的返利记录
+					Integer adCommissionRate = parentM.getAdCommissionRate();
+					if (adCommissionRate == null) {// 如果没有设置推广返利比例，则取当前站点的推广返利比例
+						if (sc == null)
+							sc = this.get(SiteCommission.class, site_id);
+						adCommissionRate = sc.getAdCommissionRate();
+					}
+					if (adCommissionRate > 0) {
+						AdsFanliTrade trade = new AdsFanliTrade();
+						trade.setFlMember(parentM);
+						trade.setReport(report);
+						trade.setSite_id(site_id);
+						trade.setUser_id(user_id);
+						trade.setStatus(0);
 
-					re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
-					trade.setCommission(convertCommission(re));// 只保留小数点后两位
-					report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
-					trade.setStatusDate(new Date());
-					this.save(trade);
+						re = df.format(dc * adCommissionRate / 100);// 计算最终返利并字符串化
+						trade.setCommission(convertCommission(re));// 只保留小数点后两位
+						report.setAdsCommission(trade.getCommission());// 设置交易记录的推广返利
+						trade.setStatusDate(new Date());
+						this.save(trade);
+					}
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -339,10 +347,11 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 	@Override
 	public Boolean mergeReportTrade(String userId, String siteId,
 			TaobaokeReportMember member) {
-		T_TaobaokeReportMember report = this.get(T_TaobaokeReportMember.class,
-				member.getTradeId());
-		if (report == null) {
-			report = new T_TaobaokeReportMember();
+		List<T_TaobaokeReportMember> olds = this.findAllByCriterion(
+				T_TaobaokeReportMember.class,
+				R.eq("trade_id", member.getTradeId()));
+		if (olds == null || olds.size() == 0) {
+			T_TaobaokeReportMember report = new T_TaobaokeReportMember();
 			// 淘宝字段
 			report.setApp_key(member.getAppKey());
 			report.setCategory_id(member.getCategoryId());
@@ -358,6 +367,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 			report.setSeller_nick(member.getSellerNick());
 			report.setShop_title(member.getShopTitle());
 			report.setTrade_id(member.getTradeId());
+			report.setMini_trade_id(WindSiteRestUtil.getMiniTradeId(member
+					.getTradeId()));
 			// 新淘网字段
 			report.setUser_id(userId);
 			report.setSite_id(siteId);
@@ -373,15 +384,16 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 		Member m = this.get(Member.class, member_id);
 		if (m != null && m.getUser_id().equals(user_id)
 				&& m.getSite_id().equals(site_id)) {// 如果购买人存在，并且是该站点的会员
-			T_TaobaokeReportMember report = this.get(
-					T_TaobaokeReportMember.class, member.getTradeId());
-			if (report == null) {
+			List<T_TaobaokeReportMember> olds = this.findAllByCriterion(
+					T_TaobaokeReportMember.class,
+					R.eq("trade_id", member.getTradeId()));
+			if (olds == null || olds.size() == 0) {
 				DecimalFormat df = new DecimalFormat("#0.##");
 				df.setMaximumFractionDigits(2);
 				df.setGroupingSize(0);
 				df.setRoundingMode(RoundingMode.FLOOR);
 
-				report = new T_TaobaokeReportMember();
+				T_TaobaokeReportMember report = new T_TaobaokeReportMember();
 				// 淘宝字段
 				report.setApp_key(member.getAppKey());
 				report.setCategory_id(member.getCategoryId());
@@ -397,6 +409,8 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 				report.setSeller_nick(member.getSellerNick());
 				report.setShop_title(member.getShopTitle());
 				report.setTrade_id(member.getTradeId());
+				report.setMini_trade_id(WindSiteRestUtil.getMiniTradeId(member
+						.getTradeId()));
 				// 新淘网字段
 				report.setNick(m.getInfo().getUsername());// 当前购买会员
 				report.setAdNick(m.getParentUserName());// 购买人的上级推广人

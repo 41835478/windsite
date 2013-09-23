@@ -1,6 +1,7 @@
 package com.wind.site.rest;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.R;
 import org.hibernate.criterion.SimpleExpression;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,8 +71,10 @@ public class FanliMemberRest {
 		Member member = fanliService.get(Member.class, EnvManager.getMember()
 				.getId());
 		result.put("member", member);
-		result.put("siteCommission", fanliService.get(SiteCommission.class,
-				String.valueOf(result.get("sid"))));
+		result.put(
+				"siteCommission",
+				fanliService.get(SiteCommission.class,
+						String.valueOf(result.get("sid"))));
 		return new ModelAndView("site/member/fanli/front/profile", result);
 	}
 
@@ -137,29 +141,41 @@ public class FanliMemberRest {
 		}
 		Page<T_TaobaokeReportMember> page = new Page<T_TaobaokeReportMember>(
 				pageNo, 30);
+		String tradeId = request.getParameter("tradeId");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		Criterion dateFilter = null;
-		if (StringUtils.isNotEmpty(startDate)
-				&& StringUtils.isNotEmpty(endDate)) {
-			String[] p = new String[] { DateUtils.YYYY_MM_DD };
-			try {
 
-				Calendar end = Calendar.getInstance();
-				end.setTime(DateUtils.parseDate(endDate, p));
-				end.add(Calendar.DATE, 1);
-				dateFilter = R.between("pay_time", DateUtils.parseDate(
-						startDate, p), end.getTime());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
 		Member member = EnvManager.getMember();
-		List<T_TaobaokeReportMember> reports = fanliService
-				.findAllByCriterionAndOrder(page, T_TaobaokeReportMember.class,
-						Order.desc("pay_time"), dateFilter, R.eq("user_id",
-								member.getUser_id()), R.eq("site_id", member
-								.getSite_id()), R.isNull("nick"));
+		List<T_TaobaokeReportMember> reports = new ArrayList<T_TaobaokeReportMember>();
+		if (!StringUtils.isNotEmpty(tradeId) && StringUtils.isNumeric(tradeId)) {// 根据订单编号查询
+			reports = fanliService.findAllByCriterionAndOrder(page,
+					T_TaobaokeReportMember.class, Order.desc("pay_time"), R.eq(
+							"mini_trade_id", WindSiteRestUtil
+									.getMiniTradeId(Long.valueOf(tradeId))), R
+							.eq("user_id", member.getUser_id()), R.eq(
+							"site_id", member.getSite_id()), R.isNull("nick"));
+		} else {// 时间段查询
+			Criterion dateFilter = null;
+			if (StringUtils.isNotEmpty(startDate)
+					&& StringUtils.isNotEmpty(endDate)) {
+				String[] p = new String[] { DateUtils.YYYY_MM_DD };
+				try {
+
+					Calendar end = Calendar.getInstance();
+					end.setTime(DateUtils.parseDate(endDate, p));
+					end.add(Calendar.DATE, 1);
+					dateFilter = R.between("pay_time",
+							DateUtils.parseDate(startDate, p), end.getTime());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			reports = fanliService.findAllByCriterionAndOrder(page,
+					T_TaobaokeReportMember.class, Order.desc("pay_time"),
+					dateFilter, R.eq("user_id", member.getUser_id()),
+					R.eq("site_id", member.getSite_id()), R.isNull("nick"));
+		}
+
 		result.put("reports", reports);
 		result.put("page", page);
 		result.put("startDate", startDate);
@@ -199,8 +215,8 @@ public class FanliMemberRest {
 				Calendar end = Calendar.getInstance();
 				end.setTime(DateUtils.parseDate(endDate, p));
 				end.add(Calendar.DATE, 1);
-				dateFilter = R.between("orderTime", startDate, DateUtils
-						.format(end.getTime(), DateUtils.YYYY_MM_DD));
+				dateFilter = R.between("orderTime", startDate,
+						DateUtils.format(end.getTime(), DateUtils.YYYY_MM_DD));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -208,8 +224,8 @@ public class FanliMemberRest {
 		Member member = EnvManager.getMember();
 		List<YiqifaReport> reports = fanliService.findAllByCriterionAndOrder(
 				page, YiqifaReport.class, Order.desc("orderTime"), dateFilter,
-				R.eq("user_id", member.getUser_id()), R.eq("site_id", member
-						.getSite_id()), R.isNull("nick"));
+				R.eq("user_id", member.getUser_id()),
+				R.eq("site_id", member.getSite_id()), R.isNull("nick"));
 		result.put("reports", reports);
 		result.put("page", page);
 		result.put("startDate", startDate);
@@ -312,8 +328,10 @@ public class FanliMemberRest {
 		Member member = fanliService.get(Member.class, EnvManager.getMember()
 				.getId());
 		result.put("member", member);
-		result.put("siteCommission", fanliService.get(SiteCommission.class,
-				String.valueOf(result.get("sid"))));
+		result.put(
+				"siteCommission",
+				fanliService.get(SiteCommission.class,
+						String.valueOf(result.get("sid"))));
 		return new ModelAndView("site/member/fanli/front/fanliAdsManager",
 				result);
 	}
@@ -344,8 +362,8 @@ public class FanliMemberRest {
 		}
 		Page<Member> page = new Page<Member>(pageNo, 30);
 		List<Member> members = fanliService.findAllByCriterionAndOrder(page,
-				Member.class, Order.desc("created"), R.eq("parentId",
-						EnvManager.getMember().getId()), qFilter);
+				Member.class, Order.desc("created"),
+				R.eq("parentId", EnvManager.getMember().getId()), qFilter);
 		result.put("members", members);
 		result.put("q", q);
 		result.put("page", page);
@@ -607,16 +625,7 @@ public class FanliMemberRest {
 	@ResponseBody
 	public String reportConfirm(@PathVariable Long id,
 			HttpServletRequest request) {
-		T_TaobaokeReportMember report = fanliService.get(
-				T_TaobaokeReportMember.class, id);
-		if (report == null) {
-			SystemException.handleMessageException("当前指定订单不存在");
-		}
 		Member member = EnvManager.getMember();
-		if (!(report.getUser_id().equals(member.getUser_id()) && report
-				.getSite_id().equals(member.getSite_id()))) {
-			SystemException.handleMessageException("您无权确认当前订单");
-		}
 		commandService.confirmReportTrade(id, member.getId());
 		return WindSiteRestUtil.SUCCESS;
 	}
@@ -670,8 +679,8 @@ public class FanliMemberRest {
 		Page<T_TaobaokeReportMember> page = new Page<T_TaobaokeReportMember>(1,
 				5);
 		result.put("reports", fanliService.findAllByCriterionAndOrder(page,
-				T_TaobaokeReportMember.class, Order.desc("pay_time"), R.eq(
-						"outer_code", "xtfl" + member.getId())));
+				T_TaobaokeReportMember.class, Order.desc("pay_time"),
+				R.eq("outer_code", "xtfl" + member.getId())));
 		return new ModelAndView(
 				"site/member/fanli/front/fanliReportSearchTaobao", result);
 	}
@@ -695,8 +704,8 @@ public class FanliMemberRest {
 		Member member = EnvManager.getMember();
 		Page<YiqifaReport> page = new Page<YiqifaReport>(1, 5);
 		result.put("reports", fanliService.findAllByCriterionAndOrder(page,
-				YiqifaReport.class, Order.desc("orderTime"), R.eq("outerCode",
-						"xtfl" + member.getId())));
+				YiqifaReport.class, Order.desc("orderTime"),
+				R.eq("outerCode", "xtfl" + member.getId())));
 		result.put("malls", EnvManager.getYiqifaMalls());
 		return new ModelAndView(
 				"site/member/fanli/front/fanliReportSearchMall", result);
@@ -747,8 +756,8 @@ public class FanliMemberRest {
 				Calendar end = Calendar.getInstance();
 				end.setTime(DateUtils.parseDate(endDate, p));
 				end.add(Calendar.DATE, 1);
-				dateFilter = R.between("pay_time", DateUtils.parseDate(
-						startDate, p), end.getTime());
+				dateFilter = R.between("pay_time",
+						DateUtils.parseDate(startDate, p), end.getTime());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -756,8 +765,8 @@ public class FanliMemberRest {
 		// 可分页，过滤订单号，时间排序
 		result.put("reports", fanliService.findAllByCriterionAndOrder(page,
 				T_TaobaokeReportMember.class, Order.desc("pay_time"),
-				tradeFilter, dateFilter, R.eq("outer_code", "xtfl"
-						+ member.getId())));
+				tradeFilter, dateFilter,
+				R.eq("outer_code", "xtfl" + member.getId())));
 		result.put("page", page);
 		result.put("tradeId", tradeId);
 		result.put("startDate", startDate);
@@ -810,8 +819,8 @@ public class FanliMemberRest {
 				Calendar end = Calendar.getInstance();
 				end.setTime(DateUtils.parseDate(endDate, p));
 				end.add(Calendar.DATE, 1);
-				dateFilter = R.between("orderTime", startDate, DateUtils
-						.format(end.getTime(), DateUtils.YYYY_MM_DD));
+				dateFilter = R.between("orderTime", startDate,
+						DateUtils.format(end.getTime(), DateUtils.YYYY_MM_DD));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -1000,8 +1009,10 @@ public class FanliMemberRest {
 	public ModelAndView tradeReport(@PathVariable Long id,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("trades", fanliService.findAllByCriterion(
-				BuyFanliTrade.class, R.eq("report.trade_id", id)));
+		result.put(
+				"trades",
+				fanliService.findAllByCriterion(BuyFanliTrade.class,
+						R.eq("report.trade_id", id)));
 		return new ModelAndView("site/member/fanli/trade", result);
 	}
 
@@ -1015,24 +1026,22 @@ public class FanliMemberRest {
 	public ModelAndView flMemberTradeCount(@PathVariable Long id,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result
-				.put("allFanli", fanliService.countFanliTradeByMemberId(id,
-						null));// 总返利金额
+		result.put("allFanli", fanliService.countFanliTradeByMemberId(id, null));// 总返利金额
 		// 等待站长支付返利记录数
-		result.put("unBuyFanli", fanliService.countFanliTradeByMemberId(id,
-				"BUY", 0));// 购买返利记录数
-		result.put("unAdsFanli", fanliService.countFanliTradeByMemberId(id,
-				"ADS", 0));// 推广返利记录数
+		result.put("unBuyFanli",
+				fanliService.countFanliTradeByMemberId(id, "BUY", 0));// 购买返利记录数
+		result.put("unAdsFanli",
+				fanliService.countFanliTradeByMemberId(id, "ADS", 0));// 推广返利记录数
 		// 等待会员确认收款（已支付）记录数
-		result.put("waitBuyFanli", fanliService.countFanliTradeByMemberId(id,
-				"BUY", 1));// 购买返利记录数
-		result.put("waitAdsFanli", fanliService.countFanliTradeByMemberId(id,
-				"ADS", 1));// 推广返利记录数
+		result.put("waitBuyFanli",
+				fanliService.countFanliTradeByMemberId(id, "BUY", 1));// 购买返利记录数
+		result.put("waitAdsFanli",
+				fanliService.countFanliTradeByMemberId(id, "ADS", 1));// 推广返利记录数
 		// 已完成记录数
-		result.put("finishBuyFanli", fanliService.countFanliTradeByMemberId(id,
-				"BUY", 2));// 购买返利记录数
-		result.put("finishAdsFanli", fanliService.countFanliTradeByMemberId(id,
-				"ADS", 2));// 推广返利记录数
+		result.put("finishBuyFanli",
+				fanliService.countFanliTradeByMemberId(id, "BUY", 2));// 购买返利记录数
+		result.put("finishAdsFanli",
+				fanliService.countFanliTradeByMemberId(id, "ADS", 2));// 推广返利记录数
 		return new ModelAndView("site/member/fanli/flmemberTradeCount", result);
 	}
 
@@ -1048,20 +1057,20 @@ public class FanliMemberRest {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("allFanli", fanliService.sumFanliMoneyByMemberId(id, null));// 总返利金额
 		// 等待站长支付返利
-		result.put("unBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 0));// 购买返利金额
-		result.put("unAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 0));// 推广返利金额
+		result.put("unBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 0));// 购买返利金额
+		result.put("unAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 0));// 推广返利金额
 		// 等待会员确认收款（已支付）
-		result.put("waitBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 1));// 购买返利金额
-		result.put("waitAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 1));// 推广返利金额
+		result.put("waitBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 1));// 购买返利金额
+		result.put("waitAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 1));// 推广返利金额
 		// 已完成
-		result.put("finishBuyFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"BUY", 2));// 购买返利金额
-		result.put("finishAdsFanli", fanliService.sumFanliMoneyByMemberId(id,
-				"ADS", 2));// 推广返利金额
+		result.put("finishBuyFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "BUY", 2));// 购买返利金额
+		result.put("finishAdsFanli",
+				fanliService.sumFanliMoneyByMemberId(id, "ADS", 2));// 推广返利金额
 		return new ModelAndView("site/member/fanli/flmemberIncome", result);
 	}
 }

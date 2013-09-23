@@ -103,6 +103,7 @@ import com.wind.site.model.CoolSite;
 import com.wind.site.model.CustomeWidget;
 import com.wind.site.model.DesignerErrorLog;
 import com.wind.site.model.DomainHistory;
+import com.wind.site.model.FanliTrade;
 import com.wind.site.model.Forum;
 import com.wind.site.model.ForumType;
 import com.wind.site.model.Huabao;
@@ -215,6 +216,52 @@ public class AdminRest {
 	public String fixedAds() {
 		this.fixedAdsCommission();
 		return WindSiteRestUtil.SUCCESS;
+	}
+
+	@RequestMapping(value = "/fixedfanli")
+	@ResponseBody
+	public String fixedFanlitrade() {
+		fixedFanlitrade(new Page<FanliTrade>(1, 1000));
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	private void fixedFanlitrade(Page<FanliTrade> page) {
+		List<FanliTrade> trades = adminService.findAllByCriterion(page,
+				FanliTrade.class, R.isNotNull("old_trade_id"),
+				R.isNull("trade_id"));
+		if (trades != null && trades.size() > 0) {
+			for (FanliTrade trade : trades) {
+				T_TaobaokeReportMember report = adminService.findByCriterion(
+						T_TaobaokeReportMember.class,
+						R.eq("trade_id", trade.getOld_trade_id()));
+				trade.setReport(report);
+				if (report != null)
+					adminService.update(trade);
+			}
+			page.setPageNo(page.getPageNo() + 1);
+			// fixedFanlitrade(page);
+		}
+	}
+
+	@RequestMapping(value = "/fixedreport")
+	@ResponseBody
+	public String fixedTaobaokeReportMember() {
+		fixedTaobaokeReportMember(new Page<T_TaobaokeReportMember>(1, 1000));
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	private void fixedTaobaokeReportMember(Page<T_TaobaokeReportMember> page) {
+		List<T_TaobaokeReportMember> reports = adminService.findAllByCriterion(
+				page, T_TaobaokeReportMember.class, R.isNull("mini_trade_id"));
+		if (reports != null && reports.size() > 0) {
+			for (T_TaobaokeReportMember report : reports) {
+				report.setMini_trade_id(WindSiteRestUtil.getMiniTradeId(report
+						.getTrade_id()));
+				adminService.update(report);
+			}
+			page.setPageNo(page.getPageNo() + 1);
+			fixedTaobaokeReportMember(page);
+		}
 	}
 
 	public void fixedAdsCommission() {

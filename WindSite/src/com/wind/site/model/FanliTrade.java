@@ -41,6 +41,8 @@ public class FanliTrade implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "trade_id", referencedColumnName = "id")
 	private T_TaobaokeReportMember report;
+
+	private Long old_trade_id;
 	/**
 	 * 亿起发详细报表
 	 */
@@ -92,6 +94,14 @@ public class FanliTrade implements Serializable {
 	 */
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getOld_trade_id() {
+		return old_trade_id;
+	}
+
+	public void setOld_trade_id(Long old_trade_id) {
+		this.old_trade_id = old_trade_id;
 	}
 
 	/**

@@ -14,10 +14,16 @@
 						<ol class="step step-four"><li><span>1.登录返利网站</span></li><li><span>2.淘宝网交易</span></li><li class="current"><span>3.确认收货</span></li><li class="last"><span>返利</span></li></ol>
 						<table>
 						<tr><td colspan=3><strong style="color:#AB4400;font-size:14px;">等待找回并确认的交易记录</strong></td></tr>
-							<tr>
-							<td>查询时间：</td><td><input type="text" name="startDate" id="startDate" value="${startDate}" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" name="endDate" id="endDate" value="${endDate}"/></td>
+						<tr>
+							<td>输入订单编号：</td>
+							<td style="padding:8px;"><input type="text" style="width:400px;height: 18px;padding: 4px;" id="searchOrderByTradeIdInput">&nbsp;<span class="btn btn-ok" id="searchOrderByTradeIdButton"><input type="button" value="查询"></span></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>查询时间：</td>
+							<td><input type="text" name="startDate" id="startDate" value="${startDate}" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" name="endDate" id="endDate" value="${endDate}"/></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-ok" id="searchOrderButton"><input type="button" value="查询"></span></td>
-							</tr>
+						</tr>
 						</table>
 						<TABLE class="wTable" border="0" cellspacing="1" cellpadding="1">
 							<THEAD><TR><TH width=120px>淘宝交易号</TH><TH width=300px>商品名称</TH><TH width=60px>单价</TH><TH width=40px>数量</TH><TH width=120px>交易时间</TH><TH>操作</TH></TR></THEAD>

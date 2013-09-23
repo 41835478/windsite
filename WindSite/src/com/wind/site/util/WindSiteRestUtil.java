@@ -86,6 +86,24 @@ public class WindSiteRestUtil {
 		return message;
 	}
 
+	public static Long getMiniTradeId(Long tradeId) {
+		Long miniTradeId = tradeId;
+		String tradeIdStr = String.valueOf(tradeId);
+		Integer length = tradeIdStr.length();
+		String miniTradeIdStr = tradeIdStr;
+		if (length >= 8) {
+			miniTradeIdStr = tradeIdStr.substring(0, 8)
+					+ tradeIdStr.substring(length - 4);
+		} else if (length >= 4) {
+			miniTradeIdStr = tradeIdStr.substring(0, length)
+					+ tradeIdStr.substring(length - 4);
+		} else {
+			miniTradeIdStr = tradeIdStr.substring(0) + tradeIdStr.substring(0);
+		}
+		miniTradeId = Long.valueOf(miniTradeIdStr);
+		return miniTradeId;
+	}
+
 	public static void synPid(IBaseService service) {
 		_synPid(service, new Page<User>(1, 1000));
 	}
@@ -747,7 +765,7 @@ public class WindSiteRestUtil {
 			try {
 				myServer = InetAddress.getByName(url);
 
-				if ("199.119.138.50".equals(myServer.getHostAddress())) {// 仍指向
+				if ("106.186.28.27".equals(myServer.getHostAddress())) {// 仍指向
 				} else {// 已未指向
 					count++;
 					if (isUpdate) {
@@ -837,6 +855,15 @@ public class WindSiteRestUtil {
 	}
 
 	public static void main(String[] args) {
-		WindSiteRestUtil.checkWWW(null, false);
+		System.out.println("215880265274241="
+				+ WindSiteRestUtil.getMiniTradeId(215880265274241L));
+		System.out.println("1966978999="
+				+ WindSiteRestUtil.getMiniTradeId(1966978999L));
+		System.out.println("19669789="
+				+ WindSiteRestUtil.getMiniTradeId(19669789L));
+		System.out.println("1966978="
+				+ WindSiteRestUtil.getMiniTradeId(1966978L));
+		System.out.println("1966=" + WindSiteRestUtil.getMiniTradeId(1966L));
+		System.out.println("19=" + WindSiteRestUtil.getMiniTradeId(19L));
 	}
 }

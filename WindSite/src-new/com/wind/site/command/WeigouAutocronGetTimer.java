@@ -130,9 +130,11 @@ public class WeigouAutocronGetTimer {
 												+ i);
 									}
 									Integer share = cronMap.get("share");
-									for (int i = 400; i < (400 + share); i++) {// 400-500之间为影视
-										autoCrons.add("weigou_" + userId + "_"
-												+ i);
+									if (share != null) {
+										for (int i = 400; i < (400 + share); i++) {// 400-500之间为影视
+											autoCrons.add("weigou_" + userId
+													+ "_" + i);
+										}
 									}
 								} else {// 免费版
 									// 两个笑话

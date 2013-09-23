@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,11 +19,15 @@ import javax.persistence.Table;
 @Table(name = "t_fanli_report")
 public class T_TaobaokeReportMember implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	/**
 	 * 淘宝交易号
 	 **/
 	@Id
 	private Long trade_id;
+	private Long mini_trade_id;
 	/**
 	 * 应用授权码
 	 **/
@@ -99,6 +105,14 @@ public class T_TaobaokeReportMember implements Serializable {
 	 */
 	private String user_id;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	/**
 	 * @return the trade_id
 	 */
@@ -112,6 +126,14 @@ public class T_TaobaokeReportMember implements Serializable {
 	 */
 	public void setTrade_id(Long tradeId) {
 		trade_id = tradeId;
+	}
+
+	public Long getMini_trade_id() {
+		return mini_trade_id;
+	}
+
+	public void setMini_trade_id(Long mini_trade_id) {
+		this.mini_trade_id = mini_trade_id;
 	}
 
 	/**

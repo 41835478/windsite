@@ -496,6 +496,21 @@ function initFanliSiteOrderTaobao() {
 			}).click(function() {
 				searchFanliSiteOrderTaobao();
 			});
+	$('#searchOrderByTradeIdButton').hover(function() {
+				$(this).removeClass('btn-ok-hover').addClass('btn-ok-hover');
+			}, function() {
+				$(this).removeClass('btn-ok-hover');
+			}).click(function() {
+				if (!$('#searchOrderByTradeIdInput').val()) {
+					alert('请输入您的订单编号');
+					return false;
+				}
+				if (!/^\d{4,20}$/.test($('#searchOrderByTradeIdInput').val())) {
+					alert('订单编号格式不正确');
+					return false;
+				}
+				searchFanliSiteOrderTaobao();
+			});
 	searchFanliSiteOrderTaobao();
 }
 /**
@@ -504,7 +519,8 @@ function initFanliSiteOrderTaobao() {
 function searchFanliSiteOrderTaobao() {
 	var start = $('#startDate').val();
 	var end = $('#endDate').val();
-	getFanliSiteOrderSearchHtmlTaobao(start, end, 1);
+	var tradeId = $('#searchOrderByTradeIdInput').val();
+	getFanliSiteOrderSearchHtmlTaobao(tradeId, start, end, 1);
 }
 /**
  * 找回淘宝订单搜索结果返回
@@ -516,7 +532,7 @@ function searchFanliSiteOrderTaobao() {
  * @param {}
  *            pageNo
  */
-function getFanliSiteOrderSearchHtmlTaobao(start, end, pageNo) {
+function getFanliSiteOrderSearchHtmlTaobao(tradeId, start, end, pageNo) {
 	$("#orderTaobaoSearchResult").empty();
 	$("#orderTaobaoSearchResult")
 			.append("<tr><td colspan=7>正在加载数据,请稍候...</td></tr>");
@@ -524,6 +540,7 @@ function getFanliSiteOrderSearchHtmlTaobao(start, end, pageNo) {
 				url : '/router/fanlimember/order/search/tao?v=' + Math.random(),
 				type : 'POST',
 				data : {
+					tradeId : tradeId,
 					startDate : start,
 					endDate : end,
 					pageNo : pageNo
@@ -540,14 +557,14 @@ function getFanliSiteOrderSearchHtmlTaobao(start, end, pageNo) {
 				success : function(data) {
 					$('#orderTaobaoSearchResult').empty().append(data);
 					$('.page-number').click(function() {
-						getFanliSiteOrderSearchHtmlTaobao(start, end, $('a',
-										$(this)).text());
+						getFanliSiteOrderSearchHtmlTaobao(tradeId, start, end,
+								$('a', $(this)).text());
 						return false;
 					});
 					$('.pgNext').click(function() {
 						if (!$(this).hasClass('pgEmpty')) {
-							getFanliSiteOrderSearchHtmlTaobao(start, end,
-									$(this).attr('page'));
+							getFanliSiteOrderSearchHtmlTaobao(tradeId, start,
+									end, $(this).attr('page'));
 						}
 						return false;
 					});

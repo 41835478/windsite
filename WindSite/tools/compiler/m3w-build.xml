@@ -1,0 +1,28 @@
+<project basedir="." default="compile">
+	<property file="m3w-build.properties" />
+	<target name="compile" depends="clean,compile.js">
+	</target>
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<!--清理-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${output}" includes="m3w_mobilize.min.js" />
+		</delete>
+	</target>
+	<target name="compile.js">
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/m3w_mobilize.min.js">
+			<!--<sources dir="${plugin}/scripts">
+				<file name="m3w.widget.js" />
+			</sources>-->
+			<sources dir="${output}">
+				<file name="m3w_mobilize.js" />
+			</sources>
+		</jscomp>
+	</target>
+	<path id="yuiClasspath">
+		<fileset dir="lib">
+			<include name="yuicompressor-2.4.2.jar" />
+			<include name="YUIAnt.jar" />
+		</fileset>
+	</path>
+</project>

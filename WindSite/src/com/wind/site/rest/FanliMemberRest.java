@@ -147,13 +147,14 @@ public class FanliMemberRest {
 
 		Member member = EnvManager.getMember();
 		List<T_TaobaokeReportMember> reports = new ArrayList<T_TaobaokeReportMember>();
-		if (!StringUtils.isNotEmpty(tradeId) && StringUtils.isNumeric(tradeId)) {// 根据订单编号查询
+
+		if (StringUtils.isNotEmpty(tradeId) && StringUtils.isNumeric(tradeId)) {// 根据订单编号查询
 			reports = fanliService.findAllByCriterionAndOrder(page,
 					T_TaobaokeReportMember.class, Order.desc("pay_time"), R.eq(
+							"user_id", member.getUser_id()), R.eq("site_id",
+							member.getSite_id()), R.isNull("nick"), R.eq(
 							"mini_trade_id", WindSiteRestUtil
-									.getMiniTradeId(Long.valueOf(tradeId))), R
-							.eq("user_id", member.getUser_id()), R.eq(
-							"site_id", member.getSite_id()), R.isNull("nick"));
+									.getMiniTradeId(Long.valueOf(tradeId))));
 		} else {// 时间段查询
 			Criterion dateFilter = null;
 			if (StringUtils.isNotEmpty(startDate)
@@ -1012,7 +1013,7 @@ public class FanliMemberRest {
 		result.put(
 				"trades",
 				fanliService.findAllByCriterion(BuyFanliTrade.class,
-						R.eq("report.trade_id", id)));
+						R.eq("report.id", id)));
 		return new ModelAndView("site/member/fanli/trade", result);
 	}
 

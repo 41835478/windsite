@@ -864,7 +864,7 @@ public class MemberFanliRest {
 		result.put(
 				"trades",
 				memberService.findAllByCriterion(FanliTrade.class,
-						R.eq("report.trade_id", id)));
+						R.eq("report.id", id)));
 		return new ModelAndView("site/member/fanli/trade", result);
 	}
 

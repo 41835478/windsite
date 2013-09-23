@@ -221,25 +221,34 @@ public class AdminRest {
 	@RequestMapping(value = "/fixedfanli")
 	@ResponseBody
 	public String fixedFanlitrade() {
-		fixedFanlitrade(new Page<FanliTrade>(1, 1000));
+		fixedFanlitrade(new Page<FanliTrade>(1, 1000), "ASC");
 		return WindSiteRestUtil.SUCCESS;
 	}
 
-	private void fixedFanlitrade(Page<FanliTrade> page) {
-		List<FanliTrade> trades = adminService.findAllByCriterion(page,
-				FanliTrade.class, R.isNotNull("old_trade_id"),
-				R.isNull("trade_id"));
+	@RequestMapping(value = "/fixedfanlidesc")
+	@ResponseBody
+	public String fixedFanlitradeDesc() {
+		fixedFanlitrade(new Page<FanliTrade>(1, 1000), "DESC");
+		return WindSiteRestUtil.SUCCESS;
+	}
+
+	private void fixedFanlitrade(Page<FanliTrade> page, String orderby) {
+		List<FanliTrade> trades = adminService.findByHql(page,
+				"From FanliTrade Where old_trade_id is not null order by old_trade_id "
+						+ orderby, new HashMap<String, Object>());
 		if (trades != null && trades.size() > 0) {
 			for (FanliTrade trade : trades) {
 				T_TaobaokeReportMember report = adminService.findByCriterion(
 						T_TaobaokeReportMember.class,
 						R.eq("trade_id", trade.getOld_trade_id()));
 				trade.setReport(report);
-				if (report != null)
+				if (report != null) {
+					trade.setOld_trade_id(null);
 					adminService.update(trade);
+				}
 			}
 			page.setPageNo(page.getPageNo() + 1);
-			// fixedFanlitrade(page);
+			fixedFanlitrade(page, orderby);
 		}
 	}
 

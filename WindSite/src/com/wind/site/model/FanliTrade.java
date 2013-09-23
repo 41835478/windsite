@@ -39,7 +39,7 @@ public class FanliTrade implements Serializable {
 	 * 淘宝详细报表
 	 */
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "trade_id")
+	@JoinColumn(name = "trade_id", referencedColumnName = "id")
 	private T_TaobaokeReportMember report;
 	/**
 	 * 亿起发详细报表

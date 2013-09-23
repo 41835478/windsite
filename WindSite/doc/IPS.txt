@@ -16,6 +16,8 @@ netstat -nat|grep 223.4.86.100:80|awk '{print $5}' |awk -F: '{print $1}' | sort|
 /etc/rc.d/init.d/iptables start 
 
 iptables-save >/etc/sysconfig/iptables
+iptables-restore < /etc/sysconfig/iptables
+iptales -F //清空内存规则，类似stop
 //包长封
 iptables -A INPUT -p icmp --icmp-type 8 -m length --length 403 -j ACCEPT
 iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
@@ -34,8 +36,9 @@ iptables -A INPUT -i eth1 -m length --length 403 -j ACCEPT
 chinaz工具的IP地址
 125.90.88.96
 125.90.93.141
+iptables -I INPUT -s 101.26.126.130 -j DROP
 
-
+iptables -I INPUT -s 123.151.39.37 -j DROP
 iptables -I INPUT -s 101.226.5.0/24 -j DROP
 iptables -I INPUT -s 61.135.189.0/24 -j DROP
 iptables -I INPUT -s 125.115.49.96 -j DROP

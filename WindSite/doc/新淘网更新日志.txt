@@ -73,20 +73,35 @@ rsync -avzuP /old/usr/local/apache2/htdocs/weibo21/var/cache_xt/cache_tv /usr/lo
 
 sudo kill -9 `ps -ef|grep httpd|grep -v grep|awk '{print $2}'`
 
+/usr/bin/rsync -avzuP  root@199.119.138.67:/opt/mysql-5.1.62.tar /opt/
+/usr/bin/rsync -avzuP  root@199.119.138.67:/opt/mysqldata /opt/
+/usr/bin/rsync -avzuP  root@199.119.138.67:/usr/local/apache2/htdocs/iweibo /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.67:/usr/local/apache2/htdocs/mysql /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.67:/usr/local/apache2/htdocs/piwik /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.67:/usr/local/apache2/htdocs/weibo21 /usr/local/apache2/htdocs
 
-/usr/bin/rsync -avzuP  root@203.124.13.74:/opt/jdk-6u26-linux-x64.bin /opt
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/discuz72 /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/discuzx15 /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/uchome2 /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/help /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hitem /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hposter /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
-/usr/bin/rsync -avzuP  root@203.124.13.74:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
-/usr/bin/rsync -avzuP  root@203.124.13.74:/opt/mysqldata /opt/
+
+/usr/bin/rsync -avzuP  root@199.119.138.50:/opt/jdk-6u26-linux-x64.bin /opt
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/zone /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/assets /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/discuz72 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/discuzx15 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/uchome2 /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/help /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/hitem /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/hposter /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/hshop /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/htdocs/weibo /usr/local/apache2/htdocs
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/tomcat/webapps/ROOT/WEB-INF /usr/local/tomcat/webapps/ROOT
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/tomcat/conf /usr/local/tomcat/
+
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/domain.txt /usr/local/apache2/
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/fanli.txt /usr/local/apache2/
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/seconddomain.txt /usr/local/apache2/
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/unvalid.txt /usr/local/apache2/
+/usr/bin/rsync -avzuP  root@199.119.138.50:/usr/local/apache2/weibo.txt /usr/local/apache2/
+/usr/bin/rsync -avzuP  root@199.119.138.50:/opt/mysqldata /opt/
 #apache apr
 wget http://apache.etoak.com//apr/apr-1.4.6.tar.gz
 gzip -d apr-1.4.6.tar.gz
@@ -115,7 +130,7 @@ lynx http://httpd.apache.org/download.cgi
 gzip -d httpd-NN.tar.gz
 tar xvf httpd-NN.tar
 cd httpd-NN
-./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so --with-included-apr
+./configure --prefix=/usr/local/apache2 --enable-rewrite --enable-so --with-included-apr  --with-pcre=/usr/local/pcre
 #--with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre
 make
 make install
@@ -141,21 +156,21 @@ yum -y install gmp-devel
 yum -y install bzip2-devel
 
 #http_proxy
-cd /opt/httpd-2.2.22/modules/proxy
+cd /opt/httpd-2.2.25/modules/proxy
 /usr/local/apache2/bin/apxs -c -i mod_proxy.c proxy_util.c
 /usr/local/apache2/bin/apxs -c -i mod_proxy_balancer.c
 /usr/local/apache2/bin/apxs -c -i mod_proxy_http.c
-cd /opt/httpd-2.2.22/modules/metadata/
+cd /opt/httpd-2.2.25/modules/metadata/
 /usr/local/apache2/bin/apxs -c -i -a mod_expires.c
 /usr/local/apache2/bin/apxs -c -i -a mod_headers.c
-cd /opt/httpd-2.2.22/modules/filters/
+cd /opt/httpd-2.2.25/modules/filters/
 /usr/local/apache2/bin/apxs -i -c -a mod_deflate.c
 #java
 cp jdk-6u26-linux-x64.bin /usr/local/
 chmod +x jdk-6u26-linux-x64.bin
 ./jdk-6u26-linux-x64.bin
 /etc/profile
-export PATH=$PATH:/usr/local/mysql/bin
+export PATH=/usr/local/mysql/bin:$PATH
 export JAVA_HOME=/usr/local/jdk1.6.0_26
 export PATH=$JAVA_HOME/bin:$PATH
 source /etc/profile
@@ -217,7 +232,7 @@ wget http://cn2.php.net/get/php-5.4.0.tar.gz/from/this/mirror
 gzip -d php-5.4.0.tar.gz
 tar xvf php-5.4.0.tar
 cd php-5.4.0
-'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs' '--enable-force-cgi-redirect' '--enable-magic-quotes' '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql' '--enable-sqlite-utf8' '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf' '--with-ttf' '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib' 
+'./configure' '--prefix=/usr/local/php5' '--with-apxs2=/usr/local/apache2/bin/apxs'  '--with-mysql=/usr/local/mysql' '--with-mysqli=/usr/local/mysql/bin/mysql_config' '--with-pdo-mysql=/usr/local/mysql'  '--enable-calendar' '--enable-exif' '--enable-ftp' '--with-iconv' '--with-gd' '--enable-cgi' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-zlib-dir=/usr' '--with-freetype-dir=/usr' '--enable-gd-native-ttf'  '--enable-mbstring' '--enable-bcmath' '--with-curl' '--with-openssl' '--enable-soap' '--enable-zip' '--with-config-file-path=/usr/local/php5/lib' 
 #'--with-mcrypt=/usr/local/libmcrypt'
 
 #同步
@@ -251,7 +266,9 @@ rsync -avzuP -e "ssh -i /opt/xintao-ap-tokyo.pem" root@54.248.105.30:/mnt/ebs/op
 导入：
 gzip sql.gz
 mysql -uroot -p --default-character-set=utf8 uchome
-mysql -uroot -p --default-character-set=utf8 uchome
+mysql -uroot -p --default-character-set=utf8 discuz
+mysql -uroot -p --default-character-set=utf8 windsite
+mysql -uroot -p --default-character-set=utf8 xwb
 
 rsync
 http://www.jb51.net/article/19668.htm
@@ -485,7 +502,7 @@ netstat -nat|grep 80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort
 netstat -nat|grep 175.41.19.18:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 netstat -nat|grep 223.4.86.100:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 netstat -nat|grep 222.35.137.84:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
-netstat -nat|grep 203.124.13.74:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
+netstat -nat|grep 199.119.138.50:80|awk '{print $5}' |awk -F: '{print $1}' | sort| uniq -c|sort -n
 ps -ef | grep httpd | wc -l
 硬盘空间：
 df -lh

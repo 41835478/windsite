@@ -4,7 +4,7 @@
 		<copy todir="${SAE}/wp-content/plugins/wp-xintaoke">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
-		<zip destfile="${ZIP}/WordPress3.4.1 For SAE.zip" basedir="${SAE}" update="true" />
+		<zip destfile="${ZIP}/WordPress3.5.1 For SAE.zip" basedir="${SAE}" update="true" />
 		<copy todir="${BAE}/wp-content/plugins/wp-xintaoke">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
@@ -15,6 +15,6 @@
 		<copy todir="${WORDPRESS}/xintaoke/wp-xintaoke">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
-		<zip destfile="${ZIP}/wp-xintaoke1.0.9.zip" basedir="${WORDPRESS}/xintaoke" update="true" />
+		<zip destfile="${ZIP}/wp-xintaoke1.1.1.zip" basedir="${WORDPRESS}/xintaoke" update="true" />
 	</target>
 </project>

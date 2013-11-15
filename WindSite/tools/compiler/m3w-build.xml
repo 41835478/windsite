@@ -1,28 +1,221 @@
 <project basedir="." default="compile">
 	<property file="m3w-build.properties" />
-	<target name="compile" depends="clean,compile.js">
+	<target name="compile" depends="dest.js,dest.css,target.copy,clean">
 	</target>
+	<!-- whitespace simple advanced -->
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
 	<!--清理-->
 	<target name="clean">
 		<delete>
-			<fileset dir="${output}" includes="m3w_mobilize.min.js" />
+			<fileset dir="${dest}/js/" includes="**/*.*" />
+			<fileset dir="${dest}/css/" includes="**/*.*" />
 		</delete>
 	</target>
-	<target name="compile.js">
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${output}/m3w_mobilize.min.js">
-			<!--<sources dir="${plugin}/scripts">
-				<file name="m3w.widget.js" />
-			</sources>-->
-			<sources dir="${output}">
+	<target name="dest.js">
+		<!--m3w_mobilize.js-->
+		<copy tofile="${dest}/js/m3w_mobilize.debug.js">
+			<fileset dir="${source}/js/" includes="m3w_mobilize.js" />
+		</copy>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w_mobilize.min.js">
+			<sources dir="${source}/js/">
 				<file name="m3w_mobilize.js" />
+				<file name="m3w.filter.js" />
 			</sources>
 		</jscomp>
+		<!--dx.phonejs.debug.js,dx.phonejs.m3w.debug.js-->
+		<concat destfile="${dest}/js/m3w_mobilize.phonejs.debug.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${source}/js/" files="dx.phonejs.debug.js,dx.phonejs.m3w.debug.js" />
+		</concat>
+		<concat destfile="${dest}/js/m3w_mobilize.phonejs.min.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${source}/js/" files="dx.phonejs.min.js,dx.phonejs.m3w.min.js" />
+		</concat>
+		<!--utils-->
+		<copy tofile="${dest}/js/jquery-1.9.1.min.js">
+			<fileset dir="${source}/js/" includes="jquery-1.9.1.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/globalize.min.js">
+			<fileset dir="${source}/js/" includes="globalize.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/knockout-2.2.1.min.js">
+			<fileset dir="${source}/js/" includes="knockout-2.2.1.js" />
+		</copy>
+		<copy tofile="${dest}/js/bootstrap.min.js">
+			<fileset dir="${source}/js/" includes="bootstrap.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/bootstrap-editable.min.js">
+			<fileset dir="${source}/js/" includes="bootstrap-editable.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/jquery-ui-1.10.3.min.js">
+			<fileset dir="${source}/js/" includes="jquery-ui-1.10.3.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/jquery-ui-1.10.3.sortableanddraggable.min.js">
+			<fileset dir="${source}/js/" includes="jquery-ui-1.10.3.sortableanddraggable.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/jquery.htmlClean.min.js">
+			<fileset dir="${source}/js/" includes="jquery.htmlClean.min.js" />
+		</copy>
+		<copy tofile="${dest}/js/m3w.constant.js">
+			<fileset dir="${source}/js/" includes="m3w.constant.js" />
+		</copy>
+		<copy tofile="${dest}/js/m3w.widget.debug.js">
+			<fileset dir="${source}/js/" includes="m3w.widget.js" />
+		</copy>
+		<copy tofile="${dest}/js/m3w.filter.debug.js">
+			<fileset dir="${source}/js/" includes="m3w.filter.js" />
+		</copy>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.widget.min.js">
+			<sources dir="${source}/js/">
+				<file name="m3w.widget.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.filter.min.js">
+			<sources dir="${source}/js/">
+				<file name="m3w.filter.js" />
+			</sources>
+		</jscomp>
+		<!-- m3w mobilize all min -->
+		<concat destfile="${dest}/js/m3w_mobilize.core.mobile.min.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,knockout-2.2.1.min.js,globalize.min.js,m3w_mobilize.phonejs.min.js,m3w.widget.min.js" />
+		</concat>
+		<!-- m3w mobilize all debug-->
+		<concat destfile="${dest}/js/m3w_mobilize.core.mobile.debug.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,knockout-2.2.1.min.js,globalize.min.js,m3w_mobilize.phonejs.debug.js,m3w.widget.debug.js" />
+		</concat>
 	</target>
 	<path id="yuiClasspath">
 		<fileset dir="lib">
-			<include name="yuicompressor-2.4.2.jar" />
+			<include name="yuicompressor-2.4.7.jar" />
 			<include name="YUIAnt.jar" />
 		</fileset>
 	</path>
+	<!--此处编译太耗费时间，单独拎出来，默认不执行此步骤(因为此类css里的图片为data:image)-->
+	<!--<target name="dest.dx.css">
+		<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+			<classpath>
+				<path refid="yuiClasspath" />
+			</classpath>
+		</taskdef>
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
+			<fileset dir="${source}/css/">
+				<include name="**/*.css" />
+			</fileset>
+		</yuicompress>
+	</target>-->
+	<target name="dest.css">
+		<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+			<classpath>
+				<path refid="yuiClasspath" />
+			</classpath>
+		</taskdef>
+		<!--dx mobile css-->
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
+			<fileset dir="${source}/css/">
+				<include name="dx.m3w.default.css" />
+			</fileset>
+		</yuicompress>
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
+			<fileset dir="${source}/css/">
+				<include name="m3w.loadpanel.css" />
+			</fileset>
+		</yuicompress>
+		<copy todir="${dest}/css/">
+			<fileset dir="${source}/css/">
+				<include name="dx.common.css" />
+				<include name="dx.ios.default.css" />
+				<include name="dx.android.holo-dark.css" />
+				<include name="dx.win8.black.small.css" />
+			</fileset>
+		</copy>
+		<!--dx ios min css-->
+		<concat destfile="${dest}/css/m3w_mobilize.dx.ios.default.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/css/" files="dx.common.css,dx.ios.default.css,dx.m3w.default.css" />
+		</concat>
+		<!--dx android min css-->
+		<concat destfile="${dest}/css/m3w_mobilize.dx.android.holo-dark.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/css/" files="dx.common.css,dx.android.holo-dark.css,dx.m3w.default.css" />
+		</concat>
+		<!--dx win8 min css-->
+		<concat destfile="${dest}/css/m3w_mobilize.dx.win8.black.small.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/css/" files="dx.common.css,dx.win8.black.small.css,dx.m3w.default.css" />
+		</concat>
+		<!--dx all min css-->
+		<concat destfile="${dest}/css/m3w_mobilize.dx.mobile.all.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/css/" files="dx.common.css,dx.ios.default.css,dx.android.holo-dark.css,dx.win8.black.small.css,dx.m3w.default.css" />
+		</concat>
+		<!--delete min css-->
+		<delete>
+			<fileset dir="${dest}/css/">
+				<include name="dx.common.css" />
+				<include name="dx.ios.default.css" />
+				<include name="dx.android.holo-dark.css" />
+				<include name="dx.win8.black.small.css" />
+				<include name="dx.m3w.default.css" />
+			</fileset>
+		</delete>
+	</target>
+	<target name="target.copy">
+		<!--M3W Plugin Js-->
+		<copy todir="${plugin}/scripts/">
+			<fileset dir="${dest}/js/">
+				<include name="jquery-1.9.1.min.js" />
+				<include name="bootstrap.min.js" />
+				<include name="bootstrap-editable.min.js" />
+				<include name="jquery.htmlClean.min.js" />
+				<include name="knockout-2.2.1.min.js" />
+				<include name="globalize.min.js" />
+				<include name="jquery-ui-1.10.3.sortableanddraggable.min.js" />
+				<include name="m3w_mobilize.phonejs.debug.js" />
+				<include name="m3w_mobilize.phonejs.min.js" />
+				<include name="m3w.widget.debug.js" />
+				<include name="m3w.widget.min.js" />
+				<include name="m3w.filter.debug.js" />
+				<include name="m3w.filter.min.js" />
+				<include name="m3w.constant.js" />
+			</fileset>
+		</copy>
+		<!--M3W Plugin Css-->
+		<copy todir="${plugin}/css/">
+			<fileset dir="${dest}/css/">
+				<include name="m3w_mobilize.dx.mobile.all.min.css" />
+				<include name="m3w_mobilize.dx.ios.default.min.css" />
+			</fileset>
+		</copy>
+
+		<!--M3W Server Mobilize Js And Css-->
+		<copy todir="${cssoutput}/">
+			<fileset dir="${dest}/css/">
+				<include name="m3w.loadpanel.css" />
+			</fileset>
+		</copy>
+		<copy todir="${template}">
+			<fileset dir="${dest}/js/">
+				<include name="m3w_mobilize.debug.js" />
+				<include name="m3w_mobilize.min.js" />
+			</fileset>
+		</copy>
+		<copy todir="${jsoutput}/m3w_mobilize/">
+			<fileset dir="${dest}/js/">
+				<include name="m3w_mobilize.core.mobile.min.js" />
+				<include name="m3w_mobilize.core.mobile.debug.js" />
+			</fileset>
+		</copy>
+		<copy todir="${jsoutput}/">
+			<fileset dir="${dest}/js/">
+				<include name="m3w.filter.debug.js" />
+				<include name="m3w.filter.min.js" />
+				<include name="m3w.widget.debug.js" />
+				<include name="m3w.widget.min.js" />
+				<include name="m3w.constant.js" />
+			</fileset>
+		</copy>
+		<copy todir="${cssoutput}/m3w_mobilize/">
+			<fileset dir="${dest}/css/">
+				<include name="m3w_mobilize.dx.mobile.all.min.css" />
+				<include name="m3w_mobilize.dx.ios.default.min.css" />
+				<include name="m3w_mobilize.dx.android.holo-dark.min.css" />
+				<include name="m3w_mobilize.dx.win8.black.small.min.css" />
+				<include name="m3w.loadpanel.css" />
+			</fileset>
+		</copy>
+	</target>
 </project>

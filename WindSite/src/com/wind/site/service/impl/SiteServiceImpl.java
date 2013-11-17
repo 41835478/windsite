@@ -796,50 +796,51 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 					nick, TaobaoFetchUtil.VAS_APPSTORE);
 			Float vn = TaobaoFetchUtil.convertVersionNo(subs, user);
 			if (vn == 1f) {// 如果是普及版，则判断是否已付费
-				ArticleBizOrder order = TaobaoFetchUtil
-						.vasOrderSearchLast(nick);
-				tus.setVersionNo(vn);// 预设1f;
-				user.setAppType("0");
-				if (order != null) {
-					Float pay = Float.valueOf(order.getTotalPayFee());
-					if (pay > 0) {
-						Float versionNo = WindSiteRestUtil.getNativeUsb(this,
-								user);
-						if (versionNo > 1.6f) {// 本地升级
-							user.setAppType("0");
-							tus.setVersionNo(versionNo);
-						} else {
-							tus.setVersionNo(1.6f);// 普及版（付费）
-						}
-					}
-				}
-				if (tus.getVersionNo() == 1f) {// 如果仍是普及版（未付费用户），则查询是否订购分成版
-					Boolean isFC = false;
-					try {
-						if (StringUtils.isEmpty(user.getPid())) {
-							synPid(user);
-						}
-						if (StringUtils.isEmpty(user.getPid())) {
-							SystemException
-									.handleMessageException("用户PID错误，请联系客服支持");
-						}
-						if (null == user.getPid()) {
-							synPid(user);
-						}
-						Long pid = Long.valueOf(user.getPid()
-								.replaceAll("mm_", "").replaceAll("_0_0", ""));
-						isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-					} catch (Exception e) {
-						isFC = false;
-					}
-					if (isFC) {
-						user.setAppType("1");// 如果订购了分成版，则设置为分成
-						tus.setVersionNo(1.5f);
-					} else {
-						user.setAppType("0");
-						tus.setVersionNo(1f);
-					}
-				}
+				tus.setVersionNo(1.6f);// 普及版（付费）
+				// ArticleBizOrder order = TaobaoFetchUtil
+				// .vasOrderSearchLast(nick);
+				// tus.setVersionNo(vn);// 预设1f;
+				// user.setAppType("0");
+				// if (order != null) {
+				// Float pay = Float.valueOf(order.getTotalPayFee());
+				// if (pay > 0) {
+				// Float versionNo = WindSiteRestUtil.getNativeUsb(this,
+				// user);
+				// if (versionNo > 1.6f) {// 本地升级
+				// user.setAppType("0");
+				// tus.setVersionNo(versionNo);
+				// } else {
+				// tus.setVersionNo(1.6f);// 普及版（付费）
+				// }
+				// }
+				// }
+				// if (tus.getVersionNo() == 1f) {// 如果仍是普及版（未付费用户），则查询是否订购分成版
+				// Boolean isFC = false;
+				// try {
+				// if (StringUtils.isEmpty(user.getPid())) {
+				// synPid(user);
+				// }
+				// if (StringUtils.isEmpty(user.getPid())) {
+				// SystemException
+				// .handleMessageException("用户PID错误，请联系客服支持");
+				// }
+				// if (null == user.getPid()) {
+				// synPid(user);
+				// }
+				// Long pid = Long.valueOf(user.getPid()
+				// .replaceAll("mm_", "").replaceAll("_0_0", ""));
+				// isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+				// } catch (Exception e) {
+				// isFC = false;
+				// }
+				// if (isFC) {
+				// user.setAppType("1");// 如果订购了分成版，则设置为分成
+				// tus.setVersionNo(1.5f);
+				// } else {
+				// user.setAppType("0");
+				// tus.setVersionNo(1f);
+				// }
+				// }
 			} else if (vn > 1f) {// 如果是返利，卖家版
 				user.setAppType("0");
 				tus.setVersionNo(vn);
@@ -1009,8 +1010,8 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 
 	public User synTUser(User user, String nick) {
 		try {
-			com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
-					null, user.getUser_id(), nick);
+			// com.taobao.api.domain.User tUser = TaobaoFetchUtil.getTaobaoUser(
+			// null, user.getUser_id(), nick);
 			// user.setAlipay_account(tUser.getAlipayAccount());
 			// user.setAlipay_bind(tUser.getAlipayBind());
 			// user.setAlipay_no(tUser.getAlipayNo());
@@ -1044,7 +1045,7 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			// user.setPromoted_type(tUser.getPromotedType());
 			// user.setProp_img_num(tUser.getPropImgNum().intValue());
 			// user.setProp_img_size(tUser.getPropImgSize().intValue());
-			user.setSex(tUser.getSex());
+			// user.setSex(tUser.getSex());
 			// user.setT_created(tUser.getCreated());
 			// user.setT_last_visit(tUser.getLastVisit());
 			// user.setT_status(tUser.getStatus());

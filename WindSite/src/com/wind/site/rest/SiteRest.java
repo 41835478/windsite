@@ -1160,35 +1160,36 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
 		// 详情
-		TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-		getRequest.setNick((String) result.get("nick"));// 昵称
-		getRequest.setNumIids(nid);
-		getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-				.getItemsDetail(null, null, null, getRequest,
-						String.valueOf(result.get("pid")));
-		if (getResponse == null) {
+//		TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
+//		getRequest.setNick((String) result.get("nick"));// 昵称
+//		getRequest.setNumIids(nid);
+//		getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+//		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+//		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+//				.getItemsDetail(null, null, null, getRequest,
+//						String.valueOf(result.get("pid")));
+		Item tbItem = TaobaoFetchUtil.taobaoItemGet(null, Long.parseLong(nid));
+		if (tbItem == null) {
 			try {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
 						result, userId) + "error/item404");
 			} catch (Exception e) {
 			}
-			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
 		}
-		List<TaobaokeItemDetail> itemList = getResponse
-				.getTaobaokeItemDetails();
-		if (itemList == null || itemList.size() != 1) {
-			try {
-				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-						result, userId) + "error/item404");
-			} catch (Exception e) {
-			}
-			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
-		}
-		TaobaokeItemDetail item = itemList.get(0);// 单个商品
+//		List<TaobaokeItemDetail> itemList = getResponse
+//				.getTaobaokeItemDetails();
+//		if (itemList == null || itemList.size() != 1) {
+//			try {
+//				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+//				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+//						result, userId) + "error/item404");
+//			} catch (Exception e) {
+//			}
+//			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
+//		}
+		TaobaokeItemDetail item = TaobaoFetchUtil
+				.convertItemToTaobaokeItemDetail(tbItem);// 单个商品
 		List<TradeRate> rates = new ArrayList<TradeRate>();
 		Long totalResults = 0L;
 		// if (StringUtils.isNotEmpty(item.getItem().getNick())) {// 详情

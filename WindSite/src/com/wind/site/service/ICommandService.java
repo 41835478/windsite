@@ -1,5 +1,6 @@
 package com.wind.site.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.taobao.api.domain.TaobaokeReportMember;
@@ -76,6 +77,7 @@ public interface ICommandService extends IBaseService {
 	Boolean mergeReportTrade(String user_id, String site_id,
 			TaobaokeReportMember member);
 
+	
 	/**
 	 * 同步返利收入报表(非跟单，批量)
 	 * 
@@ -84,7 +86,7 @@ public interface ICommandService extends IBaseService {
 	 * @param member
 	 */
 	Integer mergeReportTrades(String user_id, String site_id,
-			Set<TaobaokeReportMember> members);
+			List<TaobaokeReportMember> members);
 
 	/**
 	 * 同步返利收入报表(跟单)

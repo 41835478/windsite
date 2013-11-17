@@ -24,6 +24,7 @@ import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.Item;
 import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.ItemProp;
+import com.taobao.api.domain.ItemSearch;
 import com.taobao.api.domain.Location;
 import com.taobao.api.domain.Poster;
 import com.taobao.api.domain.PosterGoodsInfo;
@@ -116,6 +117,7 @@ public class TaobaoFetchUtil {
 	public static final String VAS_APPSTORE_4 = "appstore-10911-4";// 普及版免费代码
 	public static final String VAS_APPSTORE_5 = "appstore-10911-5";// 返利版独立代码
 	public static final String VAS_APPSTORE_6 = "appstore-10911-6";// 卖家版独立代码
+	public static final String TAOBAO_ITEM = "num_iid,title,nick,pic_url,cid,price,type,delist_time,post_fee,location,score,volume";
 	public static final String TAOBAO_SHOPCAT_FIELDS = "cid,parent_cid,name,is_parent";
 	public static final String DETAIL_FIELDS = "click_url,shop_click_url,seller_credit_score,num_iid,title,nick,cid,desc,pic_url,num,list_time,delist_time,location,price,post_fee,express_fee,ems_fee,volume,second_kill,sell_promise";
 	public static final String TAOBAOKEITEM_FIELDS = "iid,title,nick,pic_url,price,click_url,commission,commission_num,commission_rate,commission_volume,num_iid,shop_click_url,seller_credit_score,item_location,volume";
@@ -914,9 +916,8 @@ public class TaobaoFetchUtil {
 	public static Item taobaoItemGet(String appType, Long numIid) {
 		try {
 			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					EnvManager.getAppKey(appType),
-					EnvManager.getSecret(appType), Constants.FORMAT_JSON,
-					TIMEOUT, TIMEOUT);
+					EnvManager.getAppKey(null), EnvManager.getSecret(null),
+					Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
 			ItemGetRequest request = new ItemGetRequest();
 			request.setFields("num_iid,title,nick,price,pic_url,location,num");
 			request.setNumIid(numIid);
@@ -928,6 +929,44 @@ public class TaobaoFetchUtil {
 			return null;
 		}
 		return null;
+	}
+
+	public static TaobaokeItemDetail convertItemToTaobaokeItemDetail(Item item) {
+		TaobaokeItemDetail detail = new TaobaokeItemDetail();
+		detail.setClickUrl(item.getDetailUrl());
+		detail.setShopClickUrl(item.getDetailUrl());
+		detail.setSellerCreditScore(item.getScore());
+		detail.setItem(item);
+		return detail;
+	}
+
+	public static List<TaobaokeItem> convertItemToTaobaokeItems(List<Item> items) {
+		List<TaobaokeItem> tbkItems = new ArrayList<TaobaokeItem>();
+		if (items != null && items.size() > 0) {
+			for (Item item : items)
+				tbkItems.add(convertItemToTaobaokeItem(item));
+		}
+		return tbkItems;
+	}
+
+	public static TaobaokeItem convertItemToTaobaokeItem(Item item) {
+		TaobaokeItem tbkItem = new TaobaokeItem();
+		tbkItem.setClickUrl(item.getDetailUrl());
+		if (item.getLocation() != null) {
+			tbkItem.setItemLocation(item.getLocation().getState() + ','
+					+ item.getLocation().getCity());
+		}
+		tbkItem.setKeywordClickUrl(item.getDetailUrl());
+		tbkItem.setNick(item.getNick());
+		tbkItem.setNumIid(item.getNumIid());
+		tbkItem.setPicUrl(item.getPicUrl());
+		tbkItem.setPrice(item.getPrice());
+		tbkItem.setSellerCreditScore(item.getScore());
+		tbkItem.setShopClickUrl(item.getDetailUrl());
+		tbkItem.setTaobaokeCatClickUrl(item.getDetailUrl());
+		tbkItem.setTitle(item.getTitle());
+		tbkItem.setVolume(item.getVolume());
+		return tbkItem;
 	}
 
 	public static List<TaobaokeItem> huabaoItemConvert(String appKey,
@@ -1071,27 +1110,66 @@ public class TaobaoFetchUtil {
 	public static TaobaokeItemsGetResponse searchItems(String appKey,
 			String appSecret, String appType, TaobaokeItemsGetRequest request,
 			String pid) {
-		try {
-			if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
-					|| "null".equals(appKey) || "null".equals(appSecret)) {
-				appKey = EnvManager.getAppKey(appType);
-				appSecret = EnvManager.getSecret(appType);
-			}
-			TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
-					appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
-			Long PID = WindSiteRestUtil.getPid(pid);
-			if (PID != null)
-				request.setPid(String.valueOf(PID));
-			TaobaokeItemsGetResponse response = client.execute(request);
-			if (response.isSuccess()) {
-				return response;
-			} else {
-				handleError(response);
-			}
-		} catch (ApiException e) {
-			SystemException.handleMessageException("淘宝请求失败,请重试:" + e);
+		ItemsSearchRequest req = new ItemsSearchRequest();
+		req.setFields(TAOBAO_ITEM);
+		req.setQ(request.getKeyword());
+		req.setCid(request.getCid());
+		req.setPageNo(request.getPageNo());
+		String startPrice = request.getStartPrice();
+		if (StringUtils.isNotBlank(startPrice)) {
+			req.setStartPrice(Long.parseLong(startPrice));
 		}
-		return null;
+		String endPrice = request.getEndPrice();
+		if (StringUtils.isNotBlank(endPrice)) {
+			req.setEndPrice(Long.parseLong(endPrice));
+		}
+		String mallItem = request.getMallItem();
+		if (StringUtils.isNotBlank(mallItem) && mallItem.equals("true")) {
+			req.setIsMall(true);
+		}
+
+		req.setPageSize(request.getPageSize());
+		ItemsSearchResponse resp = taobaoSearchItems(null, req);
+		TaobaokeItemsGetResponse response = null;
+		if (resp != null) {
+			response = new TaobaokeItemsGetResponse();
+			response.setErrorCode(resp.getErrorCode());
+			response.setMsg(resp.getMsg());
+			response.setSubCode(resp.getSubCode());
+			response.setSubMsg(resp.getSubMsg());
+			response.setTotalResults(resp.getTotalResults());
+			List<TaobaokeItem> taobaokeItems = new ArrayList<TaobaokeItem>();
+			ItemSearch search = resp.getItemSearch();
+			if (search != null) {
+				List<Item> items = search.getItems();
+				if (items != null) {
+					taobaokeItems = convertItemToTaobaokeItems(items);
+				}
+			}
+			response.setTaobaokeItems(taobaokeItems);
+		}
+		return response;
+		// try {
+		// if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)
+		// || "null".equals(appKey) || "null".equals(appSecret)) {
+		// appKey = EnvManager.getAppKey(appType);
+		// appSecret = EnvManager.getSecret(appType);
+		// }
+		// TaobaoClient client = new DefaultTaobaoClient(EnvManager.getUrl(),
+		// appKey, appSecret, Constants.FORMAT_JSON, TIMEOUT, TIMEOUT);
+		// Long PID = WindSiteRestUtil.getPid(pid);
+		// if (PID != null)
+		// request.setPid(String.valueOf(PID));
+		// TaobaokeItemsGetResponse response = client.execute(request);
+		// if (response.isSuccess()) {
+		// return response;
+		// } else {
+		// handleError(response);
+		// }
+		// } catch (ApiException e) {
+		// SystemException.handleMessageException("淘宝请求失败,请重试:" + e);
+		// }
+		// return null;
 	}
 
 	/**
@@ -1517,7 +1595,29 @@ public class TaobaoFetchUtil {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getReportTimes(new Date()));
+		TaobaokeItemsGetRequest request = new TaobaokeItemsGetRequest();
+		TaobaoClient client = new DefaultTaobaoClient(
+				"https://eco.taobao.com/rest", "12034285",
+				"2c18a03c14736c62a0b70804618f8c45", Constants.FORMAT_JSON,
+				TIMEOUT, TIMEOUT);
+		request.setFields(TAOBAOKEITEM_FIELDS);
+		request.setKeyword("女装");
+		request.setNick("fxy060608");
+		TaobaokeItemsGetResponse response;
+		try {
+			response = client.execute(request);
+			if (response.isSuccess()) {
+				System.out.println(response);
+			} else {
+				handleError(response);
+			}
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// System.out.println(getReportTimes(new Date()));
+
 		// String num_iids =
 		// "16272290352,17820515411,16078842780,20226124528,15439073490,16526411341,19392072071,15678998794,16574707167,15679074799,17385691153,15474174172,17834239180,18997436570,16082317715,16129538834,20226148341,19392080537,20226100648,15678978334,16419445989,16078658537,18855152155,20226096630,20329928036,15438074853,20226188056,19401900860,20329852318,19402684118,20225936932,20919260054,17834083716,20919008887,20918968915,20919060655,20329908292";
 		// List<TaobaokeItem> items = newItemsConvert("12034285",

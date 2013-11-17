@@ -108,7 +108,7 @@ public class MemberFanliRest {
 				String siteId = EnvManager.getUser().getSites().get(0).getId();
 				for (String fileName : files.keySet()) {
 					// 获得输入流：
-					Set<TaobaokeReportMember> members = JExcelUtil
+					List<TaobaokeReportMember> members = JExcelUtil
 							.readTaobao(files.get(fileName).getInputStream());
 					// 批量更新
 					if (members != null && members.size() > 0) {

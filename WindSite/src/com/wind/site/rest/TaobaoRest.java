@@ -434,63 +434,61 @@ public class TaobaoRest {
 				}
 			}
 			if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
-				TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-				getRequest.setNick(nick);// 昵称
-				getRequest.setNumIids(q);
-				getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-				getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-				TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-						.getItemsDetail(String.valueOf(result.get("appKey")),
-								String.valueOf(result.get("appSecret")),
-								appType, getRequest, pid);
-				TaobaokeItemDetail item = null;
-				if (getResponse != null) {
-					List<TaobaokeItemDetail> itemList = getResponse
-							.getTaobaokeItemDetails();
-					if (itemList != null && itemList.size() == 1) {
-						item = itemList.get(0);// 单个商品
-						clickUrl = item.getClickUrl();
-						if (StringUtils.isNotEmpty(clickUrl)) {
-							try {
-								Object versionNo = result.get("versionNo");
-								if (versionNo != null) {
-									if ((Float) versionNo >= 2) {
-										Object www = result.get("www");
-										if (www != null
-												&& StringUtils
-														.isNotEmpty((String) www)) {
-											response.sendRedirect(WindSiteRestUtil
-													.getUrl(siteService,
-															result, userId)
-													+ "titem/" + q + ".html");
-											return null;
-										}
-									}
-								}
-							} catch (Exception e) {
+				// TaobaokeItemsDetailGetRequest getRequest = new
+				// TaobaokeItemsDetailGetRequest();
+				// getRequest.setNick(nick);// 昵称
+				// getRequest.setNumIids(q);
+				// getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+				// getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+				// TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+				// .getItemsDetail(String.valueOf(result.get("appKey")),
+				// String.valueOf(result.get("appSecret")),
+				// appType, getRequest, pid);
+				// TaobaokeItemDetail item = null;
+				// if (getResponse != null) {
+				// List<TaobaokeItemDetail> itemList = getResponse
+				// .getTaobaokeItemDetails();
+				// if (itemList != null && itemList.size() == 1) {
+				// item = itemList.get(0);// 单个商品
+				// clickUrl = item.getClickUrl();
+				// if (StringUtils.isNotEmpty(clickUrl)) {
+				try {
+					// Object versionNo = result.get("versionNo");
+					// if (versionNo != null) {
+					// if ((Float) versionNo >= 2) {
+					// Object www = result.get("www");
+					// if (www != null
+					// && StringUtils.isNotEmpty((String) www)) {
+					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+							result, userId) + "titem/" + q + ".html");
+					return null;
+					// }
+					// }
+					// }
+				} catch (Exception e) {
 
-							}
-						}
-					} else {
-						String is_mall = request.getParameter("is_mall");
-						if ("true".equals(is_mall)) {
-							try {
-								response.sendRedirect("http://s.click.taobao.com/t_9?p="
-										+ pPid
-										+ "&l="
-										+ URLEncoder.encode(
-												"http://detail.tmall.com/item.htm?id="
-														+ q, "UTF-8"));
-								return null;
-							} catch (IOException e) {
-							}
-						}
-					}
 				}
+				// }
+				// } else {
+				// String is_mall = request.getParameter("is_mall");
+				// if ("true".equals(is_mall)) {
+				// try {
+				// response.sendRedirect("http://s.click.taobao.com/t_9?p="
+				// + pPid
+				// + "&l="
+				// + URLEncoder.encode(
+				// "http://detail.tmall.com/item.htm?id="
+				// + q, "UTF-8"));
+				// return null;
+				// } catch (IOException e) {
+				// }
+				// }
+				// }
+				// }
 			}
-			if (StringUtils.isEmpty(clickUrl))
-				clickUrl = searchWords(response, q, appType, nick, pid, pPid,
-						appKey, appSecret);
+//			if (StringUtils.isEmpty(clickUrl))
+//				clickUrl = searchWords(response, q, appType, nick, pid, pPid,
+//						appKey, appSecret);
 		} else {
 			if (StringUtils.isNotEmpty(cid) && !"0".equals(cid)) {
 				T_ItemCat cat = siteService.findByCriterion(T_ItemCat.class,
@@ -978,7 +976,7 @@ public class TaobaoRest {
 			return oldItemsSearch(request, response);
 		}
 		Map<String, Object> result = new HashMap<String, Object>();
-		TaobaokeItemsGetRequest req = new TaobaokeItemsGetRequest();
+		ItemsSearchRequest req = new ItemsSearchRequest();
 		String userId = request.getParameter("USER");
 		String pid = WindSiteRestUtil.covertPID(siteService, result, userId);
 		if (StringUtils.isEmpty(pid)) {
@@ -1003,28 +1001,40 @@ public class TaobaoRest {
 					q = "";
 				}
 			}
-			req.setKeyword(q);
+			req.setQ(q);
 		} else {
 			q = "";
 		}
 		TaobaokeItemDetail item = null;
 		Item normal = null;
 		if (q.matches("[0-9]{7,20}")) {// 如果传入商品标识
-			TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-			getRequest.setNick((String) result.get("nick"));// 昵称
-			getRequest.setNumIids(q);
-			getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-			getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-			TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-					.getItemsDetail(null, null, null, getRequest,
-							String.valueOf(result.get("pid")));
-			if (getResponse != null) {
-				List<TaobaokeItemDetail> itemList = getResponse
-						.getTaobaokeItemDetails();
-				if (itemList != null && itemList.size() == 1) {
-					item = itemList.get(0);// 单个商品
+			Item tbItem = TaobaoFetchUtil
+					.taobaoItemGet(null, Long.parseLong(q));
+			if (tbItem == null) {
+				try {
+					response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+					response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+							result, userId) + "error/item404");
+				} catch (Exception e) {
 				}
 			}
+			item = TaobaoFetchUtil.convertItemToTaobaokeItemDetail(tbItem);// 单个商品
+			// TaobaokeItemsDetailGetRequest getRequest = new
+			// TaobaokeItemsDetailGetRequest();
+			// getRequest.setNick((String) result.get("nick"));// 昵称
+			// getRequest.setNumIids(q);
+			// getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+			// getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+			// TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+			// .getItemsDetail(null, null, null, getRequest,
+			// String.valueOf(result.get("pid")));
+			// if (getResponse != null) {
+			// List<TaobaokeItemDetail> itemList = getResponse
+			// .getTaobaokeItemDetails();
+			// if (itemList != null && itemList.size() == 1) {
+			// item = itemList.get(0);// 单个商品
+			// }
+			// }
 			if (item == null) {
 				normal = TaobaoFetchUtil.taobaoItemGet(
 						String.valueOf(result.get("appType")), Long.valueOf(q));
@@ -1034,12 +1044,12 @@ public class TaobaoRest {
 			q = item.getItem().getTitle();
 			view = "list";
 			result.put("taokeItem", item.getItem());
-			req.setKeyword(q);
+			req.setQ(q);
 		} else if (normal != null) {
 			q = normal.getTitle();
 			view = "list";
 			result.put("normal", normal);
-			req.setKeyword(q);
+			req.setQ(q);
 		}
 		String nick = String.valueOf(result.get("nick"));
 		if (StringUtils.isEmpty(nick)) {
@@ -1077,7 +1087,7 @@ public class TaobaoRest {
 		// seller_credit；默认按上架时间倒序.如按价格升序排列表示为：price:asc。新增排序字段：volume（30天成交量）；新增排序字段：popularity(商品的人气值)
 		String order_by = request.getParameter("order_by");
 		if (StringUtils.isNotEmpty(order_by)) {
-			req.setSort(order_by);
+			req.setOrderBy("");
 		} else {
 			order_by = "default";
 		}
@@ -1098,19 +1108,21 @@ public class TaobaoRest {
 		} else {
 			req.setPageSize(30L);
 		}
-
-		TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(null, null,
-				null, req, String.valueOf(result.get("pid")));
-		if (resp.getTaobaokeItems() != null) {
-			result.put("items", resp.getTaobaokeItems());
+		ItemsSearchResponse resp = TaobaoFetchUtil.taobaoSearchItems(null, req);
+		// TaobaokeItemsGetResponse resp = TaobaoFetchUtil.searchItems(null,
+		// null,
+		// null, req, String.valueOf(result.get("pid")));
+		List<TaobaokeItem> taokeItems = new ArrayList<TaobaokeItem>();
+		if (resp.getTotalResults() > 0) {
+			taokeItems = TaobaoFetchUtil.convertItemToTaobaokeItems(resp
+					.getItemSearch().getItems());
+			result.put("items", taokeItems);
 		} else {
 			result.put("items", new ArrayList<TaobaokeItem>());
 		}
 		Page<?> page = new Page(pageNo, 30);
-		if (resp.getTotalResults() > 0 && resp.getTaobaokeItems() != null) {
+		if (resp.getTotalResults() > 0) {
 			page.setTotalCount(resp.getTotalResults().intValue());
-
-			List<TaobaokeItem> taokeItems = resp.getTaobaokeItems();
 			if (taokeItems.size() > 0) {
 				Map<String, Item> itemsMap = new HashMap<String, Item>();
 				result.put("itemsMap", itemsMap);

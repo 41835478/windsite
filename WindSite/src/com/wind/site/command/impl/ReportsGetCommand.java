@@ -41,9 +41,9 @@ public class ReportsGetCommand implements ICommand {
 			from.set(Calendar.MINUTE, 0);
 			from.set(Calendar.SECOND, 0);
 			List<Date> froms = TaobaoFetchUtil.getReportTimes(from.getTime());
-			for (Date date : froms) {
-				getReportByPage(1L, date, service);
-			}
+//			for (Date date : froms) {
+//				getReportByPage(1L, date, service);
+//			}
 			// Calendar now = Calendar.getInstance();
 			// now.setTime(new Date());
 			// now.add(Calendar.DATE, 1);

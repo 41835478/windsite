@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.R;
@@ -45,6 +46,8 @@ import com.wind.site.util.WindSiteRestUtil;
  */
 public class CommandServiceImpl extends BaseServiceImpl implements
 		ICommandService {
+	private static final Logger logger = Logger
+			.getLogger(CommandServiceImpl.class.getName());
 
 	@Override
 	public void synADModuleItem(Long mId, Set<ADModuleItem> items) {
@@ -332,15 +335,49 @@ public class CommandServiceImpl extends BaseServiceImpl implements
 
 	@Override
 	public Integer mergeReportTrades(String userId, String siteId,
-			Set<TaobaokeReportMember> members) {
+			List<TaobaokeReportMember> members) {
 		Integer success = 0;
+		logger.info("trade count:" + members.size());
+		List<T_TaobaokeReportMember> successReports = new ArrayList<T_TaobaokeReportMember>();
 		if (members != null && members.size() > 0) {
 			for (TaobaokeReportMember member : members) {
-				if (this.mergeReportTrade(userId, siteId, member)) {
+				List<T_TaobaokeReportMember> olds = this.findAllByCriterion(
+						T_TaobaokeReportMember.class, R.eq("mini_trade_id",
+								WindSiteRestUtil.getMiniTradeId(member
+										.getTradeId())));
+				if (olds == null || olds.size() == 0) {
+					T_TaobaokeReportMember report = new T_TaobaokeReportMember();
+					// 淘宝字段
+					report.setApp_key(member.getAppKey());
+					report.setCategory_id(member.getCategoryId());
+					report.setCategory_name(member.getCategoryName());
+					report.setCommission(member.getCommission());
+					report.setCommission_rate(member.getCommissionRate());
+					report.setItem_num(member.getItemNum());
+					report.setItem_title(member.getItemTitle());
+					report.setNum_iid(member.getNumIid());
+					report.setOuter_code(member.getOuterCode());
+					report.setPay_price(member.getPayPrice());
+					report.setPay_time(member.getPayTime());
+					report.setSeller_nick(member.getSellerNick());
+					report.setShop_title(member.getShopTitle());
+					report.setTrade_id(member.getTradeId());
+					report.setMini_trade_id(WindSiteRestUtil
+							.getMiniTradeId(member.getTradeId()));
+					// 新淘网字段
+					report.setUser_id(userId);
+					report.setSite_id(siteId);
+					successReports.add(report);
 					success++;
+				} else {
+					logger.info("trade[" + member.getTradeId() + "] is existed");
 				}
 			}
 		}
+		if (successReports.size() > 0) {
+			this.saveAll(successReports);
+		}
+		logger.info("trade insert success count:" + successReports.size());
 		return success;
 	}
 

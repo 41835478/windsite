@@ -40,7 +40,10 @@ public class YiqifaClient {
 		httpClient.setTimeout(5000);
 		GetMethod getMethod = new GetMethod(
 				"http://o.yiqifa.com/servlet/queryCpsMultiRow"); // 创建GET方法的实
-		getMethod.setQueryString(request.toUrlParams());
+		String queryString = request.toUrlParams();
+		getMethod.setQueryString(queryString);
+		logger.info("http://o.yiqifa.com/servlet/queryCpsMultiRow?"
+				+ queryString);
 		InputStream in = null;
 		BufferedReader reader = null;
 		try {

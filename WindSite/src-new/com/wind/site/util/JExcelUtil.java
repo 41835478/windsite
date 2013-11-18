@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +35,7 @@ public class JExcelUtil {
 
 	public static void main(String[] args) {
 		try {
-			Set<TaobaokeReportMember> members = readTaobao(new FileInputStream(
+			List<TaobaokeReportMember> members = readTaobao(new FileInputStream(
 					new File(
 							"/Users/fengxiaoyun/Downloads/Taokedetail-2013-08-16.xls")));
 			Gson gson = new Gson();
@@ -44,8 +46,8 @@ public class JExcelUtil {
 		}
 	}
 
-	public static Set<TaobaokeReportMember> readTaobao(InputStream in) {
-		Set<TaobaokeReportMember> members = new HashSet<TaobaokeReportMember>();
+	public static List<TaobaokeReportMember> readTaobao(InputStream in) {
+		List<TaobaokeReportMember> members = new ArrayList<TaobaokeReportMember>();
 		Map<String, Integer> INDEXS = new HashMap<String, Integer>();
 		INDEXS.put("create_time", 0);
 		INDEXS.put("item_title", 1);
@@ -63,16 +65,17 @@ public class JExcelUtil {
 		INDEXS.put("item_commission", 13);
 		INDEXS.put("tmall_commission_rate", 14);
 		INDEXS.put("tmall_commission", 15);
-		INDEXS.put("is_third", 16);
-		INDEXS.put("third", 17);
-		INDEXS.put("third_fee", 18);
-		INDEXS.put("trade_id", 19);
+		INDEXS.put("commission_type", 16);
+		INDEXS.put("is_third", 17);
+		INDEXS.put("third", 18);
+		INDEXS.put("third_fee", 19);
+		INDEXS.put("trade_id", 20);
 
 		try {
 			Workbook workbook = Workbook.getWorkbook(in);
 			Sheet sheet = workbook.getSheet(0);
 			Integer columns = sheet.getColumns();// 列数
-			if (columns != 20) {
+			if (columns != 21) {
 				SystemException.handleMessageException("订单文件格式不正确【列数不正确】");
 			}
 			Integer rows = sheet.getRows();// 行数
@@ -81,8 +84,8 @@ public class JExcelUtil {
 				if (sheet.getCell(INDEXS.get("status"), i).getContents()
 						.equals("订单结算")) {
 					member = new TaobaokeReportMember();
-					member.setCommission(sheet.getCell(INDEXS.get("commission"), i)
-							.getContents());
+					member.setCommission(sheet.getCell(
+							INDEXS.get("commission"), i).getContents());
 					double commission_rate = Double.valueOf(sheet
 							.getCell(INDEXS.get("commission_rate"), i)
 							.getContents().replace("%", "")) * 100 / 10000;

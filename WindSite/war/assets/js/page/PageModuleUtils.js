@@ -325,76 +325,15 @@ var PageModuleUtils = {
 			var self = $(this);
 			var nid = $('#detail .xt-gallery .xt-s310').attr('data-id');
 			if (nid) {
-				if (typeof(TOP) != 'undefined') {
-					try {
-						TOP.api({
-									method : 'taobao.taobaoke.widget.items.convert',
-									fields : 'commission,price',
-									num_iids : nid
-								}, function(resp) {
-									try {
-										if (resp.taobaoke_items.taobaoke_item) {
-											var c = resp.taobaoke_items.taobaoke_item[0].commission;
-											var co = Math.floor(parseFloat(c)
-													* rate * 100)
-											self
-													.after('<li class="xt-detail-commission xt-clearfix"><span style="color:red;">'
-															+ pre
-															+ '</span>'
-															+ '<strong style="vertical-align: baseline;font-family:Tahoma,Arial,Helvetica,sans-serif;color: #F50;font-size:24px;font-weight: normal;padding-right: 5px;line-height:25px;">'
-															+ co
-															+ '</strong>'
-															+ last + '<li>');
-										}
-									} catch (e) {
-									}
-
-								});
-					} catch (e) {
-					}
-				}
+				var src = "http://api.xintaonet.com/widget/item/detail?id="
+						+ nid + "&fx=1&fx_type=jifenbao&fx_rate=" + rate * 100
+						+ "&price=" + self.find('strong').text()
+						+ "&from=xintao";
+				self
+						.replaceWith('<li><iframe id="X_API-Iframe-Item-Detail" name="xintaokeifrm" style="margin-top:-1px;" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" width="399" height="54"  src="'
+								+ src + '"></iframe></li>');
 			}
 		});
-		// $('#detail .xt-gallery .xt-s310').each(function() {
-		// var pre = '返利:';
-		// var last = '元';
-		// var self = $(this);
-		// var nid = $(this).attr('data-id');
-		// if (nid) {
-		// var sender = new WindSender('/router/site/getCommission/' + nid
-		// + '?v=' + Math.random(), true);
-		// sender.load("GET", {}, function(response) {
-		// if (response.isSuccess()) {// 转换佣金返利成功
-		// var c = response.body.co;
-		// if (c == 0) {
-		// return;
-		// }
-		// if (c > 0) {
-		// var co = Math.floor(parseFloat(c) * rate * 100)
-		// / 100.00;
-		// self
-		// .prepend('<a class="commission-action clearfix" style="display:
-		// block;margin: 0 auto auto auto;width: 310px;height: 52px;line-height:
-		// 52px;text-decoration: none;position: relative;cursor:
-		// pointer;background:
-		// url(http://img02.taobaocdn.com/imgextra/i2/71614142/T208mhXo4aXXXXXXXX_!!71614142.png)
-		// no-repeat 0 0;"><span class="price J_MorePrice" style="color:
-		// white;font-weight: bold;font-size:40px;letter-spacing:
-		// -2px;text-shadow: 0 0 0 transparent,1px 1px 1px #8A181B;"><em
-		// style="font-size: 26px;font-style: normal;font-weight:
-		// bold;margin-right: 3px;font-family: "Microsoft
-		// Yahei","Arial","Verda","tahoma";">'
-		// + pre
-		// + '</em>'
-		// + co
-		// + '<span style="font-size: 28px;">'
-		// + last + '</span></span></a>');
-		// }
-		// }
-		// });
-		// }
-		//
-		// });
 
 	},
 	/**
@@ -840,38 +779,38 @@ var PageModuleUtils = {
 	 *            widget
 	 */
 	initShopSearchHot : function(widget) {
-		if ((typeof(KEYWORD) == 'undefined' && typeof(CID) == 'undefined')
-				|| ('' == KEYWORD && '' == CID)) {
-			return;
-		}
-		var hot = widget.find('.shop-searchhot');
-		var sort = hot.attr('data-sort');
-		var count = hot.attr('data-count');
-		var data = {};
-		if (sort && '' != sort)
-			data.sort = sort;
-		data.q = KEYWORD;// 关键词
-		data.cid = CID;// 分类
-		if (count) {
-			data.count = count;
-		} else {
-			data.count = 5;
-		}
-		$.ajax({
-					url : '/router/site/itemsearch/hot?v=' + Math.random(),
-					type : 'POST',
-					data : data,
-					dataType : 'html',
-					beforeSend : function(xhr) {
-						xhr.setRequestHeader("WindType", "AJAX");// 请求方式
-						xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
-					},
-					error : function(request, textStatus, errorThrown) {
-					},
-					success : function(data) {
-						widget.find('.bd').empty().append(data);
-					}
-				});
+//		if ((typeof(KEYWORD) == 'undefined' && typeof(CID) == 'undefined')
+//				|| ('' == KEYWORD && '' == CID)) {
+//			return;
+//		}
+//		var hot = widget.find('.shop-searchhot');
+//		var sort = hot.attr('data-sort');
+//		var count = hot.attr('data-count');
+//		var data = {};
+//		if (sort && '' != sort)
+//			data.sort = sort;
+//		data.q = KEYWORD;// 关键词
+//		data.cid = CID;// 分类
+//		if (count) {
+//			data.count = count;
+//		} else {
+//			data.count = 5;
+//		}
+//		$.ajax({
+//					url : '/router/site/itemsearch/hot?v=' + Math.random(),
+//					type : 'POST',
+//					data : data,
+//					dataType : 'html',
+//					beforeSend : function(xhr) {
+//						xhr.setRequestHeader("WindType", "AJAX");// 请求方式
+//						xhr.setRequestHeader("WindDataType", "HTML");// 请求返回内容类型
+//					},
+//					error : function(request, textStatus, errorThrown) {
+//					},
+//					success : function(data) {
+//						widget.find('.bd').empty().append(data);
+//					}
+//				});
 	},
 	/**
 	 * 初始化同类热卖推荐展示
@@ -1195,7 +1134,7 @@ var PageModuleUtils = {
 			var form = $('form', widget);
 			$('input[name="is_mall"]', widget).val('');
 			if ('item' == rel) {// 商品搜索
-				form.attr('action', '/searchbox?v=' + Math.random());
+				form.attr('action', '/search?v=' + Math.random());
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
 					q.val('输入 宝贝 名称或宝贝地址');
 				}
@@ -1209,7 +1148,7 @@ var PageModuleUtils = {
 				q.unbind('focus').unbind('blur').focusText('输入 店铺 名称');
 			} else if ('mall' == rel) {// 商城搜索
 				$('input[name="is_mall"]', widget).val('true');
-				form.attr('action', '/searchbox?v=' + Math.random());
+				form.attr('action', '/search?v=' + Math.random());
 				if (!q.val() || TIPS.indexOf(q.val()) != -1) {
 					q.val('输入 宝贝 名称');
 				}
@@ -1237,7 +1176,7 @@ var PageModuleUtils = {
 				q.val('');
 			}
 			if ('item' == rel) {// 商品搜索
-				form.attr('action', '/searchbox?v=' + Math.random());
+				form.attr('action', '/search?v=' + Math.random());
 				if (q.val()) {
 					var _url = q.val();
 					q.val(_url.replace('-', ' '));
@@ -1355,7 +1294,7 @@ var PageModuleUtils = {
 					+ (widget.width() - 10) + 'px;font-size:12px;"></ul>');
 			for (var i = 0; i < length; i++) {
 				try {
-					ul.append('<li><a target="_blank" href="/searchbox?q='
+					ul.append('<li><a target="_blank" href="/search?q='
 							+ (encodeURIComponent(arr_data[i + j * length][0]))
 							+ '">' + arr_data[i + j * length][0] + '</a></li>');
 				} catch (e) {

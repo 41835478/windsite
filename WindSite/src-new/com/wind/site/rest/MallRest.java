@@ -1,9 +1,13 @@
 package com.wind.site.rest;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -132,9 +136,9 @@ public class MallRest {
 				String outCode = report.getOuterCode();
 				if (StringUtils.isNotEmpty(outCode)
 						&& outCode.startsWith("xtfl")) {// 如果推广渠道不为空，并且是新淘返利
-					commandService.mergeYiqifaReportTrade(Long.valueOf(outCode
-							.replace("xtfl", "")), report.getUser_id(), report
-							.getSite_id(), report);
+					commandService.mergeYiqifaReportTrade(
+							Long.valueOf(outCode.replace("xtfl", "")),
+							report.getUser_id(), report.getSite_id(), report);
 				} else {
 					commandService.mergeYiqifaReportTrade(report.getUser_id(),
 							report.getSite_id(), report);
@@ -148,14 +152,24 @@ public class MallRest {
 	}
 
 	private static String encryptMD5(String data) throws IOException {
+		StringBuffer buf = new StringBuffer("");
 		byte[] bytes = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			bytes = md.digest(data.getBytes());
+			bytes = md.digest(data.getBytes("gbk"));
+			int i;
+			for (int offset = 0; offset < bytes.length; offset++) {
+				i = bytes[offset];
+				if (i < 0)
+					i += 256;
+				if (i < 16)
+					buf.append("0");
+				buf.append(Integer.toHexString(i));
+			}
 		} catch (GeneralSecurityException gse) {
 			throw new IOException(gse);
 		}
-		return new String(bytes);
+		return buf.toString();
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -234,16 +248,17 @@ public class MallRest {
 		}
 		result.put("mall", m);
 		List<MyYiqifaMall> malls = siteService.findAllByCriterionAndOrder(
-				new Page<MyYiqifaMall>(1, 1), MyYiqifaMall.class, Order
-						.asc("sortOrder"), R.eq("pk.user_id", Long
-						.valueOf(userId)), R.eq("pk.mall_id", id));
+				new Page<MyYiqifaMall>(1, 1), MyYiqifaMall.class,
+				Order.asc("sortOrder"),
+				R.eq("pk.user_id", Long.valueOf(userId)),
+				R.eq("pk.mall_id", id));
 		if (malls != null && malls.size() == 1) {// 转换反馈标签
 			MyYiqifaMall mall = malls.get(0);
 			String clickUrl = mall.getPk().getClickUrl();
 			if (StringUtils.isNotEmpty(clickUrl)) {
 				mall.getPk().setClickUrl(
-						clickUrl.replaceAll("e=c", "e="
-								+ EnvManager.getMallsOuterCode()));
+						clickUrl.replaceAll("e=c",
+								"e=" + EnvManager.getMallsOuterCode()));
 				result.put("action", mall);
 			}
 		}
@@ -261,19 +276,53 @@ public class MallRest {
 			result.put("pid", EnvManager.getDefaultPid());
 		}
 		List<MyYiqifaMall> malls = siteService.findAllByCriterionAndOrder(
-				MyYiqifaMall.class, Order.asc("sortOrder"), R.eq("pk.user_id",
-						Long.valueOf(userId)), R.eq("pk.mall_id", id));
+				MyYiqifaMall.class, Order.asc("sortOrder"),
+				R.eq("pk.user_id", Long.valueOf(userId)),
+				R.eq("pk.mall_id", id));
 		if (malls != null && malls.size() > 0) {// 转换反馈标签
 			for (MyYiqifaMall mall : malls) {
 				String clickUrl = mall.getPk().getClickUrl();
 				if (StringUtils.isNotEmpty(clickUrl)) {
 					mall.getPk().setClickUrl(
-							clickUrl.replaceAll("e=c", "e="
-									+ EnvManager.getMallsOuterCode()));
+							clickUrl.replaceAll("e=c",
+									"e=" + EnvManager.getMallsOuterCode()));
 				}
 			}
 		}
 		return new Gson().toJson(malls, new TypeToken<List<MyYiqifaMall>>() {
 		}.getType());
+	}
+
+	public static Map<String, String> splitQuery(URL url)
+			throws UnsupportedEncodingException {
+		Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+		String query = url.getQuery();
+		String[] pairs = query.split("&");
+		for (String pair : pairs) {
+			int idx = pair.indexOf("=");
+			query_pairs.put(pair.substring(0, idx),
+					URLDecoder.decode(pair.substring(idx + 1), "GBK"));
+		}
+		return query_pairs;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Map<String, String> params = splitQuery(new URL(
+				"http://www.tlehui.com/yiqifa?unique_id=351433832&create_date=2013-07-11+18%3A05%3A07&action_id=5402&action_name=%C3%C0%CD%C5%CD%F8CPS&sid=90098&wid=650119&order_no=217214871-1&order_time=2013-07-11+18%3A04%3A12&prod_id=3351701&prod_name=&prod_count=1&prod_money=59.9&feed_back=xtfl35171&status=R&comm_type=O&commision=1.0303&chkcode=76f76a7787111815409b09eb13458fac&prod_type=O&am=0.0&exchange_rate=0.0"));
+		System.out.println(params);
+		String action_id = params.get("action_id");
+		String order_no = params.get("order_no");
+		String prod_money = params.get("prod_money");
+		String order_time = params.get("order_time");
+		String yiqifa_secret = "ryrxwjsywpzxsqy";
+		String chkcode = params.get("chkcode");
+		System.out.println(action_id + order_no + prod_money + order_time
+				+ yiqifa_secret);
+		String localChkCode = encryptMD5(action_id + order_no + prod_money
+				+ order_time + yiqifa_secret);
+		System.out.println(chkcode + "|||||||||" + localChkCode);
+		if (!chkcode.equals(localChkCode)) {
+			System.out.println("MD5加密校验失败，请确认您的亿起发密钥正确");
+		}
 	}
 }

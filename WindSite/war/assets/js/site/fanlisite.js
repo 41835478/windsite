@@ -574,6 +574,7 @@ function getFanliSiteOrderSearchHtmlTaobao(tradeId, start, end, pageNo) {
 						$(this).click(function() {
 									openFanliSiteGetOrderDialog($(this)
 											.data('tid'));
+									return false;
 								});
 					});
 				}
@@ -629,10 +630,10 @@ function openFanliSiteGetOrderDialog(id) {
 								alert('交易号不能为空');
 								return;
 							}
-							if (t != $(this).data('tid')) {
-								alert('您输入的交易号不正确，无法确认该交易记录');
-								return;
-							}
+//							if (t != $(this).data('tid')) {
+//								alert('您输入的交易号不正确，无法确认该交易记录');
+//								return;
+//							}
 							$(this).addClass('btn-ok-disabled');
 							confirmFnaliSiteGetOrderTaobao(t);
 							$('#getorder-dialog').dialog('close');

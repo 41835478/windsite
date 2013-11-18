@@ -1,463 +1,69 @@
-body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td
-	{
-	margin: 0;
-	padding: 0
+*#dm *.dmBody input.u_48 {
+	color: rgba(86, 93, 231, 1) !important;
 }
 
-html {
-	color: #000;
-	overflow-y: scoll;
-	overflow: -moz-scrollbars-vertical
+*#dm *.dmBody span.u_1671893618 {
+	text-align: justify !important;
+	display: block !important;
+	direction: ltr !important;
 }
 
-body,button,input,select,textarea {
-	font-size: 12px;
-	font-family: arial, \5b8b\4f53, sans-serif
+*#dm *.dmBody span.u_1671893618 * {
+	text-align: justify !important;
 }
 
-h1,h2,h3,h4,h5,h6 {
-	font-size: 100%
+*#dm *.dmBody section.u_1854398401 {
+	padding-top: 21px !important;
+	padding-bottom: 40px !important;
+	padding-right: 0px !important;
+	padding-left: 0px !important;
 }
 
-em {
-	font-style: normal
+*#dm *.dmBody div.u_16 {
+	padding-top: 41px !important;
+	padding-bottom: 41px !important;
+	color: rgba(255, 255, 255, 1) !important;
+	border-style: solid !important;
+	border-width: 0px !important;
+	background-size: auto !important;
+	background-position: top center !important;
+	background-repeat: no-repeat !important;
+	background-image:
+		url('http://www.baidu.com/cache/sethelp/img/360_1.png') !important;
 }
 
-small {
-	font-size: 12px
+*#dm *.dmBody div.u_16 {
+	background-color: red !important;
+	border-style: solid !important;
+	border-width: 25px !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
 }
 
-ul,ol {
-	list-style: none
+*#dm *.dmBody div.u_9 {
+	text-align: left !important;
+	text-decoration: none !important;
+	display: block !important;
+	font-style: italic !important;
+	font-size: 59px !important;
 }
 
-a {
-	text-decoration: none
+*#dm *.dmBody div.u_9 * {
+	text-align: left !important;
+	text-decoration: none !important;
+	font-style: italic !important;
+	font-size: 59px !important;
 }
 
-a:hover {
-	text-decoration: underline
+*#dm *.dmBody ol.u_1952816869 {
+	
 }
 
-legend {
-	color: #000
+*#dm *.dmBody a.u_1200016143 {
+	font-size: 34px !important;
 }
 
-fieldset,img {
-	border: 0
-}
-
-button,input,select,textarea {
-	font-size: 100%
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0
-}
-
-img {
-	-ms-interpolation-mode: bicubic
-}
-
-textarea {
-	resize: vertical
-}
-
-.left {
-	float: left
-}
-
-.right {
-	float: right
-}
-
-.overflow {
-	overflow: hidden
-}
-
-.hide {
-	display: none
-}
-
-.block {
-	display: block
-}
-
-.inline {
-	display: inline
-}
-
-.error {
-	color: #F00;
-	font-size: 12px
-}
-
-label,button {
-	cursor: pointer
-}
-
-.grid-5,.grid-30,.grid-39,.grid-42,.grid-50,.grid-56,.grid-62,.grid-71,.grid-73,.grid-92,.grid-98
-	{
-	overflow: hidden;
-	margin: 0 auto;
-	padding: 0
-}
-
-.grid-5 {
-	width: 50px
-}
-
-.grid-30 {
-	width: 300px
-}
-
-.grid-39 {
-	width: 390px
-}
-
-.grid-42 {
-	width: 420px
-}
-
-.grid-50 {
-	width: 500px
-}
-
-.grid-56 {
-	width: 560px
-}
-
-.grid-62 {
-	width: 620px
-}
-
-.grid-71 {
-	width: 710px
-}
-
-.grid-73 {
-	width: 730px
-}
-
-.grid-92 {
-	width: 920px
-}
-
-.grid-98 {
-	width: 980px
-}
-
-.clearfix:after {
-	content: '\20';
-	display: block;
-	height: 0;
-	clear: both
-}
-
-.clearfix {
-	zoom: 1
-}
-
-.clear {
-	clear: both;
-	height: 0;
-	line-height: 0;
-	font-size: 0;
-	visibility: hidden;
-	overflow: hidden
-}
-
-.wordwrap {
-	word-break: break-all;
-	word-wrap: break-word
-}
-
-pre.wordwrap {
-	white-space: pre-wrap
-}
-
-body {
-	text-align: center
-}
-
-body,form,#s_fm {
-	position: relative
-}
-
-td {
-	text-align: left
-}
-
-img {
-	border: 0
-}
-
-#u {
-	color: #999;
-	padding: 4px 10px 5px 0;
-	text-align: right
-}
-
-#u a {
-	color: #00c;
-	text-decoration: underline;
-	margin: 0 5px
-}
-
-#u a.last {
-	margin-right: 0
-}
-
-#m {
-	width: 680px;
-	margin: 0 auto
-}
-
-#nv {
-	margin: 0 0 5px;
-	_margin-bottom: 4px;
-	padding: 2px 0 0;
-	text-align: left;
-	text-indent: 72px
-}
-
-#nv a,#nv b {
-	margin-left: 12px
-}
-
-#nv a,#nv b,.btn,#lk {
-	font-size: 14px
-}
-
-#s_fm {
-	text-align: left;
-	padding-left: 61px;
-	z-index: 300;
-	height: 35px
-}
-
-#kw,.btn,.btn_wr,#mCon {
-	background:
-		url(http://su.bdimg.com/static/superpage/img/spis_9762e054.png)
-		no-repeat #fff
-}
-
-#kw {
-	width: 529px;
-	height: 22px;
-	padding: 4px 7px;
-	padding: 6px 7px 2px\9;
-	font: 16px arial;
-	border: 1px solid #cdcdcd;
-	border-color: #9a9a9a #cdcdcd #cdcdcd #9a9a9a;
-	vertical-align: top;
-	outline: none
-}
-
-.btn {
-	width: 95px;
-	height: 32px;
-	padding: 0;
-	padding-top: 2px\9;
-	border: 0;
-	background-position: 0 -35px;
-	background-color: #ddd;
-	cursor: pointer
-}
-
-.btn_h {
-	background-position: -100px -35px
-}
-
-#kw,.btn_wr {
-	margin: 0 3px 0 0
-}
-
-.btn_wr {
-	background-position: -202px -33px;
-	width: 97px;
-	height: 34px;
-	display: inline-block;
-	_margin-top: 1px
-}
-
-#lk {
-	margin: 33px 0
-}
-
-#lk span {
-	font: 14px "\5b8b\4f53"
-}
-
-#lh {
-	margin: 16px 0 5px;
-	word-spacing: 3px
-}
-
-#mCon {
-	position: absolute;
-	right: 5px;
-	top: 10px;
-	height: 15px;
-	line-height: 15px;
-	width: 25px;
-	cursor: pointer;
-	padding: 0 16px 0 0;
-	background-position: right -206px
-}
-
-#mCon span {
-	color: #00c;
-	cursor: default;
-	display: block
-}
-
-#mCon .hw {
-	text-decoration: underline;
-	cursor: pointer
-}
-
-#mMenu {
-	width: 56px;
-	border: 1px solid #9B9B9B;
-	list-style: none;
-	position: absolute;
-	right: 2px;
-	top: 28px;
-	display: none;
-	background: #fff;
-	box-shadow: 1px 1px 2px #ccc;
-	-moz-box-shadow: 1px 1px 2px #ccc;
-	-webkit-box-shadow: 1px 1px 2px #ccc;
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135,
-		Color="#cccccc" ) \9
-
-}
-
-#mMenu a,#mMenu a:visited {
-	color: #00C;
-	width: 100%;
-	height: 100%;
-	display: block;
-	line-height: 22px;
-	text-indent: 6px;
-	text-decoration: none;
-	filter: none\9
-
-}
-
-#mMenu a:hover {
-	background: #ebebeb
-}
-
-#mMenu .ln {
-	height: 1px;
-	background: #ebebeb;
-	overflow: hidden;
-	font-size: 1px;
-	line-height: 1px;
-	margin-top: -1px
-}
-
-#cp,#cp a {
-	color: #77c
-}
-
-#tb_mr {
-	color: #00C;
-	cursor: pointer;
-	position: relative;
-	z-index: 200
-}
-
-#tb_mr b {
-	font-weight: normal
-}
-
-#nv a,#tb_mr b {
-	text-decoration: underline
-}
-
-#nv a {
-	color: #00C
-}
-
-#hwr_div,#loading {
-	z-index: 3000
-}
-
-#mHolder {
-	display: none
-}
-
-.user-name-top {
-	cursor: pointer;
-	line-height: 20px;
-	color: #00C;
-	font-weight: bold;
-	padding-right: 11px;
-	background:
-		url(http://su.bdimg.com/static/superpage/img/spis_9762e054.png)
-		no-repeat right -221px
-}
-
-html {
-	overflow: -moz-scrollbars-vertical;
-	overflow-y: scroll
-}
-
-.main {
-	display: none
-}
-
-#s_feed {
-	display: none
-}
-
-.s-title em {
-	font-size: 14px;
-	font-family: '宋体', \5b8b\4f53, Microsoft YaHei, sans-serif;
-	color: #666
-}
-
-.s-title {
-	line-height: 31px;
-	line-height: 30px\9;
-	height: 30px;
-	background-position: left top;
-	padding: 0 10px 0 20px;
-	font-size: 14px;
-	text-align: left;
-	font-family: "Microsoft YaHei";
-	font-weight: bold
-}
-
-#s_wrap .main .s-title a {
-	background-repeat: no-repeat;
-	text-decoration: none
-}
-
-#s_wrap .main .s-title {
-	background-repeat: repeat-x;
-	background-position: 0 -85px;
-	border-bottom: 1px solid #e5e5e5;
-	_overflow: hidden
-}
-
-#s_wrap .main .s-container {
-	float: left;
-	width: 818px;
-	background-color: #fff
-}
-
-.s-mod-hida {
-	display: block;
-	width: 0;
-	height: 0;
-	overflow: hidden
-}
-
-#s_wrap .main .s-title {
-	background-image: url("../img/spis_9762e054.png")
+*#dm *.dmBody a.u_1200016143 * {
+	font-size: 34px !important;
 }

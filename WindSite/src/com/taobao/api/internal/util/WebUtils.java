@@ -1,19 +1,29 @@
 package com.taobao.api.internal.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringWriter;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import com.taobao.api.Constants;
 import com.taobao.api.FileItem;
@@ -29,7 +39,21 @@ public abstract class WebUtils {
 	public static final String DEFAULT_CHARSET = Constants.CHARSET_UTF8;
 	private static final String METHOD_POST = "POST";
 	private static final String METHOD_GET = "GET";
-	private WebUtils() {}
+
+	private static class DefaultTrustManager implements X509TrustManager {
+		public X509Certificate[] getAcceptedIssuers() {
+			return null;
+		}
+
+		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+		}
+
+		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+		}
+	}
+
+	private WebUtils() {
+	}
 
 	/**
 	 * 执行HTTP POST请求。
@@ -39,8 +63,9 @@ public abstract class WebUtils {
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doPost(String url, Map<String, String> params,int connectTimeout,int readTimeout) throws IOException {
-		return doPost(url, params, DEFAULT_CHARSET,connectTimeout,readTimeout);
+	public static String doPost(String url, Map<String, String> params, int connectTimeout, int readTimeout)
+			throws IOException {
+		return doPost(url, params, DEFAULT_CHARSET, connectTimeout, readTimeout);
 	}
 
 	/**
@@ -52,15 +77,20 @@ public abstract class WebUtils {
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doPost(String url, Map<String, String> params, String charset,int connectTimeout,int readTimeout)
-			throws IOException {
+	public static String doPost(String url, Map<String, String> params, String charset, int connectTimeout,
+			int readTimeout) throws IOException {
+		return doPost(url, params, charset, connectTimeout, readTimeout, null);
+	}
+
+	public static String doPost(String url, Map<String, String> params, String charset, int connectTimeout,
+			int readTimeout, Map<String, String> headerMap) throws IOException {
 		String ctype = "application/x-www-form-urlencoded;charset=" + charset;
 		String query = buildQuery(params, charset);
-		byte[] content={};
-		if(query!=null){
-			content=query.getBytes(charset);
+		byte[] content = {};
+		if (query != null) {
+			content = query.getBytes(charset);
 		}
-		return doPost(url, ctype, content, connectTimeout, readTimeout);
+		return _doPost(url, ctype, content, connectTimeout, readTimeout, headerMap);
 	}
 
 	/**
@@ -72,31 +102,38 @@ public abstract class WebUtils {
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doPost(String url, String ctype, byte[] content,int connectTimeout,int readTimeout) throws IOException {
+	@Deprecated
+	public static String doPost(String url, String ctype, byte[] content, int connectTimeout, int readTimeout)
+			throws IOException {
+		return _doPost(url, ctype, content, connectTimeout, readTimeout, null);
+	}
+
+	private static String _doPost(String url, String ctype, byte[] content, int connectTimeout, int readTimeout,
+			Map<String, String> headerMap) throws IOException {
 		HttpURLConnection conn = null;
 		OutputStream out = null;
 		String rsp = null;
 		try {
-			try{
-				conn = getConnection(new URL(url), METHOD_POST, ctype);	
+			try {
+				conn = getConnection(new URL(url), METHOD_POST, ctype, headerMap);
 				conn.setConnectTimeout(connectTimeout);
 				conn.setReadTimeout(readTimeout);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, url,map.get("app_key"),map.get("method"), content);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, url, map.get("app_key"), map.get("method"), content);
 				throw e;
 			}
-			try{
+			try {
 				out = conn.getOutputStream();
 				out.write(content);
 				rsp = getResponseAsString(conn);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, conn,map.get("app_key"),map.get("method"), content);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, conn, map.get("app_key"), map.get("method"), content);
 				throw e;
 			}
-			
-		}finally {
+
+		} finally {
 			if (out != null) {
 				out.close();
 			}
@@ -107,7 +144,7 @@ public abstract class WebUtils {
 
 		return rsp;
 	}
-	
+
 	/**
 	 * 执行带文件上传的HTTP POST请求。
 	 * 
@@ -117,13 +154,18 @@ public abstract class WebUtils {
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doPost(String url, Map<String, String> params,
-			Map<String, FileItem> fileParams,int connectTimeout,int readTimeout) throws IOException {
+	public static String doPost(String url, Map<String, String> params, Map<String, FileItem> fileParams,
+			int connectTimeout, int readTimeout) throws IOException {
 		if (fileParams == null || fileParams.isEmpty()) {
 			return doPost(url, params, DEFAULT_CHARSET, connectTimeout, readTimeout);
 		} else {
 			return doPost(url, params, fileParams, DEFAULT_CHARSET, connectTimeout, readTimeout);
 		}
+	}
+
+	public static String doPost(String url, Map<String, String> params, Map<String, FileItem> fileParams,
+			String charset, int connectTimeout, int readTimeout) throws IOException {
+		return doPost(url, params, fileParams, charset, connectTimeout, readTimeout, null);
 	}
 
 	/**
@@ -133,28 +175,39 @@ public abstract class WebUtils {
 	 * @param textParams 文本请求参数
 	 * @param fileParams 文件请求参数
 	 * @param charset 字符集，如UTF-8, GBK, GB2312
+	 * @param headerMap 需要传递的header头，可以为空
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doPost(String url, Map<String, String> params,
-			Map<String, FileItem> fileParams, String charset,int connectTimeout,int readTimeout) throws IOException {
+	public static String doPost(String url, Map<String, String> params, Map<String, FileItem> fileParams,
+			String charset, int connectTimeout, int readTimeout, Map<String, String> headerMap) throws IOException {
+		if (fileParams == null || fileParams.isEmpty()) {
+			return doPost(url, params, charset, connectTimeout, readTimeout, headerMap);
+		} else {
+			return _doPostWithFile(url, params, fileParams, charset, connectTimeout, readTimeout, headerMap);
+		}
+
+	}
+
+	private static String _doPostWithFile(String url, Map<String, String> params, Map<String, FileItem> fileParams,
+			String charset, int connectTimeout, int readTimeout, Map<String, String> headerMap) throws IOException {
 		String boundary = System.currentTimeMillis() + ""; // 随机分隔线
 		HttpURLConnection conn = null;
 		OutputStream out = null;
-		String rsp = null;		
+		String rsp = null;
 		try {
-			try{
+			try {
 				String ctype = "multipart/form-data;charset=" + charset + ";boundary=" + boundary;
-				conn = getConnection(new URL(url), METHOD_POST, ctype);
+				conn = getConnection(new URL(url), METHOD_POST, ctype, headerMap);
 				conn.setConnectTimeout(connectTimeout);
 				conn.setReadTimeout(readTimeout);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, url,map.get("app_key"),map.get("method"), params);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, url, map.get("app_key"), map.get("method"), params);
 				throw e;
 			}
-			
-			try{
+
+			try {
 				out = conn.getOutputStream();
 
 				byte[] entryBoundaryBytes = ("\r\n--" + boundary + "\r\n").getBytes(charset);
@@ -171,8 +224,10 @@ public abstract class WebUtils {
 				Set<Entry<String, FileItem>> fileEntrySet = fileParams.entrySet();
 				for (Entry<String, FileItem> fileEntry : fileEntrySet) {
 					FileItem fileItem = fileEntry.getValue();
-					byte[] fileBytes = getFileEntry(fileEntry.getKey(), fileItem.getFileName(),
-							fileItem.getMimeType(), charset);
+					if (fileItem.getContent() == null) {
+						continue;
+					}
+					byte[] fileBytes = getFileEntry(fileEntry.getKey(), fileItem.getFileName(), fileItem.getMimeType(), charset);
 					out.write(entryBoundaryBytes);
 					out.write(fileBytes);
 					out.write(fileItem.getContent());
@@ -182,12 +237,11 @@ public abstract class WebUtils {
 				byte[] endBoundaryBytes = ("\r\n--" + boundary + "--\r\n").getBytes(charset);
 				out.write(endBoundaryBytes);
 				rsp = getResponseAsString(conn);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, conn,map.get("app_key"),map.get("method"), params);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, conn, map.get("app_key"), map.get("method"), params);
 				throw e;
 			}
-			
 		} finally {
 			if (out != null) {
 				out.close();
@@ -200,8 +254,7 @@ public abstract class WebUtils {
 		return rsp;
 	}
 
-	private static byte[] getTextEntry(String fieldName, String fieldValue, String charset)
-			throws IOException {
+	private static byte[] getTextEntry(String fieldName, String fieldValue, String charset) throws IOException {
 		StringBuilder entry = new StringBuilder();
 		entry.append("Content-Disposition:form-data;name=\"");
 		entry.append(fieldName);
@@ -210,8 +263,8 @@ public abstract class WebUtils {
 		return entry.toString().getBytes(charset);
 	}
 
-	private static byte[] getFileEntry(String fieldName, String fileName, String mimeType,
-			String charset) throws IOException {
+	private static byte[] getFileEntry(String fieldName, String fileName, String mimeType, String charset)
+			throws IOException {
 		StringBuilder entry = new StringBuilder();
 		entry.append("Content-Disposition:form-data;name=\"");
 		entry.append(fieldName);
@@ -244,30 +297,29 @@ public abstract class WebUtils {
 	 * @return 响应字符串
 	 * @throws IOException
 	 */
-	public static String doGet(String url, Map<String, String> params, String charset)
-			throws IOException {
+	public static String doGet(String url, Map<String, String> params, String charset) throws IOException {
 		HttpURLConnection conn = null;
 		String rsp = null;
 
 		try {
 			String ctype = "application/x-www-form-urlencoded;charset=" + charset;
 			String query = buildQuery(params, charset);
-			try{
-				conn = getConnection(buildGetUrl(url, query), METHOD_GET, ctype);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, url,map.get("app_key"),map.get("method"), params);
+			try {
+				conn = getConnection(buildGetUrl(url, query), METHOD_GET, ctype, null);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, url, map.get("app_key"), map.get("method"), params);
 				throw e;
 			}
-			
-			try{
+
+			try {
 				rsp = getResponseAsString(conn);
-			}catch(IOException e){
-				Map<String, String> map=getParamsFromUrl(url);
-				TaobaoLogger.logCommError(e, conn,map.get("app_key"),map.get("method"), params);
+			} catch (IOException e) {
+				Map<String, String> map = getParamsFromUrl(url);
+				TaobaoLogger.logCommError(e, conn, map.get("app_key"), map.get("method"), params);
 				throw e;
 			}
-			
+
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -277,18 +329,41 @@ public abstract class WebUtils {
 		return rsp;
 	}
 
-	private static HttpURLConnection getConnection(URL url, String method, String ctype)
-			throws IOException {
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	private static HttpURLConnection getConnection(URL url, String method, String ctype, Map<String, String> headerMap) throws IOException {
+		HttpURLConnection conn = null;
+		if ("https".equals(url.getProtocol())) {
+			SSLContext ctx = null;
+			try {
+				ctx = SSLContext.getInstance("TLS");
+				ctx.init(new KeyManager[0], new TrustManager[] { new DefaultTrustManager() }, new SecureRandom());
+			} catch (Exception e) {
+				throw new IOException(e);
+			}
+			HttpsURLConnection connHttps = (HttpsURLConnection) url.openConnection();
+			connHttps.setSSLSocketFactory(ctx.getSocketFactory());
+			connHttps.setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String hostname, SSLSession session) {
+					return true;// 默认都认证通过
+				}
+			});
+			conn = connHttps;
+		} else {
+			conn = (HttpURLConnection) url.openConnection();
+		}
+
 		conn.setRequestMethod(method);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 		conn.setRequestProperty("Accept", "text/xml,text/javascript,text/html");
 		conn.setRequestProperty("User-Agent", "top-sdk-java");
 		conn.setRequestProperty("Content-Type", ctype);
+		if (headerMap != null) {
+			for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+				conn.setRequestProperty(entry.getKey(), entry.getValue());
+			}
+		}
 		return conn;
 	}
-	
 
 	private static URL buildGetUrl(String strUrl, String query) throws IOException {
 		URL url = new URL(strUrl);
@@ -357,16 +432,16 @@ public abstract class WebUtils {
 
 	private static String getStreamAsString(InputStream stream, String charset) throws IOException {
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream, charset));
-			StringWriter writer = new StringWriter();
+			Reader reader = new InputStreamReader(stream, charset);
+			StringBuilder response = new StringBuilder();
 
-			char[] chars = new char[256];
-			int count = 0;
-			while ((count = reader.read(chars)) > 0) {
-				writer.write(chars, 0, count);
+			final char[] buff = new char[1024];
+			int read = 0;
+			while ((read = reader.read(buff)) > 0) {
+				response.append(buff, 0, read);
 			}
 
-			return writer.toString();
+			return response.toString();
 		} finally {
 			if (stream != null) {
 				stream.close();
@@ -455,15 +530,16 @@ public abstract class WebUtils {
 	}
 
 	private static Map<String, String> getParamsFromUrl(String url) {
-		Map<String,String> map=null;
-		if(url!=null&&url.indexOf('?')!=-1){
-			map=splitUrlQuery(url.substring(url.indexOf('?')+1));
+		Map<String, String> map = null;
+		if (url != null && url.indexOf('?') != -1) {
+			map = splitUrlQuery(url.substring(url.indexOf('?') + 1));
 		}
-		if(map==null){
-			map=new HashMap<String,String>();
+		if (map == null) {
+			map = new HashMap<String, String>();
 		}
 		return map;
 	}
+
 	/**
 	 * 从URL中提取所有的参数。
 	 * 
@@ -485,5 +561,5 @@ public abstract class WebUtils {
 
 		return result;
 	}
-	
+
 }

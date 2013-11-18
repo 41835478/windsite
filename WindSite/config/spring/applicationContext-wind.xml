@@ -149,7 +149,9 @@
 		<!--正式容器地址 -->
 		<property name="taobaoContainer" value="http://container.open.taobao.com/container" />
 		<!--REST正式地址 -->
-		<property name="taobaoUrl" value="http://110.75.69.11/router/rest" />
+		<property name="taobaoUrl" value="http://gw.api.taobao.com/router/rest" />
+		<!--<property name="taobaoUrl" value="https://eco.taobao.com/rest" />-->
+		
 		<!--目前支持的API集合 -->
 		<property name="API">
 			<map>

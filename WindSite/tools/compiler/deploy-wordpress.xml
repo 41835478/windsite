@@ -15,6 +15,6 @@
 		<copy todir="${WORDPRESS}/xintaoke/wp-xintaoke">
 			<fileset dir="${xintaoke}" excludes="**/.svn/**" />
 		</copy>
-		<zip destfile="${ZIP}/wp-xintaoke1.1.1.zip" basedir="${WORDPRESS}/xintaoke" update="true" />
+		<zip destfile="${ZIP}/wp-xintaoke1.1.2.zip" basedir="${WORDPRESS}/xintaoke" update="true" />
 	</target>
 </project>

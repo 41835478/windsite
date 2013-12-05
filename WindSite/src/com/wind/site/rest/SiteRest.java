@@ -961,34 +961,37 @@ public class SiteRest {
 			}
 			// 查询同类店铺
 			if (cid != null) {
-				TaobaokeShopsGetRequest shopGetRequest = new TaobaokeShopsGetRequest();
-				try {
-					shopGetRequest.setCid(Long.valueOf(cid));
-				} catch (Exception e) {
-				}
-				shopGetRequest.setStartCredit("3crown");
-				shopGetRequest.setEndCredit("5goldencrown");
-				shopGetRequest.setFields(TaobaoFetchUtil.TAOBAOKESHOP_FIELDS);
-				shopGetRequest.setNick((String) result.get("nick"));
-				shopGetRequest.setPageNo(1L);
-				shopGetRequest.setPageSize(Long.valueOf(10));
-				TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil
-						.shopsGet(String.valueOf(result.get("appKey")),
-								String.valueOf(result.get("appSecret")),
-								String.valueOf(result.get("appType")),
-								shopGetRequest,
-								String.valueOf(result.get("pid")));
-				if (shopGetResponse != null) {
-					if (shopGetResponse.isSuccess()) {
-						Long total = shopGetResponse.getTotalResults();
-						if (total != null && total > 0) {
-							List<TaobaokeShop> shops = shopGetResponse
-									.getTaobaokeShops();
-							result.put("shops", shops);
-							// 本地查询结束
-						}
-					}
-				}
+				List<TaobaokeShop> shops = new ArrayList<TaobaokeShop>();
+				result.put("shops", shops);
+				// TaobaokeShopsGetRequest shopGetRequest = new
+				// TaobaokeShopsGetRequest();
+				// try {
+				// shopGetRequest.setCid(Long.valueOf(cid));
+				// } catch (Exception e) {
+				// }
+				// shopGetRequest.setStartCredit("3crown");
+				// shopGetRequest.setEndCredit("5goldencrown");
+				// shopGetRequest.setFields(TaobaoFetchUtil.TAOBAOKESHOP_FIELDS);
+				// shopGetRequest.setNick((String) result.get("nick"));
+				// shopGetRequest.setPageNo(1L);
+				// shopGetRequest.setPageSize(Long.valueOf(10));
+				// TaobaokeShopsGetResponse shopGetResponse = TaobaoFetchUtil
+				// .shopsGet(String.valueOf(result.get("appKey")),
+				// String.valueOf(result.get("appSecret")),
+				// String.valueOf(result.get("appType")),
+				// shopGetRequest,
+				// String.valueOf(result.get("pid")));
+				// if (shopGetResponse != null) {
+				// if (shopGetResponse.isSuccess()) {
+				// Long total = shopGetResponse.getTotalResults();
+				// if (total != null && total > 0) {
+				// List<TaobaokeShop> shops = shopGetResponse
+				// .getTaobaokeShops();
+				// result.put("shops", shops);
+				// // 本地查询结束
+				// }
+				// }
+				// }
 			}
 			// File file = new File(EnvManager.getUserPath("shop" + userId)
 			// + "shopDetail.html");
@@ -1160,14 +1163,15 @@ public class SiteRest {
 		String userId = request.getParameter("USER");
 		WindSiteRestUtil.covertPID(siteService, result, userId);
 		// 详情
-//		TaobaokeItemsDetailGetRequest getRequest = new TaobaokeItemsDetailGetRequest();
-//		getRequest.setNick((String) result.get("nick"));// 昵称
-//		getRequest.setNumIids(nid);
-//		getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
-//		getRequest.setOuterCode(EnvManager.getItemsOuterCode());
-//		TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
-//				.getItemsDetail(null, null, null, getRequest,
-//						String.valueOf(result.get("pid")));
+		// TaobaokeItemsDetailGetRequest getRequest = new
+		// TaobaokeItemsDetailGetRequest();
+		// getRequest.setNick((String) result.get("nick"));// 昵称
+		// getRequest.setNumIids(nid);
+		// getRequest.setFields(TaobaoFetchUtil.DETAIL_FIELDS);
+		// getRequest.setOuterCode(EnvManager.getItemsOuterCode());
+		// TaobaokeItemsDetailGetResponse getResponse = TaobaoFetchUtil
+		// .getItemsDetail(null, null, null, getRequest,
+		// String.valueOf(result.get("pid")));
 		Item tbItem = TaobaoFetchUtil.taobaoItemGet(null, Long.parseLong(nid));
 		if (tbItem == null) {
 			try {
@@ -1177,17 +1181,17 @@ public class SiteRest {
 			} catch (Exception e) {
 			}
 		}
-//		List<TaobaokeItemDetail> itemList = getResponse
-//				.getTaobaokeItemDetails();
-//		if (itemList == null || itemList.size() != 1) {
-//			try {
-//				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-//				response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
-//						result, userId) + "error/item404");
-//			} catch (Exception e) {
-//			}
-//			// SystemException.handleMessageException("该商品已移除或者被卖家下架");
-//		}
+		// List<TaobaokeItemDetail> itemList = getResponse
+		// .getTaobaokeItemDetails();
+		// if (itemList == null || itemList.size() != 1) {
+		// try {
+		// response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+		// response.sendRedirect(WindSiteRestUtil.getUrl(siteService,
+		// result, userId) + "error/item404");
+		// } catch (Exception e) {
+		// }
+		// // SystemException.handleMessageException("该商品已移除或者被卖家下架");
+		// }
 		TaobaokeItemDetail item = TaobaoFetchUtil
 				.convertItemToTaobaokeItemDetail(tbItem);// 单个商品
 		List<TradeRate> rates = new ArrayList<TradeRate>();
@@ -2245,6 +2249,62 @@ public class SiteRest {
 		// logger.info("sign error|淘宝业务签名错误");
 		// logger.info("_sign:" + topSign);
 		// }
+	}
+
+	@RequestMapping(value = "/loginXT", method = RequestMethod.POST)
+	@ResponseBody
+	private String loginXT(HttpServletRequest request,
+			HttpServletResponse response) {
+		String nick = request.getParameter("nick");
+		String pwd = request.getParameter("pwd");
+		if (StringUtils.isEmpty(nick)) {
+			SystemException.handleMessageException("会员名称不能为空");
+		}
+		if (StringUtils.isEmpty(pwd)) {
+			SystemException.handleMessageException("密码不能为空");
+		}
+		User user = siteService.findByCriterion(User.class, R.eq("nick", nick));
+		if (user == null) {
+			SystemException.handleMessageException("会员【" + nick + "】不存在");
+		}
+		if (!pwd.equals(user.getPassword())) {
+			SystemException.handleMessageException("密码不正确");
+		}
+		String appType = "1";
+		siteService.synUser(appType, user.getUser_id(), user.getNick(), null,
+				false, null, deployZone, fcg, widgetCustomer, pageService,
+				moduleMethod);
+		user = EnvManager.getUser();
+		if (user != null) {
+			Limit limit = user.getLimit();
+			if (limit != null && user.getUsb() != null) {
+				if (user.getUsb().getVersionNo() > 1) {// 如果是月租返利或者分成返利
+					limit.setPages(limit.getPages() + 5);// 页面限额
+					limit.setGroups(limit.getGroups() + 10);// 推广组
+					limit.setWidgets(limit.getWidgets() + 15);// 自定义组件
+					limit.setFavWidgets(limit.getFavWidgets() + 20);// 收藏组件
+					limit.setLayouts(limit.getLayouts() + 3);// 页面布局
+					limit.setModules(limit.getModules() + 18);// 页面模块
+					limit.setHeaders(limit.getHeaders() + 2);// 页头
+				} else if (user.getUsb().getVersionNo() == 3) {
+					limit.setPages(limit.getPages() + 10);// 页面限额
+					limit.setGroups(limit.getGroups() + 20);// 推广组
+					limit.setWidgets(limit.getWidgets() + 30);// 自定义组件
+					limit.setFavWidgets(limit.getFavWidgets() + 40);// 收藏组件
+					limit.setLayouts(limit.getLayouts() + 3);// 页面布局
+					limit.setModules(limit.getModules() + 18);// 页面模块
+					limit.setHeaders(limit.getHeaders() + 2);// 页头
+				}
+				user.setLimit(limit);
+			}
+			EnvManager.setUser(user);
+			SiteImpl impl = EnvManager.getSites().get(user.getUser_id());
+			if (impl != null) {// 每次登录则更新最新的缓存数据
+				impl = siteService.getSiteImplByUserId(user.getUser_id());
+				EnvManager.getSites().put(user.getUser_id(), impl);
+			}
+		}
+		return WindSiteRestUtil.SUCCESS;
 	}
 
 	private Boolean validateTaobao(HttpServletRequest request) {

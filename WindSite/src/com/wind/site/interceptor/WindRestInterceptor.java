@@ -165,15 +165,15 @@ public class WindRestInterceptor extends HandlerInterceptorAdapter {
 					siteService.synVersionNo(EnvManager.getUser(), EnvManager
 							.getUser().getNick(), false);
 				}
-				if (EnvManager.getUser().getLimit() == null
-						|| EnvManager.getUser().getUsb() == null) {// 如果限额为空或者订购信息为空
-					return unLogin(request, response);
-				}
-				if (uri.indexOf("/taobao") != -1
-						&& !StringUtils.isNotEmpty(EnvManager
-								.getTaobaoSession())) {// 如果淘宝Session不存在,导航至登录
-					return unLogin(request, response);
-				}
+//				if (EnvManager.getUser().getLimit() == null
+//						|| EnvManager.getUser().getUsb() == null) {// 如果限额为空或者订购信息为空
+//					return unLogin(request, response);
+//				}
+//				if (uri.indexOf("/taobao") != -1
+//						&& !StringUtils.isNotEmpty(EnvManager
+//								.getTaobaoSession())) {// 如果淘宝Session不存在,导航至登录
+//					return unLogin(request, response);
+//				}
 				if (!"admin".equals(EnvManager.getUser().getRole())
 						&& isPuji(uri, request)
 						&& (EnvManager.getUser().getUsb().getVersionNo() < 1.5)) {

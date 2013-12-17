@@ -3,7 +3,7 @@ function openLoginXTDialog(url) {
 	$('body')
 			.append('<div id="loginXTDialog" title="会员登录"><table><tr height=30px><td width="110px" height=30px><span style="color: red">*</span> 会员名</td><td><input type="text" style="padding:2px;" id="username" name="username" value=""></td></tr>'
 					+ '<tr height=30px><td width="110px" height=30px><span style="color: red">*</span> 密码</td><td><input type="password"  style="padding:2px;" id="pwd" name="pwd" value=""></td></tr>'
-					+ '<tr><td colspan=2 height=40px align=center><span class="btn btn-ok"><input type="button" value="登录"></span>&nbsp;&nbsp;&nbsp;<a href="/router/fanli/registe" style="color:#f30;" target="_blank">联系管理员QQ：153647646 获取账号，密码</a>&nbsp;&nbsp;&nbsp;</td></tr></table>');
+					+ '<tr><td colspan=2 height=40px align=center><span class="btn btn-ok"><input type="button" value="登录"></span>&nbsp;&nbsp;&nbsp;分成版会员请联系管理员QQ：153647646 获取账号，密码&nbsp;&nbsp;&nbsp;</td></tr></table></div>');
 	$('#loginXTDialog .btn-ok').hover(function() {
 				$(this).removeClass('btn-ok-hover').addClass('btn-ok-hover');
 			}, function() {
@@ -25,7 +25,7 @@ function openLoginXTDialog(url) {
 					return;
 				}
 				$(this).addClass('btn-ok-disabled');
-				loginFanliMember(username, pwd, url);
+				loginXT(username, pwd, url);
 			});
 	$('#loginXTDialog').dialog({
 				bgiframe : true,
@@ -40,8 +40,8 @@ function openLoginXTDialog(url) {
 function loginXT(username, pwd, url) {
 	var sender = new WindSender("/router/site/loginXT");
 	sender.load("POST", {
-				username : username,
-				password : pwd
+				nick : username,
+				pwd : pwd
 			}, function(response) {
 				if (response.isSuccess()) {
 					if (url) {

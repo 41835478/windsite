@@ -168,7 +168,7 @@ $(function() {
 
 </style>
 <div class="fm-item"><a class="btn-web-account" href="${taobaoEnv.container}" title="适合普及版，返利版(月租型)，卖家版">登录淘客卖家联盟</a><br/><span>适合普及版，返利版(月租型)，卖家版</span></div>
-<div class="fm-item"><a class="btn-web-account" href="http://container.open.taobao.com/container?appkey=12194773" title="适合返利版(分成型)">登录淘客分成版</a><br/><span>适合分成型</span></div>
+<div class="fm-item"><a class="btn-web-account" href="javascript:openLoginXTDialog();" title="适合返利版(分成型)">登录淘客分成版</a><br/><span>适合分成型</span></div>
 </div>
 <div id="wrap">
 	<div id="site-nav-bg">

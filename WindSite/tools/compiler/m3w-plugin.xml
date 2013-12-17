@@ -1,0 +1,230 @@
+<project basedir="." default="compile">
+	<property file="m3w-plugin.properties" />
+	<scriptdef name="generateguid" language="javascript">
+		<attribute name="property" />
+		<![CDATA[
+		    importClass( java.util.UUID );
+			//JS
+		    project.setProperty("m3w.adapter.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.background.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.constant.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.loader.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.main.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.mobilize.plugin.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.preview.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.simulator.min.js", UUID.randomUUID()+".js" );
+			project.setProperty("m3w.widget.min.js", UUID.randomUUID()+".js" );
+		
+			//第三方
+			project.setProperty("jquery-1.9.1.min.js", UUID.randomUUID()+".js" );
+			
+			//CSS
+			project.setProperty("m3w_mobilize.ios.min.css", UUID.randomUUID()+".css" );
+			project.setProperty("m3w_chrome_plugin_simulator.css", UUID.randomUUID()+".css" );
+			project.setProperty("m3w_chrome_plugin.css", UUID.randomUUID()+".css" );
+		    ]]>
+	</scriptdef>
+
+	<generateguid />
+	<path id="jscrambler.classpath">
+		<fileset dir="lib/third/" includes="*.jar" />
+	</path>
+	<path id="yuiClasspath">
+		<fileset dir="lib">
+			<include name="yuicompressor-2.4.2.jar" />
+			<include name="YUIAnt.jar" />
+		</fileset>
+	</path>
+	<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+		<classpath>
+			<path refid="yuiClasspath" />
+		</classpath>
+	</taskdef>
+
+	<target name="compile" depends="dest" />
+
+	<!-- whitespace simple advanced -->
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<taskdef name="m3wjscrambler" classname="com.dheaven.m3w.ant.task.JscramblerUploadTask" classpath="lib/m3w.jscrambler.jar" classpathref="jscrambler.classpath" />
+
+
+	<target name="clean">
+		<delete dir="${deploy}${version}/development/" />
+		<delete dir="${deploy}${version}/production/" />
+	</target>
+
+	<target name="dest" depends="clean">
+		<!--开发版本-->
+		<copy todir="${deploy}${version}/development/">
+			<fileset dir="${plugin}" excludes="**/*.js,**/*.css,**/setting/**" />
+		</copy>
+		<!--css-->
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${deploy}${version}/development/css/">
+			<fileset dir="${plugin}/css/">
+				<include name="m3w_chrome_plugin.css" />
+				<include name="m3w_chrome_plugin_simulator.css" />
+			</fileset>
+		</yuicompress>
+		<copy todir="${deploy}${version}/development/css/">
+			<fileset dir="${plugin}/css" includes="m3w_mobilize.ios.min.css" />
+		</copy>
+
+		<!--JS-->
+		<copy todir="${deploy}${version}/development/scripts/">
+			<fileset dir="${plugin}/scripts" includes="jquery-1.9.1.min.js" />
+		</copy>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.adapter.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.adapter.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.background.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.background.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.constant.min.js">
+			<sources dir="${source}/js">
+				<file name="m3w.constant.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.loader.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.loader.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.main.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.main.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.mobilize.plugin.min.js">
+			<sources dir="${source}/js/">
+				<file name="m3w.core.js" />
+				<file name="m3w.core.widget.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.preview.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.preview.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.simulator.min.js">
+			<sources dir="${plugin}/scripts/">
+				<file name="m3w.simulator.debug.js" />
+			</sources>
+		</jscomp>
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${deploy}${version}/development/scripts/m3w.widget.min.js">
+			<sources dir="${source}/js/">
+				<file name="m3w.widget.js" />
+			</sources>
+		</jscomp>
+		<!--文件名替换-->
+		<!--[m3w.loader.js]-->
+		<replace file="${deploy}${version}/development/scripts/m3w.loader.min.js" token=".debug.js" value=".min.js" />
+		<!--[background.html]-->
+		<replace file="${deploy}${version}/development/background.html" token=".debug.js" value=".min.js" />
+		<!--[manifest.json]-->
+		<replace file="${deploy}${version}/development/manifest.json" token=".debug.js" value=".min.js" />
+
+
+		<!--产品版本-->
+		<copy todir="${deploy}${version}/production/">
+			<fileset dir="${deploy}${version}/development/" />
+		</copy>
+
+		<!--文件名替换-->
+		<!--[m3w.loader.js]加密前就替换-->
+		<replace file="${deploy}${version}/production/scripts/m3w.loader.min.js">
+			<!-- JS -->
+			<replacefilter token="jquery-1.9.1.min.js" value="${jquery-1.9.1.min.js}" />
+			<replacefilter token="m3w.adapter.min.js" value="${m3w.adapter.min.js}" />
+			<replacefilter token="m3w.background.min.js" value="${m3w.background.min.js}" />
+			<replacefilter token="m3w.constant.min.js" value="${m3w.constant.min.js}" />
+			<replacefilter token="m3w.min.js" value="${m3w.min.js}" />
+			<replacefilter token="m3w.loader.min.js" value="${m3w.loader.min.js}" />
+			<replacefilter token="m3w.mobilize.plugin.min.js" value="${m3w.mobilize.plugin.min.js}" />
+			<replacefilter token="m3w.main.min.js" value="${m3w.main.min.js}" />
+			<replacefilter token="m3w.preview.min.js" value="${m3w.preview.min.js}" />
+			<replacefilter token="m3w.simulator.min.js" value="${m3w.simulator.min.js}" />
+			<replacefilter token="m3w.widget.min.js" value="${m3w.widget.min.js}" />
+			<!-- CSS -->
+			<replacefilter token="m3w_mobilize.ios.min.css" value="${m3w_mobilize.ios.min.css}" />
+			<replacefilter token="m3w_chrome_plugin_simulator.css" value="${m3w_chrome_plugin_simulator.css}" />
+			<replacefilter token="m3w_chrome_plugin.css" value="${m3w_chrome_plugin.css}" />
+		</replace>
+
+		<!--压缩需要加密的js文件,插件后台(这里的三个文件。不能使用eval加密)-->
+		<zip destfile="${deploy}${version}/m3w.background.${version}.zip" update="true">
+			<fileset dir="${deploy}${version}/production/scripts/" includes="m3w.min.js,m3w.background.min.js,jquery-1.9.1.min.js" />
+		</zip>
+		<!--加密，下载，删除(不启用eval加密,即dictionary_compression="")-->
+		<m3wjscrambler dictionary_compression="" files="${deploy}${version}/m3w.background.${version}.zip" output="${deploy}${version}/m3w.background.${version}.output.zip" isDelete="true" sleep="${jscrambler.sleep}" apiHostname="${jscrambler.apiHostname}" accessKey="${jscrambler.accessKey}" secretKey="${jscrambler.secretKey}" port="${jscrambler.port}" />
+		<!--解压输出至产品版本-->
+		<unzip src="${deploy}${version}/m3w.background.${version}.output.zip" dest="${deploy}${version}/production/scripts/" overwrite="true" />
+
+		<!--压缩需要加密的js文件,非插件后台-->
+		<zip destfile="${deploy}${version}/m3w.${version}.zip" update="true">
+			<fileset dir="${deploy}${version}/production/scripts/" includes="m3w.mobilize.plugin.min.js,m3w.adapter.min.js,m3w.loader.min.js,m3w.main.min.js,m3w.preview.min.js,m3w.simulator.min.js,m3w.widget.min.js,m3w.constant.min.js" />
+		</zip>
+		<!--加密，下载，删除-->
+		<m3wjscrambler files="${deploy}${version}/m3w.${version}.zip" output="${deploy}${version}/m3w.${version}.output.zip" isDelete="true" sleep="${jscrambler.sleep}" apiHostname="${jscrambler.apiHostname}" accessKey="${jscrambler.accessKey}" secretKey="${jscrambler.secretKey}" port="${jscrambler.port}" />
+		<!--解压输出至产品版本-->
+		<unzip src="${deploy}${version}/m3w.${version}.output.zip" dest="${deploy}${version}/production/scripts/" overwrite="true" />
+		<!--随机文件名-->
+
+		<move tofile="${deploy}${version}/production/scripts/${jquery-1.9.1.min.js}" file="${deploy}${version}/production/scripts/jquery-1.9.1.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.adapter.min.js}" file="${deploy}${version}/production/scripts/m3w.adapter.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.background.min.js}" file="${deploy}${version}/production/scripts/m3w.background.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.constant.min.js}" file="${deploy}${version}/production/scripts/m3w.constant.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.min.js}" file="${deploy}${version}/production/scripts/m3w.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.loader.min.js}" file="${deploy}${version}/production/scripts/m3w.loader.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.main.min.js}" file="${deploy}${version}/production/scripts/m3w.main.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.mobilize.plugin.min.js}" file="${deploy}${version}/production/scripts/m3w.mobilize.plugin.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.preview.min.js}" file="${deploy}${version}/production/scripts/m3w.preview.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.simulator.min.js}" file="${deploy}${version}/production/scripts/m3w.simulator.min.js" />
+		<move tofile="${deploy}${version}/production/scripts/${m3w.widget.min.js}" file="${deploy}${version}/production/scripts/m3w.widget.min.js" />
+
+
+		<move tofile="${deploy}${version}/production/css/${m3w_mobilize.ios.min.css}" file="${deploy}${version}/production/css/m3w_mobilize.ios.min.css" />
+		<move tofile="${deploy}${version}/production/css/${m3w_chrome_plugin_simulator.css}" file="${deploy}${version}/production/css/m3w_chrome_plugin_simulator.css" />
+		<move tofile="${deploy}${version}/production/css/${m3w_chrome_plugin.css}" file="${deploy}${version}/production/css/m3w_chrome_plugin.css" />
+
+		<!--文件名替换-->
+		<!--[background.html]-->
+		<replace file="${deploy}${version}/production/background.html" token=".debug.js" value=".min.js">
+			<replacefilter token="jquery-1.9.1.min.js" value="${jquery-1.9.1.min.js}" />
+			<replacefilter token="m3w.background.min.js" value="${m3w.background.min.js}" />
+			<replacefilter token="m3w.min.js" value="${m3w.min.js}" />
+		</replace>
+		<!--[manifest.json]-->
+		<replace file="${deploy}${version}/production/manifest.json" token=".debug.js" value=".min.js">
+			<!-- JS -->
+			<replacefilter token="jquery-1.9.1.min.js" value="${jquery-1.9.1.min.js}" />
+			<replacefilter token="m3w.adapter.min.js" value="${m3w.adapter.min.js}" />
+			<replacefilter token="m3w.background.min.js" value="${m3w.background.min.js}" />
+			<replacefilter token="m3w.constant.min.js" value="${m3w.constant.min.js}" />
+			<replacefilter token="m3w.min.js" value="${m3w.min.js}" />
+			<replacefilter token="m3w.loader.min.js" value="${m3w.loader.min.js}" />
+			<replacefilter token="m3w.mobilize.plugin.min.js" value="${m3w.mobilize.plugin.min.js}" />
+			<replacefilter token="m3w.main.min.js" value="${m3w.main.min.js}" />
+			<replacefilter token="m3w.preview.min.js" value="${m3w.preview.min.js}" />
+			<replacefilter token="m3w.simulator.min.js" value="${m3w.simulator.min.js}" />
+			<replacefilter token="m3w.widget.min.js" value="${m3w.widget.min.js}" />
+			<!-- CSS -->
+			<replacefilter token="m3w_mobilize.ios.min.css" value="${m3w_mobilize.ios.min.css}" />
+			<replacefilter token="m3w_chrome_plugin_simulator.css" value="${m3w_chrome_plugin_simulator.css}" />
+			<replacefilter token="m3w_chrome_plugin.css" value="${m3w_chrome_plugin.css}" />
+		</replace>
+		<!--删除压缩文件-->
+		<delete>
+			<fileset dir="${deploy}${version}" includes="m3w.${version}.zip,m3w.${version}.output.zip,m3w.background.${version}.zip,m3w.background.${version}.output.zip" />
+		</delete>
+	</target>
+</project>

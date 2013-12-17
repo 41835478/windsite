@@ -1,95 +1,92 @@
-<project basedir="." default="compile">
+<project basedir="." default="compileAndJscrambler">
 	<property file="m3w-build.properties" />
-	<target name="compile" depends="dest.js,dest.css,target.copy,clean">
-	</target>
+	<scriptdef name="generateguid" language="javascript">
+		<attribute name="property" />
+		<![CDATA[
+	    importClass( java.util.UUID );
+		//JS
+	    project.setProperty("m3w.constant.js", UUID.randomUUID()+".js" );
+		project.setProperty("m3w.designer.js", UUID.randomUUID()+".js" );
+		project.setProperty("m3w.server.js", UUID.randomUUID()+".js" );
+		project.setProperty("m3w.site.js", UUID.randomUUID()+".js" );
+		project.setProperty("m3w.site.designer.js", UUID.randomUUID()+".js" );
+		project.setProperty("m3w.widget.editor.js", UUID.randomUUID()+".js" );
+		
+		//第三方
+		project.setProperty("jquery-2.0.3.min.js", UUID.randomUUID()+".js" );
+		project.setProperty("bootstrap.min.js", UUID.randomUUID()+".js" );
+		project.setProperty("bootstrap-editable.min.js", UUID.randomUUID()+".js" );
+		project.setProperty("bootstrap-slider.js", UUID.randomUUID()+".js" );
+		project.setProperty("jquery-ui-1.10.3.sortableanddraggable.min.js", UUID.randomUUID()+".js" );
+		project.setProperty("colpick.js", UUID.randomUUID()+".js" );
+		project.setProperty("typeahead.min.js", UUID.randomUUID()+".js" );
+		project.setProperty("hogan-2.0.0.min.js", UUID.randomUUID()+".js" );
+		
+		//CSS
+		project.setProperty("bootstrap.min.css", UUID.randomUUID()+".css" );
+		project.setProperty("bootstrap-editable.css", UUID.randomUUID()+".css" );
+		project.setProperty("slider.css", UUID.randomUUID()+".css" );
+		project.setProperty("colpick.css", UUID.randomUUID()+".css" );
+		project.setProperty("m3w_server.css", UUID.randomUUID()+".css" );
+		project.setProperty("m3w_preview.css", UUID.randomUUID()+".css" );
+	    ]]>
+	</scriptdef>
+
+	<generateguid />
+
+	<path id="jscrambler.classpath">
+		<fileset dir="lib/third/" includes="*.jar" />
+	</path>
+
+	<target name="compile" depends="dest.js,dest.css,target.copy,target.copy.template,clean" />
+	<target name="compileAndJscrambler" depends="dest.js,dest.css,target.copy,target.copy.template,target.jscrambler,target.jscrambler.clean" />
 	<!-- whitespace simple advanced -->
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="lib/compiler.jar" />
+	<taskdef name="m3wjscrambler" classname="com.dheaven.m3w.ant.task.JscramblerUploadTask" classpath="lib/m3w.jscrambler.jar" classpathref="jscrambler.classpath" />
 	<!--清理-->
 	<target name="clean">
 		<delete>
-			<fileset dir="${dest}/js/" includes="**/*.*" />
-			<fileset dir="${dest}/css/" includes="**/*.*" />
+			<fileset dir="${dest}/js/" includes="**/*.js" excludes="m3w_mobilize.template.js" />
+			<fileset dir="${dest}/css/" includes="**/*.css" />
 		</delete>
 	</target>
 	<target name="dest.js">
 		<!--m3w_mobilize.js-->
-		<copy tofile="${dest}/js/m3w_mobilize.debug.js">
-			<fileset dir="${source}/js/" includes="m3w_mobilize.js" />
+		<copy tofile="${dest}/js/m3w.widget.debug.js">
+			<fileset dir="${source}/js/" includes="m3w.widget.js" />
 		</copy>
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w_mobilize.min.js">
+		<copy tofile="${dest}/js/m3w.constant.debug.js">
+			<fileset dir="${source}/js/" includes="m3w.constant.js" />
+		</copy>
+		<!--该JS是用户发布时需要合并的(即最终用户要引用的JS) , 在该脚本内，需要加密该文件-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.mobilize.template.js">
 			<sources dir="${source}/js/">
 				<file name="m3w_mobilize.js" />
 				<file name="m3w.filter.js" />
 			</sources>
 		</jscomp>
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/dx.phonejs.m3w.min.js">
-			<sources dir="${source}/js/">
-				<file name="dx.phonejs.m3w.debug.js" />
-			</sources>
-		</jscomp>
-
-		<!--dx.phonejs.debug.js,dx.phonejs.m3w.debug.js-->
-		<concat destfile="${dest}/js/m3w_mobilize.phonejs.debug.js" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${source}/js/" files="dx.phonejs.debug.js,dx.phonejs.m3w.debug.js" />
+		<!--debug版本-->
+		<concat destfile="${dest}/js/m3w.mobilize.template.debug.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${source}/js/" files="m3w_mobilize.js,m3w.filter.js" />
 		</concat>
-		<concat destfile="${dest}/js/m3w_mobilize.phonejs.min.js" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${source}/js/" files="dx.phonejs.min.js" />
-			<filelist dir="${dest}/js/" files="dx.phonejs.m3w.min.js" />
-		</concat>
-		<!--utils-->
-		<copy tofile="${dest}/js/jquery-1.9.1.min.js">
-			<fileset dir="${source}/js/" includes="jquery-1.9.1.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/globalize.min.js">
-			<fileset dir="${source}/js/" includes="globalize.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/knockout-2.2.1.min.js">
-			<fileset dir="${source}/js/" includes="knockout-2.2.1.js" />
-		</copy>
-		<copy tofile="${dest}/js/bootstrap.min.js">
-			<fileset dir="${source}/js/" includes="bootstrap.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/bootstrap-editable.min.js">
-			<fileset dir="${source}/js/" includes="bootstrap-editable.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/jquery-ui-1.10.3.min.js">
-			<fileset dir="${source}/js/" includes="jquery-ui-1.10.3.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/jquery-ui-1.10.3.sortableanddraggable.min.js">
-			<fileset dir="${source}/js/" includes="jquery-ui-1.10.3.sortableanddraggable.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/jquery.htmlClean.min.js">
-			<fileset dir="${source}/js/" includes="jquery.htmlClean.min.js" />
-		</copy>
-		<copy tofile="${dest}/js/m3w.constant.js">
-			<fileset dir="${source}/js/" includes="m3w.constant.js" />
-		</copy>
-		<copy tofile="${dest}/js/m3w.widget.debug.js">
-			<fileset dir="${source}/js/" includes="m3w.widget.js" />
-		</copy>
-		<copy tofile="${dest}/js/m3w.filter.debug.js">
-			<fileset dir="${source}/js/" includes="m3w.filter.js" />
-		</copy>
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.widget.min.js">
+		<!--该JS是核心JS[MIN](站点引用的JS需要调用该核心JS)，在该脚本内，需要拷贝到服务端的script内-->
+		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.mobilize.min.js">
 			<sources dir="${source}/js/">
+				<file name="zepto.js" />
+				<file name="m3w.core.js" />
+				<file name="m3w.core.widget.js" />
 				<file name="m3w.widget.js" />
 			</sources>
 		</jscomp>
-		<jscomp compilationLevel="simple" warning="quiet" debug="false" output="${dest}/js/m3w.filter.min.js">
-			<sources dir="${source}/js/">
-				<file name="m3w.filter.js" />
-			</sources>
-		</jscomp>
-		<!-- m3w mobilize all min -->
-		<concat destfile="${dest}/js/m3w_mobilize.core.mobile.min.js" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,m3w_mobilize.phonejs.min.js,m3w.widget.min.js" />
-			<!--<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,knockout-2.2.1.min.js,globalize.min.js,m3w_mobilize.phonejs.min.js,m3w.widget.min.js" />-->
+		<!--该JS是插件内的核心JS[DEBUG](仅需m3w.core.js和m3w.core.widget.js)，需要拷贝到插件的script内-->
+		<concat destfile="${dest}/js/m3w.mobilize.plugin.debug.js" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${source}/js/" files="m3w.core.js,m3w.core.widget.js" />
 		</concat>
-		<!-- m3w mobilize all debug-->
-		<concat destfile="${dest}/js/m3w_mobilize.core.mobile.debug.js" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,m3w_mobilize.phonejs.debug.js,m3w.widget.debug.js" />
-			<!--<filelist dir="${dest}/js/" files="jquery-1.9.1.min.js,knockout-2.2.1.min.js,globalize.min.js,m3w_mobilize.phonejs.debug.js,m3w.widget.debug.js" />-->
-		</concat>
+
+		<!--utils-->
+		<copy todir="${dest}/js/">
+			<fileset dir="${source}/js/" includes="m3w.constant.js,m3w.designer.js,m3w.server.js,m3w.site.js,m3w.site.designer.js,m3w.widget.editor.js,jquery-1.9.1.min.js,jquery-2.0.3.min.js,bootstrap.min.js,bootstrap-editable.min.js,bootstrap-slider.js,jquery-ui-1.10.3.sortableanddraggable.min.js,colpick.js,typeahead.min.js,hogan-2.0.0.min.js" />
+		</copy>
 	</target>
 	<path id="yuiClasspath">
 		<fileset dir="lib">
@@ -116,10 +113,20 @@
 				<path refid="yuiClasspath" />
 			</classpath>
 		</taskdef>
+		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
+			<fileset dir="${source}/css/">
+				<include name="bootstrap.min.css" />
+				<include name="bootstrap-editable.css" />
+				<include name="slider.css" />
+				<include name="colpick.css" />
+				<include name="m3w_server.css" />
+				<include name="m3w_preview.css" />
+			</fileset>
+		</yuicompress>
 		<!--dx mobile css-->
 		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
 			<fileset dir="${source}/css/">
-				<include name="dx.m3w.default.css" />
+				<include name="m3w.default.css" />
 			</fileset>
 		</yuicompress>
 		<yuicompress linebreak="1000" warn="true" munge="yes" preserveallsemicolons="true" outputfolder="${dest}/css">
@@ -129,36 +136,20 @@
 		</yuicompress>
 		<copy todir="${dest}/css/">
 			<fileset dir="${source}/css/">
-				<include name="dx.common.css" />
-				<include name="dx.ios.default.css" />
-				<include name="dx.android.holo-dark.css" />
-				<include name="dx.win8.black.small.css" />
+				<include name="m3w.common.css" />
+				<include name="m3w.ios.default.css" />
 			</fileset>
 		</copy>
 		<!--dx ios min css-->
-		<concat destfile="${dest}/css/m3w_mobilize.dx.ios.default.min.css" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/css/" files="dx.common.css,dx.ios.default.css,dx.m3w.default.css" />
-		</concat>
-		<!--dx android min css-->
-		<concat destfile="${dest}/css/m3w_mobilize.dx.android.holo-dark.min.css" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/css/" files="dx.common.css,dx.android.holo-dark.css,dx.m3w.default.css" />
-		</concat>
-		<!--dx win8 min css-->
-		<concat destfile="${dest}/css/m3w_mobilize.dx.win8.black.small.min.css" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/css/" files="dx.common.css,dx.win8.black.small.css,dx.m3w.default.css" />
-		</concat>
-		<!--dx all min css-->
-		<concat destfile="${dest}/css/m3w_mobilize.dx.mobile.all.min.css" fixlastline="true" encoding="UTF-8">
-			<filelist dir="${dest}/css/" files="dx.common.css,dx.ios.default.css,dx.android.holo-dark.css,dx.win8.black.small.css,dx.m3w.default.css" />
+		<concat destfile="${dest}/css/m3w_mobilize.ios.min.css" fixlastline="true" encoding="UTF-8">
+			<filelist dir="${dest}/css/" files="m3w.common.css,m3w.ios.default.css,m3w.default.css" />
 		</concat>
 		<!--delete min css-->
 		<delete>
 			<fileset dir="${dest}/css/">
-				<include name="dx.common.css" />
-				<include name="dx.ios.default.css" />
-				<include name="dx.android.holo-dark.css" />
-				<include name="dx.win8.black.small.css" />
-				<include name="dx.m3w.default.css" />
+				<include name="m3w.common.css" />
+				<include name="m3w.ios.default.css" />
+				<include name="m3w.default.css" />
 			</fileset>
 		</delete>
 	</target>
@@ -167,26 +158,15 @@
 		<copy todir="${plugin}/scripts/">
 			<fileset dir="${dest}/js/">
 				<include name="jquery-1.9.1.min.js" />
-				<include name="bootstrap.min.js" />
-				<include name="bootstrap-editable.min.js" />
-				<include name="jquery.htmlClean.min.js" />
-				<include name="knockout-2.2.1.min.js" />
-				<include name="globalize.min.js" />
-				<include name="jquery-ui-1.10.3.sortableanddraggable.min.js" />
-				<include name="m3w_mobilize.phonejs.debug.js" />
-				<include name="m3w_mobilize.phonejs.min.js" />
+				<include name="m3w.mobilize.plugin.debug.js" />
 				<include name="m3w.widget.debug.js" />
-				<include name="m3w.widget.min.js" />
-				<include name="m3w.filter.debug.js" />
-				<include name="m3w.filter.min.js" />
-				<include name="m3w.constant.js" />
+				<include name="m3w.constant.debug.js" />
 			</fileset>
 		</copy>
 		<!--M3W Plugin Css-->
 		<copy todir="${plugin}/css/">
 			<fileset dir="${dest}/css/">
-				<include name="m3w_mobilize.dx.mobile.all.min.css" />
-				<include name="m3w_mobilize.dx.ios.default.min.css" />
+				<include name="m3w_mobilize.ios.min.css" />
 			</fileset>
 		</copy>
 
@@ -198,34 +178,156 @@
 		</copy>
 		<copy todir="${template}">
 			<fileset dir="${dest}/js/">
-				<include name="m3w_mobilize.debug.js" />
-				<include name="m3w_mobilize.min.js" />
+				<include name="m3w.mobilize.template.debug.js" />
 			</fileset>
 		</copy>
 		<copy todir="${jsoutput}/m3w_mobilize/">
 			<fileset dir="${dest}/js/">
-				<include name="m3w_mobilize.core.mobile.min.js" />
-				<include name="m3w_mobilize.core.mobile.debug.js" />
-				<include name="m3w_mobile.min.js" />
-			</fileset>
-		</copy>
-		<copy todir="${jsoutput}/">
-			<fileset dir="${dest}/js/">
-				<include name="m3w.filter.debug.js" />
-				<include name="m3w.filter.min.js" />
-				<include name="m3w.widget.debug.js" />
-				<include name="m3w.widget.min.js" />
-				<include name="m3w.constant.js" />
+				<include name="m3w.mobilize.min.js" />
 			</fileset>
 		</copy>
 		<copy todir="${cssoutput}/m3w_mobilize/">
 			<fileset dir="${dest}/css/">
-				<include name="m3w_mobilize.dx.mobile.all.min.css" />
-				<include name="m3w_mobilize.dx.ios.default.min.css" />
-				<include name="m3w_mobilize.dx.android.holo-dark.min.css" />
-				<include name="m3w_mobilize.dx.win8.black.small.min.css" />
+				<include name="m3w_mobilize.ios.min.css" />
 				<include name="m3w.loadpanel.css" />
 			</fileset>
 		</copy>
+	</target>
+	<target name="target.copy.template">
+		<copy todir="${template}">
+			<fileset dir="${dest}/js/">
+				<include name="m3w.mobilize.template.debug.js" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="target.jscrambler">
+		<!--压缩需要加密的js文件-->
+		<zip destfile="${dest}/js/m3w.server.zip">
+			<fileset dir="${dest}/js/" includes="m3w.mobilize.min.js,m3w.mobilize.template.js,m3w.constant.js,m3w.designer.js,m3w.server.js,m3w.site.js,m3w.site.designer.js,m3w.widget.editor.js,jquery-2.0.3.min.js,bootstrap.min.js,bootstrap-editable.min.js,bootstrap-slider.js,jquery-ui-1.10.3.sortableanddraggable.min.js,colpick.js,typeahead.min.js,hogan-2.0.0.min.js" />
+		</zip>
+		<m3wjscrambler files="${dest}/js/m3w.server.zip" output="${dest}/js/m3w.server.output.zip" isDelete="true" sleep="${jscrambler.sleep}" apiHostname="${jscrambler.apiHostname}" accessKey="${jscrambler.accessKey}" secretKey="${jscrambler.secretKey}" port="${jscrambler.port}" />
+		<unzip src="${dest}/js/m3w.server.output.zip" dest="${dest}/js/server/" />
+		<!--引用的JS模板-->
+		<copy todir="${template}" overwrite="true">
+			<fileset dir="${dest}/js/server/">
+				<include name="m3w.mobilize.template.js" />
+			</fileset>
+		</copy>
+		<!--服务端核心JS-->
+		<copy todir="${jsoutput}/m3w_mobilize/" overwrite="true">
+			<fileset dir="${dest}/js/server/">
+				<include name="m3w.mobilize.min.js" />
+			</fileset>
+		</copy>
+		<!--删除以前的随机文件-->
+		<delete>
+			<fileset dir="${jsoutput}/" includes="**/*">
+				<filename regex="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.js" />
+			</fileset>
+		</delete>
+		<delete>
+			<fileset dir="${cssoutput}/" includes="**/*">
+				<filename regex="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.css" />
+			</fileset>
+		</delete>
+		<!--生成随机文件-->
+		<copy tofile="${jsoutput}/${m3w.constant.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.constant.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${m3w.designer.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.designer.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${m3w.server.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.server.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${m3w.site.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.site.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${m3w.site.designer.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.site.designer.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${m3w.widget.editor.js}">
+			<fileset dir="${dest}/js/server/" includes="m3w.widget.editor.js" />
+		</copy>
+
+		<!--生成第三方随机文件-->
+		<!-- JS -->
+		<copy tofile="${jsoutput}/${jquery-2.0.3.min.js}">
+			<fileset dir="${dest}/js/server/" includes="jquery-2.0.3.min.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${bootstrap.min.js}">
+			<fileset dir="${dest}/js/server/" includes="bootstrap.min.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${bootstrap-editable.min.js}">
+			<fileset dir="${dest}/js/server/" includes="bootstrap-editable.min.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${bootstrap-slider.js}">
+			<fileset dir="${dest}/js/server/" includes="bootstrap-slider.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${jquery-ui-1.10.3.sortableanddraggable.min.js}">
+			<fileset dir="${dest}/js/server/" includes="jquery-ui-1.10.3.sortableanddraggable.min.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${colpick.js}">
+			<fileset dir="${dest}/js/server/" includes="colpick.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${typeahead.min.js}">
+			<fileset dir="${dest}/js/server/" includes="typeahead.min.js" />
+		</copy>
+		<copy tofile="${jsoutput}/${hogan-2.0.0.min.js}">
+			<fileset dir="${dest}/js/server/" includes="hogan-2.0.0.min.js" />
+		</copy>
+		<!-- CSS -->
+		<copy tofile="${cssoutput}/${bootstrap.min.css}">
+			<fileset dir="${dest}/css/" includes="bootstrap.min.css" />
+		</copy>
+		<copy tofile="${cssoutput}/${bootstrap-editable.css}">
+			<fileset dir="${dest}/css/" includes="bootstrap-editable.css" />
+		</copy>
+		<copy tofile="${cssoutput}/${slider.css}">
+			<fileset dir="${dest}/css/" includes="slider.css" />
+		</copy>
+		<copy tofile="${cssoutput}/${colpick.css}">
+			<fileset dir="${dest}/css/" includes="colpick.css" />
+		</copy>
+		<copy tofile="${cssoutput}/${m3w_server.css}">
+			<fileset dir="${dest}/css/" includes="m3w_server.css" />
+		</copy>
+		<copy tofile="${cssoutput}/${m3w_preview.css}">
+			<fileset dir="${dest}/css/" includes="m3w_preview.css" />
+		</copy>
+		<!--替换常量-->
+		<copy tofile="${template}/../../config/production/constants.php" overwrite="true">
+			<fileset dir="${template}/../../config/development/" includes="constants.php" />
+		</copy>
+		<replace file="${template}/../../config/production/constants.php">
+			<!-- JS -->
+			<replacefilter token="m3w.constant.js" value="${m3w.constant.js}" />
+			<replacefilter token="m3w.designer.js" value="${m3w.designer.js}" />
+			<replacefilter token="m3w.server.js" value="${m3w.server.js}" />
+			<replacefilter token="m3w.site.js" value="${m3w.site.js}" />
+			<replacefilter token="m3w.site.designer.js" value="${m3w.site.designer.js}" />
+			<replacefilter token="m3w.widget.editor.js" value="${m3w.widget.editor.js}" />
+			<!--替换第三方-->
+			<replacefilter token="jquery-2.0.3.min.js" value="${jquery-2.0.3.min.js}" />
+			<replacefilter token="bootstrap.min.js" value="${bootstrap.min.js}" />
+			<replacefilter token="bootstrap-editable.min.js" value="${bootstrap-editable.min.js}" />
+			<replacefilter token="bootstrap-slider.js" value="${bootstrap-slider.js}" />
+			<replacefilter token="jquery-ui-1.10.3.sortableanddraggable.min.js" value="${jquery-ui-1.10.3.sortableanddraggable.min.js}" />
+			<replacefilter token="colpick.js" value="${colpick.js}" />
+			<replacefilter token="typeahead.min.js" value="${typeahead.min.js}" />
+			<replacefilter token="hogan-2.0.0.min.js" value="${hogan-2.0.0.min.js}" />
+			<!-- CSS -->
+			<replacefilter token="bootstrap.min.css" value="${bootstrap.min.css}" />
+			<replacefilter token="bootstrap-editable.css" value="${bootstrap-editable.css}" />
+			<replacefilter token="slider.css" value="${slider.css}" />
+			<replacefilter token="colpick.css" value="${colpick.css}" />
+			<replacefilter token="m3w_server.css" value="${m3w_server.css}" />
+			<replacefilter token="m3w_preview.css" value="${m3w_preview.css}" />
+		</replace>
+	</target>
+	<target name="target.jscrambler.clean">
+		<delete>
+			<fileset dir="${dest}/js/" includes="**/*.*" />
+		</delete>
 	</target>
 </project>

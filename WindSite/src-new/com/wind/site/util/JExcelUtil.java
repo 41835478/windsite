@@ -37,7 +37,7 @@ public class JExcelUtil {
 		try {
 			List<TaobaokeReportMember> members = readTaobao(new FileInputStream(
 					new File(
-							"/Users/fengxiaoyun/Downloads/Taokedetail-2013-08-16.xls")));
+							"/Users/fengxiaoyun/Downloads/Taokedetail-2014-04-06.xls")));
 			Gson gson = new Gson();
 			System.out.println(gson.toJson(members));
 
@@ -65,17 +65,17 @@ public class JExcelUtil {
 		INDEXS.put("item_commission", 13);
 		INDEXS.put("tmall_commission_rate", 14);
 		INDEXS.put("tmall_commission", 15);
-		INDEXS.put("commission_type", 16);
-		INDEXS.put("is_third", 17);
-		INDEXS.put("third", 18);
-		INDEXS.put("third_fee", 19);
-		INDEXS.put("trade_id", 20);
+		//INDEXS.put("commission_type", 16);
+		INDEXS.put("is_third", 16);
+		INDEXS.put("third", 17);
+		INDEXS.put("third_fee", 18);
+		INDEXS.put("trade_id", 19);
 
 		try {
 			Workbook workbook = Workbook.getWorkbook(in);
 			Sheet sheet = workbook.getSheet(0);
 			Integer columns = sheet.getColumns();// 列数
-			if (columns != 21) {
+			if (columns != 20) {
 				SystemException.handleMessageException("订单文件格式不正确【列数不正确】");
 			}
 			Integer rows = sheet.getRows();// 行数
@@ -102,7 +102,7 @@ public class JExcelUtil {
 							INDEXS.get("num_iid"), i).getContents()));
 					member.setPayPrice(sheet
 							.getCell(INDEXS.get("pay_price"), i).getContents());
-					String[] formats = { DateUtils.YYYY_MM_DD };
+					String[] formats = { DateUtils.yyyy_MM_DD_HH_MM_SS };
 					member.setPayTime(DateUtils.parseDate(
 							sheet.getCell(INDEXS.get("pay_time"), i)
 									.getContents(), formats));

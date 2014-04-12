@@ -47,6 +47,7 @@ import com.taobao.api.request.ItemGetRequest;
 import com.taobao.api.request.ItemcatsGetRequest;
 import com.taobao.api.request.ItempropsGetRequest;
 import com.taobao.api.request.ItempropvaluesGetRequest;
+import com.taobao.api.request.ItemsGetRequest;
 import com.taobao.api.request.ItemsSearchRequest;
 import com.taobao.api.request.PosterPosterdetailGetRequest;
 import com.taobao.api.request.PosterPostersSearchRequest;
@@ -73,6 +74,7 @@ import com.taobao.api.response.ItemGetResponse;
 import com.taobao.api.response.ItemcatsGetResponse;
 import com.taobao.api.response.ItempropsGetResponse;
 import com.taobao.api.response.ItempropvaluesGetResponse;
+import com.taobao.api.response.ItemsGetResponse;
 import com.taobao.api.response.ItemsSearchResponse;
 import com.taobao.api.response.PosterPosterdetailGetResponse;
 import com.taobao.api.response.PosterPostersSearchResponse;
@@ -1595,15 +1597,17 @@ public class TaobaoFetchUtil {
 	}
 
 	public static void main(String[] args) {
-		TaobaokeItemsGetRequest request = new TaobaokeItemsGetRequest();
+		ItemGetRequest request = new ItemGetRequest();
+		//TaobaokeItemsGetRequest request = new TaobaokeItemsGetRequest();
 		TaobaoClient client = new DefaultTaobaoClient(
-				"https://eco.taobao.com/rest", "12034285",
+				"http://api.taobao.xintaonet.com/router/rest", "12034285",
 				"2c18a03c14736c62a0b70804618f8c45", Constants.FORMAT_JSON,
 				TIMEOUT, TIMEOUT);
-		request.setFields(TAOBAOKEITEM_FIELDS);
-		request.setKeyword("女装");
-		request.setNick("fxy060608");
-		TaobaokeItemsGetResponse response;
+		request.setFields(TAOBAO_ITEM);
+		request.setNumIid(37870143414L);
+//		request.setKeyword("女装");
+//		request.setNick("fxy060608");
+		ItemGetResponse response;
 		try {
 			response = client.execute(request);
 			if (response.isSuccess()) {

@@ -792,9 +792,10 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 			}
 		} else {// 老会员
 			boolean isRefresh = (tus.getVersionNo() == 0f);
-			List<ArticleUserSubscribe> subs = TaobaoFetchUtil.vasSubscribeGet(
-					nick, TaobaoFetchUtil.VAS_APPSTORE);
-			Float vn = TaobaoFetchUtil.convertVersionNo(subs, user);
+			// List<ArticleUserSubscribe> subs =
+			// TaobaoFetchUtil.vasSubscribeGet(
+			// nick, TaobaoFetchUtil.VAS_APPSTORE);
+			Float vn = 0f;// TaobaoFetchUtil.convertVersionNo(subs, user);
 			if (vn == 1f) {// 如果是普及版，则判断是否已付费
 				tus.setVersionNo(1.6f);// 普及版（付费）
 				// ArticleBizOrder order = TaobaoFetchUtil
@@ -856,21 +857,23 @@ public class SiteServiceImpl extends BaseServiceImpl implements ISiteService {
 					user.setAppType("0");
 					tus.setVersionNo(versionNo);
 				} else {
-					Long pid = Long.valueOf(user.getPid().replaceAll("mm_", "")
-							.replaceAll("_0_0", ""));
-					Boolean isFC = TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
-					if (isFC) {
-						user.setAppType("1");// 如果订购了分成版，则设置为分成
-						tus.setVersionNo(1.5f);
-					} else {
-						user.setAppType("0");
-						tus.setVersionNo(1f);
-						EnvManager.setUser(null);
-						SystemException
-								.handleMessageException("当前淘宝帐号【"
-										+ user.getNick()
-										+ "】为无效用户(淘宝联盟已不再提供分成版)，请订购付费版本（咨询客服QQ：153647646）！<ul><li><a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li></ul>");
-					}
+					// Long pid = Long.valueOf(user.getPid().replaceAll("mm_",
+					// "")
+					// .replaceAll("_0_0", ""));
+					// Boolean isFC =
+					// TaobaoFetchUtil.isTaobaokeToolRelation(pid);// 获取分成型
+					// if (isFC) {
+					// user.setAppType("1");// 如果订购了分成版，则设置为分成
+					// tus.setVersionNo(1.5f);
+					// } else {
+					user.setAppType("0");
+					tus.setVersionNo(1f);
+					EnvManager.setUser(null);
+					SystemException
+							.handleMessageException("当前淘宝帐号【"
+									+ user.getNick()
+									+ "】为无效用户(淘宝联盟已不再提供分成版)，请订购付费版本（咨询客服QQ：153647646）！<ul><li><a href=\"http://fuwu.taobao.com/serv/detail.htm?service_id=300\" target=\"_blank\">订购地址</a></li></ul>");
+					// }
 				}
 			}
 			if (isRefresh) {// 如果之前是无效的，则刷新最新

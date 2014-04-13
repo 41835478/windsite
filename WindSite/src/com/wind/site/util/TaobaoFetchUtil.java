@@ -38,7 +38,6 @@ import com.taobao.api.domain.HuabaoPicture;
 import com.taobao.api.domain.Item;
 import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.ItemProp;
-import com.taobao.api.domain.ItemSearch;
 import com.taobao.api.domain.Location;
 import com.taobao.api.domain.Poster;
 import com.taobao.api.domain.PosterGoodsInfo;
@@ -1165,6 +1164,9 @@ public class TaobaoFetchUtil {
 		params.put("st", "2");
 		params.put("v", "2");
 		params.put("cb", "jsonp_callback");
+		if (StringUtils.isEmpty(keyword)) {
+			keyword = "女装";
+		}
 		try {
 			params.put("ct", URLEncoder.encode("keyword=" + keyword, "utf-8"));
 		} catch (UnsupportedEncodingException e1) {
@@ -1317,44 +1319,37 @@ public class TaobaoFetchUtil {
 	public static TaobaokeItemsGetResponse searchItems(String appKey,
 			String appSecret, String appType, TaobaokeItemsGetRequest request,
 			String pid) {
-		ItemsSearchRequest req = new ItemsSearchRequest();
-		req.setFields(TAOBAO_ITEM);
-		req.setQ(request.getKeyword());
-		req.setCid(request.getCid());
-		req.setPageNo(request.getPageNo());
-		String startPrice = request.getStartPrice();
-		if (StringUtils.isNotBlank(startPrice)) {
-			req.setStartPrice(Long.parseLong(startPrice));
-		}
-		String endPrice = request.getEndPrice();
-		if (StringUtils.isNotBlank(endPrice)) {
-			req.setEndPrice(Long.parseLong(endPrice));
-		}
-		String mallItem = request.getMallItem();
-		if (StringUtils.isNotBlank(mallItem) && mallItem.equals("true")) {
-			req.setIsMall(true);
-		}
-
-		req.setPageSize(request.getPageSize());
-		ItemsSearchResponse resp = taobaoSearchItems(null, req);
+		// ItemsSearchRequest req = new ItemsSearchRequest();
+		// req.setFields(TAOBAO_ITEM);
+		// req.setQ(request.getKeyword());
+		// req.setCid(request.getCid());
+		// req.setPageNo(request.getPageNo());
+		// String startPrice = request.getStartPrice();
+		// if (StringUtils.isNotBlank(startPrice)) {
+		// req.setStartPrice(Long.parseLong(startPrice));
+		// }
+		// String endPrice = request.getEndPrice();
+		// if (StringUtils.isNotBlank(endPrice)) {
+		// req.setEndPrice(Long.parseLong(endPrice));
+		// }
+		// String mallItem = request.getMallItem();
+		// if (StringUtils.isNotBlank(mallItem) && mallItem.equals("true")) {
+		// req.setIsMall(true);
+		// }
+		//
+		// req.setPageSize(request.getPageSize());
+		// ItemsSearchResponse resp = taobaoSearchItems(null, req);
 		TaobaokeItemsGetResponse response = null;
-		if (resp != null) {
-			response = new TaobaokeItemsGetResponse();
-			response.setErrorCode(resp.getErrorCode());
-			response.setMsg(resp.getMsg());
-			response.setSubCode(resp.getSubCode());
-			response.setSubMsg(resp.getSubMsg());
-			response.setTotalResults(resp.getTotalResults());
-			List<TaobaokeItem> taobaokeItems = new ArrayList<TaobaokeItem>();
-			ItemSearch search = resp.getItemSearch();
-			if (search != null) {
-				List<Item> items = search.getItems();
-				if (items != null) {
-					taobaokeItems = convertItemToTaobaokeItems(items);
-				}
-			}
-			response.setTaobaokeItems(taobaokeItems);
-		}
+		response = new TaobaokeItemsGetResponse();
+		response.setErrorCode(null);
+		response.setMsg(null);
+		response.setSubCode(null);
+		response.setSubMsg(null);
+
+		List<TaobaokeItem> items = convertTdjItemToTaobaokeItems(getTdjEtItemsSearch(request
+				.getKeyword()));
+		response.setTotalResults(Long.valueOf(items.size()));
+		response.setTaobaokeItems(items);
 		return response;
 		// try {
 		// if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(appSecret)

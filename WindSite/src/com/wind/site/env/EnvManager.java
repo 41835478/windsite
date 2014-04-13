@@ -75,6 +75,8 @@ public class EnvManager {
 
 	private static String zonePath;
 
+	private static String tdjEt = "";
+
 	/**
 	 * 存储当前所有线程激活的Session
 	 */
@@ -852,6 +854,14 @@ public class EnvManager {
 
 	public static String getDefaultPid() {
 		return defaultPid;
+	}
+
+	public static String getTdjEt() {
+		return tdjEt;
+	}
+
+	public static void setTdjEt(String tdjEt) {
+		EnvManager.tdjEt = tdjEt;
 	}
 
 }

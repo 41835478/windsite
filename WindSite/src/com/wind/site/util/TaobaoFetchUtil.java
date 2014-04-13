@@ -1,16 +1,30 @@
 package com.wind.site.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.taobao.api.ApiException;
 import com.taobao.api.Constants;
 import com.taobao.api.DefaultTaobaoClient;
@@ -47,7 +61,6 @@ import com.taobao.api.request.ItemGetRequest;
 import com.taobao.api.request.ItemcatsGetRequest;
 import com.taobao.api.request.ItempropsGetRequest;
 import com.taobao.api.request.ItempropvaluesGetRequest;
-import com.taobao.api.request.ItemsGetRequest;
 import com.taobao.api.request.ItemsSearchRequest;
 import com.taobao.api.request.PosterPosterdetailGetRequest;
 import com.taobao.api.request.PosterPostersSearchRequest;
@@ -74,7 +87,6 @@ import com.taobao.api.response.ItemGetResponse;
 import com.taobao.api.response.ItemcatsGetResponse;
 import com.taobao.api.response.ItempropsGetResponse;
 import com.taobao.api.response.ItempropvaluesGetResponse;
-import com.taobao.api.response.ItemsGetResponse;
 import com.taobao.api.response.ItemsSearchResponse;
 import com.taobao.api.response.PosterPosterdetailGetResponse;
 import com.taobao.api.response.PosterPostersSearchResponse;
@@ -102,6 +114,9 @@ import com.wind.site.model.T_PosterPicture;
 import com.wind.site.model.T_TaobaoItem;
 import com.wind.site.model.T_TaobaokeItem;
 import com.wind.site.util.taobao.HttpRequestUtil;
+import com.wind.site.util.taobao.TdjItem;
+import com.wind.site.util.taobao.TdjResult;
+import com.wind.site.util.taobao.TdjResultData;
 
 /**
  * 淘宝辅助
@@ -942,6 +957,38 @@ public class TaobaoFetchUtil {
 		return detail;
 	}
 
+	public static List<TaobaokeItem> convertTdjItemToTaobaokeItems(
+			List<TdjItem> items) {
+		List<TaobaokeItem> tbkItems = new ArrayList<TaobaokeItem>();
+		if (items != null && items.size() > 0) {
+			for (TdjItem item : items)
+				tbkItems.add(convertTdjItemToTaobaokeItem(item));
+		}
+		return tbkItems;
+	}
+
+	public static TaobaokeItem convertTdjItemToTaobaokeItem(TdjItem item) {
+		TaobaokeItem tbkItem = new TaobaokeItem();
+		String itemUrl = "http://item.taobao.com/item.htm?id="
+				+ item.getDs_nid();
+
+		String shopUrl = "http://store.taobao.com/shop/view_shop.htm?user_number_id="
+				+ item.getDs_user_id();
+		tbkItem.setClickUrl(itemUrl);
+		tbkItem.setItemLocation(item.getDs_provcity());
+		tbkItem.setKeywordClickUrl(itemUrl);
+		tbkItem.setNick(item.getDs_nick());
+		tbkItem.setNumIid(Long.valueOf(item.getDs_nid()));
+		tbkItem.setPicUrl(item.getDs_img().get("src"));
+		tbkItem.setPrice(item.getDs_discount_price());
+		tbkItem.setSellerCreditScore(Long.valueOf(item.getDs_rank()));
+		tbkItem.setShopClickUrl(shopUrl);
+		tbkItem.setTaobaokeCatClickUrl(itemUrl);
+		tbkItem.setTitle(item.getDs_title());
+		tbkItem.setVolume(Long.valueOf(item.getDs_sell()));
+		return tbkItem;
+	}
+
 	public static List<TaobaokeItem> convertItemToTaobaokeItems(List<Item> items) {
 		List<TaobaokeItem> tbkItems = new ArrayList<TaobaokeItem>();
 		if (items != null && items.size() > 0) {
@@ -1101,6 +1148,164 @@ public class TaobaoFetchUtil {
 			SystemException.handleMessageException("淘宝请求失败,请重试:" + e);
 		}
 		return null;
+	}
+
+	public static List<TdjItem> getTdjEtItemsSearch(String keyword) {
+		List<TdjItem> items = new ArrayList<TdjItem>();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("rf", "http%3A%2F%2Fwordpress.xintaowang.com");
+		params.put("pid", "mm_13667242_3474457_11320663");
+		params.put("pgid", "665559a8fdf14739b1d63fc954d1608d");
+		params.put("ak", "21609366");
+		params.put("unid", "xintaoke");
+		params.put("wt", "2");
+		params.put("ti", "176");
+		params.put("tl", "790x675");
+		params.put("rd", "2");
+		params.put("st", "2");
+		params.put("v", "2");
+		params.put("cb", "jsonp_callback");
+		try {
+			params.put("ct", URLEncoder.encode("keyword=" + keyword, "utf-8"));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+			params.put("ct", "keyword=" + keyword);
+		}
+		String et = EnvManager.getTdjEt();
+		params.put("et", StringUtils.isEmpty(et) ? getTdjEt() : et);
+		String paramsStr = "";
+		Set<String> sets = params.keySet();
+		for (String key : sets) {
+			paramsStr += key + "=" + params.get(key) + "&";
+		}
+		InputStream is = null;
+		try {
+			is = new URL("http://g.click.taobao.com/display?" + paramsStr)
+					.openStream();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return items;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return items;
+		}
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
+					Charset.forName("UTF-8")));
+			String jsonText;
+			try {
+				jsonText = readAll(rd);
+				jsonText = jsonText.substring(params.get("cb").length() + 1,
+						jsonText.length() - 1);
+				TdjResult result = new Gson().fromJson(jsonText,
+						new TypeToken<TdjResult>() {
+						}.getType());
+				if (result != null) {
+					if ("200".equals(result.getCode())) {
+						TdjResultData data = result.getData();
+						if (data != null) {
+							return data.getItems();
+						}
+					} else {
+						getTdjEt();
+					}
+
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				return items;
+			}
+
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return items;
+			}
+		}
+
+		return items;
+	}
+
+	public static String getTdjEt() {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("rf", "http%3A%2F%2Fwordpress.xintaowang.com");
+		params.put("pid", "mm_13667242_3474457_11320663");
+		params.put("pgid", "665559a8fdf14739b1d63fc954d1608d");
+		params.put("ak", "21609366");
+		params.put("cbh", "711");
+		params.put("chw", "1413");
+		params.put("re", "1440x900");
+		params.put("cah", "808");
+		params.put("caw", "1440");
+		params.put("ccd", "24");
+		params.put("ctz", "8");
+		params.put("chl", "2");
+		params.put("cja", "1");
+		params.put("cpl", "19");
+		params.put("cmm", "72");
+		params.put("cf", "13.0");
+		params.put("cb", "jsonp_callback");
+		String et = "";
+		String paramsStr = "";
+		Set<String> sets = params.keySet();
+		for (String key : sets) {
+			paramsStr += key + "=" + params.get(key) + "&";
+		}
+		InputStream is = null;
+		try {
+			is = new URL("http://g.click.taobao.com/load?" + paramsStr)
+					.openStream();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return et;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return et;
+		}
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
+					Charset.forName("UTF-8")));
+			String jsonText;
+			try {
+				jsonText = readAll(rd);
+				Pattern p = Pattern.compile("[0-9]+");
+				Matcher matcher = p.matcher(jsonText);
+				if (matcher.find()) {
+					et = matcher.group();
+					EnvManager.setTdjEt(et);
+					return et;
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				return et;
+			}
+
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return et;
+			}
+		}
+
+		return et;
+
+	}
+
+	private static String readAll(Reader rd) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		int cp;
+		while ((cp = rd.read()) != -1) {
+			sb.append((char) cp);
+		}
+		return sb.toString();
 	}
 
 	/**
@@ -1597,16 +1802,20 @@ public class TaobaoFetchUtil {
 	}
 
 	public static void main(String[] args) {
+		// System.out.println(getTdjEt());
+		List<TaobaokeItem> items = convertTdjItemToTaobaokeItems(getTdjEtItemsSearch("男装"));
+		System.out.println(items);
+
 		ItemGetRequest request = new ItemGetRequest();
-		//TaobaokeItemsGetRequest request = new TaobaokeItemsGetRequest();
+		// TaobaokeItemsGetRequest request = new TaobaokeItemsGetRequest();
 		TaobaoClient client = new DefaultTaobaoClient(
 				"http://api.taobao.xintaonet.com/router/rest", "12034285",
 				"2c18a03c14736c62a0b70804618f8c45", Constants.FORMAT_JSON,
 				TIMEOUT, TIMEOUT);
 		request.setFields(TAOBAO_ITEM);
 		request.setNumIid(37870143414L);
-//		request.setKeyword("女装");
-//		request.setNick("fxy060608");
+		// request.setKeyword("女装");
+		// request.setNick("fxy060608");
 		ItemGetResponse response;
 		try {
 			response = client.execute(request);
